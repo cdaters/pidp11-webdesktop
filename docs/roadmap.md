@@ -1,0 +1,61 @@
+# Roadmap, resource budget and open questions
+
+2026-11-16. All Pi numbers below are **acceptance targets**, not measurements. The target is the user's Pi 3B+ running Trixie Lite ARM64; this work has not contacted it.
+
+## Performance targets
+
+Budget is incremental cost of the companion service, excluding SIMH, the existing GPIO daemon and the browser on the user's Mac. CPU percentages below use **100% = one fully occupied core**, not the four-core aggregate.
+
+| Measure | Initial target | Workload / method |
+|---|---|---|
+| Backend idle RSS | ≤24 MiB | Assets cached, no active browser, 5-minute settled sample |
+| Backend active RSS | ≤48 MiB; ≤64 MiB peak | Two panel viewers, one terminal, 30-minute sample; measure process RSS and PSS separately |
+| Idle backend CPU | <1% of one core | No viewers, no unnecessary redraw publication; required physical mediation still counted |
+| Active backend CPU | <5% mean, <10% p95 over one-second samples | Two viewers at 20 Hz and terminal at 10 KiB/s |
+| Emulator impact | <3% throughput regression | Same guest workload, configuration and thermals, broker versus original path |
+| RPC mediation latency | <5 ms p95 added | Same-host future fixture; separate from browser transport |
+| Browser command acknowledgement | <100 ms p95 on LAN | Command accepted/applied revision, not guest instruction completion |
+| Browser panel freshness | <100 ms p95 | 20 Hz publication; report actual age, don't extrapolate real lamps |
+| Panel network traffic | <40 KiB/s per viewer | Delta/snapshot encoding measured on wire; terminal budget separate |
+| Browser core assets | <150 KiB gzip | HTML, CSS, JS and SVG; terminal chunk separate and loaded on demand |
+| Browser performance | <50 MiB incremental tab memory; no sustained long tasks | Desktop browser, panel + bounded terminal, 30-minute run |
+| Queue bounds | Latest lamp snapshot; ≤256 KiB terminal output per client | Disconnect/backpressure slow readers; never unbounded buffering |
+
+Cap browser publication at 20 Hz, render changed SVG attributes, pause synthetic animation when hidden, and avoid global 60 Hz rerender loops. Physical RPC service timing remains independent of browser refresh. Re-evaluate resource targets when actual integration cost is known. A lower idle limit could favor Rust, but comparing language labels is not a benchmark.
+
+Measurement plan after authorization: record exact OS/kernel/toolchain, binary hash, CPU governor/temperature/throttling, guest workload and connection count. Capture `/proc` RSS/PSS, process CPU, queue depths and latency histograms; repeat idle, one/two viewers, terminal burst, slow reader, reconnect and large media upload. Use fixed sample lengths and record raw results. No performance command is to be run on the active Pi during this phase.
+
+## Milestones and exit criteria
+
+| Milestone | Deliverable | Exit criteria |
+|---|---|---|
+| M0: research and isolated prototype — current | Architecture, language decision, protocol analysis; original SVG panel with simulated activity and controls | Local build/typecheck/model tests; desktop/mobile browser inspection; explicit mock boundary; no Pi traffic |
+| M1: wire fixtures | Bounded XDR codec and original C/Java differential fixtures | All used procedures round-trip; both byte extensions; descriptor discrepancies; truncation/oversize/fuzz tests; no network hardware |
+| M2: mock Go service | Embedded assets, versioned REST/WS, mock state hub, ownership lease and terminal fixture | Cross-built Linux ARM64 binary; bounded queues, slow-reader and disconnect tests; same frontend can use local/remote mocks |
+| M3: isolated emulator integration | Disposable Linux SIMH/REALCONS + virtual panel RPC server | Control parity including START edges; UDP/TCP and rpcbind behavior verified; no production Pi |
+| M4: coexistence laboratory | Broker and physical-panel stand-in, ownership/recovery tests | Single physical client; spectators; override and stale state tests; crash rollback and registration plan; decide broker vs daemon hook |
+| M5: authorized Pi audit and read-only pilot | Reconcile installed source/binaries/services/console configuration after installation work ends | Explicit user authorization; backup/rollback reviewed; no polling assumed side-effect free; incremental benchmarks pass |
+| M6: authorized control, terminal and media | Owned controls; real terminal broker; catalog and safe attach/detach | Guest-safe lifecycle, no terminal takeover, image exclusivity, auth/origin checks, end-to-end recovery tests |
+| M7: packaging and release | Reproducible builds, service configuration, notices and operator docs | Source/dependency license inventory, measured resource report, target acceptance and separately authorized release |
+
+Completion of the other Codex session does not automatically authorize M5. No automatic detection, background Pi probing, live endpoint setting, RPC code path or deployment script is included in M0.
+
+## Risks and unknowns
+
+| Risk / unknown | Evidence and effect | Resolution |
+|---|---|---|
+| Installed revision/config unknown | Only public source inspected; official installation may differ | Authorized inventory in M5; use hashes and effective settings |
+| Multi-client ownership absent | Global panel state, no lease fields | Explicit broker, one writer, adversarial handoff tests |
+| RPC discovery collision | Physical daemon unregisters program 99/version 1 on startup | Separate fixture network boundary; select a tested deployment routing strategy |
+| Read callback has side effects | Physical POWER handling invokes restart/shutdown scripts | Preserve semantics deliberately; no casual monitoring poll on active Pi |
+| Protocol quirks | Char arrays expand 4×; Java sign extension; descriptor differences | C/Java golden vectors and schema profiles before RPC implementation |
+| Polling/edge loss | REALCONS detects edges; START acts on release | Serialize pulses across observed polls; test missed packets and lease expiry |
+| Broker failure interrupts physical controls | It sits between REALCONS and hardware daemon | Physical-only rollback; no automatic failover claim without testing |
+| Terminal takeover and monitor access | Official stack uses screen and launcher scripts | Determine non-disruptive endpoint; separate guest and privileged monitor capability |
+| Device/OS corruption | Abrupt stop or shared writable images can damage guest state | Safe lifecycle, immutable bases/working copies and exclusive mounts |
+| Licensing and artwork | Repository bundles mixed licenses; OS images have separate rights | Source notices and per-image rights before distribution |
+| Historic panel fidelity | Prototype is an original interpretation, not a calibrated replica | Compare approved DEC/Oscar reference layouts, labels and knob encodings in later UI milestone |
+| Resource competition | Pi runs simulator and high-rate GPIO work already | Measure overhead under real guest/physical load in M5, not Mac extrapolation |
+| Browser compatibility | SVG/keyboard behavior and terminal performance vary | Test Chromium, Firefox and Safari before release; M0 QA records actual browser tested |
+
+See [validation](validation.md) for what was actually verified in this delivery.

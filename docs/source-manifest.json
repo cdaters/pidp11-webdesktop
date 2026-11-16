@@ -1,0 +1,390 @@
+{
+  "inspected": "2026-11-16",
+  "files": [
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "README.md",
+      "sha256": "aefe77f4d69e94916714c2b3407388d92e2edc23f259cc4cd28e89d00d4a8a51",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/README.md"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "bin/pdp11control.sh",
+      "sha256": "c95b65188cf30ba8a288366d6e3b9bdf02a9837a2226193be6bb375259a727f9",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/bin/pdp11control.sh"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "bin/pidp11.sh",
+      "sha256": "2a041dcc1064a581663b20300c41f45abae8baf6bc1c2b84c23c5a72cfa82300",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/bin/pidp11.sh"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "etc/pdp.sh",
+      "sha256": "dd0045b9c314fa76c6880b6d36de692d2e864f70a21dcdaae65000d7723daf53",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/etc/pdp.sh"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "etc/rc.pidp11",
+      "sha256": "d34d063b0b831de4155c9f54c4798e6f0e695de20ee19533b0b03bdcfca35297",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/etc/rc.pidp11"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/02.3_simh/4.x+realcons/src/REALCONS/realcons.c",
+      "sha256": "c0e6726e49da5bfbe8da45f33fb3f29ac640f22dd58ac96482a5e106c954f220",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/02.3_simh/4.x+realcons/src/REALCONS/realcons.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/02.3_simh/4.x+realcons/src/REALCONS/realcons.h",
+      "sha256": "c5317bf7e0e3a96a5f2b7f5d9987421bbff880763721169c9368dd75ecb3f102",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/02.3_simh/4.x+realcons/src/REALCONS/realcons.h"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.c",
+      "sha256": "c38da7047b700ef84a8338cd052b49c15694c8b70bd81352755f6fb33ce006bf",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.h",
+      "sha256": "93f7bce9f2343c95abcd409be5d9247d3d79117f8ae8ca51fd9c384ea2b78d63",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.h"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/blinkenlight_api_client.c",
+      "sha256": "9b803cab4a3fc5ff96aefe449066461af27e5dab408eba17379ea524c7415015",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/blinkenlight_api_client.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/blinkenlight_api_client.h",
+      "sha256": "a7872d96c8f458f36ad965369b33134d720df54ca0a8d4525589d6bc643e1683",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/blinkenlight_api_client.h"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/blinkenlight_api_server_procs.c",
+      "sha256": "53c3148b614d3809f553f5a7c401669d3853f3d00cb18131d7eac959b94f66a2",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/blinkenlight_api_server_procs.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/blinkenlight_api_server_procs.h",
+      "sha256": "06261ef682329e59c83ad1fa389a03fdcc7e9fedc87aa5b9bd7af9c93a7fec22",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/blinkenlight_api_server_procs.h"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/blinkenlight_panels.c",
+      "sha256": "d557eb672d42c2c63c09e799a773f8c580ab67b2e0ffeba4c03e3d8c05f17b2d",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/blinkenlight_panels.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/blinkenlight_panels.h",
+      "sha256": "c863a9617757f47eb85db09f8e3a74c5a7621c5d1f78e1c7c072c1dfe8c9bb77",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/blinkenlight_panels.h"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/historybuffer.c",
+      "sha256": "e36048d4f79ffedfd5295f198c9f3f3dd65a2fc983176192987ffcfa9cbf742a",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/historybuffer.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/historybuffer.h",
+      "sha256": "bac2449b87b9abc61f16dc191f82bd72b07e4a5596fdf4f56706bb3e6f4367a7",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/historybuffer.h"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/rpc_blinkenlight_api.x",
+      "sha256": "c878b0565312888eea18e8dc77052adc020ce48c36021576a4813bfd96e20251",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/rpc_blinkenlight_api.x"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api.x",
+      "sha256": "c878b0565312888eea18e8dc77052adc020ce48c36021576a4813bfd96e20251",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api.x"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_clnt.c",
+      "sha256": "e072a88fae2a10b45cf5f0b953a7fa381ee8d43279ccc9336634d07ad33dc8fa",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_clnt.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_svc.c",
+      "sha256": "029d02f23e69274284103350f242c5204622806315655be86498cd99de3a8449",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_svc.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_xdr.c",
+      "sha256": "389927ae17542ff67962179b71c802ed413707e56adac1828ee1cf8e51f84fff",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_xdr.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/11_pidp_server/pidp11/gpio.c",
+      "sha256": "2a9fed69964eaa08058cc7c17ba647f4b96d0fee702f7cbfb7ceadb080ea1f40",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/11_pidp_server/pidp11/gpio.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/11_pidp_server/pidp11/gpiopattern.c",
+      "sha256": "a866120257477cb2f378d2554690cd6c601ccfceb9047d6826cbe765ef278796",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/11_pidp_server/pidp11/gpiopattern.c"
+    },
+    {
+      "repository": "obsolescence/pidp11",
+      "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+      "path": "src/11_pidp_server/pidp11/main.c",
+      "sha256": "80795bf40af09517f6f98f1e0b6fa14e9533a349d7c91dc485a4a9e8cf1cfca0",
+      "url": "https://github.com/obsolescence/pidp11/blob/26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75/src/11_pidp_server/pidp11/main.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "LICENSE",
+      "sha256": "a41aaf2ce065d4d9e62b46390d5432de5252210f2d026057953afc02e0f49c96",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/LICENSE"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "README.md",
+      "sha256": "4b12d134ff52fd824ea2706a9918289d8a527d212df7212980efac5f7e0d24d9",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/README.md"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/02.3_simh/4.x+realcons/src/REALCONS/realcons.c",
+      "sha256": "c0e6726e49da5bfbe8da45f33fb3f29ac640f22dd58ac96482a5e106c954f220",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/02.3_simh/4.x+realcons/src/REALCONS/realcons.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/02.3_simh/4.x+realcons/src/REALCONS/realcons.h",
+      "sha256": "c5317bf7e0e3a96a5f2b7f5d9987421bbff880763721169c9368dd75ecb3f102",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/02.3_simh/4.x+realcons/src/REALCONS/realcons.h"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.c",
+      "sha256": "1c99a4643df5e6fb2072765dad14df473ff8c412484a1c7c0cc3dbb0c9e3c423",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.h",
+      "sha256": "93f7bce9f2343c95abcd409be5d9247d3d79117f8ae8ca51fd9c384ea2b78d63",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.h"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/blinkenlight_api_client.c",
+      "sha256": "9b803cab4a3fc5ff96aefe449066461af27e5dab408eba17379ea524c7415015",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/blinkenlight_api_client.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/blinkenlight_api_client.h",
+      "sha256": "a7872d96c8f458f36ad965369b33134d720df54ca0a8d4525589d6bc643e1683",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/blinkenlight_api_client.h"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/blinkenlight_api_server_procs.c",
+      "sha256": "53c3148b614d3809f553f5a7c401669d3853f3d00cb18131d7eac959b94f66a2",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/blinkenlight_api_server_procs.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/blinkenlight_api_server_procs.h",
+      "sha256": "06261ef682329e59c83ad1fa389a03fdcc7e9fedc87aa5b9bd7af9c93a7fec22",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/blinkenlight_api_server_procs.h"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/blinkenlight_panels.c",
+      "sha256": "d557eb672d42c2c63c09e799a773f8c580ab67b2e0ffeba4c03e3d8c05f17b2d",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/blinkenlight_panels.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/blinkenlight_panels.h",
+      "sha256": "c863a9617757f47eb85db09f8e3a74c5a7621c5d1f78e1c7c072c1dfe8c9bb77",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/blinkenlight_panels.h"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/historybuffer.c",
+      "sha256": "58d4a1d1438869396c474db758e2966fba4672a688a73b682df5b409b26b1463",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/historybuffer.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/historybuffer.h",
+      "sha256": "90c36ad0ab464ecbaba27ff06541f9404c274aeab9baf53217299f51794bcdd1",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/historybuffer.h"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/Bitcalc.java",
+      "sha256": "78814dd9c374f47aa83043d398482951ea3fbeeb7e514f1e6f0cc1077ada079c",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/Bitcalc.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/Control.java",
+      "sha256": "f1ee767111c70a4242571efbb4b9fdd3c439e6d500a5222d86dc03ac107f040c",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/Control.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/Panel.java",
+      "sha256": "0b4d83f531eee30441a9a5553940ab38f1c5fb482ad0ffcd3c24fbc6839f3511",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/Panel.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/PanelList.java",
+      "sha256": "847d1efef97f995338cb6eaf6c9c73e21c75c5a8686001dcdff2f10a4a715a6f",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/PanelList.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/RpcServer.java",
+      "sha256": "1e73f169e526b7cd60354ae4090f3c786f9aa11469ac17a760f7e4270aafe973",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/java/blinkenbone/blinkenlight_api/RpcServer.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/java/blinkenbone/rpcgen/rpc_blinkenlight_apiServerStub.java",
+      "sha256": "87430ed2f67d29da2fa63606498bfe53c5c9762902adaac74417c8765db6d146",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/java/blinkenbone/rpcgen/rpc_blinkenlight_apiServerStub.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/java/blinkenbone/rpcgen/rpc_blinkenlight_api_controlvalues_struct.java",
+      "sha256": "85cdaea0ad921dc0f9fc0d8d71798f4ae110b34e512b2a757d56c3b80a2c903d",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/java/blinkenbone/rpcgen/rpc_blinkenlight_api_controlvalues_struct.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/rpc_blinkenlight_api.x",
+      "sha256": "c878b0565312888eea18e8dc77052adc020ce48c36021576a4813bfd96e20251",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/rpc_blinkenlight_api.x"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_clnt.c",
+      "sha256": "e072a88fae2a10b45cf5f0b953a7fa381ee8d43279ccc9336634d07ad33dc8fa",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_clnt.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_svc.c",
+      "sha256": "029d02f23e69274284103350f242c5204622806315655be86498cd99de3a8449",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_svc.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_xdr.c",
+      "sha256": "389927ae17542ff67962179b71c802ed413707e56adac1828ee1cf8e51f84fff",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_xdr.c"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/09_javapanelsim/src/blinkenbone/panelsim/panelsim1170/Panel1170.java",
+      "sha256": "f9f32ac7a876f9fb1c031badb83c201234a1b4b9765f7ec391af95987ad9216a",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/09_javapanelsim/src/blinkenbone/panelsim/panelsim1170/Panel1170.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/09_javapanelsim/src/blinkenbone/panelsim/panelsim1170/Panel1170Control.java",
+      "sha256": "e91a5377fce0a9288504ec75b1424993ed81bedf9f41f7848f26199716d7fb24",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/09_javapanelsim/src/blinkenbone/panelsim/panelsim1170/Panel1170Control.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/09_javapanelsim/src/blinkenbone/panelsim/panelsim1170/Panelsim1170_app.java",
+      "sha256": "46a5034f50956a17a449edd24f675e0eb2978fc6b15f62a215348883665b5e7b",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/09_javapanelsim/src/blinkenbone/panelsim/panelsim1170/Panelsim1170_app.java"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/3rdparty/remotetea/COPYING.LIB",
+      "sha256": "839fe34523a7b9048f243f5a49d75758a3c806e25b7a2e270f612d03c431faf3",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/3rdparty/remotetea/COPYING.LIB"
+    },
+    {
+      "repository": "j-hoppe/BlinkenBone",
+      "revision": "1ce5c0657690ebd8e5f343f36fd4473a60d4402b",
+      "path": "projects/3rdparty/remotetea/src/org/acplt/oncrpc/XdrEncodingStream.java",
+      "sha256": "ddf7e0b719b64d37e4c30d564243e00970bd8f00677631aae0d776f81acfb0a9",
+      "url": "https://github.com/j-hoppe/BlinkenBone/blob/1ce5c0657690ebd8e5f343f36fd4473a60d4402b/projects/3rdparty/remotetea/src/org/acplt/oncrpc/XdrEncodingStream.java"
+    }
+  ]
+}
