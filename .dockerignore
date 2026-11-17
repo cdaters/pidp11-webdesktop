@@ -1,0 +1,11 @@
+*
+!.research/
+.research/*
+!.research/lab-source/
+.research/lab-source/*
+!.research/lab-source/src/
+!lab/
+lab/*
+!lab/Dockerfile
+!lab/c-client.c
+!lab/ptyshim.c

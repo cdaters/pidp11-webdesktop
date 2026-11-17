@@ -1,0 +1,14 @@
+{
+  "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+  "archive_sha256": "3f857439ec9ab63de1f227dc7779c5c69df99d050f90e52209359330a6d9c070",
+  "files": {
+    "src/02.3_simh/4.x+realcons/src/scp.c": "3549049ae5928b3b6bac2a337a4de3a2a69a630e19e817c1f3a9ac3220767609",
+    "src/02.3_simh/4.x+realcons/src/REALCONS/realcons.c": "c0e6726e49da5bfbe8da45f33fb3f29ac640f22dd58ac96482a5e106c954f220",
+    "src/02.3_simh/4.x+realcons/src/REALCONS/realcons_console_pdp11_70.c": "c38da7047b700ef84a8338cd052b49c15694c8b70bd81352755f6fb33ce006bf",
+    "src/02.3_simh/4.x+realcons/src/PDP11/pdp11_cpu.c": "83dc79136d2a710f8f71302c13a642be9415d5acd8fea2540870d8ea8a8566e8",
+    "src/02.3_simh/4.x+realcons/src/quickmake": "e49373b626181a79821fd84ba4f36433f435755e1ba4c16dfb28df2a83a720c5",
+    "src/07.0_blinkenlight_api/blinkenlight_api_client.c": "9b803cab4a3fc5ff96aefe449066461af27e5dab408eba17379ea524c7415015",
+    "src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_clnt.c": "e072a88fae2a10b45cf5f0b953a7fa381ee8d43279ccc9336634d07ad33dc8fa",
+    "src/07.0_blinkenlight_api/rpcgen_linux/rpc_blinkenlight_api_xdr.c": "389927ae17542ff67962179b71c802ed413707e56adac1828ee1cf8e51f84fff"
+  }
+}
