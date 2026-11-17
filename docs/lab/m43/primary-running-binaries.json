@@ -1,0 +1,12 @@
+[
+  {
+    "pid": 32,
+    "binary": "/opt/observed/pdp11_realcons",
+    "sha256": "92aab5fdba6064d2438f9c646711cc5f1bdedb30c3e68a84ab4993f35ad11593"
+  },
+  {
+    "pid": 46,
+    "binary": "/fixtures/m43-probe-linux-arm64",
+    "sha256": "686a4b77ef3c6eaa0a4f89dc868c3901be2cac6b98c3a16e4055364b08c86166"
+  }
+]

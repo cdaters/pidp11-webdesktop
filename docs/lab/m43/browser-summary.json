@@ -1,0 +1,154 @@
+{
+  "projects": [
+    {
+      "title": "embedded Go: terminal renders under strict CSP and panel remains interactive",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "embedded Go: terminal renders under strict CSP and panel remains interactive",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "embedded Go: terminal renders under strict CSP and panel remains interactive",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "self-contained file: terminal renders under strict CSP and panel remains interactive",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "self-contained file: terminal renders under strict CSP and panel remains interactive",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "self-contained file: terminal renders under strict CSP and panel remains interactive",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "fullscreen API enters and exits the selected window",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "fullscreen API enters and exits the selected window",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "fullscreen API enters and exits the selected window",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "working desktop, independent terminals and media workflows",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "working desktop, independent terminals and media workflows",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "working desktop, independent terminals and media workflows",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "mobile touch and desktop screenshots; preferences contain geometry only",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "mobile touch and desktop screenshots; preferences contain geometry only",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "mobile touch and desktop screenshots; preferences contain geometry only",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "mechanical geometry, fixed colors and labels, zoom and common panel state",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "mechanical geometry, fixed colors and labels, zoom and common panel state",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "mechanical geometry, fixed colors and labels, zoom and common panel state",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "terminal key sequences are intact at encoder and do not contaminate mock commands; handoff discards partial line",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "terminal key sequences are intact at encoder and do not contaminate mock commands; handoff discards partial line",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "terminal key sequences are intact at encoder and do not contaminate mock commands; handoff discards partial line",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "read-only observation, unavailable/stale states and spectator reconnect",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "read-only observation, unavailable/stale states and spectator reconnect",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "read-only observation, unavailable/stale states and spectator reconnect",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "touch switch uses the shared panel model on a tablet",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "touch switch uses the shared panel model on a tablet",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "touch switch uses the shared panel model on a tablet",
+      "project": "webkit",
+      "status": "expected"
+    },
+    {
+      "title": "queued stale stream is discarded; fresh reconnect remains passive and shows simultaneous physical controls",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "queued stale stream is discarded; fresh reconnect remains passive and shows simultaneous physical controls",
+      "project": "firefox",
+      "status": "expected"
+    },
+    {
+      "title": "queued stale stream is discarded; fresh reconnect remains passive and shows simultaneous physical controls",
+      "project": "webkit",
+      "status": "expected"
+    }
+  ]
+}

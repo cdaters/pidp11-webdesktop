@@ -8,6 +8,7 @@ import (
 	"crypto/subtle"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -33,21 +34,125 @@ type Credential struct {
 	Capabilities []Capability
 }
 type session struct {
-	Caps  map[Capability]bool
-	CSRF  string
-	Until time.Time
+	Caps     map[Capability]bool
+	CSRF     string
+	Until    time.Time
+	Identity string
 }
 type Gate struct {
-	mu       sync.Mutex
-	keys     []Credential
-	sessions map[string]session
-	attempts int
-	window   time.Time
-	Now      func() time.Time
+	mu           sync.Mutex
+	keys         []Credential
+	sessions     map[string]session
+	attempts     int
+	window       time.Time
+	Now          func() time.Time
+	secureOrigin string
+	audit        []AuditEvent
 }
 
 func New(keys []Credential) *Gate {
-	return &Gate{keys: keys, sessions: map[string]session{}, Now: time.Now}
+	return &Gate{keys: cloneCredentials(keys), sessions: map[string]session{}, Now: time.Now}
+}
+
+func cloneCredentials(keys []Credential) []Credential {
+	out := make([]Credential, len(keys))
+	for i, k := range keys {
+		out[i] = Credential{k.Token, append([]Capability(nil), k.Capabilities...)}
+	}
+	return out
+}
+
+type AuditEvent struct {
+	At       time.Time `json:"at"`
+	Kind     string    `json:"kind"`
+	Identity string    `json:"identity,omitempty"`
+}
+
+// NewSecure fixes an exact public origin; forwarding headers cannot change trust.
+func NewSecure(origin string, keys []Credential) (*Gate, error) {
+	u, e := url.Parse(origin)
+	if e != nil || u.Scheme != "https" || u.Host == "" || u.Path != "" || u.RawQuery != "" || u.Fragment != "" || u.User != nil {
+		return nil, fmt.Errorf("exact HTTPS origin required")
+	}
+	g := New(keys)
+	g.secureOrigin = origin
+	return g, nil
+}
+func Identity(token string) string {
+	h := sha256.Sum256([]byte(token))
+	return hex.EncodeToString(h[:8])
+}
+func (g *Gate) cookieName() string {
+	if g.secureOrigin != "" {
+		return "__Host-pidp11"
+	}
+	return "pidp11_lab"
+}
+func (g *Gate) TrustedRequest(r *http.Request) bool {
+	if g.secureOrigin == "" {
+		return LocalHost(r.Host)
+	}
+	u, _ := url.Parse(g.secureOrigin)
+	return r.TLS != nil && r.Host == u.Host
+}
+func (g *Gate) Origin(r *http.Request) bool {
+	if g.secureOrigin == "" {
+		return Origin(r)
+	}
+	return g.TrustedRequest(r) && r.Header.Get("Origin") == g.secureOrigin
+}
+func (g *Gate) record(kind, id string) {
+	g.audit = append(g.audit, AuditEvent{g.Now(), kind, id})
+	if len(g.audit) > 128 {
+		copy(g.audit, g.audit[len(g.audit)-128:])
+		g.audit = g.audit[:128]
+	}
+}
+func (g *Gate) Audit() []AuditEvent {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	return append([]AuditEvent(nil), g.audit...)
+}
+
+// Provisioning/revocation is a local operator action, never a browser ownership operation.
+func (g *Gate) ReplaceCredentials(keys []Credential) {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	g.keys = cloneCredentials(keys)
+	g.sessions = map[string]session{}
+	g.record("credentials-replaced-sessions-revoked", "")
+}
+func (g *Gate) Revoke(identity string) {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	kept := g.keys[:0]
+	for _, k := range g.keys {
+		if Identity(k.Token) != identity {
+			kept = append(kept, k)
+		}
+	}
+	g.keys = kept
+	for id, s := range g.sessions {
+		if s.Identity == identity {
+			delete(g.sessions, id)
+		}
+	}
+	g.record("credential-revoked", identity)
+}
+func (g *Gate) Session(w http.ResponseWriter, r *http.Request) {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	c, e := r.Cookie(g.cookieName())
+	if e != nil || !g.TrustedRequest(r) {
+		http.Error(w, "session required", 401)
+		return
+	}
+	s, ok := g.sessions[c.Value]
+	if !ok || !g.Now().Before(s.Until) {
+		http.Error(w, "session expired", 401)
+		return
+	}
+	json.NewEncoder(w).Encode(map[string]any{"capabilities": s.Caps, "csrf": s.CSRF, "expires": s.Until, "identity": s.Identity})
 }
 func nonce() string {
 	var b [32]byte
@@ -68,22 +173,24 @@ func Origin(r *http.Request) bool {
 	return e == nil && u.Scheme == "http" && u.Host == r.Host && u.Path == "" && u.RawQuery == "" && u.Fragment == "" && u.User == nil
 }
 func (g *Gate) Login(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" || !Origin(r) {
+	if r.Method != "POST" || !g.Origin(r) {
 		http.Error(w, "same-origin POST required", 403)
 		return
 	}
 	g.mu.Lock()
-	defer g.mu.Unlock()
 	now := g.Now()
 	if now.Sub(g.window) >= time.Minute {
 		g.window = now
 		g.attempts = 0
 	}
 	g.attempts++
-	if g.attempts > 20 {
+	limited := g.attempts > 20
+	g.mu.Unlock()
+	if limited {
 		http.Error(w, "login rate limit", 429)
 		return
 	}
+	// Never hold the session/rotation lock while reading an untrusted body.
 	var req struct {
 		Token string `json:"token"`
 	}
@@ -98,6 +205,9 @@ func (g *Gate) Login(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid request", 400)
 		return
 	}
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	now = g.Now()
 	sum := sha256.Sum256([]byte(req.Token))
 	var caps []Capability
 	for _, k := range g.keys {
@@ -107,6 +217,7 @@ func (g *Gate) Login(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if len(caps) == 0 {
+		g.record("login-denied", "")
 		http.Error(w, "invalid credentials", 401)
 		return
 	}
@@ -120,33 +231,34 @@ func (g *Gate) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	id := nonce()
-	s := session{Caps: map[Capability]bool{}, CSRF: nonce(), Until: now.Add(15 * time.Minute)}
+	s := session{Caps: map[Capability]bool{}, CSRF: nonce(), Until: now.Add(15 * time.Minute), Identity: Identity(req.Token)}
 	for _, c := range caps {
 		s.Caps[c] = true
 	}
 	g.sessions[id] = s
-	http.SetCookie(w, &http.Cookie{Name: "pidp11_lab", Value: id, Path: "/", HttpOnly: true, SameSite: http.SameSiteStrictMode, MaxAge: 900})
+	g.record("login", s.Identity)
+	http.SetCookie(w, &http.Cookie{Name: g.cookieName(), Secure: g.secureOrigin != "", Value: id, Path: "/", HttpOnly: true, SameSite: http.SameSiteStrictMode, MaxAge: 900})
 	w.Header().Set("Cache-Control", "no-store")
 	json.NewEncoder(w).Encode(map[string]any{"capabilities": caps, "csrf": s.CSRF, "expires": s.Until})
 }
 func (g *Gate) Allowed(r *http.Request, cap Capability) bool {
 	g.mu.Lock()
 	defer g.mu.Unlock()
-	cookie, e := r.Cookie("pidp11_lab")
+	cookie, e := r.Cookie(g.cookieName())
 	if e != nil {
 		return false
 	}
 	s, ok := g.sessions[cookie.Value]
-	return ok && g.Now().Before(s.Until) && s.Caps[cap]
+	return g.TrustedRequest(r) && ok && g.Now().Before(s.Until) && s.Caps[cap]
 }
 func (g *Gate) Logout(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" || !Origin(r) {
+	if r.Method != "POST" || !g.Origin(r) {
 		http.Error(w, "same-origin POST required", 403)
 		return
 	}
 	g.mu.Lock()
 	defer g.mu.Unlock()
-	c, e := r.Cookie("pidp11_lab")
+	c, e := r.Cookie(g.cookieName())
 	if e != nil {
 		http.Error(w, "session required", 401)
 		return
@@ -158,7 +270,8 @@ func (g *Gate) Logout(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	delete(g.sessions, c.Value)
-	http.SetCookie(w, &http.Cookie{Name: "pidp11_lab", Value: "", Path: "/", HttpOnly: true, SameSite: http.SameSiteStrictMode, MaxAge: -1})
+	g.record("logout", s.Identity)
+	http.SetCookie(w, &http.Cookie{Name: g.cookieName(), Secure: g.secureOrigin != "", Value: "", Path: "/", HttpOnly: true, SameSite: http.SameSiteStrictMode, MaxAge: -1})
 	w.WriteHeader(204)
 }
 func (g *Gate) Require(cap Capability, next http.Handler) http.Handler {

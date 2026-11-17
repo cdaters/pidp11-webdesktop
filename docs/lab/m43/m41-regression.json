@@ -1,0 +1,93 @@
+{
+  "environment": "Mac-hosted isolated Linux ARM64; no Raspberry Pi, GPIO, guest images or production network",
+  "cases": {
+    "observers": "passed: snapshots and rejected spectator controls do not alter controls/tickets",
+    "authorized_semantics": "passed: LOAD/DEP/EXAM, START reset, CONT step via original controller and fenced dispatch",
+    "inflight_start_release": "mitigated: exact held reply delivered after consumer revoke; no dispatch or RUN transition",
+    "queued_commands": "passed: RESET(START), CONT, DEP, EXAM rejected at dispatch after revoke",
+    "inflight_load": "passed: direct REALCONS LOAD mutation fenced at service boundary",
+    "queued_run": "passed: START-release RUN ticket rejected before SIMH action",
+    "duplicate_consumed_ticket": "passed: replay of already consumed ticket rejected",
+    "already_committed": "EXPECTED LIMIT: committed DEP persists after revoke; fencing is not rollback",
+    "stale_generation": "passed: stale PING does not renew current consumer lease",
+    "physical_handoffs": "passed: physical RUN/HALT, held START blocks grant, physical HALT revokes virtual RUN",
+    "browser_disconnect_and_expiry": "passed: consumer quiescence after loss/lease expiry; reconnect remains spectator",
+    "consumer_stall": "passed: no false quiescence/grant while SIGSTOP; lease expires on recovery; explicit rearm",
+    "physical_restart": "passed: fault inhibits, restart does not rearm, explicit baseline required",
+    "independent_watchdog": "passed: heartbeat loss with working RPC stops managed CPU, independently of broker revoke; no automatic resume",
+    "broker_crash_lost_rpc": "consumer lease disarmed independently; blocked original C RPC may delay quiescence (recorded separately)",
+    "broker_consumer_restart": "passed: fresh consumer boot generation, stale lease rejected, unowned/neutral restart",
+    "abrupt_process_loss": "passed: all lab processes killed/restarted, no persisted owner or automatic execution; not a real power/storage test",
+    "independent_terminal_transports": "passed: two original DZ11 TCP/Telnet lines and local monitor coexist without broker/browser; no guest login/driver validation",
+    "physical_only_rollback": "passed: no broker/browser/fence, RPC program99 routes to stand-in39100, unchanged SIMH performs physical RUN/HALT and direct monitor works"
+  },
+  "provenance": {
+    "kernel": "Linux-7.2.12-orbstack-00394-gbecdd6130068-aarch64-with-glibc2.36",
+    "interfaces": [
+      "lo"
+    ],
+    "source_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": {
+      "/opt/lab/pdp11_realcons": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+      "/opt/fenced/pdp11_realcons": "3124b86fb34d01a1836ac603549075f6a38979887195a0942c25709667323c69",
+      "/opt/interlock/wd_fence.c": "6ec614fe7eea743ba61c0eaec51aa1b7b224e4da90a830775d7013548523415d",
+      "/opt/interlock/wd_fence.h": "e50f69c2c007cefe9e727a493a3f540ed3fc7b5c17a9700b2a3f589f61f7c9fb",
+      "/opt/interlock/apply.py": "007155bee8deaea96ae8af8d047aa5c73f50c398f462d9280d6b1270b87c8d62",
+      "/fixtures/realcons-lab-linux-arm64": "b70c8e746a8d25f5df5baaa13f7c3fe1aeb28b38e3f2734925293efc6356d73d"
+    }
+  },
+  "idle_broker_measurement": {
+    "seconds": 5.002,
+    "rss_mean_bytes": 10392535,
+    "rss_peak_bytes": 11395072,
+    "pss_peak_bytes": 8395776,
+    "cpu_percent_one_core": 1.999
+  },
+  "idle_consumer_measurement": {
+    "cpu_seconds": 0.43,
+    "rss_bytes": 9605120,
+    "pss_bytes": 7748608,
+    "cpu_percent_one_core": 0.799
+  },
+  "active_broker_measurement": {
+    "seconds": 15.0,
+    "rss_mean_bytes": 12117006,
+    "rss_peak_bytes": 12337152,
+    "pss_peak_bytes": 10142720,
+    "cpu_percent_one_core": 3.133,
+    "commands": 300,
+    "viewers": 2,
+    "command_rate_hz": 20,
+    "rtt_including_driver_ipc_p95_ms": 1.488
+  },
+  "active_consumer_measurement": {
+    "cpu_seconds": 0.55,
+    "rss_bytes": 9605120,
+    "pss_bytes": 8296448,
+    "cpu_percent_one_core": 0.8
+  },
+  "responsive_rpc_watchdog_stop_ms": 324.323,
+  "watchdog_disarm_ms": 320.695,
+  "blocked_rpc_status": {
+    "ok": 1,
+    "generation": 2419686143274377012,
+    "armed": 0,
+    "quiescent": 0,
+    "running": 1,
+    "waiting": 0,
+    "accepted": 13,
+    "rejected": 6,
+    "expiries": 3
+  },
+  "independent_terminals": {
+    "connections": "show dz connections\r\nline 0: Connection from IP address 127.0.0.1\r\nConnection [127.0.0.1]:40100->[127.0.0.1]:54128\r\n Connected 00:00:01\r\n Telnet protocol\r\nline 1: Connection from IP address 127.0.0.1\r\nConnection [127.0.0.1]:40100->[127.0.0.1]:54136\r\n Telnet protocol\r\nsim> ",
+    "telnet_banners_hex": [
+      "fffb22fffb03fffb01fffb00fffd000a0d0a436f6e6e656374656420746f20746865205044502d31312073696d756c61746f7220445a206465766963652c206c696e6520300d0a0a",
+      "fffb22fffb03fffb01fffb00fffd00"
+    ],
+    "stop_method": "SIGINT to original SIMH signal handler, then independent PTY monitor",
+    "scope": "two independent original DZ11 transport lines and direct PTY monitor; no guest OS login/driver test"
+  },
+  "registration_after_rollback": "   program vers proto   port  service\n    100000    4   tcp    111  portmapper\n    100000    3   tcp    111  portmapper\n    100000    2   tcp    111  portmapper\n    100000    4   udp    111  portmapper\n    100000    3   udp    111  portmapper\n    100000    2   udp    111  portmapper\n        99    1   tcp  39100\n        99    1   udp  39100\n",
+  "status": "PASS with explicit safety limits"
+}

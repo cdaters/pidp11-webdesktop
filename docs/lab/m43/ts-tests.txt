@@ -1,0 +1,53 @@
+
+> pidp11-web-desktop@0.4.3 test
+> node --test tests/*.test.ts
+
+✔ deterministic activity, halt and step (0.83725ms)
+✔ all 22 switches are independently usable and invalid bits rejected (0.098375ms)
+✔ load, deposit and examine round-trip a word without changing other addresses (0.081208ms)
+✔ wraps at 22 bits, truncates data, validates register input (0.072042ms)
+✔ lamp test preserves CPU demonstration state; reset clears scratch data (0.059291ms)
+✔ snapshots immutable, subscription removable, rejected commands do not publish (0.069709ms)
+✔ selector ranges and start keep HALT semantics (0.5275ms)
+✔ observer never invents available data or gains controls; validates complete banks (0.684083ms)
+✔ queued old snapshots and future clock skew fail closed even if server says fresh (0.118334ms)
+✔ observed simultaneous physical momentaries retain all input positions (0.087ms)
+✔ shared mechanical shapes keep hardware pigments separate from pose (0.896666ms)
+✔ local momentaries return after three 50 ms ticks without altering memory semantics (0.299291ms)
+✔ remote view rejects older state while allowing repeated full snapshots (0.332958ms)
+✔ latches send explicit levels; actions send pulses without replayable toggles (0.345875ms)
+✔ all upstream selector ordinals survive UI mapping (0.09ms)
+✔ HALT release stays stopped; consecutive memory commands advance; lamp test auto returns (0.206708ms)
+✔ REALCONS data output is authoritative for every selector (0.070375ms)
+✔ xterm6 G0: every split preserves parser state (51.01975ms)
+✔ xterm6 G1: every split preserves parser state (28.624083ms)
+✔ xterm6 CUP: every split preserves parser state (39.226958ms)
+✔ xterm6 defaults: every split preserves parser state (45.072792ms)
+✔ xterm6 margins: every split preserves parser state (122.864625ms)
+✔ xterm6 origin: every split preserves parser state (62.62625ms)
+✔ xterm6 wrap: every split preserves parser state (28.528333ms)
+✔ xterm6 no wrap: every split preserves parser state (40.856708ms)
+✔ xterm6 CR LF: every split preserves parser state (18.813ms)
+✔ xterm6 BS: every split preserves parser state (13.28425ms)
+✔ xterm6 DEL: every split preserves parser state (14.706208ms)
+✔ xterm6 save restore: every split preserves parser state (55.484625ms)
+✔ xterm6 insert: every split preserves parser state (51.379375ms)
+✔ xterm6 delete: every split preserves parser state (41.611958ms)
+✔ xterm6 protection: every split preserves parser state (66.365667ms)
+✔ xterm6 reverse index: every split preserves parser state (30.930958ms)
+✔ profile limits: VT52 unavailable, C1 only explicit legacy decoding, streaming UTF8 (3.429541ms)
+✔ keypad / PF / cursor bytes and split mock escape filtering (1.125708ms)
+✔ bounded keyboard queue, flow control, ownership and reconnect never replay (1.493584ms)
+✔ Telnet NVT every split, escaped IAC, option rejection, bounded partial commands (0.783666ms)
+✔ window lifecycle preserves geometry across maximize and maintains stacking (0.43675ms)
+✔ layout preferences accept only bounded known geometry, never ownership or secrets (0.481584ms)
+✔ media compatibility, stopped-only mutation and bounded paper/spool prototypes (0.250834ms)
+✔ terminal input ownership and histories are independent of each other and panel (0.830541ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 41
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 901.3025

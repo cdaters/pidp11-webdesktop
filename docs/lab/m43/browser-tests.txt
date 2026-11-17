@@ -1,0 +1,45 @@
+
+> pidp11-web-desktop@0.4.3 test:browser
+> playwright test
+
+
+Running 30 tests using 1 worker
+
+(node:78078) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (284ms)
+  ✓   2 [chromium] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (244ms)
+  ✓   3 [chromium] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (314ms)
+  ✓   4 [chromium] › browser-tests/desktop.spec.ts:13:1 › working desktop, independent terminals and media workflows (1.3s)
+  ✓   5 [chromium] › browser-tests/desktop.spec.ts:161:1 › mobile touch and desktop screenshots; preferences contain geometry only (363ms)
+  ✓   6 [chromium] › browser-tests/m43.spec.ts:2:1 › mechanical geometry, fixed colors and labels, zoom and common panel state (712ms)
+  ✓   7 [chromium] › browser-tests/m43.spec.ts:23:1 › terminal key sequences are intact at encoder and do not contaminate mock commands; handoff discards partial line (468ms)
+  ✓   8 [chromium] › browser-tests/observe.spec.ts:46:1 › read-only observation, unavailable/stale states and spectator reconnect (2.3s)
+  ✓   9 [chromium] › browser-tests/observe.spec.ts:83:1 › touch switch uses the shared panel model on a tablet (279ms)
+  ✓  10 [chromium] › browser-tests/observe.spec.ts:109:1 › queued stale stream is discarded; fresh reconnect remains passive and shows simultaneous physical controls (2.1s)
+(node:78125) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 [firefox] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (1.0s)
+  ✓  12 [firefox] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (463ms)
+  ✓  13 [firefox] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (339ms)
+  ✓  14 [firefox] › browser-tests/desktop.spec.ts:13:1 › working desktop, independent terminals and media workflows (2.0s)
+  ✓  15 [firefox] › browser-tests/desktop.spec.ts:161:1 › mobile touch and desktop screenshots; preferences contain geometry only (463ms)
+  ✓  16 [firefox] › browser-tests/m43.spec.ts:2:1 › mechanical geometry, fixed colors and labels, zoom and common panel state (1.0s)
+  ✓  17 [firefox] › browser-tests/m43.spec.ts:23:1 › terminal key sequences are intact at encoder and do not contaminate mock commands; handoff discards partial line (625ms)
+  ✓  18 [firefox] › browser-tests/observe.spec.ts:46:1 › read-only observation, unavailable/stale states and spectator reconnect (2.5s)
+  ✓  19 [firefox] › browser-tests/observe.spec.ts:83:1 › touch switch uses the shared panel model on a tablet (329ms)
+  ✓  20 [firefox] › browser-tests/observe.spec.ts:109:1 › queued stale stream is discarded; fresh reconnect remains passive and shows simultaneous physical controls (2.4s)
+(node:78151) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  21 [webkit] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (735ms)
+  ✓  22 [webkit] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (449ms)
+  ✓  23 [webkit] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (329ms)
+  ✓  24 [webkit] › browser-tests/desktop.spec.ts:13:1 › working desktop, independent terminals and media workflows (1.7s)
+  ✓  25 [webkit] › browser-tests/desktop.spec.ts:161:1 › mobile touch and desktop screenshots; preferences contain geometry only (485ms)
+  ✓  26 [webkit] › browser-tests/m43.spec.ts:2:1 › mechanical geometry, fixed colors and labels, zoom and common panel state (974ms)
+  ✓  27 [webkit] › browser-tests/m43.spec.ts:23:1 › terminal key sequences are intact at encoder and do not contaminate mock commands; handoff discards partial line (578ms)
+  ✓  28 [webkit] › browser-tests/observe.spec.ts:46:1 › read-only observation, unavailable/stale states and spectator reconnect (2.4s)
+  ✓  29 [webkit] › browser-tests/observe.spec.ts:83:1 › touch switch uses the shared panel model on a tablet (392ms)
+  ✓  30 [webkit] › browser-tests/observe.spec.ts:109:1 › queued stale stream is discarded; fresh reconnect remains passive and shows simultaneous physical controls (2.2s)
+
+  30 passed (31.9s)

@@ -1,3 +1,4 @@
+import { paddleDefinitions, paddle, registerColor, setPaddle } from "./paddles.ts";
 import type { PanelState, Command } from "./model.ts";
 const panelLogo = new URL("./assets/digital-logo-bezel.svg", import.meta.url)
   .href;
@@ -5,6 +6,11 @@ const bits = (n: number) => Array.from({ length: n }, (_, i) => n - i - 1);
 const x = (bit: number) => 105.5 + (21 - bit) * (719 / 21);
 const color = (bit: number) =>
   Math.floor(bit / 3) % 2 ? "#b62d4b" : "#713452";
+const controlWireNames: Record<string,string> = { load:"LOAD_ADRS", examine:"EXAM", deposit:"DEPOSIT", continue:"CONT", start:"START", "lamp-test":"LAMPTEST" };
+const labelStrip = (bit: number) => {
+  const left=x(bit)-17, right=x(bit)+17, l=bit===21 || bit%3===2 ? 6 : 0, r=bit===21 || bit%3===0 ? 6 : 0;
+  return `<path d="M${left+l} 450H${right-r}Q${right} 450 ${right} ${450+r}V${494-r}Q${right} 494 ${right-r} 494H${left+l}Q${left} 494 ${left} ${494-l}V${450+l}Q${left} 450 ${left+l} 450Z" fill="${color(bit)}"/>`;
+};
 const lamp = (id: string, cx: number, cy: number, label = "") =>
   `<g class="lamp-group"><title>${label || id}</title><rect x="${cx - 10}" y="${cy - 12}" width="20" height="27" rx="2" fill="#141719"/><circle id="${id}" class="lamp" cx="${cx}" cy="${cy}" r="5.5"/>${
     label
@@ -32,7 +38,7 @@ const controls = [
 ];
 export function panelMarkup() {
   return `<svg class="front-panel" viewBox="0 0 1200 688" role="group" aria-label="PDP-11/70 panel; photographic coordinate calibration, original SVG artwork">
-<title>PDP-11/70 operator panel</title><rect width="1200" height="688" fill="#bdb9a7"/><rect x="21" y="36" width="1156" height="630" rx="13" fill="#c7c5b3" stroke="#aaa999" stroke-width="3"/>
+<title>PDP-11/70 operator panel</title>${paddleDefinitions()}<rect width="1200" height="688" fill="#bdb9a7"/><rect x="21" y="36" width="1156" height="630" rx="13" fill="#c7c5b3" stroke="#aaa999" stroke-width="3"/>
 <image href="${panelLogo}" x="83" y="58" width="110" height="33"/><rect x="48" y="128" width="1104" height="382" rx="28" fill="#202329" stroke="#85877c" stroke-width="5"/>
 <text x="88" y="227" class="panel-model">pdp11/70</text>
 ${[
@@ -78,14 +84,15 @@ ${bits(16)
 <text x="122" y="346" class="panel-tag" text-anchor="middle">POWER / LOCK</text><circle cx="122" cy="388" r="22" fill="#a3a393" stroke="#111719" stroke-width="7"/><path d="M111 403l24-31" stroke="#353934" stroke-width="7"/><text x="122" y="434" text-anchor="middle" class="panel-tag">OFF</text><title>Power key illustration only; host power is unavailable</title>
 <g class="selector-art"><text x="900" y="232">USER D</text><text x="981" y="232">USER I</text><text x="900" y="252">SUPER D</text><text x="981" y="252">SUPER I</text><text x="900" y="272">KERNEL D</text><text x="981" y="272">KERNEL I</text><text x="900" y="292">CONS PHY</text><text x="981" y="292">PROG PHY</text><circle cx="1086" cy="263" r="27" fill="#12181b" stroke="#313838" stroke-width="3"/><path id="addr-knob" d="M1086 263l22-15" stroke="#c7c8b5" stroke-width="5"/></g>
 <g class="selector-art"><text x="900" y="379">DATA PATHS</text><text x="900" y="400">BUS REG</text><text x="989" y="369">µADRS</text><text x="982" y="381">FPP / CPU</text><text x="981" y="401">DISPLAY REG</text><circle cx="1086" cy="387" r="27" fill="#12181b" stroke="#313838" stroke-width="3"/><path id="data-knob" d="M1086 387l22-15" stroke="#c7c8b5" stroke-width="5"/></g>
+<rect x="87" y="498" width="1033" height="101" fill="#131112"/>
 ${bits(22)
   .map(
     (b) =>
-      `<g class="register-switch" id="switch-${b}" role="switch" tabindex="0" aria-label="Switch register bit ${b}" aria-checked="false" data-bit="${b}"><rect class="switch-hit" x="${x(b) - 17}" y="447" width="34" height="157" fill="transparent"/><rect x="${x(b) - 17}" y="450" width="34" height="44" fill="${color(b)}"/><text x="${x(b)}" y="478" class="historic-switch-label">${b}</text><rect x="${x(b) - 15}" y="506" width="30" height="89" rx="3" fill="#41483c"/><path class="paddle ${Math.floor(b / 3) % 2 ? "red" : "rose"}" d="M${x(b) - 16} 510h32l-2 84h-28z"/><path class="paddle-line" d="M${x(b) - 12} 522h24" stroke="#ffffff35"/></g>`,
+      `<g class="register-switch" id="switch-${b}" role="switch" tabindex="0" aria-label="Switch register bit ${b}" aria-checked="false" data-bit="${b}"><rect class="switch-hit" x="${x(b) - 17}" y="447" width="34" height="157" fill="transparent"/>${labelStrip(b)}<text x="${x(b)}" y="478" class="historic-switch-label">${b}</text>${paddle(registerColor(b), "down", x(b) - 16, 506)}</g>`,
   )
   .join("")}
-<g role="button" tabindex="0" aria-label="Lamp test pulse" data-action="lamp-test" class="panel-action up-action" id="action-lamp-test"><rect class="switch-hit" x="842" y="447" width="32" height="157" fill="transparent"/><path class="action-paddle" d="M844 510h28l-2 84h-24z" fill="#e7dfc5"/></g>
-${controls.map(([action, top, bottom], i) => `<g role="${action === "halt" || action === "bus-cycle" ? "switch" : "button"}" tabindex="0" aria-label="${top} ${bottom}" ${action === "halt" || action === "bus-cycle" ? 'aria-checked="false"' : ""} data-action="${action}" id="action-${action}" class="panel-action ${action === "deposit" ? "up-action" : ""}"><rect class="switch-hit" x="${878 + i * 34.3}" y="447" width="34" height="157" fill="transparent"/><rect x="${878 + i * 34.3}" y="450" width="34" height="44" fill="${i % 2 ? "#713452" : "#b62d4b"}"/><text x="${895 + i * 34.3}" y="${bottom ? 469 : 476}" class="control-legend">${top}</text><text x="${895 + i * 34.3}" y="484" class="control-legend">${bottom}</text><path class="action-paddle" d="M${880 + i * 34.3} 510h30l-2 84h-26z" fill="${i % 2 ? "#813b60" : "#b7304f"}"/></g>`).join("")}
+<g role="button" tabindex="0" aria-label="Lamp test pulse" data-action="lamp-test" class="panel-action up-action" id="action-lamp-test"><rect class="switch-hit" x="842" y="447" width="32" height="157" fill="transparent"/>${paddle("cream", "rest", 842, 506)}</g>
+${controls.map(([action, top, bottom], i) => `<g role="${action === "halt" || action === "bus-cycle" ? "switch" : "button"}" tabindex="0" aria-label="${top} ${bottom}" ${action === "halt" || action === "bus-cycle" ? 'aria-checked="false"' : ""} data-action="${action}" id="action-${action}" class="panel-action ${action === "deposit" ? "up-action" : ""}"><rect class="switch-hit" x="${878 + i * 34.3}" y="447" width="34" height="157" fill="transparent"/><rect x="${878 + i * 34.3}" y="450" width="34" height="44" fill="${i % 2 ? "#713452" : "#b62d4b"}"/><text x="${895 + i * 34.3}" y="${bottom ? 469 : 476}" class="control-legend">${top}</text><text x="${895 + i * 34.3}" y="484" class="control-legend">${bottom}</text>${paddle(i % 2 ? "purple" : "red", "rest", 879 + i * 34.3, 506)}</g>`).join("")}
 </svg>`;
 }
 export function bindPanel(
@@ -102,13 +109,9 @@ export function bindPanel(
             ? ({ type } as Command)
             : { type: "switch", bit: Number(node.dataset.bit) },
         );
-        if (type && !["halt", "bus-cycle"].includes(type)) {
-          node.classList.add("pressed");
-          setTimeout(() => node.classList.remove("pressed"), 150);
-        }
       };
       node.addEventListener("click", invoke);
-      node.addEventListener("keydown", (event) => {
+      if (node.tagName.toLowerCase() !== "button") node.addEventListener("keydown", (event) => {
         if ((event.key === " " || event.key === "Enter") && !event.repeat) {
           event.preventDefault();
           invoke();
@@ -134,6 +137,7 @@ export function renderPanel(container: HTMLElement, s: Readonly<PanelState>) {
     const node = container.querySelector(`#switch-${b}`)!;
     const on = Boolean(s.switchRegister & (1 << b));
     node.classList.toggle("up", on);
+    setPaddle(node, on ? "up" : "down");
     node.setAttribute("aria-checked", String(on));
   });
   bits(16).forEach((b) =>
@@ -184,12 +188,13 @@ export function renderPanel(container: HTMLElement, s: Readonly<PanelState>) {
     node.classList.toggle("latched", on);
     node.setAttribute("aria-checked", String(on));
   }
-  for (const node of container.querySelectorAll<SVGGElement>("[data-action]"))
-    node.classList.toggle(
-      "active-pulse",
-      node.dataset.action === s.momentary ||
-        (node.dataset.action === "lamp-test" && s.lampTest),
-    );
+  for (const node of container.querySelectorAll<SVGGElement>("[data-action]")) {
+    const action = node.dataset.action;
+    const active = s.controls && action && controlWireNames[action] ? !!s.controls[controlWireNames[action]] : action === s.momentary || (action === "lamp-test" && s.lampTest);
+    node.classList.toggle("active-pulse", active);
+    const latched = action === "halt" ? s.halted : action === "bus-cycle" ? s.busCycle : undefined;
+    setPaddle(node, latched !== undefined ? (latched ? "down" : "up") : active ? (action === "deposit" || action === "lamp-test" ? "up" : "down") : "rest");
+  }
   const addrAngles = [65, 40, 90, 15, -15, 115, -40, -65];
   container
     .querySelector("#addr-knob")

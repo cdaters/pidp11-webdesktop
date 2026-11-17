@@ -1,0 +1,13 @@
+
+> pidp11-web-desktop@0.4.3 test:integration
+> node --test integration/*.test.ts
+
+✔ remote adapter discards pending commands and ownership on reconnect; fresh epoch may reset sequence (264.412625ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 403.819917

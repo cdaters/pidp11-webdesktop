@@ -169,7 +169,10 @@ export class VirtualDevices {
 }
 export class MockTerminalSession {
   readonly id: string;
-  inputOwner = false;
+  private owned = false;
+  inputEpoch = 0;
+  get inputOwner() { return this.owned; }
+  set inputOwner(value: boolean) { if (value !== this.owned) this.inputEpoch++; this.owned = value; }
   history: string[] = [];
   profile = "VT100 / ANSI";
   constructor(id: string) {

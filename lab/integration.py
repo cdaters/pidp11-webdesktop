@@ -127,6 +127,7 @@ def metrics(pid):
  cpu=(int(fields[11])+int(fields[12]))/os.sysconf('SC_CLK_TCK');rss=int(fields[21])*os.sysconf('SC_PAGE_SIZE')
  pss=0
  for line in pathlib.Path(f'/proc/{pid}/smaps_rollup').read_text().splitlines():
+  if line.startswith('Rss:'):rss=int(line.split()[1])*1024
   if line.startswith('Pss:'):pss=int(line.split()[1])*1024
  return {'cpu_seconds':cpu,'rss_bytes':rss,'pss_bytes':pss}
 def measure(pid,owner=None):

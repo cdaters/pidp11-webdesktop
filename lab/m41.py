@@ -148,7 +148,8 @@ def m41():
   wait(lambda:pget()['outputs']['RUN']==1);physical(HALT=1);wait(lambda:pget()['outputs']['RUN']==0)
   assert re.search(r'PC:\s+[0-7]+',sim.command('examine pc'))
   from terminal import terminal_probe
-  physical(HALT=0);time.sleep(.1)
+  # Wait for actual consumer reads of ENABLE, rather than a 100 ms guess.
+  physical(HALT=0);enabled_gets=pget()['gets'];wait(lambda:pget()['gets']>=enabled_gets+3)
   report['independent_terminals']=terminal_probe(sim)
   physical(HALT=1)
   cases['independent_terminal_transports']='passed: two original DZ11 TCP/Telnet lines and local monitor coexist without broker/browser; no guest login/driver validation'

@@ -19,3 +19,7 @@ M4.1 adds project-authored, optional C compatibility hooks on a disposable copy 
 - DIGITAL logos: user-supplied originals preserved byte-for-byte under `src/assets/original`; hashes and derived versions in `src/assets/logo-provenance.json`. They are historical branding references, not a claim of official DEC affiliation. Trademark/redistribution review remains required before public release; no ownership or license grant is inferred.
 - The High Nibble's inspected firmware/GUI package is **not redistributed**. Its software/code/artwork was not copied into the desktop. Research inventory records inspected package hashes, source notices and the release's prohibition on rehosting.
 - Optional M4.2 publisher/recovery hooks are project-authored and applied only to disposable copies of pinned upstream C source. Their binaries are laboratory artifacts, not linked into the normal Go desktop.
+
+## M4.3 additions
+
+The user-supplied PDP-11 switch photograph and supplemental IMSAI shading screenshot are preserved unchanged under `docs/references`, with provenance and SHA-256 values. They are local research evidence, not embedded product artwork; redistribution rights remain unestablished. The shared SVG paddle geometry is project-authored. No additional Go or browser runtime dependency was introduced. Optional RPC-budget and diagnostic C copies retain upstream notices and remain isolated test artifacts, separate from the normal static Go desktop.

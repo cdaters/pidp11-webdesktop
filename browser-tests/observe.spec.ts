@@ -105,3 +105,20 @@ test("touch switch uses the shared panel model on a tablet", async ({
   ).toBeGreaterThanOrEqual(44);
   await context.close();
 });
+
+test("queued stale stream is discarded; fresh reconnect remains passive and shows simultaneous physical controls", async ({page}) => {
+ let sockets=0;const sent:string[]=[];
+ await page.route('**/api/v1/login',route=>route.fulfill({json:{capabilities:['observe'],csrf:'fixture-only'}}));
+ await page.routeWebSocket('**/api/v1/observe/ws',ws=>{
+  sockets++;ws.onMessage(m=>sent.push(String(m)));
+  const s=frame();s.frame.seq=sockets;
+  if(sockets===1)s.frame.capturedUnixMs-=120000;
+  else { s.frame.inputs.CONT=1;s.frame.inputs.START=1; }
+  ws.send(JSON.stringify(s));
+ });
+ await page.goto('/?backend=observe');await page.locator('#observe-login').click();await page.getByLabel('Observation token').fill('fixture-no-production-credentials');await page.getByRole('button',{name:'Sign in',exact:true}).click();
+ await expect.poll(()=>sockets).toBe(2);
+ await expect(page.locator('#action-continue .mechanical-paddle')).toHaveAttribute('data-pose','down');
+ await expect(page.locator('#action-start .mechanical-paddle')).toHaveAttribute('data-pose','down');
+ expect(sent).toEqual([]);await expect(page.locator('#action-start')).toHaveAttribute('aria-disabled','true');
+});

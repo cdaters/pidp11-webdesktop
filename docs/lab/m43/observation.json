@@ -1,0 +1,280 @@
+{
+  "scope": "Mac-hosted Linux ARM64 network-none; pinned C publisher PID/UID/start/executable; TLS1.3 observers; no Pi or GPIO",
+  "cases": {
+    "publisher_identity": "passed kernel credentials: same UID different PID rejected; separate UID/group transport test passed",
+    "polling_route": "unchanged registrations; viewer churn does not increase running physical poll rate"
+  },
+  "baseline_running_gets_hz": 47.577555335869135,
+  "stream": {
+    "churn_observer": 6,
+    "observers": [
+      {
+        "Frames": 28179,
+        "Fresh": 28179,
+        "Bytes": 17713007,
+        "Reconnects": 3,
+        "Changes": 28148,
+        "AgeTotal": 708370,
+        "AgeMax": 55,
+        "Histogram": [
+          5411,
+          5584,
+          5510,
+          5542,
+          5466,
+          666,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 28180,
+        "Fresh": 28180,
+        "Bytes": 17713632,
+        "Reconnects": 3,
+        "Changes": 28149,
+        "AgeTotal": 706828,
+        "AgeMax": 56,
+        "Histogram": [
+          5404,
+          5582,
+          5535,
+          5538,
+          5466,
+          655,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 28180,
+        "Fresh": 28180,
+        "Bytes": 17713645,
+        "Reconnects": 3,
+        "Changes": 28149,
+        "AgeTotal": 707989,
+        "AgeMax": 56,
+        "Histogram": [
+          5415,
+          5563,
+          5541,
+          5482,
+          5567,
+          612,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 28179,
+        "Fresh": 28179,
+        "Bytes": 17712839,
+        "Reconnects": 3,
+        "Changes": 28148,
+        "AgeTotal": 703099,
+        "AgeMax": 59,
+        "Histogram": [
+          5560,
+          5551,
+          5542,
+          5475,
+          5437,
+          614,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 28179,
+        "Fresh": 28179,
+        "Bytes": 17713026,
+        "Reconnects": 3,
+        "Changes": 28148,
+        "AgeTotal": 706686,
+        "AgeMax": 54,
+        "Histogram": [
+          5390,
+          5595,
+          5582,
+          5504,
+          5485,
+          623,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 28180,
+        "Fresh": 28180,
+        "Bytes": 17713596,
+        "Reconnects": 3,
+        "Changes": 28149,
+        "AgeTotal": 707804,
+        "AgeMax": 55,
+        "Histogram": [
+          5451,
+          5532,
+          5565,
+          5520,
+          5512,
+          600,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 28204,
+        "Fresh": 28204,
+        "Bytes": 17728433,
+        "Reconnects": 60,
+        "Changes": 28149,
+        "AgeTotal": 700229,
+        "AgeMax": 87,
+        "Histogram": [
+          5677,
+          5534,
+          5507,
+          5538,
+          5370,
+          572,
+          5,
+          0,
+          1,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 11868,
+        "Fresh": 2,
+        "Bytes": 7453979,
+        "Reconnects": 1,
+        "Changes": 11859,
+        "AgeTotal": 6201857473,
+        "AgeMax": 1044119,
+        "Histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          11868
+        ],
+        "Errors": 0
+      }
+    ],
+    "seconds": 1800,
+    "session_refresh_seconds": 840,
+    "slow_observer": 7,
+    "transport": "TLS1.3 WSS, explicitly trusted ephemeral CA"
+  },
+  "consumer": {
+    "cpu_percent_one_core": 79.84405701635323,
+    "rss_start_bytes": 9756672,
+    "rss_end_bytes": 7331840,
+    "rss_peak_bytes": 9756672,
+    "pss_peak_bytes": 8569856,
+    "rss_first_minute_mean": 9442099.2,
+    "rss_last_minute_mean": 7420723.2
+  },
+  "observer": {
+    "cpu_percent_one_core": 0.8548733109361069,
+    "rss_start_bytes": 8847360,
+    "rss_end_bytes": 9551872,
+    "rss_peak_bytes": 12976128,
+    "pss_peak_bytes": 13837312,
+    "rss_first_minute_mean": 12451157.333333334,
+    "rss_last_minute_mean": 9771827.2
+  },
+  "physical_standin": {
+    "cpu_percent_one_core": 0.43909401879900034,
+    "rss_start_bytes": 11264000,
+    "rss_end_bytes": 8159232,
+    "rss_peak_bytes": 11657216,
+    "pss_peak_bytes": 12329984,
+    "rss_first_minute_mean": 10823133.866666667,
+    "rss_last_minute_mean": 8377685.333333333
+  },
+  "poll_hz_by_phase": {
+    "running": 47.59406549228986,
+    "idle": 44.35761559258259
+  },
+  "transitions": [
+    {
+      "seconds": 240.32518143400375,
+      "phase": "idle"
+    },
+    {
+      "seconds": 300.48295431400766,
+      "phase": "running"
+    },
+    {
+      "seconds": 540.940937516003,
+      "phase": "idle"
+    },
+    {
+      "seconds": 601.0615803170076,
+      "phase": "running"
+    },
+    {
+      "seconds": 841.5032787050004,
+      "phase": "idle"
+    },
+    {
+      "seconds": 901.6505342379969,
+      "phase": "running"
+    },
+    {
+      "seconds": 1140.0592530020076,
+      "phase": "idle"
+    },
+    {
+      "seconds": 1200.2199714250019,
+      "phase": "running"
+    },
+    {
+      "seconds": 1440.7034207760007,
+      "phase": "idle"
+    },
+    {
+      "seconds": 1500.8730787759996,
+      "phase": "running"
+    },
+    {
+      "seconds": 1741.2957786890038,
+      "phase": "idle"
+    }
+  ],
+  "elapsed_seconds": 1801.436517317008,
+  "status": "PASS"
+}

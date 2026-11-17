@@ -1,0 +1,14 @@
+[
+  {
+    "name": "chromium",
+    "version": "159.0.8154.6"
+  },
+  {
+    "name": "firefox",
+    "version": "159.0"
+  },
+  {
+    "name": "webkit",
+    "version": "27.2"
+  }
+]

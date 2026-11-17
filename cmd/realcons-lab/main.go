@@ -175,6 +175,15 @@ func main() {
 	})
 	mux.HandleFunc("POST /hold-load", func(w http.ResponseWriter, r *http.Request) { s.HoldLoad.Store(true); w.Write([]byte("{}")) })
 	mux.HandleFunc("POST /hold-start-release", func(w http.ResponseWriter, r *http.Request) { s.HoldStartRelease.Store(true); w.Write([]byte("{}")) })
+	mux.HandleFunc("POST /delay-replies", func(w http.ResponseWriter, r *http.Request) {
+		s.ReplyDelayNanos.Store(int64(75 * time.Millisecond))
+		w.Write([]byte("{}"))
+	})
+	mux.HandleFunc("POST /resume-replies", func(w http.ResponseWriter, r *http.Request) { s.ReplyDelayNanos.Store(0); w.Write([]byte("{}")) })
+	mux.HandleFunc("GET /held-reply", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]bool{"held": s.Held.Load()})
+	})
+	mux.HandleFunc("POST /hold-parameter-reply", func(w http.ResponseWriter, r *http.Request) { s.HoldProcedure.Store(101); w.Write([]byte("{}")) })
 	mux.HandleFunc("POST /hold-next-reply", func(w http.ResponseWriter, r *http.Request) { s.HoldNext.Store(true); w.Write([]byte("{}")) })
 	mux.HandleFunc("POST /release-reply", func(w http.ResponseWriter, r *http.Request) { s.ReleaseHeld(); w.Write([]byte("{}")) })
 	if arbiter == nil {

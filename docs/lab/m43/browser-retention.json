@@ -1,0 +1,42 @@
+{
+  "scope": "Final embedded build, accelerated 60 create/use/dispose cycles and 600 commands; post-GC no-terminal baseline comparison, not a second timed soak",
+  "samples": [
+    {
+      "label": "baseline, no terminals",
+      "nodes": 1689,
+      "heap": 2884932,
+      "listeners": 139,
+      "connected": 727
+    },
+    {
+      "label": "15 terminal lifecycles, no terminals",
+      "nodes": 1692,
+      "heap": 3928464,
+      "listeners": 139,
+      "connected": 727
+    },
+    {
+      "label": "30 terminal lifecycles, no terminals",
+      "nodes": 1692,
+      "heap": 3996056,
+      "listeners": 139,
+      "connected": 727
+    },
+    {
+      "label": "45 terminal lifecycles, no terminals",
+      "nodes": 1692,
+      "heap": 4035288,
+      "listeners": 139,
+      "connected": 727
+    },
+    {
+      "label": "60 terminal lifecycles, no terminals",
+      "nodes": 1692,
+      "heap": 4070052,
+      "listeners": 139,
+      "connected": 727
+    }
+  ],
+  "errors": [],
+  "status": "PASS"
+}

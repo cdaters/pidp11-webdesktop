@@ -3,6 +3,10 @@ from integration import Simh
 import socket,re,time,os,json,pathlib,signal
 
 def terminal_probe(sim):
+ # This RAM-only transport fixture starts a fresh device epoch; do not inherit
+ # calibrated/co-scheduled timer state from the preceding RUN/HALT fault tests.
+ # No guest image is attached. Retain the original 3 s socket deadline.
+ sim.command('reset all')
  for c in ['set dz enabled','set dz lines=8','attach dz 127.0.0.1:40100']:sim.command(c)
  dev=sim.command('examine dz devaddr');match=re.search(r'DEVADDR:\s+([0-7]+)',dev);assert match,dev
  csr=int(match.group(1),8)&0xffff

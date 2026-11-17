@@ -1,0 +1,10 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/45 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 45/45 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 421940 (140640/sec), new interesting: 0 (total: 45)
+fuzz: elapsed: 6s, execs: 851929 (143316/sec), new interesting: 1 (total: 46)
+fuzz: elapsed: 9s, execs: 1277288 (141759/sec), new interesting: 1 (total: 46)
+fuzz: elapsed: 12s, execs: 1711099 (144603/sec), new interesting: 2 (total: 47)
+fuzz: elapsed: 15s, execs: 2146203 (145073/sec), new interesting: 2 (total: 47)
+fuzz: elapsed: 15s, execs: 2146203 (0/sec), new interesting: 2 (total: 47)
+PASS
+ok  	pidp11.local/webdesktop/internal/labrpc	15.196s

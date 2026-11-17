@@ -45,23 +45,9 @@
 .selector-art text {
   font-size: 9px;
 }
-.paddle {
-  stroke: #4c2838;
-  stroke-width: 1;
-}
-.paddle.red {
-  fill: #b7304f;
-}
-.paddle.rose {
-  fill: #813b60;
-}
 .register-switch,
 .panel-action {
   cursor: pointer;
-}
-.register-switch.up .paddle,
-.register-switch.up .paddle-line {
-  transform: translateY(-15px);
 }
 .register-switch:hover .switch-hit,
 .panel-action:hover .switch-hit {
@@ -76,13 +62,4 @@
   stroke: #fff0be;
   stroke-width: 3;
   fill: #ffffff14;
-}
-.panel-action.pressed .action-paddle,
-.panel-action.active-pulse .action-paddle,
-.panel-action.latched .action-paddle {
-  transform: translateY(10px);
-}
-.panel-action.up-action.pressed .action-paddle,
-.panel-action.up-action.active-pulse .action-paddle {
-  transform: translateY(-15px);
 }

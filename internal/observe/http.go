@@ -22,6 +22,8 @@ func (s *Server) Handler(assets fs.FS) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /api/v1/login", s.Auth.Login)
 	mux.HandleFunc("POST /api/v1/logout", s.Auth.Logout)
+	mux.HandleFunc("GET /api/v1/session", s.Auth.Session)
+	mux.Handle("GET /api/v1/audit", s.Auth.Require(access.Admin, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(s.Auth.Audit()) })))
 	mux.Handle("GET /api/v1/observe", s.Auth.Require(access.Observe, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(s.Store.Snapshot(time.Now())) })))
 	mux.Handle("GET /api/v1/observe/ws", s.Auth.Require(access.Observe, http.HandlerFunc(s.stream)))
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +37,7 @@ func (s *Server) Handler(assets fs.FS) http.Handler {
 		web.ServeAssets(assets).ServeHTTP(w, r)
 	}))
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if !access.LocalHost(r.Host) {
+		if !s.Auth.TrustedRequest(r) {
 			http.Error(w, "loopback IP Host required", 403)
 			return
 		}
@@ -46,7 +48,7 @@ func (s *Server) Handler(assets fs.FS) http.Handler {
 	})
 }
 func (s *Server) stream(w http.ResponseWriter, r *http.Request) {
-	if !access.Origin(r) {
+	if !s.Auth.Origin(r) {
 		http.Error(w, "same origin required", 403)
 		return
 	}

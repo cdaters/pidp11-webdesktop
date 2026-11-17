@@ -40,6 +40,7 @@ export class ObservedPanelAdapter implements PanelAdapter {
   private reconnect: ReturnType<typeof setTimeout> | undefined;
   private watchdog: ReturnType<typeof setInterval>;
   private closed = false;
+  private csrf = "";
   private last = 0;
   private boot = "";
   private seq = 0;
@@ -49,12 +50,12 @@ export class ObservedPanelAdapter implements PanelAdapter {
   constructor(privateStatus: (message: string) => void) {
     this.status = privateStatus;
     this.watchdog = setInterval(() => {
-      if (this.last && Date.now() - this.last > 500 && this.fresh) {
+      if (this.last && Date.now() - this.last + this.age > 350 && this.fresh) {
         this.fresh = false;
         this.status("Stale observation · last received state retained");
         this.publish();
       }
-    }, 250);
+    }, 100);
   }
   private status: (message: string) => void;
   async login(token: string) {
@@ -65,6 +66,8 @@ export class ObservedPanelAdapter implements PanelAdapter {
       credentials: "same-origin",
     });
     if (!r.ok) throw Error("Observation login rejected");
+    const session = await r.json();
+    this.csrf = session.csrf;
     this.closed = false;
     clearTimeout(this.reconnect);
     if (this.socket) {
@@ -74,14 +77,31 @@ export class ObservedPanelAdapter implements PanelAdapter {
     }
     this.connect();
   }
+  async logout() {
+    // Stop displaying a connected session even if the server cannot be reached.
+    this.closed = true;
+    clearTimeout(this.reconnect);
+    this.socket?.close();
+    this.fresh = false;
+    this.status("Signed out · observation disconnected");
+    this.publish();
+    const r = await fetch("/api/v1/logout", { method: "POST", credentials: "same-origin", headers: { "X-CSRF-Token": this.csrf } });
+    this.csrf = "";
+    if (!r.ok) throw Error("Server logout was not acknowledged; session expiry/revocation still applies");
+  }
   private connect() {
     if (this.closed) return;
     const u = new URL("/api/v1/observe/ws", location.href);
     u.protocol = location.protocol === "https:" ? "wss:" : "ws:";
     const ws = (this.socket = new WebSocket(u));
     ws.onmessage = (e) => {
+      if (ws !== this.socket || this.closed || ws.readyState !== WebSocket.OPEN) return;
       try {
-        this.accept(JSON.parse(String(e.data)));
+        const snapshot: ObservedSnapshot = JSON.parse(String(e.data));
+        this.accept(snapshot);
+        // A bounded server write cannot flush already buffered TCP/browser data.
+        // Discard an old stream rather than reading minutes of stale snapshots.
+        if (snapshot.fresh && this.age > 1000) ws.close();
       } catch {
         this.status("Invalid observation message");
       }
@@ -168,8 +188,10 @@ export class ObservedPanelAdapter implements PanelAdapter {
     }
     this.last = Date.now();
     this.available = s.available;
-    this.fresh = s.fresh;
-    this.age = s.ageMs;
+    const transportAge = f ? Date.now() - f.capturedUnixMs : 0;
+    this.age = Math.max(s.ageMs, transportAge);
+    this.fresh = s.fresh && this.age <= 350 && transportAge >= -100;
+
     if (!f) {
       this.status("No observed machine data available");
       this.publish();
@@ -184,6 +206,7 @@ export class ObservedPanelAdapter implements PanelAdapter {
       source: "observed-lab",
       revision: this.state.revision + 1,
       indicators: { ...o },
+      controls: { ...i },
       address: o.ADDRESS,
       data: o.DATA,
       switchRegister: i.SR,
@@ -195,9 +218,9 @@ export class ObservedPanelAdapter implements PanelAdapter {
       lampTest: !!i.LAMPTEST,
     };
     this.status(
-      s.fresh
-        ? `Observed REALCONS · read only · age ${s.ageMs} ms`
-        : `Stale observation · age ${s.ageMs} ms`,
+      this.fresh
+        ? `Observed REALCONS · read only · age ${this.age} ms`
+        : `Stale observation · age ${this.age} ms (check clocks if persistent)`,
     );
     this.publish();
   }

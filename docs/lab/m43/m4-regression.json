@@ -1,0 +1,33 @@
+{
+  "idle_broker_measurement": {
+    "seconds": 5.0,
+    "rss_mean_bytes": 9909371,
+    "rss_peak_bytes": 11137024,
+    "pss_peak_bytes": 8817664,
+    "cpu_percent_one_core": 0.2
+  },
+  "missed_physical_edge": "demonstrated: physical press/release between consumer polls is lost; no invented replay",
+  "held_switch_handoff": "passed: physical momentary blocks grant until neutral and explicit request",
+  "physical_virtual_observers": "passed: physical RUN/lamps, halted grant, one virtual owner, no SR merge",
+  "active_broker_measurement": {
+    "seconds": 15.001,
+    "rss_mean_bytes": 12018374,
+    "rss_peak_bytes": 12197888,
+    "pss_peak_bytes": 10251264,
+    "cpu_percent_one_core": 0.533,
+    "commands": 300,
+    "viewers": 2,
+    "command_rate_hz": 20,
+    "rtt_including_driver_ipc_p95_ms": 0.209
+  },
+  "delayed_poll_handoff": "passed: START held across missing polls; HALT frame precedes neutral frame",
+  "browser_disconnect": "passed: held START assertion, disconnect, safe neutralization, spectator reconnect",
+  "physical_movement_and_loss": "passed: revocation and persistent fault; fresh physical samples do not auto-arm",
+  "lease_expiry": "passed: expiry halts/disarms; no implicit reacquisition",
+  "inflight_start_release": "COUNTEREXAMPLE: pre-handoff START=0/HALT=0 reply can run before the following HALT; no absolute cancellation guarantee",
+  "broker_crash": "broker killed while RUN=1; no broker-delivered HALT is possible",
+  "crash_observation": "127.0.0.1: RPC: Unable to receive; errno = Connection refused (in .//../../../07.0_blinkenlight_api/blinkenlight_api_client.c, line 296)",
+  "independent_stop_acknowledged": false,
+  "stop_observation_seconds": 1.504,
+  "broker_restart": "fresh halted/unowned baseline; stale ownership discarded"
+}

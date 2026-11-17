@@ -7,7 +7,7 @@ export type Command =
   | { type: 'halt' | 'continue' | 'start' | 'load' | 'examine' | 'deposit' | 'lamp-test' | 'reset' | 'bus-cycle' }
   | { type: 'address-select' | 'data-select'; value: number };
 export interface PanelState {
-  source: 'simulation' | 'realcons-lab' | 'observed-lab'; indicators?: Record<string,number>; revision: number; address: number; data: number;
+  source: 'simulation' | 'realcons-lab' | 'observed-lab'; indicators?: Record<string,number>; controls?: Record<string,number>; revision: number; address: number; data: number;
   switchRegister: number; halted: boolean; running: boolean; busCycle: boolean; momentary: string; lampTest: boolean;
   addressSelect: number; dataSelect: number; cycles: number; storedWords: number;
 }
@@ -47,7 +47,9 @@ export class SimulatedPanelAdapter implements PanelAdapter {
     this.state.data = this.word(this.state.address);
     this.state.cycles++;
   }
+  private momentaryTicks = 0;
   tick() {
+    if (this.momentaryTicks > 0 && --this.momentaryTicks === 0) { this.state.momentary = ""; this.publish(); }
     if(this.lampTicks>0){this.lampTicks--;if(this.lampTicks===0){this.state.lampTest=false;this.publish();}}
     if (this.state.halted || !this.state.running) return;
     this.advance(); this.publish();
@@ -105,8 +107,9 @@ export class SimulatedPanelAdapter implements PanelAdapter {
         else s.dataSelect = command.value;
         message = 'Demo selector updated; no MMU or microcode is emulated.'; break;
       }
-      case 'reset': this.memory.clear();this.loadedAddress=0o1000;this.lastMemory='';this.lampTicks=0; this.state = initial(); message = 'Demo reset. Scratch memory cleared.'; break;
+      case 'reset': this.memory.clear();this.loadedAddress=0o1000;this.lastMemory='';this.lampTicks=0; this.momentaryTicks=0; this.state = initial(); message = 'Demo reset. Scratch memory cleared.'; break;
     }
+    if (["load", "examine", "deposit", "continue", "start"].includes(command.type)) { this.state.momentary = command.type; this.momentaryTicks = 3; }
     this.publish(); return { accepted: true, message };
   }
 }

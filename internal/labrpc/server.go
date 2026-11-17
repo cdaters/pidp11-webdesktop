@@ -23,6 +23,8 @@ type Server struct {
 	HoldLoad         atomic.Bool
 	HoldStartRelease atomic.Bool
 	HoldNext         atomic.Bool
+	HoldProcedure    atomic.Uint32
+	ReplyDelayNanos  atomic.Int64
 	Held             atomic.Bool
 	release          chan struct{}
 
@@ -207,9 +209,25 @@ func (s *Server) serveUDP(ctx context.Context) {
 		}
 		s.mu.Unlock()
 		if reply != nil {
+			if s.ReplyDelayNanos.Load() > 0 && ok {
+				continue
+			} // delay fixture emits one reply per XID
+			if delay := s.ReplyDelayNanos.Load(); delay > 0 && !ok {
+				select {
+				case <-time.After(time.Duration(delay)):
+				case <-ctx.Done():
+					return
+				}
+			}
 			hold := false
+			if len(request) >= 24 {
+				proc := binary.BigEndian.Uint32(request[20:])
+				if proc != 0 {
+					hold = s.HoldProcedure.CompareAndSwap(proc, 0)
+				}
+			}
 			if len(request) >= 24 && binary.BigEndian.Uint32(request[20:]) == 5 {
-				hold = s.HoldNext.Swap(false)
+				hold = s.HoldNext.Swap(false) || hold
 				payload, err := bb.DecodeReply(binary.BigEndian.Uint32(request), 5, reply)
 				if err == nil && payload.Error == 0 {
 					controls := Filter(PDP1170(), 1)

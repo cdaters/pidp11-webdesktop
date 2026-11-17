@@ -1,0 +1,234 @@
+{
+  "scope": "Mac-hosted Linux ARM64 network-none; pinned C publisher PID/UID/start/executable; TLS1.3 observers; no Pi or GPIO",
+  "cases": {
+    "publisher_identity": "passed kernel credentials: same UID different PID rejected; separate UID/group transport test passed",
+    "polling_route": "unchanged registrations; viewer churn does not increase running physical poll rate"
+  },
+  "baseline_running_gets_hz": 47.58730958756985,
+  "stream": {
+    "churn_observer": 6,
+    "observers": [
+      {
+        "Frames": 952,
+        "Fresh": 952,
+        "Bytes": 597013,
+        "Reconnects": 1,
+        "Changes": 952,
+        "AgeTotal": 23071,
+        "AgeMax": 52,
+        "Histogram": [
+          200,
+          191,
+          183,
+          191,
+          175,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 952,
+        "Fresh": 952,
+        "Bytes": 597011,
+        "Reconnects": 1,
+        "Changes": 952,
+        "AgeTotal": 23089,
+        "AgeMax": 52,
+        "Histogram": [
+          202,
+          189,
+          181,
+          192,
+          174,
+          14,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 952,
+        "Fresh": 952,
+        "Bytes": 597010,
+        "Reconnects": 1,
+        "Changes": 952,
+        "AgeTotal": 23047,
+        "AgeMax": 52,
+        "Histogram": [
+          202,
+          190,
+          182,
+          191,
+          176,
+          11,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 952,
+        "Fresh": 952,
+        "Bytes": 597012,
+        "Reconnects": 1,
+        "Changes": 952,
+        "AgeTotal": 23180,
+        "AgeMax": 52,
+        "Histogram": [
+          199,
+          190,
+          180,
+          193,
+          176,
+          14,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 952,
+        "Fresh": 952,
+        "Bytes": 597010,
+        "Reconnects": 1,
+        "Changes": 952,
+        "AgeTotal": 23134,
+        "AgeMax": 52,
+        "Histogram": [
+          201,
+          189,
+          181,
+          192,
+          175,
+          14,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 952,
+        "Fresh": 952,
+        "Bytes": 597011,
+        "Reconnects": 1,
+        "Changes": 952,
+        "AgeTotal": 23144,
+        "AgeMax": 52,
+        "Histogram": [
+          200,
+          189,
+          185,
+          186,
+          177,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 952,
+        "Fresh": 952,
+        "Bytes": 597024,
+        "Reconnects": 2,
+        "Changes": 952,
+        "AgeTotal": 23620,
+        "AgeMax": 52,
+        "Histogram": [
+          189,
+          189,
+          179,
+          196,
+          183,
+          16,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Errors": 0
+      },
+      {
+        "Frames": 395,
+        "Fresh": 3,
+        "Bytes": 247662,
+        "Reconnects": 1,
+        "Changes": 395,
+        "AgeTotal": 6978617,
+        "AgeMax": 35161,
+        "Histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          395
+        ],
+        "Errors": 0
+      }
+    ],
+    "seconds": 60,
+    "session_refresh_seconds": 840,
+    "slow_observer": 7,
+    "transport": "TLS1.3 WSS, explicitly trusted ephemeral CA"
+  },
+  "consumer": {
+    "cpu_percent_one_core": 96.34590834457063,
+    "rss_start_bytes": 10088448,
+    "rss_end_bytes": 9322496,
+    "rss_peak_bytes": 10088448,
+    "pss_peak_bytes": 8705024,
+    "rss_first_minute_mean": 9782067.2,
+    "rss_last_minute_mean": 9782067.2
+  },
+  "observer": {
+    "cpu_percent_one_core": 0.43271611970268387,
+    "rss_start_bytes": 9781248,
+    "rss_end_bytes": 12271616,
+    "rss_peak_bytes": 13643776,
+    "pss_peak_bytes": 13628416,
+    "rss_first_minute_mean": 12765593.6,
+    "rss_last_minute_mean": 12765593.6
+  },
+  "physical_standin": {
+    "cpu_percent_one_core": 0.26628684289395926,
+    "rss_start_bytes": 12214272,
+    "rss_end_bytes": 10792960,
+    "rss_peak_bytes": 12218368,
+    "pss_peak_bytes": 12207104,
+    "rss_first_minute_mean": 11549764.266666668,
+    "rss_last_minute_mean": 11549764.266666668
+  },
+  "poll_hz_by_phase": {
+    "running": 47.6217567534954
+  },
+  "transitions": [],
+  "elapsed_seconds": 60.08558224700391,
+  "status": "PASS"
+}

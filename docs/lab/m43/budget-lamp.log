@@ -1,0 +1,32 @@
+
+PDP-11 simulator V4.0-0 Current  REALCONS build Nov 17 2026
+sim> set cpu 11/70
+Disabling XQ
+sim> set cpu 256K
+sim> deposit 2000 5200
+sim> deposit 2002 776
+sim> deposit pc 2000
+sim> set realcons host=127.0.0.1
+sim> set realcons panel=11/70
+sim> set realcons interval=20
+sim> set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+sim> @WD 3795063948773236397 1
+
+Simulation stopped, PC: 002000 (INC R0)
+sim> set realcons test
+Verify lamp test!
+Switch SR          = 0
+Switch LOAD ADRS   = 0
+Switch EXAM        = 0
+Switch DEPOSIT     = 0
+Switch CONT        = 0
+Switch HALT        = 1
+Switch S INST/S BUS= 0
+Switch START       = 0
+Switch ADDR SELECT = 4
+Switch DATA SELECT = 2
+REALCONS device for blinkenlight panels. Build Nov 17 2026.
+Contact: www.retrocmp.com; j_hoppe@t-online.de
+sim> 127.0.0.1: RPC: Unable to receive; errno = Connection refused (in .//../../../07.0_blinkenlight_api/blinkenlight_api_client.c, line 296)

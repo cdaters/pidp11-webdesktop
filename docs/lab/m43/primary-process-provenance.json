@@ -1,0 +1,17 @@
+[
+  {
+    "pid": "25",
+    "binary": "/fixtures/realcons-lab-linux-arm64",
+    "exe": "/fixtures/realcons-lab-linux-arm64 (deleted)"
+  },
+  {
+    "pid": "38",
+    "binary": "/fixtures/observe-lab-linux-arm64",
+    "exe": "/fixtures/observe-lab-linux-arm64 (deleted)"
+  },
+  {
+    "pid": "46",
+    "binary": "/fixtures/m43-probe-linux-arm64",
+    "exe": "/fixtures/m43-probe-linux-arm64"
+  }
+]

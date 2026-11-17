@@ -6,7 +6,7 @@ export default defineConfig({
   workers: 1,
   reporter: [
     ["list"],
-    ["json", { outputFile: ".research/m42-browser-results.json" }],
+    ["json", { outputFile: ".research/m43-browser-results.json" }],
   ],
   use: {
     baseURL: "http://127.0.0.1:5173",

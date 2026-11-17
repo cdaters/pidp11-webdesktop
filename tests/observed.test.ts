@@ -75,3 +75,19 @@ test("observer never invents available data or gains controls; validates complet
     a.close();
   }
 });
+
+test("queued old snapshots and future clock skew fail closed even if server says fresh", () => {
+  const a = new ObservedPanelAdapter(() => {});
+  try {
+    for (const offset of [-2000, 2000]) {
+      const s = observedFixture(); s.frame!.capturedUnixMs += offset;
+      a.accept(s); assert(!a.fresh); assert(a.available);
+    }
+    a.accept(observedFixture()); assert(a.fresh);
+  } finally { a.close(); }
+});
+
+test("observed simultaneous physical momentaries retain all input positions", () => {
+ const a=new ObservedPanelAdapter(()=>{});
+ try { const s=observedFixture();s.frame!.inputs.CONT=1;s.frame!.inputs.START=1;a.accept(s);assert.equal(a.snapshot().controls?.CONT,1);assert.equal(a.snapshot().controls?.START,1); } finally { a.close(); }
+});

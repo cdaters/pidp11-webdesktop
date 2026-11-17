@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('/diagnostic/src/02.3_simh/4.x+realcons/src/PDP11/pdp11_cpu.c');s=p.read_text();s=s.replace('if (cpu_realcons->connected && realcons_console_halt) {','if (cpu_realcons->connected && realcons_console_halt) {\n fprintf(stderr,"M43 diagnostic: REALCONS console HALT asserted at PC=%o\\n",PC);');s=s.replace('if (cpu_astop) {','if (cpu_astop) {\n fprintf(stderr,"M43 diagnostic: CPU address stop at PC=%o\\n",PC);');p.write_text(s)

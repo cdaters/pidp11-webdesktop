@@ -1,0 +1,15 @@
+{
+  "scope": "Native Chromium heap snapshot after accelerated 600-command/12-lifecycle diagnostic; no guest or Pi",
+  "heap_snapshot_sha256": "cd29076fb5a6e7e8c425e69754e7cbaf9c827ec0ea03d13b76296c6d4a0dbc54",
+  "native_counts": {
+    "blink::UndoStep": 465,
+    "blink::InsertIntoTextNodeCommand": 1860,
+    "blink::InsertNodeBeforeCommand": 465,
+    "blink::RemoveNodeCommand": 465,
+    "<br id=\"textarea-placeholder-break\" aria-hidden=\"true\">": 469,
+    "Text": 1199
+  },
+  "detached_native_counts": {},
+  "source": "https://chromium.googlesource.com/chromium/src/+/4852d4ffeefa31265675175f00edcf84c5e30ecd/third_party/blink/renderer/core/editing/commands/undo_stack.cc",
+  "interpretation": "Native edit undo retains nodes even while connected element count is stable. Original startup-growth budget failure remains recorded; warm-up and steady-state follow-up do not rewrite it."
+}

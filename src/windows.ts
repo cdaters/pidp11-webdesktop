@@ -290,6 +290,29 @@ export class WindowManager {
       this.elements.get(id)?.focus({ preventScroll: true });
     }
   }
+  place(id: string, rect: Rect) {
+    const w = this.store.windows.find((w) => w.id === id);
+    if (!w) return;
+    Object.assign(w, clampRect(rect, this.bounds().width, this.bounds().height), { minimized: false, maximized: false });
+    delete w.restore;
+    this.render();
+  }
+  arrangeTerminals() {
+    const { width, height } = this.bounds();
+    const wide = width >= 1150;
+    const panelWidth = wide ? Math.min(720, width * .48) : width;
+    const panelHeight = Math.min(height * (wide ? .72 : .48), 550);
+    this.place("panel", { x: 0, y: 0, width: panelWidth, height: panelHeight });
+    const terminals = this.store.windows.filter((w) => w.id.startsWith("terminal-"));
+    const x = wide ? panelWidth + 8 : 0, y = wide ? 0 : panelHeight + 8;
+    const columns = width - x >= 1100 && terminals.length > 2 ? 2 : 1;
+    const rows = Math.ceil(terminals.length / columns) || 1;
+    terminals.forEach((w, i) => this.place(w.id, {
+      x: x + (i % columns) * (width - x) / columns,
+      y: y + Math.floor(i / columns) * (height - y) / rows,
+      width: (width - x) / columns - 4, height: (height - y) / rows - 4,
+    }));
+  }
   toggleMax(id: string) {
     this.store.maximize(id, this.bounds().width, this.bounds().height);
     this.render();

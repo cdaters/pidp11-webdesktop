@@ -1100,3 +1100,16 @@ table button {
 .panel-app.unavailable .front-panel {
   opacity: 0.6;
 }
+
+/* M4.3: retain the 1200:688 reference geometry at every scale. */
+.panel-zoom-label { display:flex; align-items:center; gap:4px; font-size:10px; }
+.panel-zoom-label select { width:110px; min-height:26px; font-size:11px; }
+.panel-toolbar { flex-wrap:wrap; }
+.panel-app.fixed-scale .panel-viewport { display:block; }
+.panel-app.fixed-scale .front-panel { max-width:none; max-height:none; min-width:0; display:block; }
+.drive-visual { position:relative; min-height:130px; background:linear-gradient(#ede6d4 0 15%, #4d3444 15% 22%, #c9c4af 22% 80%, #343b37 80%); border:1px solid #65695b; box-shadow:inset 0 0 0 3px #b8b9a7; }
+.drive-visual svg { color:#4b5347; }
+.drive-lights { display:flex; flex-direction:column; gap:3px; position:absolute; bottom:5px; font:7px Menlo,monospace; color:#d9d9c2; }
+.drive-lights i { display:inline-block; width:5px; height:5px; border-radius:50%; background:#292c23; }
+.drive-lights i.lit { background:#e4c165; }
+@media(max-width:700px) { #arrange-workspace { display:none; } .panel-zoom-label select { width:88px; } }

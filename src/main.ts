@@ -57,7 +57,7 @@ const apps = [
   ["about", "About", "References & shortcuts"],
 ];
 const root = document.querySelector<HTMLDivElement>("#app")!;
-root.innerHTML = `<header class="desktop-top"><img src="${logo}" class="digital-brand" alt="DIGITAL"><span class="desktop-name">PiDP-11 <b>Web Desktop</b></span><span class="top-source" id="source-badge">LOCAL SIMULATION</span><button id="reset-layout" title="Reset saved window geometry">Reset layout</button><time id="clock"></time></header><div class="desktop-layout"><nav class="launcher" aria-label="Applications">${apps.map(([id, name, desc]) => `<button data-app="${id}" title="${desc}" aria-label="Open ${name}">${icon(id)}<span>${name}</span></button>`).join("")}</nav><main id="desktop" aria-label="PiDP-11 desktop workspace"><div class="wallpaper" aria-hidden="true"><span>pdp11/70</span><small>THE COMPUTER IS STILL THE COMPUTER.</small></div></main></div><footer class="taskbar"><span class="taskbar-label">WORKSPACE</span><div id="tasks" aria-label="Open windows"></div><span class="local-label">M4.2 · LOCAL LAB</span></footer><div id="toast" role="status" aria-live="polite"></div>`;
+root.innerHTML = `<header class="desktop-top"><img src="${logo}" class="digital-brand" alt="DIGITAL"><span class="desktop-name">PiDP-11 <b>Web Desktop</b></span><span class="top-source" id="source-badge">LOCAL SIMULATION</span><button id="arrange-workspace">Arrange terminals</button><button id="reset-layout" title="Reset saved window geometry">Reset layout</button><time id="clock"></time></header><div class="desktop-layout"><nav class="launcher" aria-label="Applications">${apps.map(([id, name, desc]) => `<button data-app="${id}" title="${desc}" aria-label="Open ${name}">${icon(id)}<span>${name}</span></button>`).join("")}</nav><main id="desktop" aria-label="PiDP-11 desktop workspace"><div class="wallpaper" aria-hidden="true"><span>pdp11/70</span><small>THE COMPUTER IS STILL THE COMPUTER.</small></div></main></div><footer class="taskbar"><span class="taskbar-label">WORKSPACE</span><div id="tasks" aria-label="Open windows"></div><span class="local-label">M4.3 · LOCAL LAB</span></footer><div id="toast" role="status" aria-live="polite"></div>`;
 const $ = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 const manager = new WindowManager($("desktop"), $("tasks"));
@@ -207,7 +207,7 @@ function openPanel() {
     return;
   }
   panelEl = body(
-    `<div class="panel-toolbar"><span class="source-tag" id="panel-source">SIMULATED PANEL</span><span id="run-state"></span><button id="panel-mode">Full panel</button>${observeMode ? '<button id="observe-login">Sign in to observe</button>' : ""}${remoteMode ? '<button id="acquire">Acquire panel</button><button id="release">Release</button>' : ""}</div><div class="panel-viewport">${panelMarkup()}</div><div class="panel-readouts"><span>ADDRESS <output id="address-value"></output></span><span>DATA <output id="data-value"></output></span><span>SWITCH REGISTER <output id="sr-value"></output></span></div><div class="panel-options"><label>Address<select id="address-select"><option value="0">USER I</option><option value="1">USER D</option><option value="2">SUPER I</option><option value="3">SUPER D</option><option value="4">CONS PHY</option><option value="5">KERNEL I</option><option value="6">KERNEL D</option><option value="7">PROG PHY</option></select></label><label>Data<select id="data-select"><option value="0">µADRS FPP / CPU</option><option value="1">DISPLAY REGISTER</option><option value="2">DATA PATHS</option><option value="3">BUS REG</option></select></label><form id="register-form"><label>SR octal<input id="register-input" value="00001000" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="Octal switch register"></label><button>Set</button></form></div><details class="touch-controls"><summary>Touch / accessible controls</summary><div class="touch-bits">${Array.from(
+    `<div class="panel-toolbar"><span class="source-tag" id="panel-source">SIMULATED PANEL</span><span id="run-state"></span><button id="panel-mode">Full panel</button><button id="panel-compact">Compact</button><label class="panel-zoom-label">Scale <select id="panel-zoom" aria-label="Panel zoom"><option value="fit">Fit</option><option value="600">50%</option><option value="900">75%</option><option value="1200">Reference 100%</option><option value="1500">125%</option><option value="1800">150%</option><option value="2400">200%</option></select></label>${observeMode ? '<button id="observe-login">Sign in to observe</button><button id="observe-logout">Sign out</button>' : ""}${remoteMode ? '<button id="acquire">Acquire panel</button><button id="release">Release</button>' : ""}</div><div class="panel-viewport">${panelMarkup()}</div><div class="panel-readouts"><span>ADDRESS <output id="address-value"></output></span><span>DATA <output id="data-value"></output></span><span>SWITCH REGISTER <output id="sr-value"></output></span></div><div class="panel-options"><label>Address<select id="address-select"><option value="0">USER I</option><option value="1">USER D</option><option value="2">SUPER I</option><option value="3">SUPER D</option><option value="4">CONS PHY</option><option value="5">KERNEL I</option><option value="6">KERNEL D</option><option value="7">PROG PHY</option></select></label><label>Data<select id="data-select"><option value="0">µADRS FPP / CPU</option><option value="1">DISPLAY REGISTER</option><option value="2">DATA PATHS</option><option value="3">BUS REG</option></select></label><form id="register-form"><label>SR octal<input id="register-input" value="00001000" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="Octal switch register"></label><button>Set</button></form></div><details class="touch-controls"><summary>Touch / accessible controls</summary><div class="touch-bits">${Array.from(
       { length: 22 },
       (_, i) => 21 - i,
     )
@@ -252,6 +252,16 @@ function openPanel() {
       : "Full panel";
     manager.toggleMax("panel");
   };
+  $("panel-zoom").onchange = () => {
+    const value = $<HTMLSelectElement>("panel-zoom").value;
+    node.classList.toggle("fixed-scale", value !== "fit");
+    node.querySelector<SVGSVGElement>(".front-panel")!.style.width = value === "fit" ? "" : `${value}px`;
+  };
+  $("panel-compact").onclick = () => {
+    node.classList.remove("authentic-mode");
+    $("panel-mode").textContent = "Full panel";
+    manager.place("panel", { x: 10, y: 10, width: 760, height: 550 });
+  };
   $("register-form").onsubmit = (e) => {
     e.preventDefault();
     const v = $<HTMLInputElement>("register-input").value;
@@ -265,6 +275,7 @@ function openPanel() {
         value: Number((e.target as HTMLSelectElement).value),
       });
   if (observeMode) {
+    $("observe-logout").onclick = () => void observed!.logout().catch((e) => notify(String(e), true));
     $("observe-login").onclick = () => {
       if (manager.store.windows.some((w) => w.id === "login")) {
         manager.restore("login");
@@ -327,7 +338,7 @@ function openTerminal() {
     session = new MockTerminalSession(`DZ${n - 1}`);
   terminals.set(id, session);
   const el = body(
-    `<div class="terminal-toolbar"><span class="source-tag">MOCK · ${session.id}</span><button data-keyboard>Acquire keyboard</button><select aria-label="Terminal profile"><option>VT100 / ANSI</option><option disabled>VT52 · not validated</option><option disabled>VT220 · not validated</option></select></div><div class="terminal-host" aria-label="${session.id} terminal"></div><div class="terminal-foot">Independent session · read-only until keyboard acquired · no shell or guest OS</div>`,
+    `<div class="terminal-toolbar"><span class="source-tag">MOCK · ${session.id}</span><button data-keyboard>Acquire keyboard</button><select aria-label="Terminal profile"><option>VT100 / ANSI · tested subset</option><option disabled>VT52 · not validated</option><option disabled>VT220 · partial renderer only</option></select></div><div class="terminal-host" aria-label="${session.id} terminal"></div><div class="terminal-foot">Independent session · read-only until keyboard acquired · no shell or guest OS</div>`,
   );
   el.classList.add("terminal-app");
   let dispose = () => {};
@@ -379,7 +390,7 @@ function mediaHTML(tape = false) {
   return `<div class="app-heading"><div><h2>${tape ? "Magnetic tape" : "Disk drives"}</h2><p>RAM-only media prototype · no image files are mounted.</p></div><span class="source-tag">SIMULATION</span></div>${ds
     .map((d) => {
       const image = imageLibrary.find((i) => i.id === d.mounted);
-      return `<article class="drive-card"><div class="drive-visual ${tape ? "reels" : ""}">${icon(tape ? "tapes" : "disks")}<b>${d.id}</b></div><div class="drive-details"><h3>${d.family} <span>${d.mounted ? "PACK LOADED" : "EMPTY"}</span></h3><p>${image ? escape(image.name) : "No demonstration media attached"}</p><small>${image ? `${(image.bytes / 1048576).toFixed(2)} MiB · catalog metadata` : "Choose a compatible profile below"}</small><div class="device-actions"><select aria-label="${d.id} media">${imageLibrary
+      return `<article class="drive-card"><div class="drive-visual ${tape ? "reels" : ""}">${icon(tape ? "tapes" : "disks")}<b>${d.id}</b><span class="drive-lights" aria-hidden="true"><span><i class="${d.mounted ? "lit" : ""}"></i> READY</span><span><i class="${d.readOnly ? "lit" : ""}"></i> PROTECT</span></span></div><div class="drive-details"><h3>${d.family} <span>${d.mounted ? "PACK LOADED" : "EMPTY"}</span></h3><p>${image ? escape(image.name) : "No demonstration media attached"}</p><small>${image ? `${(image.bytes / 1048576).toFixed(2)} MiB · catalog metadata` : "Choose a compatible profile below"}</small><div class="device-actions"><select aria-label="${d.id} media">${imageLibrary
         .filter((i) => i.family === d.family)
         .map((i) => `<option value="${i.id}">${escape(i.name)}</option>`)
         .join(
@@ -590,6 +601,12 @@ function openApp(id: string) {
     height: 470,
   });
 }
+$("arrange-workspace").onclick = () => {
+  openPanel();
+  panelEl?.classList.remove("authentic-mode");
+  $("panel-mode").textContent = "Full panel";
+  manager.arrangeTerminals();
+};
 root
   .querySelectorAll<HTMLButtonElement>("[data-app]")
   .forEach((b) => (b.onclick = () => openApp(b.dataset.app!)));

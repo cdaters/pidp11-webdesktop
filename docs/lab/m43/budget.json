@@ -1,0 +1,37 @@
+{
+  "scope": "Optional budgeted C copy; IPv4-loopback UDP only, Mac Linux ARM64; no production guarantee",
+  "cases": {
+    "discovery": "passed absent and silent rpcbind; no DNS lookup or implicit port discovery",
+    "m3_compatibility": "passed original generated C UDP/TCP oracle and actual REALCONS semantic suite with optional UDP budgeted consumer",
+    "GET": "passed lost reply and broker crash; confirmed consumer quiescence; restart does not rearm or resume",
+    "lamp_parameter": "passed held actual controller lamp-test parameter RPC during stopped/armed state; bounded watchdog acknowledgement, no rearm or resume (not a running-CPU stop test)"
+  },
+  "no_rpcbind_attach_ms": 12.133813012042083,
+  "silent_rpcbind_attach_ms": 219.3087040068349,
+  "normal_attach_ms": 11.250064009800553,
+  "GET_quiescence_ms": 329.830928996671,
+  "GET_status": {
+    "ok": 1,
+    "generation": 1974600266957438978,
+    "armed": 0,
+    "quiescent": 1,
+    "running": 0,
+    "waiting": 0,
+    "accepted": 1,
+    "rejected": 0,
+    "expiries": 1
+  },
+  "lamp_parameter_quiescence_ms": 348.10998001194093,
+  "lamp_parameter_status": {
+    "ok": 1,
+    "generation": 3795063948773236400,
+    "armed": 0,
+    "quiescent": 1,
+    "running": 0,
+    "waiting": 0,
+    "accepted": 1,
+    "rejected": 0,
+    "expiries": 1
+  },
+  "status": "PASS"
+}

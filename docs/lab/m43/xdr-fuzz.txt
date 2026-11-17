@@ -1,0 +1,10 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/58 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 58/58 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 498939 (166280/sec), new interesting: 1 (total: 59)
+fuzz: elapsed: 6s, execs: 1016502 (172554/sec), new interesting: 4 (total: 62)
+fuzz: elapsed: 9s, execs: 1526633 (169987/sec), new interesting: 6 (total: 64)
+fuzz: elapsed: 12s, execs: 2046073 (173147/sec), new interesting: 8 (total: 66)
+fuzz: elapsed: 15s, execs: 2562552 (172197/sec), new interesting: 8 (total: 66)
+fuzz: elapsed: 15s, execs: 2562552 (0/sec), new interesting: 8 (total: 66)
+PASS
+ok  	pidp11.local/webdesktop/internal/blinkenbone	15.321s

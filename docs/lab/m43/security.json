@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "cases": [
+    "trusted ephemeral certificate / TLS HTTPS",
+    "CSRF logout required",
+    "cross-Origin rejected",
+    "control/admin privilege denied",
+    "logout invalidates cookie",
+    "SIGHUP rotation revokes existing session and old credential",
+    "unsafe token permissions on reload revoke all credentials"
+  ],
+  "scope": "isolated Linux loopback, no installed CA, no production endpoint or credentials"
+}

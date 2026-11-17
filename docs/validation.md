@@ -1,6 +1,6 @@
 # Validation record
 
-For current work, see [M4.2 findings and validation](lab/M4.2.md). M3/M4/M4.1 and the sections below remain historical records. The [milestone 0.2 section](#milestone-02-mock-backend) remains its historical acceptance record. The first section is the historical M0 record; its unimplemented items describe that checkpoint only.
+For current work, see [M4.3 findings and validation](lab/M4.3.md). M3/M4/M4.1/M4.2 and the sections below remain historical records. The [milestone 0.2 section](#milestone-02-mock-backend) remains its historical acceptance record. The first section is the historical M0 record; its unimplemented items describe that checkpoint only.
 
 Date: 2026-11-16. Environment: local Mac; Node v26.9.0, npm 11.19.1. Locked development dependencies: TypeScript 7.0.2, Vite 8.3.8, @types/node 26.6.6. No production npm dependencies.
 
@@ -161,3 +161,12 @@ Full evidence, scope and reproducible commands: [M4.1 report](lab/M4.1.md). Orig
 ## M4.2 desktop and passive observation
 
 See [M4.2 report](lab/M4.2.md), [raw evidence](lab/m42/), [frontend architecture](frontend-m42.md), [observation/security contract](lab/M4.2-observation.md) and [screenshots](screenshots/m42-desktop.png). This milestone adds 17 Node tests plus the transport fixture, passing Go race tests, 21 three-engine browser cases, bounded observation fuzzing, original C/M4/M4.1 reruns, and five-minute observer/terminal workloads. Direct standalone `file://` and embedded Go artifacts are exercised. Native Safari was unavailable because the Mac was locked; WebKit tests are recorded separately. No Pi access or production claims are made.
+
+
+## M4.3 historical controls and offline hardening
+
+See the [technical report](lab/M4.3.md), [performance measurements](lab/M4.3-performance.md), [terminal matrix](lab/M4.3-terminals.md), [security contract](lab/M4.3-security.md) and [recovery limits](lab/M4.3-recovery.md). Evidence is archived separately under [m43](lab/m43/); earlier milestone records are unchanged.
+
+Final checks include Go race tests; 41 TypeScript tests and the transport integration fixture; 30 Chromium/Firefox/WebKit cases; nine additional final embedded/standalone artifact checks; bounded XDR/RPC/observation fuzzing; original M3/M4 and all 19 M4.1 cases; TLS, identity and credential-rotation tests; aggregate RPC deadline and held-callback fault tests. The primary observer workload exceeds 30 minutes. Browser workloads, including an initial failed DOM-budget check and the subsequent baseline investigation, are reported explicitly rather than hidden. Native Safari remained unavailable.
+
+Reproduce ordinary checks with `go test -race ./...`, `npm run check`, `npm test`, `npm run test:integration`, `sh scripts/build.sh`, and `npm run test:browser` with the documented loopback services running. The isolated Linux runners are `lab/verify-m41.sh`, `lab/run-budget.sh`, `lab/run-m43-extra.sh`, and `lab/run-m43.sh`; they require the local laboratory images and must retain their network-none restrictions. The complementary browser workload is `node scripts/m43-browser-soak.mjs`; `node scripts/m43-browser-retention.mjs` checks repeated final-artifact disposal, and `node scripts/m43-browser-plateau.mjs` separately measures cold growth and accelerated steady-state retention. Full invocation and scope details are in the reports and runner sources. No Pi access or production performance claim is made.

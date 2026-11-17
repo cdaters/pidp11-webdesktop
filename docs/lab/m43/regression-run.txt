@@ -1,0 +1,298 @@
+
+> pidp11-web-desktop@0.4.3 build:server
+> npm run build && node scripts/embed-assets.mjs
+
+
+> pidp11-web-desktop@0.4.3 build
+> tsc --noEmit && vite build && node scripts/standalone.mjs
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              1.26 kB │ gzip:  0.73 kB
+dist/assets/digital-logo-red-CInkNjrr.svg    4.30 kB │ gzip:  1.65 kB
+dist/assets/xterm-BrP-ENHg.css               3.93 kB │ gzip:  1.01 kB
+dist/assets/index-DT7M2TKc.css              15.81 kB │ gzip:  4.57 kB
+dist/assets/addon-fit-DIOBYJe3.js            1.20 kB │ gzip:  0.49 kB
+dist/assets/terminal-ilJX1_An.js             3.19 kB │ gzip:  1.80 kB
+dist/assets/index-Ct-Z7MTl.js               65.59 kB │ gzip: 22.38 kB
+dist/assets/xterm-BMsy1fDS.js              330.92 kB │ gzip: 83.01 kB
+
+✓ built in 99ms
+vite v8.3.8 building client environment for production...
+
+ WARN  inlineDynamicImports option is deprecated, please use codeSplitting: false instead.
+
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+.research/standalone-build/index.html                   1.15 kB │ gzip:   0.71 kB
+.research/standalone-build/assets/style-BSJ4frDY.css   19.76 kB │ gzip:   5.37 kB
+.research/standalone-build/assets/index-W0_eIvIy.js   415.42 kB │ gzip: 113.03 kB
+
+✓ built in 88ms
+Self-contained prototype: dist/prototype.html (436376 bytes; network connections disabled by CSP)
+Copied compiled browser assets for go:embed
+M3: original generated C client over UDP/TCP
+C udp: discovery, bounds, input read, lamp write, parameters passed (29 controls)
+C tcp: discovery, bounds, input read, lamp write, parameters passed (29 controls)
+   program vers proto   port  service
+    100000    4   tcp    111  portmapper
+    100000    3   tcp    111  portmapper
+    100000    2   tcp    111  portmapper
+    100000    4   udp    111  portmapper
+    100000    3   udp    111  portmapper
+    100000    2   udp    111  portmapper
+        99    1   tcp  39099
+        99    1   udp  39099
+
+set cpu 11/70
+Disabling XQ
+sim>
+set cpu 256K
+sim>
+set realcons host=127.0.0.1
+sim>
+set realcons panel=11/70
+sim>
+set realcons interval=20
+sim>
+set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+sim>
+show realcons
+REALCONS 11/70, host="127.0.0.1", host panel="11/70", interval = 20 msec, connected, boot image filename not set, nodebug, 
+panel BlinkenBoards driver hardware state = ACTIVE,
+server info=
+PiDP11 isolated Go laboratory; no GPIO
+sim>
+deposit 1000 12345
+sim> examine 1000
+1000:	012345
+sim> examine 1000
+1000:	012345
+sim>
+deposit 2000 5200
+sim> deposit 2002 776
+sim> reset all
+sim> examine pc
+PC:	002000
+sim>
+M3 controls: memory, START reset/release, HALT, CONT step/run, all selector values passed
+M4: physical and virtual ownership, observer synchronization passed
+M4: demonstrated in-flight START release limitation
+M4: recorded broker crash and independent operator-stop observation
+
+> pidp11-web-desktop@0.4.3 build:server
+> npm run build && node scripts/embed-assets.mjs
+
+
+> pidp11-web-desktop@0.4.3 build
+> tsc --noEmit && vite build && node scripts/standalone.mjs
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              1.26 kB │ gzip:  0.73 kB
+dist/assets/digital-logo-red-CInkNjrr.svg    4.30 kB │ gzip:  1.65 kB
+dist/assets/xterm-BrP-ENHg.css               3.93 kB │ gzip:  1.01 kB
+dist/assets/index-DT7M2TKc.css              15.81 kB │ gzip:  4.57 kB
+dist/assets/addon-fit-DIOBYJe3.js            1.20 kB │ gzip:  0.49 kB
+dist/assets/terminal-ilJX1_An.js             3.19 kB │ gzip:  1.80 kB
+dist/assets/index-Ct-Z7MTl.js               65.59 kB │ gzip: 22.38 kB
+dist/assets/xterm-BMsy1fDS.js              330.92 kB │ gzip: 83.01 kB
+
+✓ built in 118ms
+vite v8.3.8 building client environment for production...
+
+ WARN  inlineDynamicImports option is deprecated, please use codeSplitting: false instead.
+
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+.research/standalone-build/index.html                   1.15 kB │ gzip:   0.71 kB
+.research/standalone-build/assets/style-BSJ4frDY.css   19.76 kB │ gzip:   5.37 kB
+.research/standalone-build/assets/index-W0_eIvIy.js   415.42 kB │ gzip: 113.03 kB
+
+✓ built in 90ms
+Self-contained prototype: dist/prototype.html (436376 bytes; network connections disabled by CSP)
+Copied compiled browser assets for go:embed
+M3: original generated C client over UDP/TCP
+C udp: discovery, bounds, input read, lamp write, parameters passed (29 controls)
+C tcp: discovery, bounds, input read, lamp write, parameters passed (29 controls)
+   program vers proto   port  service
+    100000    4   tcp    111  portmapper
+    100000    3   tcp    111  portmapper
+    100000    2   tcp    111  portmapper
+    100000    4   udp    111  portmapper
+    100000    3   udp    111  portmapper
+    100000    2   udp    111  portmapper
+        99    1   tcp  39099
+        99    1   udp  39099
+
+set cpu 11/70
+Disabling XQ
+sim>
+set cpu 256K
+sim>
+set realcons host=127.0.0.1
+sim>
+set realcons panel=11/70
+sim>
+set realcons interval=20
+sim>
+set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+sim>
+show realcons
+REALCONS 11/70, host="127.0.0.1", host panel="11/70", interval = 20 msec, connected, boot image filename not set, nodebug, 
+panel BlinkenBoards driver hardware state = ACTIVE,
+server info=
+PiDP11 isolated Go laboratory; no GPIO
+sim>
+deposit 1000 12345
+sim> examine 1000
+1000:	012345
+sim> examine 1000
+1000:	012345
+sim>
+deposit 2000 5200
+sim> deposit 2002 776
+sim> reset all
+sim> examine pc
+PC:	002000
+sim>
+M3 controls: memory, START reset/release, HALT, CONT step/run, all selector values passed
+
+> pidp11-web-desktop@0.4.3 build:server
+> npm run build && node scripts/embed-assets.mjs
+
+
+> pidp11-web-desktop@0.4.3 build
+> tsc --noEmit && vite build && node scripts/standalone.mjs
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              1.26 kB │ gzip:  0.73 kB
+dist/assets/digital-logo-red-CInkNjrr.svg    4.30 kB │ gzip:  1.65 kB
+dist/assets/xterm-BrP-ENHg.css               3.93 kB │ gzip:  1.01 kB
+dist/assets/index-DT7M2TKc.css              15.81 kB │ gzip:  4.57 kB
+dist/assets/addon-fit-DIOBYJe3.js            1.20 kB │ gzip:  0.49 kB
+dist/assets/terminal-ilJX1_An.js             3.19 kB │ gzip:  1.80 kB
+dist/assets/index-Ct-Z7MTl.js               65.59 kB │ gzip: 22.38 kB
+dist/assets/xterm-BMsy1fDS.js              330.92 kB │ gzip: 83.01 kB
+
+✓ built in 87ms
+vite v8.3.8 building client environment for production...
+
+ WARN  inlineDynamicImports option is deprecated, please use codeSplitting: false instead.
+
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+.research/standalone-build/index.html                   1.15 kB │ gzip:   0.71 kB
+.research/standalone-build/assets/style-BSJ4frDY.css   19.76 kB │ gzip:   5.37 kB
+.research/standalone-build/assets/index-W0_eIvIy.js   415.42 kB │ gzip: 113.03 kB
+
+✓ built in 85ms
+Self-contained prototype: dist/prototype.html (436376 bytes; network connections disabled by CSP)
+Copied compiled browser assets for go:embed
+=== RUN   TestAuthorityProtocol
+--- PASS: TestAuthorityProtocol (0.00s)
+=== RUN   TestUnavailableAuthority
+--- PASS: TestUnavailableAuthority (0.00s)
+PASS
+fence unit: stale/reordered/duplicate/overflow/expiry/CPU stop/console passed
+M4.1 case: observers
+M4.1 case: authorized_semantics
+M4.1 case: inflight_start_release
+M4.1: held START-release rejected at consumer
+M4.1 case: queued_commands
+M4.1 case: inflight_load
+M4.1 case: queued_run
+M4.1 case: duplicate_consumed_ticket
+M4.1 case: already_committed
+M4.1 case: stale_generation
+M4.1 case: physical_handoffs
+M4.1 case: browser_disconnect_and_expiry
+M4.1 case: consumer_stall
+M4.1 case: physical_restart
+M4.1 case: independent_watchdog
+M4.1 case: broker_crash_lost_rpc
+M4.1 case: broker_consumer_restart
+M4.1 case: abrupt_process_loss
+M4.1 case: independent_terminal_transports
+M4.1 case: physical_only_rollback
+M4.1: queued tickets, faults, watchdog, restart and browserless rollback passed
+
+> pidp11-web-desktop@0.4.3 build:server
+> npm run build && node scripts/embed-assets.mjs
+
+
+> pidp11-web-desktop@0.4.3 build
+> tsc --noEmit && vite build && node scripts/standalone.mjs
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              1.26 kB │ gzip:  0.73 kB
+dist/assets/digital-logo-red-CInkNjrr.svg    4.30 kB │ gzip:  1.65 kB
+dist/assets/xterm-BrP-ENHg.css               3.93 kB │ gzip:  1.01 kB
+dist/assets/index-2mobuE3B.css              15.89 kB │ gzip:  4.58 kB
+dist/assets/addon-fit-DIOBYJe3.js            1.20 kB │ gzip:  0.49 kB
+dist/assets/terminal-D96HPd1q.js             3.19 kB │ gzip:  1.80 kB
+dist/assets/index-B-mZ2Lki.js               65.63 kB │ gzip: 22.39 kB
+dist/assets/xterm-BMsy1fDS.js              330.92 kB │ gzip: 83.01 kB
+
+✓ built in 97ms
+vite v8.3.8 building client environment for production...
+
+ WARN  inlineDynamicImports option is deprecated, please use codeSplitting: false instead.
+
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+.research/standalone-build/index.html                   1.15 kB │ gzip:   0.71 kB
+.research/standalone-build/assets/style-R9gqdLyX.css   19.84 kB │ gzip:   5.38 kB
+.research/standalone-build/assets/index-4MLFblec.js   415.47 kB │ gzip: 113.04 kB
+
+✓ built in 85ms
+Self-contained prototype: dist/prototype.html (436498 bytes; network connections disabled by CSP)
+Copied compiled browser assets for go:embed
+{
+  "original": {
+    "steps_per_sample": 100000000,
+    "seconds": [
+      0.8042614519945346,
+      0.8121738129993901,
+      0.8122998559992993
+    ],
+    "median_seconds": 0.8121738129993901
+  },
+  "patched_disabled": {
+    "steps_per_sample": 100000000,
+    "seconds": [
+      0.6546151349903084,
+      0.6505806619970826,
+      0.6453290189965628
+    ],
+    "median_seconds": 0.6505806619970826
+  },
+  "disabled_patch_wall_time_change_percent": -19.896375432930736,
+  "scope": "3 timed 100M instruction samples after warmup; no RPC, guest OS or physical daemon; Mac-hosted Linux ARM64, not Pi"
+}

@@ -1,0 +1,65 @@
+{
+  "scope": "Three final-artifact initial and rendered-baseline comparisons; not a long-run memory test",
+  "runs": [
+    {
+      "immediate": {
+        "nodes": 2181,
+        "heap": 3713072,
+        "terminals": 4,
+        "rows": 4
+      },
+      "ready": {
+        "nodes": 2145,
+        "heap": 3836948,
+        "terminals": 4,
+        "rows": 4
+      },
+      "settled": {
+        "nodes": 2178,
+        "heap": 3838352,
+        "terminals": 4,
+        "rows": 4
+      }
+    },
+    {
+      "immediate": {
+        "nodes": 2133,
+        "heap": 3693880,
+        "terminals": 4,
+        "rows": 4
+      },
+      "ready": {
+        "nodes": 2145,
+        "heap": 3778688,
+        "terminals": 4,
+        "rows": 4
+      },
+      "settled": {
+        "nodes": 2178,
+        "heap": 3787452,
+        "terminals": 4,
+        "rows": 4
+      }
+    },
+    {
+      "immediate": {
+        "nodes": 2133,
+        "heap": 3695184,
+        "terminals": 4,
+        "rows": 4
+      },
+      "ready": {
+        "nodes": 2145,
+        "heap": 3782236,
+        "terminals": 4,
+        "rows": 4
+      },
+      "settled": {
+        "nodes": 2177,
+        "heap": 3787940,
+        "terminals": 4,
+        "rows": 4
+      }
+    }
+  ]
+}

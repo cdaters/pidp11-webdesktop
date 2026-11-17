@@ -1,0 +1,20 @@
+
+Running 9 tests using 1 worker
+
+(node:79119) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (526ms)
+  ✓  2 [chromium] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (276ms)
+  ✓  3 [chromium] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (296ms)
+(node:79145) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 [firefox] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (1.0s)
+  ✓  5 [firefox] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (514ms)
+  ✓  6 [firefox] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (352ms)
+(node:79159) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  7 [webkit] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (719ms)
+  ✓  8 [webkit] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (455ms)
+  ✓  9 [webkit] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (369ms)
+
+  9 passed (6.5s)

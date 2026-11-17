@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "attach_ms": 2014.126595997368,
+  "per_response_delay_ms": 75,
+  "sequence_budget_ms": 2000,
+  "result": "partial descriptor enumeration rejected; consumer remains disconnected; no execution requested",
+  "scope": "optional loopback UDP copy; scheduler tolerance is a test bound, not a production deadline"
+}

@@ -1,0 +1,48 @@
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/blinkenbone
+cpu: Apple M4 Pro
+BenchmarkValues-12    	 8101869	       146.1 ns/op	      64 B/op	       1 allocs/op
+BenchmarkValues-12    	 8232456	       146.2 ns/op	      64 B/op	       1 allocs/op
+BenchmarkValues-12    	 8255635	       144.8 ns/op	      64 B/op	       1 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/blinkenbone	3.719s
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/labrpc
+cpu: Apple M4 Pro
+BenchmarkPhysicalRead/reuse-12         	   41121	     29127 ns/op	   12274 B/op	     151 allocs/op
+BenchmarkPhysicalRead/reuse-12         	   41901	     28505 ns/op	   12274 B/op	     151 allocs/op
+BenchmarkPhysicalRead/reuse-12         	   42570	     28192 ns/op	   12274 B/op	     151 allocs/op
+BenchmarkPhysicalRead/prior-allocation-12         	   38035	     32334 ns/op	   77862 B/op	     152 allocs/op
+BenchmarkPhysicalRead/prior-allocation-12         	   36922	     32132 ns/op	   77864 B/op	     152 allocs/op
+BenchmarkPhysicalRead/prior-allocation-12         	   37908	     32935 ns/op	   77864 B/op	     152 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/labrpc	9.285s
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/observe
+cpu: Apple M4 Pro
+BenchmarkSnapshotJSON-12    	  396810	      2750 ns/op	    4218 B/op	      71 allocs/op
+BenchmarkSnapshotJSON-12    	  437058	      2683 ns/op	    4218 B/op	      71 allocs/op
+BenchmarkSnapshotJSON-12    	  437106	      2747 ns/op	    4218 B/op	      71 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/observe	3.656s
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/panel
+cpu: Apple M4 Pro
+BenchmarkPoll-12    	67105179	        17.99 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPoll-12    	66886834	        17.94 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPoll-12    	66989985	        18.09 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/panel	3.752s
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/server
+cpu: Apple M4 Pro
+BenchmarkCommandRoundTrip-12    	   32308	     37492 ns/op	    6369 B/op	      76 allocs/op
+BenchmarkCommandRoundTrip-12    	   32713	     36692 ns/op	    6370 B/op	      76 allocs/op
+BenchmarkCommandRoundTrip-12    	   34290	     35236 ns/op	    6369 B/op	      76 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/server	3.813s

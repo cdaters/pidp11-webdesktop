@@ -1,8 +1,18 @@
 # PiDP-11 Web Desktop
 
-A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M4.2: complete local desktop and passive-observation laboratory.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
+A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M4.3: historical paddles, offline security and recovery hardening, terminal fixtures and extended stability testing.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
 
 All development and testing is local to the Mac. The Raspberry Pi was not contacted or modified. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation or guest OS images are used. Peripheral and system-management workflows are clearly labeled RAM-only prototypes.
+
+## M4.3 delivered
+
+- Photograph-based raised/lowered/rest paddle geometry, fixed hardware pigments, shared SVG definitions and authentic cream lamp-test control; actual photo comparisons retained.
+- Fit/reference/50–200% scaling, compact panel and terminal arrangement; unchanged independent mock device workflows.
+- Kernel-pinned passive publishers, TLS/WSS, private credential files, secure sessions, CSRF logout and local credential rotation/revocation.
+- DEC renderer/keypad/encoding/Telnet/flow-control fixtures, bounded mock input/output and no replay across keyboard handoff.
+- Separate optional C operation-budget experiment, all prior safety checkpoints preserved, and 30-minute laboratory/browser workloads.
+
+See the [M4.3 technical report](docs/lab/M4.3.md), [terminal matrix](docs/lab/M4.3-terminals.md), [security contract](docs/lab/M4.3-security.md), [recovery report](docs/lab/M4.3-recovery.md), [performance record](docs/lab/M4.3-performance.md) and [proposed, unexecuted pilot/rollback](docs/lab/M4.3-pilot.md). Production access remains separately gated.
 
 ## M4.2 delivered
 
@@ -36,7 +46,7 @@ python3 lab/save-results.py
 
 The first command fetches the pinned public source and Debian build packages. Runtime tests have **only loopback networking**, no published ports, no privileged container and no physical devices. They do not contact the Pi. Containers are test infrastructure, not deployment dependencies. Test results go to `.research/lab-results`; the last command records a successful run in `docs/lab`. Use `--m3-only` or `--m4-only` with `lab/run.sh` for focused runs; save the combined results only after a complete successful run.
 
-Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, and `checkpoint/m4.2`. Golden-backup completion does not authorize production integration.
+Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, `checkpoint/m4.2`, and `checkpoint/m4.3`. Golden-backup completion does not authorize production integration.
 
 ## Build and run on the Mac
 
@@ -69,7 +79,7 @@ All 22 SR switches support click, Tab and Space/Enter. Direct entry accepts 22-b
 
 On narrow screens, swipe the SVG sideways; the rest of the page fits the viewport. Browser-local animation pauses when hidden. Remote state comes from the server, and background timer throttling can safely expire a control lease.
 
-![Verified M4.2 desktop](docs/screenshots/m42-desktop.png)
+![M4.3 local simulated desktop](docs/screenshots/m43-desktop.png)
 
 ## Architecture, findings and validation
 

@@ -1,3 +1,4 @@
+import { MockInputFilter, decKey } from "./terminal-protocol.ts";
 import { MockTerminalSession } from "./devices.ts";
 import type { Terminal } from "@xterm/xterm";
 export async function mountTerminal(
@@ -34,31 +35,55 @@ export async function mountTerminal(
   terminal.loadAddon(fit);
   terminal.open(host);
   fit.fit();
+  let queuedOutput = 0;
+  const write = (text: string) => {
+    if (queuedOutput + text.length > 65536) return false;
+    queuedOutput += text.length;
+    terminal.write(text, () => { queuedOutput -= text.length; });
+    return true;
+  };
+  const writeln = (text: string) => write(text + "\r\n");
   let line = "";
-  terminal.writeln("\x1b[1mPiDP-11  /  " + session.id + "\x1b[0m");
-  terminal.writeln("LOCAL TERMINAL FIXTURE · NO GUEST OS");
-  terminal.writeln("Acquire keyboard above, then type HELP.\r\n");
-  terminal.write("DEMO> ");
+  const filter = new MockInputFilter();
+  let inputEpoch = session.inputEpoch;
+  terminal.attachCustomKeyEventHandler((e) => {
+    if (e.type !== "keydown" || e.altKey || e.ctrlKey || e.metaKey) return true;
+    const encoded = decKey(e.code, terminal.modes.applicationKeypadMode, terminal.modes.applicationCursorKeysMode);
+    if (encoded === undefined) return true;
+    e.preventDefault();
+    terminal.input(encoded, true);
+    return false;
+  });
+  writeln("\x1b[1mPiDP-11  /  " + session.id + "\x1b[0m");
+  writeln("LOCAL TERMINAL FIXTURE · NO GUEST OS");
+  writeln("Acquire keyboard above, then type HELP.\r\n");
+  write("DEMO> ");
   const input = terminal.onData((data) => {
+    if (inputEpoch !== session.inputEpoch) {
+      if (line) write("\r\n[Unfinished input discarded after keyboard handoff]\r\nDEMO> ");
+      line = ""; filter.reset(); inputEpoch = session.inputEpoch;
+    }
     if (!session.inputOwner) return;
-    for (const ch of data) {
+    if (data.length > 4096) { line = ""; filter.reset(); writeln("\r\nPaste rejected: fixture input limit is 4 KiB."); write("DEMO> "); return; }
+    // xterm emits whole escape sequences; only the mock line editor filters them.
+    for (const ch of filter.feed(data)) {
       if (ch === "\r") {
-        terminal.write("\r\n");
+        write("\r\n");
         const out = session.command(line);
-        if (out) terminal.writeln(out);
+        if (out) writeln(out);
         line = "";
-        terminal.write("DEMO> ");
-      } else if (ch === "\x7f") {
+        write("DEMO> ");
+      } else if ((ch === "\x7f" || ch === "\b")) {
         if (line) {
           line = line.slice(0, -1);
-          terminal.write("\b \b");
+          write("\b \b");
         }
       } else if (ch === "\x03") {
         line = "";
-        terminal.write("^C\r\nDEMO> ");
+        write("^C\r\nDEMO> ");
       } else if (ch >= " " && ch <= "~" && line.length < 256) {
         line += ch;
-        terminal.write(ch);
+        write(ch);
       }
     }
   });

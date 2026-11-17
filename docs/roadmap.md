@@ -36,7 +36,7 @@ Measurement plan after authorization: record exact OS/kernel/toolchain, binary h
 | M4: coexistence laboratory — implemented; safety limitation demonstrated | Broker and physical-panel stand-in, ownership/recovery tests | Single physical client; spectators; override and stale state tests; crash rollback and registration plan; decide broker vs daemon hook |
 | M4.1: consumer interlock and independent access — laboratory implementation | Optional consumer authority/watchdog, original regression, rollback, separate terminal domains | Finite tests and limits in [M4.1](lab/M4.1.md); no unconditional crash-safe guarantee |
 | M4.2: desktop and passive-observation lab — delivered | Complete local workspace, optional nonblocking publisher, lab capability boundaries, bounded-call experiment, longer soaks | [Evidence and limits](lab/M4.2.md); no Pi or production control claim |
-| M4.3: recommended offline hardening | Terminal conformance fixtures, observation process identities, TLS/session UX, independent recovery budgets, longer resource testing | Production audit package ready for separate authorization |
+| M4.3: offline hardening and historical reconstruction | Photo-calibrated paddle faces, panel scaling/layout, DEC fixtures, publisher identity, TLS/session rotation, operation budgets and 30-minute workloads | [Recorded implementation and limits](lab/M4.3.md); production audit/pilot still requires separate authorization |
 | M5: authorized Pi audit and read-only pilot | Reconcile installed source/binaries/services/console configuration after installation work ends | Explicit user authorization; backup/rollback reviewed; no polling assumed side-effect free; incremental benchmarks pass |
 | M6: authorized control, terminal and media | Owned controls; real terminal broker; catalog and safe attach/detach | Guest-safe lifecycle, no terminal takeover, image exclusivity, auth/origin checks, end-to-end recovery tests |
 | M7: packaging and release | Reproducible builds, service configuration, notices and operator docs | Source/dependency license inventory, measured resource report, target acceptance and separately authorized release |
@@ -72,3 +72,20 @@ See [validation](validation.md) for what was actually verified in this delivery.
 The [M4.2 report](lab/M4.2.md) records current measurements separately from historical M4.1 evidence. Passive observation is now implemented on the original path and has no broker/RPC-client dependency. Broker idle CPU still needs work: retain its physical freshness and watchdog timing, profile required RPC work/allocations, and avoid claiming savings from merely changing a language or slowing safety polling. Longer alternating instruction samples reduce the earlier short-benchmark concern but do not establish guest throughput on a Pi.
 
 Recommended next is **M4.3 offline hardening**, with no production authorization implied: validate DEC terminal profiles and byte-stream flow control; define TLS/session provisioning/logout/revocation UX; isolate publisher identity and runtime paths; bound discovery plus recovery as an end-to-end protocol; run 30-minute multi-client workloads and repeated CPU trials. Native Safari and real touch/assistive-technology testing remain desirable. Then report the readiness of an explicitly authorized read-only Pi audit/pilot. Remote control, real media modification, physical POWER/LOCK behavior and guest-safe stop/recovery remain later gates.
+
+## M4.3 risk update and recommended next milestone
+
+The [M4.3 report](lab/M4.3.md) supersedes the earlier recommendation to start M4.3. Continue with an explicitly authorized **installed-system read-only audit**, followed by a separately reviewed observation-only pilot only if compatibility, identity, TLS provisioning and physical-only rollback are established. The [pilot plan](lab/M4.3-pilot.md) has not been executed. Offline improvements can continue independently.
+
+| Remaining risk | M4.3 evidence / gate |
+|---|---|
+| CPU stop versus lease revoke | Optional shared budgets tested on one UDP consumer; original blocked-RPC and committed-command limits remain. No hard real-time or unconditional fail-safe claim. |
+| Observation identity | Kernel UID/PID/start checks; same-UID executable inode verification. Separate-UID `/proc` restrictions and actual service-account lifecycle require production audit. |
+| LAN exposure | TLS1.3/WSS, exact origin, secure sessions, rotation/CSRF tested in isolation. LAN certificate/DNS/firewall, connection-level DoS limits and durable audit remain deployment work. |
+| Terminal fidelity | Tested VT100/ANSI subset, selected VT220 functions; VT52 disabled. Offline transport contracts do not constitute a guest terminal gateway or login validation. |
+| Historical appearance | Primary photograph governs shapes/colors; supplemental IMSAI image informs shading only. Hidden pivot geometry, calibrated pigments and physical switch behavior still need hardware/reference confirmation. |
+| Performance | Extended Mac-hosted evidence, allocation benchmarks and unchanged targets. Pi thermal contention, GPIO load and guest throughput remain unmeasured. |
+| Native Safari | WebKit passes; native Safari WebDriver unavailable because remote automation is disabled. No settings changed or native-Safari success claimed. |
+| Physical-only access | Original-binary rollback and independent DZ lines remain laboratory tests; clean RAM-device reset is fixture initialization, not guest-safe rollback. |
+
+Go remains the backend choice. The existing reused UDP buffer materially reduces allocation volume; language replacement is not justified by these measurements. Preserve required physical sampling and watchdog timing while profiling before further optimization. The companion observer remains optional and outside the original RPC route.

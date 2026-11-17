@@ -1,0 +1,43 @@
+
+PDP-11 simulator V4.0-0 Current  REALCONS build Nov 17 2026
+sim> set cpu 11/70
+Disabling XQ
+sim> set cpu 256K
+sim> set realcons host=127.0.0.1
+sim> set realcons panel=11/70
+sim> set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=2 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=200000 depth=1
+M43 RPC proc=3 status=0 left=157022 depth=1
+M43 RPC proc=3 status=0 left=81046 depth=1
+M43 RPC proc=3 status=5 left=5559 depth=1
+Loading panels and controls from host 127.0.0.1 failed.
+Unit not attachable
+sim> show realcons
+REALCONS 11/70, host="127.0.0.1", host panel="11/70", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server
+sim> 
