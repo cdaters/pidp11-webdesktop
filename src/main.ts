@@ -24,7 +24,7 @@ app.innerHTML = `
     </section>
     <section id="view-console" class="view" hidden><div class="page-heading"><div><p class="eyebrow">OPERATOR WORKSPACE <span>/ 02</span></p><h1>A console for exploration.</h1><p class="intro">A local command demo, connected to the same simulated panel.</p></div><button id="clear-console" class="quiet-button">Clear output</button></div><div class="terminal-window"><div class="terminal-title"><span class="status-dot"></span> DEMO CONSOLE <span>NO SHELL · NO GUEST OS</span></div><pre id="terminal-output" tabindex="0" aria-label="Demo console output"></pre><form id="terminal-form"><label for="terminal-input">demo&gt;</label><input id="terminal-input" autocomplete="off" spellcheck="false" aria-label="Demo console command"><button type="submit" class="quiet-button">Send ↵</button></form></div><p class="console-hint">Try <code>help</code>, <code>halt</code>, <code>sr 1000</code>, <code>load</code>, <code>sr 12345</code>, <code>deposit</code>, <code>examine</code>. Arrow keys recall commands.</p></section>
     <section id="view-library" class="view" hidden><div class="page-heading"><div><p class="eyebrow">OPERATOR WORKSPACE <span>/ 03</span></p><h1>A home for historic systems.</h1><p class="intro">Planning catalog · illustrative profiles, no disk images attached.</p></div></div><div class="library-grid">${[['UNIX V6','Time-sharing, 1975','RK disk family','unix'],['RT-11','Single-user, real-time','RK / RL disk families','rt'],['RSX-11M+','Multi-user, real-time','Profile to be validated','rsx']].map(([name,desc,device,key])=>`<article class="system-card"><div class="disk-art" aria-hidden="true">◉</div><p class="eyebrow">PLANNED PROFILE</p><h2>${name}</h2><p>${desc}</p><dl><dt>Media</dt><dd>${device}</dd><dt>Availability</dt><dd>Not installed by this project</dd></dl><button class="quiet-button" data-profile="${key}">View profile notes →</button></article>`).join('')}</div><div id="profile-notes" class="profile-notes" role="status">Select a profile for integration notes. This catalog does not inspect the Raspberry Pi.</div></section>
-    <footer><span>PiDP-11 Web Desktop <span class="footer-version">/ MOCK MILESTONE 0.2</span></span><span>Simulated panel · no emulator or GPIO connection</span></footer>
+    <footer><span>PiDP-11 Web Desktop <span class="footer-version">/ DEVELOPMENT 0.4</span></span><span>Simulated panel · no emulator or GPIO connection</span></footer>
   </main>
 </div>`;
 const remoteMode = new URLSearchParams(location.search).get('backend') === 'mock';
@@ -50,10 +50,15 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
 adapter.subscribe(s => {
   renderPanel(panel, s);
+  if(s.source==='realcons-lab'){
+    document.querySelector<HTMLElement>('.mode')!.textContent='ISOLATED REALCONS · LINUX LAB';
+    document.querySelector<HTMLElement>('.ownership-note')!.textContent='Isolated Linux laboratory';
+    $('rate-label').textContent='20 Hz display · original REALCONS';
+  }
   $('address-value').textContent = octal(s.address);
   $('data-value').textContent = octal(displayedData(s), 6);
   $('sr-value').textContent = octal(s.switchRegister);
-  $('run-label').textContent = s.running ? 'SYNTHETIC ACTIVITY' : s.halted ? 'HALTED · SCRATCH MEMORY READY' : 'STOPPED · ENABLE SELECTED';
+  $('run-label').textContent = s.running ? (s.source==='realcons-lab'?'REALCONS RUNNING':'SYNTHETIC ACTIVITY') : s.halted ? 'HALTED · SCRATCH MEMORY READY' : 'STOPPED · ENABLE SELECTED';
   $<HTMLSelectElement>('address-select').value = String(s.addressSelect);
   $<HTMLSelectElement>('data-select').value = String(s.dataSelect);
 });

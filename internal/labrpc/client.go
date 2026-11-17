@@ -130,3 +130,26 @@ func (c *Client) Write(values map[string]uint64) error {
 	}
 	return e
 }
+
+// ValidatePDP1170 requires the complete tested PiDP profile while allowing wire order.
+func (c *Client) ValidatePDP1170() error {
+	expected := PDP1170()
+	if len(c.Controls) != len(expected) {
+		return fmt.Errorf("untested panel schema")
+	}
+	for _, want := range expected {
+		found := false
+		for _, got := range c.Controls {
+			if got.Name == want.Name && got.Input == want.Input {
+				found = true
+				if got.Bits != want.Bits || got.Bytes != want.Bytes || got.Type != want.Type {
+					return fmt.Errorf("profile mismatch: %s", want.Name)
+				}
+			}
+		}
+		if !found {
+			return fmt.Errorf("missing %s", want.Name)
+		}
+	}
+	return nil
+}

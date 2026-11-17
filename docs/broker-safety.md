@@ -1,6 +1,6 @@
 # Physical and virtual panel broker — design decision
 
-2026-11-16. This is an offline architecture decision, not implemented physical integration. The mock exercises ownership/recovery policy; it cannot establish that a running emulator will halt after a broker failure.
+2026-11-16 original design, retained as rationale. **Update:** [M4](lab/M4.md) implements this in an isolated lab and demonstrates the in-flight START-release counterexample. The original-source PTY adaptation and M3 results are [documented separately](lab/M3.md). This is not implemented physical-hardware integration. The mock exercises ownership/recovery policy; it cannot establish that a running emulator will halt after a broker failure.
 
 ## Recommended progression
 

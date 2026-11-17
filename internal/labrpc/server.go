@@ -20,6 +20,11 @@ type cached struct {
 	at             time.Time
 }
 type Server struct {
+	HoldStartRelease atomic.Bool
+	HoldNext         atomic.Bool
+	Held             atomic.Bool
+	release          chan struct{}
+
 	Exclusive atomic.Bool
 	peerMu    sync.Mutex
 	consumer  string
@@ -47,7 +52,13 @@ func Listen(address string, h Handler) (*Server, error) {
 		tcp.Close()
 		return nil, err
 	}
-	return &Server{tcp: tcp, udp: udp, handler: h, cache: map[string]cached{}, slots: make(chan struct{}, 8)}, nil
+	return &Server{release: make(chan struct{}, 1), tcp: tcp, udp: udp, handler: h, cache: map[string]cached{}, slots: make(chan struct{}, 8)}, nil
+}
+func (s *Server) ReleaseHeld() {
+	select {
+	case s.release <- struct{}{}:
+	default:
+	}
 }
 func (s *Server) Address() string { return s.tcp.Addr().String() }
 func (s *Server) Close()          { s.tcp.Close(); s.udp.Close() }
@@ -73,7 +84,7 @@ func (s *Server) Serve(ctx context.Context) {
 					if e != nil {
 						return
 					}
-					reply := s.dispatch(b, c.RemoteAddr().String())
+					reply := s.dispatch(b, "tcp/"+c.RemoteAddr().String())
 					if reply == nil {
 						return
 					}
@@ -151,6 +162,8 @@ func (s *Server) dispatch(b []byte, peer string) []byte {
 	return out
 }
 func (s *Server) serveUDP(ctx context.Context) {
+	previousStart := uint64(0)
+	nextPrune := time.Time{}
 	buf := make([]byte, bb.MaxMessage+1)
 	for {
 		n, peer, e := s.udp.ReadFromUDP(buf)
@@ -173,15 +186,18 @@ func (s *Server) serveUDP(ctx context.Context) {
 				reply = rpcError(binary.BigEndian.Uint32(request), 4)
 			}
 		} else {
-			for k, v := range s.cache {
-				if now.Sub(v.at) >= 35*time.Second {
-					delete(s.cache, k)
+			if !now.Before(nextPrune) || len(s.cache) >= 4096 {
+				for k, v := range s.cache {
+					if now.Sub(v.at) >= 35*time.Second {
+						delete(s.cache, k)
+					}
 				}
+				nextPrune = now.Add(time.Second)
 			}
 			if len(s.cache) >= 4096 {
 				reply = rpcError(binary.BigEndian.Uint32(request), 5)
 			} else {
-				reply = s.dispatch(request, peer.String())
+				reply = s.dispatch(request, "udp/"+peer.String())
 			}
 
 			if len(s.cache) < 4096 {
@@ -190,6 +206,39 @@ func (s *Server) serveUDP(ctx context.Context) {
 		}
 		s.mu.Unlock()
 		if reply != nil {
+			hold := false
+			if len(request) >= 24 && binary.BigEndian.Uint32(request[20:]) == 5 {
+				hold = s.HoldNext.Swap(false)
+				payload, err := bb.DecodeReply(binary.BigEndian.Uint32(request), 5, reply)
+				if err == nil && payload.Error == 0 {
+					controls := Filter(PDP1170(), 1)
+					v, err := bb.UnpackValues(controls, payload.Values)
+					if err == nil {
+						var start, halt uint64
+						for i, c := range controls {
+							if c.Name == "START" {
+								start = v[i]
+							}
+							if c.Name == "HALT" {
+								halt = v[i]
+							}
+						}
+						if previousStart == 1 && start == 0 && halt == 0 && s.HoldStartRelease.Swap(false) {
+							hold = true
+						}
+						previousStart = start
+					}
+				}
+			}
+			if hold {
+				s.Held.Store(true)
+				select {
+				case <-s.release:
+				case <-ctx.Done():
+					return
+				}
+				s.Held.Store(false)
+			}
 			s.udp.WriteToUDP(reply, peer)
 		}
 	}

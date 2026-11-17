@@ -13,25 +13,26 @@ const LeaseDuration = 5 * time.Second
 const MaxClients = 8
 
 type State struct {
-	Blocked         bool   `json:"blocked"`
-	Source          string `json:"source"`
-	Revision        uint64 `json:"revision"`
-	ControlRevision uint64 `json:"controlRevision"`
-	Epoch           uint64 `json:"epoch"`
-	Owner           string `json:"owner"`
-	Address         uint32 `json:"address"`
-	Data            uint32 `json:"data"`
-	SwitchRegister  uint32 `json:"switchRegister"`
-	Halted          bool   `json:"halted"`
-	Running         bool   `json:"running"`
-	LampTest        bool   `json:"lampTest"`
-	BusCycle        bool   `json:"busCycle"`
-	AddressSelect   uint32 `json:"addressSelect"`
-	DataSelect      uint32 `json:"dataSelect"`
-	Cycles          uint64 `json:"cycles"`
-	StoredWords     int    `json:"storedWords"`
-	Momentary       string `json:"momentary"`
-	Reason          string `json:"reason"`
+	Indicators      map[string]uint64 `json:"indicators,omitempty"`
+	Blocked         bool              `json:"blocked"`
+	Source          string            `json:"source"`
+	Revision        uint64            `json:"revision"`
+	ControlRevision uint64            `json:"controlRevision"`
+	Epoch           uint64            `json:"epoch"`
+	Owner           string            `json:"owner"`
+	Address         uint32            `json:"address"`
+	Data            uint32            `json:"data"`
+	SwitchRegister  uint32            `json:"switchRegister"`
+	Halted          bool              `json:"halted"`
+	Running         bool              `json:"running"`
+	LampTest        bool              `json:"lampTest"`
+	BusCycle        bool              `json:"busCycle"`
+	AddressSelect   uint32            `json:"addressSelect"`
+	DataSelect      uint32            `json:"dataSelect"`
+	Cycles          uint64            `json:"cycles"`
+	StoredWords     int               `json:"storedWords"`
+	Momentary       string            `json:"momentary"`
+	Reason          string            `json:"reason"`
 }
 type Request struct {
 	ID       uint64 `json:"id"`

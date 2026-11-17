@@ -137,3 +137,31 @@ func TestNoExternalEndpoints(t *testing.T) {
 		}
 	}
 }
+
+func TestProfileMismatchFailsClosed(t *testing.T) {
+	c := &Client{Controls: PDP1170()}
+	if e := c.ValidatePDP1170(); e != nil {
+		t.Fatal(e)
+	}
+	c.Controls[0].Bits = 16
+	if e := c.ValidatePDP1170(); e == nil {
+		t.Fatal("changed width accepted")
+	}
+	c.Controls = PDP1170()[1:]
+	if e := c.ValidatePDP1170(); e == nil {
+		t.Fatal("missing input accepted")
+	}
+}
+func FuzzRPCDispatch(f *testing.F) {
+	s := &Server{handler: NewPanel()}
+	for _, proc := range []uint32{0, 1, 2, 3, 4, 5, 100, 101, 1000, 1001} {
+		b, _ := bb.EncodeCall(bb.Call{XID: 1, Procedure: proc})
+		f.Add(b)
+	}
+	f.Fuzz(func(t *testing.T, b []byte) {
+		reply := s.dispatch(b, "fixture")
+		if len(reply) > bb.MaxMessage {
+			t.Fatal("unbounded reply")
+		}
+	})
+}

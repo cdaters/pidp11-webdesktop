@@ -1,8 +1,26 @@
 # PiDP-11 Web Desktop
 
-A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone 0.2: Go mock backend, shared WebSocket panel, offline RPC/XDR codecs and historical panel refinements.**
+A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestones M3/M4: original REALCONS interoperability and physical/virtual broker laboratory.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
 
-All development and testing is local to the Mac. The Raspberry Pi was not contacted or modified. There is no emulator control, RPC listener/client, GPIO integration, real terminal attachment or media management. Every working control affects temporary simulated state.
+All development and testing is local to the Mac. The Raspberry Pi was not contacted or modified. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation, guest OS images or media management is used.
+
+## Laboratory findings and reproduction
+
+M3 passed actual original-C UDP/TCP interoperability, rpcbind discovery, lamp/switch exchange, and REALCONS START/HALT/CONT/EXAM/DEP/selector checks. M4 implements a separate physical-panel stand-in, control broker, observers and explicit handoffs, with delay/loss/disconnect/crash tests.
+
+**Production safety is not established.** The lab reproduces a delayed START-release reply that can cause RUN after ownership has been revoked. Newly generated handoff frames assert HALT before releasing START, but cannot retract an earlier reply or queued command. Broker crash recovery also has no guaranteed halt deadline. See [M3 findings](docs/lab/M3.md), [M4 safety limits and diagram](docs/lab/M4.md), and [actual fault/measurement report](docs/lab/m4-report.json).
+
+With the existing **local OrbStack Docker context** on this Mac:
+
+```sh
+sh lab/build-image.sh
+sh lab/run.sh
+python3 lab/save-results.py
+```
+
+The first command fetches the pinned public source and Debian build packages. Runtime tests have **only loopback networking**, no published ports, no privileged container and no physical devices. They do not contact the Pi. Containers are test infrastructure, not deployment dependencies. Test results go to `.research/lab-results`; the last command records a successful run in `docs/lab`. Use `--m3-only` or `--m4-only` with `lab/run.sh` for focused runs; save the combined results only after a complete successful run.
+
+Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, and `checkpoint/m4`. Golden-backup completion does not authorize production integration.
 
 ## Build and run on the Mac
 
@@ -47,7 +65,7 @@ On narrow screens, swipe the SVG sideways; the rest of the page fits the viewpor
 - [Original architecture](docs/architecture.md), [Go versus Rust decision](docs/backend-decision.md), [protocol analysis](docs/protocol.md), [sources](docs/sources.md) and [source manifest](docs/source-manifest.json).
 - [Third-party notices](THIRD_PARTY_NOTICES.md) and [offline C oracle provenance](scripts/fixtures/README.md).
 
-The key protocol finding remains: SIMH/REALCONS is the RPC **client**; the panel is the **server**. GET reads switches and SET writes lamps. Multiple callers do not establish ownership or supply a complete virtual-panel interface. The current codec has C-derived golden-vector and malformed-input tests; original-runtime interoperability and physical coexistence remain future laboratory work.
+The key protocol finding remains: SIMH/REALCONS is the RPC **client**; the panel is the **server**. GET reads switches and SET writes lamps. Multiple callers do not establish ownership or supply a complete virtual-panel interface. Original C/REALCONS interoperability and simulated coexistence now run in the isolated lab. Physical hardware coexistence and unconditional failure safety remain unproven.
 
 ## Tests and measurements
 
@@ -82,7 +100,10 @@ cmd/webdesktop/        Mock HTTP/WebSocket executable
 cmd/mockbench/         Fixed-loopback Mac measurement workload
 internal/panel/        Simulated state and ownership arbiter
 internal/server/       HTTP/WS transport and real-socket tests
-internal/blinkenbone/  Offline XDR/RPC codecs and golden vectors
+internal/blinkenbone/  Bounded XDR/RPC codecs and golden vectors
+internal/labrpc/       Experimental loopback RPC transport and panel profile
+internal/broker/       Poll-fenced laboratory arbitration
+lab/                   Isolated Linux build, C/PTY fixtures and test harness
 internal/web/          Embedded compiled assets
 src/                   TypeScript local/remote adapters and original SVG
 scripts/               Build, packaging, C fixture oracle and measurement

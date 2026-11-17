@@ -7,3 +7,5 @@
 - Reference photograph by Henk Gooijen and DEC handbook pages: research references only, not distributed as product assets. The SVG is original artwork based on observed arrangement.
 
 The accepted M0 original-code license decision is unchanged: the owner has not yet selected a project distribution license. Nothing is published by this milestone. Dependency notices do not grant rights to unrelated guest OS images or upstream artwork.
+
+M3/M4 laboratory images compile original SIMH/REALCONS and BlinkenBone C sources from the pinned public PiDP revision. Their per-file source notices remain in the image; the original code is not linked into the Go desktop. Debian build/runtime packages and the test-only PTY shim are not deployment dependencies. Source/image/package provenance is recorded in `docs/lab/environment.json` and `docs/lab/build-metadata.json`. No laboratory image or source archive has been published.

@@ -18,13 +18,23 @@ import (
 	"pidp11.local/webdesktop/internal/panel"
 )
 
+type Hub interface {
+	Connect(string) bool
+	Disconnect(string)
+	Snapshot() panel.State
+	Apply(string, panel.Request, time.Time) panel.Result
+	Poll(time.Time)
+}
 type Server struct {
-	Hub          *panel.Hub
+	Hub          Hub
 	assets       fs.FS
 	requestLimit int
 }
 
-func New(assets fs.FS) *Server { return &Server{Hub: panel.New(), assets: assets, requestLimit: 40} }
+func New(assets fs.FS) *Server { return NewWithHub(assets, panel.New()) }
+func NewWithHub(assets fs.FS, hub Hub) *Server {
+	return &Server{Hub: hub, assets: assets, requestLimit: 40}
+}
 func (s *Server) Run(ctx context.Context) {
 	t := time.NewTicker(20 * time.Millisecond)
 	defer t.Stop()

@@ -1,6 +1,6 @@
 # Validation record
 
-For the current mock backend delivery, see [milestone 0.2 below](#milestone-02-mock-backend). The first section is the historical M0 record; its unimplemented items describe that checkpoint only.
+For current work, see [M3/M4 below](#m3m4-isolated-realcons-and-coexistence-lab). The [milestone 0.2 section](#milestone-02-mock-backend) remains its historical acceptance record. The first section is the historical M0 record; its unimplemented items describe that checkpoint only.
 
 Date: 2026-11-16. Environment: local Mac; Node v26.9.0, npm 11.19.1. Locked development dependencies: TypeScript 7.0.2, Vite 8.3.8, @types/node 26.6.6. No production npm dependencies.
 
@@ -106,3 +106,45 @@ The samples are encouraging for the selected Go implementation, but too short to
 ### Remaining validation limits
 
 No executed JVM oracle, complete original peer transport interoperability, UDP retry/rpcbind integration, real REALCONS edge sequence, physical latch reconciliation, broker crash failover, real terminal, device/OS operation, or Pi resource measurement. No Firefox/Safari, screen-reader validation, browser memory/paint latency profile or long-duration slow-client/maximum-viewer soak. The partial original protocol and differences in mock/hardware behavior are documented in [backend scope](backend-milestone.md) and [broker safety](broker-safety.md).
+
+
+## M3/M4: isolated REALCONS and coexistence lab
+
+2026-11-16 local Mac / 2026-11-17 UTC laboratory timestamps. No Raspberry Pi access. The local OrbStack Linux ARM64 runtime ran a network-none disposable container with a read-only root, no published ports, no GPIO/device mounts, 512 MiB memory limit and two-CPU quota. The Go lab executable independently refuses non-Linux or non-loopback-only environments. Source hashes were checked inside the image on the final run.
+
+### Completed checks
+
+- `npm run check`, `npm test`: passed; **12** TypeScript tests, including authoritative REALCONS DATA output for every selector.
+- `npm run test:integration`: reconnect fixture passed; no pending-write replay or implicit ownership reacquisition.
+- `go test -race ./...`: all packages passed. New broker tests cover cancellation at each asserted START stage for release, disconnect, expiry, physical movement and fault; stale/conflicting owners; persistent faults; missing lamp baseline and insufficient neutral samples. New transport tests cover UDP/TCP, duplicate/colliding XIDs, exclusive consumer, RPC failure replies, fragmented TCP and schema/profile mismatch.
+- RPC dispatcher fuzz run: **1,422,294 executions** in ten seconds with two workers; no crash. This complements the existing bounded-XDR fuzz corpus, not semantic certification of all arbitrary input.
+- Full `sh lab/run.sh`: passed M3 followed by M4 against the original C implementation. The original generated client uses actual rpcbind discovery for UDP and TCP. Original REALCONS uses its unchanged UDP client.
+- Registration collision probe refused a competing port and retained existing TCP/UDP registrations. The simulated physical daemon uses an explicit unregistered port; simultaneous original-daemon rpcbind behavior is not reproduced as a production deployment.
+- M3 asserted actual memory contents, CPU PC changes, reset/run/stop edges, selector output behavior and MMU-disabled mapping lamps. Original source files remain unchanged; the documented PTY ioctl shim is necessary for this kernel.
+- M4 exercised two real WebSocket sessions through the existing transport, physical lamp forwarding, distinct physical/effective SR values, explicit handoffs, held-switch rejection, missed physical edges, delayed consumer polls, browser loss, lease expiry, physical RPC loss, broker kill and fresh restart baseline.
+- **Known-failure regression passed:** a held pre-revocation START-release response causes REALCONS to issue RUN before the following HALT. This is evidence that unconditional cancellation safety is **not achieved**, not an assertion that the race is safe.
+
+Source/runtime provenance: [environment](lab/environment.json), [build metadata](lab/build-metadata.json), [source manifest](../lab/source-manifest.json). Actual results: [M3 transcript](lab/m3-simh.log), [M3 final state](lab/m3-state.json), [M4 transcript](lab/m4-simh.log), [M4 frame trace](lab/m4-trace.json), [M4 assertions/measurements](lab/m4-report.json). Transcript CR/trailing whitespace is normalized for Git; the raw captures remain in the ignored local results directory. Build metadata records the pre-commit source head and dirty tree because measurement preceded the final checkpoint; binary hashes identify the exact measured executables.
+
+### Linux ARM64 laboratory measurements
+
+Broker process only; excludes original SIMH, physical stand-in, driver processes and browser rendering. Idle includes ongoing REALCONS and physical RPC polling. Active: two browser-protocol sessions and 300 SR updates at 20 Hz, with emulated CPU halted. Samples are five/fifteen seconds, below the 35-second duplicate-cache lifetime and far shorter than a steady-state soak.
+
+| Measure | Idle | Active |
+|---|---:|---:|
+| Mean RSS | 10.74 MiB | 11.57 MiB |
+| Peak sampled RSS | 10.86 MiB | 11.77 MiB |
+| Peak sampled PSS | 8.91 MiB | 9.84 MiB |
+| CPU, 100%=one core | 2.20% | 3.27% |
+
+Active p95 acknowledgment time including local driver IPC: **1.388 ms**. No browser-paint, guest-instruction-completion or LAN latency measurement is claimed. Cache expiry scans are periodic and unchanged lamp banks are no longer forwarded every physical poll.
+
+The **idle CPU result exceeds the proposed <1% target**, even in this Mac-hosted lab. Active CPU/memory and acknowledgment results are below their numeric budgets for this short workload, but Pi acceptance remains unmeasured. Emulator slowdown, 30-minute memory behavior, full running-lamp traffic, terminal load and on-wire traffic accounting remain outstanding.
+
+### Safety and validation limits
+
+[The M4 report](lab/M4.md) states the conditional handoff invariant and the counterexample. No broker-only guarantee can retract an in-flight reply or queued SIMH command. On broker crash, an independent PTY stop was not acknowledged within the recorded 1.5-second observation; no hard stop deadline or automatic physical fallback is proven. A fresh broker starts unowned/halted but does not restore prior ownership or prove consumer reconnection. A consumer-side interlock/watchdog requires a new laboratory design before production control should be considered.
+
+The WebSocket peers here are automated protocol drivers, not a browser rendering the isolated Linux page. No new cross-browser visual or accessibility claim is made. Java runtime interoperability, physical POWER/LOCK scripts, GPIO, actual media/OS operation and any Pi deployment remain untested. The normal Mac mock and its preserved checkpoint remain available. Lab containers and child processes were removed after the successful run; the reusable local development image remains cached.
+
+Final static Linux ARM64 artifacts: mock desktop 6,095,010 bytes; lab executable 6,160,546 bytes. The mock binary dependency graph includes only the panel/server/web project packages, with no broker or RPC transport linked. Current browser core totals 14,707 gzip bytes across HTML/JS/CSS.

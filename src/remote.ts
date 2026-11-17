@@ -42,7 +42,7 @@ export class RemotePanelAdapter implements PanelAdapter {
     let lastMessage=Date.now();
     socket.onmessage=event=>{
       let response:Response;try{response=JSON.parse(event.data);}catch{socket.close();return;}
-      if(!response.state||response.state.source!=='simulation'||!Number.isSafeInteger(response.state.revision)){socket.close();return;}
+      if(!response.state||!['simulation','realcons-lab'].includes(response.state.source)||!Number.isSafeInteger(response.state.revision)){socket.close();return;}
       lastMessage=Date.now();
       if(response.type==='hello') {this.session=response.session!;this.id=0;this.state=response.state;this.connected=true;this.delay=250;}
       else if(newer(this.state,response.state)) this.state=response.state;

@@ -1,5 +1,6 @@
 {
-  "gets": 154,
+  "gets": 150,
+  "heldReply": false,
   "inputs": {
     "ADDR_SELECT": 7,
     "CONT": 0,
@@ -30,5 +31,5 @@
     "PAUSE": 0,
     "RUN": 0
   },
-  "sets": 31
+  "sets": 33
 }

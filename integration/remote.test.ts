@@ -32,8 +32,8 @@ test('remote adapter discards pending commands and ownership on reconnect; fresh
   const pending=adapter.dispatch({type:'start'});first.close();assert.equal((await pending).accepted,false);assert.equal(status.connected,false);
   const end=Date.now()+1500;while(SocketFixture.sockets.length<2&&Date.now()<end)await pause(10);
   assert.equal(SocketFixture.sockets.length,2);const second=SocketFixture.sockets[1];
-  second.receive({type:'hello',session:'second',state:{...state,revision:0,epoch:0}});
-  assert.equal(adapter.snapshot().revision,0);assert.equal(status.owns,false);assert.equal(second.sent.length,0);
+  second.receive({type:'hello',session:'second',state:{...state,source:'realcons-lab',revision:0,epoch:0,indicators:{RUN:0,ADDRESSING_16:1}}});
+  assert.equal(adapter.snapshot().revision,0);assert.equal(adapter.snapshot().source,'realcons-lab');assert.equal(adapter.snapshot().indicators?.ADDRESSING_16,1);assert.equal(status.owns,false);assert.equal(second.sent.length,0);
   assert.equal((await adapter.dispatch({type:'continue'})).accepted,false);
  }finally{adapter.close();if(oldSocket)Object.defineProperty(globalThis,'WebSocket',oldSocket);if(oldLocation)Object.defineProperty(globalThis,'location',oldLocation);else Reflect.deleteProperty(globalThis,'location');}
 });

@@ -7,7 +7,7 @@ export type Command =
   | { type: 'halt' | 'continue' | 'start' | 'load' | 'examine' | 'deposit' | 'lamp-test' | 'reset' | 'bus-cycle' }
   | { type: 'address-select' | 'data-select'; value: number };
 export interface PanelState {
-  source: 'simulation'; revision: number; address: number; data: number;
+  source: 'simulation' | 'realcons-lab'; indicators?: Record<string,number>; revision: number; address: number; data: number;
   switchRegister: number; halted: boolean; running: boolean; busCycle: boolean; momentary: string; lampTest: boolean;
   addressSelect: number; dataSelect: number; cycles: number; storedWords: number;
 }

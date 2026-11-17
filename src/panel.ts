@@ -37,7 +37,7 @@ export function bindPanel(container: HTMLElement, dispatch: (command:Command)=>u
     node.addEventListener('keydown',event=>{if((event.key===' '||event.key==='Enter')&&!event.repeat){event.preventDefault();invoke();}});
   });
 }
-export function displayedData(s:Readonly<PanelState>){return [s.cycles&0xffff,0,s.data,s.switchRegister&0xffff][s.dataSelect];}
+export function displayedData(s:Readonly<PanelState>){if(s.source==='realcons-lab')return s.data;return [s.cycles&0xffff,0,s.data,s.switchRegister&0xffff][s.dataSelect];}
 export function renderPanel(container:HTMLElement,s:Readonly<PanelState>){
  const setLamp=(id:string,on:boolean)=>container.querySelector(`#${id}`)?.classList.toggle('on',s.lampTest||on);
  const address=s.addressSelect===4||s.addressSelect===7?s.address:s.address&0xffff;
@@ -45,6 +45,11 @@ export function renderPanel(container:HTMLElement,s:Readonly<PanelState>){
  bits(16).forEach(b=>setLamp(`data-${b}`,Boolean(displayedData(s)&(1<<b))));
  setLamp('run',s.running);setLamp('master',!s.running);setLamp('kernel',true);setLamp('width22',true);
  for(const id of ['pause','parity-high','parity-low','address-error','parity-error','user','super','space','width16','width18'])setLamp(id,false);
+ if(s.source==='realcons-lab'&&s.indicators){
+  const names:Record<string,string>={'run':'RUN','master':'MASTER','pause':'PAUSE','parity-high':'PARITY_HIGH','parity-low':'PARITY_LOW','address-error':'ADRS_ERR','parity-error':'PAR_ERR','space':'DATA_SPACE','width16':'ADDRESSING_16','width18':'ADDRESSING_18','width22':'ADDRESSING_22'};
+  for(const [id,name] of Object.entries(names))setLamp(id,!!s.indicators[name]);
+  setLamp('kernel',s.indicators.MMR0_MODE===0);setLamp('super',s.indicators.MMR0_MODE===2);setLamp('user',s.indicators.MMR0_MODE===3);
+ }
  for(const [name,on] of [['halt',s.halted],['bus-cycle',s.busCycle]] as const){const node=container.querySelector(`#action-${name}`)!;node.classList.toggle('latched',on);node.setAttribute('aria-checked',String(on));}
  for(const node of container.querySelectorAll<SVGGElement>('[data-action]'))node.classList.toggle('active-pulse',node.dataset.action===s.momentary||(node.dataset.action==='lamp-test'&&s.lampTest));
  const addrAngles=[65,40,90,15,-15,115,-40,-65];
