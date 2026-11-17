@@ -1,6 +1,6 @@
 # Architecture proposal
 
-Status: proposed, 2026-11-16. Initial delivery is a browser-local prototype. No Pi access, installed-software inspection, live emulator connection, RPC listener, or deployment is part of this milestone.
+Original M0 proposal, 2026-11-16, retained as design context. **Current implementation:** the Go mock service and WebSocket adapter are described in [backend milestone 0.2](backend-milestone.md); the updated coexistence decision is in [broker safety](broker-safety.md). The future/live modules below remain proposals. No Pi access, installed-software inspection, live emulator connection, RPC listener or deployment has occurred.
 
 ## Recommendation
 

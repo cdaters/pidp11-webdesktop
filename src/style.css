@@ -867,3 +867,24 @@ code {
     margin:0 0 10px;
   }
 }
+/* Historical panel arrangement, based on DEC chapter 11 and reference photography. */
+.front-panel .bezel-logo{fill:#55534d;font:22px Georgia,serif}
+.front-panel .bezel-caption{fill:#54534e;font:9px ui-monospace,monospace;letter-spacing:1px}
+.front-panel .panel-model{font-size:31px;letter-spacing:-1px;fill:#e4d8cf}
+.front-panel .bank-name{font-size:8px;fill:#f4e6dc}
+.front-panel .bit-label{font-size:8px;fill:#ddd5c6}
+.front-panel .historic-switch-label{fill:#fff0dc;font:9px ui-monospace,monospace;text-anchor:middle}
+.front-panel .control-legend{fill:#fff0dc;font:6px ui-monospace,monospace;text-anchor:middle}
+.front-panel .selector-art text{font:8px ui-monospace,monospace;fill:#d2cebb}
+.paddle.rose{fill:#9d3155}.paddle.red{fill:#c83250}
+.register-switch.up .paddle,.register-switch.up .paddle-line{transform:translateY(-12px)}
+.panel-action{cursor:pointer}.panel-action:hover .switch-hit{fill:#ffffff12}
+.panel-action:focus-visible{outline:none}.panel-action:focus-visible .switch-hit{stroke:#f2d59c;stroke-width:2}
+.panel-action .action-paddle{transition:transform 80ms}
+.panel-action.pressed .action-paddle,.panel-action.active-pulse .action-paddle,.panel-action.latched .action-paddle{transform:translateY(9px)}
+.panel-action.up-action.pressed .action-paddle,.panel-action.up-action.active-pulse .action-paddle,#action-lamp-test.active-pulse .action-paddle{transform:translateY(-10px)}
+.panel-scroll.read-only{filter:saturate(.7)}
+.connection-bar{display:flex;gap:12px;align-items:center;margin:0 0 20px;font:11px/1.5 ui-monospace,monospace;color:#becab5}
+.connection-bar>span{flex:1}.connection-bar a{font-size:10px;text-decoration:underline}
+button:disabled{opacity:.45;cursor:default}
+@media(max-width:760px){.front-panel{min-width:960px}.connection-bar{flex-wrap:wrap}.connection-bar>span{flex-basis:100%}.connection-bar .quiet-button{font-size:10px}}

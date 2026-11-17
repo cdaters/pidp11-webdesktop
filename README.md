@@ -1,66 +1,94 @@
 # PiDP-11 Web Desktop
 
-A lightweight companion-interface research project for Oscar Vermeulen's PiDP-11/70, inspired by The High Nibble's browser desktop. Current milestone: **architecture research and an isolated browser prototype**.
+A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone 0.2: Go mock backend, shared WebSocket panel, offline RPC/XDR codecs and historical panel refinements.**
 
-The Raspberry Pi was not contacted or modified. No emulator, RPC adapter, GPIO driver, shell, disk image or operating system is started by this project. All prototype controls affect only temporary state in the current browser tab.
+All development and testing is local to the Mac. The Raspberry Pi was not contacted or modified. There is no emulator control, RPC listener/client, GPIO integration, real terminal attachment or media management. Every working control affects temporary simulated state.
 
-## Open the prototype
+## Build and run on the Mac
 
-The generated self-contained artifact is [`dist/prototype.html`](dist/prototype.html). It contains the application, original SVG panel and stylesheet in one approximately 33 KB file. Its CSP permits the bundled scripts/styles by hash and sets `connect-src 'none'`. Direct `file:` opening was not testable through the browser tool; the identical built file was tested over loopback HTTP.
-
-For a reproducible local preview on the Mac, with Node.js 22.18 or newer:
+Requires Node.js 22.18+ and Go 1.25+; tested with Node 26.9.0 and Go 1.26.0. From the project directory:
 
 ```sh
-cd /Volumes/TheBench/Projects/PiDP11/WebDesktop
 npm ci
-npm run build
-npm run preview -- --port 4173 --strictPort
+sh scripts/build.sh
+./bin/webdesktop-macos
 ```
 
-Open [the built prototype](http://127.0.0.1:4173/prototype.html). Stop with Ctrl-C. All servers bind to `127.0.0.1`. No Pi hostname, network discovery or live connection option exists.
+Open [the shared mock desktop](http://127.0.0.1:8080/?backend=mock). Click **Acquire mock control**. A second browser tab observes the same state; only one can own controls. Closing the owner halts/disarms the mock. Reconnecting never automatically acquires control or replays commands. Stop the service with Ctrl-C.
 
-For source development, `npm run dev` starts Vite on loopback. Node/Vite/TypeScript are Mac development tools; the proposed Pi backend is a compiled Go service. There are **zero production npm dependencies**.
+The build creates a native Mac executable and `bin/webdesktop-linux-arm64`, a statically linked ARM64 ELF executable with embedded browser assets. The ARM64 build has **not** been deployed or executed on the Pi. No Node runtime, container, database or asset directory is required by the executable. It permits only literal loopback IP listeners, with no DNS lookup or remote connection setting.
 
-## Try it
+For an independent browser-only demo, use the **Open offline demo** link or generated `dist/prototype.html`. The standalone file embeds JS/CSS/SVG and prohibits network connections through CSP. The original accepted prototype is preserved unchanged at [`checkpoints/m0/prototype.html`](checkpoints/m0/prototype.html), with Git tag `checkpoint/m0` identifying its source. Current `dist/` artifacts are regenerable and ignored by Git.
 
-- The address and data lamps show deterministic synthetic activity at a nominal 20 Hz.
-- Click **ENABLE / HALT** to halt. Set the switch register to octal `1000`, then **LOAD ADRS**.
-- Set the register to `12345`, then **DEP** and **EXAM**. DATA reads `012345` at ADDRESS `00001000`.
-- **CONT** advances one demonstration word while halted. **START** initializes at the switch-register address, preserving HALT. Releasing HALT resumes synthetic activity.
-- Toggle any of the 22 SVG paddles by click, or Tab then Space/Enter. Direct entry validates octal digits and the 22-bit range.
-- **LAMP TEST** toggles all 48 rendered lamps. The selectors choose illustrative display modes.
-- **Console** offers a bounded local command demo (`help`, `status`, `halt`, `run`, `step`, `sr`, `load`, `examine`, `deposit`, `start`, `lamps`, `clear`) sharing panel state. It is not a VT emulator, shell or guest OS.
-- **Library** presents planning profiles and notes. It does not inspect or manage installed systems.
+For frontend development: `npm run dev` starts loopback Vite. There are zero production npm dependencies. Go uses its standard library plus the small ISC-licensed `coder/websocket` package.
 
-At narrow widths, swipe the SVG panel sideways; controls and readouts adapt below it. Synthetic activity pauses while the document is hidden. A reduced-motion preference starts the model halted; explicit controls can resume it. Reset/reload discards scratch memory. The model stores at most 1,024 deposited words; console history/output are bounded.
+## Try the panel
 
-This is an original, simplified visual interpretation, not a pixel-perfect DEC panel. It implements a subset of the upstream control/indicator model. LOAD/EXAM/DEP/START and selector behavior are documented demo interactions, not REALCONS compatibility claims. The physical/virtual ownership policy is proposed, not implemented.
+1. Acquire mock control; the panel starts halted.
+2. Set SR to octal `1000`, then press **LOAD ADRS**.
+3. Set SR to `12345`, press **DEP**, then **EXAM**. ADDRESS stays `00001000`, DATA is `012345`.
+4. Consecutive EXAM or DEP operations advance one word; changing from EXAM to DEP or back keeps the address.
+5. Select **ENABLE**, then **CONT** to animate. ENABLE alone leaves the model stopped. HALT stops; CONT while halted advances one demonstration word.
+6. START uses the previously loaded address, rather than the current SR. Lamp test is an automatically returning pulse. DEP/lamp test raise their paddles; other momentaries depress them.
 
-![Verified local prototype](docs/screenshots/panel-desktop.jpg)
+All 22 SR switches support click, Tab and Space/Enter. Direct entry accepts 22-bit octal values. Selector ordinals follow the inspected original interface; their displayed values remain illustrative. CPU/MMU, bus-cycle execution, special address boundaries and operating systems are not emulated. POWER/LOCK is inert. The console provides bounded demonstration commands against the same mock state, not a shell or VT terminal. Library profiles remain planning notes.
 
-## Research and decisions
+On narrow screens, swipe the SVG sideways; the rest of the page fits the viewport. Browser-local animation pauses when hidden. Remote state comes from the server, and background timer throttling can safely expire a control lease.
 
-- [Architecture proposal and diagrams](docs/architecture.md): modules, RPC direction, coexistence, ownership, terminal and media boundaries.
-- [Go versus Rust](docs/backend-decision.md): complexity, resource tradeoffs, cross-compilation, licensing and provisional Go recommendation.
-- [Protocol compatibility analysis](docs/protocol.md): original C/Java behavior, procedure map, XDR encoding, version differences and test plan.
-- [Roadmap, resource targets and risks](docs/roadmap.md): milestones M0–M7 with explicit authorization boundaries.
-- [Sources](docs/sources.md) and [pinned source manifest](docs/source-manifest.json): upstream revisions and downloaded-source SHA-256 hashes.
-- [Validation record](docs/validation.md): checks actually performed and their limits.
+![Verified Go-backed mock panel](docs/screenshots/panel-mock-desktop.jpg)
 
-Key finding: SIMH/REALCONS is the RPC **client**, and the panel is the **server**. The API reads switches and writes lamps; it does not supply a second client's complete virtual-panel interface or control ownership. A future broker must mediate both directions. Another wire-level trap: the IDL's char vector encodes each logical byte as a four-byte XDR integer. Reuse the protocol and emulator semantics, then prove compatibility with offline C/Java fixtures.
+## Architecture, findings and validation
+
+- [Implemented backend and API](docs/backend-milestone.md): component diagram, ownership/revisions, stream limits, wire support and remaining questions.
+- [Physical/virtual broker safety design](docs/broker-safety.md): single arbitration point, latches, momentaries, START recovery, rpcbind and failure limitations.
+- [Historical panel evidence](docs/panel-reference-notes.md): DEC handbook, authentic photograph, original Java and REALCONS source.
+- [Validation record](docs/validation.md): tests, browser verification, Mac measurements and limitations.
+- [Roadmap and Pi resource targets](docs/roadmap.md): measurable acceptance budgets and integration gates.
+- [Original architecture](docs/architecture.md), [Go versus Rust decision](docs/backend-decision.md), [protocol analysis](docs/protocol.md), [sources](docs/sources.md) and [source manifest](docs/source-manifest.json).
+- [Third-party notices](THIRD_PARTY_NOTICES.md) and [offline C oracle provenance](scripts/fixtures/README.md).
+
+The key protocol finding remains: SIMH/REALCONS is the RPC **client**; the panel is the **server**. GET reads switches and SET writes lamps. Multiple callers do not establish ownership or supply a complete virtual-panel interface. The current codec has C-derived golden-vector and malformed-input tests; original-runtime interoperability and physical coexistence remain future laboratory work.
+
+## Tests and measurements
+
+```sh
+npm run check
+npm test
+npm run test:integration
+go test -race ./...
+go test ./internal/blinkenbone -run='^$' -fuzz=FuzzDecode -fuzztime=10s -parallel=2
+```
+
+Optional offline fixture regeneration on macOS with Xcode command-line tools:
+
+```sh
+python3 scripts/fixtures/generate.py
+git diff -- internal/blinkenbone/testdata/original.json scripts/fixtures/provenance.json
+```
+
+For the fixed-loopback Mac workload, build the web service first, then run:
+
+```sh
+CGO_ENABLED=0 go build -trimpath -o bin/mockbench-macos ./cmd/mockbench
+python3 scripts/measure-mac.py
+```
+
+The measurement script starts/stops its own child service on `127.0.0.1:18770`. It records ten seconds idle and approximately fifteen seconds with two viewers and 300 control updates at 20 Hz. [Raw measurements](docs/performance-mac.json) include binary hashes. These short Mac samples do not establish Raspberry Pi performance or a long-duration memory bound. Pi targets remain ≤24 MiB idle RSS, ≤48 MiB active RSS, <5% mean active CPU of one core, and <100 ms p95 LAN acknowledgment/freshness under the defined workload.
 
 ## Repository layout
 
 ```text
-src/model.ts       PanelAdapter contract and deterministic simulation
-src/panel.ts       Original SVG and control rendering
-src/main.ts        Workspace, demo console, catalog and input handling
-src/style.css      Responsive layout and panel styling
-scripts/standalone.mjs  Self-contained artifact packaging and CSP hashes
-tests/model.test.ts     Simulation behavior tests
-docs/                  Research, decisions, screenshots and validation
-.research/             Ignored local upstream-source cache (not executed)
-dist/                  Ignored generated browser artifacts
+cmd/webdesktop/        Mock HTTP/WebSocket executable
+cmd/mockbench/         Fixed-loopback Mac measurement workload
+internal/panel/        Simulated state and ownership arbiter
+internal/server/       HTTP/WS transport and real-socket tests
+internal/blinkenbone/  Offline XDR/RPC codecs and golden vectors
+internal/web/          Embedded compiled assets
+src/                   TypeScript local/remote adapters and original SVG
+scripts/               Build, packaging, C fixture oracle and measurement
+tests/, integration/   Model/transport mapping and reconnect fixture tests
+checkpoints/m0/        Preserved accepted standalone prototype
+docs/                  Architecture, evidence, validation and screenshots
 ```
 
-Run `npm run check`, `npm test`, and `npm run build`. Build and test need no Pi or emulator. Upstream source is research evidence and is not linked into the prototype. Licensing for original project code remains an owner decision before publication; see the dependency and upstream license discussion in the backend decision.
+Preview processes used for verification were stopped after testing. Live integration remains a separate milestone after the complete microSD backup and explicit authorization. Licensing of original project code remains an owner decision before publication.

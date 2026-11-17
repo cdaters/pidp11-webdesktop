@@ -1,6 +1,6 @@
 # Backend decision: Go versus Rust
 
-2026-11-16 — provisional recommendation: **Go**, with a pure-Go protocol boundary if compatibility tests prove it. Neither a Go nor a Rust backend is implemented or benchmarked in this milestone. Resource estimates below are hypotheses and budgets, not measured language rankings.
+2026-11-16 — selected for the mock milestone: **Go**, with an offline pure-Go RPC/XDR codec and one small WebSocket dependency. The original comparison below remains the decision rationale. A native Go mock server and static Linux ARM64 cross-build now exist; short [Mac measurements](validation.md#short-mac-measurements) support continuing with Go. Rust and Pi hardware have not been benchmarked. This is not a measured language ranking; complete protocol interoperability remains unproven.
 
 | Criterion | Go | Rust | Project consequence |
 |---|---|---|---|

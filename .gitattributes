@@ -1,0 +1,2 @@
+# Preserve the upstream combined license notice byte-for-byte, including its formatting.
+licenses/vite.txt -whitespace

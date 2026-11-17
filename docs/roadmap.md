@@ -29,16 +29,18 @@ Measurement plan after authorization: record exact OS/kernel/toolchain, binary h
 
 | Milestone | Deliverable | Exit criteria |
 |---|---|---|
-| M0: research and isolated prototype — current | Architecture, language decision, protocol analysis; original SVG panel with simulated activity and controls | Local build/typecheck/model tests; desktop/mobile browser inspection; explicit mock boundary; no Pi traffic |
-| M1: wire fixtures | Bounded XDR codec and original C/Java differential fixtures | All used procedures round-trip; both byte extensions; descriptor discrepancies; truncation/oversize/fuzz tests; no network hardware |
-| M2: mock Go service | Embedded assets, versioned REST/WS, mock state hub, ownership lease and terminal fixture | Cross-built Linux ARM64 binary; bounded queues, slow-reader and disconnect tests; same frontend can use local/remote mocks |
+| M0: research and isolated prototype — accepted, preserved | Architecture, language decision, protocol analysis; original SVG panel with simulated activity and controls | Local build/typecheck/model tests; desktop/mobile browser inspection; explicit mock boundary; no Pi traffic |
+| M1: wire fixtures — codec baseline delivered | Bounded XDR codec and original C/Java differential fixtures | All used procedures round-trip; both byte extensions; descriptor discrepancies; truncation/oversize/fuzz tests; no network hardware |
+| M2: mock Go service — mock panel delivered | Embedded assets, versioned REST/WS, mock state hub, ownership lease and terminal fixture | Cross-built Linux ARM64 binary; bounded queues, slow-reader and disconnect tests; same frontend can use local/remote mocks |
 | M3: isolated emulator integration | Disposable Linux SIMH/REALCONS + virtual panel RPC server | Control parity including START edges; UDP/TCP and rpcbind behavior verified; no production Pi |
 | M4: coexistence laboratory | Broker and physical-panel stand-in, ownership/recovery tests | Single physical client; spectators; override and stale state tests; crash rollback and registration plan; decide broker vs daemon hook |
 | M5: authorized Pi audit and read-only pilot | Reconcile installed source/binaries/services/console configuration after installation work ends | Explicit user authorization; backup/rollback reviewed; no polling assumed side-effect free; incremental benchmarks pass |
 | M6: authorized control, terminal and media | Owned controls; real terminal broker; catalog and safe attach/detach | Guest-safe lifecycle, no terminal takeover, image exclusivity, auth/origin checks, end-to-end recovery tests |
 | M7: packaging and release | Reproducible builds, service configuration, notices and operator docs | Source/dependency license inventory, measured resource report, target acceptance and separately authorized release |
 
-Completion of the other Codex session does not automatically authorize M5. No automatic detection, background Pi probing, live endpoint setting, RPC code path or deployment script is included in M0.
+Current status: M1 has C-generated payload/envelope vectors, Java-source-derived byte extension coverage and fuzzed bounded codecs; it still needs an executed Java oracle and full peer schema/transport conformance. M2 has embedded assets, REST/WS, ownership/recovery, browser verification and a static ARM64 cross-build. A deterministic stalled-writer test now covers timeout/revocation; a real terminal fixture and sustained slow-reader/soak coverage remain future work. See [milestone 0.2](backend-milestone.md) and [validation](validation.md).
+
+Completion of the other Codex session does not automatically authorize M5. The complete microSD backup and explicit authorization are required before any production Pi access. No automatic detection, background Pi probing, live endpoint setting, RPC code path or deployment script is included in milestone 0.2.
 
 ## Risks and unknowns
 
@@ -54,7 +56,7 @@ Completion of the other Codex session does not automatically authorize M5. No au
 | Terminal takeover and monitor access | Official stack uses screen and launcher scripts | Determine non-disruptive endpoint; separate guest and privileged monitor capability |
 | Device/OS corruption | Abrupt stop or shared writable images can damage guest state | Safe lifecycle, immutable bases/working copies and exclusive mounts |
 | Licensing and artwork | Repository bundles mixed licenses; OS images have separate rights | Source notices and per-image rights before distribution |
-| Historic panel fidelity | Prototype is an original interpretation, not a calibrated replica | Compare approved DEC/Oscar reference layouts, labels and knob encodings in later UI milestone |
+| Historic panel fidelity | Prototype is an original interpretation, not a calibrated replica | 0.2 now uses DEC handbook/photo and Java/REALCONS evidence; dimensional calibration and full hardware behavior remain out of scope |
 | Resource competition | Pi runs simulator and high-rate GPIO work already | Measure overhead under real guest/physical load in M5, not Mac extrapolation |
 | Browser compatibility | SVG/keyboard behavior and terminal performance vary | Test Chromium, Firefox and Safari before release; M0 QA records actual browser tested |
 

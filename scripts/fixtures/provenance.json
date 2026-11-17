@@ -1,0 +1,10 @@
+{
+  "repository": "obsolescence/pidp11",
+  "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+  "generator": "macOS system libRPC XDR + unmodified upstream generated C",
+  "files": {
+    "scripts/fixtures/original/rpc_blinkenlight_api.x": "c878b0565312888eea18e8dc77052adc020ce48c36021576a4813bfd96e20251",
+    "scripts/fixtures/original/rpc_blinkenlight_api_xdr.c": "389927ae17542ff67962179b71c802ed413707e56adac1828ee1cf8e51f84fff",
+    "scripts/fixtures/original/rpc_blinkenlight_api.h": "bdd975b3d99afd51eee657cf630100ea257a2e29483ab924a4ff5f00ef210bf9"
+  }
+}

@@ -3,3 +3,7 @@ dist/
 .research/
 .DS_Store
 coverage/
+/bin/
+internal/web/static/*
+!internal/web/static/README.txt
+.research-fixtures/

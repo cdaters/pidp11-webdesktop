@@ -1,6 +1,6 @@
 {
   "name": "pidp11-web-desktop",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,9 @@
     "check": "tsc --noEmit",
     "test": "node --test tests/*.test.ts",
     "build": "tsc --noEmit && vite build && node scripts/standalone.mjs",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "build:server": "npm run build && node scripts/embed-assets.mjs",
+    "test:integration": "node --test integration/*.test.ts"
   },
   "devDependencies": {
     "@types/node": "26.6.6",
