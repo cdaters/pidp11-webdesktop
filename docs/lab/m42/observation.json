@@ -1,0 +1,80 @@
+{
+  "scope": "Mac-hosted network-none Linux ARM64; original direct panel route, optional C observation copy; no Pi/GPIO/guest images",
+  "cases": {
+    "raw_copy": "passed: all 13 inputs and 16 outputs match existing REALCONS RPC banks",
+    "receiver_absent_and_queue_full": "passed: nonblocking drops, existing RPC continues; receiver restart automatically receives current read-only snapshot",
+    "consumer_stall": "passed: last state retained but marked stale; fresh only after new consumer cycle",
+    "independent_physical_route": "passed: direct CONT/RUN/HALT with observation, no broker/ownership changes",
+    "polling_independence": "passed: eight observers do not increase panel GET frequency or change RPC registrations"
+  },
+  "baseline": {
+    "seconds": 10.00293716401211,
+    "gets_per_second": 44.08705091006669,
+    "cpu_percent_one_core": 0.8997357328585041,
+    "cpu_seconds": 0.51,
+    "rss_bytes": 9768960,
+    "pss_bytes": 8564736
+  },
+  "eight_observers": {
+    "frames": [
+      4481,
+      4480,
+      4480,
+      4481,
+      4481,
+      4480,
+      4481,
+      4481
+    ],
+    "max_capture_to_receive_ms": [
+      60,
+      60,
+      60,
+      58,
+      60,
+      60,
+      57,
+      57
+    ],
+    "observers": 8,
+    "seconds": 300,
+    "total_capture_to_receive_ms": [
+      111838,
+      112227,
+      113480,
+      113786,
+      113865,
+      113911,
+      114454,
+      114239
+    ],
+    "gets_per_second": 44.744654622640006,
+    "consumer": {
+      "cpu_percent_one_core": 1.1004964095774887,
+      "rss_start_bytes": 9768960,
+      "rss_end_bytes": 5967872,
+      "rss_peak_bytes": 9768960,
+      "pss_peak_bytes": 8572928
+    },
+    "observer": {
+      "cpu_percent_one_core": 1.9981823025863161,
+      "rss_start_bytes": 6610944,
+      "rss_end_bytes": 8261632,
+      "rss_peak_bytes": 12144640,
+      "pss_peak_bytes": 12837888
+    },
+    "panel_server": {
+      "cpu_percent_one_core": 1.020702107976704,
+      "rss_start_bytes": 10862592,
+      "rss_end_bytes": 7094272,
+      "rss_peak_bytes": 10993664,
+      "pss_peak_bytes": 12157952
+    }
+  },
+  "provenance": {
+    "original_sha256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+    "observed_sha256": "92aab5fdba6064d2438f9c646711cc5f1bdedb30c3e68a84ab4993f35ad11593",
+    "publisher_sha256": "04fa71441a56ba10ef6cd34e51db0691a2d69eaecabddb2e5629790ae350913a"
+  },
+  "status": "PASS"
+}

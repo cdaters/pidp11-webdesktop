@@ -1,0 +1,17 @@
+{
+  "go": "go version go1.26.0 darwin/arm64",
+  "node": "v26.9.0",
+  "git_head": "238e45f97e829dd1636ae4b42eae05c1c14a3ce7",
+  "working_tree_dirty": true,
+  "image_id": "sha256:564662bf3489f350e39b39ec46751454568689b0d8dd0d24b4527971c2f3836c",
+  "binaries": {
+    "realcons-lab-linux-arm64": {
+      "bytes": 6553762,
+      "sha256": "7fa6f2faa1a12e8de18b4e4c2b9ae42ec483def261f7d3e0877d624d068b8909"
+    },
+    "lab-browser-probe-linux-arm64": {
+      "bytes": 5832866,
+      "sha256": "c3088e5bfdba7182b9809e0f6e1625cd4d0e8faf7a82da28c76aae7a7d14271d"
+    }
+  }
+}

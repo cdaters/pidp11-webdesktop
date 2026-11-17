@@ -1,153 +1,654 @@
-import { SimulatedPanelAdapter, octal } from './model.ts';
-import type { Command, PanelAdapter } from './model.ts';
-import { panelMarkup, bindPanel, renderPanel, displayedData } from './panel.ts';
-import { RemotePanelAdapter } from './remote.ts';
+import {
+  SimulatedPanelAdapter,
+  octal,
+  type Command,
+  type PanelAdapter,
+} from "./model.ts";
+import { panelMarkup, bindPanel, renderPanel, displayedData } from "./panel.ts";
+import { RemotePanelAdapter } from "./remote.ts";
+import { ObservedPanelAdapter } from "./observed.ts";
+import { WindowManager } from "./windows.ts";
+import {
+  VirtualDevices,
+  MockTerminalSession,
+  imageLibrary,
+} from "./devices.ts";
+import logo from "./assets/digital-logo-offWht.svg?url";
+import redLogo from "./assets/digital-logo-red.svg?url";
 
-const app = document.querySelector<HTMLDivElement>('#app')!;
-app.innerHTML = `
-<header class="topbar"><a class="wordmark" href="#panel" aria-label="PiDP-11 Web Desktop home"><span class="mark">11</span><span>PiDP-11 <span class="wordmark-sub">/ WEB DESKTOP</span></span></a><span class="mode"><span class="status-dot"></span> SIMULATION <span class="mode-detail">· MOCK SIGNALS ONLY</span></span></header>
-<div class="workspace">
-  <nav class="rail" aria-label="Workspace"><button class="nav-button active" data-view="panel" aria-current="page"><span class="nav-icon">▤</span>Panel</button><button class="nav-button" data-view="console"><span class="nav-icon">&gt;_</span>Console</button><button class="nav-button" data-view="library"><span class="nav-icon">▱</span>Library</button><span class="rail-bottom">11 / 70</span></nav>
-  <main>
-    <section id="view-panel" class="view">
-      <div class="page-heading"><div><p class="eyebrow">OPERATOR WORKSPACE <span>/ 01</span></p><h1>A little mainframe.<br class="mobile-break"> A living front panel.</h1><p class="intro">PDP-11/70 · Explore the switches. Follow the lights.</p></div><button id="reset" class="quiet-button">↺ Reset demo</button></div>
-      <div class="connection-bar"><span id="connection-status">Offline browser simulation</span><button id="acquire-control" class="quiet-button" hidden>Acquire mock control</button><button id="release-control" class="quiet-button" hidden>Release control</button><a id="offline-link" href="?" hidden>Open offline demo</a></div><div class="instrument-top"><span><span class="live-dot"></span> <span id="run-label">SYNTHETIC ACTIVITY</span></span><span id="rate-label">20 Hz display · simulated data</span></div>
-      <p class="scroll-hint">Swipe the panel sideways to reach all 22 switches →</p><div class="panel-shell"><div id="panel" class="panel-scroll">${panelMarkup()}</div>
-        <div class="operator-controls" aria-label="Operator controls">
-
-          <div class="selector-row"><label>ADDRESS SELECT<select id="address-select"><option value="1">USER D</option><option value="3">SUPER D</option><option value="6">KERNEL D</option><option value="4" selected>CONS PHY</option><option value="0">USER I</option><option value="2">SUPER I</option><option value="5">KERNEL I</option><option value="7">PROG PHY</option></select></label><label>DATA SELECT<select id="data-select"><option value="2">DATA PATHS</option><option value="3">BUS REG</option><option value="0">µADRS FPP/CPU</option><option value="1">DISPLAY REGISTER</option></select></label><p class="selector-note">Selectors use illustrative demo values.<br>CPU/MMU and bus-cycle execution are not emulated.</p></div>
-        </div>
-      </div>
-      <div class="readouts"><div><span class="readout-label">ADDRESS <small>22 BIT</small></span><output aria-live="off" id="address-value">00001000</output><span class="unit">OCT</span></div><div><span class="readout-label">DATA <small>16 BIT</small></span><output aria-live="off" id="data-value">012700</output><span class="unit">OCT</span></div><div><span class="readout-label">SWITCH REGISTER</span><output aria-live="off" id="sr-value">00001000</output><span class="unit">OCT</span></div><div class="ownership"><span class="readout-label">CONTROL SOURCE</span><strong id="owner-label"><span class="status-dot"></span> This browser</strong><span class="ownership-note">Isolated demonstration</span></div></div>
-      <div id="notice" class="notice" role="status">Initially halted. To animate: select ENABLE, then press CONT. Memory controls work while halted.</div>
-      <div class="bottom-grid"><section class="guide"><p class="eyebrow">TRY THE PANEL</p><h2>Deposit your first word.</h2><ol><li>Set <b>ENABLE / HALT</b> to HALT.</li><li>Choose an address with the switches, then <b>LOAD ADRS</b>.</li><li>Set a data word, press <b>DEP</b>, then <b>EXAM</b> to read it.</li></ol><p class="fine-print">Consecutive EXAM or DEP advances one word. ENABLE alone does not resume; press CONT.</p></section><section class="register-editor"><p class="eyebrow">DIRECT ENTRY</p><h2>Set the switch register.</h2><form id="register-form"><label for="register-input">Octal value · 0–17777777</label><div class="input-row"><input id="register-input" name="register" value="00001000" inputmode="numeric" autocomplete="off" maxlength="8" spellcheck="false" aria-describedby="register-help"><button class="primary-button" type="submit">Set switches <span>↵</span></button></div><p id="register-help" class="fine-print">Or select a paddle above. Tab, then Space or Enter, toggles it.</p></form></section></div>
-    </section>
-    <section id="view-console" class="view" hidden><div class="page-heading"><div><p class="eyebrow">OPERATOR WORKSPACE <span>/ 02</span></p><h1>A console for exploration.</h1><p class="intro">A local command demo, connected to the same simulated panel.</p></div><button id="clear-console" class="quiet-button">Clear output</button></div><div class="terminal-window"><div class="terminal-title"><span class="status-dot"></span> DEMO CONSOLE <span>NO SHELL · NO GUEST OS</span></div><pre id="terminal-output" tabindex="0" aria-label="Demo console output"></pre><form id="terminal-form"><label for="terminal-input">demo&gt;</label><input id="terminal-input" autocomplete="off" spellcheck="false" aria-label="Demo console command"><button type="submit" class="quiet-button">Send ↵</button></form></div><p class="console-hint">Try <code>help</code>, <code>halt</code>, <code>sr 1000</code>, <code>load</code>, <code>sr 12345</code>, <code>deposit</code>, <code>examine</code>. Arrow keys recall commands.</p></section>
-    <section id="view-library" class="view" hidden><div class="page-heading"><div><p class="eyebrow">OPERATOR WORKSPACE <span>/ 03</span></p><h1>A home for historic systems.</h1><p class="intro">Planning catalog · illustrative profiles, no disk images attached.</p></div></div><div class="library-grid">${[['UNIX V6','Time-sharing, 1975','RK disk family','unix'],['RT-11','Single-user, real-time','RK / RL disk families','rt'],['RSX-11M+','Multi-user, real-time','Profile to be validated','rsx']].map(([name,desc,device,key])=>`<article class="system-card"><div class="disk-art" aria-hidden="true">◉</div><p class="eyebrow">PLANNED PROFILE</p><h2>${name}</h2><p>${desc}</p><dl><dt>Media</dt><dd>${device}</dd><dt>Availability</dt><dd>Not installed by this project</dd></dl><button class="quiet-button" data-profile="${key}">View profile notes →</button></article>`).join('')}</div><div id="profile-notes" class="profile-notes" role="status">Select a profile for integration notes. This catalog does not inspect the Raspberry Pi.</div></section>
-    <footer><span>PiDP-11 Web Desktop <span class="footer-version">/ DEVELOPMENT 0.4</span></span><span>Simulated panel · no emulator or GPIO connection</span></footer>
-  </main>
-</div>`;
-const remoteMode = new URLSearchParams(location.search).get('backend') === 'mock';
+const escape = (s: string) =>
+  s.replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ]!,
+  );
+const icons: Record<string, string> = {
+  panel:
+    '<rect x="2" y="5" width="28" height="19" rx="2"/><path d="M6 10h20M6 15h20M6 20h2m4 0h2m4 0h2m4 0h2"/>',
+  terminal:
+    '<rect x="2" y="3" width="28" height="22" rx="2"/><path d="m7 9 4 4-4 4m8 0h7M10 29h12"/>',
+  disks:
+    '<rect x="5" y="2" width="22" height="28" rx="2"/><path d="M5 9h22M5 22h22"/><circle cx="16" cy="16" r="4"/>',
+  tapes:
+    '<circle cx="9" cy="12" r="7"/><circle cx="24" cy="12" r="7"/><circle cx="9" cy="12" r="2"/><circle cx="24" cy="12" r="2"/><path d="M3 25h26M9 19v5m15-5v5"/>',
+  paper:
+    '<path d="M7 2h19v28H7zM11 7h2m5 0h4m-11 5h2m5 0h4m-11 5h2m5 0h4m-11 5h2m5 0h4"/>',
+  printer: '<path d="M8 11V2h16v9M8 25H3V11h26v14h-5M8 20h16v10H8zM7 15h3"/>',
+  systems: '<path d="M3 7h10l3-4h13v25H3zM3 12h26M10 18h12m-12 5h8"/>',
+  sessions:
+    '<rect x="2" y="4" width="20" height="16"/><path d="M9 24h21V10M12 28h12M8 24v-4"/>',
+  diagnostics: '<path d="M2 27h28M5 22V12h5v10m6 0V3h5v19m5 0v-7h4v7"/>',
+  about: '<circle cx="16" cy="16" r="13"/><path d="M16 14v10m0-17v3"/>',
+};
+const icon = (id: string) =>
+  `<svg viewBox="0 0 32 32" aria-hidden="true">${icons[id] ?? icons.terminal}</svg>`;
+const apps = [
+  ["panel", "Front panel", "PDP-11/70"],
+  ["terminal", "Terminal", "Independent session"],
+  ["disks", "Disk drives", "RK05 / RL02"],
+  ["tapes", "Magnetic tape", "TU10 transport"],
+  ["paper", "Paper tape", "Reader & punch"],
+  ["printer", "Line printer", "LP0 spool"],
+  ["systems", "Systems", "Operating-system library"],
+  ["sessions", "Terminals", "Lines & keyboards"],
+  ["diagnostics", "Diagnostics", "State & connection"],
+  ["about", "About", "References & shortcuts"],
+];
+const root = document.querySelector<HTMLDivElement>("#app")!;
+root.innerHTML = `<header class="desktop-top"><img src="${logo}" class="digital-brand" alt="DIGITAL"><span class="desktop-name">PiDP-11 <b>Web Desktop</b></span><span class="top-source" id="source-badge">LOCAL SIMULATION</span><button id="reset-layout" title="Reset saved window geometry">Reset layout</button><time id="clock"></time></header><div class="desktop-layout"><nav class="launcher" aria-label="Applications">${apps.map(([id, name, desc]) => `<button data-app="${id}" title="${desc}" aria-label="Open ${name}">${icon(id)}<span>${name}</span></button>`).join("")}</nav><main id="desktop" aria-label="PiDP-11 desktop workspace"><div class="wallpaper" aria-hidden="true"><span>pdp11/70</span><small>THE COMPUTER IS STILL THE COMPUTER.</small></div></main></div><footer class="taskbar"><span class="taskbar-label">WORKSPACE</span><div id="tasks" aria-label="Open windows"></div><span class="local-label">M4.2 · LOCAL LAB</span></footer><div id="toast" role="status" aria-live="polite"></div>`;
+const $ = <T extends HTMLElement>(id: string) =>
+  document.getElementById(id) as T;
+const manager = new WindowManager($("desktop"), $("tasks"));
+const devices = new VirtualDevices();
+const terminals = new Map<string, MockTerminalSession>();
+let panelEl: HTMLElement | undefined;
 let remote: RemotePanelAdapter | undefined;
-const adapter: PanelAdapter = remoteMode ? (remote = new RemotePanelAdapter(status => {
-  $('connection-status').textContent = status.message;
-  $('owner-label').textContent = status.owns ? 'This browser' : status.owner ? 'Another browser' : 'Spectator';
-  $<HTMLButtonElement>('acquire-control').disabled = !status.connected || !!status.owner;
-  $<HTMLButtonElement>('release-control').disabled = !status.owns;
-  panel.classList.toggle('read-only',!status.owns);
-  panel.setAttribute('aria-disabled',String(!status.owns));
-})) : new SimulatedPanelAdapter();
-const panel = document.querySelector<HTMLElement>('#panel')!;
-const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
-const notice = $('notice');
-async function dispatch(command: Command) {
-  const result = await adapter.dispatch(command);
-  notice.textContent = result.message; notice.classList.toggle('error', !result.accepted);
-  return result;
+const mode = new URLSearchParams(location.search).get("backend");
+const observeMode = mode === "observe";
+let observed: ObservedPanelAdapter | undefined;
+const remoteMode = mode === "mock";
+let owns = !remoteMode && !observeMode,
+  connected = !remoteMode && !observeMode,
+  connectionText = remoteMode
+    ? "Connecting to local mock backend…"
+    : "Browser simulation · no emulator connection";
+const adapter: PanelAdapter = observeMode
+  ? (observed = new ObservedPanelAdapter((message) => {
+      connectionText = message;
+      connected = !!observed?.fresh;
+      updatePanel();
+    }))
+  : remoteMode
+    ? (remote = new RemotePanelAdapter((status) => {
+        owns = status.owns;
+        connected = status.connected;
+        connectionText = status.message;
+        updatePanel();
+      }))
+    : new SimulatedPanelAdapter();
+let current = adapter.snapshot();
+function notify(message: string, error = false) {
+  const el = $("toast");
+  el.textContent = message;
+  el.classList.toggle("error", error);
+  el.classList.add("visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("visible"), 5000);
 }
-bindPanel(panel, dispatch);
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-
-adapter.subscribe(s => {
-  renderPanel(panel, s);
-  if(s.source==='realcons-lab'){
-    document.querySelector<HTMLElement>('.mode')!.textContent='ISOLATED REALCONS · LINUX LAB';
-    document.querySelector<HTMLElement>('.ownership-note')!.textContent='Isolated Linux laboratory';
-    $('rate-label').textContent='20 Hz display · original REALCONS';
+let toastTimer: ReturnType<typeof setTimeout>;
+const body = (html: string) => {
+  const el = document.createElement("div");
+  el.innerHTML = html;
+  return el;
+};
+function safe(action: () => void) {
+  try {
+    action();
+    refreshApps();
+  } catch (e) {
+    notify((e as Error).message, true);
   }
-  $('address-value').textContent = octal(s.address);
-  $('data-value').textContent = octal(displayedData(s), 6);
-  $('sr-value').textContent = octal(s.switchRegister);
-  $('run-label').textContent = s.running ? (s.source==='realcons-lab'?'REALCONS RUNNING':'SYNTHETIC ACTIVITY') : s.halted ? 'HALTED · SCRATCH MEMORY READY' : 'STOPPED · ENABLE SELECTED';
-  $<HTMLSelectElement>('address-select').value = String(s.addressSelect);
-  $<HTMLSelectElement>('data-select').value = String(s.dataSelect);
-});
-document.querySelectorAll<HTMLButtonElement>('[data-command]').forEach(b => {
-  b.addEventListener('click', () => dispatch({ type: b.dataset.command } as Command));
-});
-$('reset').addEventListener('click', () => {void dispatch({type:'reset'});});
-$('register-form').addEventListener('submit', e => {
-  e.preventDefault(); const value = $<HTMLInputElement>('register-input').value.trim();
-  if (!/^[0-7]{1,8}$/.test(value)) { notice.textContent = 'Use only octal digits 0–7 (up to 17777777).'; notice.classList.add('error'); return; }
-  dispatch({ type: 'register', value: parseInt(value, 8) });
-});
-(['address', 'data'] as const).forEach(name => {
-  $(`${name}-select`).addEventListener('change', e => dispatch({ type: `${name}-select`, value: Number((e.target as HTMLSelectElement).value) }));
-});
-function showView(next: string) {
-  if (!['panel', 'console', 'library'].includes(next)) next = 'panel';
-  document.querySelectorAll<HTMLElement>('.view').forEach(s => { s.hidden = s.id !== `view-${next}`; });
-  document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach(b => {
-    b.classList.toggle('active', b.dataset.view === next);
-    if (b.dataset.view === next) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
-  });
-  if (next === 'console') $('terminal-input').focus();
 }
-document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach(b => b.addEventListener('click', () => { location.hash = b.dataset.view!; }));
-window.addEventListener('hashchange', () => showView(location.hash.slice(1)));
-showView(location.hash.slice(1) || 'panel');
-// Only the offline adapter has a browser timer; the remote adapter owns no clock.
+function download(name: string, data: string | Uint8Array) {
+  const blob = new Blob(
+    [typeof data === "string" ? data : new Uint8Array(data)],
+    {
+      type:
+        typeof data === "string"
+          ? "text/plain;charset=utf-8"
+          : "application/octet-stream",
+    },
+  );
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.download = name;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+async function dispatch(command: Command) {
+  if (!owns) {
+    notify(
+      "This panel is read-only. Acquire control on the mock connection first.",
+      true,
+    );
+    return;
+  }
+  const result = await adapter.dispatch(command);
+  notify(result.message, !result.accepted);
+  updatePanel();
+}
+function updatePanel() {
+  if (!panelEl) return;
+  renderPanel(panelEl, current);
+  panelEl.classList.toggle("read-only", !owns);
+  panelEl
+    .querySelectorAll<HTMLElement>("[data-bit],[data-action]")
+    .forEach((el) => {
+      el.setAttribute("aria-disabled", String(!owns));
+      if (el.dataset.bit !== undefined)
+        el.setAttribute(
+          "aria-checked",
+          String(
+            Boolean(current.switchRegister & (1 << Number(el.dataset.bit))),
+          ),
+        );
+    });
+  const local = current.source === "simulation";
+  const label = observeMode
+    ? observed?.fresh
+      ? "OBSERVED · READ ONLY"
+      : observed?.available
+        ? "STALE OBSERVATION"
+        : "OBSERVATION UNAVAILABLE"
+    : local
+      ? "SIMULATED PANEL"
+      : "ISOLATED REALCONS";
+  $("source-badge").textContent = label;
+  $("panel-source").textContent = label;
+  $("panel-connection").textContent = connectionText;
+  $("run-state").textContent = !connected
+    ? "DISCONNECTED"
+    : current.running
+      ? "RUN"
+      : current.halted
+        ? "HALT"
+        : "STOPPED / ENABLE";
+  $("address-value").textContent = octal(current.address);
+  $("data-value").textContent = octal(displayedData(current), 6);
+  $("sr-value").textContent = octal(current.switchRegister);
+  if (observeMode && !observed?.available) {
+    for (const id of ["address-value", "data-value", "sr-value"])
+      $(id).textContent = "—";
+    panelEl.classList.add("unavailable");
+  } else panelEl.classList.remove("unavailable");
+  $("panel-owner").textContent = owns
+    ? "This browser has panel control"
+    : "Read-only observer";
+  for (const name of ["address", "data"] as const) {
+    const select = panelEl.querySelector<HTMLSelectElement>(`#${name}-select`);
+    if (select) {
+      select.value = String(
+        name === "address" ? current.addressSelect : current.dataSelect,
+      );
+      select.disabled = !owns;
+    }
+  }
+  const acquire = panelEl.querySelector<HTMLButtonElement>("#acquire");
+  if (acquire) acquire.disabled = !connected || owns;
+  const release = panelEl.querySelector<HTMLButtonElement>("#release");
+  if (release) release.disabled = !owns;
+}
+function openPanel() {
+  if (manager.store.windows.some((w) => w.id === "panel")) {
+    manager.restore("panel");
+    return;
+  }
+  panelEl = body(
+    `<div class="panel-toolbar"><span class="source-tag" id="panel-source">SIMULATED PANEL</span><span id="run-state"></span><button id="panel-mode">Full panel</button>${observeMode ? '<button id="observe-login">Sign in to observe</button>' : ""}${remoteMode ? '<button id="acquire">Acquire panel</button><button id="release">Release</button>' : ""}</div><div class="panel-viewport">${panelMarkup()}</div><div class="panel-readouts"><span>ADDRESS <output id="address-value"></output></span><span>DATA <output id="data-value"></output></span><span>SWITCH REGISTER <output id="sr-value"></output></span></div><div class="panel-options"><label>Address<select id="address-select"><option value="0">USER I</option><option value="1">USER D</option><option value="2">SUPER I</option><option value="3">SUPER D</option><option value="4">CONS PHY</option><option value="5">KERNEL I</option><option value="6">KERNEL D</option><option value="7">PROG PHY</option></select></label><label>Data<select id="data-select"><option value="0">µADRS FPP / CPU</option><option value="1">DISPLAY REGISTER</option><option value="2">DATA PATHS</option><option value="3">BUS REG</option></select></label><form id="register-form"><label>SR octal<input id="register-input" value="00001000" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="Octal switch register"></label><button>Set</button></form></div><details class="touch-controls"><summary>Touch / accessible controls</summary><div class="touch-bits">${Array.from(
+      { length: 22 },
+      (_, i) => 21 - i,
+    )
+      .map(
+        (bit) =>
+          `<button role="switch" aria-checked="false" aria-label="Touch switch register bit ${bit}" data-bit="${bit}">${bit}</button>`,
+      )
+      .join("")}</div><div class="touch-actions">${[
+      ["halt", "HALT / ENABLE"],
+      ["load", "LOAD ADRS"],
+      ["examine", "EXAM"],
+      ["deposit", "DEP"],
+      ["continue", "CONT"],
+      ["start", "START"],
+      ["bus-cycle", "S INST / BUS"],
+      ["lamp-test", "LAMP TEST"],
+    ]
+      .map(
+        ([action, label]) =>
+          `<button data-action="${action}">${label}</button>`,
+      )
+      .join(
+        "",
+      )}</div></details><div class="panel-foot"><span id="panel-owner"></span><span id="panel-connection"></span></div>`,
+  );
+  panelEl.classList.add("panel-app");
+  const node = panelEl;
+  manager.open(
+    "panel",
+    "PDP-11/70 · front panel",
+    node,
+    { x: 26, y: 22, width: 1050, height: 690 },
+    () => {
+      panelEl = undefined;
+    },
+  );
+  bindPanel(node, dispatch);
+  $("panel-mode").onclick = () => {
+    node.classList.toggle("authentic-mode");
+    $("panel-mode").textContent = node.classList.contains("authentic-mode")
+      ? "Desktop panel"
+      : "Full panel";
+    manager.toggleMax("panel");
+  };
+  $("register-form").onsubmit = (e) => {
+    e.preventDefault();
+    const v = $<HTMLInputElement>("register-input").value;
+    if (!/^[0-7]{1,8}$/.test(v)) return notify("Enter octal digits 0–7.", true);
+    void dispatch({ type: "register", value: parseInt(v, 8) });
+  };
+  for (const name of ["address", "data"] as const)
+    $(`${name}-select`).onchange = (e) =>
+      void dispatch({
+        type: `${name}-select`,
+        value: Number((e.target as HTMLSelectElement).value),
+      });
+  if (observeMode) {
+    $("observe-login").onclick = () => {
+      if (manager.store.windows.some((w) => w.id === "login")) {
+        manager.restore("login");
+        return;
+      }
+      if (manager.store.windows.length >= 14) {
+        notify("Close a window before signing in.");
+        return;
+      }
+      const form = body(
+        '<h2>Observe the isolated lab</h2><p>Read-only capability. Enter a locally provisioned observation token.</p><form><label>Observation token<input type="password" autocomplete="off" aria-label="Observation token"></label><button>Sign in</button><p role="status"></p></form>',
+      );
+      form.classList.add("utility-app");
+      manager.open("login", "Observation sign-in", form, {
+        x: 100,
+        y: 70,
+        width: 420,
+        height: 250,
+      });
+      form.querySelector("form")!.onsubmit = async (e) => {
+        e.preventDefault();
+        const input = form.querySelector("input")!;
+        const token = input.value;
+        input.value = "";
+        try {
+          await observed!.login(token);
+          form.querySelector("[role=status]")!.textContent =
+            "Authorized for observation only.";
+        } catch (err) {
+          form.querySelector("[role=status]")!.textContent = (
+            err as Error
+          ).message;
+        }
+      };
+    };
+  }
+  if (remote) {
+    $("acquire").onclick = async () => {
+      const r = await remote!.acquire();
+      notify(r.message, !r.accepted);
+    };
+    $("release").onclick = async () => {
+      const r = await remote!.release();
+      notify(r.message, !r.accepted);
+    };
+  }
+  updatePanel();
+}
+function openTerminal() {
+  if (manager.store.windows.length >= 14) {
+    notify("Close a window before opening another.");
+    return;
+  }
+  const n = [1, 2, 3, 4].find((n) => !terminals.has(`terminal-${n}`));
+  if (!n) {
+    notify("Four terminal windows are already open.");
+    return;
+  }
+  const id = `terminal-${n}`,
+    session = new MockTerminalSession(`DZ${n - 1}`);
+  terminals.set(id, session);
+  const el = body(
+    `<div class="terminal-toolbar"><span class="source-tag">MOCK · ${session.id}</span><button data-keyboard>Acquire keyboard</button><select aria-label="Terminal profile"><option>VT100 / ANSI</option><option disabled>VT52 · not validated</option><option disabled>VT220 · not validated</option></select></div><div class="terminal-host" aria-label="${session.id} terminal"></div><div class="terminal-foot">Independent session · read-only until keyboard acquired · no shell or guest OS</div>`,
+  );
+  el.classList.add("terminal-app");
+  let dispose = () => {};
+  manager.open(
+    id,
+    `${session.id} · DEC terminal`,
+    el,
+    {
+      x: Math.max(40, manager.bounds().width - 650) - n * 12,
+      y: Math.max(260, manager.bounds().height - 360) + n * 10,
+      width: 620,
+      height: 330,
+    },
+    () => {
+      dispose();
+      session.inputOwner = false;
+      terminals.delete(id);
+      refreshApps();
+    },
+  );
+  el.querySelector<HTMLButtonElement>("[data-keyboard]")!.onclick = (e) => {
+    session.inputOwner = !session.inputOwner;
+    (e.target as HTMLElement).textContent = session.inputOwner
+      ? "Release keyboard"
+      : "Acquire keyboard";
+    el.querySelector(".terminal-foot")!.textContent = session.inputOwner
+      ? "Keyboard owned by this window · panel ownership unchanged"
+      : "Read-only terminal · output preserved";
+    refreshApps();
+  };
+  void import("./terminal.ts")
+    .then(({ mountTerminal }) =>
+      mountTerminal(el.querySelector(".terminal-host")!, session),
+    )
+    .then((cleanup) => {
+      if (el.isConnected) dispose = cleanup;
+      else cleanup();
+    })
+    .catch((e) => {
+      el.querySelector(".terminal-host")!.textContent =
+        "Terminal renderer unavailable: " + String(e);
+    });
+  refreshApps();
+}
+function mediaHTML(tape = false) {
+  const ds = devices.drives.filter((d) =>
+    tape ? d.family === "TU10" : d.family !== "TU10",
+  );
+  return `<div class="app-heading"><div><h2>${tape ? "Magnetic tape" : "Disk drives"}</h2><p>RAM-only media prototype · no image files are mounted.</p></div><span class="source-tag">SIMULATION</span></div>${ds
+    .map((d) => {
+      const image = imageLibrary.find((i) => i.id === d.mounted);
+      return `<article class="drive-card"><div class="drive-visual ${tape ? "reels" : ""}">${icon(tape ? "tapes" : "disks")}<b>${d.id}</b></div><div class="drive-details"><h3>${d.family} <span>${d.mounted ? "PACK LOADED" : "EMPTY"}</span></h3><p>${image ? escape(image.name) : "No demonstration media attached"}</p><small>${image ? `${(image.bytes / 1048576).toFixed(2)} MiB · catalog metadata` : "Choose a compatible profile below"}</small><div class="device-actions"><select aria-label="${d.id} media">${imageLibrary
+        .filter((i) => i.family === d.family)
+        .map((i) => `<option value="${i.id}">${escape(i.name)}</option>`)
+        .join(
+          "",
+        )}</select><button data-mount="${d.id}" ${d.mounted ? "disabled" : ""}>Mount</button><button data-eject="${d.id}" ${!d.mounted ? "disabled" : ""}>Eject</button><button data-protect="${d.id}">${d.readOnly ? "Write protected" : "Writable · mock"}</button></div>${tape ? `<div class="tape-position"><span>Synthetic block ${d.position}</span><progress value="${d.position}" max="100"></progress><button data-tape="rewind">Rewind</button><button data-tape="advance">Advance</button></div>` : ""}</div></article>`;
+    })
+    .join(
+      "",
+    )}<p class="app-note">Stop the simulated system before mounting, ejecting, or changing write protection. Conventional PiDP-11 utilities remain independent.</p>`;
+}
+function wireMedia(el: HTMLElement) {
+  el.querySelectorAll<HTMLButtonElement>("[data-mount]").forEach(
+    (b) =>
+      (b.onclick = () =>
+        safe(() =>
+          devices.mount(
+            b.dataset.mount!,
+            b.parentElement!.querySelector("select")!.value,
+          ),
+        )),
+  );
+  el.querySelectorAll<HTMLButtonElement>("[data-eject]").forEach(
+    (b) => (b.onclick = () => safe(() => devices.eject(b.dataset.eject!))),
+  );
+  el.querySelectorAll<HTMLButtonElement>("[data-protect]").forEach(
+    (b) => (b.onclick = () => safe(() => devices.protect(b.dataset.protect!))),
+  );
+  el.querySelectorAll<HTMLButtonElement>("[data-tape]").forEach(
+    (b) =>
+      (b.onclick = () =>
+        safe(() => devices.tape(b.dataset.tape as "rewind" | "advance"))),
+  );
+}
+function systemsHTML() {
+  return `<div class="app-heading"><div><h2>Operating systems</h2><p>Explore boot profiles. No guest OS or disk image is included.</p></div><span class="source-tag">SIMULATION</span></div><div class="system-state">${devices.running ? `Simulated session: ${devices.profile}` : "Simulated session stopped"} <button data-stop ${devices.running ? "" : "disabled"}>Stop simulation</button></div>${[
+    ["UNIX V6", "1975 · time-sharing", "RK05", "RK0 · PDP-11/70 · 256 KiB"],
+    [
+      "RT-11",
+      "Single-user · real-time",
+      "RL02",
+      "RL0 · profile pending validation",
+    ],
+    [
+      "RSX-11M+",
+      "Multiuser · real-time",
+      "RL02",
+      "RL0 · guest serial lines require OS configuration",
+    ],
+  ]
+    .map(
+      ([name, desc, media, config]) =>
+        `<article class="system-profile"><span class="system-initial">${name === "UNIX V6" ? "U" : name === "RT-11" ? "R" : "M+"}</span><div><h3>${name}</h3><p>${desc}</p><small>${config}<br>${media} demonstration pack required; actual guest shutdown is not implemented.</small></div><button data-boot="${name}" ${devices.running ? "disabled" : ""}>Start demo</button></article>`,
+    )
+    .join(
+      "",
+    )}<a class="reference-link" href="https://obsolescence.dev/pidp11/PiDP-11_Manual.pdf" target="_blank" rel="noreferrer">Official PiDP-11 manual ↗</a>`;
+}
+function printerHTML() {
+  return `<div class="app-heading"><div><h2>Line printer / LP0</h2><p>Local text spool · bounded to 32 jobs of 16 KiB.</p></div><span class="source-tag">SIMULATION</span></div><div class="button-row"><button data-sample>Add sample job</button><button data-print>Print queue</button><button data-spool>Download spool</button><button data-clear>Clear queue</button></div><div class="printer-paper"><pre>${escape(devices.spool() || "LP0 READY\n\nQueue a demonstration listing, then print.\nOutput remains in this browser until downloaded.")}</pre></div><ul class="job-list">${devices.jobs.map((j) => `<li>#${j.id} ${escape(j.name)} <span>${j.state}</span></li>`).join("")}</ul>`;
+}
+function paperHTML() {
+  return `<div class="app-heading"><div><h2>Paper tape</h2><p>Read and punch local bytes · 8 KiB per tape.</p></div><span class="source-tag">SIMULATION</span></div><div class="paper-columns"><section><h3>Reader / PTR</h3><label class="file-label">Load local tape<input type="file" data-paper-file aria-label="Load local paper tape"></label><p>${devices.paper.length} bytes loaded</p><div class="punched-strip" aria-label="First 32 bytes as punched holes">${Array.from(
+    devices.paper.slice(0, 32),
+  )
+    .map(
+      (b) =>
+        `<span>${Array.from({ length: 8 }, (_, i) => `<i class="${b & (1 << i) ? "hole" : ""}"></i>`).join("")}</span>`,
+    )
+    .join("")}</div><pre class="hex-preview">${
+    Array.from(devices.paper.slice(0, 128))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join(" ") || "No tape loaded."
+  }</pre><button data-paper-download>Save loaded bytes</button></section><section><h3>Punch / PTP</h3><label>Text to punch<textarea data-punch-input maxlength="8192" rows="6">HELLO FROM THE PDP-11\n</textarea></label><button data-punch>Punch text</button><button data-punch-download>Save punched tape</button><p>${devices.punched.length} output bytes</p></section></div>`;
+}
+function sessionsHTML() {
+  return `<div class="app-heading"><div><h2>Terminal manager</h2><p>Each keyboard lease belongs to one terminal, never to the panel.</p></div><button data-new-terminal>New terminal</button></div><table><thead><tr><th>Line</th><th>Profile</th><th>Keyboard</th><th>Session</th></tr></thead><tbody>${
+    Array.from(terminals.entries())
+      .map(
+        ([id, s]) =>
+          `<tr><td>${s.id}</td><td>${s.profile}</td><td>${s.inputOwner ? "Owned by its window" : "Read-only"}</td><td><button data-focus="${id}">Open window</button></td></tr>`,
+      )
+      .join("") || '<tr><td colspan="4">No terminal windows open.</td></tr>'
+  }</tbody></table><p class="app-note">Mock sessions are independent. SSH, Screen, real serial terminals and guest network logins are never attached or taken over by this prototype.</p>`;
+}
+function diagnosticsHTML() {
+  return `<div class="app-heading"><div><h2>Diagnostics</h2><p>Source and availability are explicit.</p></div><span class="source-tag">${remoteMode ? "LOCAL BACKEND" : "BROWSER ONLY"}</span></div><dl class="diagnostic-grid"><dt>Panel source</dt><dd>${current.source === "simulation" ? "Simulated data" : "Isolated REALCONS data"}</dd><dt>Connection</dt><dd>${escape(connectionText)}</dd><dt>Panel ownership</dt><dd>${owns ? "This browser" : "Observer"}</dd><dt>Terminal keyboards</dt><dd>${[...terminals.values()].filter((t) => t.inputOwner).length} independent owners</dd><dt>Host CPU / memory</dt><dd>Unavailable · no host telemetry connected</dd><dt>Temperature / throttling</dt><dd>Unavailable · no Pi access</dd><dt>RPC</dt><dd>${current.source === "simulation" ? "Not connected" : "Isolated laboratory only"}</dd><dt>Guest OS</dt><dd>Not connected · mock profiles only</dd><dt>Desktop windows</dt><dd>${manager.store.windows.length} / 14</dd></dl><h3>Local prototype log</h3><pre class="diagnostic-log">${escape(devices.logs.slice(-30).join("\n"))}</pre>`;
+}
+function refreshApps() {
+  for (const id of [
+    "disks",
+    "tapes",
+    "systems",
+    "printer",
+    "sessions",
+    "diagnostics",
+  ]) {
+    const el = document.querySelector<HTMLElement>(
+      `[data-window="${id}"] .window-body`,
+    );
+    if (el) renderApp(id, el);
+  }
+}
+function renderApp(id: string, el: HTMLElement) {
+  const html: Record<string, () => string> = {
+    disks: () => mediaHTML(),
+    tapes: () => mediaHTML(true),
+    systems: systemsHTML,
+    printer: printerHTML,
+    paper: paperHTML,
+    sessions: sessionsHTML,
+    diagnostics: diagnosticsHTML,
+  };
+  if (html[id]) el.innerHTML = html[id]();
+  if (id === "disks" || id === "tapes") wireMedia(el);
+  el.querySelector<HTMLButtonElement>("[data-stop]")?.addEventListener(
+    "click",
+    () => safe(() => devices.stop()),
+  );
+  el.querySelectorAll<HTMLButtonElement>("[data-boot]").forEach(
+    (b) =>
+      (b.onclick = () =>
+        safe(() => {
+          devices.boot(b.dataset.boot!);
+          notify(`${b.dataset.boot}: simulation started. No guest OS booted.`);
+        })),
+  );
+  el.querySelector<HTMLButtonElement>("[data-sample]")?.addEventListener(
+    "click",
+    () =>
+      safe(() =>
+        devices.queue(
+          "HELLO.MAC listing",
+          "\t.TITLE HELLO\n; SYNTHETIC LISTING — NO ASSEMBLER EXECUTED\nSTART:  MOV #MESSAGE,R1\n        HALT\nMESSAGE: .ASCIZ /HELLO, WORLD/\n\t.END START\n",
+        ),
+      ),
+  );
+  el.querySelector<HTMLButtonElement>("[data-print]")?.addEventListener(
+    "click",
+    () => safe(() => devices.print()),
+  );
+  el.querySelector<HTMLButtonElement>("[data-clear]")?.addEventListener(
+    "click",
+    () => safe(() => devices.clear()),
+  );
+  el.querySelector<HTMLButtonElement>("[data-spool]")?.addEventListener(
+    "click",
+    () => download("pidp11-demo-spool.txt", devices.spool()),
+  );
+  el.querySelector<HTMLInputElement>("[data-paper-file]")?.addEventListener(
+    "change",
+    async (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      if (file.size > 8192) return notify("Paper-tape limit is 8 KiB.", true);
+      devices.loadPaper(new Uint8Array(await file.arrayBuffer()));
+      renderApp("paper", el);
+      refreshApps();
+    },
+  );
+  el.querySelector<HTMLButtonElement>(
+    "[data-paper-download]",
+  )?.addEventListener("click", () => download("reader-demo.pt", devices.paper));
+  el.querySelector<HTMLButtonElement>(
+    "[data-punch-download]",
+  )?.addEventListener("click", () =>
+    download("punch-demo.pt", devices.punched),
+  );
+  el.querySelector<HTMLButtonElement>("[data-punch]")?.addEventListener(
+    "click",
+    () =>
+      safe(() => {
+        devices.punch(
+          el.querySelector<HTMLTextAreaElement>("[data-punch-input]")!.value,
+        );
+        renderApp("paper", el);
+      }),
+  );
+  el.querySelector<HTMLButtonElement>("[data-new-terminal]")?.addEventListener(
+    "click",
+    openTerminal,
+  );
+  el.querySelectorAll<HTMLButtonElement>("[data-focus]").forEach(
+    (b) => (b.onclick = () => manager.restore(b.dataset.focus!)),
+  );
+}
+function openApp(id: string) {
+  if (id === "panel") return openPanel();
+  if (id === "terminal") return openTerminal();
+  if (manager.store.windows.some((w) => w.id === id)) {
+    manager.restore(id);
+    return;
+  }
+  if (manager.store.windows.length >= 14) {
+    notify("Close a window before opening another.");
+    return;
+  }
+  const title = apps.find((a) => a[0] === id)?.[1];
+  if (!title) return;
+  const el = body("");
+  el.classList.add("utility-app");
+  if (id === "about")
+    el.innerHTML = `<div class="about-brand"><img src="${redLogo}" alt="DIGITAL historical logo"><h2>PiDP-11 Web Desktop</h2><p>An independent companion project.<br>Not an official Digital Equipment Corporation product.</p></div><p>M4.2 · Original TypeScript/SVG workspace, inspired by The High Nibble's IMSAI desktop. The physical PiDP-11 remains independently operable.</p><h3>Keyboard</h3><dl class="diagnostic-grid"><dt>Alt + 1</dt><dd>Front panel</dd><dt>Alt + 2</dt><dd>New terminal</dd><dt>Alt + \x60</dt><dd>Cycle windows</dd><dt>Titlebar double-click</dt><dd>Maximize / restore</dd><dt>Resize handle + arrows</dt><dd>Keyboard resize (Shift = larger step)</dd><dt>Panel Tab + Space</dt><dd>Operate a focused switch</dd></dl><p class="app-note">Only window geometry is saved locally. Credentials, control leases, guest state and media contents are not persisted. Supplied DIGITAL artwork retains its proportions; public redistribution requires rights review.</p>`;
+  else renderApp(id, el);
+  manager.open(id, title, el, {
+    x: 90 + (manager.store.windows.length % 4) * 35,
+    y: 70 + (manager.store.windows.length % 3) * 30,
+    width: id === "paper" ? 760 : 680,
+    height: 470,
+  });
+}
+root
+  .querySelectorAll<HTMLButtonElement>("[data-app]")
+  .forEach((b) => (b.onclick = () => openApp(b.dataset.app!)));
+manager.onChange = () => {
+  const el = document.querySelector<HTMLElement>(
+    '[data-window="diagnostics"] .window-body',
+  );
+  if (el) renderApp("diagnostics", el);
+};
+adapter.subscribe((state) => {
+  current = state;
+  updatePanel();
+});
+$("reset-layout").onclick = () => {
+  try {
+    localStorage.removeItem("pidp11.layout.v1");
+  } catch {}
+  location.reload();
+};
+window.addEventListener("keydown", (e) => {
+  if (!e.altKey) return;
+  if (e.key === "1") {
+    e.preventDefault();
+    openPanel();
+  }
+  if (e.key === "2") {
+    e.preventDefault();
+    openTerminal();
+  }
+  if (e.key === "`") {
+    e.preventDefault();
+    manager.cycle();
+  }
+});
 let timer: ReturnType<typeof setInterval> | undefined;
 function schedule() {
-  if (timer) clearInterval(timer);
-  timer = undefined;
-  if (!document.hidden && !remoteMode) timer = setInterval(() => adapter.tick(), 50);
+  clearInterval(timer);
+  if (!document.hidden && !remoteMode && !observeMode)
+    timer = setInterval(() => adapter.tick(), 50);
 }
-document.addEventListener('visibilitychange', schedule); schedule();
-reducedMotion.addEventListener('change', () => { if (reducedMotion.matches && !adapter.snapshot().halted) dispatch({ type: 'halt' }); });
-window.addEventListener('pagehide', () => { if (timer) clearInterval(timer); });
-window.addEventListener('pageshow', schedule);
-
-const terminal = $('terminal-output');
-let lines: string[] = [];
-const history: string[] = []; let historyIndex = 0;
-function print(line: string) { lines.push(line); lines = lines.slice(-200); terminal.textContent = lines.join('\n'); terminal.scrollTop = terminal.scrollHeight; }
-print('PiDP-11 / simulated console\nNo guest operating system or host shell is running here.\nType help for available demonstration commands.\n');
-async function consoleCommand(input: string) {
-  const [name, arg, ...extra] = input.trim().toLowerCase().split(/\s+/);
-  if (extra.length || (name !== 'sr' && arg !== undefined)) return 'Unexpected arguments. Type help.';
-  if (name === 'help') return 'help | status | halt | run | step | sr OCTAL | load | examine | deposit | start | lamps | clear\nMemory: halt → sr 1000 → load → sr 12345 → deposit → examine\nThis is a command demo, not a VT terminal or PDP-11 emulator.';
-  if (name === 'clear') { lines = []; terminal.textContent = ''; return ''; }
-  if (name === 'status') { const s = adapter.snapshot(); return `${s.running ? 'RUNNING' : s.halted ? 'HALTED' : 'STOPPED'} (simulation)  ADDRESS ${octal(s.address)}  DATA ${octal(s.data, 6)}  SR ${octal(s.switchRegister)}\nScratch words: ${s.storedWords} / 1024`; }
-  if (name === 'sr') {
-    if (!arg || !/^[0-7]{1,8}$/.test(arg)) return 'Usage: sr OCTAL (0–17777777)';
-    return (await dispatch({ type: 'register', value: parseInt(arg, 8) })).message;
-  }
-  if (name === 'halt' || name === 'run') {
-    const halted = adapter.snapshot().halted;
-    if (name==='halt' && halted) return `Already ${halted ? 'halted' : 'running'}.`;
-    if(name==='halt')return (await dispatch({type:'halt'})).message;
-    if(halted)await dispatch({type:'halt'});return (await dispatch({type:'continue'})).message;
-  }
-  const map: Record<string, Command> = { step: { type: 'continue' }, load: { type: 'load' }, examine: { type: 'examine' }, deposit: { type: 'deposit' }, start: { type: 'start' }, lamps: { type: 'lamp-test' } };
-  if (name === 'step' && !adapter.snapshot().halted) return 'Use halt before step.';
-  return Object.hasOwn(map, name) ? (await dispatch(map[name])).message : 'Unknown demo command. Type help.';
-}
-$('terminal-form').addEventListener('submit', async e => {
-  e.preventDefault(); const input = $<HTMLInputElement>('terminal-input'); const command = input.value.trim().slice(0, 120);
-  if (!command) return; print(`demo> ${command}`); history.push(command); if (history.length > 50) history.shift(); historyIndex = history.length;
-  const result = await consoleCommand(command); if (result) print(result); input.value = '';
-});
-$('terminal-input').addEventListener('keydown', e => {
-  const event = e as KeyboardEvent;
-  if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-    event.preventDefault(); historyIndex = Math.max(0, Math.min(history.length, historyIndex + (event.key === 'ArrowUp' ? -1 : 1)));
-    $<HTMLInputElement>('terminal-input').value = history[historyIndex] ?? '';
-  }
-});
-$('clear-console').addEventListener('click', () => { lines = []; terminal.textContent = ''; $('terminal-input').focus(); });
-const notes: Record<string, string> = {
-  unix: 'UNIX V6 · Future profile will reference validated boot configuration and exclusive working disk images. A clean guest shutdown is required before stopping the emulator. No image is bundled.',
-  rt: 'RT-11 · Future profile must match the disk controller and image format supported by the selected SIMH configuration. Attach and detach will require a verified safe emulator state. No image is bundled.',
-  rsx: 'RSX-11M+ · Future profile needs a validated guest version, controller configuration and orderly shutdown procedure. Existing installation files will be inventoried only in an authorized integration phase.'
+document.addEventListener("visibilitychange", schedule);
+schedule();
+const clockTick = () => {
+  $("clock").textContent = new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 };
-document.querySelectorAll<HTMLButtonElement>('[data-profile]').forEach(b => b.addEventListener('click', () => { $('profile-notes').textContent = notes[b.dataset.profile!]; }));
-
-if(remote){
-  $('acquire-control').hidden=false;$('release-control').hidden=false;$('offline-link').hidden=false;
-  $<HTMLButtonElement>('reset').disabled=true;
-  $('acquire-control').addEventListener('click',async()=>{const result=await remote!.acquire();notice.textContent=result.message;});
-  $('release-control').addEventListener('click',async()=>{const result=await remote!.release();notice.textContent=result.message;});
-  window.addEventListener('pagehide',()=>remote!.close());
-  window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
-}
+clockTick();
+const clock = setInterval(clockTick, 1000);
+window.addEventListener("pagehide", () => {
+  clearInterval(timer);
+  clearInterval(clock);
+  remote?.close();
+  observed?.close();
+  for (const t of terminals.values()) t.inputOwner = false;
+});
+window.addEventListener("pageshow", (e) => {
+  if (e.persisted) location.reload();
+});
+openPanel();
+if (innerWidth > 900) openTerminal();

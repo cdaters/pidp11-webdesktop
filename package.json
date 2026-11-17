@@ -1,6 +1,6 @@
 {
   "name": "pidp11-web-desktop",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,14 +10,21 @@
     "build": "tsc --noEmit && vite build && node scripts/standalone.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "build:server": "npm run build && node scripts/embed-assets.mjs",
-    "test:integration": "node --test integration/*.test.ts"
+    "test:integration": "node --test integration/*.test.ts",
+    "test:browser": "playwright test",
+    "test:browser-soak": "node scripts/browser-soak.mjs"
   },
   "devDependencies": {
+    "@playwright/test": "1.65.1",
     "@types/node": "26.6.6",
     "typescript": "7.0.2",
     "vite": "8.3.8"
   },
   "engines": {
     "node": ">=22.18.0"
+  },
+  "dependencies": {
+    "@xterm/addon-fit": "0.11.0",
+    "@xterm/xterm": "6.0.0"
   }
 }

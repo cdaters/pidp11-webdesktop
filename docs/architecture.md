@@ -1,6 +1,6 @@
 # Architecture proposal
 
-Original M0 proposal, 2026-11-16, retained as design context. **Current implementation:** the Go mock service and WebSocket adapter are described in [backend milestone 0.2](backend-milestone.md); the updated coexistence decision is in [broker safety](broker-safety.md). M3/M4 now implement original REALCONS and RPC/broker integration solely in a disposable Linux lab; see [M4 architecture and safety limits](lab/M4.md). No Pi access, installed-software inspection, GPIO integration or production deployment has occurred. The broader terminal/media/deployment modules below remain proposals.
+Original M0 proposal, 2026-11-16, retained as design context. **M4.2 update:** [desktop architecture](frontend-m42.md) and [passive-observation topology](lab/M4.2-observation.md) supersede the proposed frontend and Mode B below. Functional media/terminal implementations remain clearly simulated. **Earlier implementation:** the Go mock service and WebSocket adapter are described in [backend milestone 0.2](backend-milestone.md); the updated coexistence decision is in [broker safety](broker-safety.md). M3/M4 now implement original REALCONS and RPC/broker integration solely in a disposable Linux lab; see [M4 architecture and safety limits](lab/M4.md). No Pi access, installed-software inspection, GPIO integration or production deployment has occurred. The broader terminal/media/deployment modules below remain proposals.
 
 ## Recommendation
 

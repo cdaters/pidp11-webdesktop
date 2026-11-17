@@ -1,0 +1,32 @@
+
+Running 21 tests using 1 worker
+
+(node:17650) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (465ms)
+  ✓   2 [chromium] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (225ms)
+  ✓   3 [chromium] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (297ms)
+  ✓   4 [chromium] › browser-tests/desktop.spec.ts:13:1 › working desktop, independent terminals and media workflows (1.3s)
+  ✓   5 [chromium] › browser-tests/desktop.spec.ts:161:1 › mobile touch and desktop screenshots; preferences contain geometry only (341ms)
+  ✓   6 [chromium] › browser-tests/observe.spec.ts:46:1 › read-only observation, unavailable/stale states and spectator reconnect (2.9s)
+  ✓   7 [chromium] › browser-tests/observe.spec.ts:83:1 › touch switch uses the shared panel model on a tablet (294ms)
+(node:17687) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 [firefox] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (972ms)
+  ✓   9 [firefox] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (474ms)
+  ✓  10 [firefox] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (319ms)
+  ✓  11 [firefox] › browser-tests/desktop.spec.ts:13:1 › working desktop, independent terminals and media workflows (2.0s)
+  ✓  12 [firefox] › browser-tests/desktop.spec.ts:161:1 › mobile touch and desktop screenshots; preferences contain geometry only (476ms)
+  ✓  13 [firefox] › browser-tests/observe.spec.ts:46:1 › read-only observation, unavailable/stale states and spectator reconnect (3.0s)
+  ✓  14 [firefox] › browser-tests/observe.spec.ts:83:1 › touch switch uses the shared panel model on a tablet (339ms)
+(node:17709) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  15 [webkit] › browser-tests/artifacts.spec.ts:8:3 › embedded Go: terminal renders under strict CSP and panel remains interactive (669ms)
+  ✓  16 [webkit] › browser-tests/artifacts.spec.ts:8:3 › self-contained file: terminal renders under strict CSP and panel remains interactive (405ms)
+  ✓  17 [webkit] › browser-tests/artifacts.spec.ts:43:1 › fullscreen API enters and exits the selected window (319ms)
+  ✓  18 [webkit] › browser-tests/desktop.spec.ts:13:1 › working desktop, independent terminals and media workflows (1.5s)
+  ✓  19 [webkit] › browser-tests/desktop.spec.ts:161:1 › mobile touch and desktop screenshots; preferences contain geometry only (458ms)
+  ✓  20 [webkit] › browser-tests/observe.spec.ts:46:1 › read-only observation, unavailable/stale states and spectator reconnect (3.1s)
+  ✓  21 [webkit] › browser-tests/observe.spec.ts:83:1 › touch switch uses the shared panel model on a tablet (356ms)
+
+  21 passed (22.2s)

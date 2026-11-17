@@ -1,0 +1,9 @@
+{
+  "source": "User-supplied files in parent project directory; originals retained unchanged",
+  "original_sha256": {
+    "digital-logo-offWht.svg": "f51197843709288fbcba05707fcd96468a81743e8fc82c13de54dd1f5c52297d",
+    "digital-logo-red.svg": "3a31058789214c20c277a4f08e10f312eb9da11ee79c99ba5215341a2f846e44"
+  },
+  "derivation": "Removed XML/DOCTYPE and unused Affinity metadata only; original viewBox, paths, proportions and colors preserved; digital-logo-bezel.svg additionally changes the off-white fill to #686b60 for the embossed panel treatment",
+  "distribution": "Trademark/redistribution clearance remains required before public release"
+}

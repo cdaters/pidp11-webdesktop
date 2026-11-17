@@ -1,0 +1,152 @@
+{
+  "environment": "Mac Apple M4 Pro / network-none OrbStack ARM64; NOT Raspberry Pi",
+  "observer": {
+    "frames": [
+      4481,
+      4480,
+      4480,
+      4481,
+      4481,
+      4480,
+      4481,
+      4481
+    ],
+    "max_capture_to_receive_ms": [
+      60,
+      60,
+      60,
+      58,
+      60,
+      60,
+      57,
+      57
+    ],
+    "observers": 8,
+    "seconds": 300,
+    "total_capture_to_receive_ms": [
+      111838,
+      112227,
+      113480,
+      113786,
+      113865,
+      113911,
+      114454,
+      114239
+    ],
+    "gets_per_second": 44.744654622640006,
+    "consumer": {
+      "cpu_percent_one_core": 1.1004964095774887,
+      "rss_start_bytes": 9768960,
+      "rss_end_bytes": 5967872,
+      "rss_peak_bytes": 9768960,
+      "pss_peak_bytes": 8572928
+    },
+    "observer": {
+      "cpu_percent_one_core": 1.9981823025863161,
+      "rss_start_bytes": 6610944,
+      "rss_end_bytes": 8261632,
+      "rss_peak_bytes": 12144640,
+      "pss_peak_bytes": 12837888
+    },
+    "panel_server": {
+      "cpu_percent_one_core": 1.020702107976704,
+      "rss_start_bytes": 10862592,
+      "rss_end_bytes": 7094272,
+      "rss_peak_bytes": 10993664,
+      "pss_peak_bytes": 12157952
+    }
+  },
+  "baseline_panel_gets_per_second": 44.08705091006669,
+  "browser": {
+    "scope": "Mac Chromium; four independent mock terminals, 300 HELP commands, mock backend observer; not Pi/browser OS RSS",
+    "seconds": 300.014396875,
+    "terminals": 4,
+    "commands": 300,
+    "js_heap_before_gc_bytes": 3701880,
+    "js_heap_after_gc_bytes": 4677772,
+    "js_heap_peak_sample_bytes": 5846984,
+    "renderer_task_cpu_percent": 2.898268,
+    "interaction_to_two_animation_frames_p95_ms": 89.91562500002328,
+    "dom_nodes_start": 1494,
+    "dom_nodes_end": 2252,
+    "errors": []
+  },
+  "instruction_change_percent": {
+    "fenced_disabled": {
+      "wall_seconds": 0.23404899887853325,
+      "process_cpu_seconds": 0.1652892561983199
+    },
+    "observed_disabled": {
+      "wall_seconds": -1.6976843751152493,
+      "process_cpu_seconds": -1.818181818181841
+    }
+  },
+  "artifacts": [
+    {
+      "path": "dist/assets/addon-fit-DIOBYJe3.js",
+      "bytes": 1205,
+      "gzip_bytes": 494,
+      "sha256": "869fc33ba8669f6b9e43d79ce5c227a6071b5b41b6e22db630879e0b68fdde6e"
+    },
+    {
+      "path": "dist/assets/digital-logo-red-CInkNjrr.svg",
+      "bytes": 4303,
+      "gzip_bytes": 1683,
+      "sha256": "6c828604f5e86b92ed5010ac6d815715b2b1675005de87d3b192baeebd818c2e"
+    },
+    {
+      "path": "dist/assets/index-BRmgd9f4.js",
+      "bytes": 60259,
+      "gzip_bytes": 20218,
+      "sha256": "9ad23abb5f75bcfa4a7eb809559206469240c36a5dd5a84d753a68f6bb2cdc5d"
+    },
+    {
+      "path": "dist/assets/index-Dz-6j6eW.css",
+      "bytes": 15450,
+      "gzip_bytes": 4444,
+      "sha256": "ee1a65d9db431b8724b144e2dc6ce33deec6c6738f0244be7fc43477ce10bbfc"
+    },
+    {
+      "path": "dist/assets/terminal-BH05AMbw.js",
+      "bytes": 1825,
+      "gzip_bytes": 1106,
+      "sha256": "fc926dadc8a56fa37a90653ca7f25b4a51757ddf563e3caa9183c63c77415698"
+    },
+    {
+      "path": "dist/assets/xterm-BMsy1fDS.js",
+      "bytes": 330929,
+      "gzip_bytes": 81894,
+      "sha256": "c3486a738e868fc70309aa552bb70fd02630160cf17cb3ac1d7be34904800adc"
+    },
+    {
+      "path": "dist/assets/xterm-BrP-ENHg.css",
+      "bytes": 3939,
+      "gzip_bytes": 1008,
+      "sha256": "0e5386f16cb4be78a2fe911e014a810da76ea2db47d8c8b2a966516b2fd5270b"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 1261,
+      "gzip_bytes": 725,
+      "sha256": "94ddd2661b14266febeb046bcda69d44eaf25e9ed7e30bbaae8f353044d94c03"
+    },
+    {
+      "path": "dist/prototype.html",
+      "bytes": 429255,
+      "gzip_bytes": 114018,
+      "sha256": "c7db51bfdc9148474cd2e5ccf5c72667a92b605f355d1ac5452316763bbffd49"
+    },
+    {
+      "path": "bin/webdesktop-linux-arm64",
+      "bytes": 6488226,
+      "gzip_bytes": 2543624,
+      "sha256": "2098e5b7f876f2170813f90191104b8f9c1f46da7d34318eefc415d279f5368d"
+    },
+    {
+      "path": "bin/observe-lab-linux-arm64",
+      "bytes": 6488226,
+      "gzip_bytes": 2542538,
+      "sha256": "88faf078087393dd1ba854d800312fd7cd07ba8f2b29de92dc03e97fe0844d4a"
+    }
+  ]
+}

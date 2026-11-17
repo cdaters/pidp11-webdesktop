@@ -2,3 +2,6 @@
 licenses/vite.txt -whitespace
 # Unified-diff context prefixes preserve original upstream indentation and blank lines.
 lab/interlock/upstream.patch -whitespace
+# Preserve raw PTY and laboratory console transcripts, including CRLF/spacing.
+docs/lab/m42/*.log -whitespace
+docs/lab/m42/regression-run.txt -whitespace

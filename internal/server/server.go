@@ -16,6 +16,7 @@ import (
 
 	"github.com/coder/websocket"
 	"pidp11.local/webdesktop/internal/panel"
+	"pidp11.local/webdesktop/internal/web"
 )
 
 type Hub interface {
@@ -62,7 +63,7 @@ func (s *Server) Handler() http.Handler {
 		json.NewEncoder(w).Encode(s.Hub.Snapshot())
 	})
 	mux.HandleFunc("GET /api/v1/ws", s.stream)
-	mux.Handle("GET /", http.FileServer(http.FS(s.assets)))
+	mux.Handle("GET /", web.ServeAssets(s.assets))
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if !loopbackHost(r.Host) {
 			http.Error(w, "Loopback IP Host required", http.StatusForbidden)

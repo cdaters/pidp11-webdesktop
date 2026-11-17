@@ -1,0 +1,15 @@
+?   	pidp11.local/webdesktop/cmd/lab-browser-probe	[no test files]
+?   	pidp11.local/webdesktop/cmd/mockbench	[no test files]
+?   	pidp11.local/webdesktop/cmd/observe-lab	[no test files]
+?   	pidp11.local/webdesktop/cmd/observe-probe	[no test files]
+?   	pidp11.local/webdesktop/cmd/realcons-lab	[no test files]
+?   	pidp11.local/webdesktop/cmd/webdesktop	[no test files]
+ok  	pidp11.local/webdesktop/internal/access	(cached)
+ok  	pidp11.local/webdesktop/internal/blinkenbone	(cached)
+ok  	pidp11.local/webdesktop/internal/broker	(cached)
+ok  	pidp11.local/webdesktop/internal/consumer	(cached)
+ok  	pidp11.local/webdesktop/internal/labrpc	(cached)
+ok  	pidp11.local/webdesktop/internal/observe	2.299s
+ok  	pidp11.local/webdesktop/internal/panel	(cached)
+ok  	pidp11.local/webdesktop/internal/server	2.550s
+ok  	pidp11.local/webdesktop/internal/web	1.359s

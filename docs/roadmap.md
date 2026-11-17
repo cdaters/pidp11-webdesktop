@@ -35,7 +35,8 @@ Measurement plan after authorization: record exact OS/kernel/toolchain, binary h
 | M3: isolated emulator integration — laboratory baseline passed | Disposable Linux SIMH/REALCONS + virtual panel RPC server | Control parity including START edges; UDP/TCP and rpcbind behavior verified; no production Pi |
 | M4: coexistence laboratory — implemented; safety limitation demonstrated | Broker and physical-panel stand-in, ownership/recovery tests | Single physical client; spectators; override and stale state tests; crash rollback and registration plan; decide broker vs daemon hook |
 | M4.1: consumer interlock and independent access — laboratory implementation | Optional consumer authority/watchdog, original regression, rollback, separate terminal domains | Finite tests and limits in [M4.1](lab/M4.1.md); no unconditional crash-safe guarantee |
-| M4.2: passive observation and resilience — recommended next | Nonblocking publisher on original path, authentication design, bounded RPC recovery, longer soaks | Observe-only access cannot affect controls or conventional access; reviewed recovery boundary |
+| M4.2: desktop and passive-observation lab — delivered | Complete local workspace, optional nonblocking publisher, lab capability boundaries, bounded-call experiment, longer soaks | [Evidence and limits](lab/M4.2.md); no Pi or production control claim |
+| M4.3: recommended offline hardening | Terminal conformance fixtures, observation process identities, TLS/session UX, independent recovery budgets, longer resource testing | Production audit package ready for separate authorization |
 | M5: authorized Pi audit and read-only pilot | Reconcile installed source/binaries/services/console configuration after installation work ends | Explicit user authorization; backup/rollback reviewed; no polling assumed side-effect free; incremental benchmarks pass |
 | M6: authorized control, terminal and media | Owned controls; real terminal broker; catalog and safe attach/detach | Guest-safe lifecycle, no terminal takeover, image exclusivity, auth/origin checks, end-to-end recovery tests |
 | M7: packaging and release | Reproducible builds, service configuration, notices and operator docs | Source/dependency license inventory, measured resource report, target acceptance and separately authorized release |
@@ -65,3 +66,9 @@ Completion of the other Codex session does not automatically authorize M5. The c
 | Browser compatibility | SVG/keyboard behavior and terminal performance vary | Test Chromium, Firefox and Safari before release; M0 QA records actual browser tested |
 
 See [validation](validation.md) for what was actually verified in this delivery.
+
+## M4.2 risk update and next decisions
+
+The [M4.2 report](lab/M4.2.md) records current measurements separately from historical M4.1 evidence. Passive observation is now implemented on the original path and has no broker/RPC-client dependency. Broker idle CPU still needs work: retain its physical freshness and watchdog timing, profile required RPC work/allocations, and avoid claiming savings from merely changing a language or slowing safety polling. Longer alternating instruction samples reduce the earlier short-benchmark concern but do not establish guest throughput on a Pi.
+
+Recommended next is **M4.3 offline hardening**, with no production authorization implied: validate DEC terminal profiles and byte-stream flow control; define TLS/session provisioning/logout/revocation UX; isolate publisher identity and runtime paths; bound discovery plus recovery as an end-to-end protocol; run 30-minute multi-client workloads and repeated CPU trials. Native Safari and real touch/assistive-technology testing remain desirable. Then report the readiness of an explicitly authorized read-only Pi audit/pilot. Remote control, real media modification, physical POWER/LOCK behavior and guest-safe stop/recovery remain later gates.

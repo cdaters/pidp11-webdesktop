@@ -1,0 +1,19 @@
+{
+  "recorded_utc": "2026-11-17T02:50:05.066044+00:00",
+  "host": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "go": "go version go1.26.0 darwin/arm64",
+  "node": "v26.9.0",
+  "base_commit": "238e45f97e829dd1636ae4b42eae05c1c14a3ce7",
+  "note": "Evidence captured before the M4.2 checkpoint commit; final source hashes below. Lab regression binary hashes refer to their specific build, not subsequent documentation-only commits. Standalone packaging uses a build-specific style nonce, so HTML hashes vary per build.",
+  "source_sha256": {
+    "lab/observe/publisher.c": "04fa71441a56ba10ef6cd34e51db0691a2d69eaecabddb2e5629790ae350913a",
+    "lab/observe/apply.py": "4c98729ce862f98162a0c05ea945a4e4e6c912b163c5f35bf6614437b0b21552",
+    "lab/recovery/apply.py": "99256f2491324e25125cc98ca45f6f0e8dff454c1ddfcfee36680130f5307105",
+    "lab/m42.py": "62d77a3def5349067b3aec160513495a2db3730b5ca87bd880709135dee7e8c0",
+    "lab/recovery.py": "96bcc60e6622ce4d0d6c906211a7f8416e11d5c63ad639f482e0b3a9cc4ab39c",
+    "lab/long-bench.py": "bdac8b9e346728a2d822a68cb6ede0300999c6ce50656937832dd3d66904791c",
+    "internal/observe/observe.go": "be5d5378967fb405ece8080eb41a9165a27121d3c6ab4767ac884732e61054bf",
+    "internal/observe/http.go": "d0542aa48a072163f033cb9d86291152715e86b83cc0d4a2e9e1d93bc29b8f68",
+    "internal/access/access.go": "e0551bdeac3d3798bda264c7c69e0a60a946b695e930f97302327d12e4474b23"
+  }
+}

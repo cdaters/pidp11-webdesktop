@@ -13,3 +13,9 @@ WORKDIR /tmp
 COPY lab/interlock /opt/interlock
 RUN --network=none cp -a /upstream /fenced && cp /opt/interlock/wd_fence.* '/fenced/src/02.3_simh/4.x+realcons/src/' && python3 /opt/interlock/apply.py '/fenced/src/02.3_simh/4.x+realcons/src' && cd '/fenced/src/02.3_simh/4.x+realcons/src' && make -B -f quickmake NETWORK_OPT= DISPLAY_OPT=-DUSE_DISPLAY LDFLAGS='-lrt -lm -lpthread -ldl -lreadline -ltirpc' BIN=/opt/fenced/
 RUN --network=none gcc -g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer /opt/interlock/fence-unit.c -lpthread -o /opt/lab/fence-unit && /opt/lab/fence-unit
+# M4.2 observe-only binary: original CPU and control path, nonblocking state copy.
+COPY lab/observe /opt/observe
+RUN --network=none cp -a /upstream /observed && cp /opt/observe/publisher.c '/observed/src/02.3_simh/4.x+realcons/src/REALCONS/' && python3 /opt/observe/apply.py '/observed/src/02.3_simh/4.x+realcons/src' && cd '/observed/src/02.3_simh/4.x+realcons/src' && make -B -f quickmake NETWORK_OPT= DISPLAY_OPT=-DUSE_DISPLAY LDFLAGS='-lrt -lm -lpthread -ldl -lreadline -ltirpc' BIN=/opt/observed/
+# Separate recovery experiment; original, fenced and observation binaries remain intact.
+COPY lab/recovery /opt/recovery
+RUN --network=none cp -a /fenced /bounded && python3 /opt/recovery/apply.py /bounded && cd '/bounded/src/02.3_simh/4.x+realcons/src' && make -B -f quickmake NETWORK_OPT= DISPLAY_OPT=-DUSE_DISPLAY LDFLAGS='-lrt -lm -lpthread -ldl -lreadline -ltirpc' BIN=/opt/bounded/

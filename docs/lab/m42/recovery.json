@@ -1,0 +1,27 @@
+{
+  "scope": "Optional isolated per-call timeout experiment; no production safety claim",
+  "cases": {
+    "lost_reply_broker_crash": "passed: bounded calls return, consumer watchdog confirms quiescence; no new execution command",
+    "restart": "passed: broker restart leaves consumer disarmed/quiescent; no automatic rearm/resume"
+  },
+  "confirmed_quiescence_ms": 308.5213769954862,
+  "status_after_loss": {
+    "ok": 1,
+    "generation": 5534517009103204453,
+    "armed": 0,
+    "quiescent": 1,
+    "running": 0,
+    "waiting": 0,
+    "accepted": 1,
+    "rejected": 0,
+    "expiries": 1
+  },
+  "limits": [
+    "200 ms per call is not an end-to-end stop deadline",
+    "clnt_create/rpcbind discovery remains separately blocking",
+    "scheduler/process stalls and physical GPIO unproven",
+    "no cancellation or rollback of commands already committed",
+    "UDP only; TCP timeout/reconnect recovery not validated"
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,15 @@
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/labrpc
+cpu: Apple M4 Pro
+BenchmarkPhysicalRead/reuse-12         	   38232	     30522 ns/op	   12275 B/op	     151 allocs/op
+BenchmarkPhysicalRead/prior-allocation-12         	   34408	     34845 ns/op	   77862 B/op	     152 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/labrpc	3.314s
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/observe
+cpu: Apple M4 Pro
+BenchmarkSnapshotJSON-12    	  445585	      2679 ns/op	    4218 B/op	      71 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/observe	1.406s

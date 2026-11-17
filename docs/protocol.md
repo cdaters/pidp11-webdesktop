@@ -70,3 +70,7 @@ Test in disposable local fixtures first: generate canonical C encodings, compare
 ## M4.1 compatibility boundary
 
 See [ADR 0004](decisions/0004-independent-access.md) and the [M4.1 consumer interlock](lab/M4.1-interlock.md). The optional lab hook keeps the original BlinkenBone wire protocol unchanged and validates consumer-owned generations before controller service and command dispatch. Mode A remains independent; passive Mode B is the first future live target. Broker-only M4 safety claims are not strengthened retroactively. No production authorization is implied.
+
+## M4.2 passive publication and timeout experiment
+
+[Observation contract](lab/M4.2-observation.md): a nonblocking copy of an existing REALCONS cycle, with no extra RPC, no wire-protocol extension and no registration change. Control feedback outputs retain their full bitmaps. A separate optional UDP client-handle timeout experiment overrides the generated 25-second per-call timeout; it does not bound discovery or cancel committed commands. Original M3 UDP/TCP and M4/M4.1 regressions remain required.

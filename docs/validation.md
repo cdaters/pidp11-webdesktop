@@ -1,6 +1,6 @@
 # Validation record
 
-For current work, see [M3/M4 below](#m3m4-isolated-realcons-and-coexistence-lab). The [milestone 0.2 section](#milestone-02-mock-backend) remains its historical acceptance record. The first section is the historical M0 record; its unimplemented items describe that checkpoint only.
+For current work, see [M4.2 findings and validation](lab/M4.2.md). M3/M4/M4.1 and the sections below remain historical records. The [milestone 0.2 section](#milestone-02-mock-backend) remains its historical acceptance record. The first section is the historical M0 record; its unimplemented items describe that checkpoint only.
 
 Date: 2026-11-16. Environment: local Mac; Node v26.9.0, npm 11.19.1. Locked development dependencies: TypeScript 7.0.2, Vite 8.3.8, @types/node 26.6.6. No production npm dependencies.
 
@@ -156,3 +156,8 @@ The complete `lab/verify-m41.sh` sequence passed: original M3/M4 (including the 
 M4.1 reports about 11.20 MiB active broker RSS, 3.33% active and 2.40% idle one-core CPU, and 1.14 ms p95 driver-inclusive acknowledgment latency. Idle CPU still misses the <1% target. A small disabled-patch CPU loop test was 4.84% slower by median wall time; the <3% emulator impact target remains open. The responsive watchdog stopped managed execution in about 351.59 ms in one test. With a lost RPC response it revoked authority but did not acknowledge quiescence. These observations do not establish a hard stop deadline, Pi performance, real serial/Screen/SSH access, guest login support, or physical GPIO safety.
 
 Full evidence, scope and reproducible commands: [M4.1 report](lab/M4.1.md). Original M3/M4 artifacts above remain historical records, not replaced by these reruns.
+
+
+## M4.2 desktop and passive observation
+
+See [M4.2 report](lab/M4.2.md), [raw evidence](lab/m42/), [frontend architecture](frontend-m42.md), [observation/security contract](lab/M4.2-observation.md) and [screenshots](screenshots/m42-desktop.png). This milestone adds 17 Node tests plus the transport fixture, passing Go race tests, 21 three-engine browser cases, bounded observation fuzzing, original C/M4/M4.1 reruns, and five-minute observer/terminal workloads. Direct standalone `file://` and embedded Go artifacts are exercised. Native Safari was unavailable because the Mac was locked; WebKit tests are recorded separately. No Pi access or production claims are made.

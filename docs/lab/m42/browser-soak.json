@@ -1,0 +1,14 @@
+{
+  "scope": "Mac Chromium; four independent mock terminals, 300 HELP commands, mock backend observer; not Pi/browser OS RSS",
+  "seconds": 300.014396875,
+  "terminals": 4,
+  "commands": 300,
+  "js_heap_before_gc_bytes": 3701880,
+  "js_heap_after_gc_bytes": 4677772,
+  "js_heap_peak_sample_bytes": 5846984,
+  "renderer_task_cpu_percent": 2.898268,
+  "interaction_to_two_animation_frames_p95_ms": 89.91562500002328,
+  "dom_nodes_start": 1494,
+  "dom_nodes_end": 2252,
+  "errors": []
+}

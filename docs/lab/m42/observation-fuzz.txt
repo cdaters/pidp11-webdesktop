@@ -1,0 +1,12 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/2 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 2/2 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 50188 (16723/sec), new interesting: 36 (total: 38)
+fuzz: elapsed: 6s, execs: 358119 (102644/sec), new interesting: 80 (total: 82)
+fuzz: elapsed: 9s, execs: 482040 (41307/sec), new interesting: 110 (total: 112)
+fuzz: elapsed: 12s, execs: 648808 (55591/sec), new interesting: 122 (total: 124)
+fuzz: elapsed: 15s, execs: 873429 (74872/sec), new interesting: 151 (total: 153)
+fuzz: elapsed: 18s, execs: 934660 (20410/sec), new interesting: 158 (total: 160)
+fuzz: elapsed: 21s, execs: 934660 (0/sec), new interesting: 158 (total: 160)
+fuzz: elapsed: 21s, execs: 934660 (0/sec), new interesting: 158 (total: 160)
+PASS
+ok  	pidp11.local/webdesktop/internal/observe	21.335s

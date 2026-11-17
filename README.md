@@ -1,8 +1,18 @@
 # PiDP-11 Web Desktop
 
-A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M4.1: optional consumer fencing and independent-access laboratory.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
+A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M4.2: complete local desktop and passive-observation laboratory.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
 
-All development and testing is local to the Mac. The Raspberry Pi was not contacted or modified. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation, guest OS images or media management is used.
+All development and testing is local to the Mac. The Raspberry Pi was not contacted or modified. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation or guest OS images are used. Peripheral and system-management workflows are clearly labeled RAM-only prototypes.
+
+## M4.2 delivered
+
+- Movable/resizable/minimizable windows, taskbar, fullscreen, keyboard/touch controls and geometry-only preferences.
+- Calibrated 1200×688 SVG PDP-11/70 panel with shared desktop/full-panel modes and supplied DIGITAL logos.
+- Four independent xterm-based mock terminals; working disk, magnetic tape, paper tape, printer, OS-profile and diagnostics applications.
+- Passive C publisher and authenticated Go read-only observation service, isolated from RPC/control/terminal input.
+- Original M4/M4.1 regressions retained; optional bounded-RPC recovery experiment and five-minute observer/browser workloads.
+
+See the [M4.2 findings and risks](docs/lab/M4.2.md), [desktop architecture](docs/frontend-m42.md), [observation/security contract](docs/lab/M4.2-observation.md), [IMSAI inventory](docs/research/imsai-inventory.md) and [parity matrix](docs/research/imsai-parity.md). No production integration is authorized or implied.
 
 ## M4.1 findings
 
@@ -26,7 +36,7 @@ python3 lab/save-results.py
 
 The first command fetches the pinned public source and Debian build packages. Runtime tests have **only loopback networking**, no published ports, no privileged container and no physical devices. They do not contact the Pi. Containers are test infrastructure, not deployment dependencies. Test results go to `.research/lab-results`; the last command records a successful run in `docs/lab`. Use `--m3-only` or `--m4-only` with `lab/run.sh` for focused runs; save the combined results only after a complete successful run.
 
-Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, and `checkpoint/m4.1`. Golden-backup completion does not authorize production integration.
+Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, and `checkpoint/m4.2`. Golden-backup completion does not authorize production integration.
 
 ## Build and run on the Mac
 
@@ -38,28 +48,28 @@ sh scripts/build.sh
 ./bin/webdesktop-macos
 ```
 
-Open [the shared mock desktop](http://127.0.0.1:8080/?backend=mock). Click **Acquire mock control**. A second browser tab observes the same state; only one can own controls. Closing the owner halts/disarms the mock. Reconnecting never automatically acquires control or replays commands. Stop the service with Ctrl-C.
+Open [the shared mock desktop](http://127.0.0.1:8080/?backend=mock). Click **Acquire panel**. A second browser tab observes the same state; only one can own controls. Closing the owner halts/disarms the mock. Reconnecting never automatically acquires control or replays commands. Stop the service with Ctrl-C.
 
 The build creates a native Mac executable and `bin/webdesktop-linux-arm64`, a statically linked ARM64 ELF executable with embedded browser assets. The ARM64 build has **not** been deployed or executed on the Pi. No Node runtime, container, database or asset directory is required by the executable. It permits only literal loopback IP listeners, with no DNS lookup or remote connection setting.
 
-For an independent browser-only demo, use the **Open offline demo** link or generated `dist/prototype.html`. The standalone file embeds JS/CSS/SVG and prohibits network connections through CSP. The original accepted prototype is preserved unchanged at [`checkpoints/m0/prototype.html`](checkpoints/m0/prototype.html), with Git tag `checkpoint/m0` identifying its source. Current `dist/` artifacts are regenerable and ignored by Git.
+For an independent browser-only demo, open the desktop without `?backend=mock` or use generated `dist/prototype.html`. The standalone file embeds JS/CSS/SVG and prohibits network connections through CSP. The original accepted prototype is preserved unchanged at [`checkpoints/m0/prototype.html`](checkpoints/m0/prototype.html), with Git tag `checkpoint/m0` identifying its source. Current `dist/` artifacts are regenerable and ignored by Git.
 
-For frontend development: `npm run dev` starts loopback Vite. There are zero production npm dependencies. Go uses its standard library plus the small ISC-licensed `coder/websocket` package.
+For frontend development: `npm run dev` starts loopback Vite. Two pinned, lazy-loaded browser runtime packages provide xterm.js and its fit addon. Go uses its standard library plus the small ISC-licensed `coder/websocket` package.
 
 ## Try the panel
 
-1. Acquire mock control; the panel starts halted.
+1. Acquire panel; the panel starts halted.
 2. Set SR to octal `1000`, then press **LOAD ADRS**.
 3. Set SR to `12345`, press **DEP**, then **EXAM**. ADDRESS stays `00001000`, DATA is `012345`.
 4. Consecutive EXAM or DEP operations advance one word; changing from EXAM to DEP or back keeps the address.
 5. Select **ENABLE**, then **CONT** to animate. ENABLE alone leaves the model stopped. HALT stops; CONT while halted advances one demonstration word.
 6. START uses the previously loaded address, rather than the current SR. Lamp test is an automatically returning pulse. DEP/lamp test raise their paddles; other momentaries depress them.
 
-All 22 SR switches support click, Tab and Space/Enter. Direct entry accepts 22-bit octal values. Selector ordinals follow the inspected original interface; their displayed values remain illustrative. CPU/MMU, bus-cycle execution, special address boundaries and operating systems are not emulated. POWER/LOCK is inert. The console provides bounded demonstration commands against the same mock state, not a shell or VT terminal. Library profiles remain planning notes.
+All 22 SR switches support click, Tab and Space/Enter. Direct entry accepts 22-bit octal values. Selector ordinals follow the inspected original interface; their displayed values remain illustrative. CPU/MMU, bus-cycle execution, special address boundaries and operating systems are not emulated. POWER/LOCK is inert. Each terminal has its own bounded mock command/session model and mature ANSI renderer; its keyboard never controls the panel. Device and system profiles have working simulated workflows, with no guest OS or host shell.
 
 On narrow screens, swipe the SVG sideways; the rest of the page fits the viewport. Browser-local animation pauses when hidden. Remote state comes from the server, and background timer throttling can safely expire a control lease.
 
-![Verified Go-backed mock panel](docs/screenshots/panel-mock-desktop.jpg)
+![Verified M4.2 desktop](docs/screenshots/m42-desktop.png)
 
 ## Architecture, findings and validation
 
@@ -79,6 +89,8 @@ The key protocol finding remains: SIMH/REALCONS is the RPC **client**; the panel
 npm run check
 npm test
 npm run test:integration
+# Browser suite requires Vite on 5173 and the built mock service on 8080:
+npm run test:browser
 go test -race ./...
 go test ./internal/blinkenbone -run='^$' -fuzz=FuzzDecode -fuzztime=10s -parallel=2
 ```
@@ -109,6 +121,8 @@ internal/server/       HTTP/WS transport and real-socket tests
 internal/blinkenbone/  Bounded XDR/RPC codecs and golden vectors
 internal/labrpc/       Experimental loopback RPC transport and panel profile
 internal/broker/       Poll-fenced laboratory arbitration
+internal/observe/      Passive snapshot receiver and read-only streaming
+internal/access/       Independent capabilities and bounded lab sessions
 lab/                   Isolated Linux build, C/PTY fixtures and test harness
 internal/web/          Embedded compiled assets
 src/                   TypeScript local/remote adapters and original SVG

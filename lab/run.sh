@@ -6,8 +6,13 @@ npm run build:server
 CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath -ldflags='-s -w' -o bin/realcons-lab-linux-arm64 ./cmd/realcons-lab
 CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath -ldflags='-s -w' -o bin/lab-browser-probe-linux-arm64 ./cmd/lab-browser-probe
 CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go test -c -o bin/consumer-test-linux-arm64 ./internal/consumer
+CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath -ldflags='-s -w' -o bin/observe-lab-linux-arm64 ./cmd/observe-lab
+CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath -ldflags='-s -w' -o bin/observe-probe-linux-arm64 ./cmd/observe-probe
 python3 lab/build-metadata.py
 script=integration.py
+if [ "${1:-}" = "--instruction-bench" ]; then script=long-bench.py; shift; fi
+if [ "${1:-}" = "--recovery" ]; then script=recovery.py; shift; fi
+if [ "${1:-}" = "--m42" ]; then script=m42.py; shift; fi
 if [ "${1:-}" = "--m41" ]; then script=m41.py; shift; fi
 if [ "${1:-}" = "--terminal" ]; then script=terminal.py; shift; fi
 if [ "${1:-}" = "--cpu-bench" ]; then script=cpu-bench.py; shift; fi

@@ -7,3 +7,4 @@ coverage/
 internal/web/static/*
 !internal/web/static/README.txt
 .research-fixtures/
+__pycache__/
