@@ -13,14 +13,28 @@ import (
 	"os"
 	"os/signal"
 	"pidp11.local/webdesktop/internal/broker"
+	"pidp11.local/webdesktop/internal/consumer"
 	"pidp11.local/webdesktop/internal/labrpc"
 	"pidp11.local/webdesktop/internal/server"
 	"pidp11.local/webdesktop/internal/web"
 	"runtime"
+	"sync/atomic"
 	"syscall"
 	"time"
 )
 
+// Heartbeat suppression is a lab-only failure injector, never a service feature.
+type labFence struct {
+	*consumer.Client
+	paused atomic.Bool
+}
+
+func (f *labFence) Heartbeat() error {
+	if f.paused.Load() {
+		return nil
+	}
+	return f.Client.Heartbeat()
+}
 func isolated() error {
 	if runtime.GOOS != "linux" || os.Getenv("PIDP11_ISOLATED_LAB") != "1" {
 		return fmt.Errorf("requires disposable Linux lab")
@@ -38,6 +52,7 @@ func isolated() error {
 }
 func main() {
 	role := flag.String("role", "direct", "direct, physical or broker (isolated lab only)")
+	fencePath := flag.String("consumer-fence", "", "optional isolated consumer Unix socket")
 	registerProbe := flag.Uint("register-probe", 0, "lab registration collision test only")
 	flag.Parse()
 	if e := isolated(); e != nil {
@@ -63,6 +78,12 @@ func main() {
 	var arbiter *broker.Broker
 	if *role == "broker" {
 		arbiter = broker.New()
+		if *fencePath != "" {
+			f := &labFence{Client: &consumer.Client{Path: *fencePath}}
+			arbiter = broker.NewFenced(f)
+			mux.HandleFunc("POST /pause-heartbeat", func(w http.ResponseWriter, r *http.Request) { f.paused.Store(true); w.Write([]byte("{}")) })
+			mux.HandleFunc("POST /resume-heartbeat", func(w http.ResponseWriter, r *http.Request) { f.paused.Store(false); w.Write([]byte("{}")) })
+		}
 		p.ReadInputs = arbiter.Inputs
 		p.WriteOutputs = arbiter.Lamps
 		browser := server.NewWithHub(web.Assets(), broker.NewAdapter(arbiter))
@@ -152,6 +173,7 @@ func main() {
 		}
 		json.NewEncoder(w).Encode(data)
 	})
+	mux.HandleFunc("POST /hold-load", func(w http.ResponseWriter, r *http.Request) { s.HoldLoad.Store(true); w.Write([]byte("{}")) })
 	mux.HandleFunc("POST /hold-start-release", func(w http.ResponseWriter, r *http.Request) { s.HoldStartRelease.Store(true); w.Write([]byte("{}")) })
 	mux.HandleFunc("POST /hold-next-reply", func(w http.ResponseWriter, r *http.Request) { s.HoldNext.Store(true); w.Write([]byte("{}")) })
 	mux.HandleFunc("POST /release-reply", func(w http.ResponseWriter, r *http.Request) { s.ReleaseHeld(); w.Write([]byte("{}")) })

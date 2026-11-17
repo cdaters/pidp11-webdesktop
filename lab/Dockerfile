@@ -9,3 +9,7 @@ RUN --network=none gcc -O2 -I/usr/include/tirpc -I/upstream/src/07.0_blinkenligh
 COPY lab/ptyshim.c /opt/lab/ptyshim.c
 RUN --network=none gcc -shared -fPIC -O2 /opt/lab/ptyshim.c -ldl -o /opt/lab/ptyshim.so
 WORKDIR /tmp
+# Preserve /upstream and original binary; apply optional hooks only to a copy.
+COPY lab/interlock /opt/interlock
+RUN --network=none cp -a /upstream /fenced && cp /opt/interlock/wd_fence.* '/fenced/src/02.3_simh/4.x+realcons/src/' && python3 /opt/interlock/apply.py '/fenced/src/02.3_simh/4.x+realcons/src' && cd '/fenced/src/02.3_simh/4.x+realcons/src' && make -B -f quickmake NETWORK_OPT= DISPLAY_OPT=-DUSE_DISPLAY LDFLAGS='-lrt -lm -lpthread -ldl -lreadline -ltirpc' BIN=/opt/fenced/
+RUN --network=none gcc -g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer /opt/interlock/fence-unit.c -lpthread -o /opt/lab/fence-unit && /opt/lab/fence-unit

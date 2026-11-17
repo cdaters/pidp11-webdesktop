@@ -1,2 +1,4 @@
 # Preserve the upstream combined license notice byte-for-byte, including its formatting.
 licenses/vite.txt -whitespace
+# Unified-diff context prefixes preserve original upstream indentation and blank lines.
+lab/interlock/upstream.patch -whitespace

@@ -1,6 +1,7 @@
 package broker
 
 import (
+	"fmt"
 	"testing"
 	"time"
 )
@@ -156,5 +157,80 @@ func TestGrantRequiresActualLampBaselineAndNeutralSamples(t *testing.T) {
 	b.Physical(physical, time.Now())
 	if e := b.Grant("a", time.Now()); e != nil {
 		t.Fatal(e)
+	}
+}
+
+type fenceFixture struct {
+	ready, armed, fail bool
+	revokes            int
+}
+
+func (f *fenceFixture) Ready() bool { return f.ready && !f.armed && !f.fail }
+func (f *fenceFixture) Arm() error {
+	if !f.Ready() {
+		return fmt.Errorf("inhibited")
+	}
+	f.armed = true
+	return nil
+}
+func (f *fenceFixture) Revoke() error {
+	f.revokes++
+	f.armed = false
+	if f.fail {
+		return fmt.Errorf("unavailable")
+	}
+	return nil
+}
+func (f *fenceFixture) Heartbeat() error {
+	if f.fail || !f.armed {
+		return fmt.Errorf("expired")
+	}
+	return nil
+}
+func TestConsumerQuiescenceAndUnavailableAuthority(t *testing.T) {
+	b := ready(t)
+	f := &fenceFixture{}
+	b.authority = f
+	b.Revoke("test")
+	for i := 0; i < 4; i++ {
+		b.Inputs()
+	}
+	if b.View().Phase == "ready" {
+		t.Fatal("lamp HALT mistaken for consumer ack")
+	}
+	f.ready = true
+	b.Inputs()
+	if e := b.Grant("a", time.Now()); e != nil {
+		t.Fatal(e)
+	}
+	if !f.armed {
+		t.Fatal("grant without authority")
+	}
+	f.fail = true
+	b.Tick(time.Now().Add(110 * time.Millisecond))
+	if b.View().Owner != "" || b.View().Phase != "fault" || f.revokes < 2 {
+		t.Fatal("authority loss did not fault", b.View())
+	}
+	f.fail = false
+	b.Inputs()
+	if e := b.Grant("a", time.Now()); e == nil {
+		t.Fatal("automatic recovery")
+	}
+	b.Revoke("explicit rearm")
+	for i := 0; i < 3; i++ {
+		b.Inputs()
+	}
+	if e := b.Grant("a", time.Now()); e != nil {
+		t.Fatal(e)
+	}
+}
+func TestExpiredRenewCannotReviveLease(t *testing.T) {
+	b := ready(t)
+	s := b.View()
+	if b.Renew("a", s.Epoch, time.Now().Add(Lease)) == nil {
+		t.Fatal("expired renewal revived")
+	}
+	if b.View().Owner != "" {
+		t.Fatal("owner retained")
 	}
 }

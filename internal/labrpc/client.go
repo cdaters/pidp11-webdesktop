@@ -14,6 +14,7 @@ type Client struct {
 	conn     net.Conn
 	xid      uint32
 	network  string
+	buffer   []byte
 	Controls []bb.Control
 }
 
@@ -29,7 +30,7 @@ func Dial(network, address string) (*Client, error) {
 	if e != nil {
 		return nil, e
 	}
-	return &Client{conn: c, network: network}, nil
+	return &Client{conn: c, network: network, buffer: make([]byte, bb.MaxMessage)}, nil
 }
 func (c *Client) Close() { c.conn.Close() }
 func (c *Client) Call(proc uint32, p bb.Payload) (bb.Payload, error) {
@@ -50,7 +51,7 @@ func (c *Client) Call(proc uint32, p bb.Payload) (bb.Payload, error) {
 	if c.network == "tcp" {
 		b, e = bb.ReadRecord(c.conn)
 	} else {
-		b = make([]byte, bb.MaxMessage)
+		b = c.buffer
 		var n int
 		n, e = c.conn.Read(b)
 		b = b[:n]

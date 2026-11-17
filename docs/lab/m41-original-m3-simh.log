@@ -1,0 +1,38 @@
+
+PDP-11 simulator V4.0-0 Current  REALCONS build Nov 17 2026
+sim> set cpu 11/70
+Disabling XQ
+sim> set cpu 256K
+sim> set realcons host=127.0.0.1
+sim> set realcons panel=11/70
+sim> set realcons interval=20
+sim> set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+sim> show realcons
+REALCONS 11/70, host="127.0.0.1", host panel="11/70", interval = 20 msec, connected, boot image filename not set, nodebug,
+panel BlinkenBoards driver hardware state = ACTIVE,
+server info=
+PiDP11 isolated Go laboratory; no GPIO
+sim> deposit 1000 12345
+sim> examine 1000
+1000:	012345
+sim> examine 1000
+1000:	012345
+sim> deposit 2000 5200
+sim> deposit 2002 776
+sim> reset all
+sim> examine pc
+PC:	002000
+sim> step 1
+
+Simulation stopped, PC: 002002 (BR 2000)
+sim> examine pc
+PC:	002002
+sim> cont
+
+Simulation stopped, PC: 002000 (INC R0)
+sim> run 2000
+
+Simulation stopped, PC: 002002 (BR 2000)
+sim>

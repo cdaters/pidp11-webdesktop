@@ -71,3 +71,7 @@ Rollback means a tested, operator-controlled return to the original physical-onl
 The Go mock proves one-owner arbitration, revisions independent of lamp frames, stale-epoch rejection, bounded duplicate handling, fresh spectator sessions on reconnect, priority HALT, persistent fixture interlocks, and cancellation of a pending START under disconnect/release/lease-expiry/interlock. In that model HALT and cancellation are atomic domain operations. **Those tests do not prove the multi-poll HALT-before-release sequence against REALCONS.**
 
 Next safe work is a disposable physical-panel stand-in and poll-consumption scheduler using the committed wire fixtures: delayed/skipped/duplicate polls, simultaneous physical changes, every latch mismatch, held-key handoff, START loss at each edge, physical/consumer restart, partial schema enumeration, stale outputs and recovery. Then test an isolated original REALCONS build, with no GPIO and no access to the production Pi. Live work remains gated on the backup and explicit authorization.
+
+## M4.1 consumer authority
+
+See [ADR 0004](decisions/0004-independent-access.md) and the [M4.1 consumer interlock](lab/M4.1-interlock.md). The optional lab hook keeps the original BlinkenBone wire protocol unchanged and validates consumer-owned generations before controller service and command dispatch. Mode A remains independent; passive Mode B is the first future live target. Broker-only M4 safety claims are not strengthened retroactively. No production authorization is implied.

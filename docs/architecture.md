@@ -102,3 +102,7 @@ Media service: immutable base images plus per-session working copies where suppo
 ## Deployment direction, deferred
 
 One unprivileged Go process, embedded assets, loopback RPC/console endpoints, no GPIO access, no root web server, no build toolchain on the Pi. Authenticate browser sessions before any eventual remote control; validate WebSocket Origin, protect REST mutations against CSRF, and restrict RPC to the private integration boundary. No arbitrary shell, remote reboot endpoint, or generalized configuration editor. TLS/access policy is a later deployment decision. These are architectural requirements, not features of this static prototype.
+
+## M4.1 update
+
+See [ADR 0004](decisions/0004-independent-access.md) and the [M4.1 consumer interlock](lab/M4.1-interlock.md). The optional lab hook keeps the original BlinkenBone wire protocol unchanged and validates consumer-owned generations before controller service and command dispatch. Mode A remains independent; passive Mode B is the first future live target. Broker-only M4 safety claims are not strengthened retroactively. No production authorization is implied.

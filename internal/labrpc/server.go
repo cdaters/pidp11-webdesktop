@@ -20,6 +20,7 @@ type cached struct {
 	at             time.Time
 }
 type Server struct {
+	HoldLoad         atomic.Bool
 	HoldStartRelease atomic.Bool
 	HoldNext         atomic.Bool
 	Held             atomic.Bool
@@ -216,6 +217,9 @@ func (s *Server) serveUDP(ctx context.Context) {
 					if err == nil {
 						var start, halt uint64
 						for i, c := range controls {
+							if c.Name == "LOAD_ADRS" && v[i] == 1 && s.HoldLoad.Swap(false) {
+								hold = true
+							}
 							if c.Name == "START" {
 								start = v[i]
 							}

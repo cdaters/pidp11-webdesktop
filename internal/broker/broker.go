@@ -35,7 +35,19 @@ type State struct {
 	Outputs        map[string]uint64 `json:"outputs"`
 	Trace          []Frame           `json:"trace"`
 }
+
+// Fence is optional. The original M4 broker retains its known unsafe behavior
+// without it, so the counterexample remains a permanent regression oracle.
+type Fence interface {
+	Ready() bool
+	Arm() error
+	Revoke() error
+	Heartbeat() error
+}
 type Broker struct {
+	authority                        Fence
+	heartbeat                        time.Time
+	fenceError                       bool
 	lampsSeen                        bool
 	neutralSamples                   int
 	mu                               sync.Mutex
@@ -50,6 +62,7 @@ type Broker struct {
 func New() *Broker {
 	return &Broker{s: State{Phase: "halting", Reason: "startup baseline", Physical: map[string]uint64{}, Effective: map[string]uint64{"POWER": 1, "HALT": 1, "ADDR_SELECT": 4, "DATA_SELECT": 2}, Outputs: map[string]uint64{}}, clients: map[string]bool{}}
 }
+func NewFenced(f Fence) *Broker   { b := New(); b.authority = f; return b }
 func (b *Broker) Snapshot() State { return b.snapshot(true) }
 func (b *Broker) View() State     { return b.snapshot(false) }
 func (b *Broker) OutputSnapshot() map[string]uint64 {
@@ -75,10 +88,18 @@ func (b *Broker) snapshot(trace bool) State {
 	return s
 }
 func (b *Broker) quiesce(reason string) {
+	if b.authority != nil {
+		b.fenceError = b.authority.Revoke() != nil
+	}
+
 	b.s.Owner = ""
 	b.s.Epoch++
 	b.s.Revision++
 	b.s.Phase = "halting"
+	if b.fenceError {
+		b.s.Phase = "fault"
+		reason += "; consumer fence unavailable"
+	}
 	b.s.Reason = reason
 	b.fence = 0
 	b.pulse = ""
@@ -148,6 +169,13 @@ func (b *Broker) Fault(reason string) {
 func (b *Broker) Tick(now time.Time) {
 	b.mu.Lock()
 	defer b.mu.Unlock()
+	if b.authority != nil && b.s.Phase == "active" && now.Sub(b.heartbeat) >= 100*time.Millisecond {
+		b.heartbeat = now
+		if b.authority.Heartbeat() != nil {
+			b.quiesce("consumer watchdog/connection lost")
+			b.s.Phase = "fault"
+		}
+	}
 	if b.s.Owner != "" && b.s.Owner != "physical" && !now.Before(b.deadline) {
 		b.quiesce("virtual lease expired")
 	}
@@ -171,7 +199,7 @@ func (b *Broker) Inputs() map[string]uint64 {
 			}
 			b.s.Phase = "neutralizing"
 		}
-		if b.fence >= 2 && b.lampsSeen && b.s.Outputs["RUN"] == 0 {
+		if b.fence >= 2 && b.lampsSeen && b.s.Outputs["RUN"] == 0 && (b.authority == nil || b.authority.Ready()) {
 			b.s.Phase = "ready"
 			b.s.Reason = "halted neutral baseline; explicit grant required"
 		}
@@ -239,6 +267,12 @@ func (b *Broker) Grant(id string, now time.Time) error {
 			return fmt.Errorf("physical momentary held")
 		}
 	}
+	if b.authority != nil {
+		if err := b.authority.Arm(); err != nil {
+			return err
+		}
+		b.heartbeat = now
+	}
 	b.s.Owner = id
 	b.s.Phase = "active"
 	b.s.Epoch++
@@ -254,6 +288,10 @@ func (b *Broker) Renew(id string, epoch uint64, now time.Time) error {
 	defer b.mu.Unlock()
 	if b.s.Owner != id || b.s.Epoch != epoch || b.s.Phase != "active" {
 		return fmt.Errorf("stale owner")
+	}
+	if !now.Before(b.deadline) {
+		b.quiesce("lease expired before renewal")
+		return fmt.Errorf("lease expired")
 	}
 	b.deadline = now.Add(Lease)
 	return nil

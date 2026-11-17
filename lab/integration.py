@@ -1,6 +1,7 @@
 """Actual original C interoperability in a network-none Linux fixture only."""
 import os,sys,json,time,subprocess,urllib.request,pty,select,signal,re,pathlib,hashlib,platform
 BASE='http://127.0.0.1:8081'
+_browsers=[]
 def api(path,data=None,base=BASE):
  req=urllib.request.Request(base+path,data=None if data is None else json.dumps(data).encode(),headers={'Content-Type':'application/json'})
  with urllib.request.urlopen(req,timeout=2) as f:return json.load(f)
@@ -16,10 +17,21 @@ def wait(predicate,timeout=4):
 def setinputs(**values):api('/set',values)
 def polls(n=3):
  before=api('/state')['gets'];wait(lambda:api('/state')['gets']>=before+n)
+ # Observe completion through the actual WS stream before issuing the next CAS.
+ # Never retry a rejected mutation (which could conceal a safety failure).
+ state=api('/state')
+ if 'broker' in state:
+  revision=state['broker']['revision']
+  for browser in list(_browsers):
+   wait(lambda:browser.request('status')['State']['controlRevision']>=revision)
 def pulse(name):setinputs(**{name:1});polls();setinputs(**{name:0});polls()
 class Simh:
- def __init__(self):
-  self.master,slave=pty.openpty();self.p=subprocess.Popen(['/opt/lab/pdp11_realcons'],stdin=slave,stdout=slave,stderr=slave,pass_fds=(self.master,),env={**os.environ,'LD_PRELOAD':'/opt/lab/ptyshim.so','PIDP11_LAB_PTY_MASTER':str(self.master)});os.close(slave);self.log='';self.read(.4)
+ def __init__(self,binary=None,extra_env=None):
+  binary=binary or ("/opt/fenced/pdp11_realcons" if "--fence-disabled" in sys.argv else "/opt/lab/pdp11_realcons")
+  self.master,slave=pty.openpty();self.p=subprocess.Popen([binary],stdin=slave,stdout=slave,stderr=slave,pass_fds=(self.master,),env={**os.environ,'LD_PRELOAD':'/opt/lab/ptyshim.so','PIDP11_LAB_PTY_MASTER':str(self.master),**(extra_env or {})});os.close(slave);self.log=''
+  deadline=time.monotonic()+4
+  while 'sim> ' not in self.log and time.monotonic()<deadline:self.read(.1)
+  assert 'sim> ' in self.log, 'SIMH startup prompt unavailable: '+self.log
  def read(self,duration=.15):
   end=time.monotonic()+duration;out=''
   while time.monotonic()<end:
@@ -81,7 +93,7 @@ def m3():
 class Browser:
  def __init__(self):
   self.p=subprocess.Popen(['/fixtures/lab-browser-probe-linux-arm64'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1)
-  self.hello=self.response()
+  self.hello=self.response();_browsers.append(self)
  def response(self):
   ready,_,_=select.select([self.p.stdout],[],[],4)
   assert ready,'browser response timeout'
@@ -91,6 +103,7 @@ class Browser:
   if kind!='status':assert r['Accepted']==accepted,r
   return r
  def close(self):
+  if self in _browsers:_browsers.remove(self)
   if self.p.poll() is None:self.p.terminate();self.p.wait(timeout=3)
 def physical(**values):api('/set',values,base='http://127.0.0.1:8082')
 def ppulse(name):physical(**{name:1});polls();physical(**{name:0});polls()
@@ -180,10 +193,11 @@ def m4():
   report['lease_expiry']='passed: expiry halts/disarms; no implicit reacquisition'
   # Counterexample: an already-built falling START response cannot be retracted.
   owner.request('set','sr',0o2000);owner.request('pulse','load');polls(4);owner.request('set','halt',0)
+  sim.read(.05);counterexample_log_start=len(sim.log)
   api('/hold-start-release',{});owner.request('pulse','start');wait(lambda:api('/state')['heldReply'])
   runs=api('/state')['broker']['runTransitions'];owner.request('release');api('/release-reply',{})
   wait(lambda:api('/state')['broker']['phase']=='ready');sim.read(.15)
-  assert api('/state')['broker']['runTransitions']>runs or 'run 2000' in sim.log,sim.log
+  assert api('/state')['broker']['runTransitions']>runs or 'run 2000' in sim.log[counterexample_log_start:],sim.log[counterexample_log_start:]
   assert api('/state')['outputs']['RUN']==0
   report['inflight_start_release']='COUNTEREXAMPLE: pre-handoff START=0/HALT=0 reply can run before the following HALT; no absolute cancellation guarantee'
   print('M4: demonstrated in-flight START release limitation')

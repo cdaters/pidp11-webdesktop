@@ -1,0 +1,141 @@
+
+PDP-11 simulator V4.0-0 Current  REALCONS build Nov 17 2026
+sim> set cpu 11/70
+Disabling XQ
+sim> set cpu 256K
+sim> deposit 2000 5200
+sim> deposit 2002 776
+sim> deposit pc 2000
+sim> set realcons host=127.0.0.1
+sim> set realcons panel=11/70
+sim> set realcons interval=20
+sim> set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+sim> @WD 4581932164882253178 1
+sim> @WD 4581932164882253178 2
+1000:	012345
+sim> examine 1000
+1000:	012345
+sim> @WD 4581932164882253178 3
+sim> @WD 4581932164882253178 4
+
+Simulation stopped, PC: 002002 (BR 2000)
+sim> examine pc
+PC:	002002
+sim> @WD 4581932164882253180 5
+WD rejected stale panel command
+sim> @WD 4581932164882253182 6
+WD rejected stale panel command
+sim> @WD 4581932164882253184 7
+WD rejected stale panel command
+sim> @WD 4581932164882253186 8
+WD rejected stale panel command
+sim> @WD 4581932164882253190 9
+WD rejected stale panel command
+sim> @WD 4581932164882253190 9
+WD rejected stale panel command
+sim> @WD 4581932164882253192 10
+sim> examine 1002
+1002:	054321
+sim> @WD 4581932164882253194 11
+
+Simulation stopped, PC: 002002 (BR 2000)
+sim> @WD 4581932164882253196 12
+
+Simulation stopped, PC: 002000 (INC R0)
+sim> @WD 4581932164882253198 13
+
+Simulation stopped, PC: 002002 (BR 2000)
+sim> @WD 4581932164882253200 14
+
+Simulation stopped, PC: 002000 (INC R0)
+sim> @WD 4581932164882253202 15
+
+Simulation stopped, PC: 002002 (BR 2000)
+sim> @WD 4581932164882253204 16
+
+Simulation stopped, PC: 002002 (BR 2000)
+sim> @WD 4581932164882253206 17
+
+Simulation stopped, PC: 002000 (INC R0)
+sim> @WD 4581932164882253208 18
+
+--- consumer instance ---
+
+PDP-11 simulator V4.0-0 Current  REALCONS build Nov 17 2026
+sim> set cpu 11/70
+Disabling XQ
+sim> set cpu 256K
+sim> deposit 2000 5200
+sim> deposit 2002 776
+sim> deposit pc 2000
+sim> set realcons host=127.0.0.1
+sim> set realcons panel=11/70
+sim> set realcons interval=20
+sim> set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+sim> @WD 5764650413148754260 1
+
+--- consumer instance ---
+
+PDP-11 simulator V4.0-0 Current  REALCONS build Nov 17 2026
+sim> set cpu 11/70
+Disabling XQ
+sim> set cpu 256K
+sim> deposit 2000 5200
+sim> deposit 2002 776
+sim> deposit pc 2000
+sim> set realcons host=127.0.0.1
+sim> set realcons panel=11/70
+sim> set realcons interval=20
+sim> set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+sim>
+--- consumer instance ---
+
+PDP-11 simulator V4.0-0 Current  REALCONS build Nov 17 2026
+sim> set cpu 11/70
+Disabling XQ
+sim> set cpu 256K
+sim> deposit 2000 5200
+sim> deposit 2002 776
+sim> deposit pc 2000
+sim> set realcons host=127.0.0.1
+sim> set realcons panel=11/70
+sim> set realcons connected
+Searching realcons controller "11/70" ...
+Connecting to host 127.0.0.1 ...
+sim> cont
+
+Simulation stopped, PC: 002000 (INC R0)
+sim> examine pc
+PC:	002000
+sim> set dz enabled
+sim> set dz lines=8
+sim> attach dz 127.0.0.1:40100
+Listening on port 127.0.0.1:40100
+sim> examine dz devaddr
+DEVADDR:	00017760100
+sim> deposit 3000 12737
+sim> deposit 3002 40
+sim> deposit 3004 160100
+sim> deposit 3006 777
+sim> deposit pc 3000
+sim> continue
+
+Simulation stopped, PC: 003006 (BR 3006)
+sim> show dz connections
+line 0: Connection from IP address 127.0.0.1
+Connection [127.0.0.1]:40100->[127.0.0.1]:42892
+ Connected 00:00:01
+ Telnet protocol
+line 1: Connection from IP address 127.0.0.1
+Connection [127.0.0.1]:40100->[127.0.0.1]:42904
+ Telnet protocol
+sim> examine pc
+PC:	003006
+sim> detach dz
+sim>

@@ -148,3 +148,11 @@ The **idle CPU result exceeds the proposed <1% target**, even in this Mac-hosted
 The WebSocket peers here are automated protocol drivers, not a browser rendering the isolated Linux page. No new cross-browser visual or accessibility claim is made. Java runtime interoperability, physical POWER/LOCK scripts, GPIO, actual media/OS operation and any Pi deployment remain untested. The normal Mac mock and its preserved checkpoint remain available. Lab containers and child processes were removed after the successful run; the reusable local development image remains cached.
 
 Final static Linux ARM64 artifacts: mock desktop 6,095,010 bytes; lab executable 6,160,546 bytes. The mock binary dependency graph includes only the panel/server/web project packages, with no broker or RPC transport linked. Current browser core totals 14,707 gzip bytes across HTML/JS/CSS.
+
+## M4.1 consumer interlock and independent access
+
+The complete `lab/verify-m41.sh` sequence passed: original M3/M4 (including the preserved unsafe START-release oracle), patched-but-disabled M3, fenced M4.1 fault injection, browserless original-route rollback and two independent original DZ11 transports. The C compatibility module passed ASan/UBSan unit checks; Linux Unix-packet protocol tests and all Go race tests passed. TypeScript check/build, 12 model tests and one reconnect test passed. A bounded 10-second RPC fuzz run completed 6,018,470 executions without a crash.
+
+M4.1 reports about 11.20 MiB active broker RSS, 3.33% active and 2.40% idle one-core CPU, and 1.14 ms p95 driver-inclusive acknowledgment latency. Idle CPU still misses the <1% target. A small disabled-patch CPU loop test was 4.84% slower by median wall time; the <3% emulator impact target remains open. The responsive watchdog stopped managed execution in about 351.59 ms in one test. With a lost RPC response it revoked authority but did not acknowledge quiescence. These observations do not establish a hard stop deadline, Pi performance, real serial/Screen/SSH access, guest login support, or physical GPIO safety.
+
+Full evidence, scope and reproducible commands: [M4.1 report](lab/M4.1.md). Original M3/M4 artifacts above remain historical records, not replaced by these reruns.

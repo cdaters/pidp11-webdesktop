@@ -9,3 +9,4 @@ lab/*
 !lab/Dockerfile
 !lab/c-client.c
 !lab/ptyshim.c
+!lab/interlock/

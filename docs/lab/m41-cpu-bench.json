@@ -1,0 +1,22 @@
+{
+  "original": {
+    "steps_per_sample": 100000000,
+    "seconds": [
+      0.5835569920018315,
+      0.5950235630007228,
+      0.6099760999932187
+    ],
+    "median_seconds": 0.5950235630007228
+  },
+  "patched_disabled": {
+    "steps_per_sample": 100000000,
+    "seconds": [
+      0.6247525529906852,
+      0.6238263420091243,
+      0.6232505079969997
+    ],
+    "median_seconds": 0.6238263420091243
+  },
+  "disabled_patch_wall_time_change_percent": 4.8406114983326365,
+  "scope": "3 timed 100M instruction samples after warmup; no RPC, guest OS or physical daemon; Mac-hosted Linux ARM64, not Pi"
+}

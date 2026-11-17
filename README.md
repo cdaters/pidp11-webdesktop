@@ -1,8 +1,14 @@
 # PiDP-11 Web Desktop
 
-A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestones M3/M4: original REALCONS interoperability and physical/virtual broker laboratory.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
+A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M4.1: optional consumer fencing and independent-access laboratory.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
 
 All development and testing is local to the Mac. The Raspberry Pi was not contacted or modified. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation, guest OS images or media management is used.
+
+## M4.1 findings
+
+The optional consumer interlock rejects the M4 delayed START-release response and queued stale panel commands at SIMH consumption. Its independent watchdog can stop managed execution while RPC remains responsive. **Unconditional crash-safe halting is not established:** a blocked original RPC can delay quiescence, and committed commands cannot be undone. Original physical-only operation remains the default design; rollback and two independent DZ11 terminal transports are exercised in the lab.
+
+See the [M4.1 report and risk register](docs/lab/M4.1.md), [access-independence architecture](docs/decisions/0004-independent-access.md), [minimal upstream hooks](lab/interlock/upstream.patch), and [rollback procedure](docs/lab/M4.1-rollback.md). Run `sh lab/verify-m41.sh` after building the lab image. Production integration still needs separate authorization.
 
 ## Laboratory findings and reproduction
 
@@ -20,7 +26,7 @@ python3 lab/save-results.py
 
 The first command fetches the pinned public source and Debian build packages. Runtime tests have **only loopback networking**, no published ports, no privileged container and no physical devices. They do not contact the Pi. Containers are test infrastructure, not deployment dependencies. Test results go to `.research/lab-results`; the last command records a successful run in `docs/lab`. Use `--m3-only` or `--m4-only` with `lab/run.sh` for focused runs; save the combined results only after a complete successful run.
 
-Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, and `checkpoint/m4`. Golden-backup completion does not authorize production integration.
+Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, and `checkpoint/m4.1`. Golden-backup completion does not authorize production integration.
 
 ## Build and run on the Mac
 

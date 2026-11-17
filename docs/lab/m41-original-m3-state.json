@@ -1,0 +1,35 @@
+{
+  "gets": 163,
+  "heldReply": false,
+  "inputs": {
+    "ADDR_SELECT": 7,
+    "CONT": 0,
+    "DATA_SELECT": 3,
+    "DEPOSIT": 0,
+    "EXAM": 0,
+    "HALT": 1,
+    "LOAD_ADRS": 0,
+    "POWER": 1,
+    "SR": 66048,
+    "START": 0
+  },
+  "outputs": {
+    "ADDRESS": 1026,
+    "ADDRESSING_16": 1,
+    "ADDRESSING_18": 0,
+    "ADDRESSING_22": 0,
+    "ADDR_SELECT_FEEDBACK": 0,
+    "ADRS_ERR": 0,
+    "DATA": 512,
+    "DATA_SELECT_FEEDBACK": 0,
+    "DATA_SPACE": 0,
+    "MASTER": 1,
+    "MMR0_MODE": 0,
+    "PARITY_HIGH": 1,
+    "PARITY_LOW": 0,
+    "PAR_ERR": 0,
+    "PAUSE": 0,
+    "RUN": 0
+  },
+  "sets": 33
+}
