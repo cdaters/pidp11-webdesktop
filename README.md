@@ -4,6 +4,10 @@ A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's
 
 Web Desktop development and testing remain local to the Mac. During the separate pre-Oscar documentation review, original installation records were retrieved from the Pi read-only with the owner’s authorization; no Pi tests, installation changes, or Web Desktop deployment were performed. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. M5.0 uses disposable copies of a verified public guest image; original media and the Pi installation remain untouched. No Pi access occurred during M5.0. Peripheral and system-management workflows remain clearly labeled RAM-only prototypes.
 
+## M5.1 read-only installation assessment
+
+The owner-authorized Pi inspection supports UNIX V7/DC11 as the first terminal-pilot candidate. Installed original ARM64 binaries and guest login configuration were inspected without starting the emulator or changing the installation. The current lab-only server still requires a separately reviewed pilot entry point. See the [assessment and remaining gates](docs/lab/M5.1.md) and [unexecuted pilot plan](docs/lab/M5.1-pilot-plan.md). No deployment, guest boot or physical-panel acceptance is claimed; M5.0 remains the accepted application checkpoint.
+
 ## M5.0 real guest terminal checkpoint
 
 Chromium, Firefox and WebKit execute real guest commands through the bounded Go bridge. Multiple browsers can observe one line, with an explicit keyboard owner; separate DC11 lines have independent owners. Conventional guest access and the original operator console continue while the browser closes or the bridge stops. Screen is never taken over. The fixed 80 × 24 terminal adds reviewed paste and explicit DEL/BS/UNIX V7 erase selection.

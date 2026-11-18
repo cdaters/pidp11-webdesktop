@@ -98,3 +98,10 @@ Go remains the backend choice. The existing reused UDP buffer materially reduces
 The next decision is a separately reviewed **terminal-only integration proposal**: guest/line inventory, endpoint identity, user authentication and certificates, coexistence with conventional and future physical serial terminals, guest-safe lifecycle and authorized Pi resource measurement. No installation is authorized by this milestone. Keep remote panel-control, real-media and distribution-switcher work behind their own gates. Product Modes A/B/C are assessed in the report and are distinct from earlier broker-mode labels.
 
 M5.0's short Mac-hosted Linux bridge samples are approximately 10.7–12.5 MiB RSS and 0.1–0.9% of one core; these are neither Pi measurements nor a long-duration soak. Preserve the target table above. Add a terminal-only target of <100 ms p95 added transport latency, measured separately from guest response time under an authorized LAN workload. The observed short full-command times include browser automation, forwarding and guest processing and do not validate that target.
+
+
+## M5.1 read-only Pi assessment — 2026-11-18
+
+The [authorized inspection](lab/M5.1.md) confirms the pinned original source, official ARM64 runtime files, and installed V7 login metadata matching M5.0's base. It identifies an unattached DC11 line as the preferred candidate, while documenting that the normal launcher has no external configuration argument and the M5.0 lab command intentionally rejects a normally networked Pi. No emulator or guest was started, and no installed file/service/network configuration was changed.
+
+Next is owner review of the [staged pilot plan](lab/M5.1-pilot-plan.md). Local implementation of a reviewed terminal-only entry point and separately authorized standalone Pi testing precede any original-launcher/profile change or assembled-panel coexistence claim. Do not treat the read-only assessment, idle resource snapshot or clean current throttling flags as deployment authorization or production acceptance. The accepted application checkpoint remains M5.0.

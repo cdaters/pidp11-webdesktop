@@ -1,0 +1,57 @@
+{
+  "assessment": "M5.1 read-only; no deployment or live terminal test",
+  "date": "2026-11-18",
+  "application_checkpoint": "checkpoint/m5.0",
+  "application_commit": "156ce33d6b42ee4ad7689554c3d85e4883abb907",
+  "private_root": ".research/m51 (ignored; excluded from review packages)",
+  "records": [
+    {
+      "id": "E1",
+      "private_capture": "inventory.json",
+      "sha256": "ce06117908435d0bbaef4d2fa0eb1554781095afd1ef92c8f191b9209dce3015",
+      "scope": "Read-only host inventory snapshot"
+    },
+    {
+      "id": "E2",
+      "private_capture": "configuration.json",
+      "sha256": "9dcc3018f9c55f971861474db13c62b04c1c45ac08ef4a0201bef21eab3605e3",
+      "scope": "Installed configuration and binary/source inspection"
+    },
+    {
+      "id": "E3",
+      "private_capture": "followup.json",
+      "sha256": "a0c65280e31f559cb7f13758b9add98c18aa4e113a0cb2541b6255054ed6bb6d",
+      "scope": "Binary provenance, startup paths and final status"
+    },
+    {
+      "id": "E4",
+      "private_capture": "installed-v7-metadata.json",
+      "sha256": "0c75b2c63d729f2e01063632df990217e0a6bee950f6e865faedd5ee09213231",
+      "scope": "Bounded installed V7 metadata reads"
+    },
+    {
+      "id": "E5",
+      "private_capture": "lab-v7-metadata.json",
+      "sha256": "0c75b2c63d729f2e01063632df990217e0a6bee950f6e865faedd5ee09213231",
+      "scope": "Known M5.0 base comparison"
+    },
+    {
+      "id": "E6",
+      "private_capture": "installation-evidence-appendix.md",
+      "sha256": "53d19958104de1fcb86223741d377f142b0bcfadcc357330ca4fba01ebcf1c4c",
+      "scope": "Earlier installation evidence, not a new workload"
+    }
+  ],
+  "checks": {
+    "upstream_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "installed_binaries_match_pinned_arm64_backups": true,
+    "v7_metadata_bytes_read": 11328,
+    "v7_ttys_and_rc_match_m50_base": true,
+    "guest_booted": false,
+    "emulator_started_or_stopped": false,
+    "pi_file_edits": false,
+    "new_services_or_listeners": false,
+    "application_code_changed": false,
+    "production_acceptance": false
+  }
+}
