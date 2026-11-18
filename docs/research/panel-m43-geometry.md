@@ -4,7 +4,7 @@ Research date: 2026-11-17. This document records photographic evidence and an or
 
 ## Evidence
 
-The primary reference is the user-supplied `/Volumes/TheBench/Projects/PiDP11/bottom-switches.png`: 1226 × 284 pixels, SHA-256 `8447ea53ba387e8af54074de13c59bf148b7ed5beeecd7f8f080dd929d0f52e9`. It shows the 22-bit switch register, including mixed positions. It does **not** show the function switches or lamp-test switch. Its provenance and redistribution license are not established; preserve it as the supplied research reference rather than a shipped application asset.
+The primary reference is the user-supplied `/Volumes/TheBench/Projects/PiDP11/bottom-switches.png`: 1226 × 284 pixels, SHA-256 `8447ea53ba387e8af54074de13c59bf148b7ed5beeecd7f8f080dd929d0f52e9`. It shows the 22-bit switch register, including mixed positions. It does **not** show the function switches or lamp-test switch. It is preserved as the supplied research reference; the application renders original SVG rather than photographic sprites.
 
 Supporting references, already cached and inspected for M4.2:
 
@@ -13,7 +13,7 @@ Supporting references, already cached and inspected for M4.2:
 - Henk Gooijen's full-panel photograph, credited on [w11, Figure D-1](https://wfjm.github.io/home/w11/), with [original image](https://wfjm.github.io/downloads/w11/pictures/HenkGooijen-pdp11-70-front.jpg). This corroborates arrangement; it is not the primary geometry reference for M4.3.
 - [Official PiDP-11 building instructions](https://obsolescence.dev/pidp-11-building-instructions.html) distinguish the red, magenta and white switch inventory. Replica components are corroboration, not proof of original DEC mechanical dimensions.
 
-Use these sources to construct original SVG paths, not to redistribute photographic sprites. The Java source's MIT notice does not independently establish the rights to every photograph or DEC mark. See [M4.2 calibration](panel-m42-calibration.md) for source hashes, logo provenance and overall panel coordinates.
+These sources inform the original SVG paths; the Java source retains its MIT notice. See [M4.2 calibration](panel-m42-calibration.md) for source hashes, logo provenance and overall panel coordinates.
 
 ## What the primary photograph establishes
 

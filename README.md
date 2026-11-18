@@ -2,7 +2,13 @@
 
 A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M4.3: historical paddles, offline security and recovery hardening, terminal fixtures and extended stability testing.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
 
-All development and testing is local to the Mac. The Raspberry Pi was not contacted or modified. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation or guest OS images are used. Peripheral and system-management workflows are clearly labeled RAM-only prototypes.
+Web Desktop development and testing remain local to the Mac. During the separate pre-Oscar documentation review, original installation records were retrieved from the Pi read-only with the owner’s authorization; no Pi tests, installation changes, or Web Desktop deployment were performed. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation or guest OS images are used. Peripheral and system-management workflows are clearly labeled RAM-only prototypes.
+
+## M4.3.1 presentation checkpoint
+
+The presentation revision refines the existing shared SVG paddle curves, depth, spacing, and highlights. About and the footer now derive **M4.3** from the same `package.json` version (`0.4.3`); the checkpoint suffix identifies polish, not a new integration milestone. Contributor credits and truthful mock/observer labels remain visible. No control-policy or transport changes were made.
+
+See the [presentation review and checks](docs/review-m431.md), [before/after switches](docs/screenshots/m431-before-after-switches.png), and [corrected About window](docs/screenshots/m431-about.png). Earlier screenshots and `checkpoint/m4.3` remain unchanged.
 
 ## M4.3 delivered
 
@@ -46,7 +52,7 @@ python3 lab/save-results.py
 
 The first command fetches the pinned public source and Debian build packages. Runtime tests have **only loopback networking**, no published ports, no privileged container and no physical devices. They do not contact the Pi. Containers are test infrastructure, not deployment dependencies. Test results go to `.research/lab-results`; the last command records a successful run in `docs/lab`. Use `--m3-only` or `--m4-only` with `lab/run.sh` for focused runs; save the combined results only after a complete successful run.
 
-Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, `checkpoint/m4.2`, and `checkpoint/m4.3`. Golden-backup completion does not authorize production integration.
+Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, `checkpoint/m4.2`, `checkpoint/m4.3`, and `checkpoint/m4.3.1`. Golden-backup completion does not authorize production integration.
 
 ## Build and run on the Mac
 
@@ -142,4 +148,4 @@ checkpoints/m0/        Preserved accepted standalone prototype
 docs/                  Architecture, evidence, validation and screenshots
 ```
 
-Preview processes used for verification were stopped after testing. Live integration remains a separate milestone after the complete microSD backup and explicit authorization. Licensing of original project code remains an owner decision before publication.
+The temporary mock backend used for verification was stopped after testing; the local frontend preview may remain open for screenshots. Live integration remains a separate milestone after the complete microSD backup and explicit authorization. Licensing of original project code remains an owner decision before publication.

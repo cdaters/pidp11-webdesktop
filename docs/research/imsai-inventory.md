@@ -22,7 +22,7 @@ Public artifact inspected: [v1.14.0 update.bin](https://github.com/thehighnibble
 | IMSAI printer JS, decompressed `848a69f3846ddc6e3239.js` | 56,526 | `845440421a3ab077e242e07e8276f3b7d9f52d26b33e7600c455f97f2ceed8b7` |
 | IMSAI console `index.html` | — | `2a0eb12000e041b35d2dbdb7f9fbb75671f6ea2da86ec994d0e05f05233f601d` |
 
-Ignored local research copies reside under `.research/imsai42/`; no bundled code, fonts, sounds, images, screenshots, firmware or guest media were copied into the application or tracked documentation. The release explicitly prohibits rehosting its packages. The repository [license page](https://github.com/thehighnibble/firmware/blob/master/LICENSE.md) states CC BY-NC-SA 4.0, while embedded frontend package metadata says MIT. That inconsistency is **not** treated as permission to reuse or redistribute the package. This project implements original equivalents and should resolve any proposed third-party redistribution separately before release.
+Ignored local research copies reside under `.research/imsai42/`; no bundled code, fonts, sounds, images, screenshots, firmware or guest media were copied into the application or tracked documentation. The release explicitly prohibits rehosting its packages. The repository [license page](https://github.com/thehighnibble/firmware/blob/master/LICENSE.md) states CC BY-NC-SA 4.0, while embedded frontend package metadata says MIT. That inconsistency is **not** treated as permission to reuse or redistribute the package. This project implements original equivalents.
 
 ## Desktop and window behavior
 

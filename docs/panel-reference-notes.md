@@ -14,7 +14,7 @@ Research date: 2026-11-16. Scope: local DEC/PiDP manuals, public reference photo
 
 Local manuals are unchanged at `../docs/PDP-11_70_Handbook_1977-78.pdf` and `../docs/PiDP-11_Manual.pdf` relative to the project root. The DEC PDF is also indexed by [w11's DEC manual list](https://wfjm.github.io/home/w11/info/manuals.html) and archived at [Bitsavers](https://www.bitsavers.org/pdf/dec/pdp11/1170/PDP-11_70_Handbook_1977-78.pdf). The web reader returned 403 for the archive; the user's local copy was inspected instead.
 
-The photo and manual renders remain in ignored `.research/panel-reference/` and are not shipped as product assets. Photo credit is Henk Gooijen, as stated by w11. Permission to view a reference is not a grant to redistribute the photograph. Colors below are visual observations, not calibrated DEC paint specifications.
+The photo and manual renders remain in ignored `.research/panel-reference/` and are not shipped as product assets. Photo credit is Henk Gooijen, as stated by w11. Colors below are visual observations, not calibrated DEC paint specifications.
 
 ## Layout corrections with the greatest value
 

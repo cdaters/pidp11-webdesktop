@@ -60,7 +60,7 @@ Completion of the other Codex session does not automatically authorize M5. The c
 | Broker failure interrupts physical controls | It sits between REALCONS and hardware daemon | Physical-only rollback; no automatic failover claim without testing |
 | Terminal takeover and monitor access | Official stack uses screen and launcher scripts | Determine non-disruptive endpoint; separate guest and privileged monitor capability |
 | Device/OS corruption | Abrupt stop or shared writable images can damage guest state | Safe lifecycle, immutable bases/working copies and exclusive mounts |
-| Licensing and artwork | Repository bundles mixed licenses; OS images have separate rights | Source notices and per-image rights before distribution |
+| Source provenance | Repository includes components with different source notices | Retain the component inventory and original notices; guest media is not bundled |
 | Historic panel fidelity | Prototype is an original interpretation, not a calibrated replica | 0.2 now uses DEC handbook/photo and Java/REALCONS evidence; dimensional calibration and full hardware behavior remain out of scope |
 | Resource competition | Pi runs simulator and high-rate GPIO work already | Measure overhead under real guest/physical load in M5, not Mac extrapolation |
 | Browser compatibility | SVG/keyboard behavior and terminal performance vary | Test Chromium, Firefox and Safari before release; M0 QA records actual browser tested |

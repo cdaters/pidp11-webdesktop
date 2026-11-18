@@ -1,3 +1,4 @@
+import { APP_MILESTONE } from "./version.ts";
 import {
   SimulatedPanelAdapter,
   octal,
@@ -57,7 +58,7 @@ const apps = [
   ["about", "About", "References & shortcuts"],
 ];
 const root = document.querySelector<HTMLDivElement>("#app")!;
-root.innerHTML = `<header class="desktop-top"><img src="${logo}" class="digital-brand" alt="DIGITAL"><span class="desktop-name">PiDP-11 <b>Web Desktop</b></span><span class="top-source" id="source-badge">LOCAL SIMULATION</span><button id="arrange-workspace">Arrange terminals</button><button id="reset-layout" title="Reset saved window geometry">Reset layout</button><time id="clock"></time></header><div class="desktop-layout"><nav class="launcher" aria-label="Applications">${apps.map(([id, name, desc]) => `<button data-app="${id}" title="${desc}" aria-label="Open ${name}">${icon(id)}<span>${name}</span></button>`).join("")}</nav><main id="desktop" aria-label="PiDP-11 desktop workspace"><div class="wallpaper" aria-hidden="true"><span>pdp11/70</span><small>THE COMPUTER IS STILL THE COMPUTER.</small></div></main></div><footer class="taskbar"><span class="taskbar-label">WORKSPACE</span><div id="tasks" aria-label="Open windows"></div><span class="local-label">M4.3 · LOCAL LAB</span></footer><div id="toast" role="status" aria-live="polite"></div>`;
+root.innerHTML = `<header class="desktop-top"><img src="${logo}" class="digital-brand" alt="DIGITAL"><span class="desktop-name">PiDP-11 <b>Web Desktop</b></span><span class="top-source" id="source-badge">LOCAL SIMULATION</span><button id="arrange-workspace">Arrange terminals</button><button id="reset-layout" title="Reset saved window geometry">Reset layout</button><time id="clock"></time></header><div class="desktop-layout"><nav class="launcher" aria-label="Applications">${apps.map(([id, name, desc]) => `<button data-app="${id}" title="${desc}" aria-label="Open ${name}">${icon(id)}<span>${name}</span></button>`).join("")}</nav><main id="desktop" aria-label="PiDP-11 desktop workspace"><div class="wallpaper" aria-hidden="true"><span>pdp11/70</span><small>THE COMPUTER IS STILL THE COMPUTER.</small></div></main></div><footer class="taskbar"><span class="taskbar-label">WORKSPACE</span><div id="tasks" aria-label="Open windows"></div><span class="local-label">${APP_MILESTONE} · LOCAL LAB</span></footer><div id="toast" role="status" aria-live="polite"></div>`;
 const $ = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 const manager = new WindowManager($("desktop"), $("tasks"));
@@ -592,13 +593,13 @@ function openApp(id: string) {
   const el = body("");
   el.classList.add("utility-app");
   if (id === "about")
-    el.innerHTML = `<div class="about-brand"><img src="${redLogo}" alt="DIGITAL historical logo"><h2>PiDP-11 Web Desktop</h2><p>An independent companion project.<br>Not an official Digital Equipment Corporation product.</p></div><p>M4.2 · Original TypeScript/SVG workspace, inspired by The High Nibble's IMSAI desktop. The physical PiDP-11 remains independently operable.</p><h3>Keyboard</h3><dl class="diagnostic-grid"><dt>Alt + 1</dt><dd>Front panel</dd><dt>Alt + 2</dt><dd>New terminal</dd><dt>Alt + \x60</dt><dd>Cycle windows</dd><dt>Titlebar double-click</dt><dd>Maximize / restore</dd><dt>Resize handle + arrows</dt><dd>Keyboard resize (Shift = larger step)</dd><dt>Panel Tab + Space</dt><dd>Operate a focused switch</dd></dl><p class="app-note">Only window geometry is saved locally. Credentials, control leases, guest state and media contents are not persisted. Supplied DIGITAL artwork retains its proportions; public redistribution requires rights review.</p>`;
+    el.innerHTML = `<div class="about-brand"><img src="${redLogo}" alt="DIGITAL historical logo"><h2>PiDP-11 Web Desktop</h2><p>An independent companion project.<br>Not an official Digital Equipment Corporation product.</p></div><p><span data-app-version>${APP_MILESTONE}</span> · Go backend with a TypeScript/HTML5/SVG desktop, inspired by The High Nibble's IMSAI 8080 interface.</p><p>Built as an optional companion to Oscar Vermeulen's PiDP-11, with SIMH and Jörg Hoppe's BlinkenBone/REALCONS informing the isolated laboratory work. Terminal rendering uses xterm.js.</p><p>${observeMode ? 'The panel is in passive laboratory-observation mode; its connection status is shown separately.' : 'This demonstration uses simulated panel data. No real PiDP-11 is connected.'} The four mock terminals and in-memory media demonstrations are local fixtures, not guest OS sessions or SIMH-mounted disks.</p><h3>Keyboard</h3><dl class="diagnostic-grid"><dt>Alt + 1</dt><dd>Front panel</dd><dt>Alt + 2</dt><dd>New terminal</dd><dt>Alt + \x60</dt><dd>Cycle windows</dd><dt>Titlebar double-click</dt><dd>Maximize / restore</dd><dt>Resize handle + arrows</dt><dd>Keyboard resize (Shift = larger step)</dd><dt>Panel Tab + Space</dt><dd>Operate a focused switch</dd></dl><p class="app-note">Only window geometry is saved locally. Credentials, control leases, guest state and media contents are not persisted.</p>`;
   else renderApp(id, el);
   manager.open(id, title, el, {
     x: 90 + (manager.store.windows.length % 4) * 35,
     y: 70 + (manager.store.windows.length % 3) * 30,
     width: id === "paper" ? 760 : 680,
-    height: 470,
+    height: id === "about" ? 680 : 470,
   });
 }
 $("arrange-workspace").onclick = () => {

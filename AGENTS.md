@@ -5,3 +5,5 @@ This is an independent, local development project. Do not connect to the Raspber
 Keep emulator behavior in SIMH/REALCONS. Do not turn the demonstration model into a replacement PDP-11 emulator. Keep browser presentation independent of transport. Read docs/architecture.md and docs/protocol.md before adding adapters. Treat performance figures as targets until measured on authorized target hardware. Preserve source revision citations.
 
 Run go test -race ./..., npm run check, npm test, and npm run build for behavior changes. Do not publish or deploy this project during local development.
+
+For documentation and presentation work, also read `../AGENTS.md` when working in the full PiDP11 project. Keep explanations beginner-friendly, preserve evidence labels and original notices, and identify simulated behavior clearly. Presentation-only edits must not change control policy or trigger new integration experiments.

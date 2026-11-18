@@ -145,7 +145,7 @@ test("working desktop, independent terminals and media workflows", async ({
   await expect(panel.locator(".window-body")).toHaveClass(/authentic-mode/);
   await expect(panel.locator(".panel-options")).toBeHidden();
   if (browserName === "chromium")
-    await page.screenshot({ path: "docs/screenshots/m43-full-panel.png" });
+    await page.screenshot({ path: "docs/screenshots/m431-test-full-panel.png" });
   await page
     .getByRole("button", { name: "Desktop panel", exact: true })
     .click();
@@ -167,7 +167,7 @@ test("mobile touch and desktop screenshots; preferences contain geometry only", 
     "LOCAL TERMINAL FIXTURE",
   );
   if (browserName === "chromium")
-    await page.screenshot({ path: "docs/screenshots/m43-desktop.png" });
+    await page.screenshot({ path: "docs/screenshots/m431-test-desktop.png" });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.reload();
   await expect(page.locator('[data-window="panel"]')).toBeVisible();
@@ -178,7 +178,7 @@ test("mobile touch and desktop screenshots; preferences contain geometry only", 
   await page.getByRole("button", { name: "Advance", exact: true }).click();
   await expect(page.locator(".tape-position")).toContainText("block 10");
   if (browserName === "chromium")
-    await page.screenshot({ path: "docs/screenshots/m43-mobile.png" });
+    await page.screenshot({ path: "docs/screenshots/m431-test-mobile.png" });
   const saved = await page.evaluate(() =>
     localStorage.getItem("pidp11.layout.v1"),
   );
