@@ -12,6 +12,6 @@ These decisions describe the current direction. The linked reports retain the ev
 | Optional companion first | Original software remains authoritative. A side-by-side enhanced distribution is a possible alternative if specific features require it, not a reason to replace working paths now. [M5.0 modes](../lab/M5.0.md#oscars-side-by-side-proposal-and-recommendation) |
 | Traditional access stays independent | Physical controls, SSH, Screen, serial terminals and original SIMH must not depend on a browser process. [Independent access](../decisions/0004-independent-access.md) |
 | Observation is distinct from control | Passive publication and remote authority have different risks. M4's delayed START-release counterexample and recovery limits remain unresolved for production control. [M4](../lab/M4.md), [observation](../lab/M4.2-observation.md) |
-| Distinct lab and future pilot entry points | Keep the network-none lab guard intact. The accepted lab binary is not a Pi installer; a reviewed terminal-only entry point is required before a live pilot. [M5.1](../lab/M5.1.md) |
+| Distinct lab and pilot entry points | Keep the network-none lab guard intact. M5.3 adds a fixed-loopback terminal-only pilot and demonstrates it on the actual Pi; neither command is a production installer. [M5.3](../lab/M5.3.md) |
 
 The [philosophy](../../PHILOSOPHY.md) explains the priorities behind these choices. The [technical index](../technical/README.md) is the starting point for implementation details.

@@ -1,6 +1,14 @@
 # Changelog
 
-Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The application package currently identifies M5.0; publication does not imply a new runtime feature.
+Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
+
+## M5.3 — 2026-11-18
+
+- Added a separate fixed-loopback Linux ARM64 terminal pilot using the existing bridge, authentication and embedded assets; lab isolation guards remain unchanged.
+- Passed genuine UNIX V7 browser acceptance on the actual Pi 3B+ with original installed SIMH, a disposable disk, one DC11 line and independent Screen console in Chromium, Firefox and WebKit.
+- Verified browser/bridge disconnect independence, short Pi RSS/CPU and power observations, operator-led shutdown and unchanged original installation/disk hashes.
+- Added reproducible isolated pilot tests and an actual Pi screenshot. No permanent service, physical-panel integration or stable release.
+- [M5.3 report and evidence](docs/lab/M5.3.md).
 
 ## M5.2.1 — 2026-11-18
 

@@ -8,7 +8,7 @@ A modern browser as a desk full of vintage terminals and peripherals, connected 
 
 The goal is simple: turn on your PiDP-11, select an operating system with its physical switches, then open a browser terminal from your Mac, Windows PC, Linux computer or tablet. The Raspberry Pi stays headless; the browser draws the interface. The original panel, console, SSH, GNU Screen and serial terminals remain independent.
 
-**We have reached genuine UNIX V7 browser sessions in an isolated laboratory. The first live Pi terminal pilot is still ahead.** You can explore the local desktop today without a Pi or guest disk.
+**Genuine UNIX V7 browser sessions now work on the actual Raspberry Pi 3B+ in a controlled terminal-only pilot.** The pilot used the original installed simulator, preserved its installation, and was shut down after testing. You can explore the local desktop today without a Pi or guest disk.
 
 [Start exploring](docs/getting-started/README.md) · [Technical documentation](docs/technical/README.md) · [Philosophy](PHILOSOPHY.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Contribute](CONTRIBUTING.md)
 
@@ -22,9 +22,11 @@ M5.0 connected xterm.js in the browser to a genuine Research UNIX Seventh Editio
 
 Chromium, Firefox and WebKit passed the lab demonstration, including multiple observers, exclusive keyboard ownership, independent terminal lines and reconnects. The conventional operator console continued working when browsers closed and while the bridge was stopped. A fresh disposable disk repeated the demonstration.
 
-![Genuine UNIX V7 commands in the browser terminal](docs/screenshots/m50-real-unix-v7.png)
+M5.3 repeated the genuine terminal demonstration on the actual Pi using one disposable V7 disk, an independent Screen console and an SSH tunnel. All three browser engines passed. [Read the Pi pilot results](docs/lab/M5.3.md).
 
-*Actual M5.0 guest session in the isolated Mac-hosted Linux ARM64 lab. The background panel remains simulated; this is not a live physical-Pi deployment.*
+![Genuine UNIX V7 commands on the Raspberry Pi](docs/screenshots/m53-pi-unix-v7.png)
+
+*Actual M5.3 Pi-hosted guest session through the SSH tunnel. The background panel remains simulated; physical-panel and original-launcher coexistence are separate future tests.*
 
 [Read the demonstration report](docs/lab/M5.0.md) · [Reproduce the lab](docs/lab/M5.0-runbook.md)
 
@@ -35,11 +37,11 @@ Chromium, Firefox and WebKit passed the lab demonstration, including multiple ob
 | PDP-11/70 panel | Interactive SVG reconstruction with simulated lamps, switches and selectors |
 | Desktop | Movable/resizable windows, taskbar, keyboard controls, layout preferences and touch-friendly controls |
 | Mock terminals | Four independent local demonstration sessions with a tested DEC-style renderer |
-| Genuine guest terminal | UNIX V7/DC11 demonstrated through the Go bridge **in the isolated lab** |
+| Genuine guest terminal | UNIX V7/DC11 demonstrated in the isolated lab **and on the actual Pi** |
 | Disk, tape, paper tape and OS profiles | Working **simulated** workflows; no real guest media is changed |
 | Continuous-form line printer | Simulated LP0 spool, 80/132-column paper, perforations, tractor-feed holes and original-text download |
 | Passive panel observation | Laboratory experiments; no production Pi observation service installed |
-| Physical Pi integration | Read-only compatibility assessment completed; terminal pilot proposed but unexecuted |
+| Physical Pi integration | Terminal-only standalone pilot passed and cleaned up; no permanent service or physical-panel integration |
 | Remote front-panel control | Separate unresolved safety work; not a production feature |
 
 ![Continuous-form line-printer listing](docs/screenshots/m432-printer-maximized.png)
@@ -61,7 +63,7 @@ npm run dev
 
 Open the loopback address printed by Vite, normally `http://127.0.0.1:5173`. This starts the browser-only demonstration; it does not connect to your Pi. Open **Terminal**, acquire its keyboard and type `HELP`, or open **Line printer** and add a sample listing. Stop the preview with Ctrl-C.
 
-The separate **Guest terminal** needs the explicitly configured M5.0 lab service. There is **no production Pi installer**. For the embedded Go mock server, offline HTML build and tests, use the [developer setup](docs/technical/development.md).
+The separate **Guest terminal** needs an explicitly prepared real-guest service. The repeatable local route is the M5.0/M5.3 lab; the completed Pi pilot is not left running. There is **no production Pi installer**. For the embedded Go mock server, offline HTML build and tests, use the [developer setup](docs/technical/development.md).
 
 ## Find your way around
 
@@ -71,7 +73,7 @@ The separate **Guest terminal** needs the explicitly configured M5.0 lab service
 | See how the project evolved | [Development timeline](docs/timeline.md) and [changelog](CHANGELOG.md) |
 | Inspect the implementation | [Technical guide](docs/technical/README.md), [coding standards](docs/technical/CODING-STANDARDS.md) and [architecture decisions](docs/development/DECISIONS.md) |
 | Prepare Oscar's original software on Trixie Lite | [Headless installation guide](docs/installation/README.md) — **not a Web Desktop installer** |
-| Review the actual Pi findings | [M5.1 assessment](docs/lab/M5.1.md) and [unexecuted pilot plan](docs/lab/M5.1-pilot-plan.md) |
+| Review the actual Pi findings | [M5.1 assessment](docs/lab/M5.1.md) and [M5.3 completed terminal pilot](docs/lab/M5.3.md) |
 | Suggest an idea, report a bug or help | [Contributing](CONTRIBUTING.md), [Issues](https://github.com/cdaters/pidp11-webdesktop/issues) and [Discussions](https://github.com/cdaters/pidp11-webdesktop/discussions) |
 
 ## Built with the community's work

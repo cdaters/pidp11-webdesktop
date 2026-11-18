@@ -1,0 +1,78 @@
+{
+  "milestone": "M5.3",
+  "date": "2026-11-18",
+  "implementation_commit": "b8e9b74",
+  "pilot_binary": {
+    "sha256": "da39882d97e8dcaaa92a8ca309b850a97663d68c6d1ce1890968910e0bcadfed",
+    "bytes": 7078050,
+    "platform": "linux/arm64",
+    "cgo": false,
+    "build_vcs_revision": "d52f75e869bb1462bb92554ec56a18db28ae5a85",
+    "build_vcs_modified": true,
+    "source_note": "Built before committing the pilot changes as b8e9b74; the same executable bytes passed the Mac-hosted lab and Pi tests. Later helper/documentation additions are not compiled into it."
+  },
+  "simh": {
+    "upstream_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "lab_binary_sha256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+    "installed_pi_binary_sha256": "340c3311d2be6a04a5f3cc05c97747f524be58de3ea4d13fec97991a09df454e",
+    "modified": false
+  },
+  "checks": {
+    "go_vet": "passed",
+    "go_race": "passed",
+    "typescript_strict": "passed",
+    "typescript_units_passed": 46,
+    "transport_fixture_passed": 1,
+    "browser_regression_passed": 45,
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "genuine_lab": "passed",
+    "genuine_pi": "passed",
+    "native_safari": "not tested",
+    "physical_panel": "not tested",
+    "provisioning": "private files and refusal of existing directory verified"
+  },
+  "pi_environment": {
+    "board": "Raspberry Pi 3 Model B Plus Rev 1.3",
+    "os": "Debian GNU/Linux 13 (Trixie), Raspberry Pi ARM64 packages",
+    "kernel": "6.18.60+rpt-rpi-v8",
+    "memory_available_before_bytes": 752676864,
+    "storage_available_before_bytes": 16774459392,
+    "supply": "Owner-reported Vilros 5V/2.5A micro-USB with inline switch"
+  },
+  "power": {
+    "readiness_temperature_c": 46.2,
+    "after_disk_copy_temperature_c": 48.9,
+    "periodic_sample_count": 33,
+    "periodic_min_c": 48.3,
+    "periodic_max_c": 51.5,
+    "shutdown_verification_temperature_c": 52.1,
+    "cleanup_temperature_c": 50.5,
+    "all_recorded_throttling_flags_clear": true,
+    "kernel_voltage_or_throttling_warnings": 0
+  },
+  "rollback": {
+    "guest_sync_count": 3,
+    "simulator_monitor_quit_observed": true,
+    "recorded_installation_files_unchanged": 45,
+    "original_v7_disk_hash_and_mtime_unchanged": true,
+    "protected_base_hash_unchanged": true,
+    "after_run_copy_verified": true,
+    "pilot_screen_and_processes_exited": true,
+    "listening_endpoints_match_before": true,
+    "tunnel_closed": true,
+    "temporary_pi_tokens_and_key_removed": true,
+    "original_launcher_selection_services_gpio_unchanged": true,
+    "reboot_or_poweroff": false
+  },
+  "limits": [
+    "Single disposable UNIX V7 guest and one DC11 line",
+    "Short measurements, not sustained thermal/performance acceptance",
+    "SSH tunnel and isolated automated browser contexts; no LAN deployment or installed certificate trust",
+    "Physical controls, original launcher coexistence and serial hardware untested",
+    "Known remote front-panel safety blockers unchanged"
+  ]
+}

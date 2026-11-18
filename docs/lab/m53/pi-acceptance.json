@@ -1,0 +1,51 @@
+{
+  "environment": "actual Raspberry Pi 3B+; installed original SIMH; disposable V7; SSH tunnel",
+  "pilotSHA256": "da39882d97e8dcaaa92a8ca309b850a97663d68c6d1ce1890968910e0bcadfed",
+  "browsers": [
+    {
+      "name": "chromium",
+      "passed": true,
+      "transcript": "login: dmr\n$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\npidpcheck\ntmp\nunix\nusr\n$ echo M53_chromium_7999ec70\nM53_chromium_7999ec70\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    },
+    {
+      "name": "firefox",
+      "passed": true,
+      "transcript": "$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\npidpcheck\ntmp\nunix\nusr\n$ echo M53_firefox_79aadce4\nM53_firefox_79aadce4\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    },
+    {
+      "name": "webkit",
+      "passed": true,
+      "transcript": "$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\npidpcheck\ntmp\nunix\nusr\n$ echo M53_webkit_1544414a\nM53_webkit_1544414a\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    }
+  ],
+  "independence": [
+    {
+      "browser": "chromium",
+      "operator": "echo CONSOLE_AFTER_CLOSE_chromium\r\nCONSOLE_AFTER_CLOSE_chromium\r\n$ "
+    },
+    {
+      "browser": "firefox",
+      "operator": "echo CONSOLE_AFTER_CLOSE_firefox\r\nCONSOLE_AFTER_CLOSE_firefox\r\n$ "
+    },
+    {
+      "browser": "webkit",
+      "operator": "echo CONSOLE_AFTER_CLOSE_webkit\r\nCONSOLE_AFTER_CLOSE_webkit\r\n$ "
+    }
+  ],
+  "restart": {
+    "passed": true,
+    "operator": "echo CONSOLE_WITHOUT_BRIDGE_M53\r\nCONSOLE_WITHOUT_BRIDGE_M53\r\n$ "
+  }
+}

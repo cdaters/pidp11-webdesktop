@@ -58,3 +58,22 @@ console, and perform operator-led cleanup. See the [M5.1 pilot design](../../doc
 for these boundaries. A simulator or listener must never be started merely by
 opening a browser. Guest socket loss requires an explicit operator restart; the
 pilot does not automatically reconnect or replay uncertain input.
+
+For an explicitly prepared pilot, the manual **Pi Linux shell** invocation from
+its private working directory is:
+
+```sh
+./bin/terminal-pilot-b8e9b74 \
+  -config config/terminals.json \
+  -token-file config/terminal.token \
+  -observer-token-file config/observer.token \
+  -tls-cert config/terminal-cert.pem \
+  -tls-key config/terminal-key.pem
+```
+
+That filename identifies the tested candidate; it is not an installed PATH command.
+Start the independently supervised disposable guest and verify its listener first.
+Stop this bridge through its identified process with SIGTERM; it never shuts down
+the guest. The [M5.3 report](../../docs/lab/M5.3.md) records the actual Screen-based
+Pi run, measurements, original-file checks and cleanup. Its completion is not
+permission to rerun a pilot on someone else's machine or enable autostart.

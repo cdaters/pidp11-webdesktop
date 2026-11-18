@@ -4,11 +4,11 @@
 
 **Why do the panel and devices say “simulated”?** Those labels identify their actual data source. A convincing panel or disk window is not evidence of a live device connection. Real guest terminals have a separate connection/status display.
 
-**Guest terminal says disconnected. Is something broken?** The normal local demo has no real guest service. The M5.0 lab must be explicitly prepared and started before Guest terminal can authenticate and connect. There is no one-click Pi installer yet.
+**Guest terminal says disconnected. Is something broken?** The normal local demo has no real guest service. A real-guest service must be explicitly prepared and started before Guest terminal can authenticate and connect. The completed M5.3 Pi pilot was shut down; it is not an always-on service. There is no one-click Pi installer yet.
 
 **Does the Trixie guide install the Web Desktop?** No. It prepares Oscar's original PiDP-11 software. Its successful installation history and still-unrepeated complete blank-card tutorial are explained in the [guide status](../installation/README.md).
 
-**Can I use my regular console at the same time?** Independence is a core requirement. The lab uses separate guest lines and an operator console. Physical-Pi/normal-launcher coexistence remains a proposed test, not a completed deployment.
+**Can I use my regular console at the same time?** Independence is a core requirement. The lab uses separate guest lines and an operator console. M5.3 also verified an independent Screen console on the actual Pi during browser closure and bridge restart. Normal-launcher and physical-panel coexistence remain separate future tests.
 
 **Typing does nothing.** Check whether the terminal is a mock or real guest, whether it is connected, and whether this window owns the keyboard. A viewer cannot type. For UNIX V7, also check the Backspace selection; DEL and `#` are different guest inputs.
 

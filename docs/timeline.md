@@ -17,5 +17,7 @@ Dates below are the recorded local commit dates (America/Phoenix), not invented 
 | M4.3.2 | 2026-11-17 | Continuous-form simulated LP0 printer with unchanged spool format | [Report](printer-m432.md) · [`947697a`](https://github.com/cdaters/pidp11-webdesktop/commit/947697a) |
 | M5.0 | 2026-11-18 | Browser communicates with genuine UNIX V7; independent guest lines and console verified in the lab | [Report](lab/M5.0.md) · [`156ce33`](https://github.com/cdaters/pidp11-webdesktop/commit/156ce33) |
 | M5.1 | 2026-11-18 | Actual Pi read-only compatibility assessment and unexecuted terminal-pilot plan | [Report](lab/M5.1.md) · [`ccfb972`](https://github.com/cdaters/pidp11-webdesktop/commit/ccfb972) |
+| M5.2 / M5.2.1 | 2026-11-18 | Public repository and contributor/engineering standards | [Publication](publication-m52.md) · [Review](technical/MAINTAINABILITY.md) |
+| M5.3 | 2026-11-18 | Genuine V7 terminal on the actual Pi, independent Screen console, modest measurements and verified cleanup | [Report](lab/M5.3.md) · implementation `b8e9b74` |
 
 M5.2 prepares this work for public collaboration with community documentation and licensing. It adds no physical-Pi integration. The [roadmap](../ROADMAP.md) separates the next experiments from longer-term ambitions.

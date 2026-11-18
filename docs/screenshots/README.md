@@ -35,3 +35,9 @@ These are existing captures of the actual application, not stock images or gener
 ![VT100-style sequences emitted by the guest](m50-real-vt100-sequences.png)
 
 *M5.0: genuine UNIX V7 input/output through the authenticated Go bridge in the isolated Mac-hosted Linux lab. The guest emitted the clear/home, reverse-video and line-drawing sequence shown above. [Reproduction and limitations](../lab/M5.0.md).*
+
+## Actual Pi terminal pilot — M5.3
+
+![Genuine UNIX V7 on the actual Pi](m53-pi-unix-v7.png)
+
+Actual Chromium capture through the SSH tunnel to the Pi-hosted V7 guest. Panel/peripheral windows remain simulated; the inherited footer is not a hardware-status indicator. See the [M5.3 evidence and cleanup](../lab/M5.3.md).

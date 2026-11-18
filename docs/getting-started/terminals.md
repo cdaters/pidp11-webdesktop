@@ -20,6 +20,8 @@ In M5.0, a genuine UNIX V7 guest ran under original SIMH/REALCONS in an isolated
 
 *Actual M5.0 guest output. The background front panel is still simulated; this is not a photograph or a live physical-Pi connection.*
 
+M5.3 subsequently ran genuine UNIX V7 on the actual Pi using its original installed simulator, a disposable disk and an independent Screen console. Chromium, Firefox and WebKit passed through an SSH tunnel. The pilot was shut down and originals verified unchanged; see the [Pi report and screenshot](../lab/M5.3.md).
+
 ## Sharing a guest line
 
 Several browsers can watch the same terminal output, but only one may own its keyboard. Connecting starts read-only. **Acquire keyboard** requests control, **Release keyboard** gives it up, and **Disconnect** closes that browser connection. A different guest line can have a different keyboard owner where the operating system supports it.

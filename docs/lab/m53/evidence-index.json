@@ -1,0 +1,75 @@
+{
+  "scope": "Private original evidence retained outside the public repository; paths are relative to the private M5.3 evidence directory. No credentials or disk images included.",
+  "files": [
+    {
+      "record": "pi-readiness.json",
+      "sha256": "9900c8f434f7f854f7ec2d29393ce0bd3f73c273a9d90776e53f3ae7afd3ba9a",
+      "bytes": 56543
+    },
+    {
+      "record": "pi-prepare-result.json",
+      "sha256": "df10454c2cccd2fdf404206a4801f8b9921fba922a46fdcd0cc39d991427c85f",
+      "bytes": 194
+    },
+    {
+      "record": "pi-guest-start.json",
+      "sha256": "ebd8a1cd7ad3d63e1450405c58134beac5c137d67dd6c437f8040d4109b61aac",
+      "bytes": 1100
+    },
+    {
+      "record": "pi-bridge-start.json",
+      "sha256": "3dc22d03587acc60c7f6610d437fadb7af134dd7ac3ec1d9031a107a19745af0",
+      "bytes": 135
+    },
+    {
+      "record": "pi-shutdown.json",
+      "sha256": "9aaddab591765841c6272119442608e177ed9071a6b80047e9a10de26f276953",
+      "bytes": 832
+    },
+    {
+      "record": "pi-cleanup.json",
+      "sha256": "3d6e3abd9ad22a733e2e92da0b734cf64459768abe877024b5a7c37227dd87ca",
+      "bytes": 7954
+    },
+    {
+      "record": "pi-evidence/original-manifest.json",
+      "sha256": "5ef2001dda138a6895df2c45762e4441643983505a6614ef433202228680053e",
+      "bytes": 12495
+    },
+    {
+      "record": "pi-evidence/health.jsonl",
+      "sha256": "c3b1ab3d7585f1eaf7cb68641e47da88d28ef4fe459e39c08331d22e063a56b5",
+      "bytes": 3069
+    },
+    {
+      "record": "pi-evidence/logs/operator.log",
+      "sha256": "4a0034a85b47fbbe473e08fcbe7091903bbfd2751fa3d0dd9090ad3f063f9c6e",
+      "bytes": 886
+    },
+    {
+      "record": "lab-shutdown.txt",
+      "sha256": "8baa2550f0c710e7ab9b68e9aaecd97898148bd717577eb6405930da6e2d4f68",
+      "bytes": 98
+    },
+    {
+      "record": "go-race.txt",
+      "sha256": "e40591f47519b42df2849d361eaec27fcb44c2b00ae9722c9800671e9298ac0c",
+      "bytes": 1195
+    },
+    {
+      "record": "go-vet.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "record": "browser-regression.txt",
+      "sha256": "36a74b63a75cf06263b183eea978fe604d1df39fa6abcae58a92ac44c727c8db",
+      "bytes": 7343
+    },
+    {
+      "record": "build.txt",
+      "sha256": "bcf65fae59b4d0c23a5c5b8359ee9e92137005a9e2bec1b928ff3025fafbc441",
+      "bytes": 1649
+    }
+  ]
+}

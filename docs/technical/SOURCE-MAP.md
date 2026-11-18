@@ -1,6 +1,6 @@
 # Source map and subsystem boundaries
 
-Read this alongside the [architecture decisions](../development/DECISIONS.md). The normal mock desktop, passive-observation lab and genuine guest-terminal lab are distinct entry points. None is a production Pi installation procedure.
+Read this alongside the [architecture decisions](../development/DECISIONS.md). The normal mock desktop, passive-observation lab, genuine guest-terminal lab and M5.3 terminal-only pilot are distinct entry points. None is a production Pi installation procedure.
 
 ## Go services and interfaces
 
@@ -10,6 +10,7 @@ Read this alongside the [architecture decisions](../development/DECISIONS.md). T
 | [`internal/panel`](../../internal/panel/hub.go) | Deterministic demonstration and its ownership arbiter. Takes bounded requests and emits snapshots/results under a mutex. No emulator, network, filesystem or GPIO access. Its memory is illustrative, not PDP-11 emulation. |
 | [`internal/web`](../../internal/web/serve.go) | Read-only embedded frontend and per-document content-security policy/style nonce. Build assets before compiling the executable. It neither authenticates terminal operations nor grants panel authority. |
 | [`cmd/terminal-lab`](../../cmd/terminal-lab/main.go), [`internal/terminalbridge`](../../internal/terminalbridge/bridge.go) | Operator-configured raw guest serial sockets to authenticated browser viewers. The command validates private files and a Linux network-none environment, owns TLS/listener setup and cancellation. Bridge owns guest connections; Endpoint owns viewer accounting and keyboard leases. HTTP handlers own WebSocket lifetime. No SIMH process control or automatic guest-line reconnect. |
+| [`cmd/terminal-pilot`](../../cmd/terminal-pilot/main.go) | M5.3 Linux pilot: one fixed DC11 endpoint and loopback HTTPS, reusing the same bridge/authentication/assets. Owns only its listener and guest socket, with no emulator lifecycle. Operator-provisioned private files and an SSH tunnel remain separate. [Actual Pi evidence](../lab/M5.3.md). |
 | [`internal/access`](../../internal/access/access.go) | Provisioned credentials to bounded cookie sessions and independent capabilities. Gate owns session/audit state under its mutex. Configure origin and clock before concurrent serving. Callers enforce the capability for each operation and close/release transports when access expires. An observer is not a keyboard owner. |
 | [`internal/blinkenbone`](../../internal/blinkenbone/xdr.go) | Pure bounded ONC RPC/XDR encoding/decoding, no sockets or emulator access. Procedure selects payload shape. Original IDL character vectors are four-byte XDR elements, not opaque byte strings. Malformed input returns errors; see [protocol and fixtures](../protocol.md). |
 | [`internal/labrpc`](../../internal/labrpc/server.go) | Loopback UDP/TCP RPC transport and PDP-11/70 descriptors. Server owns listeners and workers; its context bounds lifetime. Client serializes calls and does not discover/retry endpoints. UDP duplicate replies prevent repeated execution of a side-effecting input read. Panel callbacks execute under its lock and must not reenter Panel. |

@@ -10,15 +10,17 @@ These are directions for experimentation, not delivery promises. The [timeline](
 | M4.3.2 continuous-form printer | Bounded tractor-feed paper viewer and unchanged downloadable text spool; still simulated |
 | [M5.0 genuine UNIX V7 terminals](docs/lab/M5.0.md) | Actual guest commands, independent lines, observers, explicit keyboard ownership and reconnect in an isolated Mac-hosted Linux lab |
 | [M5.1 Pi compatibility assessment](docs/lab/M5.1.md) | Read-only installed-software/configuration assessment; no deployment or guest start |
+| M5.2 / M5.2.1 community foundations | Public repository, contributor documentation, engineering standards and source map |
+| [M5.3 actual Pi terminal pilot](docs/lab/M5.3.md) | Genuine V7 on the installed simulator, one DC11 line, three browser engines, Screen independence and verified cleanup; no physical panel |
 
-## M5.2 — sharing the work
+## Sharing the work
 
 Public GitHub source, authentic screenshots, beginner and developer documentation, the headless Trixie guide, original-code MIT licensing and preserved development history. This publication milestone does not advance the live integration status.
 
 ## Next investigations
 
-- **Controlled physical-Pi terminal pilot:** prepare a reviewed terminal-only entry point, then test a disposable UNIX V7 copy on DC11 line 0 after explicit approval. The [pilot plan](docs/lab/M5.1-pilot-plan.md) has not been executed.
-- **Original-launcher coexistence:** retain the ordinary console and physical route while investigating an opt-in guest profile. No distribution switcher is implemented.
+- **Pilot follow-up:** review durable credentials/certificate provisioning, service isolation and sustained performance separately. The first controlled Pi terminal pilot is complete; no service remains running.
+- **Original-launcher coexistence:** retain the ordinary console and physical route while investigating an opt-in guest profile after assembly and explicit approval. The standalone M5.3 Screen session did not exercise that launcher or its panel daemon. No distribution switcher is implemented.
 - **Additional guests:** validate the actual driver, login and serial-line requirements of each operating system; host device support alone is insufficient.
 - **Live panel observation:** build on the passive-observation lab without adding side-effecting panel input reads. This is separate from remote control.
 - **Physical serial coexistence:** reserve independent lines and use stable device identities when the owner's optional serial hardware is available.

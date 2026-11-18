@@ -1,6 +1,6 @@
 # Development and tests
 
-Work on a local clone. The normal demonstration does not require a Pi. Application behavior remains the accepted M5.0 implementation; later milestones add assessment, publication documentation and contributor/readability improvements. Read the [coding standards](CODING-STANDARDS.md) and [source map](SOURCE-MAP.md) before changing a subsystem.
+Work on a local clone. The normal demonstration does not require a Pi. The normal application remains a mock desktop. M5.3 adds a separate terminal-only pilot command while retaining the proven M5.0 bridge and laboratory safeguards. Read the [coding standards](CODING-STANDARDS.md) and [source map](SOURCE-MAP.md) before changing a subsystem.
 
 ## Browser development
 
@@ -51,7 +51,11 @@ Follow the [M5.0 runbook](../lab/M5.0-runbook.md). Its current automation target
 
 The first image build fetches pinned public upstream source/packages. Runtime guest tests use a disposable network-none container; containers are development tools, not a proposed Pi deployment dependency. Guest media is obtained separately and verified. No disk images, credentials, container images or emulator binaries are distributed in this repository.
 
-The actual guest browser script is `lab/m50/browser.mjs`. The intercepted fixture is `browser-tests/guest.spec.ts`. Keep those evidence categories distinct. Do not rerun long control/stress campaigns for a prose or screenshot change.
+For the new single-line pilot binary, follow the [M5.3 lab replay](../../lab/m53/README.md). The actual-Pi result and cleanup are recorded in [M5.3](../lab/M5.3.md); replaying that hardware work requires separate authorization.
+
+If port 8080 is occupied, start your own mock server on another loopback port and set `PIDP11_TEST_BACKEND` for the artifact tests, for example `PIDP11_TEST_BACKEND=http://127.0.0.1:8081/ npm run test:browser`. Do not stop an unrelated service.
+
+The original guest browser script is `lab/m50/browser.mjs`. The intercepted fixture is `browser-tests/guest.spec.ts`. Keep those evidence categories distinct. Do not rerun long control/stress campaigns for a prose or screenshot change.
 
 ## Installation-guide checks
 

@@ -17,7 +17,8 @@ The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets an
 - [Reproduce M5.0](../lab/M5.0-runbook.md): disposable UNIX V7 and network-none Linux ARM64 lab on the Mac. Genuine guest acceptance is separate from intercepted browser fixtures.
 - [Terminal compatibility matrix](../lab/M4.3-terminals.md): tested renderer/encoder fixtures and limitations.
 - [M5.1 installed-Pi assessment](../lab/M5.1.md): binary/source provenance, guest-specific requirements, resources and future serial coexistence.
-- [Proposed first Pi pilot](../lab/M5.1-pilot-plan.md): not executed; current lab server is intentionally not deployable unchanged.
+- [M5.3 actual Pi pilot](../lab/M5.3.md): separate terminal-only entry point, genuine V7, independent Screen console, short Pi measurements and verified cleanup. [M5.3 lab replay](../../lab/m53/README.md).
+- [Original M5.1 pilot design](../lab/M5.1-pilot-plan.md): historical proposal; M5.3 records the actual execution and limits. The lab server still rejects a normally networked host.
 
 ## Panel protocol and safety experiments
 

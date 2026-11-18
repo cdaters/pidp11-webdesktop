@@ -1,0 +1,99 @@
+{
+  "samples": [
+    {
+      "name": "no browsers",
+      "seconds": 11.038564877000681,
+      "temperatureStart": 51,
+      "temperatureEnd": 50.5,
+      "flags": [
+        "throttled=0x0",
+        "throttled=0x0"
+      ],
+      "bridge": {
+        "rssMiBStart": 10.40625,
+        "rssMiBEnd": 10.40625,
+        "peakMiB": 10.40625,
+        "cpuPercentOneCore": 0.18118297281262394
+      },
+      "simulator": {
+        "rssMiBStart": 12.34375,
+        "rssMiBEnd": 12.34375,
+        "peakMiB": 12.34375,
+        "cpuPercentOneCore": 2.989519051408295
+      }
+    },
+    {
+      "name": "one idle observer",
+      "seconds": 10.814629362999767,
+      "temperatureStart": 50.5,
+      "temperatureEnd": 49.4,
+      "flags": [
+        "throttled=0x0",
+        "throttled=0x0"
+      ],
+      "bridge": {
+        "rssMiBStart": 11.48046875,
+        "rssMiBEnd": 11.48046875,
+        "peakMiB": 11.48046875,
+        "cpuPercentOneCore": 0.18493467809841235
+      },
+      "simulator": {
+        "rssMiBStart": 12.34375,
+        "rssMiBEnd": 12.34375,
+        "peakMiB": 12.34375,
+        "cpuPercentOneCore": 3.5137588838698344
+      }
+    },
+    {
+      "name": "five harmless echo commands",
+      "seconds": 4.607237459998942,
+      "temperatureStart": 50.5,
+      "temperatureEnd": 49.9,
+      "flags": [
+        "throttled=0x0",
+        "throttled=0x0"
+      ],
+      "bridge": {
+        "rssMiBStart": 11.49609375,
+        "rssMiBEnd": 11.90234375,
+        "peakMiB": 11.90234375,
+        "cpuPercentOneCore": 3.9068965201555153
+      },
+      "simulator": {
+        "rssMiBStart": 12.34375,
+        "rssMiBEnd": 12.34375,
+        "peakMiB": 12.34375,
+        "cpuPercentOneCore": 7.8137930403110305
+      }
+    },
+    {
+      "name": "browser closed",
+      "seconds": 11.036845812999672,
+      "temperatureStart": 51.5,
+      "temperatureEnd": 49.4,
+      "flags": [
+        "throttled=0x0",
+        "throttled=0x0"
+      ],
+      "bridge": {
+        "rssMiBStart": 11.90234375,
+        "rssMiBEnd": 11.90234375,
+        "peakMiB": 11.90234375,
+        "cpuPercentOneCore": 0.18121119329621457
+      },
+      "simulator": {
+        "rssMiBStart": 12.34375,
+        "rssMiBEnd": 12.34375,
+        "peakMiB": 12.34375,
+        "cpuPercentOneCore": 3.0805902860356476
+      }
+    }
+  ],
+  "latencyMs": [
+    775.0438340000001,
+    773.7935409999991,
+    766.0819579999988,
+    781.8778329999986,
+    778.1724170000016
+  ]
+}

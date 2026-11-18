@@ -4,7 +4,7 @@ A browser can be a window into a very different kind of computer. This project b
 
 The [PiDP-11](https://github.com/obsolescence/pidp11) is Oscar Vermeulen's replica front panel. A Raspberry Pi inside runs **SIMH**, a program that emulates the PDP-11 processor and devices. A historical operating system, such as UNIX V7, runs inside that emulated computer. We call it the **guest**.
 
-The long-term aim is to turn on a PiDP-11, select a guest using the physical switches, and open a browser terminal connected to that guest. Today you can explore the local desktop, and developers can reproduce a genuine UNIX V7 terminal in an isolated lab. The Web Desktop has not yet been deployed to the owner's physical Pi.
+The long-term aim is to turn on a PiDP-11, select a guest using the physical switches, and open a browser terminal connected to that guest. Today you can explore the local desktop, and developers can reproduce a genuine UNIX V7 terminal in an isolated lab. A [controlled terminal-only pilot on the actual Pi](../lab/M5.3.md) also passed and was shut down afterward. It is not a permanent installation or a physical-panel demonstration.
 
 ![Desktop with simulated panel and mock terminal](../screenshots/m431-desktop.png)
 
