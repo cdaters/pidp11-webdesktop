@@ -54,6 +54,9 @@ func Clone(v map[string]uint64) map[string]uint64 {
 	return out
 }
 
+// Panel maps the original descriptor order and value banks to RPC procedures.
+// Handle holds mu while invoking callbacks; configure them before serving and
+// never call back into Panel from a callback. Snapshot returns independent maps.
 type Panel struct {
 	mu              sync.Mutex
 	Controls        []bb.Control

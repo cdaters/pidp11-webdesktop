@@ -12,6 +12,11 @@ export interface PanelState {
   addressSelect: number; dataSelect: number; cycles: number; storedWords: number;
 }
 export interface CommandResult { accepted: boolean; message: string }
+/** Presentation boundary shared by local simulation, mock/lab transport and observation.
+ * Treat snapshots (including nested maps) as read-only. subscribe immediately sends
+ * the current view and returns an unsubscribe function owned by the caller.
+ * Accepted dispatch means adapter acceptance, not CPU completion; observers reject it.
+ * tick advances only the local demonstration; remote adapters own their clocks. */
 export interface PanelAdapter {
   snapshot(): Readonly<PanelState>;
   dispatch(command: Command): CommandResult | Promise<CommandResult>;

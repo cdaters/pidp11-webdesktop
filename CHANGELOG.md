@@ -2,6 +2,13 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The application package currently identifies M5.0; publication does not imply a new runtime feature.
 
+## M5.2.1 — 2026-11-18
+
+- Added permanent coding standards, a subsystem source map and a targeted maintainability review.
+- Made development instructions self-contained and expanded contributor setup, test and pull-request guidance.
+- Documented terminal/RPC ownership and historical compatibility contracts; expanded selected terminal lifecycle blocks for readability without changing behavior.
+- [Review and actual validation](docs/technical/MAINTAINABILITY.md). No Pi access, guest replay, stable release or checkpoint changes.
+
 ## M5.2 — 2026-11-18
 
 ### Added

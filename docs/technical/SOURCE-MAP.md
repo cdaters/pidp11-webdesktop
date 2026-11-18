@@ -1,0 +1,45 @@
+# Source map and subsystem boundaries
+
+Read this alongside the [architecture decisions](../development/DECISIONS.md). The normal mock desktop, passive-observation lab and genuine guest-terminal lab are distinct entry points. None is a production Pi installation procedure.
+
+## Go services and interfaces
+
+| Start here | Responsibility and boundary |
+|---|---|
+| [`cmd/webdesktop`](../../cmd/webdesktop/main.go), [`internal/server`](../../internal/server/server.go) | Serve embedded assets and mock panel REST/WebSocket requests. The command owns the listener and cancellation; `Server.Run` polls a `Hub`. Hub implementations synchronize requests and polling. Browser loss releases that session; it does not establish emulator state. |
+| [`internal/panel`](../../internal/panel/hub.go) | Deterministic demonstration and its ownership arbiter. Takes bounded requests and emits snapshots/results under a mutex. No emulator, network, filesystem or GPIO access. Its memory is illustrative, not PDP-11 emulation. |
+| [`internal/web`](../../internal/web/serve.go) | Read-only embedded frontend and per-document content-security policy/style nonce. Build assets before compiling the executable. It neither authenticates terminal operations nor grants panel authority. |
+| [`cmd/terminal-lab`](../../cmd/terminal-lab/main.go), [`internal/terminalbridge`](../../internal/terminalbridge/bridge.go) | Operator-configured raw guest serial sockets to authenticated browser viewers. The command validates private files and a Linux network-none environment, owns TLS/listener setup and cancellation. Bridge owns guest connections; Endpoint owns viewer accounting and keyboard leases. HTTP handlers own WebSocket lifetime. No SIMH process control or automatic guest-line reconnect. |
+| [`internal/access`](../../internal/access/access.go) | Provisioned credentials to bounded cookie sessions and independent capabilities. Gate owns session/audit state under its mutex. Configure origin and clock before concurrent serving. Callers enforce the capability for each operation and close/release transports when access expires. An observer is not a keyboard owner. |
+| [`internal/blinkenbone`](../../internal/blinkenbone/xdr.go) | Pure bounded ONC RPC/XDR encoding/decoding, no sockets or emulator access. Procedure selects payload shape. Original IDL character vectors are four-byte XDR elements, not opaque byte strings. Malformed input returns errors; see [protocol and fixtures](../protocol.md). |
+| [`internal/labrpc`](../../internal/labrpc/server.go) | Loopback UDP/TCP RPC transport and PDP-11/70 descriptors. Server owns listeners and workers; its context bounds lifetime. Client serializes calls and does not discover/retry endpoints. UDP duplicate replies prevent repeated execution of a side-effecting input read. Panel callbacks execute under its lock and must not reenter Panel. |
+| [`internal/broker`](../../internal/broker/broker.go), [`consumer`](../../internal/consumer/client.go) | Isolated arbitration and optional consumer-fence experiments. Broker owns effective switch state, leases and a bounded trace. The adapter translates browser requests; the fence client exchanges bounded local messages. Lock order is adapter → broker → fence client. Fence callbacks must not reenter broker. Quiescing is not proof of CPU halt after crash or delayed delivery; retain the [M4 counterexample](../lab/M4.md) and [M4.1 limits](../lab/M4.1.md). |
+| [`internal/observe`](../../internal/observe/observe.go) | Validate copies of existing REALCONS state and publish read-only snapshots. Store owns copied banks, freshness and retired producer identities under a mutex. Listener owns its Unix socket; caller supplies/cancels context. Stale data is labeled unavailable/stale rather than replaced with invented live lamps. No RPC input reads or switch writes. Linux peer checks are a separate platform-specific path. |
+
+RPC transport does not itself turn registration into a production service. The original C/Go interoperability and registration experiments are described in [M3](../lab/M3.md); their commands remain laboratory procedures.
+
+## Browser modules
+
+| Start here | Responsibility and resource owner |
+|---|---|
+| [`src/main.ts`](../../src/main.ts), [`windows.ts`](../../src/windows.ts) | Compose applications and choose adapters. WindowManager owns window DOM and lifecycle callbacks; mounted applications return cleanup functions. Preferences store geometry, not credentials or machine authority. Main is still larger than desirable; see the [review](MAINTAINABILITY.md). |
+| [`model.ts`](../../src/model.ts), [`remote.ts`](../../src/remote.ts), [`observed.ts`](../../src/observed.ts) | `PanelAdapter` connects read-only views and commands to local simulation, mock/lab control transport or read-only observation. Consumers own unsubscribe callbacks; network adapters own sockets/timers and expose `close`. Mock/lab reconnect is spectator-only and never replays commands. Observation cannot dispatch control. |
+| [`panel.ts`](../../src/panel.ts), [`paddles.ts`](../../src/paddles.ts), [`panel.css`](../../src/panel.css) | SVG layout, calibrated paddle geometry and accessible interaction. Input is a snapshot; output is DOM updates or adapter commands. The containing view owns DOM/listeners. Rendering does not decide whether control is authorized. Historical references live in [panel notes](../panel-reference-notes.md). |
+| [`guest-terminal.ts`](../../src/guest-terminal.ts) | xterm view of a genuine configured guest line. Owns the renderer, WebSocket, lease-renewal timer and callbacks. Its caller must run cleanup on window close, including when an asynchronous mount completes late. Socket identity excludes old callbacks; reconnect starts a fresh renderer and read-only view. |
+| [`terminal.ts`](../../src/terminal.ts), [`terminal-protocol.ts`](../../src/terminal-protocol.ts) | Mock terminal rendering, shared DEC key encoding, and offline byte/protocol fixtures. xterm handles VT escape sequences. The mock input filter is a line-editor convenience, not a guest parser. `TelnetNVT` and `TerminalChannel` are offline fixtures, not the M5.0 raw serial transport. `terminalDocument` scopes style nonces without changing global DOM behavior. |
+| [`devices.ts`](../../src/devices.ts) | Shared RAM-only disk/tape/catalog/printer state and mock terminal sessions. Main owns the instance; windows reflect that shared state. Catalog entries are metadata, not guest disk images. Bounds and failure checks stay in the model rather than individual renderers. |
+| [`printer-app.ts`](../../src/printer-app.ts), [`printer.ts`](../../src/printer.ts) | Printer UI and bounded visible-paper rendering. VirtualDevices retains the original spool; PaperViewer derives presentation rows without altering download text. The window owner disposes the resize observer and scheduled frame. See [printer semantics](../printer-m432.md). |
+
+## Genuine terminal lifecycle
+
+The [M5.0 harness](../../lab/m50/serve.py) configures SIMH DC11 and the disposable guest. The bridge connects once to configured raw lines. A browser authenticates, chooses a listed line and subscribes as an observer; keyboard acquisition is a separate explicit operation. Other viewers can continue receiving output.
+
+Endpoint's mutex protects membership, output credit, input sequence, lease and guest writes. A write is bounded by 250 ms and the remaining lease while holding that lock, so a release cannot overtake already accepted input. Delivery uncertainty closes the line and is never automatically replayed. A browser acknowledges output only after xterm consumes it; excessive unacknowledged output removes that viewer rather than blocking the guest reader.
+
+Disconnecting a browser releases its keyboard, not the guest. Closing the bridge detaches its raw sockets without issuing guest shutdown. The operator harness/conventional console owns guest startup and shutdown. DC11 availability alone does not establish a working login line: each guest needs its actual serial driver and login configuration checked.
+
+## Test and build entry points
+
+[`development.md`](development.md) is the command reference. Go tests sit beside their packages; TypeScript model tests live in `tests/`. `integration/remote.test.ts` replaces the browser socket with a deterministic fixture. `browser-tests/` exercises actual browser engines but includes intercepted guest/observation endpoints. Only the separately configured `lab/m50/browser.mjs` exercises the genuine V7 guest.
+
+`scripts/build.sh` generates browser/embedded assets and mock executables. `lab/build-image.sh` fetches pinned public upstream source and builds a local lab image. The M5.0 runbook documents media preparation, the network-none runtime, forwarding and cleanup. Do not infer a live Pi test from any of these local checks.

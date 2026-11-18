@@ -69,7 +69,7 @@ The separate **Guest terminal** needs the explicitly configured M5.0 lab service
 |---|---|
 | Understand the desktop and guest terminals | [Beginner guide](docs/getting-started/README.md) |
 | See how the project evolved | [Development timeline](docs/timeline.md) and [changelog](CHANGELOG.md) |
-| Inspect the implementation | [Technical guide](docs/technical/README.md) and [architecture decisions](docs/development/DECISIONS.md) |
+| Inspect the implementation | [Technical guide](docs/technical/README.md), [coding standards](docs/technical/CODING-STANDARDS.md) and [architecture decisions](docs/development/DECISIONS.md) |
 | Prepare Oscar's original software on Trixie Lite | [Headless installation guide](docs/installation/README.md) — **not a Web Desktop installer** |
 | Review the actual Pi findings | [M5.1 assessment](docs/lab/M5.1.md) and [unexecuted pilot plan](docs/lab/M5.1-pilot-plan.md) |
 | Suggest an idea, report a bug or help | [Contributing](CONTRIBUTING.md), [Issues](https://github.com/cdaters/pidp11-webdesktop/issues) and [Discussions](https://github.com/cdaters/pidp11-webdesktop/discussions) |

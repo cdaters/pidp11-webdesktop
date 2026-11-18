@@ -14,6 +14,8 @@ import (
 	"time"
 )
 
+// Handler maps decoded RPC calls to replies and must tolerate concurrent callers.
+// GET-input calls can advance REALCONS switch state; they are not observation APIs.
 type Handler interface{ Handle(bb.Call) bb.Payload }
 type cached struct {
 	request, reply []byte
@@ -182,6 +184,8 @@ func (s *Server) serveUDP(ctx context.Context) {
 		s.mu.Lock()
 		old, ok := s.cache[key]
 		var reply []byte
+		// Replay the original reply for an identical UDP retransmission. Calling
+		// the handler again could consume a second switch edge for one request.
 		if ok && now.Sub(old.at) < 35*time.Second {
 			if bytes.Equal(old.request, request) {
 				reply = old.reply

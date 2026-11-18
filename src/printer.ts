@@ -55,6 +55,9 @@ export function diagnosticPrinterSample(): string {
 
 /** Sparse rows plus a bounded scroll surface handle even form-feed-heavy jobs.
  * Only visible rows and a small overscan are mounted. No per-character nodes. */
+/** Render only a bounded visible portion of a listing, never the full paper length.
+ * Owns a resize observer and scheduled frame; the window owner must call dispose.
+ * It may normalize display layout, but must never rewrite the downloadable spool. */
 export class PaperViewer {
   private listing = paginateSpool("");
   private source = "";

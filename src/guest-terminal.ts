@@ -2,10 +2,14 @@ import { decKey } from "./terminal-protocol.ts";
 import { terminalDocument } from "./terminal.ts";
 import type { Terminal } from "@xterm/xterm";
 
+/** Require a reviewed ASCII line without Return; submitting it is a separate action. */
 export function safeGuestPaste(text: string): string {
   if (!text.length || text.length > 256 || /[^\x20-\x7e\t]/.test(text)) throw Error("Paste one ASCII line, at most 256 characters, without Return or control characters.");
   return text;
 }
+/** Mount one viewer of a configured guest line, initially without keyboard ownership.
+ * The caller owns host and must invoke the returned cleanup when its window closes.
+ * This view owns xterm, its socket and renewal timer; it never owns guest lifecycle. */
 export async function mountGuestTerminal(host: HTMLElement) {
   const [{Terminal}] = await Promise.all([import("@xterm/xterm"),import("@xterm/xterm/css/xterm.css")]);
   if (!host.isConnected) return () => {};
@@ -33,8 +37,25 @@ export async function mountGuestTerminal(host: HTMLElement) {
     selector.disabled=!!socket || !selector.options.length;
     badge.textContent=connected ? owner ? "KEYBOARD OWNER" : "REAL GUEST · READ-ONLY" : "DISCONNECTED";
   };
-  const send=(message:object)=>{if(socket?.readyState!==WebSocket.OPEN)return false;if(socket.bufferedAmount>8192){disconnect('Input backlog; disconnected, no replay');return false;}socket.send(JSON.stringify(message));return true;};
-  const disconnect=(message='Disconnected · guest continues independently')=>{const old=socket;socket=undefined;owner=false;connected=false;old?.close();status.textContent=message;controls();};
+  const send = (message: object) => {
+    if (socket?.readyState !== WebSocket.OPEN) return false;
+    if (socket.bufferedAmount > 8192) {
+      disconnect('Input backlog; disconnected, no replay');
+      return false;
+    }
+    socket.send(JSON.stringify(message));
+    return true;
+  };
+  // Invalidate the socket before closing it so late callbacks cannot update a new view.
+  const disconnect = (message = 'Disconnected · guest continues independently') => {
+    const old = socket;
+    socket = undefined;
+    owner = false;
+    connected = false;
+    old?.close();
+    status.textContent = message;
+    controls();
+  };
   const input=(data:string)=>{
     if(!owner || !connected)return;
     if(!data.length || data.length>256 || /[^\x00-\x7f]/.test(data)){status.textContent='Input rejected: ASCII7, at most 256 bytes per event';return;}
@@ -56,7 +77,22 @@ export async function mountGuestTerminal(host: HTMLElement) {
   $<HTMLButtonElement>('[data-connect]').onclick=()=>{
     if(socket || !selector.value)return;
     const url=new URL(`/api/v1/terminals/${encodeURIComponent(selector.value)}/ws`,location.href);url.protocol=location.protocol==='https:'?'wss:':'ws:';
-    const ws=new WebSocket(url);socket=ws;seq=0;owner=false;connected=false;queued=0;handler.dispose();term.dispose();term=makeTerminal();term.open($(".guest-xterm"));configureKeys();handler=term.onData(input);status.textContent='Connecting · fresh display; no terminal history replay';controls();
+    // A fresh parser prevents a partial escape sequence from the old connection
+    // consuming new output. Keyboard authority and input sequence also start fresh.
+    const ws = new WebSocket(url);
+    socket = ws;
+    seq = 0;
+    owner = false;
+    connected = false;
+    queued = 0;
+    handler.dispose();
+    term.dispose();
+    term = makeTerminal();
+    term.open($(".guest-xterm"));
+    configureKeys();
+    handler = term.onData(input);
+    status.textContent = 'Connecting · fresh display; no terminal history replay';
+    controls();
     ws.onmessage=e=>{
       if(socket!==ws)return;
       try{const f=JSON.parse(e.data);
@@ -64,8 +100,14 @@ export async function mountGuestTerminal(host: HTMLElement) {
         else if(f.type==='output'){
           const raw=atob(f.data);if(queued+raw.length>65536)throw Error('Renderer backlog');queued+=raw.length;
           const bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
-          // Stream directly into xterm: split control sequences keep parser state.
-          term.write(bytes,()=>{if(socket===ws){queued-=bytes.length;send({type:'ack',bytes:bytes.length});}});
+          // Preserve parser state across chunks on this connection. Return server
+          // credit only after xterm consumes the bytes, and never to a newer socket.
+          term.write(bytes, () => {
+            if (socket === ws) {
+              queued -= bytes.length;
+              send({ type: 'ack', bytes: bytes.length });
+            }
+          });
         }else throw Error('Invalid terminal frame');
       }catch{disconnect('Terminal protocol or output limit error; no replay');}
     };
@@ -80,5 +122,12 @@ export async function mountGuestTerminal(host: HTMLElement) {
   const hide=()=>disconnect('Page closed · guest connection remains independent');window.addEventListener('pagehide',hide);
   // Session inspection is read-only. It never connects to a line or grants input.
   void list().catch(()=>{});
-  return()=>{disposed=true;clearInterval(heartbeat);window.removeEventListener('pagehide',hide);disconnect();handler.dispose();term.dispose();};
+  return () => {
+    disposed = true;
+    clearInterval(heartbeat);
+    window.removeEventListener('pagehide', hide);
+    disconnect();
+    handler.dispose();
+    term.dispose();
+  };
 }

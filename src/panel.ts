@@ -36,6 +36,8 @@ const controls = [
   ["bus-cycle", "S INST", "S BUS CYCLE"],
   ["start", "START", ""],
 ];
+/** Original scalable artwork; calibration and historical references are recorded
+ * in docs/panel-reference-notes.md. Markup contains no transport or control policy. */
 export function panelMarkup() {
   return `<svg class="front-panel" viewBox="0 0 1200 688" role="group" aria-label="PDP-11/70 panel; photographic coordinate calibration, original SVG artwork">
 <title>PDP-11/70 operator panel</title>${paddleDefinitions()}<rect width="1200" height="688" fill="#bdb9a7"/><rect x="21" y="36" width="1156" height="630" rx="13" fill="#c7c5b3" stroke="#aaa999" stroke-width="3"/>
@@ -95,6 +97,8 @@ ${bits(22)
 ${controls.map(([action, top, bottom], i) => `<g role="${action === "halt" || action === "bus-cycle" ? "switch" : "button"}" tabindex="0" aria-label="${top} ${bottom}" ${action === "halt" || action === "bus-cycle" ? 'aria-checked="false"' : ""} data-action="${action}" id="action-${action}" class="panel-action ${action === "deposit" ? "up-action" : ""}"><rect class="switch-hit" x="${878 + i * 34.3}" y="447" width="34" height="157" fill="transparent"/><rect x="${878 + i * 34.3}" y="450" width="34" height="44" fill="${i % 2 ? "#713452" : "#b62d4b"}"/><text x="${895 + i * 34.3}" y="${bottom ? 469 : 476}" class="control-legend">${top}</text><text x="${895 + i * 34.3}" y="484" class="control-legend"${bottom === "S BUS CYCLE" ? ' textLength="31" lengthAdjust="spacingAndGlyphs"' : ""}>${bottom}</text>${paddle(i % 2 ? "purple" : "red", "rest", 879 + i * 34.3, 506)}</g>`).join("")}
 </svg>`;
 }
+/** Bind once per newly created panel DOM. The owning view removes that DOM on
+ * teardown; dispatch delegates authority and momentary/latch behavior to its adapter. */
 export function bindPanel(
   container: HTMLElement,
   dispatch: (command: Command) => unknown,

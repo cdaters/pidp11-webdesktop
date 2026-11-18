@@ -13,11 +13,15 @@ import (
 	"time"
 )
 
+// Server exposes an existing Bridge through an independently provisioned access
+// Gate. It does not dial guest lines or own the HTTP listener; the command does.
 type Server struct {
 	Bridge *Bridge
 	Auth   *access.Gate
 }
 
+// Handler serves assets and terminal-only routes. Configure Bridge and Auth before
+// serving; observation permission never implies keyboard permission.
 func (s *Server) Handler(assets fs.FS) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /api/v1/login", s.Auth.Login)
@@ -71,6 +75,8 @@ func (s *Server) stream(w http.ResponseWriter, r *http.Request) {
 	c.SetReadLimit(1024)
 	ctx, cancel := context.WithCancel(r.Context())
 	defer cancel()
+	// One goroutine reads requests; this handler writes frames. Either transport
+	// failure cancels the pair, and deferred Unsubscribe releases keyboard ownership.
 	go func() {
 		defer cancel()
 		for {

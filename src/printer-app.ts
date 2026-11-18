@@ -1,6 +1,9 @@
 import { PaperViewer, shortPrinterSample, diagnosticPrinterSample } from "./printer.ts";
 import type { VirtualDevices } from "./devices.ts";
 
+/** Bind the printer window to shared VirtualDevices. act routes state changes
+ * through desktop refresh; download receives original spool text. The caller must
+ * dispose the viewer when removing this window. No guest printer is attached. */
 export class PrinterApp {
   private viewer: PaperViewer;
   private jobs: HTMLElement;

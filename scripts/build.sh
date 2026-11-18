@@ -1,4 +1,6 @@
 #!/bin/sh
+# Mac development helper: requires npm dependencies and Go on PATH. Replaces
+# generated dist/, embedded frontend assets and bin/ outputs; never deploys them.
 set -eu
 cd "$(dirname "$0")/.."
 npm run build:server

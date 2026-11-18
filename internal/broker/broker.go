@@ -44,6 +44,10 @@ type Fence interface {
 	Revoke() error
 	Heartbeat() error
 }
+
+// Broker serializes arbitration under mu. Fence calls run while mu is held:
+// implementations must bound I/O and must not call back into the broker.
+// Only the exclusive REALCONS consumer may call Inputs; observers use snapshots.
 type Broker struct {
 	authority                        Fence
 	heartbeat                        time.Time

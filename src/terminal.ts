@@ -1,6 +1,8 @@
 import { MockInputFilter, decKey } from "./terminal-protocol.ts";
 import { MockTerminalSession } from "./devices.ts";
 import type { Terminal } from "@xterm/xterm";
+/** Mount the local command fixture, not a guest shell. The caller owns session;
+ * the returned cleanup releases its keyboard and disposes xterm/resize resources. */
 export async function mountTerminal(
   host: HTMLElement,
   session: MockTerminalSession,

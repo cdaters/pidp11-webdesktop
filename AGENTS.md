@@ -1,18 +1,30 @@
-# PiDP-11 Web Desktop
+# PiDP-11 Web Desktop working instructions
 
-This is an independent, local development project. Do not connect to the Raspberry Pi, discover it on the network, SSH to it, install anything on it, or change its official installation. Authorized work includes the mock Go backend and M3/M4/M4.1/M4.2/M4.3/M5.0 isolated Linux laboratory: original SIMH/REALCONS, loopback RPC server/client, simulated physical panel and control broker, and authenticated dedicated guest terminal lines using disposable verified public media. Run actual emulator/RPC interoperability only inside the disposable network-none lab, with no physical GPIO or production access. Do not connect to the Raspberry Pi even after backup completion; production integration requires separate explicit authorization. Preserve all checkpoints. Containers are development-only, never a deployment dependency.
+These instructions are self-contained for a standalone clone. Start with [CONTRIBUTING.md](CONTRIBUTING.md), the [coding standards](docs/technical/CODING-STANDARDS.md), and the [source map](docs/technical/SOURCE-MAP.md). No private workspace or AI tool is required for ordinary development.
 
-Keep emulator behavior in SIMH/REALCONS. Do not turn the demonstration model into a replacement PDP-11 emulator. Keep browser presentation independent of transport. Read docs/architecture.md and docs/protocol.md before adding adapters. Treat performance figures as targets until measured on authorized target hardware. Preserve source revision citations.
+## Engineering boundaries
 
-Run go test -race ./..., npm run check, npm test, and npm run build for behavior changes. Publication and deployment require explicit owner authorization for the current task. M5.2 authorizes public GitHub publication, not Pi deployment.
+- Keep the optional companion small: Go, TypeScript, HTML5, SVG and established emulator interfaces. SIMH/REALCONS own simulation; the demonstration model is not a replacement CPU.
+- Keep physical switches/LEDs, the original console, SSH, GNU Screen, supported serial terminals and guest lifecycle independent of the browser.
+- Do not discover, contact, SSH to, modify or deploy to the owner's Raspberry Pi without explicit authorization for the current task. Backup completion and public milestones do not authorize integration. Do not begin the live terminal pilot implicitly.
+- Actual emulator/RPC interoperability belongs in the documented disposable, network-none Linux lab, with verified public disposable media and no GPIO or production access. Containers are development tools, not deployment requirements. Keep original SIMH source unmodified where practical; record any isolated experimental patches distinctly.
+- Keep front-panel observation separate from control. Preserve the known START-release, polling and crash limitations; do not claim a browser disconnect proves a stopped CPU. Read [architecture](docs/architecture.md), [protocol](docs/protocol.md) and the relevant safety reports before changing adapters.
+- Preserve accepted commits, tags, test evidence, source notices and supplied artwork. Use new commits; never move a checkpoint to conceal a correction. Publication and deployment require explicit authorization for the current task. M5.2.1 authorizes the focused follow-up push, not Pi deployment or a stable release.
 
-For documentation and presentation work, also read `../AGENTS.md` when working in the full PiDP11 project. Keep explanations beginner-friendly, preserve evidence labels and original notices, and identify simulated behavior clearly. Presentation-only edits must not change control policy or trigger new integration experiments.
+## Development and verification
 
+Follow the linked coding standards: descriptive names, cohesive modules, documented APIs, explicit errors, resource ownership, locking and cancellation. Explain non-obvious historical/protocol behavior near the code. Avoid broad refactors or behavior changes for stylistic reasons.
 
-## Project identity and stewardship
+For behavior changes, run `go vet ./...`, `go test -race ./...`, `npm run check`, `npm test` and `npm run build`, with affected browser/integration checks described in [development.md](docs/technical/development.md). For prose/comments, validate references and contracts; for formatting, also compile/type-check and run relevant tests. Do not restart genuine guest experiments or long stress campaigns for editorial changes. Report actual test scope and failures.
 
-The author/maintainer is Craig Daters · RetroRealm.org. Original RetroRealm code and appropriate original software documentation use MIT, copyright 2026 Craig Daters. Keep upstream notices and asset provenance intact; do not imply that every third-party component shares the root license. Acknowledge Codex/ChatGPT assistance factually in credits, not as the primary identity.
+Keep resources bounded and performance claims tied to measurements. Mac/lab results are not Pi measurements. Capture the real application for screenshots, preserve baselines and distinguish mock, intercepted fixture, genuine lab and live hardware evidence.
 
-This is a preservation-focused hobby project. Favor useful functionality, historical accuracy, interoperability and welcoming community documentation. Address concrete third-party material questions individually; do not reopen broad speculative licensing investigations, remove functionality for theoretical concerns, or halt unrelated work over one asset. The owner handles legal judgments and rights-holder correspondence. Preserve the distinction between compatibility work and redistribution of specific materials.
+## Documentation and stewardship
 
-Keep private captures, credentials and guest/backup images outside public packages. Review history when publishing, preserve accepted tags and commits, and do not rewrite history automatically. Report actual demonstrations and current limitations accurately. No public milestone authorizes physical integration or remote panel control by itself.
+Write clear American English for intelligent readers who may be new to Linux. Identify the command environment, purpose, expected result and failure checkpoint where useful. Distinguish observed facts, reconstructed procedures and future plans. Preserve source records and state missing evidence instead of inventing results. Syntax-check installation examples without executing their disk, network or hardware actions.
+
+The author/maintainer is **Craig Daters · RetroRealm.org**. Original RetroRealm code and appropriate original software documentation use MIT, copyright 2026 Craig Daters. Retain separate upstream terms and provenance; do not imply official endorsement. Acknowledge Codex/ChatGPT factually in credits rather than project branding.
+
+This is a preservation-focused hobby project. Favor useful functionality, historical accuracy, interoperability and welcoming collaboration. The owner handles legal judgments and rights-holder correspondence. Address concrete asset questions individually; do not initiate speculative licensing investigations, remove functionality over theoretical concerns or freeze unrelated work.
+
+Keep credentials, private addresses/captures, personal backups and working guest disks out of commits and public packages. Inspect the material being published, including history when appropriate, without repeating completed publication work unnecessarily. Never rewrite history automatically.

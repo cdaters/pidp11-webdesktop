@@ -5,6 +5,7 @@ The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets an
 ## Start here
 
 - [Development environment and tests](development.md)
+- [Coding standards](CODING-STANDARDS.md), [source map](SOURCE-MAP.md) and [maintainability review](MAINTAINABILITY.md)
 - [Architecture decisions](../development/DECISIONS.md)
 - [Architecture overview and original proposal](../architecture.md)
 - [Go backend/API](../backend-milestone.md) and [frontend/window model](../frontend-m42.md)

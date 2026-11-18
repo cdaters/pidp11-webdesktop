@@ -14,10 +14,18 @@ import (
 	"time"
 )
 
+// MaxInput bounds a single ASCII7 keyboard operation, not an entire guest command.
 const MaxInput = 256
+
+// OutputCredit bounds unacknowledged guest bytes per viewer. A slow viewer is
+// disconnected rather than blocking the guest or other viewers.
 const OutputCredit = 65536
+
+// Lease limits keyboard authority unless the owning browser renews it.
 const Lease = 10 * time.Second
 
+// Config names an operator-selected raw serial endpoint, never a browser address.
+// DC11 setup and guest login configuration belong to the separate SIMH lab harness.
 type Config struct {
 	ID      string `json:"id"`
 	Label   string `json:"label"`
@@ -25,6 +33,7 @@ type Config struct {
 	Kind    string `json:"kind"`
 }
 
+// Validate accepts one to four unique, literal-loopback raw guest endpoints.
 func Validate(configs []Config) error {
 	if len(configs) == 0 || len(configs) > 4 {
 		return errors.New("one to four guest endpoints required")
@@ -43,6 +52,8 @@ func Validate(configs []Config) error {
 	return nil
 }
 
+// Frame carries per-viewer ownership state or guest bytes (base64 in JSON).
+// Epoch fences keyboard authority; it is not a guest execution acknowledgement.
 type Frame struct {
 	Type      string `json:"type"`
 	Data      []byte `json:"data,omitempty"`
@@ -52,6 +63,9 @@ type Frame struct {
 	Epoch     uint64 `json:"epoch"`
 	Message   string `json:"message,omitempty"`
 }
+
+// Client is a subscription owned by one WebSocket handler. Endpoint.mu protects
+// its accounting; done signals removal, while out is deliberately never closed.
 type Client struct {
 	out       chan Frame
 	done      chan struct{}
@@ -60,6 +74,11 @@ type Client struct {
 	rateStart time.Time
 	rateBytes int
 }
+
+// Endpoint owns one guest connection and up to eight viewers with one keyboard
+// owner. mu serializes membership, leases and guest writes. Helpers without their
+// own lock (send, remove, state, broadcastState, expire) require mu to be held.
+// Config and the injectable Now clock must not change after concurrent use begins.
 type Endpoint struct {
 	Config  Config
 	mu      sync.Mutex
@@ -71,11 +90,14 @@ type Endpoint struct {
 	Now     func() time.Time
 }
 
+// NewEndpoint creates a detached line. Callers outside New must validate c first.
 func NewEndpoint(c Config) *Endpoint {
 	return &Endpoint{Config: c, clients: map[*Client]bool{}, Now: time.Now}
 }
 
 // Attach is a local operator lifecycle action. No browser can choose an address.
+// Success transfers connection ownership to Endpoint and starts its reader;
+// failure leaves the caller responsible for closing conn. There is no retry.
 func (e *Endpoint) Attach(conn net.Conn) error {
 	e.mu.Lock()
 	defer e.mu.Unlock()
@@ -93,6 +115,7 @@ func (e *Endpoint) read(conn net.Conn) {
 	defer func() {
 		e.mu.Lock()
 		defer e.mu.Unlock()
+		// A reader from a previous attachment must not tear down a newer line.
 		if e.conn == conn {
 			conn.Close()
 			e.conn = nil
@@ -148,6 +171,9 @@ func (e *Endpoint) broadcastState(message string) {
 		e.send(c, e.state(c, message))
 	}
 }
+
+// Subscribe starts a fresh view without replaying guest output or granting input.
+// The caller must Unsubscribe when its transport ends.
 func (e *Endpoint) Subscribe() (*Client, error) {
 	e.mu.Lock()
 	defer e.mu.Unlock()
@@ -159,6 +185,8 @@ func (e *Endpoint) Subscribe() (*Client, error) {
 	e.send(c, e.state(c, "Fresh display; ongoing guest line, no history replay"))
 	return c, nil
 }
+
+// Unsubscribe releases this viewer's keyboard but leaves the guest line attached.
 func (e *Endpoint) Unsubscribe(c *Client) {
 	e.mu.Lock()
 	defer e.mu.Unlock()
@@ -172,7 +200,11 @@ func (e *Endpoint) expire() {
 		e.broadcastState("Keyboard lease expired")
 	}
 }
+
+// Tick expires idle keyboard authority; Bridge.Run calls it even without input.
 func (e *Endpoint) Tick() { e.mu.Lock(); defer e.mu.Unlock(); e.expire() }
+
+// Close detaches the socket and removes viewers; it does not stop the guest CPU.
 func (e *Endpoint) Close() {
 	e.mu.Lock()
 	defer e.mu.Unlock()
@@ -186,6 +218,8 @@ func (e *Endpoint) Close() {
 		e.remove(c)
 	}
 }
+
+// Connected reports attachment, not guest login or CPU state.
 func (e *Endpoint) Connected() bool { e.mu.Lock(); defer e.mu.Unlock(); return e.conn != nil }
 
 // Operation is a single bounded WS request. Sequence and generation fence stale input.
@@ -220,6 +254,8 @@ func (e *Endpoint) Operation(c *Client, op string, epoch, seq uint64, data []byt
 			e.until = e.Now().Add(Lease)
 		}
 	case "ack":
+		// Credit returns only after the browser renderer consumes output. Merely
+		// writing a WebSocket frame would hide an accumulating renderer backlog.
 		if n < 1 || n > c.pending {
 			return errors.New("invalid output acknowledgement")
 		}
@@ -246,6 +282,8 @@ func (e *Endpoint) Operation(c *Client, op string, epoch, seq uint64, data []byt
 			return errors.New("input rate exceeded")
 		}
 		c.lastSeq = seq
+		// Keep the lock across this bounded write so release cannot overtake it.
+		// Partial delivery is uncertain: disconnect instead of retrying a command.
 		budget := min(250*time.Millisecond, e.until.Sub(e.Now()))
 		e.conn.SetWriteDeadline(time.Now().Add(budget))
 		rest := data
@@ -269,8 +307,11 @@ func (e *Endpoint) Operation(c *Client, op string, epoch, seq uint64, data []byt
 	return nil
 }
 
+// Bridge owns the configured endpoints. Its map is fixed after New; individual
+// endpoints synchronize their own state. Connect is an operator setup action.
 type Bridge struct{ Endpoints map[string]*Endpoint }
 
+// New validates configuration and creates detached endpoints without dialing.
 func New(configs []Config) (*Bridge, error) {
 	if err := Validate(configs); err != nil {
 		return nil, err
@@ -281,6 +322,9 @@ func New(configs []Config) (*Bridge, error) {
 	}
 	return b, nil
 }
+
+// Connect attempts each configured line once and closes all lines on any failure.
+// Call during setup, before Run; do not run concurrent lifecycle operations.
 func (b *Bridge) Connect(ctx context.Context) error {
 	for _, e := range b.Endpoints {
 		conn, err := (&net.Dialer{Timeout: time.Second}).DialContext(ctx, "tcp", e.Config.Address)
@@ -296,11 +340,15 @@ func (b *Bridge) Connect(ctx context.Context) error {
 	}
 	return nil
 }
+
+// Close detaches all lines and viewers without sending guest shutdown commands.
 func (b *Bridge) Close() {
 	for _, e := range b.Endpoints {
 		e.Close()
 	}
 }
+
+// Run maintains leases until cancellation, then closes the owned endpoints.
 func (b *Bridge) Run(ctx context.Context) {
 	t := time.NewTicker(100 * time.Millisecond)
 	defer t.Stop()
@@ -316,6 +364,9 @@ func (b *Bridge) Run(ctx context.Context) {
 		}
 	}
 }
+
+// DecodeConfig reads bounded operator JSON, rejects extra fields/data, and validates
+// endpoints. It neither opens the configuration file nor closes the supplied reader.
 func DecodeConfig(r io.Reader) ([]Config, error) {
 	var c []Config
 	d := json.NewDecoder(io.LimitReader(r, 8193))

@@ -9,6 +9,8 @@ import (
 
 // Adapter connects the existing bounded browser transport to the lab broker.
 // The mock desktop does not construct this adapter.
+// mu protects per-client duplicate-request accounting. Lock order is Adapter.mu
+// then Broker.mu; broker code must not call back into Adapter while locked.
 type Adapter struct {
 	B       *Broker
 	mu      sync.Mutex

@@ -72,6 +72,8 @@ func (d *decoder) str(max uint32) string {
 	return s
 }
 func (d *decoder) vector() []byte {
+	// The original IDL uses char[], not opaque bytes: each element occupies a
+	// four-byte XDR word. C xdr_char may sign-extend bytes 0x80..0xff.
 	n := d.u()
 	if d.err != nil || n > MaxVector || uint64(n)*4 > uint64(len(d.b)-d.offset) {
 		d.err = ErrMalformed

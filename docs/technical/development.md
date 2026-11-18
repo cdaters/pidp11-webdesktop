@@ -1,6 +1,6 @@
 # Development and tests
 
-Work on a local clone. The normal demonstration does not require a Pi. Current application source is the accepted M5.0 implementation; M5.1 and M5.2 add assessment/publication documentation.
+Work on a local clone. The normal demonstration does not require a Pi. Application behavior remains the accepted M5.0 implementation; later milestones add assessment, publication documentation and contributor/readability improvements. Read the [coding standards](CODING-STANDARDS.md) and [source map](SOURCE-MAP.md) before changing a subsystem.
 
 ## Browser development
 
@@ -24,7 +24,7 @@ sh scripts/build.sh
 ./bin/webdesktop-macos
 ```
 
-Open `http://127.0.0.1:8080/?backend=mock` for the shared mock backend. It has no emulator/GPIO integration. For a native Linux development build, build browser assets with `npm run build:server`, then compile `./cmd/webdesktop` with Go into a local output directory. Windows-native development has not received the same validation as the recorded Mac environment.
+Open `http://127.0.0.1:8080/?backend=mock` for the shared mock backend. It has no emulator/GPIO integration. For a native Linux development build, run `npm run build:server`, `mkdir -p bin`, then `CGO_ENABLED=0 go build -o bin/webdesktop ./cmd/webdesktop` and start `./bin/webdesktop`. These commands run in the Linux development shell, not on the owner's Pi. Windows-native development has not received the same validation as the recorded Mac environment.
 
 The Mac build helper also creates a static Linux ARM64 mock executable. This is not a production terminal installer. `npm run build` creates `dist/prototype.html`, a self-contained offline demonstration whose policy disables network connections. The original M0 prototype is separately preserved under `checkpoints/m0/`.
 
@@ -34,9 +34,12 @@ The Mac build helper also creates a static Linux ARM64 mock executable. This is 
 npm run check
 npm test
 npm run test:integration
+go vet ./...
 go test -race ./...
 npm run build
 ```
+
+The TypeScript integration command uses a deterministic socket fixture. Go package tests cover real local HTTP/WebSocket interoperability; neither is a genuine guest test.
 
 For browser checks, install the Playwright engines locally if needed with `npx playwright install`. Start Vite on port 5173 and the built mock service on port 8080 in separate shells, then run `npm run test:browser`. The suite covers Chromium, Firefox and WebKit. Native Safari is a distinct test target; a WebKit pass is not a native Safari result.
 

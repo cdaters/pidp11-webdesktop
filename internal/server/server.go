@@ -1,3 +1,5 @@
+// Package server serves the loopback mock panel desktop and a pluggable lab Hub.
+// It owns browser sessions, not emulator lifecycle or production panel authority.
 package server
 
 import (
@@ -19,6 +21,9 @@ import (
 	"pidp11.local/webdesktop/internal/web"
 )
 
+// Hub separates panel transport from simulation/lab policy. Implementations must
+// synchronize concurrent HTTP/WebSocket calls with Run's polling goroutine and
+// return snapshots callers can read independently of later state changes.
 type Hub interface {
 	Connect(string) bool
 	Disconnect(string)

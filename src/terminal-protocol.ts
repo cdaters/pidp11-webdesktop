@@ -1,4 +1,6 @@
-/** Offline transport contracts. No network endpoint or guest connection is created. */
+/** Byte/key helpers and offline protocol fixtures; this module opens no connection.
+ * decKey is shared by mock and genuine xterm views. TerminalChannel and TelnetNVT
+ * are fixture models, not the M5.0 raw DC11 transport or xterm's VT100 parser. */
 export type Encoding = "ascii7" | "latin1-controls" | "utf8";
 export class TerminalDecoder {
   private utf8 = new TextDecoder("utf-8", { fatal: true });
@@ -10,6 +12,8 @@ export class TerminalDecoder {
     return Array.from(bytes, (b) => String.fromCharCode(b)).join("");
   }
 }
+/** Encode DEC keypad/cursor modes reported by xterm; undefined leaves other keys
+ * to xterm. SS3 (ESC O) and CSI (ESC [) are intentionally different sequences. */
 export function decKey(code: string, applicationKeypad: boolean, applicationCursor = false): string | undefined {
   const arrows: Record<string, string> = { ArrowUp: "A", ArrowDown: "B", ArrowRight: "C", ArrowLeft: "D" };
   if (arrows[code]) return `\x1b${applicationCursor ? "O" : "["}${arrows[code]}`;
