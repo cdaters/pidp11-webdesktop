@@ -4,6 +4,10 @@ A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's
 
 Web Desktop development and testing remain local to the Mac. During the separate pre-Oscar documentation review, original installation records were retrieved from the Pi read-only with the owner’s authorization; no Pi tests, installation changes, or Web Desktop deployment were performed. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation or guest OS images are used. Peripheral and system-management workflows are clearly labeled RAM-only prototypes.
 
+## M4.3.2 line-printer checkpoint
+
+LP0 now displays continuous tractor-feed paper with pale-blue rows, punched margins, page perforations, 80/132-column views and a bounded scrolling renderer. Queue behavior and downloaded spool data are unchanged. See the [printer report and tests](docs/printer-m432.md), [before/after](docs/screenshots/m432-printer-before-after.png), and [maximized listing](docs/screenshots/m432-printer-maximized.png). This remains a browser-only simulated printer; browser print export is deferred.
+
 ## M4.3.1 presentation checkpoint
 
 The presentation revision refines the existing shared SVG paddle curves, depth, spacing, and highlights. About and the footer now derive **M4.3** from the same `package.json` version (`0.4.3`); the checkpoint suffix identifies polish, not a new integration milestone. Contributor credits and truthful mock/observer labels remain visible. No control-policy or transport changes were made.
@@ -52,7 +56,7 @@ python3 lab/save-results.py
 
 The first command fetches the pinned public source and Debian build packages. Runtime tests have **only loopback networking**, no published ports, no privileged container and no physical devices. They do not contact the Pi. Containers are test infrastructure, not deployment dependencies. Test results go to `.research/lab-results`; the last command records a successful run in `docs/lab`. Use `--m3-only` or `--m4-only` with `lab/run.sh` for focused runs; save the combined results only after a complete successful run.
 
-Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, `checkpoint/m4.2`, `checkpoint/m4.3`, and `checkpoint/m4.3.1`. Golden-backup completion does not authorize production integration.
+Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, `checkpoint/m4.2`, `checkpoint/m4.3`, `checkpoint/m4.3.1`, and `checkpoint/m4.3.2`. Golden-backup completion does not authorize production integration.
 
 ## Build and run on the Mac
 

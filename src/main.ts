@@ -1,3 +1,4 @@
+import { PrinterApp } from "./printer-app.ts";
 import { APP_MILESTONE } from "./version.ts";
 import {
   SimulatedPanelAdapter,
@@ -449,9 +450,7 @@ function systemsHTML() {
       "",
     )}<a class="reference-link" href="https://obsolescence.dev/pidp11/PiDP-11_Manual.pdf" target="_blank" rel="noreferrer">Official PiDP-11 manual ↗</a>`;
 }
-function printerHTML() {
-  return `<div class="app-heading"><div><h2>Line printer / LP0</h2><p>Local text spool · bounded to 32 jobs of 16 KiB.</p></div><span class="source-tag">SIMULATION</span></div><div class="button-row"><button data-sample>Add sample job</button><button data-print>Print queue</button><button data-spool>Download spool</button><button data-clear>Clear queue</button></div><div class="printer-paper"><pre>${escape(devices.spool() || "LP0 READY\n\nQueue a demonstration listing, then print.\nOutput remains in this browser until downloaded.")}</pre></div><ul class="job-list">${devices.jobs.map((j) => `<li>#${j.id} ${escape(j.name)} <span>${j.state}</span></li>`).join("")}</ul>`;
-}
+const printerApps = new WeakMap<HTMLElement, PrinterApp>();
 function paperHTML() {
   return `<div class="app-heading"><div><h2>Paper tape</h2><p>Read and punch local bytes · 8 KiB per tape.</p></div><span class="source-tag">SIMULATION</span></div><div class="paper-columns"><section><h3>Reader / PTR</h3><label class="file-label">Load local tape<input type="file" data-paper-file aria-label="Load local paper tape"></label><p>${devices.paper.length} bytes loaded</p><div class="punched-strip" aria-label="First 32 bytes as punched holes">${Array.from(
     devices.paper.slice(0, 32),
@@ -495,11 +494,16 @@ function refreshApps() {
   }
 }
 function renderApp(id: string, el: HTMLElement) {
+  if (id === "printer") {
+    let app = printerApps.get(el);
+    if (!app) { app = new PrinterApp(el, devices, safe, download); printerApps.set(el, app); }
+    app.update(devices);
+    return;
+  }
   const html: Record<string, () => string> = {
     disks: () => mediaHTML(),
     tapes: () => mediaHTML(true),
     systems: systemsHTML,
-    printer: printerHTML,
     paper: paperHTML,
     sessions: sessionsHTML,
     diagnostics: diagnosticsHTML,
@@ -517,28 +521,6 @@ function renderApp(id: string, el: HTMLElement) {
           devices.boot(b.dataset.boot!);
           notify(`${b.dataset.boot}: simulation started. No guest OS booted.`);
         })),
-  );
-  el.querySelector<HTMLButtonElement>("[data-sample]")?.addEventListener(
-    "click",
-    () =>
-      safe(() =>
-        devices.queue(
-          "HELLO.MAC listing",
-          "\t.TITLE HELLO\n; SYNTHETIC LISTING — NO ASSEMBLER EXECUTED\nSTART:  MOV #MESSAGE,R1\n        HALT\nMESSAGE: .ASCIZ /HELLO, WORLD/\n\t.END START\n",
-        ),
-      ),
-  );
-  el.querySelector<HTMLButtonElement>("[data-print]")?.addEventListener(
-    "click",
-    () => safe(() => devices.print()),
-  );
-  el.querySelector<HTMLButtonElement>("[data-clear]")?.addEventListener(
-    "click",
-    () => safe(() => devices.clear()),
-  );
-  el.querySelector<HTMLButtonElement>("[data-spool]")?.addEventListener(
-    "click",
-    () => download("pidp11-demo-spool.txt", devices.spool()),
   );
   el.querySelector<HTMLInputElement>("[data-paper-file]")?.addEventListener(
     "change",
@@ -598,9 +580,9 @@ function openApp(id: string) {
   manager.open(id, title, el, {
     x: 90 + (manager.store.windows.length % 4) * 35,
     y: 70 + (manager.store.windows.length % 3) * 30,
-    width: id === "paper" ? 760 : 680,
-    height: id === "about" ? 680 : 470,
-  });
+    width: id === "printer" ? 960 : id === "paper" ? 760 : 680,
+    height: id === "printer" ? 740 : id === "about" ? 680 : 470,
+  }, () => { printerApps.get(el)?.dispose(); printerApps.delete(el); });
 }
 $("arrange-workspace").onclick = () => {
   openPanel();

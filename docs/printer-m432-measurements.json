@@ -1,0 +1,35 @@
+{
+  "environment": "One Chromium run on the development Mac; not Pi measurements or sustained benchmarks",
+  "measurements": [
+    {
+      "label": "dense",
+      "spoolCodeUnits": 525149,
+      "pages": 256,
+      "storedInkRows": 15040,
+      "parseMs": 6.9000000059604645,
+      "updateMs": 7,
+      "mountedRows": 37,
+      "scrollHeight": 303210
+    },
+    {
+      "label": "blank lines",
+      "spoolCodeUnits": 525149,
+      "pages": 7968,
+      "storedInkRows": 32,
+      "parseMs": 3,
+      "updateMs": 3.4000000059604645,
+      "mountedRows": 37,
+      "scrollHeight": 8000000
+    },
+    {
+      "label": "form feeds",
+      "spoolCodeUnits": 525149,
+      "pages": 524320,
+      "storedInkRows": 32,
+      "parseMs": 5.199999988079071,
+      "updateMs": 5,
+      "mountedRows": 37,
+      "scrollHeight": 8000000
+    }
+  ]
+}

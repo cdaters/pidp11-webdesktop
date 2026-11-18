@@ -36,6 +36,12 @@ for (const [label, url] of [
     await page.keyboard.type("ANSI");
     await page.keyboard.press("Enter");
     await expect(page.locator(".xterm-rows")).toContainText("ANSI");
+    await page.getByRole("button", { name: "Open Line printer", exact: true }).click();
+    const printer = page.locator('[data-window="printer"]');
+    await printer.locator('[data-sample]').click();
+    await printer.locator('[data-print]').click();
+    await expect(printer.locator('.printer-paper')).toContainText("HELLO, WORLD");
+    await expect(printer.locator('.paper-position')).toContainText("Page 1");
     expect(errors).toEqual([]);
   });
 }
