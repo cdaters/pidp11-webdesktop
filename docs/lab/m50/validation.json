@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-18",
+  "baseline": "947697a9680669ee95dd18520322fb24ade49b8c",
+  "version": "0.5.0",
+  "environment": {
+    "host": "Mac ARM64, OrbStack",
+    "kernel": "Linux 7.2.12-orbstack-00394-gbecdd6130068 aarch64",
+    "node": "26.9.0",
+    "go": "1.26.0",
+    "playwright": "1.65.1",
+    "network": "container network none; fixed loopback TLS stdio relay",
+    "piAccess": false
+  },
+  "checks": {
+    "goRaceAllPackages": "pass",
+    "typescriptCheck": "pass",
+    "typescriptTests": 46,
+    "transportIntegrationTests": 1,
+    "desktopBrowserTests": 45,
+    "genuineGuestEngines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "freshDiskReplay": "pass",
+    "previousDZ11RAMOnlyTransport": "pass",
+    "configFuzz": {
+      "secondsApprox": 6.3,
+      "executions": 447765,
+      "result": "pass"
+    },
+    "nativeSafari": "not run: remote automation disabled; setting unchanged",
+    "priorPanelFaultSoaks": "preserved, not rerun; no changes to their path",
+    "sourceArchiveAndBaseDisksAfterShutdown": "sha256 unchanged",
+    "inspectedUpstreamSource": "matches pinned archive",
+    "disposableGuestShutdown": "sync, independent SIMH monitor, quit; passed on initial and fresh replay"
+  },
+  "bridgeExecutable": {
+    "bytes": 7078050,
+    "sha256": "d0e5591e580b8141cf37bc198fd61a0d7cd46158987fdf8ec6f846d835bf34bf",
+    "format": "static stripped Linux ARM64 with embedded assets"
+  },
+  "measurements": {
+    "description": "Go server only; network-none Linux ARM64 on Mac OrbStack; 100 ticks/second. Short samples, not Pi validation.",
+    "phases": [
+      {
+        "name": "no browser, two guest lines attached",
+        "seconds": 10.053852917,
+        "cpuPercentOneCore": 0.09946435543224488,
+        "rssBeforeKiB": 10928,
+        "rssAfterKiB": 10928,
+        "threads": 8
+      },
+      {
+        "name": "one read-only browser, idle",
+        "seconds": 10.05441075,
+        "cpuPercentOneCore": 0.19891767401684876,
+        "rssBeforeKiB": 11552,
+        "rssAfterKiB": 11624,
+        "threads": 8
+      },
+      {
+        "name": "one keyboard owner, ten actual guest echo commands",
+        "seconds": 9.774913415999999,
+        "cpuPercentOneCore": 0.92072426802967,
+        "rssBeforeKiB": 11624,
+        "rssAfterKiB": 12816,
+        "threads": 8
+      },
+      {
+        "name": "browser closed, guest lines still attached",
+        "seconds": 10.054059166000004,
+        "cpuPercentOneCore": 0.19892463004031613,
+        "rssBeforeKiB": 12816,
+        "rssAfterKiB": 12816,
+        "threads": 8
+      }
+    ],
+    "commandLatencyMs": [
+      418.83820800000103,
+      495.59141699999964,
+      497.9359579999982,
+      499.5679999999993,
+      414.1471249999995,
+      412.83545799999774,
+      498.5862500000003,
+      416.0572920000013,
+      495.0777080000007,
+      498.11049999999886
+    ]
+  },
+  "limits": [
+    "Short bridge-only samples, not Pi or long-soak measurements",
+    "No PSS or peak-memory measurement",
+    "Command timings include browser automation, fixed lab relay and guest execution",
+    "No physical Screen/SSH/serial/network or GPIO validation"
+  ],
+  "checkpoint": "checkpoint/m5.0"
+}

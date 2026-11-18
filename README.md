@@ -1,8 +1,14 @@
 # PiDP-11 Web Desktop
 
-A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M4.3: historical paddles, offline security and recovery hardening, terminal fixtures and extended stability testing.** The normal Mac executable remains mock-only; the separate Linux fixture exercises actual REALCONS.
+A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M5.0: authenticated browser terminals communicating with genuine UNIX V7 in an isolated Linux laboratory.** The normal Mac executable remains mock-only; the separate terminal-lab executable serves real guest lines using original SIMH/REALCONS.
 
-Web Desktop development and testing remain local to the Mac. During the separate pre-Oscar documentation review, original installation records were retrieved from the Pi read-only with the owner’s authorization; no Pi tests, installation changes, or Web Desktop deployment were performed. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. No physical GPIO, production installation or guest OS images are used. Peripheral and system-management workflows are clearly labeled RAM-only prototypes.
+Web Desktop development and testing remain local to the Mac. During the separate pre-Oscar documentation review, original installation records were retrieved from the Pi read-only with the owner’s authorization; no Pi tests, installation changes, or Web Desktop deployment were performed. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. M5.0 uses disposable copies of a verified public guest image; original media and the Pi installation remain untouched. No Pi access occurred during M5.0. Peripheral and system-management workflows remain clearly labeled RAM-only prototypes.
+
+## M5.0 real guest terminal checkpoint
+
+Chromium, Firefox and WebKit execute real guest commands through the bounded Go bridge. Multiple browsers can observe one line, with an explicit keyboard owner; separate DC11 lines have independent owners. Conventional guest access and the original operator console continue while the browser closes or the bridge stops. Screen is never taken over. The fixed 80 × 24 terminal adds reviewed paste and explicit DEL/BS/UNIX V7 erase selection.
+
+See the [M5.0 architecture, results and limits](docs/lab/M5.0.md), [reproducible Mac laboratory procedure](docs/lab/M5.0-runbook.md), [actual guest screenshot](docs/screenshots/m50-real-unix-v7.png), and [measured resources](docs/lab/m50/validation.json). Production deployment, remote panel control and real peripherals remain separately gated. The continuous-form printer and all earlier safety evidence are preserved.
 
 ## M4.3.2 line-printer checkpoint
 
@@ -56,7 +62,7 @@ python3 lab/save-results.py
 
 The first command fetches the pinned public source and Debian build packages. Runtime tests have **only loopback networking**, no published ports, no privileged container and no physical devices. They do not contact the Pi. Containers are test infrastructure, not deployment dependencies. Test results go to `.research/lab-results`; the last command records a successful run in `docs/lab`. Use `--m3-only` or `--m4-only` with `lab/run.sh` for focused runs; save the combined results only after a complete successful run.
 
-Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, `checkpoint/m4.2`, `checkpoint/m4.3`, `checkpoint/m4.3.1`, and `checkpoint/m4.3.2`. Golden-backup completion does not authorize production integration.
+Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, `checkpoint/m4.2`, `checkpoint/m4.3`, `checkpoint/m4.3.1`, `checkpoint/m4.3.2`, and `checkpoint/m5.0`. Golden-backup completion does not authorize production integration.
 
 ## Build and run on the Mac
 

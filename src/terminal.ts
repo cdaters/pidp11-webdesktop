@@ -106,7 +106,7 @@ export async function mountTerminal(
 
 /** Scoped document facade: only xterm-created style elements receive the server
  * nonce. No global DOM monkey-patch, no policy changes, no guest-derived CSS. */
-function terminalDocument(): Document {
+export function terminalDocument(): Document {
   const nonce = document.querySelector<HTMLMetaElement>(
     'meta[name="terminal-style-nonce"]',
   )?.content;

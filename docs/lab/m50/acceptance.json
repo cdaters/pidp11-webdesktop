@@ -1,0 +1,57 @@
+{
+  "source": "Genuine UNIX V7 under original pinned SIMH/REALCONS; not transport fixtures",
+  "browsers": [
+    {
+      "name": "chromium",
+      "passed": true,
+      "transcript": "login: dmr\n$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\ntmp\nunix\nusr\n$ echo M50_chromium_5ab95582\nM50_chromium_5ab95582\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "concurrentViewers": 3,
+      "independentKeyboardLines": 2,
+      "disconnectReconnect": true,
+      "refreshReadOnly": true,
+      "guestVT100Output": true
+    },
+    {
+      "name": "firefox",
+      "passed": true,
+      "transcript": "$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\ntmp\nunix\nusr\n$ echo M50_firefox_ff938908\nM50_firefox_ff938908\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "concurrentViewers": 3,
+      "independentKeyboardLines": 2,
+      "disconnectReconnect": true,
+      "refreshReadOnly": true,
+      "guestVT100Output": true
+    },
+    {
+      "name": "webkit",
+      "passed": true,
+      "transcript": "$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\ntmp\nunix\nusr\n$ echo M50_webkit_696aad6c\nM50_webkit_696aad6c\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "concurrentViewers": 3,
+      "independentKeyboardLines": 2,
+      "disconnectReconnect": true,
+      "refreshReadOnly": true,
+      "guestVT100Output": true
+    }
+  ],
+  "independence": [
+    {
+      "browser": "chromium",
+      "traditional": "echo INDEPENDENT_chromium\r\nINDEPENDENT_chromium\r\n$ ",
+      "operator": "echo OPERATOR_chromium\r\nOPERATOR_chromium\r\n$ "
+    },
+    {
+      "browser": "firefox",
+      "traditional": "echo INDEPENDENT_firefox\r\nINDEPENDENT_firefox\r\n$ ",
+      "operator": "echo OPERATOR_firefox\r\nOPERATOR_firefox\r\n$ "
+    },
+    {
+      "browser": "webkit",
+      "traditional": "echo INDEPENDENT_webkit\r\nINDEPENDENT_webkit\r\n$ ",
+      "operator": "echo OPERATOR_webkit\r\nOPERATOR_webkit\r\n$ "
+    }
+  ],
+  "restart": {
+    "passed": true,
+    "traditional": "echo GUEST_WITHOUT_BRIDGE\r\nGUEST_WITHOUT_BRIDGE\r\n$ ",
+    "operator": "echo CONSOLE_WITHOUT_BRIDGE\r\nCONSOLE_WITHOUT_BRIDGE\r\n$ "
+  }
+}

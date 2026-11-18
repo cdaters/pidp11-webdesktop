@@ -48,7 +48,8 @@ const icon = (id: string) =>
   `<svg viewBox="0 0 32 32" aria-hidden="true">${icons[id] ?? icons.terminal}</svg>`;
 const apps = [
   ["panel", "Front panel", "PDP-11/70"],
-  ["terminal", "Terminal", "Independent session"],
+  ["terminal", "Terminal", "Independent mock session"],
+  ["guest", "Guest terminal", "Authenticated real guest line · laboratory"],
   ["disks", "Disk drives", "RK05 / RL02"],
   ["tapes", "Magnetic tape", "TU10 transport"],
   ["paper", "Paper tape", "Reader & punch"],
@@ -559,7 +560,18 @@ function renderApp(id: string, el: HTMLElement) {
     (b) => (b.onclick = () => manager.restore(b.dataset.focus!)),
   );
 }
+function openGuestTerminal() {
+  if (manager.store.windows.some(w => w.id === "guest")) { manager.restore("guest"); return; }
+  if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
+  const el = body("Loading guest terminal…"); el.classList.add("guest-terminal-app");
+  let dispose = () => {};
+  manager.open("guest", "Real guest · VT100 laboratory", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
+  void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el)).then(cleanup => {
+    if (el.isConnected) dispose = cleanup; else cleanup();
+  }).catch(() => { el.textContent = "Guest terminal renderer unavailable"; });
+}
 function openApp(id: string) {
+  if (id === "guest") return openGuestTerminal();
   if (id === "panel") return openPanel();
   if (id === "terminal") return openTerminal();
   if (manager.store.windows.some((w) => w.id === id)) {
@@ -575,7 +587,7 @@ function openApp(id: string) {
   const el = body("");
   el.classList.add("utility-app");
   if (id === "about")
-    el.innerHTML = `<div class="about-brand"><img src="${redLogo}" alt="DIGITAL historical logo"><h2>PiDP-11 Web Desktop</h2><p>An independent companion project.<br>Not an official Digital Equipment Corporation product.</p></div><p><span data-app-version>${APP_MILESTONE}</span> · Go backend with a TypeScript/HTML5/SVG desktop, inspired by The High Nibble's IMSAI 8080 interface.</p><p>Built as an optional companion to Oscar Vermeulen's PiDP-11, with SIMH and Jörg Hoppe's BlinkenBone/REALCONS informing the isolated laboratory work. Terminal rendering uses xterm.js.</p><p>${observeMode ? 'The panel is in passive laboratory-observation mode; its connection status is shown separately.' : 'This demonstration uses simulated panel data. No real PiDP-11 is connected.'} The four mock terminals and in-memory media demonstrations are local fixtures, not guest OS sessions or SIMH-mounted disks.</p><h3>Keyboard</h3><dl class="diagnostic-grid"><dt>Alt + 1</dt><dd>Front panel</dd><dt>Alt + 2</dt><dd>New terminal</dd><dt>Alt + \x60</dt><dd>Cycle windows</dd><dt>Titlebar double-click</dt><dd>Maximize / restore</dd><dt>Resize handle + arrows</dt><dd>Keyboard resize (Shift = larger step)</dd><dt>Panel Tab + Space</dt><dd>Operate a focused switch</dd></dl><p class="app-note">Only window geometry is saved locally. Credentials, control leases, guest state and media contents are not persisted.</p>`;
+    el.innerHTML = `<div class="about-brand"><img src="${redLogo}" alt="DIGITAL historical logo"><h2>PiDP-11 Web Desktop</h2><p>An independent companion project.<br>Not an official Digital Equipment Corporation product.</p></div><p><span data-app-version>${APP_MILESTONE}</span> · Go backend with a TypeScript/HTML5/SVG desktop, inspired by The High Nibble's IMSAI 8080 interface.</p><p>Built as an optional companion to Oscar Vermeulen's PiDP-11, with SIMH and Jörg Hoppe's BlinkenBone/REALCONS informing the isolated laboratory work. Terminal rendering uses xterm.js.</p><p>${observeMode ? 'The panel is in passive laboratory-observation mode; its connection status is shown separately.' : 'This demonstration uses simulated panel data. No real PiDP-11 is connected.'} The four mock terminals and in-memory media demonstrations are local fixtures, not guest OS sessions or SIMH-mounted disks. The separate Guest terminal connects to genuine guest lines only through the authenticated isolated-lab service.</p><h3>Keyboard</h3><dl class="diagnostic-grid"><dt>Alt + 1</dt><dd>Front panel</dd><dt>Alt + 2</dt><dd>New terminal</dd><dt>Alt + \x60</dt><dd>Cycle windows</dd><dt>Titlebar double-click</dt><dd>Maximize / restore</dd><dt>Resize handle + arrows</dt><dd>Keyboard resize (Shift = larger step)</dd><dt>Panel Tab + Space</dt><dd>Operate a focused switch</dd></dl><p class="app-note">Only window geometry is saved locally. Credentials, control leases, guest state and media contents are not persisted.</p>`;
   else renderApp(id, el);
   manager.open(id, title, el, {
     x: 90 + (manager.store.windows.length % 4) * 35,

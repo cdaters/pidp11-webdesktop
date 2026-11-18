@@ -83,7 +83,7 @@ export function readPreferences(raw: string | null): Map<string, Rect> {
       const r = v as Record<string, unknown>;
       if (
         typeof r.id !== "string" ||
-        !/^(panel|disks|tapes|paper|printer|systems|sessions|diagnostics|about|terminal-[1-4])$/.test(
+        !/^(panel|guest|disks|tapes|paper|printer|systems|sessions|diagnostics|about|terminal-[1-4])$/.test(
           r.id,
         )
       )

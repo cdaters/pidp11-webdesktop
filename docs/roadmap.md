@@ -89,3 +89,12 @@ The [M4.3 report](lab/M4.3.md) supersedes the earlier recommendation to start M4
 | Physical-only access | Original-binary rollback and independent DZ lines remain laboratory tests; clean RAM-device reset is fixture initialization, not guest-safe rollback. |
 
 Go remains the backend choice. The existing reused UDP buffer materially reduces allocation volume; language replacement is not justified by these measurements. Preserve required physical sampling and watchdog timing while profiling before further optimization. The companion observer remains optional and outside the original RPC route.
+
+
+## M5.0 guest-terminal milestone — 2026-11-18
+
+[M5.0](lab/M5.0.md) delivers real browser interaction with UNIX V7 under original SIMH/REALCONS, using dedicated DC11 lines and independent keyboard leases. All three automated browser engines pass the genuine demonstration, including bridge interruption and conventional-console continuity. The [runbook](lab/M5.0-runbook.md) repeats it from a fresh public-image copy. The normal service, panel and peripherals retain their simulated behavior.
+
+The next decision is a separately reviewed **terminal-only integration proposal**: guest/line inventory, endpoint identity, user authentication and certificates, coexistence with conventional and future physical serial terminals, guest-safe lifecycle and authorized Pi resource measurement. No installation is authorized by this milestone. Keep remote panel-control, real-media and distribution-switcher work behind their own gates. Product Modes A/B/C are assessed in the report and are distinct from earlier broker-mode labels.
+
+M5.0's short Mac-hosted Linux bridge samples are approximately 10.7–12.5 MiB RSS and 0.1–0.9% of one core; these are neither Pi measurements nor a long-duration soak. Preserve the target table above. Add a terminal-only target of <100 ms p95 added transport latency, measured separately from guest response time under an authorized LAN workload. The observed short full-command times include browser automation, forwarding and guest processing and do not validate that target.
