@@ -9,7 +9,7 @@ Actual development milestones, newest first. These are checkpoints, not stable s
 - Community README, beginner/developer navigation, philosophy, roadmap and architecture decisions.
 - MIT licensing for original RetroRealm materials, credits, contribution and security guidance.
 - Public edition of the headless Trixie guide, preserving command blocks and reproduction qualifications.
-- Publication preparation with existing authentic screenshots and preserved history.
+- Public GitHub repository with existing authentic screenshots and preserved history.
 
 No application behavior, live Pi integration or panel-control change. GitHub publication is verified separately in the [publication record](docs/publication-m52.md).
 

@@ -2,7 +2,7 @@
 
 **Craig Daters · RetroRealm.org · 2026-11-18**
 
-M5.2 prepares the public **PiDP-11 Web Desktop** repository with its original development history. Original RetroRealm source and appropriate original software documentation use MIT, copyright 2026 Craig Daters. Upstream notices and supplied-reference provenance remain intact.
+M5.2 publishes the public **PiDP-11 Web Desktop** repository with its original development history. Original RetroRealm source and appropriate original software documentation use MIT, copyright 2026 Craig Daters. Upstream notices and supplied-reference provenance remain intact.
 
 ## Scope and preserved baseline
 
@@ -22,4 +22,14 @@ No application regression campaign was repeated for this documentation-only mile
 
 ## GitHub verification
 
-Publication is being completed under the owner's explicit M5.2 authorization. The published owner, visibility, branch, commit, settings, README images and preserved tag targets will be recorded here after GitHub confirms them. No stable release or binary distribution is part of this milestone.
+Verified after the initial publication on 2026-11-18:
+
+- Repository: [cdaters/pidp11-webdesktop](https://github.com/cdaters/pidp11-webdesktop), owned by **cdaters (Craig Daters)**, **public**, default branch **main**.
+- Initial publication commit: [`6a470c14e48dadc87786ed968ae0dc22f10d49f8`](https://github.com/cdaters/pidp11-webdesktop/commit/6a470c14e48dadc87786ed968ae0dc22f10d49f8). This verification record is a subsequent documentation commit.
+- GitHub recognizes the root license as **MIT**. Issues, Discussions and private vulnerability reporting are enabled; the wiki is disabled in favor of repository documentation. Homepage and all ten requested topics are configured.
+- All **366 published file hashes** matched the local initial-publication commit. All **10 original checkpoint tag object IDs** matched GitHub exactly; the original **11 commits** remain ancestors of the publication commit.
+- All **352 relative Markdown destinations** resolved to tracked files/directories before publication. The published tree contains those destinations. The beginner index, technical index, full Trixie guide and decisions page also returned HTTP 200 and rendered as Markdown in a browser.
+- Opened the actual public GitHub README in Chromium. All **three existing screenshot images** loaded at their expected original dimensions; inspected the rendered README and each displayed image. The page shows the author, experimental status and MIT link.
+- Compared application and laboratory implementation directories against M5.0: unchanged. No Pi access or application/laboratory execution occurred during publication.
+
+Local verification captures and API snapshots remain in the ignored publication working directory. They are housekeeping evidence, not replacement application screenshots. No stable release or binary distribution was created. There are no outstanding publication blockers; the unexecuted Pi pilot, complete blank-card guide replay and existing engineering limitations remain as documented.
