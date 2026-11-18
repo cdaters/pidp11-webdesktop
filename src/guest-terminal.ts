@@ -13,7 +13,7 @@ export function safeGuestPaste(text: string): string {
 export async function mountGuestTerminal(host: HTMLElement) {
   const [{Terminal}] = await Promise.all([import("@xterm/xterm"),import("@xterm/xterm/css/xterm.css")]);
   if (!host.isConnected) return () => {};
-  host.innerHTML = `<div class="guest-heading"><strong>Real guest terminal · isolated laboratory</strong><span class="source-tag">NOT CONNECTED</span></div>
+  host.innerHTML = `<div class="guest-heading"><strong>Real guest terminal · dedicated guest line</strong><span class="source-tag">NOT CONNECTED</span></div>
     <form class="guest-login"><label>Terminal access token <input type="password" autocomplete="off" aria-label="Terminal access token"></label><button>Sign in</button></form>
     <div class="terminal-toolbar"><select aria-label="Guest endpoint" disabled></select><button data-connect disabled>Connect</button><button data-disconnect disabled>Disconnect</button><button data-acquire disabled>Acquire keyboard</button><button data-release disabled>Release keyboard</button><button data-logout disabled>Sign out</button></div>
     <div class="guest-status" role="status">Sign in to list configured guest lines. No automatic keyboard takeover.</div>

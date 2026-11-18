@@ -1,8 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+// A dedicated loopback test port avoids interfering with an existing local service.
+const embeddedURL = process.env.PIDP11_TEST_BACKEND ?? "http://127.0.0.1:8080/";
 for (const [label, url] of [
-  ["embedded Go", "http://127.0.0.1:8080/"],
+  ["embedded Go", embeddedURL],
   ["self-contained file", pathToFileURL(resolve("dist/prototype.html")).href],
 ]) {
   test(`${label}: terminal renders under strict CSP and panel remains interactive`, async ({
@@ -47,7 +49,7 @@ for (const [label, url] of [
 }
 
 test('fullscreen API enters and exits the selected window',async({page})=>{
- await page.goto('http://127.0.0.1:8080/');
+ await page.goto(embeddedURL);
  await page.getByRole('button',{name:'Open Front panel',exact:true}).click();
  await page.getByRole('button',{name:'Fullscreen PDP-11/70 · front panel',exact:true}).click();
  await expect.poll(()=>page.evaluate(()=>document.fullscreenElement?.getAttribute('data-window'))).toBe('panel');

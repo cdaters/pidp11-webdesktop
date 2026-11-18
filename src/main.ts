@@ -565,7 +565,7 @@ function openGuestTerminal() {
   if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
   const el = body("Loading guest terminal…"); el.classList.add("guest-terminal-app");
   let dispose = () => {};
-  manager.open("guest", "Real guest · VT100 laboratory", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
+  manager.open("guest", "Real guest · VT100 terminal", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
   void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el)).then(cleanup => {
     if (el.isConnected) dispose = cleanup; else cleanup();
   }).catch(() => { el.textContent = "Guest terminal renderer unavailable"; });
