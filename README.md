@@ -1,165 +1,81 @@
 # PiDP-11 Web Desktop
 
-A compact HTML5/TypeScript/SVG companion-interface project for Oscar Vermeulen's PiDP-11/70. **Milestone M5.0: authenticated browser terminals communicating with genuine UNIX V7 in an isolated Linux laboratory.** The normal Mac executable remains mock-only; the separate terminal-lab executable serves real guest lines using original SIMH/REALCONS.
+**Craig Daters · [RetroRealm.org](https://retrorealm.org/)**
 
-Web Desktop development and testing remain local to the Mac. During the separate pre-Oscar documentation review, original installation records were retrieved from the Pi read-only with the owner’s authorization; no Pi tests, installation changes, or Web Desktop deployment were performed. Actual emulator/RPC control exists only in the disposable Linux laboratory. The normal desktop remains simulated. M5.0 uses disposable copies of a verified public guest image; original media and the Pi installation remain untouched. No Pi access occurred during M5.0. Peripheral and system-management workflows remain clearly labeled RAM-only prototypes.
+**Experimental · Active Development · [MIT original project code](LICENSE)**
 
-## M5.1 read-only installation assessment
+A modern browser as a desk full of vintage terminals and peripherals, connected to a real PDP-11 operating system. PiDP-11 Web Desktop is an independent companion for [Oscar Vermeulen's PiDP-11/70](https://github.com/obsolescence/pidp11), built for exploration, preservation and the pleasure of using these machines.
 
-The owner-authorized Pi inspection supports UNIX V7/DC11 as the first terminal-pilot candidate. Installed original ARM64 binaries and guest login configuration were inspected without starting the emulator or changing the installation. The current lab-only server still requires a separately reviewed pilot entry point. See the [assessment and remaining gates](docs/lab/M5.1.md) and [unexecuted pilot plan](docs/lab/M5.1-pilot-plan.md). No deployment, guest boot or physical-panel acceptance is claimed; M5.0 remains the accepted application checkpoint.
+The goal is simple: turn on your PiDP-11, select an operating system with its physical switches, then open a browser terminal from your Mac, Windows PC, Linux computer or tablet. The Raspberry Pi stays headless; the browser draws the interface. The original panel, console, SSH, GNU Screen and serial terminals remain independent.
 
-## M5.0 real guest terminal checkpoint
+**We have reached genuine UNIX V7 browser sessions in an isolated laboratory. The first live Pi terminal pilot is still ahead.** You can explore the local desktop today without a Pi or guest disk.
 
-Chromium, Firefox and WebKit execute real guest commands through the bounded Go bridge. Multiple browsers can observe one line, with an explicit keyboard owner; separate DC11 lines have independent owners. Conventional guest access and the original operator console continue while the browser closes or the bridge stops. Screen is never taken over. The fixed 80 × 24 terminal adds reviewed paste and explicit DEL/BS/UNIX V7 erase selection.
+[Start exploring](docs/getting-started/README.md) · [Technical documentation](docs/technical/README.md) · [Philosophy](PHILOSOPHY.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Contribute](CONTRIBUTING.md)
 
-See the [M5.0 architecture, results and limits](docs/lab/M5.0.md), [reproducible Mac laboratory procedure](docs/lab/M5.0-runbook.md), [actual guest screenshot](docs/screenshots/m50-real-unix-v7.png), and [measured resources](docs/lab/m50/validation.json). Production deployment, remote panel control and real peripherals remain separately gated. The continuous-form printer and all earlier safety evidence are preserved.
+![PiDP-11 Web Desktop with front panel and two terminal windows](docs/screenshots/m43-arranged-retina.png)
 
-## M4.3.2 line-printer checkpoint
+*Actual M4.3 desktop: the SVG panel and these mock terminals are local demonstrations. Windows can be moved, resized and arranged without a graphical desktop on the Pi.*
 
-LP0 now displays continuous tractor-feed paper with pale-blue rows, punched margins, page perforations, 80/132-column views and a bounded scrolling renderer. Queue behavior and downloaded spool data are unchanged. See the [printer report and tests](docs/printer-m432.md), [before/after](docs/screenshots/m432-printer-before-after.png), and [maximized listing](docs/screenshots/m432-printer-maximized.png). This remains a browser-only simulated printer; browser print export is deferred.
+## From a browser to UNIX V7
 
-## M4.3.1 presentation checkpoint
+M5.0 connected xterm.js in the browser to a genuine Research UNIX Seventh Edition guest running under original SIMH/REALCONS. A small Go bridge carries terminal bytes over authenticated WebSockets to dedicated DC11 guest lines. The guest runs the commands; the browser displays their output.
 
-The presentation revision refines the existing shared SVG paddle curves, depth, spacing, and highlights. About and the footer now derive **M4.3** from the same `package.json` version (`0.4.3`); the checkpoint suffix identifies polish, not a new integration milestone. Contributor credits and truthful mock/observer labels remain visible. No control-policy or transport changes were made.
+Chromium, Firefox and WebKit passed the lab demonstration, including multiple observers, exclusive keyboard ownership, independent terminal lines and reconnects. The conventional operator console continued working when browsers closed and while the bridge was stopped. A fresh disposable disk repeated the demonstration.
 
-See the [presentation review and checks](docs/review-m431.md), [before/after switches](docs/screenshots/m431-before-after-switches.png), and [corrected About window](docs/screenshots/m431-about.png). Earlier screenshots and `checkpoint/m4.3` remain unchanged.
+![Genuine UNIX V7 commands in the browser terminal](docs/screenshots/m50-real-unix-v7.png)
 
-## M4.3 delivered
+*Actual M5.0 guest session in the isolated Mac-hosted Linux ARM64 lab. The background panel remains simulated; this is not a live physical-Pi deployment.*
 
-- Photograph-based raised/lowered/rest paddle geometry, fixed hardware pigments, shared SVG definitions and authentic cream lamp-test control; actual photo comparisons retained.
-- Fit/reference/50–200% scaling, compact panel and terminal arrangement; unchanged independent mock device workflows.
-- Kernel-pinned passive publishers, TLS/WSS, private credential files, secure sessions, CSRF logout and local credential rotation/revocation.
-- DEC renderer/keypad/encoding/Telnet/flow-control fixtures, bounded mock input/output and no replay across keyboard handoff.
-- Separate optional C operation-budget experiment, all prior safety checkpoints preserved, and 30-minute laboratory/browser workloads.
+[Read the demonstration report](docs/lab/M5.0.md) · [Reproduce the lab](docs/lab/M5.0-runbook.md)
 
-See the [M4.3 technical report](docs/lab/M4.3.md), [terminal matrix](docs/lab/M4.3-terminals.md), [security contract](docs/lab/M4.3-security.md), [recovery report](docs/lab/M4.3-recovery.md), [performance record](docs/lab/M4.3-performance.md) and [proposed, unexecuted pilot/rollback](docs/lab/M4.3-pilot.md). Production access remains separately gated.
+## What works today
 
-## M4.2 delivered
+| Part of the desktop | Current status |
+|---|---|
+| PDP-11/70 panel | Interactive SVG reconstruction with simulated lamps, switches and selectors |
+| Desktop | Movable/resizable windows, taskbar, keyboard controls, layout preferences and touch-friendly controls |
+| Mock terminals | Four independent local demonstration sessions with a tested DEC-style renderer |
+| Genuine guest terminal | UNIX V7/DC11 demonstrated through the Go bridge **in the isolated lab** |
+| Disk, tape, paper tape and OS profiles | Working **simulated** workflows; no real guest media is changed |
+| Continuous-form line printer | Simulated LP0 spool, 80/132-column paper, perforations, tractor-feed holes and original-text download |
+| Passive panel observation | Laboratory experiments; no production Pi observation service installed |
+| Physical Pi integration | Read-only compatibility assessment completed; terminal pilot proposed but unexecuted |
+| Remote front-panel control | Separate unresolved safety work; not a production feature |
 
-- Movable/resizable/minimizable windows, taskbar, fullscreen, keyboard/touch controls and geometry-only preferences.
-- Calibrated 1200×688 SVG PDP-11/70 panel with shared desktop/full-panel modes and supplied DIGITAL logos.
-- Four independent xterm-based mock terminals; working disk, magnetic tape, paper tape, printer, OS-profile and diagnostics applications.
-- Passive C publisher and authenticated Go read-only observation service, isolated from RPC/control/terminal input.
-- Original M4/M4.1 regressions retained; optional bounded-RPC recovery experiment and five-minute observer/browser workloads.
+![Continuous-form line-printer listing](docs/screenshots/m432-printer-maximized.png)
 
-See the [M4.2 findings and risks](docs/lab/M4.2.md), [desktop architecture](docs/frontend-m42.md), [observation/security contract](docs/lab/M4.2-observation.md), [IMSAI inventory](docs/research/imsai-inventory.md) and [parity matrix](docs/research/imsai-parity.md). No production integration is authorized or implied.
+*Actual M4.3.2 simulated line printer. Paper presentation is independent of the downloadable text spool; it is not yet connected to guest LP0.*
 
-## M4.1 findings
+See the [gallery](docs/screenshots/README.md) for the full panel, disk and tape applications. [Known limitations](docs/known-limitations.md) explains the boundaries without requiring you to read every engineering report.
 
-The optional consumer interlock rejects the M4 delayed START-release response and queued stale panel commands at SIMH consumption. Its independent watchdog can stop managed execution while RPC remains responsive. **Unconditional crash-safe halting is not established:** a blocked original RPC can delay quiescence, and committed commands cannot be undone. Original physical-only operation remains the default design; rollback and two independent DZ11 terminal transports are exercised in the lab.
+## Try the local desktop
 
-See the [M4.1 report and risk register](docs/lab/M4.1.md), [access-independence architecture](docs/decisions/0004-independent-access.md), [minimal upstream hooks](lab/interlock/upstream.patch), and [rollback procedure](docs/lab/M4.1-rollback.md). Run `sh lab/verify-m41.sh` after building the lab image. Production integration still needs separate authorization.
-
-## Laboratory findings and reproduction
-
-M3 passed actual original-C UDP/TCP interoperability, rpcbind discovery, lamp/switch exchange, and REALCONS START/HALT/CONT/EXAM/DEP/selector checks. M4 implements a separate physical-panel stand-in, control broker, observers and explicit handoffs, with delay/loss/disconnect/crash tests.
-
-**Production safety is not established.** The lab reproduces a delayed START-release reply that can cause RUN after ownership has been revoked. Newly generated handoff frames assert HALT before releasing START, but cannot retract an earlier reply or queued command. Broker crash recovery also has no guaranteed halt deadline. See [M3 findings](docs/lab/M3.md), [M4 safety limits and diagram](docs/lab/M4.md), and [actual fault/measurement report](docs/lab/m4-report.json).
-
-With the existing **local OrbStack Docker context** on this Mac:
+You need Git and Node.js **22.18 or newer** with npm. In a terminal on your development computer:
 
 ```sh
-sh lab/build-image.sh
-sh lab/run.sh
-python3 lab/save-results.py
-```
-
-The first command fetches the pinned public source and Debian build packages. Runtime tests have **only loopback networking**, no published ports, no privileged container and no physical devices. They do not contact the Pi. Containers are test infrastructure, not deployment dependencies. Test results go to `.research/lab-results`; the last command records a successful run in `docs/lab`. Use `--m3-only` or `--m4-only` with `lab/run.sh` for focused runs; save the combined results only after a complete successful run.
-
-Preserved source checkpoints: `checkpoint/m0`, `checkpoint/m02`, `checkpoint/m3`, `checkpoint/m4`, `checkpoint/m4.1`, `checkpoint/m4.2`, `checkpoint/m4.3`, `checkpoint/m4.3.1`, `checkpoint/m4.3.2`, and `checkpoint/m5.0`. Golden-backup completion does not authorize production integration.
-
-## Build and run on the Mac
-
-Requires Node.js 22.18+ and Go 1.25+; tested with Node 26.9.0 and Go 1.26.0. From the project directory:
-
-```sh
+git clone https://github.com/cdaters/pidp11-webdesktop.git
+cd pidp11-webdesktop
 npm ci
-sh scripts/build.sh
-./bin/webdesktop-macos
+npm run dev
 ```
 
-Open [the shared mock desktop](http://127.0.0.1:8080/?backend=mock). Click **Acquire panel**. A second browser tab observes the same state; only one can own controls. Closing the owner halts/disarms the mock. Reconnecting never automatically acquires control or replays commands. Stop the service with Ctrl-C.
+Open the loopback address printed by Vite, normally `http://127.0.0.1:5173`. This starts the browser-only demonstration; it does not connect to your Pi. Open **Terminal**, acquire its keyboard and type `HELP`, or open **Line printer** and add a sample listing. Stop the preview with Ctrl-C.
 
-The build creates a native Mac executable and `bin/webdesktop-linux-arm64`, a statically linked ARM64 ELF executable with embedded browser assets. The ARM64 build has **not** been deployed or executed on the Pi. No Node runtime, container, database or asset directory is required by the executable. It permits only literal loopback IP listeners, with no DNS lookup or remote connection setting.
+The separate **Guest terminal** needs the explicitly configured M5.0 lab service. There is **no production Pi installer**. For the embedded Go mock server, offline HTML build and tests, use the [developer setup](docs/technical/development.md).
 
-For an independent browser-only demo, open the desktop without `?backend=mock` or use generated `dist/prototype.html`. The standalone file embeds JS/CSS/SVG and prohibits network connections through CSP. The original accepted prototype is preserved unchanged at [`checkpoints/m0/prototype.html`](checkpoints/m0/prototype.html), with Git tag `checkpoint/m0` identifying its source. Current `dist/` artifacts are regenerable and ignored by Git.
+## Find your way around
 
-For frontend development: `npm run dev` starts loopback Vite. Two pinned, lazy-loaded browser runtime packages provide xterm.js and its fit addon. Go uses its standard library plus the small ISC-licensed `coder/websocket` package.
+| If you want to… | Start here |
+|---|---|
+| Understand the desktop and guest terminals | [Beginner guide](docs/getting-started/README.md) |
+| See how the project evolved | [Development timeline](docs/timeline.md) and [changelog](CHANGELOG.md) |
+| Inspect the implementation | [Technical guide](docs/technical/README.md) and [architecture decisions](docs/development/DECISIONS.md) |
+| Prepare Oscar's original software on Trixie Lite | [Headless installation guide](docs/installation/README.md) — **not a Web Desktop installer** |
+| Review the actual Pi findings | [M5.1 assessment](docs/lab/M5.1.md) and [unexecuted pilot plan](docs/lab/M5.1-pilot-plan.md) |
+| Suggest an idea, report a bug or help | [Contributing](CONTRIBUTING.md), [Issues](https://github.com/cdaters/pidp11-webdesktop/issues) and [Discussions](https://github.com/cdaters/pidp11-webdesktop/discussions) |
 
-## Try the panel
+## Built with the community's work
 
-1. Acquire panel; the panel starts halted.
-2. Set SR to octal `1000`, then press **LOAD ADRS**.
-3. Set SR to `12345`, press **DEP**, then **EXAM**. ADDRESS stays `00001000`, DATA is `012345`.
-4. Consecutive EXAM or DEP operations advance one word; changing from EXAM to DEP or back keeps the address.
-5. Select **ENABLE**, then **CONT** to animate. ENABLE alone leaves the model stopped. HALT stops; CONT while halted advances one demonstration word.
-6. START uses the previously loaded address, rather than the current SR. Lamp test is an automatically returning pulse. DEP/lamp test raise their paddles; other momentaries depress them.
+Thank you to Oscar and the PiDP contributors, Bob Supnik and the SIMH contributors, Jörg Hoppe and BlinkenBone/REALCONS, xterm.js, and the people preserving historical hardware and software. The High Nibble's IMSAI 8080 desktop inspired this project. [Full acknowledgments](ACKNOWLEDGMENTS.md) include the development tools and AI assistance used along the way.
 
-All 22 SR switches support click, Tab and Space/Enter. Direct entry accepts 22-bit octal values. Selector ordinals follow the inspected original interface; their displayed values remain illustrative. CPU/MMU, bus-cycle execution, special address boundaries and operating systems are not emulated. POWER/LOCK is inert. Each terminal has its own bounded mock command/session model and mature ANSI renderer; its keyboard never controls the panel. Device and system profiles have working simulated workflows, with no guest OS or host shell.
-
-On narrow screens, swipe the SVG sideways; the rest of the page fits the viewport. Browser-local animation pauses when hidden. Remote state comes from the server, and background timer throttling can safely expire a control lease.
-
-![M4.3 local simulated desktop](docs/screenshots/m43-desktop.png)
-
-## Architecture, findings and validation
-
-- [Implemented backend and API](docs/backend-milestone.md): component diagram, ownership/revisions, stream limits, wire support and remaining questions.
-- [Physical/virtual broker safety design](docs/broker-safety.md): single arbitration point, latches, momentaries, START recovery, rpcbind and failure limitations.
-- [Historical panel evidence](docs/panel-reference-notes.md): DEC handbook, authentic photograph, original Java and REALCONS source.
-- [Validation record](docs/validation.md): tests, browser verification, Mac measurements and limitations.
-- [Roadmap and Pi resource targets](docs/roadmap.md): measurable acceptance budgets and integration gates.
-- [Original architecture](docs/architecture.md), [Go versus Rust decision](docs/backend-decision.md), [protocol analysis](docs/protocol.md), [sources](docs/sources.md) and [source manifest](docs/source-manifest.json).
-- [Third-party notices](THIRD_PARTY_NOTICES.md) and [offline C oracle provenance](scripts/fixtures/README.md).
-
-The key protocol finding remains: SIMH/REALCONS is the RPC **client**; the panel is the **server**. GET reads switches and SET writes lamps. Multiple callers do not establish ownership or supply a complete virtual-panel interface. Original C/REALCONS interoperability and simulated coexistence now run in the isolated lab. Physical hardware coexistence and unconditional failure safety remain unproven.
-
-## Tests and measurements
-
-```sh
-npm run check
-npm test
-npm run test:integration
-# Browser suite requires Vite on 5173 and the built mock service on 8080:
-npm run test:browser
-go test -race ./...
-go test ./internal/blinkenbone -run='^$' -fuzz=FuzzDecode -fuzztime=10s -parallel=2
-```
-
-Optional offline fixture regeneration on macOS with Xcode command-line tools:
-
-```sh
-python3 scripts/fixtures/generate.py
-git diff -- internal/blinkenbone/testdata/original.json scripts/fixtures/provenance.json
-```
-
-For the fixed-loopback Mac workload, build the web service first, then run:
-
-```sh
-CGO_ENABLED=0 go build -trimpath -o bin/mockbench-macos ./cmd/mockbench
-python3 scripts/measure-mac.py
-```
-
-The measurement script starts/stops its own child service on `127.0.0.1:18770`. It records ten seconds idle and approximately fifteen seconds with two viewers and 300 control updates at 20 Hz. [Raw measurements](docs/performance-mac.json) include binary hashes. These short Mac samples do not establish Raspberry Pi performance or a long-duration memory bound. Pi targets remain ≤24 MiB idle RSS, ≤48 MiB active RSS, <5% mean active CPU of one core, and <100 ms p95 LAN acknowledgment/freshness under the defined workload.
-
-## Repository layout
-
-```text
-cmd/webdesktop/        Mock HTTP/WebSocket executable
-cmd/mockbench/         Fixed-loopback Mac measurement workload
-internal/panel/        Simulated state and ownership arbiter
-internal/server/       HTTP/WS transport and real-socket tests
-internal/blinkenbone/  Bounded XDR/RPC codecs and golden vectors
-internal/labrpc/       Experimental loopback RPC transport and panel profile
-internal/broker/       Poll-fenced laboratory arbitration
-internal/observe/      Passive snapshot receiver and read-only streaming
-internal/access/       Independent capabilities and bounded lab sessions
-lab/                   Isolated Linux build, C/PTY fixtures and test harness
-internal/web/          Embedded compiled assets
-src/                   TypeScript local/remote adapters and original SVG
-scripts/               Build, packaging, C fixture oracle and measurement
-tests/, integration/   Model/transport mapping and reconnect fixture tests
-checkpoints/m0/        Preserved accepted standalone prototype
-docs/                  Architecture, evidence, validation and screenshots
-```
-
-The temporary mock backend used for verification was stopped after testing; the local frontend preview may remain open for screenshots. Live integration remains a separate milestone after the complete microSD backup and explicit authorization. Licensing of original project code remains an owner decision before publication.
+Original RetroRealm code and appropriate original software documentation are [MIT licensed](LICENSE), copyright 2026 Craig Daters. Separately identified materials retain their [existing notices](THIRD_PARTY_NOTICES.md). This is an independent hobby project, not an official DEC product or an endorsement by Obsolescence Guaranteed.

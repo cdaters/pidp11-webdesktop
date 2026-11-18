@@ -8,3 +8,18 @@ internal/web/static/*
 !internal/web/static/README.txt
 .research-fixtures/
 __pycache__/
+
+# Local credentials, personal backups and working guest media
+.env
+.env.*
+!.env.example
+*.token
+*.pem
+*.key
+*.img
+*.img.*
+*.dsk
+*.hp
+/private/
+/backups/
+/test-results/

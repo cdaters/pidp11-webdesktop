@@ -1,0 +1,61 @@
+# Development and tests
+
+Work on a local clone. The normal demonstration does not require a Pi. Current application source is the accepted M5.0 implementation; M5.1 and M5.2 add assessment/publication documentation.
+
+## Browser development
+
+Requirements: Node.js **22.18 or newer** and npm, matching the repository's engine requirement. From a Mac, Linux or compatible Windows development shell:
+
+```sh
+git clone https://github.com/cdaters/pidp11-webdesktop.git
+cd pidp11-webdesktop
+npm ci
+npm run dev
+```
+
+Open the loopback URL Vite prints. The browser-only desktop uses simulated panel/media data. This is a local developer preview, not a hosted demo or Pi connection. Stop it with Ctrl-C.
+
+## Embedded Go service
+
+Go **1.25 or newer** is required. On the tested Mac development host:
+
+```sh
+sh scripts/build.sh
+./bin/webdesktop-macos
+```
+
+Open `http://127.0.0.1:8080/?backend=mock` for the shared mock backend. It has no emulator/GPIO integration. For a native Linux development build, build browser assets with `npm run build:server`, then compile `./cmd/webdesktop` with Go into a local output directory. Windows-native development has not received the same validation as the recorded Mac environment.
+
+The Mac build helper also creates a static Linux ARM64 mock executable. This is not a production terminal installer. `npm run build` creates `dist/prototype.html`, a self-contained offline demonstration whose policy disables network connections. The original M0 prototype is separately preserved under `checkpoints/m0/`.
+
+## Focused checks
+
+```sh
+npm run check
+npm test
+npm run test:integration
+go test -race ./...
+npm run build
+```
+
+For browser checks, install the Playwright engines locally if needed with `npx playwright install`. Start Vite on port 5173 and the built mock service on port 8080 in separate shells, then run `npm run test:browser`. The suite covers Chromium, Firefox and WebKit. Native Safari is a distinct test target; a WebKit pass is not a native Safari result.
+
+The M5.0 baseline records 46 TypeScript tests, one transport integration test and 45 desktop browser cases, alongside Go race checks and genuine guest acceptance. Counts can change with later contributions. Existing browser tests may write capture files under `docs/screenshots`; inspect changes before committing. Do not replace an accepted baseline screenshot unintentionally.
+
+## Genuine guest laboratory
+
+Follow the [M5.0 runbook](../lab/M5.0-runbook.md). Its current automation targets the existing **OrbStack `orbstack` Docker context on an ARM64 Mac**. It is not a generic Docker Desktop/Windows/Linux recipe. A contributor port should retain network isolation, disposable media and independent console access, and report its actual environment.
+
+The first image build fetches pinned public upstream source/packages. Runtime guest tests use a disposable network-none container; containers are development tools, not a proposed Pi deployment dependency. Guest media is obtained separately and verified. No disk images, credentials, container images or emulator binaries are distributed in this repository.
+
+The actual guest browser script is `lab/m50/browser.mjs`. The intercepted fixture is `browser-tests/guest.spec.ts`. Keep those evidence categories distinct. Do not rerun long control/stress campaigns for a prose or screenshot change.
+
+## Installation-guide checks
+
+```sh
+python3 docs/installation/tests/test_guide.py
+```
+
+These checks exercise documented helpers in temporary fixtures and syntax-check command blocks. They do not execute a real installation, contact a Pi, open a card device or boot a guest. See [the test scope](../installation/tests/README.md).
+
+Please read [CONTRIBUTING](../../CONTRIBUTING.md), retain notices, and include the relevant actual test results in a pull request.

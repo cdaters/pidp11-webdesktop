@@ -1,0 +1,37 @@
+# Technical documentation
+
+The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets and bounded streams. SIMH does the actual PDP-11 emulation. The normal executable remains a mock service, while the separate M5.0 laboratory command connects to genuine guest lines.
+
+## Start here
+
+- [Development environment and tests](development.md)
+- [Architecture decisions](../development/DECISIONS.md)
+- [Architecture overview and original proposal](../architecture.md)
+- [Go backend/API](../backend-milestone.md) and [frontend/window model](../frontend-m42.md)
+- [Language choice](../backend-decision.md), [resource targets](../roadmap.md)
+
+## Genuine terminals
+
+- [M5.0 implementation and results](../lab/M5.0.md): DC11, alternatives, xterm integration, keyboard leases, observers, authentication, bounded I/O, restart and original-console independence.
+- [Reproduce M5.0](../lab/M5.0-runbook.md): disposable UNIX V7 and network-none Linux ARM64 lab on the Mac. Genuine guest acceptance is separate from intercepted browser fixtures.
+- [Terminal compatibility matrix](../lab/M4.3-terminals.md): tested renderer/encoder fixtures and limitations.
+- [M5.1 installed-Pi assessment](../lab/M5.1.md): binary/source provenance, guest-specific requirements, resources and future serial coexistence.
+- [Proposed first Pi pilot](../lab/M5.1-pilot-plan.md): not executed; current lab server is intentionally not deployable unchanged.
+
+## Panel protocol and safety experiments
+
+- [BlinkenBone RPC/XDR](../protocol.md) and [M3 original-C interoperability](../lab/M3.md)
+- [Broker safety design](../broker-safety.md), [M4 failure evidence](../lab/M4.md), [M4.1 consumer fence](../lab/M4.1.md)
+- [Independent access](../decisions/0004-independent-access.md)
+- [Passive observation](../lab/M4.2-observation.md), [TLS/session security](../lab/M4.3-security.md), [bounded recovery experiment](../lab/M4.3-recovery.md)
+
+These reports describe laboratory work, not authorization or proof of production panel safety. They remain versioned historical evidence; newer overview pages do not silently rewrite old results.
+
+## Presentation, peripherals and evidence
+
+- [Continuous-form printer](../printer-m432.md): bounded rendering and exact spool semantics; simulated LP0.
+- [Panel references](../panel-reference-notes.md) and [paddle geometry](../research/panel-m43-geometry.md)
+- [Validation overview](../validation.md), [M4.3 performance](../lab/M4.3-performance.md), [M5.0 measurements](../lab/m50/validation.json)
+- [Timeline](../timeline.md), [source references](../sources.md), [third-party notices](../../THIRD_PARTY_NOTICES.md)
+
+Private capture paths mentioned in reports intentionally do not resolve to public files. Selected sanitized evidence is committed; passwords, private host configuration, disk images and raw private captures are not.

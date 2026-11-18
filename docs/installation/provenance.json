@@ -1,0 +1,28 @@
+{
+  "publication": "M5.2",
+  "date": "2026-11-18",
+  "changes": "Byline, public-edition framing and navigation only; complete fenced blocks preserved. Parent source records unchanged.",
+  "documents": [
+    {
+      "file": "PIDP11-TRIXIE-HEADLESS-GUIDE.md",
+      "source_revision": "2026-11-17 pre-Oscar review 1",
+      "source_sha256": "4bc1169dfe628010646dab15a78544e692868e6e44efe54c8b658bdb406a90d1",
+      "public_sha256": "347928c1d171cfb19725ca7baf773394300221b40878d8b34edbbe80dbdcc8ea",
+      "fenced_blocks_identical": true
+    },
+    {
+      "file": "PIDP11-TRIXIE-INSTALLATION-RECORD.md",
+      "source_revision": "2026-11-17 pre-Oscar review 1",
+      "source_sha256": "f3eb845fcdc8c54cd65fa9944f0e4a93814aec190e77ea156860301dabc181ad",
+      "public_sha256": "9d090db569ca4d3360e94047df521f9c3063f0a3cb9cb0fe929b7c74599aae6d",
+      "fenced_blocks_identical": true
+    },
+    {
+      "file": "PIDP11-EVIDENCE-APPENDIX.md",
+      "source_revision": "2026-11-17 pre-Oscar review 1",
+      "source_sha256": "53d19958104de1fcb86223741d377f142b0bcfadcc357330ca4fba01ebcf1c4c",
+      "public_sha256": "f8bc592299296d36ab4923ff6bf684fcacc093e0d2d8083625aa9b0f97a6dfad",
+      "fenced_blocks_identical": true
+    }
+  ]
+}
