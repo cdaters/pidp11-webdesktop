@@ -18,6 +18,7 @@ from integration import Simh
 
 root = Path("/work")
 os.umask(0o077)
+coexistence_fixture = os.environ.get("PIDP11_M55_PROFILE") == "1"
 sim = Simh()
 bridge = None
 bridge_log = (root / "bridge.log").open("a")
@@ -49,10 +50,17 @@ def stop_bridge():
 
 
 try:
-    config = Path("/lab/m53/guest.ini").read_text()
-    for line in config.splitlines():
-        if line and not line.startswith(";"):
-            sim.command(line)
+    if coexistence_fixture:
+        # M5.5 executes the complete candidate, as the original launcher does.
+        # The separate lab supervisor has already started a GPIO-free RPC peer.
+        config = Path("/work/profile/boot.ini").read_text()
+        sim.command("cd /work/profile")
+        sim.command("do boot.ini")
+    else:
+        config = Path("/lab/m53/guest.ini").read_text()
+        for line in config.splitlines():
+            if line and not line.startswith(";"):
+                sim.command(line)
     console("boot\r")
     console("hp(0,0)unix\r", 2)
     assert "# " in sim.log[-1000:], sim.log[-1000:]
@@ -60,6 +68,11 @@ try:
     console("dmr\r")
     operator = console("echo M53_OPERATOR_READY\r")
     assert "\r\nM53_OPERATOR_READY\r\n" in operator and "$ " in operator, operator
+    panel_evidence = None
+    if coexistence_fixture:
+        from integration import api
+        panel_evidence = api("/state")
+        assert panel_evidence["gets"] > 2 and panel_evidence["sets"] > 0, panel_evidence
     for name in ["terminal", "observer"]:
         value = secrets.token_hex(32)
         Path("/tmp/" + name + ".token").write_text(value)
@@ -76,6 +89,8 @@ try:
         "simh_pid": sim.p.pid, "bridge_pid": bridge.pid, "config": config,
         "simh_sha256": hashlib.sha256(Path("/opt/lab/pdp11_realcons").read_bytes()).hexdigest(),
         "pilot_sha256": hashlib.sha256(Path("/fixtures/terminal-pilot-linux-arm64").read_bytes()).hexdigest(),
+        "candidate_profile_sha256": hashlib.sha256(config.encode()).hexdigest() if coexistence_fixture else None,
+        "panel_fixture": panel_evidence,
     }, indent=2))
     print("M5.3 lab ready: genuine UNIX V7, one DC11 line, original operator, pilot binary", flush=True)
     while True:

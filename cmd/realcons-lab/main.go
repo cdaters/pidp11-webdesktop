@@ -54,6 +54,7 @@ func main() {
 	role := flag.String("role", "direct", "direct, physical or broker (isolated lab only)")
 	fencePath := flag.String("consumer-fence", "", "optional isolated consumer Unix socket")
 	registerProbe := flag.Uint("register-probe", 0, "lab registration collision test only")
+	replayCapacity := flag.Int("udp-replay-capacity", 4096, "bounded UDP replay entries; 65536 for the isolated 1 ms profile fixture")
 	flag.Parse()
 	if e := isolated(); e != nil {
 		log.Fatal(e)
@@ -154,7 +155,7 @@ func main() {
 			w.Write([]byte("{}"))
 		})
 	}
-	s, e := labrpc.Listen(rpcAddress, p)
+	s, e := labrpc.ListenWithReplayCapacity(rpcAddress, p, *replayCapacity)
 	if e != nil {
 		log.Fatal(e)
 	}

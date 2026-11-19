@@ -21,6 +21,13 @@ type cached struct {
 	request, reply []byte
 	at             time.Time
 }
+
+// The replay window must outlast the original C client's 25-second RPC timeout.
+// Entry and byte bounds are independent: large invalid packets cannot consume
+// unbounded memory even in the explicitly faster, network-none panel fixture.
+const replayWindow = 35 * time.Second
+const replayByteLimit = 16 << 20
+
 type Server struct {
 	HoldLoad         atomic.Bool
 	HoldStartRelease atomic.Bool
@@ -34,16 +41,30 @@ type Server struct {
 	peerMu    sync.Mutex
 	consumer  string
 
-	tcp     net.Listener
-	udp     *net.UDPConn
-	handler Handler
-	mu      sync.Mutex
-	cache   map[string]cached
-	slots   chan struct{}
-	wg      sync.WaitGroup
+	tcp           net.Listener
+	udp           *net.UDPConn
+	handler       Handler
+	mu            sync.Mutex
+	cache         map[string]cached
+	cacheCapacity int // Immutable after construction; default remains 4096.
+	cacheBytes    int // Request/reply payload bytes, protected by mu like cache.
+	slots         chan struct{}
+	wg            sync.WaitGroup
 }
 
 func Listen(address string, h Handler) (*Server, error) {
+	return ListenWithReplayCapacity(address, h, 4096)
+}
+
+// ListenWithReplayCapacity creates a laboratory transport with a bounded UDP
+// replay cache. The original 1 ms REALCONS profile can exceed the default 4096
+// entries within the unchanged 35-second window. Capacity is 1..65536 entries;
+// all configurations also share a 16 MiB payload-byte cap. A full cache rejects
+// new calls without dispatching them; live duplicate replies are never evicted.
+func ListenWithReplayCapacity(address string, h Handler, capacity int) (*Server, error) {
+	if capacity < 1 || capacity > 65536 {
+		return nil, fmt.Errorf("UDP replay capacity must be 1..65536")
+	}
 	host, _, err := net.SplitHostPort(address)
 	if err != nil || net.ParseIP(host) == nil || !net.ParseIP(host).IsLoopback() {
 		return nil, fmt.Errorf("literal loopback required")
@@ -57,7 +78,7 @@ func Listen(address string, h Handler) (*Server, error) {
 		tcp.Close()
 		return nil, err
 	}
-	return &Server{release: make(chan struct{}, 1), tcp: tcp, udp: udp, handler: h, cache: map[string]cached{}, slots: make(chan struct{}, 8)}, nil
+	return &Server{release: make(chan struct{}, 1), tcp: tcp, udp: udp, handler: h, cache: map[string]cached{}, cacheCapacity: capacity, slots: make(chan struct{}, 8)}, nil
 }
 func (s *Server) ReleaseHeld() {
 	select {
@@ -186,29 +207,34 @@ func (s *Server) serveUDP(ctx context.Context) {
 		var reply []byte
 		// Replay the original reply for an identical UDP retransmission. Calling
 		// the handler again could consume a second switch edge for one request.
-		if ok && now.Sub(old.at) < 35*time.Second {
+		if ok && now.Sub(old.at) < replayWindow {
 			if bytes.Equal(old.request, request) {
 				reply = old.reply
 			} else {
 				reply = rpcError(binary.BigEndian.Uint32(request), 4)
 			}
 		} else {
-			if !now.Before(nextPrune) || len(s.cache) >= 4096 {
+			// Reserve the largest permitted reply before dispatch: a GET can
+			// consume a switch edge, so an executed call must fit in the cache.
+			reservation := len(request) + bb.MaxMessage
+			if !now.Before(nextPrune) || len(s.cache) >= s.cacheCapacity || s.cacheBytes+reservation > replayByteLimit {
 				for k, v := range s.cache {
-					if now.Sub(v.at) >= 35*time.Second {
+					if now.Sub(v.at) >= replayWindow {
+						s.cacheBytes -= len(v.request) + len(v.reply)
 						delete(s.cache, k)
 					}
 				}
 				nextPrune = now.Add(time.Second)
 			}
-			if len(s.cache) >= 4096 {
+			if len(s.cache) >= s.cacheCapacity || s.cacheBytes+reservation > replayByteLimit {
 				reply = rpcError(binary.BigEndian.Uint32(request), 5)
 			} else {
 				reply = s.dispatch(request, "udp/"+peer.String())
-			}
-
-			if len(s.cache) < 4096 {
+				if previous, exists := s.cache[key]; exists {
+					s.cacheBytes -= len(previous.request) + len(previous.reply)
+				}
 				s.cache[key] = cached{request, reply, now}
+				s.cacheBytes += len(request) + len(reply)
 			}
 		}
 		s.mu.Unlock()

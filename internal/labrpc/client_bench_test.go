@@ -41,6 +41,7 @@ func benchPhysicalRead(b *testing.B, allocate bool) {
 			b.StopTimer()
 			server.mu.Lock()
 			clear(server.cache)
+			server.cacheBytes = 0
 			server.mu.Unlock()
 			b.StartTimer()
 		}
