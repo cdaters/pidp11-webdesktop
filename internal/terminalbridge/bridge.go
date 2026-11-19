@@ -142,14 +142,19 @@ func (e *Endpoint) read(conn net.Conn) {
 				e.mu.Unlock()
 				return
 			}
+			// Output frames are immutable. Copy once before reusing the read buffer;
+			// viewers retain independent queue and credit limits.
+			var output []byte
 			for c := range e.clients {
 				if c.pending+n > OutputCredit {
 					e.remove(c)
 					continue
 				}
-				b := append([]byte(nil), buf[:n]...)
+				if output == nil {
+					output = append([]byte(nil), buf[:n]...)
+				}
 				c.pending += n
-				e.send(c, Frame{Type: "output", Data: b})
+				e.send(c, Frame{Type: "output", Data: output})
 			}
 			e.mu.Unlock()
 		}

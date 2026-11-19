@@ -47,6 +47,7 @@ type Gate struct {
 	window       time.Time
 	Now          func() time.Time
 	secureOrigin string
+	secureHost   string
 	audit        []AuditEvent
 }
 
@@ -76,6 +77,7 @@ func NewSecure(origin string, keys []Credential) (*Gate, error) {
 	}
 	g := New(keys)
 	g.secureOrigin = origin
+	g.secureHost = u.Host
 	return g, nil
 }
 func Identity(token string) string {
@@ -92,8 +94,7 @@ func (g *Gate) TrustedRequest(r *http.Request) bool {
 	if g.secureOrigin == "" {
 		return LocalHost(r.Host)
 	}
-	u, _ := url.Parse(g.secureOrigin)
-	return r.TLS != nil && r.Host == u.Host
+	return r.TLS != nil && r.Host == g.secureHost
 }
 func (g *Gate) Origin(r *http.Request) bool {
 	if g.secureOrigin == "" {
