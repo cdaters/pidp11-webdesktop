@@ -1157,6 +1157,13 @@ table button {
 .guest-login input { width:250px; }
 .guest-status { font-size:12px; min-height:16px; }
 .guest-screen { flex:1; min-height:370px; overflow:auto; background:#101d1b; padding:8px; }
-.guest-xterm { width:650px; height:370px; }
+.guest-xterm { width:max-content; min-width:650px; min-height:370px; }
 .guest-paste { font-size:12px; }
 .guest-paste input { width:350px; }
+
+.tek-app { display:flex; flex-direction:column; padding:16px; gap:8px; }
+.tek-app p { margin:0; }
+.tek-app .app-heading { margin:0; }
+.tek-display { display:block; flex:1; min-height:200px; width:100%; height:0; background:#101d1b; overflow:hidden; }
+.tek-display line { stroke:#b6e5b5; stroke-width:1.2; }
+.tek-display text { fill:#b6e5b5; font:18px monospace; letter-spacing:0; }

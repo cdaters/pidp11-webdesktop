@@ -46,3 +46,21 @@ test('detached service never dials from opening or refreshing; attachment choice
  await page.locator('[data-connect]').click();await expect(page.locator('.guest-heading')).toContainText('READ-ONLY');expect(connections).toBe(1);
  await expect(page.locator('[data-acquire]')).toBeDisabled();
 });
+
+
+test('refresh preserves the intended guest line when directory order changes', async ({page}) => {
+ let reversed = false;
+ await page.route('**/api/v1/session', r => r.fulfill({json:{capabilities:{'terminal.observe':true},csrf:'fixture'}}));
+ await page.route('**/api/v1/terminals', r => {
+  const rows = [{id:'chosen',label:'Chosen line',state:'attached',connected:true,generation:'a'}, {id:'other',label:'Other guest',state:'detached',connected:false,generation:'b'}];
+  return r.fulfill({json:reversed ? rows.reverse() : rows});
+ });
+ await page.goto('/'); await page.getByRole('button',{name:'Open Guest terminal',exact:true}).click();
+ await expect(page.getByLabel('Guest endpoint')).toHaveValue('chosen');
+ reversed = true;
+ const refreshed = page.waitForResponse('**/api/v1/terminals');
+ await page.locator('[data-refresh]').click(); await refreshed;
+ await expect(page.getByLabel('Guest endpoint').locator('option').first()).toHaveAttribute('value', 'other');
+ await expect(page.getByLabel('Guest endpoint')).toHaveValue('chosen');
+ await expect(page.locator('[data-connect]')).toBeEnabled();
+});

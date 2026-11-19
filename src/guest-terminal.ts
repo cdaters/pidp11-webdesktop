@@ -1,4 +1,4 @@
-import { decKey } from "./terminal-protocol.ts";
+import { TerminalProfile, type TerminalPersonality } from "./terminal-profile.ts";
 import { terminalDocument } from "./terminal.ts";
 import type { Terminal } from "@xterm/xterm";
 
@@ -16,14 +16,17 @@ export async function mountGuestTerminal(host: HTMLElement) {
   host.innerHTML = `<div class="guest-heading"><strong>Real guest terminal · dedicated guest line</strong><span class="source-tag">NOT CONNECTED</span></div>
     <form class="guest-login"><label>Terminal access token <input type="password" autocomplete="off" aria-label="Terminal access token"></label><button>Sign in</button></form>
     <div class="terminal-toolbar"><select aria-label="Guest endpoint" disabled></select><button data-refresh disabled>Refresh lines</button><button data-connect disabled>Connect</button><button data-disconnect disabled>Disconnect</button><button data-acquire disabled>Acquire keyboard</button><button data-release disabled>Release keyboard</button><button data-logout disabled>Sign out</button></div>
+    <div class="terminal-toolbar"><label>Personality <select aria-label="Guest terminal personality"><option value="vt100">VT100 · tested subset</option><option value="vt52">VT52 · initial text subset</option></select></label><label>Text size <select aria-label="Guest terminal text size"><option value="11">Small</option><option value="13" selected>Normal</option><option value="16">Large</option></select></label></div>
     <div class="guest-status" role="status">Sign in to list configured guest lines. No automatic keyboard takeover.</div>
-    <div class="guest-screen"><div class="guest-xterm" aria-label="Real guest VT100 terminal"></div></div>
+    <div class="guest-screen"><div class="guest-xterm" aria-label="Real guest terminal"></div></div>
     <details class="guest-paste"><summary>Review paste</summary><label>One line, without Return <input type="text" maxlength="256" aria-label="Reviewed guest paste" autocomplete="off"></label><button data-paste disabled>Send reviewed paste</button></details>
-    <label class="guest-erase">Backspace <select aria-label="Backspace encoding"><option value="127">DEL · VT100</option><option value="8">BS</option><option value="35"># · UNIX V7 erase</option></select></label>
-    <div class="terminal-foot">VT100-style subset · ASCII7 · fixed 80 × 24 · Backspace encoding is explicit · shared guest line may already be logged in. Panel and mock peripherals remain separate.</div>`;
+    <label class="guest-erase">Backspace <select aria-label="Backspace encoding"><option value="127">DEL · DEC</option><option value="8">BS</option><option value="35"># · UNIX V7 erase</option></select></label>
+    <div class="terminal-foot">Selected personality · ASCII7 · fixed 80 × 24; resize scrolls, text size changes readability · Backspace encoding is explicit · shared guest line may already be logged in. Panel and mock peripherals remain separate.</div>`;
   const $=<T extends HTMLElement>(selector:string)=>host.querySelector<T>(selector)!;
   const status=$(".guest-status"),badge=$(".source-tag"),selector=$<HTMLSelectElement>("select");
   const makeTerminal=()=>new Terminal({documentOverride:terminalDocument(),cols:80,rows:24,scrollback:300,fontFamily:'Menlo, Consolas, monospace',fontSize:13,lineHeight:1.15,cursorBlink:false,screenReaderMode:true,convertEol:false,allowProposedApi:false,theme:{background:'#101d1b',foreground:'#c4d8bc',cursor:'#e1ddb3'}});
+  const personality = $<HTMLSelectElement>('[aria-label="Guest terminal personality"]');
+  let profile = new TerminalProfile("vt100");
   let term:Terminal=makeTerminal();
   term.open($(".guest-xterm"));
   let socket:WebSocket|undefined, owner=false,connected=false,epoch=0,seq=0,canInput=false,csrf="",disposed=false,queued=0;
@@ -35,6 +38,7 @@ export async function mountGuestTerminal(host: HTMLElement) {
     $<HTMLButtonElement>("[data-release]").disabled=!owner;
     $<HTMLButtonElement>("[data-paste]").disabled=!owner;
     selector.disabled=!!socket || !selector.options.length;
+    personality.disabled = !!socket;
     badge.textContent=connected ? owner ? "KEYBOARD OWNER" : "REAL GUEST · READ-ONLY" : (selector.selectedOptions[0]?.dataset.state === "attached" ? "DISCONNECTED" : (selector.selectedOptions[0]?.dataset.state ?? "detached").toUpperCase());
   };
   const send = (message: object) => {
@@ -63,11 +67,14 @@ export async function mountGuestTerminal(host: HTMLElement) {
   };
   const configureKeys=()=>term.attachCustomKeyEventHandler(e=>{
     if(e.type!=='keydown'||e.altKey||e.ctrlKey||e.metaKey)return true;
-    const encoded= e.code==='Backspace'?String.fromCharCode(Number($<HTMLSelectElement>('[aria-label="Backspace encoding"]').value)):decKey(e.code,term.modes.applicationKeypadMode,term.modes.applicationCursorKeysMode);
+    const encoded= e.code==='Backspace'?String.fromCharCode(Number($<HTMLSelectElement>('[aria-label="Backspace encoding"]').value)):profile.key(e.code,term.modes.applicationKeypadMode,term.modes.applicationCursorKeysMode);
     if(encoded===undefined)return true;e.preventDefault();term.input(encoded,true);return false;
   });
   configureKeys();
   let handler=term.onData(input);
+  $<HTMLSelectElement>('[aria-label="Guest terminal text size"]').onchange = e => {
+    term.options.fontSize = Number((e.target as HTMLSelectElement).value);
+  };
   // Stop native clipboard paste before xterm; nothing is sent until explicit review.
   const paste=(e:ClipboardEvent)=>{e.preventDefault();e.stopImmediatePropagation();const value=e.clipboardData?.getData('text/plain')??'';const box=$<HTMLInputElement>('.guest-paste input');try { box.value=safeGuestPaste(value); status.textContent='Paste captured for review; nothing sent'; } catch (error) { box.value=''; status.textContent=(error as Error).message; } $<HTMLDetailsElement>('.guest-paste').open=true;box.focus();};
   $(".guest-screen").addEventListener('paste',paste,true);
@@ -80,6 +87,7 @@ export async function mountGuestTerminal(host: HTMLElement) {
     if (disposed) return;
     csrf = s.csrf;
     canInput = !!s.capabilities['terminal.input'];
+    const selectedID = selector.value;
     selector.replaceChildren(...rows.map(e => {
       const option = document.createElement('option');
       option.value = e.id;
@@ -88,6 +96,9 @@ export async function mountGuestTerminal(host: HTMLElement) {
       option.textContent = `${e.label} · ${option.dataset.state}`;
       return option;
     }));
+    // Directory iteration order may change. Keep the intended line across a
+    // refresh; a different first row must not silently replace the selection.
+    if (rows.some(row => row.id === selectedID)) selector.value = selectedID;
     $<HTMLButtonElement>('[data-logout]').disabled = false;
     $<HTMLButtonElement>('[data-refresh]').disabled = false;
     status.textContent = rows.some(e => e.connected)
@@ -116,8 +127,11 @@ export async function mountGuestTerminal(host: HTMLElement) {
     queued = 0;
     handler.dispose();
     term.dispose();
+    profile = new TerminalProfile(personality.value as TerminalPersonality);
     term = makeTerminal();
+    term.options.fontSize = Number($<HTMLSelectElement>('[aria-label="Guest terminal text size"]').value);
     term.open($(".guest-xterm"));
+    term.write(profile.initial);
     configureKeys();
     handler = term.onData(input);
     status.textContent = 'Connecting · fresh display; no terminal history replay';
@@ -131,7 +145,9 @@ export async function mountGuestTerminal(host: HTMLElement) {
           const bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
           // Preserve parser state across chunks on this connection. Return server
           // credit only after xterm consumes the bytes, and never to a newer socket.
-          term.write(bytes, () => {
+          const translated = profile.feed(bytes);
+          for (const reply of translated.replies) input(reply);
+          term.write(translated.display, () => {
             if (socket === ws) {
               queued -= bytes.length;
               send({ type: 'ack', bytes: bytes.length });

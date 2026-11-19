@@ -50,6 +50,7 @@ const apps = [
   ["panel", "Front panel", "PDP-11/70"],
   ["terminal", "Terminal", "Independent mock session"],
   ["guest", "Guest terminal", "Authenticated real guest line · laboratory"],
+  ["tek4010", "4010 graphics", "Tektronix byte fixture · no guest"],
   ["disks", "Disk drives", "RK05 / RL02"],
   ["tapes", "Magnetic tape", "TU10 transport"],
   ["paper", "Paper tape", "Reader & punch"],
@@ -341,7 +342,7 @@ function openTerminal() {
     session = new MockTerminalSession(`DZ${n - 1}`);
   terminals.set(id, session);
   const el = body(
-    `<div class="terminal-toolbar"><span class="source-tag">MOCK · ${session.id}</span><button data-keyboard>Acquire keyboard</button><select aria-label="Terminal profile"><option>VT100 / ANSI · tested subset</option><option disabled>VT52 · not validated</option><option disabled>VT220 · partial renderer only</option></select></div><div class="terminal-host" aria-label="${session.id} terminal"></div><div class="terminal-foot">Independent session · read-only until keyboard acquired · no shell or guest OS</div>`,
+    `<div class="terminal-toolbar"><span class="source-tag">MOCK · ${session.id}</span><button data-keyboard>Acquire keyboard</button><select aria-label="Terminal profile"><option>VT100 / ANSI · tested subset</option><option disabled>VT52 · use Guest terminal</option><option disabled>VT220 · partial renderer only</option></select></div><div class="terminal-host" aria-label="${session.id} terminal"></div><div class="terminal-foot">Independent session · read-only until keyboard acquired · no shell or guest OS</div>`,
   );
   el.classList.add("terminal-app");
   let dispose = () => {};
@@ -565,13 +566,20 @@ function openGuestTerminal() {
   if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
   const el = body("Loading guest terminal…"); el.classList.add("guest-terminal-app");
   let dispose = () => {};
-  manager.open("guest", "Real guest · VT100 terminal", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
+  manager.open("guest", "Real guest terminal", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
   void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el)).then(cleanup => {
     if (el.isConnected) dispose = cleanup; else cleanup();
   }).catch(() => { el.textContent = "Guest terminal renderer unavailable"; });
 }
 function openApp(id: string) {
   if (id === "guest") return openGuestTerminal();
+  if (id === "tek4010") {
+    if (manager.store.windows.some(w => w.id === id)) { manager.restore(id); return; }
+    const el = body("Loading graphics fixture…");
+    manager.open(id, "Tektronix 4010 · fixture", el, { x: 100, y: 50, width: 800, height: 700 });
+    void import("./tek4010-app.ts").then(m => { if (el.isConnected) m.mountTek4010(el); }).catch(error => { el.textContent = String(error); });
+    return;
+  }
   if (id === "panel") return openPanel();
   if (id === "terminal") return openTerminal();
   if (manager.store.windows.some((w) => w.id === id)) {
