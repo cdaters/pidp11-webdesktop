@@ -106,7 +106,7 @@ func control(ctx context.Context, op, socket, instance, id string, revision uint
 }
 func run(ctx context.Context) error {
 	if len(os.Args) < 2 {
-		return errors.New("usage: webdesktop-service serve|status|attach|detach [options]")
+		return errors.New("usage: webdesktop-service provision|check|serve|status|attach|detach [options]")
 	}
 	op := os.Args[1]
 	if op == "provision" {
@@ -125,6 +125,9 @@ func run(ctx context.Context) error {
 	if flags.NArg() != 0 {
 		return errors.New("unexpected arguments")
 	}
+	if op == "check" {
+		return checkConfig(*config, os.Stdout)
+	}
 	if op == "serve" {
 		return serve(ctx, *config)
 	}
@@ -136,4 +139,16 @@ func main() {
 	if err := run(ctx); err != nil {
 		log.Fatal(err)
 	}
+}
+
+// checkConfig validates credentials/certificate/configuration without creating a
+// socket, binding a port or dialing a guest. Run under the service identity to
+// check the same file access that startup will use.
+func checkConfig(path string, output io.Writer) error {
+	config, _, cert, err := terminalservice.Load(path)
+	if err != nil {
+		return fmt.Errorf("configuration check: %w", err)
+	}
+	_, err = fmt.Fprintf(output, "Configuration valid. Browser: %s\nCertificate expires: %s\nConfigured guest lines: %d; all start detached. No listener or guest connection opened.\n", config.Origin, cert.Leaf.NotAfter.UTC().Format(time.RFC3339), len(config.Endpoints))
+	return err
 }

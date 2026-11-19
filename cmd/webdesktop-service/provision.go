@@ -18,6 +18,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"strconv"
 	"time"
 
 	"pidp11.local/webdesktop/internal/access"
@@ -47,7 +48,8 @@ func provision(args []string) error {
 		return err
 	}
 	host, port, err := net.SplitHostPort(*listen)
-	if err != nil || net.ParseIP(host) == nil || u.Port() != port || *directory == "" || !filepath.IsAbs(*directory) {
+	portNumber, portErr := strconv.Atoi(port)
+	if err != nil || portErr != nil || portNumber < 1024 || portNumber > 65535 || net.ParseIP(host) == nil || u.Port() != port || *directory == "" || !filepath.IsAbs(*directory) {
 		return errors.New("absolute new directory and explicit matching listen/origin ports required")
 	}
 	endpoints := []terminalbridge.Config{{ID: "guest-dc0", Label: "Operator-configured DC11 guest line", Address: *endpoint, Kind: "raw-guest-line"}}
