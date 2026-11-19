@@ -1,0 +1,72 @@
+{
+  "milestone": "M5.4",
+  "date": "2026-11-18",
+  "scope": "Mac-only coexistence preparation; no Pi contact or deployment",
+  "implementation_commit": "2d8766e6ef7ebc19af51012918fc6528381e1b5a",
+  "pilot_binary": {
+    "sha256": "244e69325e95cfb07a9e9c1f96f51555884750f6e9cb37bc9283557b3550626e",
+    "bytes": 7078050,
+    "platform": "linux/arm64",
+    "cgo": false,
+    "build_vcs_revision": "b0f5791dbe487ed94fa95259ad3af05c2e1af015",
+    "build_vcs_modified": true,
+    "note": "Built before implementation commit; runtime changes became that commit. Same bytes passed three-engine V7 and original-SIMH listener replacement. Accepted M5.3 binary preserved."
+  },
+  "simh": {
+    "upstream_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "lab_binary_sha256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+    "source_modified": false,
+    "normal_launcher_exercised": false,
+    "realcons_or_gpio_used": false
+  },
+  "checks": {
+    "go_vet": "passed",
+    "go_test_race_all": "passed",
+    "lifecycle_tests": "four new test functions, including five attachment terminal-state subtests; five repeated race-enabled targeted runs passed",
+    "typescript_strict": "passed",
+    "typescript_units_passed": 46,
+    "transport_fixture_passed": 1,
+    "frontend_build_and_embed": "passed",
+    "linux_arm64_static_build": "passed",
+    "genuine_v7_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "original_simh_listener_replacement": "passed in Chromium; same process and same port after detachment",
+    "node_syntax": "passed",
+    "python_compile": "passed",
+    "relative_document_links": "passed",
+    "git_diff_check": "passed",
+    "mock_browser_45_case_suite": "not rerun; unchanged frontend, genuine guest acceptance exercised affected flow",
+    "native_safari": "not tested"
+  },
+  "fixture_corrections": [
+    {
+      "failure": "Ctrl-E bytes did not produce a SIMH monitor prompt through the lab PTY",
+      "resolution": "Private supervisor uses SIGINT, as existing clean shutdown already does; new disposable disk for replay"
+    },
+    {
+      "failure": "Immediate DC11 reattachment failed with EADDRINUSE and old connection in TIME_WAIT",
+      "resolution": "Fixture inspects only its network-none socket table and waits up to 90 seconds before one reattachment; final release wait 60546 ms; no bridge retry, TCP tuning or original source edit"
+    }
+  ],
+  "cleanup": {
+    "disposable_guests": 3,
+    "all_guests_synced_three_times_and_monitor_quit_observed": true,
+    "protected_bases_unchanged": true,
+    "public_base_sha256": "fc04dab1e7f2fbf3ea4b44603ed2c9d6ba15f4f86c702d4a27a1dac725966f39",
+    "container_exited": true,
+    "mac_relay_stopped": true,
+    "accepted_m53_binary_unchanged": true
+  },
+  "limits": [
+    "No Pi contact, current-state inspection or production change",
+    "No normal-launcher, physical-panel or busy-line acceptance",
+    "Raw TCP does not identify guest reboots within the same simulator and surviving socket",
+    "Future identity witness and detached-by-default service are design only",
+    "No new CPU/RSS/latency benchmark or production performance claim",
+    "Synthetic port replacement and real same-process listener replacement are distinct from simulator restart/guest-switch acceptance",
+    "M4 remote-control safety limits unchanged"
+  ]
+}

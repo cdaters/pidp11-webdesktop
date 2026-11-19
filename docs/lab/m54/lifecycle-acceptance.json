@@ -1,0 +1,11 @@
+{
+  "environment": "isolated Mac-hosted Linux ARM64 lab",
+  "pilotSHA256": "244e69325e95cfb07a9e9c1f96f51555884750f6e9cb37bc9283557b3550626e",
+  "passed": true,
+  "socketReleaseWaitMilliseconds": 60546,
+  "originalConsoleContinued": true,
+  "listenerReplacedAtSamePort": true,
+  "oldBrowserRemainedDetached": true,
+  "manualRecoveryRequiresFreshAuthentication": true,
+  "manualRecoveryStartsReadOnly": true
+}

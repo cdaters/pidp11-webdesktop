@@ -1,6 +1,6 @@
 # Roadmap, resource budget and open questions
 
-2026-11-16. All Pi numbers below are **acceptance targets**, not measurements. The target is the user's Pi 3B+ running Trixie Lite ARM64; this work has not contacted it.
+Originally recorded 2026-11-16; M5.4 update 2026-11-18. The table below contains **acceptance targets**, not measurements. M5.3 subsequently recorded short standalone Pi measurements; M5.4 is Mac-only preparation. Historical milestone sections retain their original scope; the latest status is at the end.
 
 ## Performance targets
 
@@ -105,3 +105,20 @@ M5.0's short Mac-hosted Linux bridge samples are approximately 10.7–12.5 MiB R
 The [authorized inspection](lab/M5.1.md) confirms the pinned original source, official ARM64 runtime files, and installed V7 login metadata matching M5.0's base. It identifies an unattached DC11 line as the preferred candidate, while documenting that the normal launcher has no external configuration argument and the M5.0 lab command intentionally rejects a normally networked Pi. No emulator or guest was started, and no installed file/service/network configuration was changed.
 
 Next is owner review of the [staged pilot plan](lab/M5.1-pilot-plan.md). Local implementation of a reviewed terminal-only entry point and separately authorized standalone Pi testing precede any original-launcher/profile change or assembled-panel coexistence claim. Do not treat the read-only assessment, idle resource snapshot or clean current throttling flags as deployment authorization or production acceptance. The accepted application checkpoint remains M5.0.
+
+
+## M5.3/M5.4 — standalone acceptance and coexistence preparation
+
+[M5.3](lab/M5.3.md) completed the separately authorized standalone installed-binary V7 pilot and cleanup. Its brief Pi RSS/CPU samples met the sampled terminal-only targets; sustained load, added transport latency and assembled-panel contention remain open. The owner now reports the assembled physical machine passing initial controls and normal-launcher RT-11 checks. This report does not convert those observations into a browser coexistence result.
+
+[M5.4](lab/M5.4.md) reviews the original launcher and proposes an additive copied V7 profile, preserving physical boot selection and every existing mapping. Mac-side bridge hardening prevents reusing a guest attachment or silently dialing a replacement listener, and rejects buffered output after detachment. No Pi access or deployment occurred. The [pilot proposal](lab/M5.4-pilot-plan.md) is for owner review.
+
+| Next gate | Required evidence |
+|---|---|
+| Supervised original-launcher pilot | Explicit authorization of one copied profile and unused selection; original Screen/REALCONS/physical operation before, during and after the manual companion; original hashes/mappings and rollback verified |
+| Automatic lifecycle identity | Trusted guest/line generations, restart and listener ownership checks, stale-evidence rejection, same-process reset handling; no port-only approval or silent guest substitution |
+| Optional service | Detached startup/restart, fresh approval, least privilege, durable TLS/credentials; no emulator lifecycle dependencies or auto-enable |
+| Sustained assembled-machine performance | Authorized workloads measuring bridge, simulator and panel impact separately against the unchanged targets |
+| Passive panel observation | Separate source/identity/overhead/rollback review; no extra input polling or remote-control capability |
+
+Remote panel control, GPIO work, original-image changes and production deployment remain outside this preparation. Keep physical-only operation independent of every companion component.

@@ -1,0 +1,53 @@
+{
+  "note": "Private Mac lab captures retained under ignored .research/m54; no Pi capture or credentials published",
+  "files": [
+    {
+      "path": "guest/ready.json",
+      "sha256": "74ab943591ac18f1ba43488af4ee880c7753d2c0b5102c5f9a0c90c3905abdae"
+    },
+    {
+      "path": "guest/browser-acceptance.json",
+      "sha256": "4cccc2c32f13180f17575234dc21a96bbbd3ff740c5c382ffa550e2803a69193"
+    },
+    {
+      "path": "guest/operator-private.log",
+      "sha256": "ea05611c143fa223cc5b7bcbdf7eeef7aad346a833474b17ed50cc9d903eb826"
+    },
+    {
+      "path": "guest-replay/operator-private.log",
+      "sha256": "2ea141a54428dbf31349b37e5ecbd5f8e614f85f0df03c21fac59d28ac1b080a"
+    },
+    {
+      "path": "guest-final/ready.json",
+      "sha256": "74ab943591ac18f1ba43488af4ee880c7753d2c0b5102c5f9a0c90c3905abdae"
+    },
+    {
+      "path": "guest-final/lifecycle-acceptance.json",
+      "sha256": "06bd2edf73f5dced3cfbeb8f12b6edc2750f7aa2c63c9da4c0396ec8f8006e24"
+    },
+    {
+      "path": "guest-final/lifecycle-operator-private.json",
+      "sha256": "3b806b42094f80c9eaa48b3a887bf34b2f7d06036c5cbec2377298e8a9b64d58"
+    },
+    {
+      "path": "guest-final/operator-private.log",
+      "sha256": "ea3da4bd52275341e927bba3238b21686d23e1c40a93ea145e797b4c8b7301fb"
+    },
+    {
+      "path": "first-attempt/lifecycle-acceptance.json",
+      "sha256": "da039e90fb19af7ed33e8457bb7c3d4e92101f7025e15513b71c03678aadc071"
+    },
+    {
+      "path": "first-attempt/lifecycle-operator-private.json",
+      "sha256": "a82f943852d6959f195f85b6daf50d166c527af85f9c47f0549989f95ee5a99d"
+    },
+    {
+      "path": "second-attempt/lifecycle-acceptance.json",
+      "sha256": "da039e90fb19af7ed33e8457bb7c3d4e92101f7025e15513b71c03678aadc071"
+    },
+    {
+      "path": "second-attempt/lifecycle-operator-private.json",
+      "sha256": "c0c4077234131eccfa3876601382ee25bd889048e7efe0c66460ebd0adb9d31f"
+    }
+  ]
+}

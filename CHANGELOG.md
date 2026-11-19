@@ -2,6 +2,13 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.4 — 2026-11-18
+
+- Documented opt-in original-launcher coexistence, physical selection semantics, guest/line identity limits, optional-service boundaries and a reversible supervised pilot proposal.
+- Made bridge connection attempts and endpoint attachments one-shot, preventing reuse after guest loss or close; discarded buffered output from detached readers.
+- Passed Mac lifecycle regressions, genuine V7 in three browser engines and original-SIMH listener replacement; documented the observed TCP TIME_WAIT rebind delay. Retained all accepted checkpoints. No Pi access, deployment, launcher/profile edits or panel-control change.
+- [M5.4 design and validation](docs/lab/M5.4.md).
+
 ## M5.3 — 2026-11-18
 
 - Added a separate fixed-loopback Linux ARM64 terminal pilot using the existing bridge, authentication and embedded assets; lab isolation guards remain unchanged.

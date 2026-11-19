@@ -12,6 +12,7 @@ These are directions for experimentation, not delivery promises. The [timeline](
 | [M5.1 Pi compatibility assessment](docs/lab/M5.1.md) | Read-only installed-software/configuration assessment; no deployment or guest start |
 | M5.2 / M5.2.1 community foundations | Public repository, contributor documentation, engineering standards and source map |
 | [M5.3 actual Pi terminal pilot](docs/lab/M5.3.md) | Genuine V7 on the installed simulator, one DC11 line, three browser engines, Screen independence and verified cleanup; no physical panel |
+| [M5.4 coexistence preparation](docs/lab/M5.4.md) | Mac-only launcher/profile design, one-shot guest attachment safeguards and a reversible supervised pilot proposal; no Pi access |
 
 ## Sharing the work
 
@@ -20,7 +21,8 @@ Public GitHub source, authentic screenshots, beginner and developer documentatio
 ## Next investigations
 
 - **Pilot follow-up:** review durable credentials/certificate provisioning, service isolation and sustained performance separately. The first controlled Pi terminal pilot is complete; no service remains running.
-- **Original-launcher coexistence:** retain the ordinary console and physical route while investigating an opt-in guest profile after assembly and explicit approval. The standalone M5.3 Screen session did not exercise that launcher or its panel daemon. No distribution switcher is implemented.
+- **Original-launcher coexistence:** review the [M5.4 opt-in profile proposal](docs/lab/M5.4-pilot-plan.md) for the now-assembled machine; authorize exact additive changes separately. The standalone M5.3 Screen session did not exercise that launcher or its panel daemon. No distribution switcher is implemented.
+- **Guest lifecycle:** keep the service detached after restart; resolve authoritative generation/line identity before unsupervised guest switching. A reused port or surviving simulator PID is insufficient.
 - **Additional guests:** validate the actual driver, login and serial-line requirements of each operating system; host device support alone is insufficient.
 - **Live panel observation:** build on the passive-observation lab without adding side-effecting panel input reads. This is separate from remote control.
 - **Physical serial coexistence:** reserve independent lines and use stable device identities when the owner's optional serial hardware is available.

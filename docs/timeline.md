@@ -19,5 +19,6 @@ Dates below are the recorded local commit dates (America/Phoenix), not invented 
 | M5.1 | 2026-11-18 | Actual Pi read-only compatibility assessment and unexecuted terminal-pilot plan | [Report](lab/M5.1.md) · [`ccfb972`](https://github.com/cdaters/pidp11-webdesktop/commit/ccfb972) |
 | M5.2 / M5.2.1 | 2026-11-18 | Public repository and contributor/engineering standards | [Publication](publication-m52.md) · [Review](technical/MAINTAINABILITY.md) |
 | M5.3 | 2026-11-18 | Genuine V7 terminal on the actual Pi, independent Screen console, modest measurements and verified cleanup | [Report](lab/M5.3.md) · implementation `b8e9b74` |
+| M5.4 | 2026-11-18 | Mac-only coexistence design and one-shot guest attachment hardening; supervised pilot proposal | [Report](lab/M5.4.md) · implementation `2d8766e` |
 
 M5.2 prepares this work for public collaboration with community documentation and licensing. It adds no physical-Pi integration. The [roadmap](../ROADMAP.md) separates the next experiments from longer-term ambitions.

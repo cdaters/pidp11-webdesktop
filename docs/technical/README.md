@@ -37,3 +37,5 @@ These reports describe laboratory work, not authorization or proof of production
 - [Timeline](../timeline.md), [source references](../sources.md), [third-party notices](../../THIRD_PARTY_NOTICES.md)
 
 Private capture paths mentioned in reports intentionally do not resolve to public files. Selected sanitized evidence is committed; passwords, private host configuration, disk images and raw private captures are not.
+
+[M5.4 coexistence preparation](../lab/M5.4.md) covers normal-launcher profiles, guest/line lifecycle, one-shot attachment safeguards and the separate future optional service. The [supervised pilot proposal](../lab/M5.4-pilot-plan.md) is unexecuted.

@@ -106,3 +106,7 @@ One unprivileged Go process, embedded assets, loopback RPC/console endpoints, no
 ## M4.1 update
 
 See [ADR 0004](decisions/0004-independent-access.md) and the [M4.1 consumer interlock](lab/M4.1-interlock.md). The optional lab hook keeps the original BlinkenBone wire protocol unchanged and validates consumer-owned generations before controller service and command dispatch. Mode A remains independent; passive Mode B is the first future live target. Broker-only M4 safety claims are not strengthened retroactively. No production authorization is implied.
+
+## M5.4 normal-launcher coexistence preparation
+
+The [M5.4 design](lab/M5.4.md) keeps the original launcher, Screen and physical REALCONS path independent, proposes an opt-in copied V7 profile, and separates guest attachment from browser and keyboard lifetimes. Mac-side bridge attachment is now one-shot; automatic guest identity and detached-by-default service provisioning remain future work. The [supervised pilot proposal](lab/M5.4-pilot-plan.md) is unexecuted and requires separate authorization.
