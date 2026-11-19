@@ -83,6 +83,7 @@ type Endpoint struct {
 	Config  Config
 	mu      sync.Mutex
 	conn    net.Conn
+	used    bool // One guest attachment per endpoint lifetime, including after Close.
 	clients map[*Client]bool
 	owner   *Client
 	epoch   uint64
@@ -98,12 +99,18 @@ func NewEndpoint(c Config) *Endpoint {
 // Attach is a local operator lifecycle action. No browser can choose an address.
 // Success transfers connection ownership to Endpoint and starts its reader;
 // failure leaves the caller responsible for closing conn. There is no retry.
+// An endpoint cannot be reused after attachment or Close: a reused address is
+// not evidence of the same guest. New guests require a newly provisioned Bridge.
 func (e *Endpoint) Attach(conn net.Conn) error {
 	e.mu.Lock()
 	defer e.mu.Unlock()
-	if e.conn != nil {
-		return errors.New("endpoint already attached")
+	if conn == nil {
+		return errors.New("guest connection required")
 	}
+	if e.used {
+		return errors.New("guest attachment already consumed; create a fresh bridge")
+	}
+	e.used = true
 	e.conn = conn
 	e.epoch++
 	e.owner = nil
@@ -115,7 +122,7 @@ func (e *Endpoint) read(conn net.Conn) {
 	defer func() {
 		e.mu.Lock()
 		defer e.mu.Unlock()
-		// A reader from a previous attachment must not tear down a newer line.
+		// Close or an uncertain write may already have detached this reader.
 		if e.conn == conn {
 			conn.Close()
 			e.conn = nil
@@ -129,6 +136,12 @@ func (e *Endpoint) read(conn net.Conn) {
 		n, err := conn.Read(buf)
 		if n > 0 {
 			e.mu.Lock()
+			// Read can complete with buffered bytes after Close or a failed Write.
+			// Never publish those bytes into a detached terminal session.
+			if e.conn != conn {
+				e.mu.Unlock()
+				return
+			}
 			for c := range e.clients {
 				if c.pending+n > OutputCredit {
 					e.remove(c)
@@ -208,6 +221,7 @@ func (e *Endpoint) Tick() { e.mu.Lock(); defer e.mu.Unlock(); e.expire() }
 func (e *Endpoint) Close() {
 	e.mu.Lock()
 	defer e.mu.Unlock()
+	e.used = true
 	if e.conn != nil {
 		e.conn.Close()
 		e.conn = nil
@@ -308,8 +322,13 @@ func (e *Endpoint) Operation(c *Client, op string, epoch, seq uint64, data []byt
 }
 
 // Bridge owns the configured endpoints. Its map is fixed after New; individual
-// endpoints synchronize their own state. Connect is an operator setup action.
-type Bridge struct{ Endpoints map[string]*Endpoint }
+// endpoints synchronize their own state. Connect is a one-shot operator setup
+// action. mu protects the attempt flag, not the immutable Endpoints map.
+type Bridge struct {
+	Endpoints        map[string]*Endpoint
+	mu               sync.Mutex
+	connectAttempted bool
+}
 
 // New validates configuration and creates detached endpoints without dialing.
 func New(configs []Config) (*Bridge, error) {
@@ -325,7 +344,17 @@ func New(configs []Config) (*Bridge, error) {
 
 // Connect attempts each configured line once and closes all lines on any failure.
 // Call during setup, before Run; do not run concurrent lifecycle operations.
+// Repeated calls fail before dialing, even after an unsuccessful first attempt.
+// A new Bridge still needs independent operator verification of guest identity;
+// TCP connection success alone supplies no such evidence.
 func (b *Bridge) Connect(ctx context.Context) error {
+	b.mu.Lock()
+	if b.connectAttempted {
+		b.mu.Unlock()
+		return errors.New("guest connection already attempted; create a fresh bridge")
+	}
+	b.connectAttempted = true
+	b.mu.Unlock()
 	for _, e := range b.Endpoints {
 		conn, err := (&net.Dialer{Timeout: time.Second}).DialContext(ctx, "tcp", e.Config.Address)
 		if err != nil {
@@ -343,6 +372,9 @@ func (b *Bridge) Connect(ctx context.Context) error {
 
 // Close detaches all lines and viewers without sending guest shutdown commands.
 func (b *Bridge) Close() {
+	b.mu.Lock()
+	b.connectAttempted = true
+	b.mu.Unlock()
 	for _, e := range b.Endpoints {
 		e.Close()
 	}

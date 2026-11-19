@@ -88,6 +88,13 @@ try:
         operation = message["op"]
         if operation == "console":
             output = console(message["data"], message.get("wait", 1))
+        elif operation == "monitor":
+            # M5.4 line-replacement fixture. This PTY has no controlling terminal
+            # to deliver Ctrl-E as SIGINT; use the existing shutdown interrupt.
+            # Only the private lab operator channel can request this action.
+            sim.p.send_signal(signal.SIGINT)
+            output = sim.read(1)
+            assert "sim> " in output, output
         elif operation == "bridge-stop":
             stop_bridge()
             output = "bridge stopped"
