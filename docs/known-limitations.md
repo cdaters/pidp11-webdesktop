@@ -4,10 +4,10 @@ The desktop is useful for exploration now, and genuine guest-terminal integratio
 
 | Area | Limit and next evidence needed |
 |---|---|
-| Live Pi service | M5.5 demonstrated V7/browser/physical subtests but failed its physical-only fallback; temporary changes were rolled back and the machine left stopped. No accepted physical checkpoint, permanent service or general installer exists. M5.6 remains design only. |
+| Live Pi service | M5.5 demonstrated V7/browser/physical subtests but failed its physical-only fallback; temporary changes were rolled back and the machine left stopped. No accepted physical checkpoint or permanent service exists. The M5.6 optional package/setup helper passed disposable Linux tests, not physical deployment. |
 | Physical hardware | M5.5 owner-observed HALT/CONT and DATA-selector behavior worked with the V7 pilot and after bridge shutdown. The later intended IDLED selection started RSX despite all SR paddles being down; cause remains unknown. No further guest start is authorized by that recovery. Sustained power and physical serial expansion remain untested. |
 | Panel control | Delayed START release and blocked RPC can defeat simple browser/broker fail-safe assumptions. Remote control is separate from passive observation. |
-| Terminal compatibility | Tested VT100-style subset, ASCII7 and fixed 80 × 24. VT52/full VT220/Tektronix/VT11 are future work; full-screen guest applications need broader checks. |
+| Terminal compatibility | M5.6 adds initial VT52 text parsing and conformance fixtures; 4010 remains fixture-only and VT11 has no transport. Full-screen historical applications remain unqualified. Tested VT100-style subset, ASCII7 and fixed 80 × 24. Full VT220 and live graphics remain future work. |
 | Guest selection | Actual terminal acceptance covers UNIX V7 in the lab and the single-line Pi pilot. A configured serial device does not prove another guest has its driver and login services ready. |
 | Reconnect and handoff | M5.4 retires each bridge after one attachment attempt and rejects reused endpoints; no automatic input/history replay. In-process guest changes on a surviving socket remain undetectable without another identity mechanism. Partial commands can survive browser reconnect; bridge failure may hang up the line. |
 | Accounts and exposure | Lab credentials, endpoint allowlists and TLS are not a complete multiuser/LAN provisioning plan. Do not expose raw guest or panel RPC ports to the Internet. |

@@ -37,11 +37,12 @@ M5.3 repeated the genuine terminal demonstration on the actual Pi using one disp
 | PDP-11/70 panel | Interactive SVG reconstruction with simulated lamps, switches and selectors |
 | Desktop | Movable/resizable windows, taskbar, keyboard controls, layout preferences and touch-friendly controls |
 | Mock terminals | Four independent local demonstration sessions with a tested DEC-style renderer |
-| Genuine guest terminal | UNIX V7/DC11 demonstrated in the isolated lab **and on the actual Pi** |
+| Genuine guest terminal | UNIX V7/DC11 demonstrated in the isolated lab **and on the actual Pi**; M5.6 adds tested VT100/initial VT52 personalities locally |
+| 4010 graphics | Bounded Tektronix byte parser and SVG fixture display; no live graphics guest or VT11 transport |
 | Disk, tape, paper tape and OS profiles | Working **simulated** workflows; no real guest media is changed |
 | Continuous-form line printer | Simulated LP0 spool, 80/132-column paper, perforations, tractor-feed holes and original-text download |
 | Passive panel observation | Laboratory experiments; no production Pi observation service installed |
-| Optional installation candidate | Detached Go service and ARM64 package tested in disposable Linux; not deployed to the Pi. [M5.5.1](docs/lab/M5.5.1.md) |
+| Optional installation candidate | Detached Go service and ARM64 package tested in disposable Linux; not deployed to the Pi. [M5.6 results](docs/lab/M5.6.md) · [setup candidate](docs/getting-started/optional-service.md) |
 | Physical Pi integration | V7/browser/physical checks passed in M5.5, but fallback selected the wrong guest; acceptance blocked, temporary changes rolled back, machine left stopped |
 | Remote front-panel control | Separate unresolved safety work; not a production feature |
 

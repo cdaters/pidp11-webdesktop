@@ -14,6 +14,8 @@ These are directions for experimentation, not delivery promises. The [timeline](
 | [M5.3 actual Pi terminal pilot](docs/lab/M5.3.md) | Genuine V7 on the installed simulator, one DC11 line, three browser engines, Screen independence and verified cleanup; no physical panel |
 | [M5.4 coexistence preparation](docs/lab/M5.4.md) | Mac-only launcher/profile design, one-shot guest attachment safeguards and a reversible supervised pilot proposal; no Pi access |
 | [M5.5 physical pilot](docs/lab/M5.5-physical-pilot.md) | V7/browser/physical subtests passed; wrong-guest fallback blocks acceptance. Unchanged original media verified, temporary changes rolled back, machine left stopped |
+| [M5.5.1 foundations](docs/lab/M5.5.1.md) | Original-scanner fixtures, terminal performance work and detached optional-service implementation in the Mac/Linux lab |
+| [M5.6 local development](docs/lab/M5.6.md) | Optional-service setup/lifecycle rehearsal, VT100/VT52 conformance and genuine V7 regression, bounded 4010 fixture, VT11 architecture; no Pi deployment or GPIO execution |
 
 ## Sharing the work
 
@@ -21,7 +23,7 @@ Public GitHub source, authentic screenshots, beginner and developer documentatio
 
 ## Next investigations
 
-- **Pilot follow-up:** review the [M5.6 optional deployment design](docs/lab/M5.6-deployment-spec.md), including detached startup, durable credentials/certificates, service isolation, upgrade and uninstall; implement and test it separately. The first controlled Pi terminal pilot is complete; no service remains running.
+- **Pilot follow-up:** review the [implemented M5.6 candidate](docs/lab/M5.6.md) and [owner setup procedure](docs/getting-started/optional-service.md), then separately authorize supervised physical deployment if its gates are met. The first controlled Pi terminal pilot is complete; no service remains running.
 - **Physical-selection discrepancy:** investigate why the [M5.5 fallback](docs/lab/M5.5-physical-pilot.md) selected RSX with all SR paddles reported down. Review source/evidence on the Mac first; any hardware diagnostic needs a separately authorized plan that cannot boot original writable guests. No further launcher retry or accepted physical checkpoint until resolved.
 - **Assembled-machine performance:** explain the short 5.55% bridge CPU sample against the unchanged <5% target, then design a separately authorized representative measurement. Do not optimize or stress the stopped Pi implicitly.
 - **Guest lifecycle:** keep the service detached after restart; resolve authoritative generation/line identity before unsupervised guest switching. A reused port or surviving simulator PID is insufficient.
@@ -31,7 +33,7 @@ Public GitHub source, authentic screenshots, beginner and developer documentatio
 
 ## Longer-term possibilities
 
-Improve VT100 behavior with real applications, add VT52, extend VT220 compatibility, and investigate Tektronix 4010 and VT11/VR14 graphics. Connect disk, tape, printer and paper-tape windows to real guest devices only with appropriate lifecycle and media protections. Community experiments may suggest other useful directions.
+Qualify full-screen VT100/VT52 applications, extend the initial VT52 subset, and test 4010 output from a genuine guest before offering a live graphics line. Discuss the separate VT11 observation path upstream before implementing a hook. VT220 remains future work. Connect disk, tape, printer and paper-tape windows to real guest devices only with appropriate lifecycle and media protections. Community experiments may suggest other useful directions.
 
 Remote front-panel control remains a distinct unresolved safety problem. Observing a machine does not grant control of it, and losing a browser does not prove that the CPU stopped. Existing START-release and blocked-RPC limitations stay visible until evidence resolves them.
 

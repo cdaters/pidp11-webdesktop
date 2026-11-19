@@ -2,6 +2,15 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.6 terminal expansion and deployment preparation — 2026-11-19
+
+- Added a genuine initial VT52 text parser/key personality beside the existing VT100 renderer, explicit personality/text-size controls and DEC Delete encoding. Both personalities passed ordinary genuine V7 I/O in three browser engines.
+- Corrected guest-line selection changing when directory results reorder; retained generation checks, read-only reconnect and explicit keyboard ownership.
+- Added a bounded, incremental Tektronix 4010 SVG fixture application and tests. Documented VT11's distinct simulator-device path; no live graphics transport or source hook implemented.
+- Added first-run service configuration, no-network configuration validation and complete-package checksums; repeated disposable ARM64 systemd lifecycle, credential, upgrade, rollback and removal tests.
+- Strengthened scanner preparation for interpreted launchers and exclusive maintenance, without running GPIO. Documented the remaining concurrency limitation.
+- Published read-only Pi compatibility findings, actual local tests/resources and optional companion boundaries. No Pi deployment or guest operation; physical acceptance remains blocked. [M5.6 report](docs/lab/M5.6.md).
+
 ## M5.5.1 Mac-only diagnostics and optional-service engineering — 2026-11-19
 
 - Added bounded switch-selection diagnostics, synthetic captures, unchanged original-C GPIO-stub comparisons and an original-resolver oracle. Hardware mode remains separately authorized and unexecuted.

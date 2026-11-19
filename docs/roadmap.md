@@ -153,3 +153,10 @@ Next gates, in order:
 3. Review the [optional service candidate](lab/M5.6-implementation.md), actual network/certificate provisioning and reserved guest line before any Pi installation. Continue to stop the actual bridge before intentional guest changes.
 4. Measure the unchanged resource targets on the Pi under sustained representative workloads. Mac-hosted Linux results do not close this gate; eight busy observers measured 6.83% CPU in the lab.
 5. Keep passive panel observation, authoritative lifecycle evidence, per-user/per-line access and any [copilot adapter](lab/M5.5.1-community.md) separately scoped. Remote panel control remains restricted.
+
+
+## M5.6 local engineering — November 19, 2026
+
+The [M5.6 report](lab/M5.6.md) records actual optional-service setup/lifecycle tests, VT100/VT52 conformance and genuine V7 regressions, and a bounded 4010 byte fixture. [VT11 findings](technical/graphics-foundations.md) identify a separate simulator display path, not terminal data. Read-only Pi inspection supports platform compatibility only; no deployment, GPIO sampling, guest interaction or stress test occurred.
+
+Next gates remain: supervised physical switch diagnosis; authoritative guest/line lifecycle evidence or mandatory stop-before-change operation; certificate/network review; representative Pi resource and emulator-impact measurement; separately authorized service acceptance and rollback. The original target table is unchanged. Short synthetic ARM64 measurements cannot settle the prior Pi CPU exceedance or the longer M5.5.1 eight-observer result. Full-screen VT52 applications, compressed 4010 addressing/GIN, live graphics and upstream VT11 transport design are separate incremental steps.

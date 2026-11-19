@@ -23,3 +23,8 @@ Dates below are the recorded local commit dates (America/Phoenix), not invented 
 | M5.5 | 2026-11-19 | Exact candidate and Mac lab, followed by physical V7/browser subtest success but failed IDLED fallback; controlled unchanged-media recovery and rollback, no accepted physical tag | [Preparation](lab/M5.5.md) · [physical findings](lab/M5.5-physical-pilot.md) · implementation `32e5fc4` |
 
 M5.2 prepares this work for public collaboration with community documentation and licensing. It adds no physical-Pi integration. The [roadmap](../ROADMAP.md) separates the next experiments from longer-term ambitions.
+
+
+## November 19, 2026 — M5.6 local expansion
+
+[Terminal personalities and deployment preparation](lab/M5.6.md): initial VT52 plus VT100 conformance and genuine V7 regressions, a bounded 4010 fixture, a clearer optional setup workflow, final systemd lifecycle rehearsal and read-only physical-platform compatibility evidence. No GPIO execution or physical deployment; the M5.5 selection discrepancy remains open.

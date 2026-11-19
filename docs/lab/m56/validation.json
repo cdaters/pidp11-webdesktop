@@ -1,0 +1,29 @@
+{
+  "implementation_commits": [
+    "ac60193",
+    "310bb7c",
+    "b44b9fc",
+    "cf0975f"
+  ],
+  "binary_sha256": "ac97f3cf5aabb7c764d0821ba26144f4f8491a3f3c4839cdd5dd67603b590788",
+  "binary_bytes": 7667874,
+  "architecture": "static Linux ARM64; CGO disabled; stripped",
+  "go_vet": "pass",
+  "go_race_tests": "pass",
+  "typescript_check": "pass",
+  "typescript_unit_tests": 51,
+  "transport_fixture_tests": 1,
+  "terminal_graphics_browser_fixtures": 18,
+  "desktop_printer_regressions": 15,
+  "genuine_v7_cases": 6,
+  "engines": [
+    "Chromium",
+    "Firefox",
+    "WebKit"
+  ],
+  "pi_access": "limited read-only; no deployment, guest interaction, GPIO or stress test",
+  "selected_original_files_compared": 6,
+  "selected_files_hash_and_metadata_differences": 0,
+  "accepted_tags_preserved": 11,
+  "physical_acceptance": false
+}

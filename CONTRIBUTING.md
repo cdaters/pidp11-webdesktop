@@ -66,3 +66,6 @@ To contribute a patch, fork the repository on GitHub, clone your fork (or add it
 Write documentation in clear American English. Identify which shell or guest console runs a command, explain unfamiliar terms when needed, and distinguish tested results from plans. Keep substantial background in one place and link it. Preserve source notices, authentic screenshots and historical checkpoint tags. Changes must keep the original console and physical machine independent of the browser; hardware work needs deliberately prepared, authorized media and equipment.
 
 Original contributions use the project's [MIT License](LICENSE); separately identified material keeps its terms. Include source/attribution with reference contributions. One asset question should not prevent unrelated improvements. Patient explanations, curiosity and respect for the people who built and preserve these machines matter here.
+
+
+For terminal work, start with [personality conformance](docs/technical/terminal-personalities.md) and distinguish intercepted fixtures from the [genuine M5.6 lab](lab/m56/README.md). Graphics contributors should read the separate [4010 and VT11 paths](docs/technical/graphics-foundations.md). Future external applications need an explicit [capability boundary](docs/technical/companion-applications.md); this repository has no general plugin loader.

@@ -55,3 +55,11 @@ The [M5.5 lab and profile preparation](../../lab/m55/README.md) execute the full
 The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original Bridge remains immutable, while `terminalservice.Manager` publishes new endpoint objects behind explicit generation IDs. Manager lock order is manager → endpoint; endpoint readers never call back into the manager. A local approval consumes its revision even when dialing fails. Detached browser views cannot approve a dial. Tests cover stale generations, concurrent detach/dial, EOF, service-instance replacement, malformed local requests and public socket limits.
 
 `packaging/` contains the ARM64 builder and companion-only installation helpers. `lab/m551/` owns scanner oracles, the nine-scenario TLS/WS benchmark, genuine guest/browser supervision and real-systemd lifecycle rehearsal. These are development tools; none belongs in the runtime executable. See [the lab instructions](../../lab/m551/README.md).
+
+
+### M5.6 additions
+
+- `src/terminal-profile.ts` owns connection-local VT52 interpretation and personality key mappings; `guest-terminal.ts` still owns sockets, credits, authentication UI and keyboard authority. See [conformance](terminal-personalities.md).
+- `src/tek4010.ts` owns bounded fixture graphics state; `tek4010-app.ts` renders safe SVG nodes. It opens no transport. See [graphics paths](graphics-foundations.md).
+- `webdesktop-service check` validates private configuration without sockets. `packaging/configure.sh` performs first-run permissions and checks as the dedicated account. `PACKAGE_SHA256SUMS` covers the delivered helpers as well as retained payload.
+- `lab/m56/` adds terminal-personality guest regression and first-run/credential checks while reusing M5.5.1's genuine SIMH, systemd and benchmark harnesses. [Reproduction](../../lab/m56/README.md).
