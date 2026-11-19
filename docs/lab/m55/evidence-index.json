@@ -1,0 +1,65 @@
+{
+  "note": "Private local captures under ignored .research/m55; no Pi capture or credentials published",
+  "files": [
+    {
+      "path": "profile-review/manifest.json",
+      "sha256": "7196bd29f9ca84bcdec2a164ee1b025f6061252032df12e2054254f89d4f185d"
+    },
+    {
+      "path": "profile-review/boot.diff",
+      "sha256": "37d3565d5d54ca278f0bc9f951e69dcd0f2560bd696dfa20edb0f34e5c559121"
+    },
+    {
+      "path": "profile-review/selections.diff",
+      "sha256": "b1e730fa6fa4f89ead1ea23563f0b218890dd058efa9d8ebb9a2c409630c9843"
+    },
+    {
+      "path": "guest/ready.json",
+      "sha256": "5e0c40d5ead688c8c239c37bbe41fb4794cecae0235d12c8a9ac5692d4a47f35"
+    },
+    {
+      "path": "guest/operator-private.log",
+      "sha256": "3e59cd9fbd1c3dd2bb4536e3f08986ffc27dde08c4ae09724a1ad87c8e5503c1"
+    },
+    {
+      "path": "guest/browser-acceptance.json",
+      "sha256": "3890b00fd25497d340fb045f988aa658c32da598eec3d32a4311273dafa612a1"
+    },
+    {
+      "path": "independence-helper-first-attempt.json",
+      "sha256": "c5a4a4ac18aca4e4a4de0317fc04fc5b7da0af9e49d10e8394127781ecbfc4ac"
+    },
+    {
+      "path": "guest-final/ready.json",
+      "sha256": "ffe4c37bbcd17af65ad6e9ec5eed3e35da856fb29f98117bd52083c6945fce3e"
+    },
+    {
+      "path": "guest-final/operator-private.log",
+      "sha256": "8bcc2d5516973d76e959d54b8256c66620330b91f27f61fb5d2205ac1f028b2c"
+    },
+    {
+      "path": "guest-final/browser-acceptance.json",
+      "sha256": "b1eb1d99f7c58cc8212dec41836e0c4c69029164cbdcfe9dc52d09b031186569"
+    },
+    {
+      "path": "guest-final/independence-acceptance.json",
+      "sha256": "8d29ce5e6cc62a4b62238fb8c0d51bc378f15b3e9a5b8ef0060fed8b913d6b05"
+    },
+    {
+      "path": "guest-final/lifecycle-acceptance.json",
+      "sha256": "c6c2be8ac4f196132ada1c710f2268d20ddad87807d9b3e3d66e2dc3d87f5852"
+    },
+    {
+      "path": "guest-final/lifecycle-operator-private.json",
+      "sha256": "bff0df9b738048fd1acea8423156e0e8a918162bddfd82896049090a2db3077c"
+    },
+    {
+      "path": "guest-final/selection-acceptance.json",
+      "sha256": "f991a70c28b17bf1baee318959f6f133c64deb5848b83ec1de7e3c22d323bec9"
+    },
+    {
+      "path": "browser-regression.json",
+      "sha256": "73933c7fbef18e0babbd87d670eeaf4453b637605d1722c93190bd9e98d5d922"
+    }
+  ]
+}

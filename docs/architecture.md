@@ -110,3 +110,7 @@ See [ADR 0004](decisions/0004-independent-access.md) and the [M4.1 consumer inte
 ## M5.4 normal-launcher coexistence preparation
 
 The [M5.4 design](lab/M5.4.md) keeps the original launcher, Screen and physical REALCONS path independent, proposes an opt-in copied V7 profile, and separates guest attachment from browser and keyboard lifetimes. Mac-side bridge attachment is now one-shot; automatic guest identity and detached-by-default service provisioning remain future work. The [supervised pilot proposal](lab/M5.4-pilot-plan.md) is unexecuted and requires separate authorization.
+
+## M5.5 preparation and future installation
+
+[M5.5](lab/M5.5.md) supplies the exact one-listener V7 derivative and selection proposal, preserving original REALCONS settings. Original SIMH plus a simulated panel passed terminal and failure-independence checks in the Mac lab; the real launcher/physical panel remain an unexecuted pilot. The [M5.6 specification](lab/M5.6-deployment-spec.md) defines a separate optional service with detached startup and no emulator lifecycle dependency.

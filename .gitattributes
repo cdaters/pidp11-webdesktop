@@ -9,3 +9,7 @@ docs/lab/m42/regression-run.txt -whitespace
 # M4.3 raw laboratory evidence retains its captured console formatting.
 docs/lab/m43/*.log -whitespace
 docs/lab/m43/*-run.txt -whitespace
+
+# Exact installed V7 baseline and one-line derivative retain original EOF spacing.
+lab/m55/original-boot.ini -whitespace
+lab/m55/boot.ini -whitespace

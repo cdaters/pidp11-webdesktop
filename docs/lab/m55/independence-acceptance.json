@@ -1,0 +1,29 @@
+{
+  "environment": "isolated Mac-hosted Linux ARM64 lab",
+  "physical_hardware_tested": false,
+  "passed": true,
+  "cases": [
+    {
+      "mode": "graceful-stop",
+      "passed": true,
+      "console_echo": "M55_CONSOLE_4d7f58313e75",
+      "rpc_gets_before": 16998,
+      "rpc_gets_after": 17171,
+      "rpc_sets_before": 7133,
+      "rpc_sets_after": 7273,
+      "run_lamp": 1,
+      "fixture_switch_inputs_unchanged": true
+    },
+    {
+      "mode": "bridge-crash",
+      "passed": true,
+      "console_echo": "M55_CONSOLE_6ec26bfe87e7",
+      "rpc_gets_before": 17212,
+      "rpc_gets_after": 17404,
+      "rpc_sets_before": 7314,
+      "rpc_sets_after": 7467,
+      "run_lamp": 1,
+      "fixture_switch_inputs_unchanged": true
+    }
+  ]
+}

@@ -2,6 +2,14 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.5 — 2026-11-19
+
+- Prepared an exact copied V7 profile, proposed unused physical selection 0017, bounded local preparation helper and explicit Pi pilot/rollback instructions.
+- Validated the complete REALCONS-enabled profile against original SIMH and a simulated panel, including genuine terminals in three browser engines, bridge stop/crash independence and retired listener recovery.
+- Corrected the laboratory replay-cache capacity for the original 1 ms profile without changing the default or replay window; added a 16 MiB payload bound and regression tests.
+- Added the M5.6 optional-service deployment specification. No Pi access, physical coexistence claim, service deployment or changes to accepted checkpoints.
+- [Candidate, evidence and limits](docs/lab/M5.5.md).
+
 ## M5.4 — 2026-11-18
 
 - Documented opt-in original-launcher coexistence, physical selection semantics, guest/line identity limits, optional-service boundaries and a reversible supervised pilot proposal.

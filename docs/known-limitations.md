@@ -4,8 +4,8 @@ The desktop is useful for exploration now, and genuine guest-terminal integratio
 
 | Area | Limit and next evidence needed |
 |---|---|
-| Live Pi service | M5.3's separate terminal-pilot command passed on the Pi and was stopped. No permanent service, general installer or normal-launcher integration exists; terminal-lab still retains its isolation guard. |
-| Physical hardware | The owner reports the assembled kit passing initial LED/switch/HALT/CONT/encoder checks and a normal-launcher RT-11 boot. Integrated browser/panel coexistence, sustained power behavior and physical serial expansion remain untested; see M5.4. |
+| Live Pi service | M5.3's separate terminal-pilot command passed on the Pi and was stopped. M5.5 tests a complete candidate with simulated panel/REALCONS, but the normal-launcher/physical pilot and M5.6 service remain unexecuted; no permanent service or general installer exists; terminal-lab still retains its isolation guard. |
+| Physical hardware | The owner reports the assembled kit passing initial LED/switch/HALT/CONT/encoder checks and a normal-launcher RT-11 boot. Integrated browser/panel coexistence, sustained power behavior and physical serial expansion remain untested; see M5.5. |
 | Panel control | Delayed START release and blocked RPC can defeat simple browser/broker fail-safe assumptions. Remote control is separate from passive observation. |
 | Terminal compatibility | Tested VT100-style subset, ASCII7 and fixed 80 × 24. VT52/full VT220/Tektronix/VT11 are future work; full-screen guest applications need broader checks. |
 | Guest selection | Actual terminal acceptance covers UNIX V7 in the lab and the single-line Pi pilot. A configured serial device does not prove another guest has its driver and login services ready. |
@@ -17,4 +17,4 @@ The desktop is useful for exploration now, and genuine guest-terminal integratio
 | Browsers | Chromium, Firefox and WebKit passed recorded tests. Native Safari automation was unavailable under existing personal settings, which were left unchanged. |
 | Installation tutorial | A working original installation was tested; the complete reconstructed blank-card guide has not been independently repeated. |
 
-Details are in [M5.0](lab/M5.0.md), [M5.1](lab/M5.1.md), [M5.3](lab/M5.3.md), [M5.4](lab/M5.4.md), [panel safety](lab/M4.md), [installation status](installation/README.md) and the [roadmap](../ROADMAP.md). Contributions that reduce a specific uncertainty are welcome.
+Details are in [M5.0](lab/M5.0.md), [M5.1](lab/M5.1.md), [M5.3](lab/M5.3.md), [M5.4](lab/M5.4.md), [M5.5](lab/M5.5.md), [panel safety](lab/M4.md), [installation status](installation/README.md) and the [roadmap](../ROADMAP.md). Contributions that reduce a specific uncertainty are welcome.

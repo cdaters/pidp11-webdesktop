@@ -73,6 +73,7 @@ The separate **Guest terminal** needs an explicitly prepared real-guest service.
 | See how the project evolved | [Development timeline](docs/timeline.md) and [changelog](CHANGELOG.md) |
 | Inspect the implementation | [Technical guide](docs/technical/README.md), [coding standards](docs/technical/CODING-STANDARDS.md) and [architecture decisions](docs/development/DECISIONS.md) |
 | Prepare Oscar's original software on Trixie Lite | [Headless installation guide](docs/installation/README.md) — **not a Web Desktop installer** |
+| Review the prepared coexistence candidate | [M5.5 results](docs/lab/M5.5.md) · [physical pilot proposal](docs/lab/M5.5-pilot-plan.md) · [M5.6 deployment design](docs/lab/M5.6-deployment-spec.md) |
 | Plan original-launcher coexistence | [M5.4 Mac-only design and lifecycle safeguards](docs/lab/M5.4.md) · [proposed supervised pilot](docs/lab/M5.4-pilot-plan.md) |
 | Review the actual Pi findings | [M5.1 assessment](docs/lab/M5.1.md) and [M5.3 completed terminal pilot](docs/lab/M5.3.md) |
 | Suggest an idea, report a bug or help | [Contributing](CONTRIBUTING.md), [Issues](https://github.com/cdaters/pidp11-webdesktop/issues) and [Discussions](https://github.com/cdaters/pidp11-webdesktop/discussions) |

@@ -1,0 +1,51 @@
+{
+  "environment": "isolated Mac-hosted Linux ARM64 lab",
+  "pilotSHA256": "69b609ea7b41f24c61daaeb1a6fa2292782ebc72ead3cf9ccdf53f699598f443",
+  "browsers": [
+    {
+      "name": "chromium",
+      "passed": true,
+      "transcript": "login: dmr\n$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\ntmp\nunix\nusr\n$ echo M53_chromium_1c50308b\nM53_chromium_1c50308b\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    },
+    {
+      "name": "firefox",
+      "passed": true,
+      "transcript": "$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\ntmp\nunix\nusr\n$ echo M53_firefox_848633d1\nM53_firefox_848633d1\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    },
+    {
+      "name": "webkit",
+      "passed": true,
+      "transcript": "$ ls /\n.profile\nbin\nboot\ndev\netc\nlib\ntmp\nunix\nusr\n$ echo M53_webkit_6a260d76\nM53_webkit_6a260d76\n$ echo ERASE_OKX#\nERASE_OK\n$  ",
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    }
+  ],
+  "independence": [
+    {
+      "browser": "chromium",
+      "operator": "echo CONSOLE_AFTER_CLOSE_chromium\r\nCONSOLE_AFTER_CLOSE_chromium\r\n$ "
+    },
+    {
+      "browser": "firefox",
+      "operator": "echo CONSOLE_AFTER_CLOSE_firefox\r\nCONSOLE_AFTER_CLOSE_firefox\r\n$ "
+    },
+    {
+      "browser": "webkit",
+      "operator": "echo CONSOLE_AFTER_CLOSE_webkit\r\nCONSOLE_AFTER_CLOSE_webkit\r\n$ "
+    }
+  ],
+  "restart": {
+    "passed": true,
+    "operator": "echo CONSOLE_WITHOUT_BRIDGE_M53\r\nCONSOLE_WITHOUT_BRIDGE_M53\r\n$ "
+  }
+}

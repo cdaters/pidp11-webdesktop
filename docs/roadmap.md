@@ -1,6 +1,6 @@
 # Roadmap, resource budget and open questions
 
-Originally recorded 2026-11-16; M5.4 update 2026-11-18. The table below contains **acceptance targets**, not measurements. M5.3 subsequently recorded short standalone Pi measurements; M5.4 is Mac-only preparation. Historical milestone sections retain their original scope; the latest status is at the end.
+Originally recorded 2026-11-16; M5.5 update 2026-11-19. The table below contains **acceptance targets**, not measurements. M5.3 subsequently recorded short standalone Pi measurements; M5.4 is Mac-only preparation. Historical milestone sections retain their original scope; the latest status is at the end.
 
 ## Performance targets
 
@@ -122,3 +122,12 @@ Next is owner review of the [staged pilot plan](lab/M5.1-pilot-plan.md). Local i
 | Passive panel observation | Separate source/identity/overhead/rollback review; no extra input polling or remote-control capability |
 
 Remote panel control, GPIO work, original-image changes and production deployment remain outside this preparation. Keep physical-only operation independent of every companion component.
+
+
+## M5.5 preparation — 2026-11-19
+
+The [M5.5 candidate](lab/M5.5.md) retains the installed V7 profile except for one DC11 listener and proposes unused selector 0017 from the retained M5.1 map. Its original REALCONS settings were exercised against a simulated panel in the Mac lab. Genuine guest terminals, continuing console/RPC operation after bridge stop/crash, and listener-replacement retirement passed. The fast profile exposed a bounded replay-cache capacity issue in the stand-in; the report records its correction without changing original SIMH or the profile interval.
+
+Next is owner review of the [exact physical pilot and rollback](lab/M5.5-pilot-plan.md), followed only after separate authorization by fresh state/hash checks, physical switch selection, original launcher/Screen/panel acceptance and fallback verification. No current Pi availability or physical coexistence is inferred from cached inventory or laboratory results.
+
+The [M5.6 deployment specification](lab/M5.6-deployment-spec.md) now covers optional LAN availability, detached startup, credential/certificate provisioning, resource limits, upgrades and uninstall. Implement and validate that separate service lifecycle before packaging or enabling it. Keep the original emulator independent, retain all existing resource targets, and leave remote control and passive observation behind their own gates.

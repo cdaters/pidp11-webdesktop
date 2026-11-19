@@ -1,0 +1,7 @@
+{
+  "resolver": "original getsel.sh",
+  "selection": "0017",
+  "profile": "unix7-web-pilot",
+  "fallback": "idled",
+  "physical_scanner_or_launcher_executed": false
+}

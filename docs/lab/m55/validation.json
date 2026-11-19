@@ -1,0 +1,127 @@
+{
+  "milestone": "M5.5",
+  "date": "2026-11-19",
+  "scope": "Mac-only preparation; physical Pi pilot unexecuted",
+  "implementation_commit": "32e5fc421f3a1c9b8f7447ba47dc9ca80a70a65c",
+  "profile": {
+    "scope": "local preparation only; revalidate current Pi state after authorization",
+    "selection": "0017",
+    "profile": "unix7-web-pilot",
+    "asserted_switch_bits": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "original_boot_sha256": "9a0d63699fcc1ab117fcf9cf35f85c1694719b33f2d8989167f4018e97d7f44b",
+    "candidate_boot_sha256": "3f0b90fc857660a842cfabdbc9030b07c810e4ec67caafa3a2a1f62c32354eb2",
+    "original_selections_sha256": "cc340dc0a45aa13255a7818149956eb6713a6ecca3254f016b3449ff9ac391f9",
+    "proposed_selections_sha256": "2b530561a1a41391d7c05c090fd77f2169b900589ab2729c2f6385bc432c5e3c",
+    "selection_count_before": 18
+  },
+  "terminal_binary": {
+    "sha256": "69b609ea7b41f24c61daaeb1a6fa2292782ebc72ead3cf9ccdf53f699598f443",
+    "bytes": 7078050,
+    "platform": "linux/arm64",
+    "cgo": false,
+    "build_vcs_revision": "73ec01bd1ebd147bf69b9f34f1b52cf26505fd28",
+    "build_vcs_modified": true,
+    "note": "Terminal application source is unchanged from M5.4; binary built before the M5.5 commit. Retained M5.3/M5.4 candidate bytes were not overwritten."
+  },
+  "panel_stand_in": {
+    "sha256": "3c6d11b8a821a644e1fed26be808a7aedf44c601707df5afd41fb2ee962a34d1",
+    "udp_replay_entries": 65536,
+    "default_entries_unchanged": 4096,
+    "retention_seconds": 35,
+    "payload_byte_limit": 16777216
+  },
+  "simh": {
+    "upstream_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "binary_sha256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+    "original_source_modified": false,
+    "existing_lab_pty_shim": true,
+    "complete_candidate_executed": true,
+    "realcons_connected_to": "Go simulated panel in network-none Linux lab",
+    "original_getsel_executed": true,
+    "original_launcher_screen_scanner_gpio_executed": false,
+    "original_getsel_sha256": "eace06c57b37ffece8cff7bfedcf49f88c3cfc8b60fc8ef183472e95e29fdb71"
+  },
+  "checks": {
+    "go_vet": "passed",
+    "go_test_race_all": "passed",
+    "new_rpc_replay_tests": 4,
+    "typescript_strict": "passed",
+    "typescript_units_passed": 46,
+    "transport_fixture_passed": 1,
+    "targeted_browser_regressions_passed": 12,
+    "browser_files": [
+      "guest.spec.ts",
+      "observe.spec.ts"
+    ],
+    "profile_helper_tests_passed": 5,
+    "python_compile": "passed",
+    "documented_shell_blocks": "syntax-checked, not executed",
+    "frontend_build_embed": "passed",
+    "linux_arm64_builds": "passed",
+    "genuine_guest_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "normal_bridge_stop_independence": "passed with original REALCONS and simulated panel",
+    "bridge_sigkill_independence": "passed with original REALCONS and simulated panel",
+    "listener_replacement": "passed; old attachment retired; fresh auth and read-only recovery",
+    "listener_socket_release_wait_ms": 62477,
+    "application_panel_terminal_control_source_unchanged_from_m54": true,
+    "full_45_case_browser_suite": "not rerun",
+    "native_safari": "not tested",
+    "changed_document_links_json_and_diff": "passed; exact source EOF whitespace preserved with scoped attributes"
+  },
+  "corrections": [
+    {
+      "case": "rpcbind setup",
+      "finding": "Initial capabilities were insufficient; stopped before guest startup",
+      "resolution": "Used the existing RPC lab SETUID/SETGID/KILL capability set for privilege drop and owned-child cleanup"
+    },
+    {
+      "case": "original 1 ms REALCONS profile",
+      "finding": "4096-entry/35-second fixture cache saturated; original C reported RPC Remote system error and disconnected",
+      "resolution": "Explicit 65536-entry bounded fast fixture, same replay window, new 16 MiB payload cap; final acceptance on fresh disposable media"
+    },
+    {
+      "case": "test helper formatting",
+      "finding": "Embedded Python crash helper initially had unexpected indentation; no crash signal was sent",
+      "resolution": "Dedent before invoking the fixed lab-only child check; rerun passed"
+    },
+    {
+      "case": "Mac UDP test packet",
+      "finding": "60 KiB unit fixture exceeded host send limit",
+      "resolution": "8 KiB packets exercise the same 16 MiB memory bound"
+    },
+    {
+      "case": "dependent test sequencing",
+      "finding": "An early listener-test invocation found the bridge still stopped after failed independence and failed TLS",
+      "resolution": "Final sequence ran only after preceding acceptance succeeded; no automatic recovery"
+    }
+  ],
+  "cleanup": {
+    "guest_runs": 2,
+    "both_guests_synced_three_times_and_quit_observed": true,
+    "protected_bases_unchanged": true,
+    "public_base_sha256": "fc04dab1e7f2fbf3ea4b44603ed2c9d6ba15f4f86c702d4a27a1dac725966f39",
+    "separate_writable_file_identities": true,
+    "container_exited": true,
+    "owned_mac_relay_and_vite_stopped": true,
+    "accepted_binary_and_tag_identities_unchanged": true,
+    "pi_contact": false
+  },
+  "limits": [
+    "Current Pi hashes and unused selection must be revalidated after separate authorization",
+    "No physical-panel, original-launcher/Screen or GPIO coexistence acceptance",
+    "No original GPIO daemon, POWER/LOCK side-effect or physical serial test",
+    "In-process guest reboot on a surviving connection remains undetectable",
+    "No fresh Pi performance or sustained Mac benchmark claim",
+    "M5.6 service lifecycle/LAN provisioning are design only",
+    "Remote control and passive observation remain separate gated work"
+  ]
+}
