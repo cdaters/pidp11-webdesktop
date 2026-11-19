@@ -2,6 +2,14 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.5.1 Mac-only diagnostics and optional-service engineering — 2026-11-19
+
+- Added bounded switch-selection diagnostics, synthetic captures, unchanged original-C GPIO-stub comparisons and an original-resolver oracle. Hardware mode remains separately authorized and unexecuted.
+- Removed repeated trusted-origin parsing and per-viewer output copies with measured allocation improvements; retained all lease, ordering, stale-output and queue protections. Published nine Linux workload measurements, including the unresolved eight-observer CPU limit.
+- Implemented a separate detached service, private local approvals, generation-bound browser choices, explicit unavailable states, private TLS/token provisioning and optional static ARM64 packaging.
+- Rehearsed real systemd installation, restart/crash, credential-session revocation, upgrade, rollback and complete uninstall in disposable Linux; tested genuine V7 in Chromium, Firefox and WebKit without Pi access.
+- Documented community architecture comparisons and a proposed optional copilot adapter. No copilot or remote panel control was implemented. [Report and remaining gates](docs/lab/M5.5.1.md).
+
 ## M5.5 supervised physical pilot — 2026-11-19
 
 - Exercised the original no-argument launcher, copied V7 media, physical HALT/CONT and DATA selector, independent Screen console, and genuine browser terminals in three engines.

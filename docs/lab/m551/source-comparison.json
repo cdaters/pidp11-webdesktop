@@ -1,0 +1,8 @@
+{
+  "src/11_pidp_server/scanswitch/scansw.c": "de9457551b1c5eae6770b03242b5889f54625c25789d6d7a2de9ec938d617f34",
+  "src/11_pidp_server/pidp11/gpio.c": "2a9fed69964eaa08058cc7c17ba647f4b96d0fee702f7cbfb7ceadb080ea1f40",
+  "src/11_pidp_server/pidp11/main.c": "80795bf40af09517f6f98f1e0b6fa14e9533a349d7c91dc485a4a9e8cf1cfca0",
+  "bin/pidp11.sh": "2a041dcc1064a581663b20300c41f45abae8baf6bc1c2b84c23c5a72cfa82300",
+  "bin/pdp11control.sh": "c95b65188cf30ba8a288366d6e3b9bdf02a9837a2226193be6bb375259a727f9",
+  "bin/getsel.sh": "eace06c57b37ffece8cff7bfedcf49f88c3cfc8b60fc8ef183472e95e29fdb71"
+}

@@ -1,0 +1,13 @@
+{
+  "environment": "Disposable Debian13 ARM64, real systemd257 on Mac",
+  "install_stopped_disabled": true,
+  "upgrade": true,
+  "rollback": true,
+  "restart_detached": true,
+  "disable_stop": true,
+  "purge_companion_paths": true,
+  "purge_companion_account_and_group": true,
+  "original_guest_test": "separate network-none disposable UNIX V7 lab",
+  "initial_rehearsal_correction": "userdel can remove an empty private group; only call groupdel if it remains",
+  "production_deployment": false
+}

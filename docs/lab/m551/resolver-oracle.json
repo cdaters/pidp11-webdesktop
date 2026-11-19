@@ -1,0 +1,47 @@
+{
+  "original_resolver": true,
+  "synthetic_map": true,
+  "hardware_executed": false,
+  "results": [
+    {
+      "raw": 0,
+      "selector": "0000",
+      "profile": "idled"
+    },
+    {
+      "raw": 1,
+      "selector": "0001",
+      "profile": "rsx11mplus"
+    },
+    {
+      "raw": 15,
+      "selector": "0017",
+      "profile": "unix7-pilot"
+    },
+    {
+      "raw": 1398101,
+      "selector": "252525",
+      "profile": "idled"
+    },
+    {
+      "raw": 2796202,
+      "selector": "525252",
+      "profile": "idled"
+    },
+    {
+      "raw": 3932160,
+      "selector": "0000",
+      "profile": "idled"
+    },
+    {
+      "raw": 12582912,
+      "selector": "0000",
+      "profile": "idled"
+    },
+    {
+      "raw": 16777215,
+      "selector": "777777",
+      "profile": "idled"
+    }
+  ]
+}

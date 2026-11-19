@@ -66,3 +66,10 @@ python3 docs/installation/tests/test_guide.py
 These checks exercise documented helpers in temporary fixtures and syntax-check command blocks. They do not execute a real installation, contact a Pi, open a card device or boot a guest. See [the test scope](../installation/tests/README.md).
 
 Please read [CONTRIBUTING](../../CONTRIBUTING.md), retain notices, and include the relevant actual test results in a pull request.
+
+
+## M5.5.1 diagnostics and optional service
+
+Use the [M5.5.1 lab instructions](../../lab/m551/README.md) for the offline original-C scanner oracle, detached-service lifecycle, actual V7 browser checks and repeatable transport benchmarks. The relevant browser fixture command is `npx playwright test browser-tests/guest.spec.ts` with Vite running; it is separate from `lab/m551/browser.mjs`, which uses a genuine disposable guest.
+
+Build the optional installation candidate with `sh packaging/build.sh FRESH_OUTPUT_DIRECTORY`. Do not use the existing `terminal-pilot` as an installed service: it retains its supervised one-shot startup connection. The new service, setup/private-file requirements, explicit local attachment and companion-only uninstall are described in [M5.6 implementation](../lab/M5.6-implementation.md). Actual Pi access still requires separate authorization.

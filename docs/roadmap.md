@@ -140,3 +140,16 @@ The [actual pilot](lab/M5.5-physical-pilot.md) passed original-launcher V7, thre
 Next gates are a source/evidence review and a separately authorized selection diagnostic that cannot boot original writable media, followed by a reviewed retry only after the cause is understood. The bridge stayed absent throughout the failed switch. Do not treat a reused endpoint, no-argument launch or physical position report alone as verified guest identity.
 
 Short bridge measurements were 6,848 KiB idle RSS / 0.30% CPU and 14,176 KiB maximum sampled active RSS / 5.55% mean CPU. The active sample exceeds the unchanged <5% target; its 20-second browser-acceptance workload is not the sustained workload specified above. Added latency, PSS and emulator-throughput impact were not measured. No new Pi workload is authorized by this report.
+
+
+## M5.5.1 Mac-only development — 2026-11-19
+
+The [milestone report](lab/M5.5.1.md) records a bounded switch diagnostic and original-C/resolver synthetic oracles, measured allocation improvements, community architecture research, and an implemented detached optional service with ARM64 packaging. Three browser engines exercised actual disposable V7; real-systemd install/restart/upgrade/rollback/uninstall ran in isolated Linux. No Pi access occurred, and the accepted physical checkpoints were not changed.
+
+Next gates, in order:
+
+1. Review and separately authorize the [stopped-machine scanner diagnostic](lab/M5.5.1-switch-diagnostic.md), with owner-confirmed switch positions and exclusive GPIO ownership. Capture raw readings without booting another original guest.
+2. Investigate any discrepancy before proposing another original-launcher physical coexistence pilot. M5.5's successful subtests do not erase its failed fallback.
+3. Review the [optional service candidate](lab/M5.6-implementation.md), actual network/certificate provisioning and reserved guest line before any Pi installation. Continue to stop the actual bridge before intentional guest changes.
+4. Measure the unchanged resource targets on the Pi under sustained representative workloads. Mac-hosted Linux results do not close this gate; eight busy observers measured 6.83% CPU in the lab.
+5. Keep passive panel observation, authoritative lifecycle evidence, per-user/per-line access and any [copilot adapter](lab/M5.5.1-community.md) separately scoped. Remote panel control remains restricted.

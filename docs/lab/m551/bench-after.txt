@@ -1,0 +1,24 @@
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/access
+cpu: Apple M4 Pro
+BenchmarkTrustedRequest-12    	495907045	         2.239 ns/op	       0 B/op	       0 allocs/op
+BenchmarkTrustedRequest-12    	536393157	         2.243 ns/op	       0 B/op	       0 allocs/op
+BenchmarkTrustedRequest-12    	536556547	         2.249 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/access	4.498s
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/terminalbridge
+cpu: Apple M4 Pro
+BenchmarkFanout/viewers-1-12         	 1686445	       688.1 ns/op	1488.06 MB/s	    1024 B/op	       1 allocs/op
+BenchmarkFanout/viewers-1-12         	 1771146	       677.9 ns/op	1510.50 MB/s	    1024 B/op	       1 allocs/op
+BenchmarkFanout/viewers-1-12         	 1773633	       674.5 ns/op	1518.12 MB/s	    1024 B/op	       1 allocs/op
+BenchmarkFanout/viewers-4-12         	 1518164	       786.7 ns/op	5206.83 MB/s	    1024 B/op	       1 allocs/op
+BenchmarkFanout/viewers-4-12         	 1527201	       796.6 ns/op	5141.98 MB/s	    1024 B/op	       1 allocs/op
+BenchmarkFanout/viewers-4-12         	 1536458	       784.9 ns/op	5218.62 MB/s	    1024 B/op	       1 allocs/op
+BenchmarkFanout/viewers-8-12         	 1295521	       918.3 ns/op	8921.28 MB/s	    1024 B/op	       1 allocs/op
+BenchmarkFanout/viewers-8-12         	 1310698	       931.4 ns/op	8794.94 MB/s	    1024 B/op	       1 allocs/op
+BenchmarkFanout/viewers-8-12         	 1300982	       912.3 ns/op	8979.05 MB/s	    1024 B/op	       1 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/terminalbridge	18.190s

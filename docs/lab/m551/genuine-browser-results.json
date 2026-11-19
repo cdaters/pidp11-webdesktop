@@ -1,0 +1,38 @@
+{
+  "source": "Genuine disposable UNIX V7; network-none original SIMH; Mac browsers through fixed local test forwarding",
+  "browsers": [
+    {
+      "name": "chromium",
+      "passed": true,
+      "detachedStartup": true,
+      "explicitAttachment": true,
+      "genuineCommands": true,
+      "staleGenerationRejected": true,
+      "independentConsoleAndDC11": true,
+      "restartDetached": true,
+      "oldCookieRevoked": true
+    },
+    {
+      "name": "firefox",
+      "passed": true,
+      "detachedStartup": true,
+      "explicitAttachment": true,
+      "genuineCommands": true,
+      "staleGenerationRejected": true,
+      "independentConsoleAndDC11": true,
+      "restartDetached": true,
+      "oldCookieRevoked": true
+    },
+    {
+      "name": "webkit",
+      "passed": true,
+      "detachedStartup": true,
+      "explicitAttachment": true,
+      "genuineCommands": true,
+      "staleGenerationRejected": true,
+      "independentConsoleAndDC11": true,
+      "restartDetached": true,
+      "oldCookieRevoked": true
+    }
+  ]
+}
