@@ -1,0 +1,139 @@
+// webdesktop-service serves the optional desktop detached from all guests.
+// Local control commands can approve only configured raw guest lines.
+package main
+
+import (
+	"bytes"
+	"context"
+	"crypto/tls"
+	"encoding/json"
+	"errors"
+	"flag"
+	"fmt"
+	"io"
+	"log"
+	"net"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
+	"pidp11.local/webdesktop/internal/terminalbridge"
+	"pidp11.local/webdesktop/internal/terminalservice"
+	"pidp11.local/webdesktop/internal/web"
+)
+
+func serve(ctx context.Context, path string) error {
+	config, gate, cert, err := terminalservice.Load(path)
+	if err != nil {
+		return err
+	}
+	manager, err := terminalservice.New(config.Endpoints)
+	if err != nil {
+		return err
+	}
+	defer manager.Close()
+	control, err := terminalservice.ControlListener(config.Control)
+	if err != nil {
+		return err
+	}
+	defer control.Close()
+	listener, err := net.Listen("tcp", config.Listen)
+	if err != nil {
+		return err
+	}
+	defer listener.Close()
+	admin := terminalservice.ControlServer(manager)
+	defer admin.Close()
+	server := &http.Server{Handler: (&terminalbridge.Server{Bridge: manager, Auth: gate}).Handler(web.Assets()), TLSConfig: &tls.Config{MinVersion: tls.VersionTLS13, Certificates: []tls.Certificate{cert}}, ReadHeaderTimeout: time.Second, ReadTimeout: 3 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}
+	defer server.Close()
+	lifetime, cancel := context.WithCancel(ctx)
+	defer cancel()
+	go manager.Run(lifetime)
+	errorsOut := make(chan error, 2)
+	go func() { errorsOut <- admin.Serve(terminalservice.LimitListener(control, 8)) }()
+	go func() { errorsOut <- server.ServeTLS(terminalservice.LimitListener(listener, 64), "", "") }()
+	log.Print("Optional desktop ready; all guest lines detached; local approval required")
+	select {
+	case <-ctx.Done():
+		return nil
+	case err := <-errorsOut:
+		if errors.Is(err, http.ErrServerClosed) {
+			return nil
+		}
+		return err
+	}
+}
+
+func control(ctx context.Context, op, socket, instance, id string, revision uint64, confirmed bool) error {
+	if op != "status" && op != "attach" && op != "detach" {
+		return errors.New("choose serve, status, attach or detach")
+	}
+	transport := &http.Transport{DialContext: func(ctx context.Context, _, _ string) (net.Conn, error) {
+		return (&net.Dialer{}).DialContext(ctx, "unix", socket)
+	}}
+	defer transport.CloseIdleConnections()
+	client := &http.Client{Transport: transport, Timeout: 4 * time.Second}
+	var body io.Reader
+	method := "GET"
+	if op != "status" {
+		method = "POST"
+		data, _ := json.Marshal(terminalservice.Approval{Instance: instance, ID: id, Revision: revision, Confirmed: confirmed})
+		body = bytes.NewReader(data)
+	}
+	request, err := http.NewRequestWithContext(ctx, method, "http://local/"+op, body)
+	if err != nil {
+		return err
+	}
+	response, err := client.Do(request)
+	if err != nil {
+		return err
+	}
+	defer response.Body.Close()
+	data, err := io.ReadAll(io.LimitReader(response.Body, 8193))
+	if err != nil {
+		return err
+	}
+	if len(data) > 8192 {
+		return errors.New("control response too large")
+	}
+	if response.StatusCode != 200 {
+		return fmt.Errorf("local action rejected: %s", data)
+	}
+	_, err = os.Stdout.Write(data)
+	return err
+}
+func run(ctx context.Context) error {
+	if len(os.Args) < 2 {
+		return errors.New("usage: webdesktop-service serve|status|attach|detach [options]")
+	}
+	op := os.Args[1]
+	if op == "provision" {
+		return provision(os.Args[2:])
+	}
+	flags := flag.NewFlagSet(op, flag.ContinueOnError)
+	config := flags.String("config", "/etc/pidp11-webdesktop/config.json", "private service configuration")
+	socket := flags.String("socket", "/run/pidp11-webdesktop/control.sock", "local control socket")
+	instance := flags.String("instance", "", "fresh service instance from status")
+	id := flags.String("id", "", "approved terminal ID")
+	revision := flags.Uint64("revision", 0, "current line revision from status")
+	confirmed := flags.Bool("guest-and-line-verified", false, "operator independently verified current guest and reserved guest-only line")
+	if err := flags.Parse(os.Args[2:]); err != nil {
+		return err
+	}
+	if flags.NArg() != 0 {
+		return errors.New("unexpected arguments")
+	}
+	if op == "serve" {
+		return serve(ctx, *config)
+	}
+	return control(ctx, op, *socket, *instance, *id, *revision, *confirmed)
+}
+func main() {
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
+	if err := run(ctx); err != nil {
+		log.Fatal(err)
+	}
+}

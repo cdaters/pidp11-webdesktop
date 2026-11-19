@@ -16,7 +16,7 @@ import (
 // Server exposes an existing Bridge through an independently provisioned access
 // Gate. It does not dial guest lines or own the HTTP listener; the command does.
 type Server struct {
-	Bridge *Bridge
+	Bridge Directory
 	Auth   *access.Gate
 }
 
@@ -28,13 +28,10 @@ func (s *Server) Handler(assets fs.FS) http.Handler {
 	mux.HandleFunc("POST /api/v1/logout", s.Auth.Logout)
 	mux.HandleFunc("GET /api/v1/session", s.Auth.Session)
 	mux.Handle("GET /api/v1/terminals", s.Auth.Require(access.TerminalObserve, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		rows := []map[string]any{}
-		for id, e := range s.Bridge.Endpoints {
-			rows = append(rows, map[string]any{"id": id, "label": e.Config.Label, "connected": e.Connected(), "kind": "real-guest-line", "columns": 80, "rows": 24})
-		}
-		json.NewEncoder(w).Encode(rows)
+		json.NewEncoder(w).Encode(s.Bridge.List())
 	})))
 	mux.Handle("GET /api/v1/terminals/{id}/ws", s.Auth.Require(access.TerminalObserve, http.HandlerFunc(s.stream)))
+	mux.Handle("GET /api/v1/terminals/{id}/generation/{generation}/ws", s.Auth.Require(access.TerminalObserve, http.HandlerFunc(s.stream)))
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) { http.Error(w, "guest terminal service only", 403) })
 	mux.Handle("/", web.ServeAssets(assets))
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +53,7 @@ func (s *Server) stream(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "query parameters not accepted", 400)
 		return
 	}
-	e := s.Bridge.Endpoints[r.PathValue("id")]
+	e := s.Bridge.Lookup(r.PathValue("id"), r.PathValue("generation"))
 	if e == nil {
 		http.NotFound(w, r)
 		return

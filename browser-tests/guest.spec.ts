@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 // Renderer/transport fixture only. Genuine guest acceptance is lab/m50/browser.mjs.
 test('guest adapter preserves split sequences, explicit ownership, safe paste and fresh reconnect',async({page})=>{
  await page.route('**/api/v1/session',r=>r.fulfill({json:{capabilities:{'terminal.observe':true,'terminal.input':true},csrf:'fixture'}}));
- await page.route('**/api/v1/terminals',r=>r.fulfill({json:[{id:'fixture',label:'Transport fixture · not a guest'}]}));
+ await page.route('**/api/v1/terminals',r=>r.fulfill({json:[{id:'fixture',label:'Transport fixture · not a guest',connected:true}]}));
  const inputs:string[]=[];let connections=0,owned=false;
  await page.routeWebSocket('**/api/v1/terminals/fixture/ws',ws=>{
   connections++;owned=false;ws.send(JSON.stringify({type:'state',connected:true,owner:false,epoch:connections}));
@@ -28,4 +28,21 @@ test('guest adapter preserves split sequences, explicit ownership, safe paste an
  await expect(page.locator('.guest-heading')).toContainText('READ-ONLY');expect(connections).toBe(2);expect(owned).toBe(false);
  await expect(page.locator('.guest-xterm .xterm-rows')).not.toContainText('FIXTURE READY');
  await expect(page.locator('#panel-source')).toContainText('SIMULATED');
+});
+
+test('detached service never dials from opening or refreshing; attachment choice is generation-pinned',async({page})=>{
+ let state='detached',generation='instance-0',connections=0;
+ await page.route('**/api/v1/session',r=>r.fulfill({json:{capabilities:{'terminal.observe':true},csrf:'fixture'}}));
+ await page.route('**/api/v1/terminals',r=>r.fulfill({json:[{id:'fixture',label:'Lifecycle fixture',state,generation,connected:state==='attached'}]}));
+ await page.routeWebSocket('**/api/v1/terminals/fixture/generation/*/ws',ws=>{
+  connections++;expect(ws.url()).toContain('/instance-1/ws');
+  ws.send(JSON.stringify({type:'state',connected:true,owner:false,epoch:1}));
+ });
+ await page.goto('/');await page.getByRole('button',{name:'Open Guest terminal',exact:true}).click();
+ await expect(page.locator('.guest-heading')).toContainText('DETACHED');await expect(page.locator('[data-connect]')).toBeDisabled();
+ await page.locator('[data-refresh]').click();expect(connections).toBe(0);
+ state='unavailable';await page.locator('[data-refresh]').click();await expect(page.locator('.guest-heading')).toContainText('UNAVAILABLE');
+ state='attached';generation='instance-1';await page.locator('[data-refresh]').click();await expect(page.locator('[data-connect]')).toBeEnabled();expect(connections).toBe(0);
+ await page.locator('[data-connect]').click();await expect(page.locator('.guest-heading')).toContainText('READ-ONLY');expect(connections).toBe(1);
+ await expect(page.locator('[data-acquire]')).toBeDisabled();
 });

@@ -15,7 +15,7 @@ export async function mountGuestTerminal(host: HTMLElement) {
   if (!host.isConnected) return () => {};
   host.innerHTML = `<div class="guest-heading"><strong>Real guest terminal · dedicated guest line</strong><span class="source-tag">NOT CONNECTED</span></div>
     <form class="guest-login"><label>Terminal access token <input type="password" autocomplete="off" aria-label="Terminal access token"></label><button>Sign in</button></form>
-    <div class="terminal-toolbar"><select aria-label="Guest endpoint" disabled></select><button data-connect disabled>Connect</button><button data-disconnect disabled>Disconnect</button><button data-acquire disabled>Acquire keyboard</button><button data-release disabled>Release keyboard</button><button data-logout disabled>Sign out</button></div>
+    <div class="terminal-toolbar"><select aria-label="Guest endpoint" disabled></select><button data-refresh disabled>Refresh lines</button><button data-connect disabled>Connect</button><button data-disconnect disabled>Disconnect</button><button data-acquire disabled>Acquire keyboard</button><button data-release disabled>Release keyboard</button><button data-logout disabled>Sign out</button></div>
     <div class="guest-status" role="status">Sign in to list configured guest lines. No automatic keyboard takeover.</div>
     <div class="guest-screen"><div class="guest-xterm" aria-label="Real guest VT100 terminal"></div></div>
     <details class="guest-paste"><summary>Review paste</summary><label>One line, without Return <input type="text" maxlength="256" aria-label="Reviewed guest paste" autocomplete="off"></label><button data-paste disabled>Send reviewed paste</button></details>
@@ -29,13 +29,13 @@ export async function mountGuestTerminal(host: HTMLElement) {
   let socket:WebSocket|undefined, owner=false,connected=false,epoch=0,seq=0,canInput=false,csrf="",disposed=false,queued=0;
   const controls=()=>{
     const open=socket?.readyState===WebSocket.OPEN;
-    $<HTMLButtonElement>("[data-connect]").disabled=!selector.options.length || !!socket;
+    $<HTMLButtonElement>("[data-connect]").disabled=!selector.options.length || !!socket || selector.selectedOptions[0]?.dataset.state !== "attached";
     $<HTMLButtonElement>("[data-disconnect]").disabled=!socket;
     $<HTMLButtonElement>("[data-acquire]").disabled=!open || !connected || !canInput || owner;
     $<HTMLButtonElement>("[data-release]").disabled=!owner;
     $<HTMLButtonElement>("[data-paste]").disabled=!owner;
     selector.disabled=!!socket || !selector.options.length;
-    badge.textContent=connected ? owner ? "KEYBOARD OWNER" : "REAL GUEST · READ-ONLY" : "DISCONNECTED";
+    badge.textContent=connected ? owner ? "KEYBOARD OWNER" : "REAL GUEST · READ-ONLY" : (selector.selectedOptions[0]?.dataset.state === "attached" ? "DISCONNECTED" : (selector.selectedOptions[0]?.dataset.state ?? "detached").toUpperCase());
   };
   const send = (message: object) => {
     if (socket?.readyState !== WebSocket.OPEN) return false;
@@ -72,11 +72,40 @@ export async function mountGuestTerminal(host: HTMLElement) {
   const paste=(e:ClipboardEvent)=>{e.preventDefault();e.stopImmediatePropagation();const value=e.clipboardData?.getData('text/plain')??'';const box=$<HTMLInputElement>('.guest-paste input');try { box.value=safeGuestPaste(value); status.textContent='Paste captured for review; nothing sent'; } catch (error) { box.value=''; status.textContent=(error as Error).message; } $<HTMLDetailsElement>('.guest-paste').open=true;box.focus();};
   $(".guest-screen").addEventListener('paste',paste,true);
   $<HTMLButtonElement>('[data-paste]').onclick=()=>{try{input(safeGuestPaste($<HTMLInputElement>('.guest-paste input').value));$<HTMLInputElement>('.guest-paste input').value='';term.focus();}catch(e){status.textContent=String((e as Error).message);}};
-  const list=async()=>{const [session,endpoints]=await Promise.all([fetch('/api/v1/session'),fetch('/api/v1/terminals')]);if(!session.ok||!endpoints.ok)throw Error('Guest terminal service unavailable or sign-in required');const s=await session.json();const rows=await endpoints.json();if(disposed)return;csrf=s.csrf;canInput=!!s.capabilities['terminal.input'];selector.replaceChildren(...rows.map((e:{id:string,label:string})=>{const o=document.createElement('option');o.value=e.id;o.textContent=e.label;return o;}));$<HTMLButtonElement>('[data-logout]').disabled=false;status.textContent='Authenticated. Select a guest line and connect read-only.';controls();};
+  const list = async () => {
+    const [session, endpoints] = await Promise.all([fetch('/api/v1/session'), fetch('/api/v1/terminals')]);
+    if (!session.ok || !endpoints.ok) throw Error('Guest terminal service unavailable or sign-in required');
+    const s = await session.json();
+    const rows: {id: string; label: string; connected: boolean; state?: string; generation?: string}[] = await endpoints.json();
+    if (disposed) return;
+    csrf = s.csrf;
+    canInput = !!s.capabilities['terminal.input'];
+    selector.replaceChildren(...rows.map(e => {
+      const option = document.createElement('option');
+      option.value = e.id;
+      option.dataset.state = e.state ?? (e.connected ? 'attached' : 'unavailable');
+      option.dataset.generation = e.generation ?? '';
+      option.textContent = `${e.label} · ${option.dataset.state}`;
+      return option;
+    }));
+    $<HTMLButtonElement>('[data-logout]').disabled = false;
+    $<HTMLButtonElement>('[data-refresh]').disabled = false;
+    status.textContent = rows.some(e => e.connected)
+      ? 'Select an attached guest line and connect read-only.'
+      : 'No guest attached. A local operator must verify and approve a line, then use Refresh lines. The guest runs independently.';
+    controls();
+  };
+  selector.onchange = controls;
+  $<HTMLButtonElement>('[data-refresh]').onclick = () => {
+    if (socket) { status.textContent = 'Disconnect this view before refreshing terminal choices.'; return; }
+    void list().catch(error => { status.textContent = (error as Error).message; });
+  };
   $<HTMLFormElement>('form').onsubmit=async e=>{e.preventDefault();const box=$<HTMLInputElement>('input[type=password]'),token=box.value;box.value='';try{const r=await fetch('/api/v1/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token})});if(!r.ok)throw Error('Terminal sign-in rejected');await list();}catch(e){status.textContent=(e as Error).message;}};
   $<HTMLButtonElement>('[data-connect]').onclick=()=>{
-    if(socket || !selector.value)return;
-    const url=new URL(`/api/v1/terminals/${encodeURIComponent(selector.value)}/ws`,location.href);url.protocol=location.protocol==='https:'?'wss:':'ws:';
+    if(socket || !selector.value || selector.selectedOptions[0]?.dataset.state !== "attached")return;
+    const generation = selector.selectedOptions[0]?.dataset.generation;
+    const suffix = generation ? `/generation/${encodeURIComponent(generation)}/ws` : "/ws";
+    const url=new URL(`/api/v1/terminals/${encodeURIComponent(selector.value)}${suffix}`,location.href);url.protocol=location.protocol==='https:'?'wss:':'ws:';
     // A fresh parser prevents a partial escape sequence from the old connection
     // consuming new output. Keyboard authority and input sequence also start fresh.
     const ws = new WebSocket(url);
@@ -117,7 +146,7 @@ export async function mountGuestTerminal(host: HTMLElement) {
   $<HTMLButtonElement>('[data-acquire]').onclick=()=>{send({type:'acquire'});term.focus();};
   $<HTMLButtonElement>('[data-release]').onclick=()=>{send({type:'release'});owner=false;controls();};
   $<HTMLButtonElement>('[data-disconnect]').onclick=()=>disconnect();
-  $<HTMLButtonElement>('[data-logout]').onclick=async()=>{disconnect('Signed out locally');selector.replaceChildren();canInput=false;controls();const r=await fetch('/api/v1/logout',{method:'POST',headers:{'X-CSRF-Token':csrf}});csrf='';$<HTMLButtonElement>('[data-logout]').disabled=true;if(!r.ok)status.textContent='Local disconnect; server logout unconfirmed, session expiry still applies';};
+  $<HTMLButtonElement>('[data-logout]').onclick=async()=>{disconnect('Signed out locally');selector.replaceChildren();$<HTMLButtonElement>("[data-refresh]").disabled=true;canInput=false;controls();const r=await fetch('/api/v1/logout',{method:'POST',headers:{'X-CSRF-Token':csrf}});csrf='';$<HTMLButtonElement>('[data-logout]').disabled=true;if(!r.ok)status.textContent='Local disconnect; server logout unconfirmed, session expiry still applies';};
   const heartbeat=setInterval(()=>{if(owner)send({type:'renew',epoch});},2000);
   const hide=()=>disconnect('Page closed · guest connection remains independent');window.addEventListener('pagehide',hide);
   // Session inspection is read-only. It never connects to a line or grants input.

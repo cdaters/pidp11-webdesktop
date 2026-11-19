@@ -1,0 +1,31 @@
+[Unit]
+Description=Optional PiDP-11 Web Desktop (detached at startup)
+
+[Service]
+Type=exec
+User=pidp11-webdesktop
+Group=pidp11-webdesktop
+ExecStart=/opt/pidp11-webdesktop/current/webdesktop-service serve
+Restart=no
+TimeoutStopSec=5
+RuntimeDirectory=pidp11-webdesktop
+RuntimeDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+AmbientCapabilities=
+InaccessiblePaths=-/opt/pidp11
+MemoryMax=96M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target
