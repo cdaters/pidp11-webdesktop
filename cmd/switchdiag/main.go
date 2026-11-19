@@ -17,11 +17,12 @@ func run() error {
 	fixture := flag.String("fixture", "", "synthetic scanner captures JSON; never executes scanner")
 	selections := flag.String("selections", "", "captured or synthetic selection map (read only)")
 	hardware := flag.Bool("original-scanner", false, "run pinned original scansw; requires separate hardware authorization")
+	maintenance := flag.Bool("exclusive-maintenance-confirmed", false, "owner has prevented original launcher/panel startup for the entire diagnostic")
 	ack := flag.Bool("acknowledge-gpio-initialization", false, "acknowledge original scanner changes GPIO direction/pulls")
 	count := flag.Int("samples", 10, "hardware sample limit (1–100)")
 	interval := flag.Duration("interval", 250*time.Millisecond, "hardware interval (100ms–5s); total run capped at 30s")
 	flag.Parse()
-	if flag.NArg() != 0 || *selections == "" || (*hardware == (*fixture != "")) || (*ack && !*hardware) {
+	if flag.NArg() != 0 || *selections == "" || (*hardware == (*fixture != "")) || ((*ack || *maintenance) && !*hardware) {
 		return fmt.Errorf("choose exactly one fixture or original-scanner mode and a selection map")
 	}
 	f, err := os.Open(*selections)
@@ -36,8 +37,8 @@ func run() error {
 	var captures []switchdiag.Capture
 	var scanner *originalScanner
 	if *hardware {
-		if !*ack || *count < 1 || *count > 100 || *interval < 100*time.Millisecond || *interval > 5*time.Second {
-			return fmt.Errorf("hardware acknowledgement and bounded sample settings required")
+		if !*ack || !*maintenance || *count < 1 || *count > 100 || *interval < 100*time.Millisecond || *interval > 5*time.Second {
+			return fmt.Errorf("GPIO acknowledgement, exclusive maintenance confirmation and bounded sample settings required")
 		}
 		scanner, err = openOriginal()
 		if err != nil {

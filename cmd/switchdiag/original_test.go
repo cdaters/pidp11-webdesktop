@@ -23,3 +23,17 @@ func TestBoundedScannerDiagnostics(t *testing.T) {
 		t.Fatal("exact bound", err)
 	}
 }
+
+func TestConflictingInterpretedLaunchers(t *testing.T) {
+	for _, command := range []string{"sh\x00/opt/pidp11/bin/pidp11.sh\x00", "python3\x00/opt/pidp11/bin/test.py\x00", "sh\x00/opt/pidp11/bin/pdp11control.sh\x00start\x00", "/opt/pidp11/bin/pdp11_realcons\x00"} {
+		if conflictingProcess("sh", []byte(command)) == "" {
+			t.Fatal("missed interpreted launcher")
+		}
+	}
+	if conflictingProcess("pdp11_realcons", nil) == "" {
+		t.Fatal("missed comm name")
+	}
+	if conflictingProcess("python3", []byte("python3\x00offline-fixture.py\x00")) != "" {
+		t.Fatal("unrelated interpreter refused")
+	}
+}

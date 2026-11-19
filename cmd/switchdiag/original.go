@@ -76,8 +76,14 @@ func (s *originalScanner) guard() error {
 		if err != nil {
 			return errors.New("cannot inspect process owners")
 		}
-		name := strings.TrimSpace(string(comm))
-		if name == "client11" || name == "server11" || name == "scansw" || name == "pidp11.sh" || strings.HasPrefix(name, "pdp11_realcons") || strings.HasPrefix(name, "pidp1170_blink") {
+		cmdline, err := boundedRead(filepath.Join(base, "cmdline"), 65536)
+		if os.IsNotExist(err) {
+			continue
+		}
+		if err != nil {
+			return errors.New("cannot inspect process command line")
+		}
+		if name := conflictingProcess(strings.TrimSpace(string(comm)), cmdline); name != "" {
 			return fmt.Errorf("conflicting process %s; stop through its operator first", name)
 		}
 		fds, err := os.ReadDir(filepath.Join(base, "fd"))
@@ -176,3 +182,20 @@ func (s *originalScanner) Sample(parent context.Context) (switchdiag.Capture, er
 }
 
 var _ io.Writer = (*boundedCapture)(nil)
+
+// Shell and Python launchers may have a generic comm name. Inspect individual
+// NUL-separated arguments as well; do not log complete command lines/secrets.
+func conflictingProcess(comm string, cmdline []byte) string {
+	names := append([]string{comm}, strings.Split(string(cmdline), "\x00")...)
+	for _, argument := range names {
+		name := filepath.Base(argument)
+		switch name {
+		case "client11", "server11", "scansw", "pidp11.sh", "pdp11control", "pdp11control.sh", "rebootsimh.sh", "test.py":
+			return name
+		}
+		if strings.HasPrefix(name, "pdp11_realcons") || strings.HasPrefix(name, "pidp1170_blink") {
+			return name
+		}
+	}
+	return ""
+}
