@@ -13,7 +13,7 @@ These are directions for experimentation, not delivery promises. The [timeline](
 | M5.2 / M5.2.1 community foundations | Public repository, contributor documentation, engineering standards and source map |
 | [M5.3 actual Pi terminal pilot](docs/lab/M5.3.md) | Genuine V7 on the installed simulator, one DC11 line, three browser engines, Screen independence and verified cleanup; no physical panel |
 | [M5.4 coexistence preparation](docs/lab/M5.4.md) | Mac-only launcher/profile design, one-shot guest attachment safeguards and a reversible supervised pilot proposal; no Pi access |
-| [M5.5 full-profile candidate](docs/lab/M5.5.md) | Exact opt-in profile and selector proposal, original REALCONS with simulated panel, bridge stop/crash and listener recovery; actual Pi pilot unexecuted |
+| [M5.5 physical pilot](docs/lab/M5.5-physical-pilot.md) | V7/browser/physical subtests passed; wrong-guest fallback blocks acceptance. Unchanged original media verified, temporary changes rolled back, machine left stopped |
 
 ## Sharing the work
 
@@ -22,7 +22,8 @@ Public GitHub source, authentic screenshots, beginner and developer documentatio
 ## Next investigations
 
 - **Pilot follow-up:** review the [M5.6 optional deployment design](docs/lab/M5.6-deployment-spec.md), including detached startup, durable credentials/certificates, service isolation, upgrade and uninstall; implement and test it separately. The first controlled Pi terminal pilot is complete; no service remains running.
-- **Original-launcher coexistence:** review the [M5.5 exact candidate and supervised procedure](docs/lab/M5.5-pilot-plan.md) for the now-assembled machine; authorize exact additive changes separately. The standalone M5.3 Screen session did not exercise that launcher or its panel daemon. No distribution switcher is implemented.
+- **Physical-selection discrepancy:** investigate why the [M5.5 fallback](docs/lab/M5.5-physical-pilot.md) selected RSX with all SR paddles reported down. Review source/evidence on the Mac first; any hardware diagnostic needs a separately authorized plan that cannot boot original writable guests. No further launcher retry or accepted physical checkpoint until resolved.
+- **Assembled-machine performance:** explain the short 5.55% bridge CPU sample against the unchanged <5% target, then design a separately authorized representative measurement. Do not optimize or stress the stopped Pi implicitly.
 - **Guest lifecycle:** keep the service detached after restart; resolve authoritative generation/line identity before unsupervised guest switching. A reused port or surviving simulator PID is insufficient.
 - **Additional guests:** validate the actual driver, login and serial-line requirements of each operating system; host device support alone is insufficient.
 - **Live panel observation:** build on the passive-observation lab without adding side-effecting panel input reads. This is separate from remote control.

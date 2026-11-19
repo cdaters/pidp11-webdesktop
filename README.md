@@ -26,7 +26,7 @@ M5.3 repeated the genuine terminal demonstration on the actual Pi using one disp
 
 ![Genuine UNIX V7 commands on the Raspberry Pi](docs/screenshots/m53-pi-unix-v7.png)
 
-*Actual M5.3 Pi-hosted guest session through the SSH tunnel. The background panel remains simulated; physical-panel and original-launcher coexistence are separate future tests.*
+*Actual M5.3 Pi-hosted guest session through the SSH tunnel. The background panel remains simulated. Later [M5.5 physical-pilot findings](docs/lab/M5.5-physical-pilot.md) distinguish successful V7 coexistence checks from a failed fallback selection.*
 
 [Read the demonstration report](docs/lab/M5.0.md) · [Reproduce the lab](docs/lab/M5.0-runbook.md)
 
@@ -41,7 +41,7 @@ M5.3 repeated the genuine terminal demonstration on the actual Pi using one disp
 | Disk, tape, paper tape and OS profiles | Working **simulated** workflows; no real guest media is changed |
 | Continuous-form line printer | Simulated LP0 spool, 80/132-column paper, perforations, tractor-feed holes and original-text download |
 | Passive panel observation | Laboratory experiments; no production Pi observation service installed |
-| Physical Pi integration | Terminal-only standalone pilot passed and cleaned up; no permanent service or physical-panel integration |
+| Physical Pi integration | V7/browser/physical checks passed in M5.5, but fallback selected the wrong guest; acceptance blocked, temporary changes rolled back, machine left stopped |
 | Remote front-panel control | Separate unresolved safety work; not a production feature |
 
 ![Continuous-form line-printer listing](docs/screenshots/m432-printer-maximized.png)
@@ -73,7 +73,7 @@ The separate **Guest terminal** needs an explicitly prepared real-guest service.
 | See how the project evolved | [Development timeline](docs/timeline.md) and [changelog](CHANGELOG.md) |
 | Inspect the implementation | [Technical guide](docs/technical/README.md), [coding standards](docs/technical/CODING-STANDARDS.md) and [architecture decisions](docs/development/DECISIONS.md) |
 | Prepare Oscar's original software on Trixie Lite | [Headless installation guide](docs/installation/README.md) — **not a Web Desktop installer** |
-| Review the prepared coexistence candidate | [M5.5 results](docs/lab/M5.5.md) · [physical pilot proposal](docs/lab/M5.5-pilot-plan.md) · [M5.6 deployment design](docs/lab/M5.6-deployment-spec.md) |
+| Review coexistence results and the unresolved fallback | [M5.5 physical pilot](docs/lab/M5.5-physical-pilot.md) · [Mac preparation](docs/lab/M5.5.md) · [M5.6 deployment design](docs/lab/M5.6-deployment-spec.md) |
 | Plan original-launcher coexistence | [M5.4 Mac-only design and lifecycle safeguards](docs/lab/M5.4.md) · [proposed supervised pilot](docs/lab/M5.4-pilot-plan.md) |
 | Review the actual Pi findings | [M5.1 assessment](docs/lab/M5.1.md) and [M5.3 completed terminal pilot](docs/lab/M5.3.md) |
 | Suggest an idea, report a bug or help | [Contributing](CONTRIBUTING.md), [Issues](https://github.com/cdaters/pidp11-webdesktop/issues) and [Discussions](https://github.com/cdaters/pidp11-webdesktop/discussions) |

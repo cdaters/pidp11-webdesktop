@@ -113,4 +113,6 @@ The [M5.4 design](lab/M5.4.md) keeps the original launcher, Screen and physical 
 
 ## M5.5 preparation and future installation
 
-[M5.5](lab/M5.5.md) supplies the exact one-listener V7 derivative and selection proposal, preserving original REALCONS settings. Original SIMH plus a simulated panel passed terminal and failure-independence checks in the Mac lab; the real launcher/physical panel remain an unexecuted pilot. The [M5.6 specification](lab/M5.6-deployment-spec.md) defines a separate optional service with detached startup and no emulator lifecycle dependency.
+[M5.5 preparation](lab/M5.5.md) supplies the exact one-listener V7 derivative, preserving original REALCONS settings. The [authorized physical pilot](lab/M5.5-physical-pilot.md) subsequently passed V7/browser/physical subtests but failed its intended IDLED fallback, which selected RSX with all SR paddles reported down. The bridge was absent before the change and could not follow the unexpected guest. Original media remained unchanged after controlled recovery; temporary changes were rolled back.
+
+Physical selection must be diagnosable without booting an original writable guest before any retry. A launch command with no argument preserves the intended scanner path, but is not proof of the selected guest. Keep deployment and acceptance blocked on the unresolved discrepancy. The [M5.6 specification](lab/M5.6-deployment-spec.md) remains a separate optional-service design with detached startup and no emulator lifecycle dependency.

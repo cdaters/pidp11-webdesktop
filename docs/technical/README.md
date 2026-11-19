@@ -40,4 +40,4 @@ Private capture paths mentioned in reports intentionally do not resolve to publi
 
 [M5.4 coexistence preparation](../lab/M5.4.md) covers normal-launcher profiles, guest/line lifecycle, one-shot attachment safeguards and the separate future optional service. The [supervised pilot proposal](../lab/M5.4-pilot-plan.md) is unexecuted.
 
-[M5.5 candidate and lab results](../lab/M5.5.md), the [unexecuted physical pilot procedure](../lab/M5.5-pilot-plan.md), and the [M5.6 optional-deployment specification](../lab/M5.6-deployment-spec.md) are the current integration handoff.
+[M5.5 physical findings](../lab/M5.5-physical-pilot.md) record successful V7/browser/physical subtests, the failed IDLED fallback and controlled rollback. Overall acceptance is blocked. The [candidate and Mac lab](../lab/M5.5.md), [historical reviewed procedure](../lab/M5.5-pilot-plan.md), and [M5.6 optional-deployment design](../lab/M5.6-deployment-spec.md) remain supporting records, not authority to retry the launcher.

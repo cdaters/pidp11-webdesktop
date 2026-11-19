@@ -1,0 +1,100 @@
+{
+  "scope": "Short supervised Pi bridge observations, not sustained qualification; browser workload on Mac",
+  "cpu_denominator": "100% is one fully occupied core",
+  "idle": {
+    "mode": "idle bridge; guest attached, no browser viewers",
+    "duration_seconds": 10.001482686000145,
+    "cpu_percent_one_core": 0.29995552601409126,
+    "rss_kib_samples": [
+      6848,
+      6848
+    ]
+  },
+  "active": {
+    "mode": "First 20 seconds of the sequential three-engine acceptance suite, with three viewers per engine; includes connection setup",
+    "duration_seconds": 20.011153409000144,
+    "cpu_percent_one_core": 5.546906654070077,
+    "rss_kib_max": 14176
+  },
+  "active_sample_offsets": [
+    {
+      "offset_seconds": 0.0,
+      "cpu_ticks_since_start": 0,
+      "rss_kib": 7980
+    },
+    {
+      "offset_seconds": 2.0010230930001853,
+      "cpu_ticks_since_start": 20,
+      "rss_kib": 12280
+    },
+    {
+      "offset_seconds": 4.002132329000233,
+      "cpu_ticks_since_start": 30,
+      "rss_kib": 13024
+    },
+    {
+      "offset_seconds": 6.003134635000151,
+      "cpu_ticks_since_start": 43,
+      "rss_kib": 13344
+    },
+    {
+      "offset_seconds": 8.004542614999991,
+      "cpu_ticks_since_start": 45,
+      "rss_kib": 13352
+    },
+    {
+      "offset_seconds": 10.005554916000165,
+      "cpu_ticks_since_start": 58,
+      "rss_kib": 13520
+    },
+    {
+      "offset_seconds": 12.006551484000283,
+      "cpu_ticks_since_start": 68,
+      "rss_kib": 13740
+    },
+    {
+      "offset_seconds": 14.008115863000057,
+      "cpu_ticks_since_start": 79,
+      "rss_kib": 14032
+    },
+    {
+      "offset_seconds": 16.009155083000223,
+      "cpu_ticks_since_start": 93,
+      "rss_kib": 13876
+    },
+    {
+      "offset_seconds": 18.010174299000028,
+      "cpu_ticks_since_start": 104,
+      "rss_kib": 13912
+    },
+    {
+      "offset_seconds": 20.011153409000144,
+      "cpu_ticks_since_start": 111,
+      "rss_kib": 14176
+    }
+  ],
+  "limits": {
+    "idle_rss_mib": 24,
+    "active_rss_mib": 48,
+    "idle_cpu_percent_less_than": 1,
+    "active_cpu_percent_less_than": 5,
+    "active_cpu_target_met_in_this_sample": false,
+    "sustained_qualification": false,
+    "added_latency_measured": false,
+    "emulator_impact_measured": false,
+    "pss_measured": false
+  },
+  "health": {
+    "periodic_sample_count": 110,
+    "periodic_temperature_min_c": 48.3,
+    "periodic_temperature_max_c": 52.6,
+    "periodic_flags": [
+      "throttled=0x0"
+    ],
+    "fresh_preflight_temperature_c": 38.6,
+    "stop_temperature_c": 70,
+    "final_temperature": "temp=49.9'C",
+    "final_flags": "throttled=0x0",
+    "sustained_power_qualification": false
+  }
+}

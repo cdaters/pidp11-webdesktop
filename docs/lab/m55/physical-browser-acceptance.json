@@ -1,0 +1,51 @@
+{
+  "environment": "Actual Raspberry Pi 3B+, original launcher/SIMH/REALCONS and assembled physical panel; copied UNIX V7 disk",
+  "binary_sha256": "69b609ea7b41f24c61daaeb1a6fa2292782ebc72ead3cf9ccdf53f699598f443",
+  "engines": [
+    {
+      "name": "chromium",
+      "passed": true,
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    },
+    {
+      "name": "firefox",
+      "passed": true,
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    },
+    {
+      "name": "webkit",
+      "passed": true,
+      "viewers": 3,
+      "reconnectReadOnly": true,
+      "refreshDisconnected": true,
+      "eraseMapping": true
+    }
+  ],
+  "independent_screen_after_browser_close": [
+    {
+      "engine": "chromium",
+      "passed": true
+    },
+    {
+      "engine": "firefox",
+      "passed": true
+    },
+    {
+      "engine": "webkit",
+      "passed": true
+    }
+  ],
+  "bridge_only_restart_passed": true,
+  "fresh_authentication_after_bridge_restart": true,
+  "observer_cannot_acquire_keyboard": true,
+  "competing_writer_rejected": true,
+  "physical_observations_recorded_separately": true,
+  "native_safari_tested": false,
+  "raw_transcripts_and_screenshots": "Retained privately; not included in this sanitized summary"
+}

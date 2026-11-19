@@ -131,3 +131,12 @@ The [M5.5 candidate](lab/M5.5.md) retains the installed V7 profile except for on
 Next is owner review of the [exact physical pilot and rollback](lab/M5.5-pilot-plan.md), followed only after separate authorization by fresh state/hash checks, physical switch selection, original launcher/Screen/panel acceptance and fallback verification. No current Pi availability or physical coexistence is inferred from cached inventory or laboratory results.
 
 The [M5.6 deployment specification](lab/M5.6-deployment-spec.md) now covers optional LAN availability, detached startup, credential/certificate provisioning, resource limits, upgrades and uninstall. Implement and validate that separate service lifecycle before packaging or enabling it. Keep the original emulator independent, retain all existing resource targets, and leave remote control and passive observation behind their own gates.
+
+
+## M5.5 supervised physical result — 2026-11-19
+
+The [actual pilot](lab/M5.5-physical-pilot.md) passed original-launcher V7, three-browser terminal, independent Screen and owner-operated physical HALT/CONT/DATA-selector subtests. The intended IDLED fallback then booted RSX despite all SR paddles being reported down. It was paused and quit without resuming under explicit recovery authorization; the closed original disk matched its complete baseline. Temporary changes were rolled back, and no physical acceptance tag or service was created.
+
+Next gates are a source/evidence review and a separately authorized selection diagnostic that cannot boot original writable media, followed by a reviewed retry only after the cause is understood. The bridge stayed absent throughout the failed switch. Do not treat a reused endpoint, no-argument launch or physical position report alone as verified guest identity.
+
+Short bridge measurements were 6,848 KiB idle RSS / 0.30% CPU and 14,176 KiB maximum sampled active RSS / 5.55% mean CPU. The active sample exceeds the unchanged <5% target; its 20-second browser-acceptance workload is not the sustained workload specified above. Added latency, PSS and emulator-throughput impact were not measured. No new Pi workload is authorized by this report.

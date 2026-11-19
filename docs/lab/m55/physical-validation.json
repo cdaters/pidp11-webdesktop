@@ -1,0 +1,79 @@
+{
+  "milestone": "M5.5 supervised physical coexistence pilot",
+  "date": "2026-11-19",
+  "overall_acceptance": "blocked; no accepted physical checkpoint or tag",
+  "source": {
+    "preparation_commit": "11a24afa276360d110a9e9e3ccfd3ed0653eb10a",
+    "implementation_commit": "32e5fc421f3a1c9b8f7447ba47dc9ca80a70a65c",
+    "tested_binary_sha256": "69b609ea7b41f24c61daaeb1a6fa2292782ebc72ead3cf9ccdf53f699598f443",
+    "original_simh_sha256": "340c3311d2be6a04a5f3cc05c97747f524be58de3ea4d13fec97991a09df454e",
+    "original_source_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "application_changes_this_execution": false
+  },
+  "passed_subtests": {
+    "original_no_argument_launcher_v7": true,
+    "independent_copied_disk": true,
+    "original_realcons_physical_path": true,
+    "independent_screen_console": true,
+    "owner_observed_halt_cont": true,
+    "owner_observed_run_dark_during_halt": true,
+    "fresh_console_response_after_cont": true,
+    "three_browser_guest_acceptance": true,
+    "owner_observed_data_selector_with_browser": true,
+    "console_and_owner_panel_observation_after_bridge_stop": true,
+    "v7_three_sync_and_simh_goodbye": true
+  },
+  "failed_fallback": {
+    "intended_guest": "idled",
+    "selected_guest": "rsx11mp",
+    "owner_confirmed_all_22_sr_paddles_down": true,
+    "raw_scanner_value_captured": false,
+    "cause_established": false,
+    "browser_bridge_absent_before_change": true,
+    "original_rsx_disk_opened": true,
+    "paused_at_monitor": true,
+    "owner_explicitly_authorized_quit_without_resume": true,
+    "rsx_resumed_after_pause": false,
+    "post_exit_original_disk_differences": {},
+    "disk_restore_or_overwrite_attempted": false,
+    "guest_restart_after_recovery": false
+  },
+  "cleanup": {
+    "temporary_selection_removed": true,
+    "selection_bytes_and_recorded_metadata_restored": true,
+    "temporary_profile_retired_outside_installation": true,
+    "stopped_pilot_disk_and_independent_archive_retained": true,
+    "temporary_tokens_and_private_key_removed_on_pi_and_mac": true,
+    "original_regular_files_verified": 609,
+    "original_symlinks_verified": 3,
+    "file_differences": {},
+    "symlink_differences": {},
+    "metadata_compared": [
+      "sha256",
+      "size",
+      "mode",
+      "uid",
+      "gid",
+      "mtime_ns",
+      "ino",
+      "dev"
+    ],
+    "original_git_status_unchanged": true,
+    "normal_stopped_state_verified": true,
+    "no_screen_simulator_panel_daemon_bridge_or_pilot_listener": true,
+    "accepted_tag_objects_unchanged": 11,
+    "new_acceptance_tag_created": false,
+    "permanent_service_or_autostart_installed": false
+  },
+  "operator_evidence_corrections": [
+    "Initial SR0\u2013SR2-only selection reached IDLED; corrected physical confirmation preceded successful V7 launch. Separate from unexplained final all-down fallback.",
+    "Prompt-prefixed echo was verified in the original capture; no input replay.",
+    "Third sync hardcopy initially read empty; original file later contained all three completion prompts. No input replay; private capture helper now waits for nonempty output."
+  ],
+  "open_items": [
+    "Unexplained physical all-down selection of RSX rather than IDLED; do not retry guest starts before bounded investigation",
+    "5.55% short active CPU sample exceeds unchanged <5% target",
+    "Sustained resources, added latency, emulator impact, native Safari, physical serial, LAN provisioning and same-process guest identity remain unverified"
+  ],
+  "documentation_validation": "Passed JSON parsing, local relative-link checks, changed-file privacy scan and git diff --check. Documentation/evidence only; no new application build or broad software test rerun."
+}

@@ -2,7 +2,15 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
-## M5.5 — 2026-11-19
+## M5.5 supervised physical pilot — 2026-11-19
+
+- Exercised the original no-argument launcher, copied V7 media, physical HALT/CONT and DATA selector, independent Screen console, and genuine browser terminals in three engines.
+- Preserved successful subtest evidence while rejecting overall acceptance: the requested IDLED fallback selected RSX-11M-PLUS despite owner-confirmed SR0–SR21 down. Paused it, then performed an explicitly authorized quit without resuming and verified the original disk unchanged.
+- Removed temporary profile/mapping changes and credentials; retained private evidence and guest copies. No further guest launch, production service, repair or accepted physical tag.
+- Recorded short bridge memory/CPU measurements; the 5.55% active CPU sample exceeds the <5% target.
+- [Physical results, recovery and remaining blockers](docs/lab/M5.5-physical-pilot.md).
+
+## M5.5 Mac preparation — 2026-11-19
 
 - Prepared an exact copied V7 profile, proposed unused physical selection 0017, bounded local preparation helper and explicit Pi pilot/rollback instructions.
 - Validated the complete REALCONS-enabled profile against original SIMH and a simulated panel, including genuine terminals in three browser engines, bridge stop/crash independence and retired listener recovery.
