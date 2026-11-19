@@ -1,0 +1,11 @@
+[
+  {"stdout":"0\n","exit_code":0},
+  {"stdout":"0\n","exit_code":0},
+  {"stdout":"1\n","exit_code":1},
+  {"stdout":"15\n","exit_code":15},
+  {"stdout":"1398101\n","exit_code":85},
+  {"stdout":"2796202\n","exit_code":170},
+  {"stdout":"0\n","exit_code":0},
+  {"stdout":"1\n","exit_code":1},
+  {"stdout":"0\n","exit_code":0}
+]
