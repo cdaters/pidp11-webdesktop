@@ -2,6 +2,13 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.7.1 SR0 comparison and memory containment — 2026-11-19
+
+- Captured 20 expected SR=1 readings with only SR0 UP. After owner-confirmed all-DOWN, captured SR=1 once and stopped immediately; no guest or launcher ran. Preserved raw evidence, verified eight original file records and stopped state, then removed temporary diagnostic executables/lock.
+- Added an optional expected-SR guard to the companion diagnostic, retaining the first mismatch before stopping. Oscar's scanner remains unchanged; physical cause unresolved and no acceptance tag created.
+- Added kernel cgroup verification before packaged service startup, zero swap allowance and a 72 MiB Go soft target beneath the unchanged 96 MiB kernel cap. Missing/unsuitable protection refuses startup instead of silently weakening containment.
+- Validated protection/refusal, bounded OOM/soft-limit comparisons, synthetic-peer lifecycle and the detached desktop in three browsers in disposable ARM64 Linux. Published a separately authorized powered-off inspection proposal and updated M5.8 gates. No Pi boot/kernel/service changes. [Report](docs/lab/M5.7.1.md).
+
 ## M5.7 physical diagnosis and M5.8 readiness — 2026-11-19
 
 - Reproduced the all-DOWN discrepancy with the owner confirming exclusive maintenance: all 20 original-scanner samples read SR=1, predicting RSX through the unchanged map. No launcher or guest ran. Stopped the pattern sequence after Test A; no accepted physical-selection checkpoint.

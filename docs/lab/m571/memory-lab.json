@@ -1,0 +1,138 @@
+{
+  "platform": "aarch64",
+  "systemd": "systemd 257 (257.13-1~deb13u1)",
+  "external_network_down": true,
+  "guests_or_gpio_used": false,
+  "cases": [
+    {
+      "name": "protected detached startup",
+      "passed": true,
+      "properties": {
+        "Restart": "no",
+        "Result": "success",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/system.slice/pidp11-webdesktop.service",
+        "MemoryMax": "100663296",
+        "MemorySwapMax": "0",
+        "PrivateDevices": "yes",
+        "ProtectControlGroups": "yes",
+        "ProtectSystem": "strict",
+        "NoNewPrivileges": "yes",
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      "kernel_memory_max": 100663296,
+      "kernel_swap_max": 0
+    },
+    {
+      "name": "missing local controller",
+      "passed": true,
+      "properties": {
+        "Restart": "no",
+        "Result": "exit-code",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "100663296",
+        "MemorySwapMax": "0",
+        "PrivateDevices": "yes",
+        "ProtectControlGroups": "yes",
+        "ProtectSystem": "strict",
+        "NoNewPrivileges": "yes",
+        "ActiveState": "failed",
+        "SubState": "failed"
+      },
+      "listener_absent": true
+    },
+    {
+      "name": "unlimited memory",
+      "passed": true,
+      "properties": {
+        "Restart": "no",
+        "Result": "exit-code",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "MemorySwapMax": "0",
+        "PrivateDevices": "yes",
+        "ProtectControlGroups": "yes",
+        "ProtectSystem": "strict",
+        "NoNewPrivileges": "yes",
+        "ActiveState": "failed",
+        "SubState": "failed"
+      },
+      "listener_absent": true
+    },
+    {
+      "name": "oversized limit",
+      "passed": true,
+      "properties": {
+        "Restart": "no",
+        "Result": "exit-code",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "134217728",
+        "MemorySwapMax": "0",
+        "PrivateDevices": "yes",
+        "ProtectControlGroups": "yes",
+        "ProtectSystem": "strict",
+        "NoNewPrivileges": "yes",
+        "ActiveState": "failed",
+        "SubState": "failed"
+      },
+      "listener_absent": true
+    },
+    {
+      "name": "unlimited swap",
+      "passed": true,
+      "properties": {
+        "Restart": "no",
+        "Result": "exit-code",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "100663296",
+        "MemorySwapMax": "infinity",
+        "PrivateDevices": "yes",
+        "ProtectControlGroups": "yes",
+        "ProtectSystem": "strict",
+        "NoNewPrivileges": "yes",
+        "ActiveState": "failed",
+        "SubState": "failed"
+      },
+      "listener_absent": true
+    }
+  ],
+  "idle_memory_current_bytes": 3047424,
+  "protected_restart_started": true,
+  "soft_limit_exceeded_by_live_heap": {
+    "go_soft_limit": 75497472,
+    "heap_alloc": 117684048,
+    "retained_mib": 112,
+    "runtime_managed_bytes": 123443496
+  },
+  "limit_rss_did_not_cap_live_heap": {
+    "go_soft_limit": 9223372036854775807,
+    "heap_alloc": 117676632,
+    "retained_mib": 112,
+    "runtime_managed_bytes": 123554072
+  },
+  "limit_address_space_prevented_go_startup": true,
+  "hard_limit_fixture": {
+    "passed": true,
+    "properties": {
+      "Restart": "no",
+      "Result": "oom-kill",
+      "ExecMainStatus": "9",
+      "ControlGroup": "",
+      "MemoryMax": "100663296",
+      "MemorySwapMax": "0",
+      "PrivateDevices": "no",
+      "ProtectControlGroups": "no",
+      "ProtectSystem": "no",
+      "NoNewPrivileges": "no",
+      "ActiveState": "failed",
+      "SubState": "failed"
+    },
+    "independent_sentinel_alive": true
+  },
+  "companion_stopped": true
+}

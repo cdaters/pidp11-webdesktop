@@ -1,0 +1,8 @@
+{
+  "source": "Installed candidate under systemd in isolated ARM64 Linux; no guest listener",
+  "browser": "webkit",
+  "authenticated": true,
+  "detached": true,
+  "noAutomaticConnection": true,
+  "errors": []
+}

@@ -1,0 +1,7 @@
+{
+  "companion_paths_absent": true,
+  "account_group_absent": true,
+  "tcp_listeners_absent": true,
+  "lab_overrides_removed": true,
+  "disposable_machine_deleted": true
+}

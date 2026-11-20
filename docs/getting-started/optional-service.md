@@ -1,6 +1,6 @@
 # Preparing the optional desktop service
 
-This is the M5.6 **laboratory-tested installation candidate**, not an accepted physical Pi deployment. The owner has not authorized installing it on the assembled machine. Original PiDP-11 operation remains the fallback. A later supervised deployment must first resolve the physical-selection discrepancy and review network access, certificate trust and guest-line ownership.
+This is the M5.7.1 **laboratory-tested installation candidate**, extending M5.6, not an accepted physical Pi deployment. The owner has not authorized installing it on the assembled machine. Original PiDP-11 operation remains the fallback. A later supervised deployment must first resolve the physical-selection discrepancy and review network access, certificate trust and guest-line ownership.
 
 The package contains a static Linux ARM64 executable with the desktop inside it. The target needs systemd and normal Linux administration tools, but no Node runtime, container, database or graphical desktop. It installs only under `/opt/pidp11-webdesktop`, `/etc/pidp11-webdesktop` and its own systemd/runtime locations. It does not change Oscar's installation or start an emulator.
 
@@ -23,7 +23,7 @@ The following commands are **Linux administrator-shell examples**, tested only i
    ```sh
    cd /reviewed/package
    sha256sum -c PACKAGE_SHA256SUMS
-   sudo sh install.sh /reviewed/package m56-candidate
+   sudo sh install.sh /reviewed/package m571-candidate
    ```
 
    Expected: installed, stopped and disabled. No guest has been contacted.
@@ -45,7 +45,11 @@ The following commands are **Linux administrator-shell examples**, tested only i
 
    Expected: valid configuration, expiry date and line count. This checks files only; it does not prove DNS resolution, port availability, firewall reachability or guest identity.
 
-4. Start only the companion:
+4. Review memory containment before starting. The candidate unit uses `MemoryMax=96M`, `MemorySwapMax=0`, `GOMEMLIMIT=72MiB` and `serve -require-memory-limit`. Startup checks its own kernel cgroup files and refuses to open listeners if the memory limit is absent, unlimited, over 96 MiB, or permits swap. A configured systemd property alone is insufficient. The Go setting is a soft runtime target, not a substitute for kernel enforcement. Unsupported layouts are refused rather than guessed.
+
+   The assessed Pi currently has `cgroup_disable=memory`; protected startup is therefore blocked pending separately authorized resolution and validation. Do not remove the startup check or weaken the unit to bypass that finding. See [M5.7.1 evidence](../lab/M5.7.1.md#memory-limit-finding-and-implemented-strategy). The file-only `check` above does not validate this runtime boundary.
+
+   Once these prerequisites are satisfied in an authorized environment, start only the companion:
 
    ```sh
    sudo systemctl start pidp11-webdesktop.service
@@ -76,4 +80,4 @@ The following commands are **Linux administrator-shell examples**, tested only i
 
 See the [tested package lifecycle procedure](../lab/M5.6-implementation.md#upgrade-rollback-disable-and-uninstall). All operations affect the companion only. Stop and disable before replacing a release. Preserve private configuration backups separately; never bundle guest disks into a desktop rollback. Complete removal explicitly purges only the five known private files and dedicated identity, refusing unknown contents.
 
-If the service cannot start, run the file check as its account and inspect `journalctl -u pidp11-webdesktop.service` locally. Review the certificate expiry/name, private-file permissions and the chosen port. An unavailable guest line calls for independent guest inspection, not an emulator restart by the companion. Do not delete a control socket or terminate unrelated processes to clear an error.
+If the service cannot start, run the file check as its account and inspect `journalctl -u pidp11-webdesktop.service` locally. Review the certificate expiry/name, private-file permissions, chosen port and any memory-containment refusal. If memory protection is unavailable, leave the companion stopped and retain the original physical-only experience; boot changes need separate authorization. An unavailable guest line calls for independent guest inspection, not an emulator restart by the companion. Do not delete a control socket or terminate unrelated processes to clear an error.

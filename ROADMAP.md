@@ -19,6 +19,8 @@ These are directions for experimentation, not delivery promises. The [timeline](
 
 M5.7 [reproduced the all-DOWN discrepancy](docs/lab/M5.7.md): 20/20 samples reported SR0 asserted without starting a guest. The sequence stopped after Test A; the physical cause remains unresolved and further hardware tests need separate authorization. [M5.8 readiness](docs/lab/M5.8-readiness.md) identifies disabled memory cgroups as an additional deployment gate; no boot setting or service was changed.
 
+M5.7.1 [compared SR0 UP and DOWN](docs/lab/M5.7.1.md): it remained asserted at the first DOWN reading, triggering an immediate stop. The candidate now refuses startup without verified kernel memory/swap containment; Linux and browser lab checks passed. Physical inspection and actual Pi memory-controller readiness remain unresolved.
+
 ## Sharing the work
 
 Public GitHub source, authentic screenshots, beginner and developer documentation, the headless Trixie guide, original-code MIT licensing and preserved development history. This publication milestone does not advance the live integration status.

@@ -1,0 +1,24 @@
+{
+  "source_parent_commit": "0a0c0d1",
+  "source_changes": "M5.7.1 working tree; original scanner unmodified",
+  "tested_arm64_service_sha256": "4d02e2185f57a688d1bbedb232008521f34705d551f19dfc4255d12cc9afd972",
+  "tested_package_manifest_sha256": "0b28003e4ec74d6ce590ecec3d464f1fdd02aa205953fd28c9ef92b2057fe950",
+  "go_vet": true,
+  "go_race": true,
+  "typescript_check": true,
+  "typescript_unit_tests": 51,
+  "transport_integration_tests": 1,
+  "browser_build": true,
+  "installed_detached_browsers": [
+    "chromium",
+    "firefox",
+    "webkit"
+  ],
+  "systemd_memory_tests": true,
+  "synthetic_peer_lifecycle": true,
+  "real_guest_replayed": false,
+  "pi_memory_or_service_tests": false,
+  "lab_companion_purged": true,
+  "implementation_commit": "abc6088c83c02666b88eddf93bd6c48ad5b20334",
+  "tested_build_note": "Built from the M5.7.1 working tree before commit; digests identify the actual tested artifacts. Later harness/comment formatting does not claim a byte-identical rebuild."
+}

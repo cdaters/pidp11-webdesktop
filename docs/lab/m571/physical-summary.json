@@ -1,0 +1,36 @@
+{
+  "source_parent_commit": "0a0c0d1",
+  "original_scanner_sha256": "5c0c05dc885946c5ef324b4e90eb7b42a0c2f20215292831b8b517daa686bb07",
+  "diagnostic_sha256": "04c39541af45ea27c7e29ad48a5902c9e56d0b39921cd48bbdfd097c75350d53",
+  "up": {
+    "owner_confirmed": "SR0 UP; SR1\u2013SR21 DOWN; HALT ENABLE",
+    "exclusive_maintenance_confirmed": true,
+    "expected_sr": 1,
+    "samples": 20,
+    "all_raw_values": 1,
+    "scanner_exit_status": 1,
+    "diagnostic_exit_status": 0,
+    "stable": true
+  },
+  "down": {
+    "owner_confirmed": "SR0\u2013SR21 DOWN; HALT ENABLE",
+    "expected_sr": 0,
+    "samples": 1,
+    "raw_value": 1,
+    "scanner_exit_status": 1,
+    "diagnostic_exit_status": 1,
+    "stopped_at_first_mismatch": true,
+    "remaining_19_samples_not_taken": true
+  },
+  "observed_response_to_movement": false,
+  "physical_cause_established": false,
+  "original_files_matching_before_after": 8,
+  "original_guest_media_opened": false,
+  "guests_started": false,
+  "pi_boot_kernel_or_service_changes": false,
+  "temporary_executables_removed": true,
+  "diagnostic_lock_removed": true,
+  "evidence_retained": true,
+  "pi_powered_on_and_stopped": true,
+  "physical_acceptance_checkpoint_created": false
+}

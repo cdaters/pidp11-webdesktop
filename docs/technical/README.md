@@ -47,3 +47,5 @@ Private capture paths mentioned in reports intentionally do not resolve to publi
 
 
 [M5.7 diagnostic results](../lab/M5.7.md) record 20/20 unexpected SR0 readings with all paddles confirmed DOWN, the stopped sequence, unchanged original files and unresolved physical cause. [M5.8 readiness](../lab/M5.8-readiness.md) separates detached installation from guest coexistence and records the actual disabled-memory-controller blocker.
+
+[M5.7.1 SR0 comparison and memory containment](../lab/M5.7.1.md) records the UP/DOWN result, immediate mismatch stop, verified Pi cleanup, optional-service startup refusal without kernel limits, and disposable ARM64 enforcement/browser tests. No Pi deployment or physical-selection acceptance.

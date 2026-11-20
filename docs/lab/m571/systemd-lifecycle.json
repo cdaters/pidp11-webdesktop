@@ -1,0 +1,14 @@
+{
+  "environment": "Mac-hosted Debian 13 ARM64, systemd 257, eth0 DOWN",
+  "install_disabled": true,
+  "detached_assets_without_guest": true,
+  "authentication": true,
+  "wrong_origin_rejected": true,
+  "explicit_synthetic_attachment": true,
+  "guest_eof_retired": true,
+  "restart_revokes_sessions": true,
+  "restart_no_guest_dial": true,
+  "crash_restart_detached": true,
+  "independent_peer_survives": true,
+  "real_guest_test": "Not run in M5.7.1; synthetic peer only"
+}
