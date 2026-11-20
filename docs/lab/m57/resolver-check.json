@@ -1,0 +1,23 @@
+{
+  "environment": "network-none Linux fixture",
+  "original_resolver_unmodified": true,
+  "captured_map": true,
+  "scanner_or_launcher_executed": false,
+  "results": [
+    {
+      "input_raw": 0,
+      "selector": "0000",
+      "profile": "idled"
+    },
+    {
+      "input_raw": 1,
+      "selector": "0001",
+      "profile": "rsx11mp"
+    },
+    {
+      "input_raw": 15,
+      "selector": "0017",
+      "profile": "idled"
+    }
+  ]
+}

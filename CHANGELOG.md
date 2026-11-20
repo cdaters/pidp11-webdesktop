@@ -2,12 +2,12 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
-## M5.7 preflight and M5.8 readiness — in progress, 2026-11-19
+## M5.7 physical diagnosis and M5.8 readiness — 2026-11-19
 
-- Verified the stopped physical machine, original scanner/launcher/map hashes, GPIO ownership and startup records under the authorized diagnostic scope. Built and hash-verified the existing ARM64 diagnostic; no GPIO sampling occurred while Test A awaited owner confirmation.
-- Removed the temporary diagnostic/audit executables after a fresh unchanged-file and stopped-state check; retained private evidence. No guest disk was opened and no guest/service started.
-- Identified an actual installation-readiness blocker: the Pi's existing `cgroup_disable=memory` boot argument leaves no active memory controller, so the package's memory limit cannot be presumed enforceable.
-- Prepared staged M5.8 installation, authentication, identity, resource and rollback acceptance guidance. Physical readings and overall M5.7 completion remain pending. [M5.7 status](docs/lab/M5.7.md) · [M5.8 readiness](docs/lab/M5.8-readiness.md).
+- Reproduced the all-DOWN discrepancy with the owner confirming exclusive maintenance: all 20 original-scanner samples read SR=1, predicting RSX through the unchanged map. No launcher or guest ran. Stopped the pattern sequence after Test A; no accepted physical-selection checkpoint.
+- Narrowed the observation to the SR0 scan path without claiming an electrical cause. Replayed captured values, passed the unchanged-C/fake-GPIO oracle and checked the original resolver in isolated Linux. No application or original PiDP-11 source changed.
+- Verified eight original file records unchanged and the machine stopped; removed exact temporary diagnostic/audit executables and the released diagnostic lock. Retained evidence; no original guest disk was opened.
+- Identified disabled memory cgroups as a separate M5.8 gate and prepared staged installation, authentication, identity, resource and rollback guidance. No deployment or boot-setting change. [Diagnostic findings](docs/lab/M5.7.md) · [M5.8 readiness](docs/lab/M5.8-readiness.md).
 
 ## M5.6 terminal expansion and deployment preparation — 2026-11-19
 

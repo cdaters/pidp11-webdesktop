@@ -1,0 +1,44 @@
+{
+  "status": "test_a_unexpected_sr0_sequence_stopped",
+  "source_commit": "6f4fff5",
+  "owner_confirmed_pattern": "SR0\u2013SR21 DOWN; exclusive maintenance confirmed",
+  "hardware_patterns_executed": [
+    "A"
+  ],
+  "patterns_not_executed": [
+    "B",
+    "C",
+    "D"
+  ],
+  "hardware_samples": 20,
+  "expected_sr_decimal": 0,
+  "observed_sr_decimal": 1,
+  "scanner_stdout": "1\n",
+  "scanner_exit_code": 1,
+  "diagnostic_exit_code": 0,
+  "diagnostic_stderr_empty": true,
+  "predicted_profile": "rsx11mp",
+  "actual_guest_started": false,
+  "original_guest_disks_opened": false,
+  "stable_sr": true,
+  "sr_transitions": 0,
+  "physical_cause_established": false,
+  "configured_post_sample_delay_ms": 250,
+  "sample_duration_ms_min": 48.777946,
+  "sample_duration_ms_max": 105.160183,
+  "sample_start_gap_ms_min": 299.290518,
+  "sample_start_gap_ms_max": 355.818694,
+  "sequence_elapsed_seconds": 5.910695807,
+  "postcheck": {
+    "original_file_records_matching_baseline": 8,
+    "screen_sessions": 0,
+    "observed_gpio_owners": 0,
+    "inspection_errors": 0,
+    "emulator_panel_bridge_stopped": true,
+    "temporary_executables_removed": true,
+    "diagnostic_lock_removed": true,
+    "private_evidence_retained": true,
+    "pi_powered_on": true
+  },
+  "physical_acceptance_checkpoint_created": false
+}

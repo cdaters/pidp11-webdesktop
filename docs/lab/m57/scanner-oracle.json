@@ -1,0 +1,26 @@
+{
+  "original_c_stubbed_gpio": true,
+  "patterns": [
+    0,
+    1,
+    15,
+    1398101,
+    2796202,
+    3932160,
+    12582912,
+    16777215,
+    0,
+    1,
+    0
+  ],
+  "matched_go_decoder": true,
+  "hardware_executed": false,
+  "invalid_capture_retained": true,
+  "summary": {
+    "physical_cause_established": false,
+    "samples": 11,
+    "sr_transitions": 10,
+    "stable_sr": false,
+    "summary": true
+  }
+}

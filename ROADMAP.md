@@ -17,7 +17,7 @@ These are directions for experimentation, not delivery promises. The [timeline](
 | [M5.5.1 foundations](docs/lab/M5.5.1.md) | Original-scanner fixtures, terminal performance work and detached optional-service implementation in the Mac/Linux lab |
 | [M5.6 local development](docs/lab/M5.6.md) | Optional-service setup/lifecycle rehearsal, VT100/VT52 conformance and genuine V7 regression, bounded 4010 fixture, VT11 architecture; no Pi deployment or GPIO execution |
 
-M5.7 is in progress: [stopped-machine preflight](docs/lab/M5.7.md) is complete, but physical sampling awaits owner confirmation. [M5.8 readiness](docs/lab/M5.8-readiness.md) identifies disabled memory cgroups as an additional deployment gate; no boot setting or service was changed.
+M5.7 [reproduced the all-DOWN discrepancy](docs/lab/M5.7.md): 20/20 samples reported SR0 asserted without starting a guest. The sequence stopped after Test A; the physical cause remains unresolved and further hardware tests need separate authorization. [M5.8 readiness](docs/lab/M5.8-readiness.md) identifies disabled memory cgroups as an additional deployment gate; no boot setting or service was changed.
 
 ## Sharing the work
 
