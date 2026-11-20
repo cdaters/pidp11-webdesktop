@@ -2,6 +2,13 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.7 preflight and M5.8 readiness — in progress, 2026-11-19
+
+- Verified the stopped physical machine, original scanner/launcher/map hashes, GPIO ownership and startup records under the authorized diagnostic scope. Built and hash-verified the existing ARM64 diagnostic; no GPIO sampling occurred while Test A awaited owner confirmation.
+- Removed the temporary diagnostic/audit executables after a fresh unchanged-file and stopped-state check; retained private evidence. No guest disk was opened and no guest/service started.
+- Identified an actual installation-readiness blocker: the Pi's existing `cgroup_disable=memory` boot argument leaves no active memory controller, so the package's memory limit cannot be presumed enforceable.
+- Prepared staged M5.8 installation, authentication, identity, resource and rollback acceptance guidance. Physical readings and overall M5.7 completion remain pending. [M5.7 status](docs/lab/M5.7.md) · [M5.8 readiness](docs/lab/M5.8-readiness.md).
+
 ## M5.6 terminal expansion and deployment preparation — 2026-11-19
 
 - Added a genuine initial VT52 text parser/key personality beside the existing VT100 renderer, explicit personality/text-size controls and DEC Delete encoding. Both personalities passed ordinary genuine V7 I/O in three browser engines.

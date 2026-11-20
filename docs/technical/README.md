@@ -44,3 +44,6 @@ Private capture paths mentioned in reports intentionally do not resolve to publi
 
 
 [M5.6 results](../lab/M5.6.md) cover the optional package's [owner setup](../getting-started/optional-service.md), [VT100/VT52 conformance](terminal-personalities.md), [4010 and VT11 foundations](graphics-foundations.md), [future companion boundaries](companion-applications.md) and [repeatable local labs](../../lab/m56/README.md). Physical deployment and switch diagnostics remain separately authorized work.
+
+
+[M5.7 preflight status](../lab/M5.7.md) records the authorized stopped-machine inspection and pending physical checkpoints. [M5.8 readiness](../lab/M5.8-readiness.md) separates detached installation from guest coexistence and records the actual disabled-memory-controller blocker.
