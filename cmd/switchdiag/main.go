@@ -5,6 +5,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -19,6 +20,7 @@ func run() error {
 	hardware := flag.Bool("original-scanner", false, "run pinned original scansw; requires separate hardware authorization")
 	maintenance := flag.Bool("exclusive-maintenance-confirmed", false, "owner has prevented original launcher/panel startup for the entire diagnostic")
 	ack := flag.Bool("acknowledge-gpio-initialization", false, "acknowledge original scanner changes GPIO direction/pulls")
+	expected := flag.Int64("expected-sr", -1, "expected 22-bit SR value in decimal; stop after first mismatch (-1 disables)")
 	count := flag.Int("samples", 10, "hardware sample limit (1–100)")
 	interval := flag.Duration("interval", 250*time.Millisecond, "hardware interval (100ms–5s); total run capped at 30s")
 	flag.Parse()
@@ -33,6 +35,9 @@ func run() error {
 	f.Close()
 	if err != nil {
 		return err
+	}
+	if *expected < -1 || *expected > (1<<22)-1 {
+		return errors.New("expected-sr must be -1 or a 22-bit unsigned value")
 	}
 	var captures []switchdiag.Capture
 	var scanner *originalScanner
@@ -104,6 +109,11 @@ func run() error {
 			Sample switchdiag.Sample `json:"sample"`
 		}{mode, i, sample}); err != nil {
 			return err
+		}
+		// Retain the actual capture before stopping; never take another sample to
+		// turn an unexpected physical reading into a passing sequence.
+		if *expected >= 0 && sample.SR != uint32(*expected) {
+			return fmt.Errorf("sample %d: expected SR %d, observed %d; stopped without retry", i, *expected, sample.SR)
 		}
 		if scanner != nil && i+1 < *count {
 			select {

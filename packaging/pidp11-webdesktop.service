@@ -5,7 +5,7 @@ Description=Optional PiDP-11 Web Desktop (detached at startup)
 Type=exec
 User=pidp11-webdesktop
 Group=pidp11-webdesktop
-ExecStart=/opt/pidp11-webdesktop/current/webdesktop-service serve
+ExecStart=/opt/pidp11-webdesktop/current/webdesktop-service serve -require-memory-limit
 Restart=no
 TimeoutStopSec=5
 RuntimeDirectory=pidp11-webdesktop
@@ -25,6 +25,8 @@ CapabilityBoundingSet=
 AmbientCapabilities=
 InaccessiblePaths=-/opt/pidp11
 MemoryMax=96M
+MemorySwapMax=0
+Environment=GOMEMLIMIT=72MiB
 TasksMax=64
 
 [Install]

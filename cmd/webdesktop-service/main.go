@@ -19,6 +19,7 @@ import (
 	"syscall"
 	"time"
 
+	"pidp11.local/webdesktop/internal/memoryguard"
 	"pidp11.local/webdesktop/internal/terminalbridge"
 	"pidp11.local/webdesktop/internal/terminalservice"
 	"pidp11.local/webdesktop/internal/web"
@@ -113,6 +114,7 @@ func run(ctx context.Context) error {
 		return provision(os.Args[2:])
 	}
 	flags := flag.NewFlagSet(op, flag.ContinueOnError)
+	requireMemory := flags.Bool("require-memory-limit", false, "refuse startup without kernel 96 MiB memory and zero-swap containment")
 	config := flags.String("config", "/etc/pidp11-webdesktop/config.json", "private service configuration")
 	socket := flags.String("socket", "/run/pidp11-webdesktop/control.sock", "local control socket")
 	instance := flags.String("instance", "", "fresh service instance from status")
@@ -125,10 +127,18 @@ func run(ctx context.Context) error {
 	if flags.NArg() != 0 {
 		return errors.New("unexpected arguments")
 	}
+	if *requireMemory && op != "serve" {
+		return errors.New("require-memory-limit is only valid for serve")
+	}
 	if op == "check" {
 		return checkConfig(*config, os.Stdout)
 	}
 	if op == "serve" {
+		if *requireMemory {
+			if err := memoryguard.Check(); err != nil {
+				return fmt.Errorf("optional desktop refused before opening listeners: memory containment unavailable: %w", err)
+			}
+		}
 		return serve(ctx, *config)
 	}
 	return control(ctx, op, *socket, *instance, *id, *revision, *confirmed)
