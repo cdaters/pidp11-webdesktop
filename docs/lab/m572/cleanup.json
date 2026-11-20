@@ -1,0 +1,26 @@
+{
+  "simh_goodbye_captured": true,
+  "owned_simulator_screen_daemon_exited": true,
+  "gpio_owners": 0,
+  "inspection_errors": 0,
+  "original_file_records_unchanged": 14,
+  "startup_file_contents_unchanged": 5,
+  "guest_media_attached": false,
+  "guest_media_rehashed": false,
+  "owned_rpc_program_version_removed": [
+    99,
+    1
+  ],
+  "other_rpc_registrations_unchanged": true,
+  "temporary_helpers_hash_verified_and_removed": 4,
+  "diagnostic_runtime_file_removed": true,
+  "private_evidence_preserved": true,
+  "powered_on_stopped": true,
+  "last_owner_positions": {
+    "sr": "all DOWN",
+    "halt": "HALT (down)",
+    "address": "CONS PHY"
+  },
+  "checkpoint_tags_preserved": 11,
+  "hardware_acceptance_tag_created": false
+}

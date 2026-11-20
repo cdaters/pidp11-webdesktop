@@ -2,6 +2,13 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.7.2 supervised physical lamp diagnostic — 2026-11-19
+
+- Ran one approved, verified diskless IDLED session with original SIMH/REALCONS and the original panel daemon. No guest media, launcher scan or Web Desktop service was used.
+- Owner-observed ADDRESS lamps and original console readings agreed: SR0 DOWN–UP–DOWN produced 1, 1, 1; raising/lowering SR1 produced 3, 1. SR1 responds; SR0 remains asserted without a diagnosed component fault.
+- Rehearsed LOAD ADRS and non-mutating SR examination against original C in isolated ARM64 Linux. Recorded the lab's missing menu-formatting utility and absence of physical photographs.
+- Stopped the owned session, removed its RPC registrations and hash-verified temporary helpers, and verified 14 original records plus five startup-file contents unchanged. Pi left powered on and stopped; no new acceptance tag. [Report and next inspection proposal](docs/lab/M5.7.2.md).
+
 ## M5.7.1 SR0 comparison and memory containment — 2026-11-19
 
 - Captured 20 expected SR=1 readings with only SR0 UP. After owner-confirmed all-DOWN, captured SR=1 once and stopped immediately; no guest or launcher ran. Preserved raw evidence, verified eight original file records and stopped state, then removed temporary diagnostic executables/lock.

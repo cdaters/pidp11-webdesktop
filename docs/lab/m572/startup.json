@@ -1,0 +1,16 @@
+{
+  "owner_startup_approval": true,
+  "exclusive_maintenance_confirmed": true,
+  "owner_sr_positions": "all 22 DOWN",
+  "owner_labeled_controls": "centered",
+  "halt_electrical_state_inferred": false,
+  "key_position_reported": false,
+  "start_count": 1,
+  "original_idled_profile": true,
+  "simulator_media_descriptors": 0,
+  "daemon_gpio_device": "/dev/gpiomem",
+  "original_binary_privilege_elevation_disabled": true,
+  "prior_rt_warning_reproduced": true,
+  "physical_lamp_observations_pending": false,
+  "cleanup_pending": false
+}

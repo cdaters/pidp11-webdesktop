@@ -160,3 +160,10 @@ Next gates, in order:
 The [M5.6 report](lab/M5.6.md) records actual optional-service setup/lifecycle tests, VT100/VT52 conformance and genuine V7 regressions, and a bounded 4010 byte fixture. [VT11 findings](technical/graphics-foundations.md) identify a separate simulator display path, not terminal data. Read-only Pi inspection supports platform compatibility only; no deployment, GPIO sampling, guest interaction or stress test occurred.
 
 Next gates remain: supervised physical switch diagnosis; authoritative guest/line lifecycle evidence or mandatory stop-before-change operation; certificate/network review; representative Pi resource and emulator-impact measurement; separately authorized service acceptance and rollback. The original target table is unchanged. Short synthetic ARM64 measurements cannot settle the prior Pi CPU exceedance or the longer M5.5.1 eight-observer result. Full-screen VT52 applications, compressed 4010 addressing/GIN, live graphics and upstream VT11 transport design are separate incremental steps.
+
+
+## M5.7.2 supervised diagnosis — November 19, 2026
+
+The [diskless physical comparison](lab/M5.7.2.md) found SR0 asserted with its paddle DOWN, UP and DOWN again, while SR1 added and removed its bit normally. Original REALCONS console readings matched the owner-observed ADDRESS lamps. The standalone scanner and multiplexed daemon therefore agree on this discrepancy; a specific faulty component is not established. The owned session was stopped, temporary helpers/registrations removed, and 14 original file records verified unchanged. No guest OS, browser service or new hardware-acceptance tag was introduced.
+
+Next is separately authorized powered-off inspection using the matching board documentation and preserved observations. No normal-launcher guest retry is justified by this diagnostic alone. [M5.8 readiness](lab/M5.8-readiness.md) retains the independent memory-controller prerequisite and M5.7.1's tested refusal of protected service startup when enforcement is absent. Resource targets and production-control restrictions remain unchanged.

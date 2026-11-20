@@ -1,0 +1,20 @@
+{
+  "application_base_revision": "ec6cd4d408f5c270465c59653b985d19c5b6c01b",
+  "lab_harness_revision": "d53cb77bec0a3363905e96d94ad7f8a5a5ebdf0d",
+  "checks": {
+    "original_c_isolated_rehearsal": "passed with recorded missing-column menu limitation",
+    "supervised_physical_sequence": "completed; SR0 discrepancy reproduced, SR1 responsive",
+    "graceful_exit_and_owned_cleanup": "passed",
+    "original_records_and_startup_contents": "unchanged",
+    "python_syntax": "passed",
+    "shell_examples_syntax_only": "passed",
+    "local_documentation_links": "passed",
+    "sanitized_json_and_lamp_console_consistency": "passed",
+    "whitespace_and_private_material_review": "passed",
+    "existing_tag_reference_comparison": "11 unchanged"
+  },
+  "broad_application_suites_rerun": false,
+  "application_source_changed": false,
+  "photo_review_performed": false,
+  "physical_acceptance": false
+}

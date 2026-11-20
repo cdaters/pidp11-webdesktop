@@ -1,0 +1,40 @@
+{
+  "original_idled_hash_verified": true,
+  "original_simh_realcons": true,
+  "physical_gpio_used": false,
+  "guest_media_mounted": false,
+  "operating_system_booted": false,
+  "halt_and_cons_phy_load_adrs": [
+    {
+      "synthetic_sr": 0,
+      "address_output": 0,
+      "system_sr_octal": "000000",
+      "register_read_preserved_address": true
+    },
+    {
+      "synthetic_sr": 1,
+      "address_output": 1,
+      "system_sr_octal": "000001",
+      "register_read_preserved_address": true
+    },
+    {
+      "synthetic_sr": 0,
+      "address_output": 0,
+      "system_sr_octal": "000000",
+      "register_read_preserved_address": true
+    },
+    {
+      "synthetic_sr": 2,
+      "address_output": 2,
+      "system_sr_octal": "000002",
+      "register_read_preserved_address": true
+    },
+    {
+      "synthetic_sr": 0,
+      "address_output": 0,
+      "system_sr_octal": "000000",
+      "register_read_preserved_address": true
+    }
+  ],
+  "graceful_quit": true
+}

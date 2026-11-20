@@ -1,0 +1,66 @@
+{
+  "local_date": "2026-11-19",
+  "timezone": "America/Phoenix",
+  "configuration": "original diskless IDLED; HALT; CONS PHY",
+  "observations": [
+    {
+      "test": "A",
+      "owner_position": "all DOWN",
+      "expected_sr": 0,
+      "owner_address_lamps": [
+        0
+      ],
+      "console_sr_octal": "000001",
+      "run_dark": "before LOAD and reconfirmed before B",
+      "console_capture_sha256": "128ab629b6d7ac7df9fab37d428560f8cc7a1c73dc4bba0455a21f2224a562ad"
+    },
+    {
+      "test": "B",
+      "owner_position": "SR0 UP, others DOWN",
+      "expected_sr": 1,
+      "owner_address_lamps": [
+        0
+      ],
+      "console_sr_octal": "000001",
+      "run_dark": "after LOAD",
+      "console_capture_sha256": "203233e3bc2d77334be135b608f89c91fcaee85177e50d3b04f3b399d28f7db6"
+    },
+    {
+      "test": "C",
+      "owner_position": "all DOWN",
+      "expected_sr": 0,
+      "owner_address_lamps": [
+        0
+      ],
+      "console_sr_octal": "000001",
+      "run_dark": "after LOAD",
+      "console_capture_sha256": "518ea80613df293fd63f4f2fd32f250a6a5876c8f2ad5080df57add7f41a1c55"
+    },
+    {
+      "test": "D",
+      "owner_position": "SR1 UP, others DOWN",
+      "expected_sr": 2,
+      "owner_address_lamps": [
+        0,
+        1
+      ],
+      "console_sr_octal": "000003",
+      "run_dark": "after LOAD",
+      "console_capture_sha256": "9faa9f74857726c171aba3929f38ef267552bd6036801f60863e0046cf690a88"
+    },
+    {
+      "test": "D return",
+      "owner_position": "all DOWN",
+      "expected_sr": 0,
+      "owner_address_lamps": [
+        0
+      ],
+      "console_sr_octal": "000001",
+      "run_dark": "after LOAD",
+      "console_capture_sha256": "46ba6486ac9f0fd4fb21279e7d462117f2d9c68f61f4d824f86830cfd100167c"
+    }
+  ],
+  "photographs_supplied": false,
+  "no_raw_electrical_measurement": true,
+  "hardware_acceptance": false
+}
