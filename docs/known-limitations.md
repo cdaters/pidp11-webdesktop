@@ -1,5 +1,8 @@
 # What is still experimental
 
+**M5.9 update:** the [development checkpoint](lab/M5.9.md) adds genuine V7 Tektronix output, initial VT220/teletype, manual printer snapshots and offline companion chat. Full-screen terminal qualification, live printer/media transport, VT11 and configured model integration remain incomplete. Earlier milestone-specific limitations below retain their historical context.
+
+
 The desktop is useful for exploration now, and genuine guest-terminal integration has passed in a controlled lab and a standalone actual-Pi pilot. That is different from a supported Pi installation.
 
 | Area | Limit and next evidence needed |

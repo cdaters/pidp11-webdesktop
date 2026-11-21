@@ -1,8 +1,8 @@
 # Terminal personalities and conformance
 
-M5.6 separates a terminal's interpretation of bytes from its connection. Choose **VT100** or **VT52** in **Guest terminal** before connecting. Both use the same configured ASCII guest line, generation checks, read-only initial state and keyboard lease. Selection does not configure the guest's terminal setting, negotiate Telnet, start a guest or acquire its keyboard. Choose the corresponding terminal type within a guest application independently.
+M5.6 separates a terminal's interpretation of bytes from its connection. M5.9 adds **VT220**, **ASR-33** and **Tektronix 4010** beside **VT100** and **VT52**; choose a personality in **Guest terminal** before connecting. All use the existing configured guest line, generation checks, read-only initial state and keyboard lease. Selection does not configure the guest's terminal setting, negotiate Telnet, start a guest or acquire its keyboard. Choose the corresponding terminal type within a guest application independently.
 
-The screen stays **80 columns × 24 rows**. Text size changes readability, not geometry; a smaller window scrolls. Reconnecting creates a fresh renderer and personality parser, discards incomplete escape sequences and returns without keyboard authority. The separate mock command editor remains a VT100-style demonstration; it is not a VT52 guest test.
+Text screens stay **80 columns × 24 rows**, except the teletype’s 72-column paper. Tektronix uses a separate 1024×781 SVG viewport. Text size changes readability, not geometry; a smaller window scrolls. Reconnecting creates a fresh renderer and personality parser, discards incomplete escape sequences and returns without keyboard authority. The separate mock command editor remains a VT100-style demonstration; it is not a VT52 guest test.
 
 ## VT100 subset
 
@@ -27,3 +27,27 @@ npx playwright test browser-tests/guest.spec.ts browser-tests/terminal-profiles.
 ```
 
 These tests intercept the transport deliberately. For real guest evidence use the separate [M5.6 lab](../../lab/m56/README.md). No terminal fixture contacts a Pi.
+
+## M5.9 VT220 subset
+
+`VT220Profile` normalizes incoming eight-bit C1 controls to seven-bit ESC forms before xterm's UTF-8 decoder. It supplies its own primary identity `ESC[?62c`, without advertising unimplemented optional capabilities, and secondary identity `ESC[>1;0;0c`. Editing keys and F6–F12 use their DEC-style sequences. Seven-bit DECSCL is supported through a soft reset; eight-bit replies and unsupported compatibility levels fail visibly. Keyboard/reply transport remains ASCII7. Device strings and supplemental high characters are rejected. Pending sequence storage is limited to 128 characters; reconnect discards it.
+
+The [DEC VT220 programmer reference, chapter 4](https://www.zx.net.nz/computers/dec/vt220/doc/vt220-rm/chapter4.html) informs this adapter. It is not a relabeled complete xterm: xterm supplies common display operations, while the adapter supplies the qualified differences. Downloadable characters, user-defined keys, selective erase, complete national character sets, 132 columns and full reset fidelity remain unqualified. Query replies require the current keyboard lease. Browser fixtures verify identity, C1 display, editing keys and observer silence; actual V7 ordinary I/O and `hangman` passed in all three engines.
+
+## M5.9 teletype presentation
+
+`TeletypePaper` models a bounded paper record: uppercase display, separate carriage return and line feed, backspace and no wrapping beyond column 72. At the margin subsequent print overwrites the final cell. Overstrike keeps the latest glyph, not accumulated ink. Export retains at most 512 lines. BEL is counted internally; no audible bell or 110-baud pacing is implemented. Tabs and other unsupported mechanical controls are ignored. Output chunks are limited to 64 KiB and ASCII7.
+
+The [Teletype Model 33 technical manual](https://www.bitsavers.org/communications/teletype/33/310B_Vol_1_33_Teletypewriter_Sets_Technical_Manual_Sep74.pdf) supplies historical context; this modern paper presentation does not claim full device emulation. Uppercase keyboard is an explicit option, initially off so lowercase V7 login/commands still work. All three engines passed genuine V7 commands. Mechanical timing, paper motion and acoustic authenticity remain future work.
+
+## Current compatibility evidence
+
+| Presentation | Fixture verification | Genuine guest verification |
+|---|---|---|
+| VT100 | Existing cursor, margin, graphics, keypad and reconnect suite | V7 commands and line-oriented `hangman`, three engines |
+| VT52 | Fragmented addressing, control handling, non-wrap, keys and identity | Same V7 command/game scope, three engines |
+| VT220 | Separate identity/C1/editing-key tests and bounds | Same V7 command/game scope, three engines |
+| ASR-33-inspired | Paper controls, truncation/export, ownership and multiple windows | V7 commands, three engines |
+| Tektronix | Compressed/incremental coordinates, bounds, GIN ownership and hardcopy | Original V7 plotting, three engines; no genuine GIN test |
+
+No full-screen editor or complete DEC conformance certification is claimed. Reproduce M5.9 using [its lab runbook](../../lab/m59/README.md).

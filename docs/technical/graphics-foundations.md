@@ -12,13 +12,17 @@ flowchart LR
     D -. future observation transport .-> W[Browser vector display]
 ```
 
-## 4010 fixture prototype
+## 4010 fixture and guest presentation
 
 Open **4010 graphics** on the desktop. **Draw fixture** and **Draw split bytes** feed the same deterministic sequence; **Erase display** clears it. No guest or network connection is involved. `Tek4010` accepts incremental seven-bit input, GS graph mode, US alpha mode and ESC FF erase. Full High-Y, Low-Y, High-X, Low-X addresses produce ten-bit coordinates. The first coordinate after GS moves without drawing. Stored marks remain until erase. The SVG maps the lower-left coordinate origin into a 1024×781 viewport and clips coordinates above the visible area.
 
-The [Tektronix 4010/4010-1 User's Manual, 070-1225-00](https://w140.com/tekwiki/images/c/c2/070-1225-00.pdf), section 3 and figures 3-1–3-3, supplies the encoding and manual coordinate example used by the tests. Alpha rendering uses approximate 14-unit spacing and 22-unit line advance. It does not reproduce storage-tube appearance, exact glyphs, dual margins, GIN, hardcopy, timing, compressed addresses or 4014 extensions. Unsupported data stops the parser until an explicit reset; it does not silently reinterpret it. This is a qualified subset, not guest-application acceptance.
+The [Tektronix 4010/4010-1 User's Manual, 070-1225-00](https://w140.com/tekwiki/images/c/c2/070-1225-00.pdf), section 3 and figures 3-1–3-3, supplies the encoding and manual coordinate example used by the tests. Alpha rendering uses approximate 14-unit spacing and 22-unit line advance. M5.9 adds compressed addresses after an initial complete coordinate, incremental pen movement, line styles and GIN. The first coordinate after GS moves without drawing. The original V7 tek driver's extra 4014 low-bit byte is accepted and downsampled to ten-bit display resolution; this is not full 4014 emulation. Alpha glyphs, dual margins, storage-tube appearance, timing and font modes remain approximate or unsupported. CR leaves graphics mode. Malformed input faults the parser until explicit reset.
 
-The parser permits at most 4,096 combined line/text marks and 64 KiB per input chunk. It retains at most three incomplete coordinate bytes. No display history grows without limit. Unit tests cover the manual's `(0,31)` address, all fixture chunk boundaries, dark moves, text/graphics changes, erase, malformed input and exhausted storage. Browser tests compare whole and split rendering in three engines. No live graphics endpoint is offered yet.
+Storage remains bounded to 4,096 combined line/text marks and 64 KiB per input chunk, with at most four pending coordinate bytes. The SVG is built from inert elements and text nodes. **Save display** downloads the current SVG without fetching files or sending guest commands. Fixture and guest views share this renderer.
+
+**Guest terminal → Tektronix 4010** uses the existing approved serial stream and keyboard lease. GIN requests show a crosshair; an explicit pointer click sends a five-byte coordinate response only for the current connected keyboard owner. Observers remain silent. Pointer-based GIN currently has no equivalent keyboard coordinate selection, and genuine guest GIN acceptance is still pending. Reconnect starts a fresh storage display; no earlier graphics are replayed.
+
+Original V7 `graph` and `plot -Ttek` produced a real 22-vector plot in Chromium, Firefox and WebKit. The isolated profile sets DCO0 to `7B` because SIMH's default `7P` filters graphics controls. Original simulator source is unchanged. [Evidence and capture](../lab/M5.9.md) distinguish this genuine plot from the retained M5.6 fixture below. Parser/reference research also used [XTerm's control-sequence reference](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html); no XTerm source was copied into the parser.
 
 ![Actual M5.6 browser application showing a deterministic 4010 byte fixture](../screenshots/m56-4010-fixture.png)
 

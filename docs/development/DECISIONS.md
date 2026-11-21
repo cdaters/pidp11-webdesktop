@@ -20,4 +20,8 @@ These decisions describe the current direction. The linked reports retain the ev
 | Verify memory containment before installed startup | M5.7.1 checks actual local cgroup memory/swap files before opening sockets; the packaged unit refuses absent or unsuitable protection. A Go soft target is supplementary, not a hard limit. Keep the physical-only fallback instead of silently weakening the service. [Evidence and limits](../lab/M5.7.1.md#memory-limit-finding-and-implemented-strategy) |
 | Distinct lab and pilot entry points | Keep the network-none lab guard intact. M5.3 adds a fixed-loopback terminal-only pilot and demonstrates it on the actual Pi; neither command is a production installer. [M5.3](../lab/M5.3.md) |
 
+| Personality adapters share existing terminal authority | M5.9 text/graphics views reuse the same generation and keyboard lease. Browser interpretation does not authorize guest lifecycle or media operations. [Evidence](../lab/M5.9.md) |
+| AI remains a separate optional capability | The shipped guide is an offline fixture; a separate provider library has no terminal tools. A proposal validator is not human approval or execution authority. [Boundaries](../technical/companion-applications.md) |
+| Local printer import is a snapshot | Preserve ASCII controls and bounded paper while labeling manual guest-output capture honestly; no implied live LP0 or simulator monitor endpoint. [Status](../lab/M5.9.md) |
+
 The [philosophy](../../PHILOSOPHY.md) explains the priorities behind these choices. The [technical index](../technical/README.md) is the starting point for implementation details.

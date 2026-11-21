@@ -41,3 +41,11 @@ These are existing captures of the actual application, not stock images or gener
 ![Genuine UNIX V7 on the actual Pi](m53-pi-unix-v7.png)
 
 Actual Chromium capture through the SSH tunnel to the Pi-hosted V7 guest. Panel/peripheral windows remain simulated; the inherited footer is not a hardware-status indicator. See the [M5.3 evidence and cleanup](../lab/M5.3.md).
+
+## M5.9 development captures
+
+Captured from actual Chromium application windows on the Mac, November 21, 2026. Existing baseline images remain unchanged.
+
+- [V7 Tektronix plot](m59-v7-tek.png): genuine disposable V7 `graph | plot -Ttek` through unmodified SIMH and the real bridge; read-only browser, no intercepted transport.
+- [Printer snapshot](m59-printer-snapshot.png): a genuine V7 `pr` listing captured through the conventional console and explicitly imported from a local text file. The paper is a local snapshot, **not a live LP0 connection**. The guest's 1969 date is its unconfigured lab clock, not the capture date.
+- [Offline companion](m59-offline-companion.png): deterministic guide fixture responding to an actual submitted question. No language model or network provider is connected. The surrounding panel and mock applications are demonstrations.

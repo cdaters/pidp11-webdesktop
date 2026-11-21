@@ -2,6 +2,13 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.9 development increment — 2026-11-21
+
+- Added separate initial VT220 and ASR-33-inspired guest presentations, bounded paper/display exports and up to four guest windows. Genuine V7 commands passed in all four text personalities across three browser engines; full-screen applications remain unqualified.
+- Connected the expanded Tektronix parser to the existing approved guest transport. Original V7 `graph` and `plot -Ttek` rendered in three engines after the isolated DCO profile selected control-preserving seven-bit output. No simulator source change.
+- Added explicit local printer-text snapshot import, a deterministic offline AI guide window, separate bounded Ollama/OpenAI-compatible adapter tests and a future command-review contract with no execution authority.
+- Added read-only installation preflight, two setup paths and versioned candidate packaging. ARM64 systemd, missing-memory refusal, transport, browser and short resource checks passed. Physical Pi untouched; real peripheral attachment, VT11, full model wiring and production deployment remain incomplete. [Report](docs/lab/M5.9.md).
+
 ## M5.7.2 supervised physical lamp diagnostic — 2026-11-19
 
 - Ran one approved, verified diskless IDLED session with original SIMH/REALCONS and the original panel daemon. No guest media, launcher scan or Web Desktop service was used.

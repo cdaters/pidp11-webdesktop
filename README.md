@@ -30,6 +30,11 @@ M5.3 repeated the genuine terminal demonstration on the actual Pi using one disp
 
 [Read the demonstration report](docs/lab/M5.0.md) · [Reproduce the lab](docs/lab/M5.0-runbook.md)
 
+## Choose a setup path
+
+- **Already own a working PiDP-11?** Use [Path A: optional companion](docs/getting-started/installation-paths.md#path-a-you-already-have-a-working-pidp-11), with read-only preflight, private setup, rollback and removal. The ARM64 package is a laboratory candidate; hardware and memory-protection gates still apply.
+- **Starting with Raspberry Pi OS Lite?** Use [Path B: original software first](docs/getting-started/installation-paths.md#path-b-start-with-raspberry-pi-os-lite). Verify independent physical operation before considering the companion. A fresh-card installation was not replayed in M5.9.
+
 ## What works today
 
 | Part of the desktop | Current status |
@@ -37,12 +42,13 @@ M5.3 repeated the genuine terminal demonstration on the actual Pi using one disp
 | PDP-11/70 panel | Interactive SVG reconstruction with simulated lamps, switches and selectors |
 | Desktop | Movable/resizable windows, taskbar, keyboard controls, layout preferences and touch-friendly controls |
 | Mock terminals | Four independent local demonstration sessions with a tested DEC-style renderer |
-| Genuine guest terminal | UNIX V7/DC11 demonstrated in the isolated lab **and on the actual Pi**; M5.6 adds tested VT100/initial VT52 personalities locally |
-| 4010 graphics | Bounded Tektronix byte parser and SVG fixture display; no live graphics guest or VT11 transport |
+| Genuine guest terminal | UNIX V7/DC11 demonstrated in the isolated lab **and on the actual Pi**; M5.9 tests VT100, initial VT52/VT220 and teletype presentations in genuine disposable V7 |
+| 4010 graphics | Bounded Tektronix parser now displays genuine V7 `graph` / `plot -Ttek` output in three browser engines; VT11 remains separate future work |
 | Disk, tape, paper tape and OS profiles | Working **simulated** workflows; no real guest media is changed |
-| Continuous-form line printer | Simulated LP0 spool, 80/132-column paper, perforations, tractor-feed holes and original-text download |
+| Continuous-form line printer | Bounded local LP0 spool, 80/132-column paper and explicit text-snapshot import/export; no live guest LP0 transport |
+| AI Companion | Optional offline guide chat; tested host-provider library prototype, no connected model or guest command authority |
 | Passive panel observation | Laboratory experiments; no production Pi observation service installed |
-| Optional installation candidate | Detached Go service and ARM64 package tested in disposable Linux; not deployed to the Pi. [M5.6 results](docs/lab/M5.6.md) · [setup candidate](docs/getting-started/optional-service.md) |
+| Optional installation candidate | Detached Go service and ARM64 package tested in disposable Linux; not deployed to the Pi. [M5.9 results](docs/lab/M5.9.md) · [setup candidate](docs/getting-started/optional-service.md) |
 | Physical Pi integration | V7/browser/physical checks passed in M5.5, but fallback selected the wrong guest; acceptance blocked, temporary changes rolled back, machine left stopped |
 | Remote front-panel control | Separate unresolved safety work; not a production feature |
 
@@ -51,6 +57,10 @@ M5.3 repeated the genuine terminal demonstration on the actual Pi using one disp
 *Actual M4.3.2 simulated line printer. Paper presentation is independent of the downloadable text spool; it is not yet connected to guest LP0.*
 
 See the [gallery](docs/screenshots/README.md) for the full panel, disk and tape applications. [Known limitations](docs/known-limitations.md) explains the boundaries without requiring you to read every engineering report.
+
+![Genuine V7 Tektronix graphics in the browser](docs/screenshots/m59-v7-tek.png)
+
+*Actual M5.9 disposable V7 plotting output through unmodified SIMH. [Evidence, limits and remaining work](docs/lab/M5.9.md).*
 
 ## Try the local desktop
 
@@ -65,7 +75,7 @@ npm run dev
 
 Open the loopback address printed by Vite, normally `http://127.0.0.1:5173`. This starts the browser-only demonstration; it does not connect to your Pi. Open **Terminal**, acquire its keyboard and type `HELP`, or open **Line printer** and add a sample listing. Stop the preview with Ctrl-C.
 
-The separate **Guest terminal** needs an explicitly prepared real-guest service. The repeatable local route is the M5.0/M5.3 lab; the completed Pi pilot is not left running. There is **no production Pi installer**. For the embedded Go mock server, offline HTML build and tests, use the [developer setup](docs/technical/development.md).
+The separate **Guest terminal** needs an explicitly prepared real-guest service. The repeatable local route is the M5.0/M5.3 lab; the completed Pi pilot is not left running. The companion installer is a **laboratory candidate**, not production deployment acceptance. For the embedded Go mock server, offline HTML build and tests, use the [developer setup](docs/technical/development.md).
 
 ## Find your way around
 

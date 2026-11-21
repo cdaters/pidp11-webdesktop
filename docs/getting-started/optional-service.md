@@ -1,6 +1,6 @@
 # Preparing the optional desktop service
 
-This is the M5.7.1 **laboratory-tested installation candidate**, extending M5.6, not an accepted physical Pi deployment. The owner has not authorized installing it on the assembled machine. Original PiDP-11 operation remains the fallback. A later supervised deployment must first resolve the physical-selection discrepancy and review network access, certificate trust and guest-line ownership.
+This is a **laboratory-tested installation candidate**, now extended by [M5.9 packaging and preflight](installation-paths.md), not an accepted physical Pi deployment. The owner has not authorized installing it on the assembled machine. Original PiDP-11 operation remains the fallback. A later supervised deployment must first resolve the physical-selection discrepancy and review network access, certificate trust and guest-line ownership.
 
 The package contains a static Linux ARM64 executable with the desktop inside it. The target needs systemd and normal Linux administration tools, but no Node runtime, container, database or graphical desktop. It installs only under `/opt/pidp11-webdesktop`, `/etc/pidp11-webdesktop` and its own systemd/runtime locations. It does not change Oscar's installation or start an emulator.
 

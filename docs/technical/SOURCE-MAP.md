@@ -63,3 +63,10 @@ The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original
 - `src/tek4010.ts` owns bounded fixture graphics state; `tek4010-app.ts` renders safe SVG nodes. It opens no transport. See [graphics paths](graphics-foundations.md).
 - `webdesktop-service check` validates private configuration without sockets. `packaging/configure.sh` performs first-run permissions and checks as the dedicated account. `PACKAGE_SHA256SUMS` covers the delivered helpers as well as retained payload.
 - `lab/m56/` adds terminal-personality guest regression and first-run/credential checks while reusing M5.5.1's genuine SIMH, systemd and benchmark harnesses. [Reproduction](../../lab/m56/README.md).
+
+### M5.9 additions
+
+- `vt220.ts` and `teletype.ts` are connection-local bounded adapters. `tek-display.ts` renders the same inert SVG for the fixture and approved guest stream. `guest-terminal.ts` retains transport/lease ownership; `main.ts` caps guest windows at four within the global limit.
+- `printer-import.ts` validates explicit local ASCII snapshots; `printer-app.ts` cancels stale file reads on clear/disposal. No new backend printer or media endpoint exists.
+- `companion.ts` defines chat-only and future proposal-review contracts. `companion-app.ts` owns/disposes the offline chat. `internal/companion` is a standalone tested provider library, not a registered HTTP route or model connection.
+- `packaging/preflight.sh` is structural/read-only; `release.sh` builds a versioned candidate only from a clean committed tree. `lab/m59` reuses original-SIMH V7 and systemd harnesses, with the explicit isolated DCO 7B profile and no original C changes.

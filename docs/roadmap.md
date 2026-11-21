@@ -1,5 +1,8 @@
 # Roadmap, resource budget and open questions
 
+**M5.9 update:** [first implementation increment](lab/M5.9.md) adds genuine V7 Tektronix output, initial VT220/teletype, optional offline companion and manual printer snapshots. [Two installation paths](getting-started/installation-paths.md) retain the memory-protection and physical-operation gates. This local development checkpoint does not advance hardware acceptance or change the targets below.
+
+
 Originally recorded 2026-11-16; M5.5 update 2026-11-19. The table below contains **acceptance targets**, not measurements. M5.3 subsequently recorded short standalone Pi measurements; M5.4 is Mac-only preparation. Historical milestone sections retain their original scope; the latest status is at the end.
 
 ## Performance targets

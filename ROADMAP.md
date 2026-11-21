@@ -21,6 +21,10 @@ M5.7 [reproduced the all-DOWN discrepancy](docs/lab/M5.7.md): 20/20 samples repo
 
 M5.7.1 [compared SR0 UP and DOWN](docs/lab/M5.7.1.md): it remained asserted at the first DOWN reading, triggering an immediate stop. The candidate now refuses startup without verified kernel memory/swap containment; Linux and browser lab checks passed. Physical inspection and actual Pi memory-controller readiness remain unresolved.
 
+## M5.9 development increment
+
+[Implemented and tested](docs/lab/M5.9.md): initial VT220, teletype presentation, genuine V7 Tektronix plotting, multiple guest windows, manual printer snapshot import, offline AI guide and separate provider contracts, read-only preflight and versioned ARM64 packaging. No physical machine was contacted. Full-screen qualification, live peripherals, VT11 output observation and configured model wiring remain next increments.
+
 ## Sharing the work
 
 Public GitHub source, authentic screenshots, beginner and developer documentation, the headless Trixie guide, original-code MIT licensing and preserved development history. This publication milestone does not advance the live integration status.
@@ -37,7 +41,7 @@ Public GitHub source, authentic screenshots, beginner and developer documentatio
 
 ## Longer-term possibilities
 
-Qualify full-screen VT100/VT52 applications, extend the initial VT52 subset, and test 4010 output from a genuine guest before offering a live graphics line. Discuss the separate VT11 observation path upstream before implementing a hook. VT220 remains future work. Connect disk, tape, printer and paper-tape windows to real guest devices only with appropriate lifecycle and media protections. Community experiments may suggest other useful directions.
+Qualify full-screen VT100/VT52 applications, extend the initial VT52 subset, and expand the now genuine-guest-tested Tektronix subset. Discuss the separate VT11 observation path upstream before implementing a hook. The initial VT220 subset needs further character-set, geometry and application qualification. Connect disk, tape, printer and paper-tape windows to real guest devices only with appropriate lifecycle and media protections. Community experiments may suggest other useful directions.
 
 Remote front-panel control remains a distinct unresolved safety problem. Observing a machine does not grant control of it, and losing a browser does not prove that the CPU stopped. Existing START-release and blocked-RPC limitations stay visible until evidence resolves them.
 
