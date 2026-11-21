@@ -1167,3 +1167,12 @@ table button {
 .tek-display { display:block; flex:1; min-height:200px; width:100%; height:0; background:#101d1b; overflow:hidden; }
 .tek-display line { stroke:#b6e5b5; stroke-width:1.2; }
 .tek-display text { fill:#b6e5b5; font:18px monospace; letter-spacing:0; }
+
+.guest-tek[hidden], .guest-screen[hidden] { display:none; }
+.guest-tek { min-height:360px; }
+.teletype-mode .guest-screen { background:#f5f0df; border:1px solid #c8bfa8; }
+.teletype-mode .guest-xterm { padding:12px; }
+
+.companion-app { padding:16px; box-sizing:border-box; }
+.companion-chat { min-height:120px; max-height:280px; overflow:auto; border:1px solid #a4aaa0; padding:12px; white-space:pre-wrap; }
+.companion-chat + form textarea { display:block; width:100%; box-sizing:border-box; }

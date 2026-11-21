@@ -1,3 +1,4 @@
+import { renderTek } from "./tek-display.ts";
 import { Tek4010, tekFixture } from "./tek4010.ts";
 
 /** Fixture-only display: no socket, guest input, timers or external resources. */
@@ -12,18 +13,7 @@ export function mountTek4010(host: HTMLElement) {
   const svg = host.querySelector<SVGSVGElement>("svg")!;
   const status = host.querySelector<HTMLElement>("[data-tek-status]")!;
   const render = () => {
-    const nodes: SVGElement[] = [];
-    for (const mark of parser.marks) {
-      const node = document.createElementNS("http://www.w3.org/2000/svg", mark.kind === "line" ? "line" : "text");
-      if (mark.kind === "line") {
-        for (const [key, value] of Object.entries({ x1: mark.x1, y1: 780 - mark.y1, x2: mark.x2, y2: 780 - mark.y2 })) node.setAttribute(key, String(value));
-      } else {
-        node.setAttribute("x", String(mark.x)); node.setAttribute("y", String(780 - mark.y));
-        node.textContent = mark.value;
-      }
-      nodes.push(node);
-    }
-    svg.replaceChildren(...nodes);
+    renderTek(svg, parser);
     status.textContent = `${parser.marks.length} stored marks · fixture only · 4,096 mark limit`;
   };
   const draw = (split: boolean) => {

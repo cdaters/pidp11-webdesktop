@@ -50,6 +50,8 @@ const apps = [
   ["panel", "Front panel", "PDP-11/70"],
   ["terminal", "Terminal", "Independent mock session"],
   ["guest", "Guest terminal", "Authenticated real guest line · laboratory"],
+  ["teletype", "Teletype", "ASR-33 paper presentation · approved guest line"],
+  ["companion", "AI Companion", "Optional offline guide fixture · no guest control"],
   ["tek4010", "4010 graphics", "Tektronix byte fixture · no guest"],
   ["disks", "Disk drives", "RK05 / RL02"],
   ["tapes", "Magnetic tape", "TU10 transport"],
@@ -342,7 +344,7 @@ function openTerminal() {
     session = new MockTerminalSession(`DZ${n - 1}`);
   terminals.set(id, session);
   const el = body(
-    `<div class="terminal-toolbar"><span class="source-tag">MOCK · ${session.id}</span><button data-keyboard>Acquire keyboard</button><select aria-label="Terminal profile"><option>VT100 / ANSI · tested subset</option><option disabled>VT52 · use Guest terminal</option><option disabled>VT220 · partial renderer only</option></select></div><div class="terminal-host" aria-label="${session.id} terminal"></div><div class="terminal-foot">Independent session · read-only until keyboard acquired · no shell or guest OS</div>`,
+    `<div class="terminal-toolbar"><span class="source-tag">MOCK · ${session.id}</span><button data-keyboard>Acquire keyboard</button><select aria-label="Terminal profile"><option>VT100 / ANSI · tested subset</option><option disabled>VT52 · use Guest terminal</option><option disabled>VT220 · use Guest terminal</option></select></div><div class="terminal-host" aria-label="${session.id} terminal"></div><div class="terminal-foot">Independent session · read-only until keyboard acquired · no shell or guest OS</div>`,
   );
   el.classList.add("terminal-app");
   let dispose = () => {};
@@ -561,23 +563,34 @@ function renderApp(id: string, el: HTMLElement) {
     (b) => (b.onclick = () => manager.restore(b.dataset.focus!)),
   );
 }
-function openGuestTerminal() {
-  if (manager.store.windows.some(w => w.id === "guest")) { manager.restore("guest"); return; }
+function openGuestTerminal(initialPersonality: "vt100" | "asr33" = "vt100") {
+  const slot = Array.from({length: 4}, (_, i) => i === 0 ? "guest" : `guest-${i + 1}`).find(id => !manager.store.windows.some(w => w.id === id));
+  if (!slot) { notify("Four guest windows are already open."); return; }
   if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
   const el = body("Loading guest terminal…"); el.classList.add("guest-terminal-app");
   let dispose = () => {};
-  manager.open("guest", "Real guest terminal", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
-  void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el)).then(cleanup => {
+  manager.open(slot, initialPersonality === "asr33" ? "Teletype · guest line" : "Real guest terminal", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
+  void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el, initialPersonality)).then(cleanup => {
     if (el.isConnected) dispose = cleanup; else cleanup();
   }).catch(() => { el.textContent = "Guest terminal renderer unavailable"; });
 }
 function openApp(id: string) {
   if (id === "guest") return openGuestTerminal();
+  if (id === "teletype") return openGuestTerminal("asr33");
   if (id === "tek4010") {
     if (manager.store.windows.some(w => w.id === id)) { manager.restore(id); return; }
     const el = body("Loading graphics fixture…");
     manager.open(id, "Tektronix 4010 · fixture", el, { x: 100, y: 50, width: 800, height: 700 });
     void import("./tek4010-app.ts").then(m => { if (el.isConnected) m.mountTek4010(el); }).catch(error => { el.textContent = String(error); });
+    return;
+  }
+  if (id === "companion") {
+    if (manager.store.windows.some(w => w.id === id)) { manager.restore(id); return; }
+    if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
+    const el = body("Loading offline guide…");
+    let dispose = () => {};
+    manager.open(id, "AI Companion · offline prototype", el, { x: 150, y: 60, width: 660, height: 650 }, () => dispose());
+    void import("./companion-app.ts").then(m => { if (el.isConnected) dispose = m.mountCompanion(el); }).catch(() => { el.textContent = "Companion unavailable"; });
     return;
   }
   if (id === "panel") return openPanel();

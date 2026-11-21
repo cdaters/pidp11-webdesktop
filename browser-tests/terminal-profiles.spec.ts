@@ -84,3 +84,48 @@ test('4010 fixture renders whole/split identically and erases without a connecti
   await page.getByRole('button',{name:'Erase display'}).click();
   await expect(page.locator('.tek-display line')).toHaveCount(0);
 });
+
+test('VT220 replies require keyboard ownership; C1 and editing keys are distinct', async ({page}) => {
+  const f=await fixture(page);
+  await page.getByLabel('Guest terminal personality').selectOption('vt220');
+  await page.locator('[data-connect]').click();
+  await expect(page.locator('.guest-heading')).toContainText('READ-ONLY');
+  f.output('\x9b2J\x9bHVT220\x1b[c');
+  await expect(f.rows.nth(0)).toHaveText('VT220');expect(f.inputs).toEqual([]);
+  await page.locator('[data-acquire]').click();await expect(page.locator('[data-release]')).toBeEnabled();
+  f.output('\x1b[c\x1b[>c');
+  await expect.poll(()=>f.inputs.join('')).toBe('\x1b[?62c\x1b[>1;0;0c');
+  await page.locator('.guest-xterm textarea').focus();await page.keyboard.press('Delete');
+  await expect.poll(()=>f.inputs.at(-1)).toBe('\x1b[3~');
+  f.output('\x1b G');await expect(page.locator('.guest-status')).toContainText('8-bit replies');
+  await expect(page.locator('[data-acquire]')).toBeDisabled();
+});
+
+test('Teletype prints uppercase paper, exports it, and multiple windows stay independent', async ({page}) => {
+  const f=await fixture(page);
+  await page.getByLabel('Guest terminal personality').selectOption('asr33');
+  await page.locator('[data-connect]').click();
+  await expect(page.locator('.guest-heading')).toContainText('READ-ONLY');
+  f.output('hello\r\nworld\x07');await expect(f.rows.nth(0)).toHaveText('HELLO');await expect(f.rows.nth(1)).toHaveText('WORLD');
+  await expect(page.locator('[data-paper-status]')).toContainText('1 bells');
+  const download=page.waitForEvent('download');await page.locator('[data-save-output]').click();
+  expect((await download).suggestedFilename()).toBe('teletype-paper.txt');
+  await page.getByRole('button',{name:'Open Guest terminal',exact:true}).click();
+  await expect(page.locator('.guest-terminal-app')).toHaveCount(2);
+  await expect(page.locator('.guest-terminal-app').nth(1).locator('[data-acquire]')).toBeDisabled();
+  await expect(page.locator('.guest-terminal-app').nth(1).locator('.guest-xterm')).not.toContainText('HELLO');
+});
+
+test('4010 guest transport, GIN ownership, hardcopy and reconnect reset', async ({page}) => {
+  const f=await fixture(page);
+  await page.getByLabel('Guest terminal personality').selectOption('tek4010');
+  await page.locator('[data-connect]').click();await expect(page.locator('.guest-heading')).toContainText('READ-ONLY');
+  f.output('\x1b\x0c\x1d'+String.fromCharCode(33,98,34,67,68)+'\x1b\x1a');
+  await expect(page.locator('.guest-tek line')).toHaveCount(1);
+  await page.locator('.guest-tek').click();expect(f.inputs).toEqual([]);
+  await page.locator('[data-acquire]').click();await expect(page.locator('[data-release]')).toBeEnabled();
+  await page.locator('.guest-tek').click();await expect.poll(()=>f.inputs.length).toBe(1);expect(f.inputs[0].length).toBe(5);
+  const download=page.waitForEvent('download');await page.locator('[data-save-output]').click();expect((await download).suggestedFilename()).toBe('tek4010-display.svg');
+  await page.locator('[data-disconnect]').click();await page.locator('[data-connect]').click();
+  await expect(page.locator('.guest-tek line')).toHaveCount(0);await expect(page.locator('.guest-heading')).toContainText('READ-ONLY');
+});

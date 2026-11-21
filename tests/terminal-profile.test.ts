@@ -37,3 +37,33 @@ test("VT52 keys differ from VT100; new profile resets partial sequences and mode
   const raw = bytes("\x1b[2J");
   assert.equal(vt100.feed(raw).display, raw);
 });
+test("VT220 identity, editing keys, C1 input and bounded sequences differ from VT100", () => {
+  const text = "\x1b[0c\x1b[>c\x1b F\x1b[62;1\"p\x9b2J\x1b(0q";
+  for (let split = 0; split <= text.length; split++) {
+    const p = new TerminalProfile("vt220");
+    const a = p.feed(bytes(text.slice(0,split))), b = p.feed(bytes(text.slice(split)));
+    assert.equal(String(a.display) + b.display, "\x1b[!p\x1b[2J\x1b(0q");
+    assert.deepEqual([...a.replies,...b.replies], ["\x1b[?62c","\x1b[>1;0;0c"]);
+  }
+  const p = new TerminalProfile("vt220");
+  assert.equal(p.key("Delete"), "\x1b[3~");
+  assert.equal(p.key("Home"), "\x1b[1~");
+  assert.equal(p.key("F6"), "\x1b[17~");
+  assert.throws(()=>p.feed(bytes("\x1b G")), /8-bit/);
+  assert.throws(()=>new TerminalProfile("vt220").feed(bytes("\x1b["+"1".repeat(128))), /limit/);
+  assert.throws(()=>new TerminalProfile("vt220").feed(bytes("\x1bPsecret")), /strings/);
+  assert.equal(new TerminalProfile("vt220").feed(bytes("\x1b[12\x18OK")).display,"OK");
+});
+test("Teletype paper keeps CR/LF distinct, overprints, bounds history and never executes escapes", () => {
+  const p = new TerminalProfile("asr33");
+  assert.equal(p.feed(bytes("abc\rZ\nq\x07\x1b[2J")).display,"ABC\rZ\nQ[2J");
+  assert.equal(p.paper.text,"ZBC\n Q[2J");
+  assert.equal(p.paper.bells,1);
+  assert.equal(p.key("ArrowUp"), "");
+  p.feed(bytes("\r"+"x".repeat(1000)));
+  assert.equal(p.paper.lines.at(-1)?.length,72);
+  p.feed(bytes("\n".repeat(1000)));
+  assert.equal(p.paper.lines.length,512);
+  assert.ok(p.paper.discardedLines>0);
+  assert.equal(new TerminalProfile("asr33").paper.text,"");
+});

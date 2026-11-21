@@ -1,3 +1,5 @@
+import { Tek4010 } from "./tek4010.ts";
+import { renderTek, saveArtifact } from "./tek-display.ts";
 import { TerminalProfile, type TerminalPersonality } from "./terminal-profile.ts";
 import { terminalDocument } from "./terminal.ts";
 import type { Terminal } from "@xterm/xterm";
@@ -10,23 +12,38 @@ export function safeGuestPaste(text: string): string {
 /** Mount one viewer of a configured guest line, initially without keyboard ownership.
  * The caller owns host and must invoke the returned cleanup when its window closes.
  * This view owns xterm, its socket and renewal timer; it never owns guest lifecycle. */
-export async function mountGuestTerminal(host: HTMLElement) {
+export async function mountGuestTerminal(host: HTMLElement, initialPersonality: TerminalPersonality = "vt100") {
   const [{Terminal}] = await Promise.all([import("@xterm/xterm"),import("@xterm/xterm/css/xterm.css")]);
   if (!host.isConnected) return () => {};
   host.innerHTML = `<div class="guest-heading"><strong>Real guest terminal · dedicated guest line</strong><span class="source-tag">NOT CONNECTED</span></div>
     <form class="guest-login"><label>Terminal access token <input type="password" autocomplete="off" aria-label="Terminal access token"></label><button>Sign in</button></form>
     <div class="terminal-toolbar"><select aria-label="Guest endpoint" disabled></select><button data-refresh disabled>Refresh lines</button><button data-connect disabled>Connect</button><button data-disconnect disabled>Disconnect</button><button data-acquire disabled>Acquire keyboard</button><button data-release disabled>Release keyboard</button><button data-logout disabled>Sign out</button></div>
-    <div class="terminal-toolbar"><label>Personality <select aria-label="Guest terminal personality"><option value="vt100">VT100 · tested subset</option><option value="vt52">VT52 · initial text subset</option></select></label><label>Text size <select aria-label="Guest terminal text size"><option value="11">Small</option><option value="13" selected>Normal</option><option value="16">Large</option></select></label></div>
+    <div class="terminal-toolbar"><label>Personality <select aria-label="Guest terminal personality"><option value="vt100">VT100 · tested subset</option><option value="vt52">VT52 · initial text subset</option><option value="vt220">VT220 · seven-bit subset</option><option value="asr33">ASR-33 · paper presentation</option><option value="tek4010">Tektronix 4010 · experimental</option></select></label><label>Text size <select aria-label="Guest terminal text size"><option value="11">Small</option><option value="13" selected>Normal</option><option value="16">Large</option></select></label></div>
     <div class="guest-status" role="status">Sign in to list configured guest lines. No automatic keyboard takeover.</div>
+    <div class="terminal-toolbar"><button data-save-output>Save display</button><label><input type="checkbox" data-uppercase> Uppercase keyboard (teletype)</label><span data-paper-status></span></div>
+    <svg class="tek-display guest-tek" viewBox="0 0 1024 781" tabindex="0" role="img" aria-label="Guest Tektronix display" hidden></svg>
     <div class="guest-screen"><div class="guest-xterm" aria-label="Real guest terminal"></div></div>
     <details class="guest-paste"><summary>Review paste</summary><label>One line, without Return <input type="text" maxlength="256" aria-label="Reviewed guest paste" autocomplete="off"></label><button data-paste disabled>Send reviewed paste</button></details>
     <label class="guest-erase">Backspace <select aria-label="Backspace encoding"><option value="127">DEL · DEC</option><option value="8">BS</option><option value="35"># · UNIX V7 erase</option></select></label>
-    <div class="terminal-foot">Selected personality · ASCII7 · fixed 80 × 24; resize scrolls, text size changes readability · Backspace encoding is explicit · shared guest line may already be logged in. Panel and mock peripherals remain separate.</div>`;
+    <div class="terminal-foot">ASCII7 input · 80 × 24 text / 72-column paper / 1024 × 781 graphics · paper timing is not simulated · Backspace encoding is explicit · shared guest line may already be logged in. Panel and mock peripherals remain separate.</div>`;
   const $=<T extends HTMLElement>(selector:string)=>host.querySelector<T>(selector)!;
   const status=$(".guest-status"),badge=$(".source-tag"),selector=$<HTMLSelectElement>("select");
   const makeTerminal=()=>new Terminal({documentOverride:terminalDocument(),cols:80,rows:24,scrollback:300,fontFamily:'Menlo, Consolas, monospace',fontSize:13,lineHeight:1.15,cursorBlink:false,screenReaderMode:true,convertEol:false,allowProposedApi:false,theme:{background:'#101d1b',foreground:'#c4d8bc',cursor:'#e1ddb3'}});
   const personality = $<HTMLSelectElement>('[aria-label="Guest terminal personality"]');
-  let profile = new TerminalProfile("vt100");
+  personality.value = initialPersonality;
+  let profile = new TerminalProfile(initialPersonality);
+  let tek = new Tek4010();
+  const graphic = $<SVGSVGElement & HTMLElement>(".guest-tek");
+  const focus = () => personality.value === "tek4010" ? graphic.focus() : term.focus();
+  const displayMode = () => {
+    const kind = personality.value;
+    host.classList.toggle("teletype-mode", kind === "asr33");
+    graphic.toggleAttribute("hidden", kind !== "tek4010");
+    $(".guest-screen").hidden = kind === "tek4010";
+    $<HTMLInputElement>("[data-uppercase]").disabled = kind !== "asr33";
+  };
+  personality.onchange = displayMode;
+  displayMode();
   let term:Terminal=makeTerminal();
   term.open($(".guest-xterm"));
   let socket:WebSocket|undefined, owner=false,connected=false,epoch=0,seq=0,canInput=false,csrf="",disposed=false,queued=0;
@@ -63,6 +80,7 @@ export async function mountGuestTerminal(host: HTMLElement) {
   const input=(data:string)=>{
     if(!owner || !connected)return;
     if(!data.length || data.length>256 || /[^\x00-\x7f]/.test(data)){status.textContent='Input rejected: ASCII7, at most 256 bytes per event';return;}
+    if (profile.personality === "asr33" && $<HTMLInputElement>("[data-uppercase]").checked) data = data.toUpperCase();
     if(send({type:'input',epoch,seq:seq+1,data:btoa(data)}))seq++;
   };
   const configureKeys=()=>term.attachCustomKeyEventHandler(e=>{
@@ -78,7 +96,7 @@ export async function mountGuestTerminal(host: HTMLElement) {
   // Stop native clipboard paste before xterm; nothing is sent until explicit review.
   const paste=(e:ClipboardEvent)=>{e.preventDefault();e.stopImmediatePropagation();const value=e.clipboardData?.getData('text/plain')??'';const box=$<HTMLInputElement>('.guest-paste input');try { box.value=safeGuestPaste(value); status.textContent='Paste captured for review; nothing sent'; } catch (error) { box.value=''; status.textContent=(error as Error).message; } $<HTMLDetailsElement>('.guest-paste').open=true;box.focus();};
   $(".guest-screen").addEventListener('paste',paste,true);
-  $<HTMLButtonElement>('[data-paste]').onclick=()=>{try{input(safeGuestPaste($<HTMLInputElement>('.guest-paste input').value));$<HTMLInputElement>('.guest-paste input').value='';term.focus();}catch(e){status.textContent=String((e as Error).message);}};
+  $<HTMLButtonElement>('[data-paste]').onclick=()=>{try{input(safeGuestPaste($<HTMLInputElement>('.guest-paste input').value));$<HTMLInputElement>('.guest-paste input').value='';focus();}catch(e){status.textContent=String((e as Error).message);}};
   const list = async () => {
     const [session, endpoints] = await Promise.all([fetch('/api/v1/session'), fetch('/api/v1/terminals')]);
     if (!session.ok || !endpoints.ok) throw Error('Guest terminal service unavailable or sign-in required');
@@ -128,7 +146,15 @@ export async function mountGuestTerminal(host: HTMLElement) {
     handler.dispose();
     term.dispose();
     profile = new TerminalProfile(personality.value as TerminalPersonality);
+    tek = new Tek4010(); renderTek(graphic, tek);
+    $("[data-paper-status]").textContent = "";
+    displayMode();
     term = makeTerminal();
+    if (profile.personality === "asr33") {
+      term.resize(72, 24);
+      term.options.scrollback = 512;
+      term.options.theme = { background: "#f5f0df", foreground: "#29271e", cursor: "#493a29" };
+    }
     term.options.fontSize = Number($<HTMLSelectElement>('[aria-label="Guest terminal text size"]').value);
     term.open($(".guest-xterm"));
     term.write(profile.initial);
@@ -145,7 +171,13 @@ export async function mountGuestTerminal(host: HTMLElement) {
           const bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
           // Preserve parser state across chunks on this connection. Return server
           // credit only after xterm consumes the bytes, and never to a newer socket.
+          if (profile.personality === "tek4010") {
+            tek.feed(bytes); renderTek(graphic, tek);
+            queued -= bytes.length; send({ type: 'ack', bytes: bytes.length });
+            return;
+          }
           const translated = profile.feed(bytes);
+          if (profile.personality === "asr33") $("[data-paper-status]").textContent = `${profile.paper.lines.length} retained lines · ${profile.paper.discardedLines} older lines discarded · ${profile.paper.bells} bells`;
           for (const reply of translated.replies) input(reply);
           term.write(translated.display, () => {
             if (socket === ws) {
@@ -154,15 +186,42 @@ export async function mountGuestTerminal(host: HTMLElement) {
             }
           });
         }else throw Error('Invalid terminal frame');
-      }catch{disconnect('Terminal protocol or output limit error; no replay');}
+      }catch(error){disconnect(`${(error as Error).message || 'Terminal protocol error'}; disconnected without replay`);}
     };
     ws.onclose=()=>{if(socket===ws)disconnect('Disconnected · reconnect explicitly; guest state is not inferred');};
     ws.onerror=()=>{if(socket===ws)disconnect('Connection unavailable · guest may still be running');};
   };
-  $<HTMLButtonElement>('[data-acquire]').onclick=()=>{send({type:'acquire'});term.focus();};
+  $<HTMLButtonElement>('[data-acquire]').onclick=()=>{send({type:'acquire'});focus();};
   $<HTMLButtonElement>('[data-release]').onclick=()=>{send({type:'release'});owner=false;controls();};
   $<HTMLButtonElement>('[data-disconnect]').onclick=()=>disconnect();
   $<HTMLButtonElement>('[data-logout]').onclick=async()=>{disconnect('Signed out locally');selector.replaceChildren();$<HTMLButtonElement>("[data-refresh]").disabled=true;canInput=false;controls();const r=await fetch('/api/v1/logout',{method:'POST',headers:{'X-CSRF-Token':csrf}});csrf='';$<HTMLButtonElement>('[data-logout]').disabled=true;if(!r.ok)status.textContent='Local disconnect; server logout unconfirmed, session expiry still applies';};
+  graphic.onkeydown = event => {
+    if (event.metaKey || event.altKey) return;
+    let data = event.key.length === 1 ? event.key : ({ Enter: "\r", Backspace: "\x7f", Tab: "\t", Escape: "\x1b" } as Record<string,string>)[event.key];
+    if (event.ctrlKey && /^[a-z]$/i.test(event.key)) data = String.fromCharCode(event.key.toUpperCase().charCodeAt(0) - 64);
+    if (data) { event.preventDefault(); input(data); }
+  };
+  graphic.onclick = event => {
+    if (!owner || !connected || !tek.gin) return;
+    // SVG's inverse transform accounts for its letterboxed responsive viewport.
+    const matrix = graphic.getScreenCTM(); if (!matrix) return;
+    const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+    if (point.x < 0 || point.x > 1023 || point.y < 0 || point.y > 780) return;
+    input(tek.ginReply(point.x, 780 - point.y)); renderTek(graphic, tek);
+  };
+  $<HTMLButtonElement>("[data-save-output]").onclick = () => {
+    if (profile.personality === "tek4010") {
+      const copy = graphic.cloneNode(true) as SVGSVGElement;
+      copy.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      copy.setAttribute("style", "background:#101d1b;stroke:#b3dcad;fill:#b3dcad;font:18px monospace");
+      saveArtifact("tek4010-display.svg", new XMLSerializer().serializeToString(copy), "image/svg+xml");
+    } else if (profile.personality === "asr33") saveArtifact("teletype-paper.txt", profile.paper.text);
+    else {
+      const buffer = term.buffer.active;
+      const lines = Array.from({ length: buffer.length }, (_, n) => buffer.getLine(n)?.translateToString(true) ?? "");
+      saveArtifact("terminal-display.txt", lines.join("\n"));
+    }
+  };
   const heartbeat=setInterval(()=>{if(owner)send({type:'renew',epoch});},2000);
   const hide=()=>disconnect('Page closed · guest connection remains independent');window.addEventListener('pagehide',hide);
   // Session inspection is read-only. It never connects to a line or grants input.
