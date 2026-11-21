@@ -17,43 +17,7 @@ assert set(os.listdir('/sys/class/net')) == {'lo'}
 root = pathlib.Path('/work')
 assert not (root / 'lp11.out').exists()
 
-class Program:
-    """Tiny label-resolving word builder; retain the emitted octal listing."""
-    def __init__(self):
-        self.words = []
-        self.labels = {}
-        self.fixups = []
-
-    def emit(self, *words):
-        self.words.extend(words)
-
-    def label(self, name):
-        self.labels[name] = len(self.words)
-
-    def branch(self, opcode, target):
-        self.fixups.append((len(self.words), opcode, target))
-        self.emit(0)
-
-    def finish(self):
-        for index, opcode, target in self.fixups:
-            delta = self.labels[target] - index - 1
-            assert -128 <= delta <= 127
-            self.words[index] = opcode | (delta & 255)
-        return self.words
-
-def execute(sim, program, name):
-    listing = []
-    for index, word in enumerate(program.finish()):
-        address = 0o1000 + 2 * index
-        listing.append(f'{address:06o}: {word:06o}')
-        sim.command(f'deposit {address:o} {word:o}')
-    (root / (name + '.words.txt')).write_text('\n'.join(listing) + '\n')
-    output = sim.command('go 1000')
-    deadline = time.monotonic() + 8
-    while 'HALT instruction' not in output and time.monotonic() < deadline:
-        output += sim.read(.1)
-    assert 'HALT instruction' in output, output
-    return output
+from pdp11_program import Program, execute
 
 sim = Simh()
 results = {}
@@ -77,7 +41,7 @@ try:
     payload = text + b'\0'
     payload += b'\0' * (len(payload) % 2)
     printer.emit(*[payload[i] | payload[i+1] << 8 for i in range(0, len(payload), 2)])
-    output = execute(sim, printer, 'lp11')
+    output = execute(sim, printer, 'lp11', root)
     output += sim.command('examine lpt pos,csr') + sim.command('detach lpt')
     (root / 'lp11-console.txt').write_text(output)
     actual = (root / 'lp11.out').read_bytes()
@@ -111,7 +75,7 @@ try:
     punch.emit(0o105737, 0o177554)
     punch.branch(0o100000, 'drain')
     punch.emit(0)
-    output = execute(sim, punch, 'pc11')
+    output = execute(sim, punch, 'pc11', root)
     for command in ['examine ptr pos,csr', 'examine ptp pos,csr', 'detach ptp', 'detach ptr']:
         output += sim.command(command)
     (root / 'pc11-console.txt').write_text(output)

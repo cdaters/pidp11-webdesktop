@@ -1176,3 +1176,7 @@ table button {
 .companion-app { padding:16px; box-sizing:border-box; }
 .companion-chat { min-height:120px; max-height:280px; overflow:auto; border:1px solid #a4aaa0; padding:12px; white-space:pre-wrap; }
 .companion-chat + form textarea { display:block; width:100%; box-sizing:border-box; }
+
+/* Runtime state is separate from the saved title/geometry and remains textual. */
+.window-status { font: 11px ui-monospace, monospace; max-width: 42%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-inline: 10px; }
+@media (max-width: 700px) { .window-status { max-width: 35%; font-size: 10px; } }

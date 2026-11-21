@@ -25,17 +25,18 @@ import (
 // Config contains only operator-provisioned addresses and private file paths.
 // No attachment approvals or sessions are serialized here.
 type Config struct {
-	AllowProposals bool                    `json:"allow_readonly_command_proposals,omitempty"`
-	Listen         string                  `json:"listen"`
-	Origin         string                  `json:"origin"`
-	Control        string                  `json:"control"`
-	Certificate    string                  `json:"certificate"`
-	Key            string                  `json:"key"`
-	Writer         string                  `json:"writer_token"`
-	Observer       string                  `json:"observer_token"`
-	Endpoints      []terminalbridge.Config `json:"endpoints"`
-	Devices        []peripheral.Config     `json:"device_exports,omitempty"`
-	Companion      *companion.Config       `json:"companion,omitempty"`
+	Followers      []peripheral.FollowConfig `json:"device_followers,omitempty"`
+	AllowProposals bool                      `json:"allow_readonly_command_proposals,omitempty"`
+	Listen         string                    `json:"listen"`
+	Origin         string                    `json:"origin"`
+	Control        string                    `json:"control"`
+	Certificate    string                    `json:"certificate"`
+	Key            string                    `json:"key"`
+	Writer         string                    `json:"writer_token"`
+	Observer       string                    `json:"observer_token"`
+	Endpoints      []terminalbridge.Config   `json:"endpoints"`
+	Devices        []peripheral.Config       `json:"device_exports,omitempty"`
+	Companion      *companion.Config         `json:"companion,omitempty"`
 }
 
 // ReadPrivate opens once, refuses links/special files and bounds private inputs.
@@ -84,6 +85,9 @@ func Load(path string) (Config, *access.Gate, tls.Certificate, error) {
 		return c, nil, cert, errors.New("trailing configuration data")
 	}
 	if _, err = peripheral.New(c.Devices); err != nil {
+		return c, nil, cert, err
+	}
+	if _, err = peripheral.NewFollowers(c.Followers); err != nil {
 		return c, nil, cert, err
 	}
 	if c.Companion != nil {

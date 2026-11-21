@@ -16,7 +16,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
           headers: { Origin: base },
           data: {
             token: readFileSync(
-              ".research/m591/arm64-writer.token",
+              `${process.env.PIDP_ARM_RESULTS ?? ".research/m591"}/arm64-writer.token`,
               "utf8",
             ).trim(),
           },
@@ -86,7 +86,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
   } finally {
     await browser.close();
     writeFileSync(
-      ".research/m591/approval-browser.json",
+      `${process.env.PIDP_ARM_RESULTS ?? ".research/m591"}/approval-browser.json`,
       JSON.stringify(results, null, 2),
     );
   }

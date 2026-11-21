@@ -1,13 +1,19 @@
 // Genuine historical 2.11BSD vi over its DZ11 guest line; no intercepted routes.
 import { chromium, firefox, webkit, expect } from "@playwright/test";
 import { readFileSync, writeFileSync } from "node:fs";
-const root = ".research/m591/bsd",
+const root = process.env.PIDP_BSD_WORK ?? ".research/m591/bsd",
   base = "https://127.0.0.1:8446";
 const results = [];
 for (const personality of (
   process.env.M591_PERSONALITIES ?? "vt100,vt52,vt220"
 ).split(","))
-  for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
+  for (const [name, engine] of Object.entries({
+    chromium,
+    firefox,
+    webkit,
+  }).filter(
+    ([name]) => !process.env.BSD_ENGINE || name === process.env.BSD_ENGINE,
+  )) {
     const browser = await engine.launch();
     const frames = [];
     try {
@@ -55,7 +61,7 @@ for (const personality of (
         await type("root");
         await expect.poll(() => screen.innerText()).toMatch(/#\s*$/);
       }
-      const file = `/tmp/m591-${personality}-${name}`;
+      const file = `/tmp/${process.env.BSD_RUN ?? "m591"}-${personality}-${name}`;
       await type(`TERM=${personality}; export TERM; /usr/ucb/vi ${file}`);
       await expect
         .poll(() => screen.innerText(), { timeout: 15000 })
@@ -68,18 +74,36 @@ for (const personality of (
       await expect(screen).toContainText("SECOND LINE");
       await page.keyboard.press("Control+l");
       await expect(screen).toContainText("M591");
-      if (personality === "vt100" && name === "chromium") {
+      if (
+        name === "chromium" &&
+        (personality === "vt100" || process.env.BSD_SCREENSHOT)
+      ) {
         await page
           .locator('[data-window="guest"]')
           .getByRole("button", { name: /Maximize \/ restore/ })
           .click();
-        await page.screenshot({ path: "docs/screenshots/m591-bsd-vi.png" });
+        await page.screenshot({
+          path:
+            process.env.BSD_SCREENSHOT ?? "docs/screenshots/m591-bsd-vi.png",
+        });
       }
       await type("1Gx", false);
       await type(":wq");
       await expect.poll(() => screen.innerText()).toMatch(/#\s*$/);
       await type(`cat ${file}`);
       await expect(screen).toContainText(`591 ${personality} ${name}`);
+      if (process.env.M592_EXPANDED === "1") {
+        const { expandBSD } = await import("../m592/bsd-expanded.mjs");
+        await expandBSD({
+          context,
+          page,
+          base,
+          personality,
+          file,
+          type,
+          screen,
+        });
+      }
       await page.locator("[data-release]").click();
       await expect(page.locator("[data-acquire]")).toBeEnabled();
       await page.locator("[data-disconnect]").click();
@@ -94,6 +118,7 @@ for (const personality of (
         insertWriteRedrawDeleteQuit: true,
         reconnectReadOnly: true,
         passed: true,
+        expandedObserverPager: process.env.M592_EXPANDED === "1",
       });
       writeFileSync(
         root +

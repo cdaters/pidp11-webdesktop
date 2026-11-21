@@ -13,7 +13,7 @@ export function safeGuestPaste(text: string): string {
 /** Mount one viewer of a configured guest line, initially without keyboard ownership.
  * The caller owns host and must invoke the returned cleanup when its window closes.
  * This view owns xterm, its socket and renewal timer; it never owns guest lifecycle. */
-export async function mountGuestTerminal(host: HTMLElement, initialPersonality: TerminalPersonality = "vt100") {
+export async function mountGuestTerminal(host: HTMLElement, initialPersonality: TerminalPersonality = "vt100", onStatus: (status: string) => void = () => {}) {
   const [{Terminal}] = await Promise.all([import("@xterm/xterm"),import("@xterm/xterm/css/xterm.css")]);
   if (!host.isConnected) return () => {};
   host.innerHTML = `<div class="guest-heading"><strong>Real guest terminal · dedicated guest line</strong><span class="source-tag">NOT CONNECTED</span></div>
@@ -47,8 +47,9 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
   displayMode();
   let term:Terminal=makeTerminal();
   term.open($(".guest-xterm"));
-  let proposalID = "", proposalEpoch = 0, proposalRequested = false;
+  let proposalID = "", proposalEpoch = 0, proposalRequested = false, proposalTimer = 0;
   const clearProposal = () => {
+    clearTimeout(proposalTimer);
     proposalRequested = false;
     proposalID = "";
     $("[data-proposal-preview]").textContent = "";
@@ -65,6 +66,7 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     selector.disabled=!!socket || !selector.options.length;
     personality.disabled = !!socket;
     badge.textContent=connected ? owner ? "KEYBOARD OWNER" : "REAL GUEST · READ-ONLY" : (selector.selectedOptions[0]?.dataset.state === "attached" ? "DISCONNECTED" : (selector.selectedOptions[0]?.dataset.state ?? "detached").toUpperCase());
+    onStatus(`${selector.value || "No line"} · ${personality.value.toUpperCase()} · ${badge.textContent}`);
   };
   const send = (message: object) => {
     if (socket?.readyState !== WebSocket.OPEN) return false;
@@ -207,8 +209,13 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
           if (!['pwd\r', 'ls\r', 'ls /\r'].includes(exact)) throw Error('Unsupported proposal');
           proposalID = f.proposal_id;
           proposalEpoch = f.epoch;
-          $("[data-proposal-preview]").textContent = `Exact input: ${JSON.stringify(exact)} (\\r = Return) · expires ${new Date(f.expires).toLocaleTimeString()}`;
+          $("[data-proposal-preview]").textContent = `Target: ${selector.value} · attachment ${selector.selectedOptions[0]?.dataset.generation ?? "unknown"}\nExact input: ${JSON.stringify(exact)} (\\r = Return) · expires ${new Date(f.expires).toLocaleTimeString()}`;
           $<HTMLButtonElement>("[data-approve]").disabled = false;
+          proposalTimer = window.setTimeout(() => {
+            clearProposal();
+            if (owner) send({type: 'cancel-proposal', epoch});
+            status.textContent = "Proposal expired; request a new review. Nothing sent to the guest.";
+          }, Math.max(0, Math.min(30000, f.expires - Date.now())));
         } else if (f.type === 'proposal-result') {
           clearProposal();
           status.textContent = f.message;

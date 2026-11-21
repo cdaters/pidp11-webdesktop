@@ -19,7 +19,7 @@ if len(sys.argv) == 3:
     options_path=pathlib.Path(sys.argv[2]).resolve()
     assert root in options_path.parents
     options=json.loads(options_path.read_text())
-    assert set(options) <= {'device_exports','companion','allow_readonly_command_proposals'}
+    assert set(options) <= {'device_exports','device_followers','companion','allow_readonly_command_proposals'}
     config.update(options)
 config_path.write_text(json.dumps(config));pathlib.Path('/tmp/m551-control').mkdir(mode=0o700)
 for name in ['writer.token','observer.token']:(root/name).write_bytes((config_path.parent/name).read_bytes())
@@ -40,6 +40,11 @@ def control(op='status',identifier=None):
 def stop_bridge():
     global bridge
     if bridge:bridge.terminate();bridge.wait(timeout=4);bridge=None
+
+def respond(message):
+    temporary=root/'response.tmp'
+    temporary.write_text(json.dumps(message))
+    temporary.replace(root/'response.json')
 
 def console(data,wait=.7):os.write(sim.master,data.encode('ascii'));return sim.read(wait)
 def receive(sock,wait=.7):
@@ -78,9 +83,9 @@ try:
             stop_bridge();traditional.close();traditional=None
             out=console('sync\r',.5)+console('sync\r',.5)+console('sync\r',1)
             sim.p.send_signal(signal.SIGINT);out+=sim.read(.7);assert 'sim> ' in out
-            out+=sim.command('quit');(root/'response.json').write_text(json.dumps({'id':message['id'],'output':out}));break
+            out+=sim.command('quit');respond({'id':message['id'],'output':out});break
         else:raise ValueError('unknown harness action')
-        (root/'response.json').write_text(json.dumps({'id':message['id'],'output':out}))
+        respond({'id':message['id'],'output':out})
 finally:
     stop_bridge()
     if traditional:traditional.close()

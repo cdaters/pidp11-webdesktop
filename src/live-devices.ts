@@ -1,0 +1,309 @@
+import { PaperViewer } from "./printer.ts";
+
+interface Activity {
+  id: string;
+  kind: "lp11" | "pc11-punch";
+  generation: string;
+  simulator_generation: string;
+  guest_generation: string;
+  state: "detached" | "observing" | "completed" | "disconnected" | "faulted";
+  message: string;
+  sequence: number;
+  start_offset: number;
+  next_offset: number;
+  total_bytes: number;
+  lost: boolean;
+  data: string | null;
+  sha256: string;
+  reader_length: number;
+  reader_bytes: number;
+  reader_eof: boolean;
+  reader_sha256: string;
+}
+function activity(value: unknown): Activity {
+  if (!value || typeof value !== "object")
+    throw Error("Invalid peripheral observation");
+  const v = value as Record<string, unknown>;
+  for (const key of [
+    "id",
+    "generation",
+    "simulator_generation",
+    "guest_generation",
+    "message",
+    "sha256",
+    "reader_sha256",
+  ])
+    if (typeof v[key] !== "string" || v[key].length > 240)
+      throw Error("Invalid peripheral identity");
+  if (
+    !["lp11", "pc11-punch"].includes(String(v.kind)) ||
+    !["detached", "observing", "completed", "disconnected", "faulted"].includes(
+      String(v.state),
+    )
+  )
+    throw Error("Unsupported peripheral state");
+  for (const key of [
+    "sequence",
+    "start_offset",
+    "next_offset",
+    "total_bytes",
+    "reader_length",
+    "reader_bytes",
+  ])
+    if (!Number.isSafeInteger(v[key]) || Number(v[key]) < 0)
+      throw Error("Invalid peripheral counter");
+  if (
+    Number(v.total_bytes) > 1048576 ||
+    Number(v.reader_length) > 65536 ||
+    Number(v.reader_bytes) > Number(v.reader_length) ||
+    typeof v.lost !== "boolean" ||
+    typeof v.reader_eof !== "boolean"
+  )
+    throw Error("Peripheral bounds exceeded");
+  if (v.data !== null && (typeof v.data !== "string" || v.data.length > 10924))
+    throw Error("Invalid peripheral chunk");
+  return v as unknown as Activity;
+}
+async function digest(bytes: Uint8Array<ArrayBuffer>): Promise<string> {
+  return Array.from(
+    new Uint8Array(await crypto.subtle.digest("SHA-256", bytes)),
+    (b) => b.toString(16).padStart(2, "0"),
+  ).join("");
+}
+function save(bytes: Uint8Array<ArrayBuffer>, name: string) {
+  const url = URL.createObjectURL(new Blob([bytes]));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = name;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/** One explicitly selected generation, one outstanding poll and a 64-KiB tail.
+ * Network failure stops observation; reconnect is a deliberate new selection.
+ * No browser request renews producer authority or modifies a device/file. */
+export function mountLiveDevices(host: HTMLElement): () => void {
+  host.classList.add("printer-app");
+  host.innerHTML = `<div class="app-heading"><h2>Peripheral activity</h2><span class="source-tag">READ-ONLY · EXPERIMENTAL</span></div><p>Approved simulator output, as bytes become visible in its local spool. Buffered device output may arrive in bursts. This observer does not operate the simulator.</p><div class="terminal-toolbar"><button data-another-observer>Open another observer</button><button data-inventory>Refresh devices</button><select aria-label="Live peripheral"></select><button data-follow disabled>Observe selected generation</button><button data-stop>Stop observing</button><button data-save disabled>Save completed output</button><button data-reader disabled>Save read-only reader image</button><label>Paper <select aria-label="Live printer columns"><option>80</option><option>132</option></select></label></div><p data-activity-status role="status">Detached · sign in through Guest terminal, then refresh.</p><p data-activity-identity></p><p data-activity-count></p><div class="paper-position"></div><div class="paper-viewport" tabindex="0" role="region" aria-label="Live printer paper"></div><pre data-punch-bytes hidden></pre>`;
+  const $ = <T extends Element>(query: string) => host.querySelector<T>(query)!;
+  const select = $<HTMLSelectElement>('[aria-label="Live peripheral"]');
+  const follow = $<HTMLButtonElement>("[data-follow]");
+  const download = $<HTMLButtonElement>("[data-save]");
+  const reader = $<HTMLButtonElement>("[data-reader]");
+  const status = $<HTMLElement>("[data-activity-status]");
+  const viewport = $<HTMLElement>(".paper-viewport");
+  const punch = $<HTMLElement>("[data-punch-bytes]");
+  const paper = new PaperViewer(
+    viewport,
+    $<HTMLElement>(".paper-position"),
+    true,
+  );
+  let inventory: Activity[] = [],
+    selected: Activity | undefined;
+  let retained = new Uint8Array(0),
+    cursor = 0,
+    sequence = 0,
+    first = 0;
+  let pending: AbortController | undefined,
+    timer = 0,
+    disposed = false;
+  $<HTMLButtonElement>("[data-another-observer]").onclick = () =>
+    window.dispatchEvent(new Event("pidp11-new-device-observer"));
+  const stop = () => {
+    clearTimeout(timer);
+    pending?.abort();
+    pending = undefined;
+  };
+  const reset = () => {
+    stop();
+    selected = undefined;
+    retained = new Uint8Array(0);
+    cursor = sequence = first = 0;
+    download.disabled = reader.disabled = true;
+    paper.update("");
+    punch.textContent = "";
+    $("[data-activity-identity]").textContent = "";
+    $("[data-activity-count]").textContent = "";
+  };
+  select.onchange = () => {
+    reset();
+    follow.disabled = !select.value;
+  };
+  $<HTMLButtonElement>("[data-stop]").onclick = () => {
+    stop();
+    status.textContent =
+      "Observation stopped · displayed bytes are cached; producer may continue independently.";
+  };
+  $<HTMLSelectElement>('[aria-label="Live printer columns"]').onchange = (
+    event,
+  ) => paper.setColumns(Number((event.target as HTMLSelectElement).value));
+  $<HTMLButtonElement>("[data-inventory]").onclick = async () => {
+    reset();
+    select.replaceChildren();
+    follow.disabled = true;
+    const request = new AbortController();
+    pending = request;
+    try {
+      const response = await fetch("/api/v1/device-streams", {
+        signal: request.signal,
+      });
+      if (!response.ok)
+        throw Error("Peripheral service unavailable or sign-in required");
+      const rows: unknown = await response.json();
+      if (!Array.isArray(rows) || rows.length > 4)
+        throw Error("Invalid device inventory");
+      if (disposed || pending !== request) return;
+      inventory = rows.map(activity).filter((row) => row.generation);
+      select.replaceChildren(
+        new Option("Select an approved observation", ""),
+        ...inventory.map(
+          (row) => new Option(`${row.id} · ${row.kind} · ${row.state}`, row.id),
+        ),
+      );
+      status.textContent = inventory.length
+        ? "Choose a generation explicitly. Refresh does not follow a new producer."
+        : "Detached · no producer observation approved.";
+    } catch (error) {
+      if (!disposed && pending === request)
+        status.textContent = (error as Error).message;
+    }
+  };
+  const poll = async () => {
+    if (!selected || disposed) return;
+    const target = selected,
+      request = new AbortController();
+    pending = request;
+    try {
+      const response = await fetch(
+        `/api/v1/device-streams/${encodeURIComponent(target.id)}/${encodeURIComponent(target.generation)}?after=${cursor}`,
+        { signal: request.signal },
+      );
+      if (!response.ok)
+        throw Error(
+          "Observation retired or unavailable; refresh and review explicitly.",
+        );
+      const next = activity(await response.json());
+      if (disposed || pending !== request) return;
+      if (
+        next.generation !== target.generation ||
+        next.simulator_generation !== target.simulator_generation ||
+        next.guest_generation !== target.guest_generation ||
+        next.sequence < sequence
+      )
+        throw Error("Peripheral identity or order changed");
+      if (next.lost || next.start_offset !== cursor)
+        throw Error(
+          "Output loss detected: this observer fell behind. Refresh to review the retained tail explicitly.",
+        );
+      const chunk = Uint8Array.from(atob(next.data ?? ""), (c) =>
+        c.charCodeAt(0),
+      );
+      if (
+        chunk.length > 8192 ||
+        next.next_offset !== cursor + chunk.length ||
+        next.next_offset > next.total_bytes
+      )
+        throw Error("Invalid peripheral byte ordering");
+      sequence = next.sequence;
+      cursor = next.next_offset;
+      selected = next;
+      if (chunk.length) {
+        const combined = new Uint8Array(retained.length + chunk.length);
+        combined.set(retained);
+        combined.set(chunk, retained.length);
+        retained = combined.slice(-65536);
+        first = cursor - retained.length;
+        if (next.kind === "lp11")
+          paper.update(new TextDecoder().decode(retained));
+        else
+          punch.textContent = Array.from(retained.slice(-512), (b) =>
+            b.toString(16).padStart(2, "0"),
+          ).join(" ");
+      }
+      $("[data-activity-count]").textContent =
+        `${cursor} / ${next.total_bytes} host-visible bytes · retained from ${first}${first ? " · earlier bytes omitted; paper origin is approximate" : ""}${next.reader_sha256 ? ` · reported reader ${next.reader_bytes}/${next.reader_length}${next.reader_eof ? " · end-of-tape reported" : ""}` : ""}`;
+      status.textContent = `${next.state.toUpperCase()} · ${next.message}`;
+      reader.disabled = !next.reader_sha256;
+      if (next.state === "completed" && cursor === next.total_bytes) {
+        if (!first && (await digest(retained)) !== next.sha256)
+          throw Error("Completed output checksum mismatch");
+        if (disposed || pending !== request) return;
+        download.disabled = false;
+        download.textContent = first
+          ? "Save retained tail (partial)"
+          : "Save completed output";
+      }
+      if (
+        next.state === "observing" ||
+        (cursor < next.total_bytes && next.state === "completed")
+      )
+        timer = window.setTimeout(() => void poll(), 200);
+    } catch (error) {
+      if (!disposed && pending === request) {
+        stop();
+        download.disabled = true;
+        status.textContent =
+          (error as Error).message +
+          " · cached bytes are not current device state.";
+      }
+    }
+  };
+  follow.onclick = () => {
+    const target = inventory.find((row) => row.id === select.value);
+    if (!target) return;
+    reset();
+    selected = target;
+    cursor = first = target.start_offset;
+    viewport.hidden = target.kind !== "lp11";
+    punch.hidden = target.kind !== "pc11-punch";
+    $("[data-activity-identity]").textContent =
+      `${target.id} · simulator ${target.simulator_generation} · guest ${target.guest_generation} · observation ${target.generation}`;
+    void poll();
+  };
+  download.onclick = () => {
+    if (selected && !download.disabled)
+      save(retained, `${selected.id}${first ? "-partial" : "-completed"}.bin`);
+  };
+  reader.onclick = async () => {
+    if (!selected || reader.disabled) return;
+    const target = selected;
+    // Stop the polling request before the optional reader download. It never
+    // resumes automatically; this avoids multiple unbounded requests per window.
+    stop();
+    const request = new AbortController();
+    pending = request;
+    try {
+      const response = await fetch(
+        `/api/v1/device-streams/${encodeURIComponent(target.id)}/${encodeURIComponent(target.generation)}/reader`,
+        { signal: request.signal },
+      );
+      if (!response.ok) throw Error("Reader image retired");
+      const wire = await response.json();
+      if (
+        typeof wire.data !== "string" ||
+        wire.data.length > 87384 ||
+        wire.generation !== target.generation
+      )
+        throw Error("Invalid reader snapshot");
+      const bytes = Uint8Array.from(atob(wire.data), (c) => c.charCodeAt(0));
+      if (
+        bytes.length !== target.reader_length ||
+        (await digest(bytes)) !== target.reader_sha256
+      )
+        throw Error("Reader checksum mismatch");
+      if (disposed || pending !== request) return;
+      save(bytes, `${target.id}-readonly-reader.bin`);
+      status.textContent =
+        "Verified reader snapshot saved. Observation paused; resume explicitly.";
+    } catch (error) {
+      if (!disposed && pending === request)
+        status.textContent = (error as Error).message;
+    }
+  };
+  return () => {
+    disposed = true;
+    stop();
+    paper.dispose();
+    retained = new Uint8Array(0);
+  };
+}

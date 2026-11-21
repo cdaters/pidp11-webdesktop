@@ -5,6 +5,7 @@ import type { CompanionProvider, CompanionRequest } from "./companion.ts";
 export class ConfiguredCompanion implements CompanionProvider {
   readonly name: string;
   source = "Manually pasted excerpt";
+  reference = "";
   readonly destination: string;
   model: string;
   readonly fixture: boolean;
@@ -34,6 +35,7 @@ export class ConfiguredCompanion implements CompanionProvider {
       },
       body: JSON.stringify({
         model: this.model,
+        reference: this.reference,
         messages: request.messages,
         shared_text: request.sharedText,
         source: this.source,

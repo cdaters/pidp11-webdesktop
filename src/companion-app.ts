@@ -1,3 +1,4 @@
+import references from "../internal/companion/references.json" with { type: "json" };
 import { ConfiguredCompanion, configuredCompanion } from "./companion-http.ts";
 import { onSelection, takeSelection } from "./terminal-sharing.ts";
 import {
@@ -16,7 +17,7 @@ export function mountCompanion(
   host.classList.add("companion-app");
   host.innerHTML = `<div class="app-heading"><h2>AI Companion</h2><span class="source-tag">PROTOTYPE · OFFLINE FIXTURE</span></div>
     <p data-provider></p><div class="terminal-toolbar"><button type="button" data-configured>Use configured provider</button><button type="button" data-offline>Use offline guide</button><select aria-label="Companion model" hidden></select><button type="button" data-discover hidden>Test connection / list models</button><button type="button" data-cancel>Cancel request</button></div><p>Ask about UNIX V7 directories, ed, keyboard ownership or plotting. Model replies are suggestions, not machine observations. No commands are sent from chat.</p>
-    <div class="companion-chat" role="log" aria-label="Companion conversation"></div>
+    <details data-tutor><summary>Historical computing reference desk</summary><label>Reference topic <select aria-label="Companion reference topic"></select></label><p data-reference-note></p><a data-reference-link target="_blank" rel="noopener noreferrer">Read the source record</a><button type="button" data-reference-question>Use this question</button><p>Curated reference notes are distinct from model explanations. Selecting a note sends nothing.</p></details><p data-sharing-scope role="status"></p><div class="companion-chat" role="log" aria-label="Companion conversation"></div>
     <form><label>Your question<textarea aria-label="Companion question" maxlength="4096" rows="2" required></textarea></label>
     <details><summary>Deliberately share selected terminal text</summary><p>Copy only the text you want to share, then paste it here. Nothing is read from a terminal automatically.</p><label>Source terminal <input aria-label="Shared terminal source" maxlength="160" value="Manually pasted excerpt"></label><textarea aria-label="Shared terminal excerpt" maxlength="4096" rows="3"></textarea></details>
     <button>Send to offline fixture</button><button type="button" data-clear>Clear chat</button></form><p role="status" data-status></p>`;
@@ -51,6 +52,7 @@ export function mountCompanion(
     question.value = "";
     button.disabled = false;
     status.textContent = "Chat cleared; nothing retained.";
+    showScope();
   };
   const source = host.querySelector<HTMLInputElement>(
     '[aria-label="Shared terminal source"]',
@@ -72,6 +74,7 @@ export function mountCompanion(
     button.textContent = configured
       ? "Send text to configured provider"
       : "Send to offline fixture";
+    showScope();
   };
   const receiveSelection = () => {
     const selection = takeSelection();
@@ -81,7 +84,46 @@ export function mountCompanion(
     host.querySelector("details")!.open = true;
     status.textContent =
       "Exact selection shown for review. Nothing sent; choose Send deliberately.";
+    showScope();
   };
+  const topic = host.querySelector<HTMLSelectElement>(
+    '[aria-label="Companion reference topic"]',
+  )!;
+  topic.replaceChildren(
+    new Option("No additional reference", ""),
+    ...references.map((note) => new Option(note.title, note.id)),
+  );
+  const scope = host.querySelector<HTMLElement>("[data-sharing-scope]")!;
+  const showScope = () => {
+    const configured =
+      provider instanceof ConfiguredCompanion ? provider : undefined;
+    scope.textContent = configured
+      ? `Destination: ${configured.destination} · model: ${models.value} · scope: question, ${messages.length} retained messages, ${new TextEncoder().encode(shared.value).length} selected bytes from ${source.value || "unspecified source"}${topic.value ? ", selected reference note" : ""}. Only Send submits this text.`
+      : "Offline guide: no provider receives your question or selected text.";
+  };
+  const showReference = () => {
+    const note = references.find((note) => note.id === topic.value);
+    host.querySelector("[data-reference-note]")!.textContent =
+      note?.text ?? "Choose a source-backed project note.";
+    const link = host.querySelector<HTMLAnchorElement>(
+      "[data-reference-link]",
+    )!;
+    link.hidden = !note;
+    link.href = note?.source ?? "#";
+    showScope();
+  };
+  topic.onchange = showReference;
+  host.querySelector<HTMLButtonElement>("[data-reference-question]")!.onclick =
+    () => {
+      question.value =
+        references.find((note) => note.id === topic.value)?.question ?? "";
+      question.focus();
+      showScope();
+    };
+  shared.addEventListener("input", showScope);
+  source.addEventListener("input", showScope);
+  models.addEventListener("change", showScope);
+  showReference();
   const unsubscribe = onSelection(receiveSelection);
   receiveSelection();
   host.querySelector<HTMLButtonElement>("[data-configured]")!.onclick =
@@ -156,8 +198,24 @@ export function mountCompanion(
       { role: "user", content: text },
     ];
     try {
-      if (provider instanceof ConfiguredCompanion)
+      if (provider instanceof ConfiguredCompanion) {
+        const size = (text: string) => new TextEncoder().encode(text).length;
+        if (
+          next.length > 18 ||
+          size(shared.value) > 4096 ||
+          size(source.value) > 160 ||
+          next.some((message) => size(message.content) > 4096) ||
+          next.reduce(
+            (sum, message) => sum + size(message.content),
+            size(shared.value) + size(source.value),
+          ) > 12000
+        )
+          throw Error(
+            "Provider context limit: clear chat or shorten the selected text before sending.",
+          );
         provider.source = source.value;
+        provider.reference = topic.value;
+      }
       const answer = await provider.reply(
         { messages: next, sharedText: shared.value },
         controller.signal,
@@ -182,6 +240,7 @@ export function mountCompanion(
       );
       question.value = "";
       shared.value = "";
+      showScope();
       status.textContent =
         provider instanceof ConfiguredCompanion
           ? provider.fixture

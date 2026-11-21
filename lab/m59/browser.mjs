@@ -1,28 +1,11 @@
 // Genuine disposable V7 through the detached service. No intercepted API/WS data.
 import { chromium, firefox, webkit, expect } from "@playwright/test";
-import { readFileSync, writeFileSync, renameSync, existsSync } from "node:fs";
-import { randomBytes } from "node:crypto";
-const root = process.env.PIDP551_WORK ?? ".research/m59/guest-terminal",
-  base = "https://127.0.0.1:8445";
+import { readFileSync, writeFileSync } from "node:fs";
+import { harness, root } from "./harness.mjs";
+const base = "https://127.0.0.1:8445";
 const token = readFileSync(`${root}/writer.token`, "utf8").trim();
 const observer = readFileSync(`${root}/observer.token`, "utf8").trim();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-async function harness(op, data = "") {
-  const id = randomBytes(8).toString("hex");
-  writeFileSync(
-    `${root}/request.tmp`,
-    JSON.stringify({ id, op, data, wait: 1 }),
-  );
-  renameSync(`${root}/request.tmp`, `${root}/request.json`);
-  for (let i = 0; i < 100; i++) {
-    await sleep(100);
-    if (existsSync(`${root}/response.json`)) {
-      const r = JSON.parse(readFileSync(`${root}/response.json`, "utf8"));
-      if (r.id === id) return r.output;
-    }
-  }
-  throw Error("Harness timeout");
-}
 const results = {
   source:
     "Genuine disposable UNIX V7; network-none original SIMH; Mac browsers through fixed local test forwarding",

@@ -64,7 +64,7 @@ const apps = [
   ["about", "About", "References & shortcuts"],
 ];
 const root = document.querySelector<HTMLDivElement>("#app")!;
-root.innerHTML = `<header class="desktop-top"><img src="${logo}" class="digital-brand" alt="DIGITAL"><span class="desktop-name">PiDP-11 <b>Web Desktop</b></span><span class="top-source" id="source-badge">LOCAL SIMULATION</span><button id="arrange-workspace">Arrange terminals</button><button id="reset-layout" title="Reset saved window geometry">Reset layout</button><time id="clock"></time></header><div class="desktop-layout"><nav class="launcher" aria-label="Applications">${apps.map(([id, name, desc]) => `<button data-app="${id}" title="${desc}" aria-label="Open ${name}">${icon(id)}<span>${name}</span></button>`).join("")}</nav><main id="desktop" aria-label="PiDP-11 desktop workspace"><div class="wallpaper" aria-hidden="true"><span>pdp11/70</span><small>THE COMPUTER IS STILL THE COMPUTER.</small></div></main></div><footer class="taskbar"><span class="taskbar-label">WORKSPACE</span><div id="tasks" aria-label="Open windows"></div><span class="local-label">${APP_MILESTONE} · LOCAL LAB</span></footer><div id="toast" role="status" aria-live="polite"></div>`;
+root.innerHTML = `<header class="desktop-top"><img src="${logo}" class="digital-brand" alt="DIGITAL"><span class="desktop-name">PiDP-11 <b>Web Desktop</b></span><span class="top-source" id="source-badge">LOCAL SIMULATION</span><button id="arrange-workspace">Arrange terminals</button><button id="arrange-equipment">Arrange equipment</button><button id="reset-layout" title="Reset saved window geometry">Reset layout</button><time id="clock"></time></header><div class="desktop-layout"><nav class="launcher" aria-label="Applications">${apps.map(([id, name, desc]) => `<button data-app="${id}" title="${desc}" aria-label="Open ${name}">${icon(id)}<span>${name}</span></button>`).join("")}</nav><main id="desktop" aria-label="PiDP-11 desktop workspace"><div class="wallpaper" aria-hidden="true"><span>pdp11/70</span><small>THE COMPUTER IS STILL THE COMPUTER.</small></div></main></div><footer class="taskbar"><span class="taskbar-label">WORKSPACE</span><div id="tasks" aria-label="Open windows"></div><span class="local-label">${APP_MILESTONE} · LOCAL LAB</span></footer><div id="toast" role="status" aria-live="polite"></div>`;
 const $ = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 const manager = new WindowManager($("desktop"), $("tasks"));
@@ -571,7 +571,7 @@ function openGuestTerminal(initialPersonality: "vt100" | "asr33" = "vt100") {
   const el = body("Loading guest terminal…"); el.classList.add("guest-terminal-app");
   let dispose = () => {};
   manager.open(slot, initialPersonality === "asr33" ? "Teletype · guest line" : "Real guest terminal", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
-  void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el, initialPersonality)).then(cleanup => {
+  void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el, initialPersonality, status => manager.setStatus(slot, status))).then(cleanup => {
     if (el.isConnected) dispose = cleanup; else cleanup();
   }).catch(() => { el.textContent = "Guest terminal renderer unavailable"; });
 }
@@ -585,14 +585,14 @@ function openApp(id: string) {
     void import("./tek4010-app.ts").then(m => { if (el.isConnected) m.mountTek4010(el); }).catch(error => { el.textContent = String(error); });
     return;
   }
-  if (id === "device-observer") {
+  if (id === "device-observer" || id === "device-observer-2") {
     if (manager.store.windows.some(w => w.id === id)) { manager.restore(id); return; }
     if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
     const el = body("Loading device observer…");
     let dispose = () => {};
-    manager.open(id, "Guest device output", el, {x: 180, y: 80, width: 900, height: 700}, () => dispose());
-    void import("./device-observer.ts").then(module => {
-      if (el.isConnected) dispose = module.mountDeviceObserver(el);
+    manager.open(id, id === "device-observer" ? "Guest device output" : "Guest device output · 2", el, {x: 180, y: 80, width: 900, height: 700}, () => dispose());
+    void import("./peripheral-workspace.ts").then(module => {
+      if (el.isConnected) dispose = module.mountPeripheralWorkspace(el);
     }).catch(() => { el.textContent = "Device observer unavailable"; });
     return;
   }
@@ -601,7 +601,7 @@ function openApp(id: string) {
     if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
     const el = body("Loading offline guide…");
     let dispose = () => {};
-    manager.open(id, "AI Companion · offline prototype", el, { x: 150, y: 60, width: 660, height: 650 }, () => dispose());
+    manager.open(id, "AI Companion · optional", el, { x: 150, y: 60, width: 660, height: 650 }, () => dispose());
     void import("./companion-app.ts").then(m => { if (el.isConnected) dispose = m.mountCompanion(el); }).catch(() => { el.textContent = "Companion unavailable"; });
     return;
   }
@@ -629,6 +629,9 @@ function openApp(id: string) {
     height: id === "printer" ? 740 : id === "about" ? 680 : 470,
   }, () => { printerApps.get(el)?.dispose(); printerApps.delete(el); });
 }
+$("arrange-equipment").onclick = () => {
+  notify(manager.arrangeEquipment() ? "Equipment arranged. Use the taskbar to switch windows on narrow displays; connections and ownership are unchanged." : "Open a guest terminal, device observer or companion first.");
+};
 $("arrange-workspace").onclick = () => {
   openPanel();
   panelEl?.classList.remove("authentic-mode");
@@ -699,3 +702,5 @@ openPanel();
 if (innerWidth > 900) openTerminal();
 
 window.addEventListener("pidp11-share-selection",()=>openApp("companion"));
+
+window.addEventListener("pidp11-new-device-observer", () => openApp("device-observer-2"));

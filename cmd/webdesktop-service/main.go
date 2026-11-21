@@ -42,6 +42,12 @@ func serve(ctx context.Context, path string) error {
 	if err != nil {
 		return err
 	}
+	followers, err := peripheral.NewFollowers(config.Followers)
+	if err != nil {
+		return err
+	}
+	followers.Start(ctx)
+	defer followers.Close()
 	var chat *companion.Service
 	if config.Companion != nil {
 		chat, err = companion.NewService(*config.Companion, terminalservice.ReadPrivate)
@@ -63,6 +69,7 @@ func serve(ctx context.Context, path string) error {
 	defer admin.Close()
 	controlMux := http.NewServeMux()
 	controlMux.Handle("/devices/", devices.ControlHandler())
+	controlMux.Handle("/streams/", followers.ControlHandler())
 	controlMux.Handle("/", admin.Handler)
 	admin.Handler = controlMux
 	server := &http.Server{Handler: (&terminalbridge.Server{Bridge: manager, Auth: gate, AllowProposals: config.AllowProposals, Register: func(mux *http.ServeMux) {
@@ -70,6 +77,7 @@ func serve(ctx context.Context, path string) error {
 			json.NewEncoder(w).Encode(map[string]bool{"readonly_command_proposals": config.AllowProposals})
 		})))
 		devices.Register(mux, gate)
+		followers.Register(mux, gate)
 		chat.Register(mux, gate)
 	}}).Handler(web.Assets()), TLSConfig: &tls.Config{MinVersion: tls.VersionTLS13, Certificates: []tls.Certificate{cert}}, ReadHeaderTimeout: time.Second, ReadTimeout: 3 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}
 	defer server.Close()

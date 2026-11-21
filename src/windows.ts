@@ -8,6 +8,7 @@ export interface Rect {
 export interface DesktopWindow extends Rect {
   id: string;
   title: string;
+  status?: string;
   minimized: boolean;
   maximized: boolean;
   restore?: Rect;
@@ -83,7 +84,7 @@ export function readPreferences(raw: string | null): Map<string, Rect> {
       const r = v as Record<string, unknown>;
       if (
         typeof r.id !== "string" ||
-        !/^(panel|guest(?:-[2-4])?|companion|device-observer|tek4010|disks|tapes|paper|printer|systems|sessions|diagnostics|about|terminal-[1-4])$/.test(
+        !/^(panel|guest(?:-[2-4])?|companion|device-observer(?:-2)?|tek4010|disks|tapes|paper|printer|systems|sessions|diagnostics|about|terminal-[1-4])$/.test(
           r.id,
         )
       )
@@ -153,6 +154,11 @@ export class WindowManager {
     caption.className = "window-title";
     caption.textContent = title;
     header.append(caption);
+    const state = document.createElement("span");
+    state.className = "window-status";
+    state.id = `window-status-${id}`;
+    state.setAttribute("aria-live", "polite");
+    header.append(state);
     const tools = document.createElement("div");
     tools.className = "window-tools";
     const button = (label: string, text: string, action: () => void) => {
@@ -297,6 +303,37 @@ export class WindowManager {
     delete w.restore;
     this.render();
   }
+  /** Runtime labels are presentation only; never saved as connection authority. */
+  setStatus(id: string, status: string) {
+    const win = this.store.windows.find(w => w.id === id);
+    if (!win || win.status === status) return;
+    win.status = status.slice(0, 120);
+    this.render(false);
+  }
+  /** Tile real-equipment windows; a narrow display uses the taskbar as tabs. */
+  arrangeEquipment(): boolean {
+    const equipment = this.store.windows.filter(w => /^(guest(?:-[2-4])?|device-observer(?:-2)?|companion|tek4010)$/.test(w.id));
+    if (!equipment.length) return false;
+    const {width, height} = this.bounds();
+    for (const window of this.store.windows) window.minimized = !equipment.includes(window);
+    if (width < 1000 || height < 650) {
+      const active = equipment.at(-1)!;
+      for (const window of equipment) {
+        window.minimized = window !== active;
+        Object.assign(window, {x:0, y:0, width, height, maximized:false});
+        delete window.restore;
+      }
+    } else {
+      const columns = equipment.length === 1 ? 1 : width >= 1800 && equipment.length > 4 ? 3 : 2;
+      const rows = Math.ceil(equipment.length / columns);
+      equipment.forEach((window, i) => {
+        Object.assign(window, clampRect({x:(i%columns)*width/columns, y:Math.floor(i/columns)*height/rows, width:width/columns-8, height:height/rows-8}, width, height), {maximized:false});
+        delete window.restore;
+      });
+    }
+    this.render();
+    return true;
+  }
   arrangeTerminals() {
     const { width, height } = this.bounds();
     const wide = width >= 1150;
@@ -343,6 +380,7 @@ export class WindowManager {
     this.store.windows.forEach((w, i) => {
       const el = this.elements.get(w.id)!;
       el.hidden = w.minimized;
+      el.querySelector(".window-status")!.textContent = w.status ?? "";
       el.classList.toggle("maximized", w.maximized);
       el.classList.toggle("focused", i === this.store.windows.length - 1);
       Object.assign(el.style, {
@@ -353,7 +391,8 @@ export class WindowManager {
         zIndex: String(i + 1),
       });
       const b = document.createElement("button");
-      b.textContent = w.title;
+      b.textContent = w.title + (w.status ? ` · ${w.status}` : "");
+      b.setAttribute("aria-describedby", `window-status-${w.id}`);
       b.className = w.minimized ? "" : "task-open";
       b.setAttribute("aria-label", `Restore ${w.title}`);
       b.onclick = () => this.restore(w.id);

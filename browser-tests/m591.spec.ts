@@ -117,7 +117,9 @@ test("device observation pins generation, preserves bytes and rejects replacemen
 test("proposal UI shows Return and needs a separate approval click", async ({
   page,
 }) => {
-  let approves = 0;
+  let approves = 0,
+    expiresAfter = 30000,
+    cancels = 0;
   await page.route("**/api/v1/session", (r) =>
     r.fulfill({
       json: { capabilities: { "terminal.input": true }, csrf: "fixture" },
@@ -168,9 +170,10 @@ test("proposal UI shows Return and needs a separate approval click", async ({
               proposal_id: "single-use",
               data: m.data,
               epoch: 2,
-              expires: Date.now() + 30000,
+              expires: Date.now() + expiresAfter,
             }),
           );
+        if (m.type === "cancel-proposal") cancels++;
         if (m.type === "approve") {
           approves++;
           ws.send(
@@ -202,6 +205,14 @@ test("proposal UI shows Return and needs a separate approval click", async ({
   await expect(page.locator(".guest-status")).toContainText("fake guest");
   expect(approves).toBe(1);
   await expect(page.locator("[data-approve]")).toBeDisabled();
+  expiresAfter = 600;
+  await page.locator("[data-propose]").click();
+  await expect(page.locator("[data-proposal-preview]")).toContainText("fake");
+  await expect(page.locator("[data-proposal-preview]")).toContainText("one");
+  await expect(page.locator("[data-approve]")).toBeDisabled({ timeout: 3000 });
+  await expect(page.locator(".guest-status")).toContainText("expired");
+  expect(approves).toBe(1);
+  expect(cancels).toBeGreaterThan(0);
   await page.locator("[data-disconnect]").click();
   await expect(page.locator("[data-proposal-preview]")).toBeEmpty();
 });
