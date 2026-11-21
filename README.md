@@ -62,6 +62,12 @@ See the [gallery](docs/screenshots/README.md) for the full panel, disk and tape 
 
 *Actual M5.9 disposable V7 plotting output through unmodified SIMH. [Evidence, limits and remaining work](docs/lab/M5.9.md).*
 
+## M5.9.3 Phase A: genuine local companion
+
+The optional companion now has real local-model acceptance in Chromium, Firefox and WebKit, including deliberate excerpt sharing, follow-up conversation and cancellation. Qwen 3 14B through Ollama works with optional reasoning disabled. Both tested Qwen models made factual errors, so the sourced offline guide remains the recommended default. No model was downloaded, no hosted inference was contacted and the Pi was untouched.
+
+[Inventory, model results and free-provider comparison](docs/lab/M5.9.3-A.md) · [Tested configuration](docs/getting-started/configured-companion.md) · [Private model-host design](docs/technical/hosted-local-companion.md)
+
 ## M5.9.2 live equipment workspace
 
 The optional desktop now follows approved LP11/PC11 output while original SIMH devices are active. Two read-only device windows can sit beside genuine UNIX V7 text, Tektronix graphics and the optional companion. **Arrange equipment** organizes the windows; terminal titles and the taskbar show connection and keyboard ownership. Tablet layouts use task switching.

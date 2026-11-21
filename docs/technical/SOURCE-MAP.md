@@ -84,3 +84,9 @@ The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original
 - `src/live-devices.ts` follows one explicit generation per window; `peripheral-workspace.ts` switches between completed and live modes while disposing old resources. `windows.ts` arranges equipment and exposes terminal status without persisting authority.
 - `internal/companion/references.json` is the shared curated catalog used by Go and TypeScript. The server accepts allowlisted reference IDs, not caller-supplied system instructions.
 - `lab/m592` contains genuine live-device supervision, equipment-browser acceptance and expanded BSD checks. `lab/pdp11_program.py` builds the small original CPU test programs shared with M5.9.1. [Results](../lab/M5.9.2.md).
+
+### M5.9.3 Phase A additions
+
+- `internal/companion/provider.go` accepts an optional native-Ollama thinking preference, preserves unset behavior, and distinguishes bounded timeout, cancellation, unavailable server and truncated-output errors. No model lifecycle or tool API is exposed.
+- `lab/m593a` contains bounded loopback tutor probes, real three-engine companion acceptance and sanitized response evidence. [Results](../lab/M5.9.3-A.md) separate model accuracy from transport acceptance.
+- `browser-tests/m593.spec.ts` protects visible review of explicitly shared terminal text. [Host-side transport design](hosted-local-companion.md) is a future deployment proposal, not an installed tunnel.

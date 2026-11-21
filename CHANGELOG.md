@@ -2,6 +2,12 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.9.3 Phase A — 2026-11-21
+
+- Qualified real local Ollama conversations and sharing/cancellation across three browser engines; recorded factual errors, memory pressure and an untested LM Studio candidate honestly.
+- Added optional native Ollama thinking control, clearer failure messages and truncated-output rejection. Fixed selected-text review to open the excerpt panel.
+- Published local inventory, bounded tutor probes, hosted-free-provider research and a private model-host transport design. No model/software downloads, hosted inference or Pi access. [Report](docs/lab/M5.9.3-A.md).
+
 ## M5.9.2 development increment — 2026-11-21
 
 - Added optional bounded live LP11/PC11 observation with explicit producer approval, leases, ordered chunks, completion checksums, reader snapshots and stale/loss retirement.
