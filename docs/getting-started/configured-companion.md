@@ -2,7 +2,7 @@
 
 The offline guide works without a model. A configured companion can send your question, recent conversation and deliberately shared excerpt to an owner-selected Ollama or OpenAI-compatible service. The model can run on a capable Mac or another explicitly chosen host; the Pi does not need a model runtime. The desktop continues working when the provider is unavailable.
 
-M5.9.1 verified this path with deterministic local HTTP fixtures. The existing explicitly configured local Ollama endpoint was unavailable. **A genuine model conversation remains untested.** No models or software were downloaded, no private cloud credentials were used and no nonlocal private model service was contacted.
+M5.9.1 and M5.9.2 verified this path with deterministic local HTTP fixtures. The existing explicitly configured local Ollama endpoint was unavailable. **A genuine model conversation remains untested.** No models or software were downloaded, no private cloud credentials were used and no nonlocal private model service was contacted.
 
 ## Configure the host
 
@@ -42,3 +42,13 @@ Chat never sends terminal input and model tool requests are rejected. A separate
 After independently verifying the UNIX guest/context, acquire the terminal keyboard and open **Review a suggested UNIX command**. Enable review in that window, select a command and request exact-byte review. Inspect the displayed `\r` (Return), then approve once or cancel. The server expires the proposal after 30 seconds and binds it to the current attachment, window and keyboard lease. Reconnect or ownership change requires a new proposal. An uncertain write is never replayed. “Bytes delivered” does not prove the guest command succeeded.
 
 Acceptance used a fake guest behind the actual installed ARM64 service in all three browser engines. No AI-generated command was executed in a genuine guest. There is no authority over a host shell, SIMH monitor, boot, shutdown, media or physical panel.
+
+## Historical reference desk and sharing scope
+
+M5.9.2 includes a small reference desk for UNIX V7, RT-11, RSX-11, 2.11BSD, octal/PDP-11 instructions and peripherals. Expand it, choose a topic, read the note and follow its source link. These curated notes are available without a provider. Selecting a topic does not send a request. **Use this question** fills the question field; the selected reference is included only when you choose **Send text to configured provider**.
+
+Before sending, review the destination, model, retained-message count, selected-text byte count and source shown above the conversation. The sharing section shows the actual excerpt. Terminal output is untrusted reference data, never permission to run commands. Clear the excerpt or chat when it should no longer be included. Changing providers clears retained conversation/sharing state. The service validates reference IDs and uses the same curated catalog as the browser; model-generated replies remain separately labeled.
+
+The configured path limits each message and shared excerpt to 4,096 UTF-8 bytes, retained input to 12,000 bytes and 18 messages. Multibyte text therefore reaches the limit sooner than its character count might suggest. Existing provider timeouts, cancellation, response limits and private credential storage remain in force. No model runtime is required on the Pi. The M5.9.2 local-model probe found no reachable authorized service; the live screenshot uses an explicitly labeled deterministic fixture.
+
+Command review now names the terminal and attachment generation alongside exact escaped bytes and expiration. Expired review disappears and cannot be approved. Keyboard ownership and the server's single-use/generation checks remain authoritative; closing a window or losing a response never causes a retry. These controls remain disabled by default and separate from chat.

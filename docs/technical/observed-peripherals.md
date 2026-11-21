@@ -1,6 +1,6 @@
-# Observing completed emulated-device output
+# Observing emulated-device output
 
-The **Guest devices** window displays completed LP11 printer and PC11 punch output through the optional Go service. It is separate from the simulated Line printer and Paper tape applications. M5.9.1 verified actual PDP-11 CPU instructions writing the original simulator's device registers; this is not a claim that the supplied UNIX V7 kernel has a printer driver.
+The **Guest devices** window offers separate **Completed exports** and **Live activity** modes. The completed mode displays LP11 printer and PC11 punch output through the optional Go service. It is separate from the simulated Line printer and Paper tape applications. M5.9.1 verified actual PDP-11 CPU instructions writing the original simulator's device registers; this is not a claim that the supplied UNIX V7 kernel has a printer driver.
 
 ## What crosses the boundary
 
@@ -49,4 +49,28 @@ Stop at a failed publication and inspect the producer and file. Do not retry usi
 
 LP11 output must be ASCII7. The device view applies CR as carriage return, LF as a new row, FF as a new form and BS as a backstep. The latest glyph occupies an overprinted cell; this is not physical ink simulation. Partial final lines are visible. Paper offers 80/132 columns without changing downloads. The existing simulated printer keeps its previous normalization behavior. PC11 preserves all eight bits; its display is limited to 512 bytes while the bounded download remains complete. Empty exports are valid.
 
-`media-observation.ts` defines a separate read-only status contract for PC11 reader/punch, RK05, RL02 and TM11. It validates media type, access mode, position/length, sequence and simulator/guest generation, rejects unknown fields, and refuses implicit generation replacement. This is fixture-tested schema work, **not a running collector**. No remote mount, reset, end-of-tape detection or disk/tape activity integration is delivered yet.
+`media-observation.ts` defines a separate read-only status contract for PC11 reader/punch, RK05, RL02 and TM11. It validates media type, access mode, position/length, sequence and simulator/guest generation, rejects unknown fields, and refuses implicit generation replacement. This is fixture-tested schema work, **not a running collector**. No remote mount, reset or disk/tape activity integration is delivered. M5.9.2 adds the separate LP11/PC11 follower below, including explicitly reported reader EOF.
+
+## Live activity: laboratory contract
+
+[Decision 0008](../decisions/0008-live-device-observation.md) explains identities, limits and failure assumptions. The [M5.9.2 harness](../../lab/m592/README.md) is the tested route; it is not an unattended production collector.
+
+A private optional `device_followers` array names up to four entries, for example:
+
+```json
+[{"id":"live-lp11","kind":"lp11","path":"/reserved/lab/empty-spool"},
+ {"id":"live-punch","kind":"pc11-punch","path":"/reserved/lab/empty-punch","reader_path":"/reserved/lab/reader.bin"}]
+```
+
+Paths must be absolute, operator-owned local regular files. Only `lp11` and `pc11-punch` are supported; an optional reader snapshot pairs with the punch. No default follower is installed. Changing private configuration requires stopping the companion first and independently reviewing compatibility and file permissions.
+
+The private Unix socket has `/streams/status` and POST operations `/streams/follow`, `/streams/renew`, `/streams/progress`, `/streams/complete`, `/streams/detach`. Approval fields are `instance`, `id`, `revision`, `simulator_generation`, `guest_generation`, `producer_verified`; progress adds `reader_bytes` and `reader_eof`, initial paired-reader approval adds `reader_sha256`, and completion adds `sha256`. Use fresh status for every operation; revisions are single-use even on validation failure. These routes are not public HTTPS APIs.
+
+1. Before producer output begins, independently verify the producer and fresh empty spool. Approve following locally with its identities. A paired reader requires its independently computed SHA-256. An old nonempty spool is refused, including after service restart.
+2. The independent supervisor must renew within five seconds only while it can still attest the same producer. On uncertainty, stop renewing and detach. The browser cannot renew or replace this authority.
+3. In the browser, sign in, open **Guest devices → Live activity**, refresh, select the approved generation and choose **Observe selected generation**. **Open another observer** provides a second independent device view. Refresh never silently selects a new producer.
+4. Original SIMH writes its files normally. The follower reads 8-KiB chunks on a 200-ms poll and retains 64 KiB per device. PC11 status reports independently observed reader position; it is not guessed from punch output. Slow viewers stop on a missing offset and require explicit review of the retained tail. Network failure stops polling without automatic reconnection.
+5. After the independent operator verifies producer flush/close, compare the entire file and submit completion with its SHA-256. Inactivity alone never completes a job. A complete retained job enables **Save completed output**; an omitted prefix produces **Save retained tail (partial)** instead. Reader download verifies a bounded immutable snapshot and pauses polling until explicit resumption.
+6. Stop observing or close the window to cancel its pending request/timer. Detach locally on producer shutdown; service shutdown closes all follower descriptors. Cached bytes may remain visible with stale-state labeling. A new producer needs a new empty spool approval and explicit browser selection.
+
+The job bound is 1 MiB and reader snapshots are limited to 64 KiB. High-bit LP11 output, changed identity, observed shrink/rewrite, removed spool, expired approval or a wrong completion hash retire observation. Parent-directory replacement, same-inode truncate/regrow between polls and incorrect supervisor attestations remain limitations. No browser action opens arbitrary files, writes media, attaches devices or controls SIMH.

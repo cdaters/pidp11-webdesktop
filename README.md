@@ -62,6 +62,18 @@ See the [gallery](docs/screenshots/README.md) for the full panel, disk and tape 
 
 *Actual M5.9 disposable V7 plotting output through unmodified SIMH. [Evidence, limits and remaining work](docs/lab/M5.9.md).*
 
+## M5.9.2 live equipment workspace
+
+The optional desktop now follows approved LP11/PC11 output while original SIMH devices are active. Two read-only device windows can sit beside genuine UNIX V7 text, Tektronix graphics and the optional companion. **Arrange equipment** organizes the windows; terminal titles and the taskbar show connection and keyboard ownership. Tablet layouts use task switching.
+
+![Genuine guest terminals and live device observation](docs/screenshots/m592-equipment-room.png)
+
+*Actual disposable V7 and original CPU-driven LP11/PC11, with a clearly labeled deterministic companion fixture. No physical Pi connection or real-model inference is shown.*
+
+Fresh 2.11BSD VT220 vi/more checks passed in all three browser engines, including the previously missing WebKit case, observer redraw and keyboard handoff. The companion adds sourced historical notes and a visible summary of text being shared. Real-model acceptance and production peripheral supervision remain pending.
+
+[Development report](docs/lab/M5.9.2.md) · [Live observation](docs/technical/observed-peripherals.md) · [Candidate record](docs/lab/M5.9.2-package.md)
+
 ## M5.9.1 equipment and applications
 
 Completed LP11/PC11 output, configured companion requests and eight retained genuine 2.11BSD `vi` cases now have working code and laboratory evidence. Twelve fresh V7 terminal cases and the combined equipment workflow passed across Chromium, Firefox and WebKit. The physical Pi was not contacted.

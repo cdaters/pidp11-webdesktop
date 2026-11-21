@@ -77,3 +77,10 @@ The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original
 - `internal/companion/service.go` owns optional configured HTTP routes and one shared provider slot, reusing `provider.go`. It retains no chat history. `companion-http.ts` is same-origin only; `companion-app.ts` owns visible context and cancellation. `terminal-sharing.ts` stores only one bounded, deliberately selected excerpt until consumed.
 - `terminalbridge/proposal.go` binds one expiring proposal per viewer to endpoint lifetime and lease epoch, consumes before writing, and calls the existing bounded input path under the same lock. HTTP requires the private opt-in. No generic command endpoint exists.
 - `media-observation.ts` is a strict read-only schema and generation fence, not a collector. `lab/m591` contains genuine CPU-device programs, full-screen/browser tests, explicit completed-export publication and fake-peer ARM64 rehearsals. [Results](../lab/M5.9.1.md).
+
+### M5.9.2 additions
+
+- `internal/peripheral/follow.go` owns fixed-path spool descriptors, producer leases, bounded tails and completion hashes; `follow_http.go` separates private approval from authenticated read-only polling.
+- `src/live-devices.ts` follows one explicit generation per window; `peripheral-workspace.ts` switches between completed and live modes while disposing old resources. `windows.ts` arranges equipment and exposes terminal status without persisting authority.
+- `internal/companion/references.json` is the shared curated catalog used by Go and TypeScript. The server accepts allowlisted reference IDs, not caller-supplied system instructions.
+- `lab/m592` contains genuine live-device supervision, equipment-browser acceptance and expanded BSD checks. `lab/pdp11_program.py` builds the small original CPU test programs shared with M5.9.1. [Results](../lab/M5.9.2.md).

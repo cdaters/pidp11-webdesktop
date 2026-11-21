@@ -2,6 +2,13 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.9.2 development increment — 2026-11-21
+
+- Added optional bounded live LP11/PC11 observation with explicit producer approval, leases, ordered chunks, completion checksums, reader snapshots and stale/loss retirement.
+- Qualified genuine original CPU/device activity and expanded 2.11BSD VT220 vi/more, observer and keyboard-handoff checks. Completed the missing WebKit case and preserved all earlier evidence.
+- Added sourced historical references, explicit sharing scope and terminal/generation/expiry command review; real-model acceptance remains pending.
+- Added equipment arrangement, a second device observer and terminal status in titles/taskbar. Verified 96 browser cases plus Go, TypeScript, genuine V7 and isolated ARM64 lifecycle/memory checks. Physical Pi untouched. [Report](docs/lab/M5.9.2.md).
+
 ## M5.9.1 development increment — 2026-11-21
 
 - Added authenticated, generation-specific completed LP11/PC11 output observations with private publication, checksum verification, bounded paper/byte views and exact downloads. Genuine CPU-device programs exercised original SIMH; OS printer-driver integration remains open.

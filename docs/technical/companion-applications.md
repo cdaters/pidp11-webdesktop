@@ -18,9 +18,11 @@ An in-process TypeScript module is trusted application code, **not a security sa
 
 Prove an adapter first with deterministic conformance fixtures and malformed/disconnected cases, then disposable genuine guests where applicable. Record exactly what passed. Keep original console, physical controls and guest lifecycle independent. Optional external intelligence, if ever pursued separately, must be absent by default and unnecessary for the complete desktop. Terminal output and model responses are data, never authority to widen capabilities.
 
-## M5.9.1 current integration
+## Current integration
 
 The existing provider library is now registered behind authenticated service routes and optional private configuration. The offline guide remains the default. Explicit model discovery, destination disclosure, bounded selected-text sharing, cancellation and inert replies are implemented. Separately, an operator-disabled-by-default terminal review admits three exact UNIX suggestions and requires a single-use human approval under the current attachment and keyboard lease. No model tool execution or physical authority is supplied.
+
+M5.9.2 adds a shared curated reference catalog and explicit UTF-8 sharing scope; it does not claim real-model acceptance or import another project.
 
 [Setup and workflow](../getting-started/configured-companion.md) · [Decision and limits](../decisions/0007-completed-devices-and-companion.md) · [Actual evidence](../lab/M5.9.1.md). Rolf's architecture remains a useful independent reference; no code import, compatibility agreement or partnership is implied.
 

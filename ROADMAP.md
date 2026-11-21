@@ -2,7 +2,7 @@
 
 These are directions for experimentation, not delivery promises. The [timeline](docs/timeline.md) and [changelog](CHANGELOG.md) record completed work; the [technical roadmap](docs/roadmap.md) retains resource targets and engineering gates.
 
-M5.9.1 delivers completed-device observation, configured chat and a first human approval path, plus genuine full-screen application evidence. See [the capability table](docs/lab/M5.9.1.md). Next: actual-model qualification, OS printer-driver support, live read-only media collectors and broader application/observer coverage. Production coexistence remains separately gated.
+M5.9.2 delivers bounded live LP11/PC11 observation, sourced companion references, deliberate sharing, an equipment layout and expanded genuine BSD applications. [Results and limits](docs/lab/M5.9.2.md). Next: owner-approved real-model qualification, independently supervised producer identity under faults, additional historical applications and OS printer-driver investigation. Production coexistence remains separately gated.
 
 ## Completed foundations
 
