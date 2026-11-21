@@ -16,6 +16,7 @@ import (
 // Config is private owner configuration. Only explicit allowlisted models may be
 // queried. Discovery never installs models. Fixture labeling is owner supplied.
 type Config struct {
+	OllamaThink    *bool    `json:"ollama_think,omitempty"`
 	Kind           string   `json:"kind"`
 	Endpoint       string   `json:"endpoint"`
 	ModelsEndpoint string   `json:"models_endpoint,omitempty"`
@@ -54,7 +55,7 @@ func NewService(c Config, readPrivate func(string) ([]byte, error)) (*Service, e
 		if s.providers[model] != nil {
 			return nil, errors.New("duplicate approved model")
 		}
-		p, err := NewHTTP(c.Kind, c.Endpoint, model, token)
+		p, err := NewHTTP(c.Kind, c.Endpoint, model, token, c.OllamaThink)
 		if err != nil {
 			return nil, err
 		}

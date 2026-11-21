@@ -81,7 +81,7 @@ export function mountCompanion(
     if (!selection) return;
     shared.value = selection.text;
     source.value = selection.source;
-    host.querySelector("details")!.open = true;
+    shared.closest("details")!.open = true;
     status.textContent =
       "Exact selection shown for review. Nothing sent; choose Send deliberately.";
     showScope();

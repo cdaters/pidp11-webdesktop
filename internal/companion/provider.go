@@ -34,11 +34,14 @@ type HTTPProvider struct {
 	kind, endpoint, model, token string
 	client                       *http.Client
 	slot                         chan struct{}
+	think                        *bool
 }
 
 // NewHTTP distinguishes Ollama native chat from OpenAI-compatible chat. Supply a
-// complete endpoint path. HTTP is limited to literal loopback; remote uses HTTPS.
-func NewHTTP(kind, endpoint, model, token string) (*HTTPProvider, error) {
+// complete endpoint path. think optionally selects native Ollama reasoning; nil
+// preserves the provider default. It is copied, and cannot enable tool authority.
+// HTTP is limited to literal loopback; remote uses HTTPS.
+func NewHTTP(kind, endpoint, model, token string, think *bool) (*HTTPProvider, error) {
 	u, err := url.Parse(endpoint)
 	if err != nil || u.User != nil || u.RawQuery != "" || u.Fragment != "" || u.Hostname() == "" || model == "" || len(model) > 128 || len(token) > 4096 {
 		return nil, errors.New("invalid private provider configuration")
@@ -50,8 +53,16 @@ func NewHTTP(kind, endpoint, model, token string) (*HTTPProvider, error) {
 	if kind != "ollama" && kind != "openai-compatible" {
 		return nil, errors.New("unsupported provider protocol")
 	}
+	if think != nil && kind != "ollama" {
+		return nil, errors.New("ollama_think applies only to native Ollama")
+	}
+	var thinking *bool
+	if think != nil {
+		value := *think
+		thinking = &value
+	}
 	client := &http.Client{Timeout: 20 * time.Second, CheckRedirect: func(*http.Request, []*http.Request) error { return errors.New("provider redirect refused") }}
-	return &HTTPProvider{kind: kind, endpoint: endpoint, model: model, token: token, client: client, slot: make(chan struct{}, 1)}, nil
+	return &HTTPProvider{kind: kind, endpoint: endpoint, model: model, token: token, client: client, slot: make(chan struct{}, 1), think: thinking}, nil
 }
 
 // Reply bounds input/output and cancellation. Tool calls and partial responses
@@ -79,6 +90,9 @@ func (p *HTTPProvider) Reply(ctx context.Context, messages []Message) (string, e
 	payload := map[string]any{"model": p.model, "messages": messages, "stream": false}
 	if p.kind == "ollama" {
 		payload["options"] = map[string]int{"num_predict": 512}
+		if p.think != nil {
+			payload["think"] = *p.think
+		}
 	} else {
 		payload["max_completion_tokens"] = 512
 	}
@@ -96,7 +110,14 @@ func (p *HTTPProvider) Reply(ctx context.Context, messages []Message) (string, e
 	}
 	response, err := p.client.Do(req)
 	if err != nil {
-		return "", errors.New("provider unavailable or cancelled")
+		if errors.Is(err, context.Canceled) {
+			return "", errors.New("provider request cancelled")
+		}
+		var timeout net.Error
+		if errors.Is(err, context.DeadlineExceeded) || (errors.As(err, &timeout) && timeout.Timeout()) {
+			return "", errors.New("provider request timed out; shorten the question or use a faster preloaded model")
+		}
+		return "", errors.New("provider unavailable; check the configured server and endpoint")
 	}
 	defer response.Body.Close()
 	if response.StatusCode != 200 {
@@ -112,9 +133,10 @@ func (p *HTTPProvider) Reply(ctx context.Context, messages []Message) (string, e
 		FunctionCall json.RawMessage   `json:"function_call"`
 	}
 	var wire struct {
-		Done    bool   `json:"done"`
-		Message answer `json:"message"`
-		Choices []struct {
+		Done       bool   `json:"done"`
+		DoneReason string `json:"done_reason"`
+		Message    answer `json:"message"`
+		Choices    []struct {
 			Message answer `json:"message"`
 			Finish  string `json:"finish_reason"`
 		} `json:"choices"`
@@ -124,6 +146,9 @@ func (p *HTTPProvider) Reply(ctx context.Context, messages []Message) (string, e
 	}
 	selected := wire.Message
 	if p.kind == "ollama" {
+		if wire.DoneReason == "length" {
+			return "", errors.New("provider reached its output limit; shorten the question or disable optional reasoning")
+		}
 		if !wire.Done {
 			return "", errors.New("partial Ollama response")
 		}

@@ -105,7 +105,7 @@ func TestProviderBusyCancellationAndDiscoveryOrigin(t *testing.T) {
 	}))
 	defer server.Close()
 	defer close(release)
-	p, _ := NewHTTP("ollama", server.URL, "approved", "")
+	p, _ := NewHTTP("ollama", server.URL, "approved", "", nil)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	done := make(chan error, 1)
