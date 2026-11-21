@@ -170,3 +170,7 @@ Next gates remain: supervised physical switch diagnosis; authoritative guest/lin
 The [diskless physical comparison](lab/M5.7.2.md) found SR0 asserted with its paddle DOWN, UP and DOWN again, while SR1 added and removed its bit normally. Original REALCONS console readings matched the owner-observed ADDRESS lamps. The standalone scanner and multiplexed daemon therefore agree on this discrepancy; a specific faulty component is not established. The owned session was stopped, temporary helpers/registrations removed, and 14 original file records verified unchanged. No guest OS, browser service or new hardware-acceptance tag was introduced.
 
 Next is separately authorized powered-off inspection using the matching board documentation and preserved observations. No normal-launcher guest retry is justified by this diagnostic alone. [M5.8 readiness](lab/M5.8-readiness.md) retains the independent memory-controller prerequisite and M5.7.1's tested refusal of protected service startup when enforcement is absent. Resource targets and production-control restrictions remain unchanged.
+
+## M5.9.1 preparation update
+
+[Completed observation and configured companion](lab/M5.9.1.md) now have implementation and lab evidence. Original deployment gates and numerical performance targets above are unchanged. Next work should qualify a real model, OS printer driver and read-only device collector before extending authority. Short Mac-hosted transport measurements do not establish Pi throughput or long-duration thermal behavior.

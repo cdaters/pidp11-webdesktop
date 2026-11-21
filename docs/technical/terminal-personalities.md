@@ -50,4 +50,4 @@ The [Teletype Model 33 technical manual](https://www.bitsavers.org/communication
 | ASR-33-inspired | Paper controls, truncation/export, ownership and multiple windows | V7 commands, three engines |
 | Tektronix | Compressed/incremental coordinates, bounds, GIN ownership and hardcopy | Original V7 plotting, three engines; no genuine GIN test |
 
-No full-screen editor or complete DEC conformance certification is claimed. Reproduce M5.9 using [its lab runbook](../../lab/m59/README.md).
+The M5.9 table above is the historical baseline. M5.9.1 additionally retained eight genuine 2.11BSD `/usr/ucb/vi` cases: VT100 and VT52 in all three engines, VT220 in Chromium and Firefox. The guest TERM matched the presentation. Insert/write/redraw/delete/quit and read-only reconnect passed; the VT220/WebKit result was not retained after a volume interruption and is not counted. This is scoped application evidence, not full DEC conformance. [M5.9.1 details](../lab/M5.9.1.md#historical-full-screen-evidence).

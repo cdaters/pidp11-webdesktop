@@ -53,3 +53,8 @@ Private capture paths mentioned in reports intentionally do not resolve to publi
 [M5.7.2 physical ADDRESS-lamp comparison](../lab/M5.7.2.md) confirms persistent SR0 assertion through the original diskless REALCONS path while SR1 responds in both directions. It records owner observations, console comparisons, the isolated rehearsal and verified stopped-state cleanup. Powered-off inspection requires separate authorization; M5.8 remains gated.
 
 [M5.9 local development](../lab/M5.9.md) records genuine V7 Tektronix plotting, initial VT220/teletype, bounded manual printer import and offline companion/provider contracts. The [two setup paths](../getting-started/installation-paths.md) and [lab runbook](../../lab/m59/README.md) cover the exact candidate package without advancing physical acceptance.
+
+## M5.9.1 applications and peripherals
+
+- [Completed device observation](observed-peripherals.md), [configured companion](../getting-started/configured-companion.md) and [architecture decision](../decisions/0007-completed-devices-and-companion.md).
+- [Genuine guest and ARM64 evidence](../lab/M5.9.1.md), [reproduction](../../lab/m591/README.md) and [candidate record](../lab/M5.9.1-package.md).

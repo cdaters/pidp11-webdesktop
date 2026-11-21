@@ -70,3 +70,10 @@ The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original
 - `printer-import.ts` validates explicit local ASCII snapshots; `printer-app.ts` cancels stale file reads on clear/disposal. No new backend printer or media endpoint exists.
 - `companion.ts` defines chat-only and future proposal-review contracts. `companion-app.ts` owns/disposes the offline chat. `internal/companion` is a standalone tested provider library, not a registered HTTP route or model connection.
 - `packaging/preflight.sh` is structural/read-only; `release.sh` builds a versioned candidate only from a clean committed tree. `lab/m59` reuses original-SIMH V7 and systemd harnesses, with the explicit isolated DCO 7B profile and no original C changes.
+
+### M5.9.1 additions
+
+- `internal/peripheral` owns fixed allowlists, private one-shot publication and at most four immutable 64-KiB copies. Its public API requires observation capability and accepts no path or control operation. `device-observer.ts` verifies generation/size/hash, renders through the existing paper viewer and aborts stale reads on replacement/disposal.
+- `internal/companion/service.go` owns optional configured HTTP routes and one shared provider slot, reusing `provider.go`. It retains no chat history. `companion-http.ts` is same-origin only; `companion-app.ts` owns visible context and cancellation. `terminal-sharing.ts` stores only one bounded, deliberately selected excerpt until consumed.
+- `terminalbridge/proposal.go` binds one expiring proposal per viewer to endpoint lifetime and lease epoch, consumes before writing, and calls the existing bounded input path under the same lock. HTTP requires the private opt-in. No generic command endpoint exists.
+- `media-observation.ts` is a strict read-only schema and generation fence, not a collector. `lab/m591` contains genuine CPU-device programs, full-screen/browser tests, explicit completed-export publication and fake-peer ARM64 rehearsals. [Results](../lab/M5.9.1.md).

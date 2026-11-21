@@ -2,6 +2,8 @@
 
 These are directions for experimentation, not delivery promises. The [timeline](docs/timeline.md) and [changelog](CHANGELOG.md) record completed work; the [technical roadmap](docs/roadmap.md) retains resource targets and engineering gates.
 
+M5.9.1 delivers completed-device observation, configured chat and a first human approval path, plus genuine full-screen application evidence. See [the capability table](docs/lab/M5.9.1.md). Next: actual-model qualification, OS printer-driver support, live read-only media collectors and broader application/observer coverage. Production coexistence remains separately gated.
+
 ## Completed foundations
 
 | Work | What the evidence establishes |

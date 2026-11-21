@@ -18,7 +18,17 @@ An in-process TypeScript module is trusted application code, **not a security sa
 
 Prove an adapter first with deterministic conformance fixtures and malformed/disconnected cases, then disposable genuine guests where applicable. Record exactly what passed. Keep original console, physical controls and guest lifecycle independent. Optional external intelligence, if ever pursued separately, must be absent by default and unnecessary for the complete desktop. Terminal output and model responses are data, never authority to widen capabilities.
 
-## M5.9 optional AI Companion
+## M5.9.1 current integration
+
+The existing provider library is now registered behind authenticated service routes and optional private configuration. The offline guide remains the default. Explicit model discovery, destination disclosure, bounded selected-text sharing, cancellation and inert replies are implemented. Separately, an operator-disabled-by-default terminal review admits three exact UNIX suggestions and requires a single-use human approval under the current attachment and keyboard lease. No model tool execution or physical authority is supplied.
+
+[Setup and workflow](../getting-started/configured-companion.md) · [Decision and limits](../decisions/0007-completed-devices-and-companion.md) · [Actual evidence](../lab/M5.9.1.md). Rolf's architecture remains a useful independent reference; no code import, compatibility agreement or partnership is implied.
+
+## M5.9 historical starting point
+
+The following describes the earlier increment; M5.9.1 supersedes its “not registered” and future-only approval status.
+
+### Optional AI Companion
 
 The desktop now offers an explicitly labeled **offline guide fixture**. It answers a small set of useful V7/terminal/graphics questions deterministically. It is not a language model. Questions and deliberately pasted excerpts remain in the window; no terminal text is captured automatically. Clear or close discards the conversation and cancels pending work. Submitted and displayed text is inert, with a 20-message, 16,384-character conversation bound and 4,096-character excerpt/response bounds.
 

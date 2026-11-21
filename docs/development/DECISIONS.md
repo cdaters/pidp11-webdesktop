@@ -25,3 +25,5 @@ These decisions describe the current direction. The linked reports retain the ev
 | Local printer import is a snapshot | Preserve ASCII controls and bounded paper while labeling manual guest-output capture honestly; no implied live LP0 or simulator monitor endpoint. [Status](../lab/M5.9.md) |
 
 The [philosophy](../../PHILOSOPHY.md) explains the priorities behind these choices. The [technical index](../technical/README.md) is the starting point for implementation details.
+
+- [0007: completed device observations and optional companion requests](../decisions/0007-completed-devices-and-companion.md): immutable bounded exports, explicit provider use and single-use limited terminal approval.

@@ -2,6 +2,13 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.9.1 development increment — 2026-11-21
+
+- Added authenticated, generation-specific completed LP11/PC11 output observations with private publication, checksum verification, bounded paper/byte views and exact downloads. Genuine CPU-device programs exercised original SIMH; OS printer-driver integration remains open.
+- Wired the existing optional Ollama/OpenAI-compatible clients into private configuration, explicit discovery/chat and deliberate selected-text sharing. Added disabled-by-default, expiring single-use review for three UNIX suggestions through the existing keyboard lease. Actual-service acceptance used deterministic providers and fake guests; real models remain untested.
+- Retained eight genuine 2.11BSD vi passes, repeated all twelve V7 text cases on fresh media, and demonstrated V7 text/graphics, completed paper and a labeled companion fixture in three browser engines. Recorded the volume interruption and retained affected disposable media without claiming clean shutdown.
+- Expanded tests, fixed saved geometry for additional equipment windows, and rehearsed protected ARM64 startup, missing-memory refusal, lifecycle and short resource measurements. No physical Pi contact. [Report](docs/lab/M5.9.1.md) and [candidate record](docs/lab/M5.9.1-package.md).
+
 ## M5.9 development increment — 2026-11-21
 
 - Added separate initial VT220 and ASR-33-inspired guest presentations, bounded paper/display exports and up to four guest windows. Genuine V7 commands passed in all four text personalities across three browser engines; full-screen applications remain unqualified.

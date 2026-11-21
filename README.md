@@ -45,8 +45,8 @@ M5.3 repeated the genuine terminal demonstration on the actual Pi using one disp
 | Genuine guest terminal | UNIX V7/DC11 demonstrated in the isolated lab **and on the actual Pi**; M5.9 tests VT100, initial VT52/VT220 and teletype presentations in genuine disposable V7 |
 | 4010 graphics | Bounded Tektronix parser now displays genuine V7 `graph` / `plot -Ttek` output in three browser engines; VT11 remains separate future work |
 | Disk, tape, paper tape and OS profiles | Working **simulated** workflows; no real guest media is changed |
-| Continuous-form line printer | Bounded local LP0 spool, 80/132-column paper and explicit text-snapshot import/export; no live guest LP0 transport |
-| AI Companion | Optional offline guide chat; tested host-provider library prototype, no connected model or guest command authority |
+| Continuous-form line printer | Simulated spool preserved; new authenticated Guest devices view receives verified completed LP11 exports from genuine PDP-11 CPU/device tests, with exact downloads. No continuous tail or verified OS printer driver yet |
+| AI Companion | Optional offline guide or owner-configured provider; explicit terminal sharing and separately approved, disabled-by-default three-command suggestions. Deterministic provider/fake-guest acceptance; real model untested |
 | Passive panel observation | Laboratory experiments; no production Pi observation service installed |
 | Optional installation candidate | Detached Go service and ARM64 package tested in disposable Linux; not deployed to the Pi. [M5.9 results](docs/lab/M5.9.md) · [setup candidate](docs/getting-started/optional-service.md) |
 | Physical Pi integration | V7/browser/physical checks passed in M5.5, but fallback selected the wrong guest; acceptance blocked, temporary changes rolled back, machine left stopped |
@@ -61,6 +61,16 @@ See the [gallery](docs/screenshots/README.md) for the full panel, disk and tape 
 ![Genuine V7 Tektronix graphics in the browser](docs/screenshots/m59-v7-tek.png)
 
 *Actual M5.9 disposable V7 plotting output through unmodified SIMH. [Evidence, limits and remaining work](docs/lab/M5.9.md).*
+
+## M5.9.1 equipment and applications
+
+Completed LP11/PC11 output, configured companion requests and eight retained genuine 2.11BSD `vi` cases now have working code and laboratory evidence. Twelve fresh V7 terminal cases and the combined equipment workflow passed across Chromium, Firefox and WebKit. The physical Pi was not contacted.
+
+![V7 terminals, genuine completed printer output and a labeled provider fixture](docs/screenshots/m591-equipment-room.png)
+
+*Actual laboratory application. V7 text/graphics are live guest streams; paper is a completed CPU-device export; the companion response is a deterministic fixture, not a real model.*
+
+[Results and limits](docs/lab/M5.9.1.md) · [Observe device output](docs/technical/observed-peripherals.md) · [Configure the companion](docs/getting-started/configured-companion.md)
 
 ## Try the local desktop
 

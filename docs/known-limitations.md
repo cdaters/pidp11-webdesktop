@@ -22,3 +22,7 @@ The desktop is useful for exploration now, and genuine guest-terminal integratio
 | Installation tutorial | A working original installation was tested; the complete reconstructed blank-card guide has not been independently repeated. |
 
 Details are in [M5.0](lab/M5.0.md), [M5.1](lab/M5.1.md), [M5.3](lab/M5.3.md), [M5.4](lab/M5.4.md), [M5.5 physical findings](lab/M5.5-physical-pilot.md), [panel safety](lab/M4.md), [installation status](installation/README.md) and the [roadmap](../ROADMAP.md). Contributions that reduce a specific uncertainty are welcome.
+
+## M5.9.1 scope update
+
+Completed LP11/PC11 observations and optional configured chat now exist; earlier statements about no backend peripheral or provider wiring describe older milestones. Printer acceptance is a real emulated-CPU/device program, not an OS driver. Spool tailing, real model acceptance, media collectors and general AI command execution remain absent. Eight retained 2.11BSD vi cases establish limited full-screen application behavior. [Current capability table](lab/M5.9.1.md).

@@ -22,3 +22,5 @@ The long-term aim is to turn on a PiDP-11, select a guest using the physical swi
 To run the local demonstration, follow the short [README setup](../../README.md#try-the-local-desktop). You need a recent Node.js installation, but no Pi, guest disk or hardware connection. If you would rather browse first, the [screenshot gallery](../screenshots/README.md) and [M5.0 demonstration](../lab/M5.0.md) show the real application.
 
 The [headless Trixie guide](../installation/README.md) is a separate guide to installing Oscar's original software. It does not install this Web Desktop.
+
+For the optional new equipment, see [configured companion setup](configured-companion.md) and [completed device output](../technical/observed-peripherals.md). Both require the separate authenticated service; the local demonstration keeps working without either.

@@ -49,3 +49,10 @@ Captured from actual Chromium application windows on the Mac, November 21, 2026.
 - [V7 Tektronix plot](m59-v7-tek.png): genuine disposable V7 `graph | plot -Ttek` through unmodified SIMH and the real bridge; read-only browser, no intercepted transport.
 - [Printer snapshot](m59-printer-snapshot.png): a genuine V7 `pr` listing captured through the conventional console and explicitly imported from a local text file. The paper is a local snapshot, **not a live LP0 connection**. The guest's 1969 date is its unconfigured lab clock, not the capture date.
 - [Offline companion](m59-offline-companion.png): deterministic guide fixture responding to an actual submitted question. No language model or network provider is connected. The surrounding panel and mock applications are demonstrations.
+
+## M5.9.1 genuine equipment and editor
+
+- [Equipment room](m591-equipment-room.png): actual Chromium application, genuine V7 text and Tektronix stream, completed LP11 CPU-device export from a separate run, and visibly labeled deterministic provider fixture. Four normal application windows; no intercepted transport or synthetic guest login.
+- [2.11BSD vi](m591-bsd-vi.png): genuine `/usr/ucb/vi`, guest TERM=vt100, original SIMH DZ11 line, disposable media.
+
+The captures are application evidence, not physical Pi or real-model evidence. Baseline screenshots remain preserved. [Results and qualifications](../lab/M5.9.1.md).
