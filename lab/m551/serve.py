@@ -48,7 +48,9 @@ try:
     bridge=start_bridge();assert all(l['state']=='detached' for l in control()['lines'])
     (root/'detached-no-guest.json').write_text(json.dumps(control()))
     sim=Simh()
-    for line in pathlib.Path('/lab/m50/guest.ini').read_text().splitlines():
+    profile = pathlib.Path(sys.argv[1] if len(sys.argv) == 2 else '/lab/m50/guest.ini').resolve()
+    assert pathlib.Path('/lab') in profile.parents, 'Only reviewed mounted lab profiles are accepted'
+    for line in profile.read_text().splitlines():
         if line and not line.startswith(';'):sim.command(line)
     console('boot\r',1);console('hp(0,0)unix\r',2);assert '# ' in sim.log[-1000:]
     console('\x04',2);console('dmr\r',1);assert '$ ' in console('echo M551_OPERATOR_READY\r',1)

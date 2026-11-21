@@ -8,6 +8,6 @@ mkdir -p "$1"
 CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath -ldflags='-s -w' -o "$1/webdesktop-service" ./cmd/webdesktop-service
 cp LICENSE THIRD_PARTY_NOTICES.md packaging/pidp11-webdesktop.service "$1/"
 (cd "$1" && shasum -a 256 webdesktop-service LICENSE THIRD_PARTY_NOTICES.md pidp11-webdesktop.service > SHA256SUMS)
-cp packaging/install.sh packaging/select-release.sh packaging/uninstall.sh packaging/configure.sh "$1/"
-(cd "$1" && shasum -a 256 webdesktop-service LICENSE THIRD_PARTY_NOTICES.md pidp11-webdesktop.service SHA256SUMS install.sh select-release.sh uninstall.sh configure.sh > PACKAGE_SHA256SUMS)
+cp packaging/install.sh packaging/select-release.sh packaging/uninstall.sh packaging/configure.sh packaging/preflight.sh "$1/"
+(cd "$1" && shasum -a 256 webdesktop-service LICENSE THIRD_PARTY_NOTICES.md pidp11-webdesktop.service SHA256SUMS install.sh select-release.sh uninstall.sh configure.sh preflight.sh > PACKAGE_SHA256SUMS)
 echo 'Package built; inspect and verify it before any separately authorized deployment.'
