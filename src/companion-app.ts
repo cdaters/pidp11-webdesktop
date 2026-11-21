@@ -1,3 +1,5 @@
+import { ConfiguredCompanion, configuredCompanion } from "./companion-http.ts";
+import { onSelection, takeSelection } from "./terminal-sharing.ts";
 import {
   GuideFixture,
   validateCompanionRequest,
@@ -13,10 +15,10 @@ export function mountCompanion(
 ): () => void {
   host.classList.add("companion-app");
   host.innerHTML = `<div class="app-heading"><h2>AI Companion</h2><span class="source-tag">PROTOTYPE · OFFLINE FIXTURE</span></div>
-    <p data-provider></p><p>Ask about UNIX V7 directories, ed, keyboard ownership or plotting. No guest commands can be sent here.</p>
+    <p data-provider></p><div class="terminal-toolbar"><button type="button" data-configured>Use configured provider</button><button type="button" data-offline>Use offline guide</button><select aria-label="Companion model" hidden></select><button type="button" data-discover hidden>Test connection / list models</button><button type="button" data-cancel>Cancel request</button></div><p>Ask about UNIX V7 directories, ed, keyboard ownership or plotting. Model replies are suggestions, not machine observations. No commands are sent from chat.</p>
     <div class="companion-chat" role="log" aria-label="Companion conversation"></div>
     <form><label>Your question<textarea aria-label="Companion question" maxlength="4096" rows="2" required></textarea></label>
-    <details><summary>Deliberately share selected terminal text</summary><p>Copy only the text you want to share, then paste it here. Nothing is read from a terminal automatically.</p><textarea aria-label="Shared terminal excerpt" maxlength="4096" rows="3"></textarea></details>
+    <details><summary>Deliberately share selected terminal text</summary><p>Copy only the text you want to share, then paste it here. Nothing is read from a terminal automatically.</p><label>Source terminal <input aria-label="Shared terminal source" maxlength="160" value="Manually pasted excerpt"></label><textarea aria-label="Shared terminal excerpt" maxlength="4096" rows="3"></textarea></details>
     <button>Send to offline fixture</button><button type="button" data-clear>Clear chat</button></form><p role="status" data-status></p>`;
   host.querySelector("[data-provider]")!.textContent = provider.name;
   const log = host.querySelector<HTMLElement>(".companion-chat")!;
@@ -50,6 +52,93 @@ export function mountCompanion(
     button.disabled = false;
     status.textContent = "Chat cleared; nothing retained.";
   };
+  const source = host.querySelector<HTMLInputElement>(
+    '[aria-label="Shared terminal source"]',
+  )!;
+  const models = host.querySelector<HTMLSelectElement>(
+    '[aria-label="Companion model"]',
+  )!;
+  const discover = host.querySelector<HTMLButtonElement>("[data-discover]")!;
+  const showProvider = () => {
+    host.querySelector("[data-provider]")!.textContent = provider.name;
+    const configured =
+      provider instanceof ConfiguredCompanion ? provider : undefined;
+    models.hidden = discover.hidden = !configured;
+    host.querySelector(".source-tag")!.textContent = configured
+      ? configured.fixture
+        ? "PROVIDER FIXTURE · NO MODEL"
+        : "CONFIGURED MODEL · OPTIONAL"
+      : "PROTOTYPE · OFFLINE FIXTURE";
+    button.textContent = configured
+      ? "Send text to configured provider"
+      : "Send to offline fixture";
+  };
+  const receiveSelection = () => {
+    const selection = takeSelection();
+    if (!selection) return;
+    shared.value = selection.text;
+    source.value = selection.source;
+    host.querySelector("details")!.open = true;
+    status.textContent =
+      "Exact selection shown for review. Nothing sent; choose Send deliberately.";
+  };
+  const unsubscribe = onSelection(receiveSelection);
+  receiveSelection();
+  host.querySelector<HTMLButtonElement>("[data-configured]")!.onclick =
+    async () => {
+      if (pending) return;
+      const controller = new AbortController();
+      pending = controller;
+      try {
+        const result = await configuredCompanion(controller.signal);
+        if (disposed || pending !== controller) return;
+        clear();
+        provider = result.provider;
+        models.replaceChildren(
+          ...result.models.map((model) => new Option(model, model)),
+        );
+        showProvider();
+        status.textContent = `Sending will share your question/history and the displayed excerpt with ${result.provider.destination}. Model knowledge is not a live machine observation.`;
+      } catch (error) {
+        if (!disposed && pending === controller)
+          status.textContent = (error as Error).message;
+      } finally {
+        if (pending === controller) pending = undefined;
+      }
+    };
+  host.querySelector<HTMLButtonElement>("[data-offline]")!.onclick = () => {
+    clear();
+    provider = new GuideFixture();
+    showProvider();
+  };
+  host.querySelector<HTMLButtonElement>("[data-cancel]")!.onclick = () => {
+    pending?.abort();
+    pending = undefined;
+    button.disabled = false;
+    status.textContent = "Request cancelled; no guest action taken.";
+  };
+  models.onchange = () => {
+    if (provider instanceof ConfiguredCompanion) provider.model = models.value;
+  };
+  discover.onclick = async () => {
+    if (pending || !(provider instanceof ConfiguredCompanion)) return;
+    const controller = new AbortController();
+    pending = controller;
+    try {
+      const names = await provider.discover(controller.signal);
+      if (disposed || pending !== controller) return;
+      status.textContent = !provider.discoveryAvailable
+        ? "Configured model list only; send a question to test the connection."
+        : names.length
+          ? `Provider responded; approved available models: ${names.join(", ")}`
+          : "Provider responded; no approved models available.";
+    } catch (error) {
+      if (!disposed && pending === controller)
+        status.textContent = (error as Error).message;
+    } finally {
+      if (pending === controller) pending = undefined;
+    }
+  };
   form.onsubmit = async (event) => {
     event.preventDefault();
     if (pending || disposed) return;
@@ -67,6 +156,8 @@ export function mountCompanion(
       { role: "user", content: text },
     ];
     try {
+      if (provider instanceof ConfiguredCompanion)
+        provider.source = source.value;
       const answer = await provider.reply(
         { messages: next, sharedText: shared.value },
         controller.signal,
@@ -81,11 +172,22 @@ export function mountCompanion(
       validateCompanionRequest({ messages: completed, sharedText: "" });
       messages = completed;
       append("You", text);
-      append("Offline guide", answer);
+      append(
+        provider instanceof ConfiguredCompanion
+          ? provider.fixture
+            ? "Provider fixture"
+            : "Model"
+          : "Offline guide",
+        answer,
+      );
       question.value = "";
       shared.value = "";
       status.textContent =
-        "Local fixture response · no model contacted or guest action taken.";
+        provider instanceof ConfiguredCompanion
+          ? provider.fixture
+            ? "Deterministic provider fixture replied; no model or guest action."
+            : "Configured model replied; verify advice against historical references. No guest action."
+          : "Local fixture response · no model contacted or guest action taken.";
     } catch (error) {
       if (pending === controller && !disposed)
         status.textContent = (error as Error).message;
@@ -99,6 +201,7 @@ export function mountCompanion(
   host.querySelector<HTMLButtonElement>("[data-clear]")!.onclick = clear;
   return () => {
     disposed = true;
+    unsubscribe();
     pending?.abort();
     messages = [];
   };

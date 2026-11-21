@@ -27,6 +27,8 @@ const (
 	PanelControl    Capability = "panel.control"
 	Media           Capability = "media"
 	Admin           Capability = "admin"
+	DeviceObserve   Capability = "device.observe"
+	CompanionChat   Capability = "companion.chat"
 )
 
 type Credential struct {
@@ -286,4 +288,21 @@ func (g *Gate) Require(cap Capability, next http.Handler) http.Handler {
 }
 func ValidToken(token string) bool {
 	return len(token) >= 32 && len(token) <= 128 && !strings.ContainsAny(token, "\r\n\x00")
+}
+
+// Mutation additionally requires same-origin and this session's CSRF proof.
+// Capability checks remain separate; possessing this proof grants no new role.
+func (g *Gate) Mutation(r *http.Request) bool {
+	if !g.Origin(r) {
+		return false
+	}
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	cookie, err := r.Cookie(g.cookieName())
+	if err != nil {
+		return false
+	}
+	session, ok := g.sessions[cookie.Value]
+	proof := r.Header.Get("X-CSRF-Token")
+	return ok && g.Now().Before(session.Until) && len(proof) == len(session.CSRF) && subtle.ConstantTimeCompare([]byte(proof), []byte(session.CSRF)) == 1
 }

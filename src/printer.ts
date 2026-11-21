@@ -12,26 +12,31 @@ export interface PaperListing {
 
 /** CRLF and lone CR are display newlines; no impact-printer overstrike emulation.
  * FF always advances to the next page. Empty rows are implicit, not DOM nodes. */
-export function paginateSpool(spool: string): PaperListing {
+export function paginateSpool(spool: string, deviceSemantics = false): PaperListing {
   const rows = new Map<number, string>();
   let row = 0, line = "", columns = 0, maxColumns = 0;
   const flush = () => {
     if (line) rows.set(row, line);
-    maxColumns = Math.max(maxColumns, columns);
+    maxColumns = Math.max(maxColumns, columns, line.length);
     line = ""; columns = 0;
   };
   for (let i = 0; i < spool.length; i++) {
     const c = spool[i]!;
-    if (c === "\r" || c === "\n") {
+    if (deviceSemantics && c === "\r") { columns = 0; }
+    else if (deviceSemantics && c === "\b") { columns = Math.max(0, columns - 1); }
+    else if (c === "\r" || c === "\n") {
       flush(); row++;
       if (c === "\r" && spool[i + 1] === "\n") i++;
     } else if (c === "\f") {
       flush(); row = (Math.floor(row / PAGE_LINES) + 1) * PAGE_LINES;
     } else if (c === "\t") {
       const n = TAB_COLUMNS - columns % TAB_COLUMNS;
-      line += " ".repeat(n); columns += n;
+      if (!deviceSemantics) line += " ".repeat(n);
+      columns += n;
     } else {
-      line += c; columns++;
+      if (deviceSemantics) line = line.padEnd(columns, " ").slice(0, columns) + c + line.slice(columns + 1);
+      else line += c;
+      columns++;
     }
   }
   flush();
@@ -61,6 +66,7 @@ export function diagnosticPrinterSample(): string {
 export class PaperViewer {
   private listing = paginateSpool("");
   private source = "";
+  private deviceSemantics: boolean;
   private columns = 80;
   private following = true;
   private frame = 0;
@@ -71,7 +77,8 @@ export class PaperViewer {
   private paintedRows = PAGE_LINES;
   readonly viewport: HTMLElement;
   private position: HTMLElement;
-  constructor(viewport: HTMLElement, position: HTMLElement) {
+  constructor(viewport: HTMLElement, position: HTMLElement, deviceSemantics = false) {
+    this.deviceSemantics = deviceSemantics;
     this.viewport = viewport; this.position = position;
     this.strip = document.createElement("div");
     this.strip.className = "printer-paper";
@@ -107,7 +114,7 @@ export class PaperViewer {
     if (spool === this.source) return;
     const wasEmpty = !this.source;
     const logicalTop = this.viewport.scrollTop * this.scale;
-    this.source = spool; this.listing = paginateSpool(spool);
+    this.source = spool; this.listing = paginateSpool(spool, this.deviceSemantics);
     // First output starts at its heading. Later appended output follows only
     // when already at the end; unrelated app refreshes never reset this view.
     this.layout();

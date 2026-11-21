@@ -17,20 +17,25 @@ import (
 	"time"
 
 	"pidp11.local/webdesktop/internal/access"
+	"pidp11.local/webdesktop/internal/companion"
+	"pidp11.local/webdesktop/internal/peripheral"
 	"pidp11.local/webdesktop/internal/terminalbridge"
 )
 
 // Config contains only operator-provisioned addresses and private file paths.
 // No attachment approvals or sessions are serialized here.
 type Config struct {
-	Listen      string                  `json:"listen"`
-	Origin      string                  `json:"origin"`
-	Control     string                  `json:"control"`
-	Certificate string                  `json:"certificate"`
-	Key         string                  `json:"key"`
-	Writer      string                  `json:"writer_token"`
-	Observer    string                  `json:"observer_token"`
-	Endpoints   []terminalbridge.Config `json:"endpoints"`
+	AllowProposals bool                    `json:"allow_readonly_command_proposals,omitempty"`
+	Listen         string                  `json:"listen"`
+	Origin         string                  `json:"origin"`
+	Control        string                  `json:"control"`
+	Certificate    string                  `json:"certificate"`
+	Key            string                  `json:"key"`
+	Writer         string                  `json:"writer_token"`
+	Observer       string                  `json:"observer_token"`
+	Endpoints      []terminalbridge.Config `json:"endpoints"`
+	Devices        []peripheral.Config     `json:"device_exports,omitempty"`
+	Companion      *companion.Config       `json:"companion,omitempty"`
 }
 
 // ReadPrivate opens once, refuses links/special files and bounds private inputs.
@@ -78,6 +83,14 @@ func Load(path string) (Config, *access.Gate, tls.Certificate, error) {
 	if decoder.Decode(&extra) != io.EOF {
 		return c, nil, cert, errors.New("trailing configuration data")
 	}
+	if _, err = peripheral.New(c.Devices); err != nil {
+		return c, nil, cert, err
+	}
+	if c.Companion != nil {
+		if _, err = companion.NewService(*c.Companion, ReadPrivate); err != nil {
+			return c, nil, cert, err
+		}
+	}
 	host, port, err := net.SplitHostPort(c.Listen)
 	p, pe := strconv.Atoi(port)
 	u, ue := url.Parse(c.Origin)
@@ -105,7 +118,7 @@ func Load(path string) (Config, *access.Gate, tls.Certificate, error) {
 	if !access.ValidToken(writer) || !access.ValidToken(observer) || writer == observer {
 		return c, nil, cert, errors.New("distinct valid writer and observer tokens required")
 	}
-	gate, err := access.NewSecure(c.Origin, []access.Credential{{Token: writer, Capabilities: []access.Capability{access.TerminalObserve, access.TerminalInput}}, {Token: observer, Capabilities: []access.Capability{access.TerminalObserve}}})
+	gate, err := access.NewSecure(c.Origin, []access.Credential{{Token: writer, Capabilities: []access.Capability{access.TerminalObserve, access.TerminalInput, access.DeviceObserve, access.CompanionChat}}, {Token: observer, Capabilities: []access.Capability{access.TerminalObserve, access.DeviceObserve}}})
 	if err != nil {
 		return c, nil, cert, err
 	}

@@ -1,5 +1,5 @@
-// Package companion provides bounded, chat-only provider adapters for a future
-// owner-configured host. It is not registered in the terminal service. No tools,
+// Package companion provides bounded, chat-only provider adapters for an optional
+// owner-configured host. No tools,
 // shell, guest writes, discovery, credentials in browser code or automatic retry.
 package companion
 

@@ -63,3 +63,11 @@ test("terminal input ownership and histories are independent of each other and p
   assert.equal(b.inputOwner, false);
   assert.match(a.command("halt"), /never reach the panel/);
 });
+
+test("guest and equipment windows restore geometry without restoring sessions", () => {
+  const ids = ["guest", "guest-2", "guest-3", "guest-4", "companion", "device-observer"];
+  const rows = readPreferences(JSON.stringify(ids.map(id => ({id, x:20, y:30, width:600, height:400, token:"secret", owner:true}))));
+  assert.equal(rows.size, ids.length);
+  assert(!JSON.stringify([...rows]).includes("secret"));
+  assert.equal(readPreferences('[{"id":"guest-5","x":0,"y":0,"width":600,"height":400}]').size, 0);
+});

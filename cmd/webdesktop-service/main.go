@@ -19,7 +19,10 @@ import (
 	"syscall"
 	"time"
 
+	"pidp11.local/webdesktop/internal/access"
+	"pidp11.local/webdesktop/internal/companion"
 	"pidp11.local/webdesktop/internal/memoryguard"
+	"pidp11.local/webdesktop/internal/peripheral"
 	"pidp11.local/webdesktop/internal/terminalbridge"
 	"pidp11.local/webdesktop/internal/terminalservice"
 	"pidp11.local/webdesktop/internal/web"
@@ -35,6 +38,17 @@ func serve(ctx context.Context, path string) error {
 		return err
 	}
 	defer manager.Close()
+	devices, err := peripheral.New(config.Devices)
+	if err != nil {
+		return err
+	}
+	var chat *companion.Service
+	if config.Companion != nil {
+		chat, err = companion.NewService(*config.Companion, terminalservice.ReadPrivate)
+		if err != nil {
+			return err
+		}
+	}
 	control, err := terminalservice.ControlListener(config.Control)
 	if err != nil {
 		return err
@@ -47,7 +61,17 @@ func serve(ctx context.Context, path string) error {
 	defer listener.Close()
 	admin := terminalservice.ControlServer(manager)
 	defer admin.Close()
-	server := &http.Server{Handler: (&terminalbridge.Server{Bridge: manager, Auth: gate}).Handler(web.Assets()), TLSConfig: &tls.Config{MinVersion: tls.VersionTLS13, Certificates: []tls.Certificate{cert}}, ReadHeaderTimeout: time.Second, ReadTimeout: 3 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}
+	controlMux := http.NewServeMux()
+	controlMux.Handle("/devices/", devices.ControlHandler())
+	controlMux.Handle("/", admin.Handler)
+	admin.Handler = controlMux
+	server := &http.Server{Handler: (&terminalbridge.Server{Bridge: manager, Auth: gate, AllowProposals: config.AllowProposals, Register: func(mux *http.ServeMux) {
+		mux.Handle("GET /api/v1/features", gate.Require(access.TerminalObserve, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			json.NewEncoder(w).Encode(map[string]bool{"readonly_command_proposals": config.AllowProposals})
+		})))
+		devices.Register(mux, gate)
+		chat.Register(mux, gate)
+	}}).Handler(web.Assets()), TLSConfig: &tls.Config{MinVersion: tls.VersionTLS13, Certificates: []tls.Certificate{cert}}, ReadHeaderTimeout: time.Second, ReadTimeout: 3 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}
 	defer server.Close()
 	lifetime, cancel := context.WithCancel(ctx)
 	defer cancel()

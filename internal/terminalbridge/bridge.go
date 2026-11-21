@@ -55,13 +55,15 @@ func Validate(configs []Config) error {
 // Frame carries per-viewer ownership state or guest bytes (base64 in JSON).
 // Epoch fences keyboard authority; it is not a guest execution acknowledgement.
 type Frame struct {
-	Type      string `json:"type"`
-	Data      []byte `json:"data,omitempty"`
-	Connected bool   `json:"connected"`
-	Owner     bool   `json:"owner"`
-	Busy      bool   `json:"busy"`
-	Epoch     uint64 `json:"epoch"`
-	Message   string `json:"message,omitempty"`
+	Type       string `json:"type"`
+	Data       []byte `json:"data,omitempty"`
+	Connected  bool   `json:"connected"`
+	Owner      bool   `json:"owner"`
+	Busy       bool   `json:"busy"`
+	Epoch      uint64 `json:"epoch"`
+	Message    string `json:"message,omitempty"`
+	ProposalID string `json:"proposal_id,omitempty"`
+	Expires    int64  `json:"expires,omitempty"`
 }
 
 // Client is a subscription owned by one WebSocket handler. Endpoint.mu protects
@@ -71,6 +73,7 @@ type Client struct {
 	done      chan struct{}
 	pending   int
 	lastSeq   uint64
+	proposal  *proposal
 	rateStart time.Time
 	rateBytes int
 }
@@ -246,6 +249,12 @@ func (e *Endpoint) Connected() bool { e.mu.Lock(); defer e.mu.Unlock(); return e
 func (e *Endpoint) Operation(c *Client, op string, epoch, seq uint64, data []byte, n int) error {
 	e.mu.Lock()
 	defer e.mu.Unlock()
+	return e.operationLocked(c, op, epoch, seq, data, n)
+}
+
+// operationLocked shares the ordinary input path with single-use approval.
+// Caller holds Endpoint.mu, including throughout the bounded guest write.
+func (e *Endpoint) operationLocked(c *Client, op string, epoch, seq uint64, data []byte, n int) error {
 	e.expire()
 	if !e.clients[c] {
 		return errors.New("disconnected")
@@ -280,6 +289,7 @@ func (e *Endpoint) Operation(c *Client, op string, epoch, seq uint64, data []byt
 		}
 		c.pending -= n
 	case "input":
+		c.proposal = nil // Ordinary typing changes the context of a pending suggestion.
 		if e.conn == nil || e.owner != c || epoch != e.epoch {
 			return errors.New("keyboard ownership required")
 		}

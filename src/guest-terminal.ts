@@ -1,3 +1,4 @@
+import { shareSelection } from "./terminal-sharing.ts";
 import { Tek4010 } from "./tek4010.ts";
 import { renderTek, saveArtifact } from "./tek-display.ts";
 import { TerminalProfile, type TerminalPersonality } from "./terminal-profile.ts";
@@ -20,11 +21,11 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     <div class="terminal-toolbar"><select aria-label="Guest endpoint" disabled></select><button data-refresh disabled>Refresh lines</button><button data-connect disabled>Connect</button><button data-disconnect disabled>Disconnect</button><button data-acquire disabled>Acquire keyboard</button><button data-release disabled>Release keyboard</button><button data-logout disabled>Sign out</button></div>
     <div class="terminal-toolbar"><label>Personality <select aria-label="Guest terminal personality"><option value="vt100">VT100 · tested subset</option><option value="vt52">VT52 · initial text subset</option><option value="vt220">VT220 · seven-bit subset</option><option value="asr33">ASR-33 · paper presentation</option><option value="tek4010">Tektronix 4010 · experimental</option></select></label><label>Text size <select aria-label="Guest terminal text size"><option value="11">Small</option><option value="13" selected>Normal</option><option value="16">Large</option></select></label></div>
     <div class="guest-status" role="status">Sign in to list configured guest lines. No automatic keyboard takeover.</div>
-    <div class="terminal-toolbar"><button data-save-output>Save display</button><label><input type="checkbox" data-uppercase> Uppercase keyboard (teletype)</label><span data-paper-status></span></div>
+    <div class="terminal-toolbar"><button data-save-output>Save display</button><button data-share-selection>Share selected text</button><label><input type="checkbox" data-uppercase> Uppercase keyboard (teletype)</label><span data-paper-status></span></div>
     <svg class="tek-display guest-tek" viewBox="0 0 1024 781" tabindex="0" role="img" aria-label="Guest Tektronix display" hidden></svg>
     <div class="guest-screen"><div class="guest-xterm" aria-label="Real guest terminal"></div></div>
     <details class="guest-paste"><summary>Review paste</summary><label>One line, without Return <input type="text" maxlength="256" aria-label="Reviewed guest paste" autocomplete="off"></label><button data-paste disabled>Send reviewed paste</button></details>
-    <label class="guest-erase">Backspace <select aria-label="Backspace encoding"><option value="127">DEL · DEC</option><option value="8">BS</option><option value="35"># · UNIX V7 erase</option></select></label>
+    <details class="guest-proposals"><summary>Review a suggested UNIX command (experimental)</summary><p>Disabled by default. Only pwd, ls and ls / are admitted; this is not general command execution. Confirm the attached guest is UNIX.</p><label><input type="checkbox" data-enable-proposals> Enable review in this window</label><select aria-label="Suggested read-only command"><option value="pwd">pwd</option><option value="ls">ls</option><option value="ls /">ls /</option></select><button data-propose disabled>Request exact-byte review</button><pre data-proposal-preview></pre><button data-approve disabled>Approve this input once</button><button data-cancel-proposal>Cancel proposal</button></details><label class="guest-erase">Backspace <select aria-label="Backspace encoding"><option value="127">DEL · DEC</option><option value="8">BS</option><option value="35"># · UNIX V7 erase</option></select></label>
     <div class="terminal-foot">ASCII7 input · 80 × 24 text / 72-column paper / 1024 × 781 graphics · paper timing is not simulated · Backspace encoding is explicit · shared guest line may already be logged in. Panel and mock peripherals remain separate.</div>`;
   const $=<T extends HTMLElement>(selector:string)=>host.querySelector<T>(selector)!;
   const status=$(".guest-status"),badge=$(".source-tag"),selector=$<HTMLSelectElement>("select");
@@ -46,7 +47,14 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
   displayMode();
   let term:Terminal=makeTerminal();
   term.open($(".guest-xterm"));
-  let socket:WebSocket|undefined, owner=false,connected=false,epoch=0,seq=0,canInput=false,csrf="",disposed=false,queued=0;
+  let proposalID = "", proposalEpoch = 0, proposalRequested = false;
+  const clearProposal = () => {
+    proposalRequested = false;
+    proposalID = "";
+    $("[data-proposal-preview]").textContent = "";
+    $<HTMLButtonElement>("[data-approve]").disabled = true;
+  };
+ let socket:WebSocket|undefined, owner=false,connected=false,epoch=0,seq=0,canInput=false,csrf="",disposed=false,queued=0;
   const controls=()=>{
     const open=socket?.readyState===WebSocket.OPEN;
     $<HTMLButtonElement>("[data-connect]").disabled=!selector.options.length || !!socket || selector.selectedOptions[0]?.dataset.state !== "attached";
@@ -74,11 +82,13 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     owner = false;
     connected = false;
     old?.close();
+    clearProposal();
     status.textContent = message;
     controls();
   };
   const input=(data:string)=>{
     if(!owner || !connected)return;
+    clearProposal();
     if(!data.length || data.length>256 || /[^\x00-\x7f]/.test(data)){status.textContent='Input rejected: ASCII7, at most 256 bytes per event';return;}
     if (profile.personality === "asr33" && $<HTMLInputElement>("[data-uppercase]").checked) data = data.toUpperCase();
     if(send({type:'input',epoch,seq:seq+1,data:btoa(data)}))seq++;
@@ -165,7 +175,7 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     ws.onmessage=e=>{
       if(socket!==ws)return;
       try{const f=JSON.parse(e.data);
-        if(f.type==='state'){owner=!!f.owner;connected=!!f.connected;epoch=f.epoch;status.textContent=f.message || (connected ? owner ? 'Connected · this window owns the guest keyboard' : f.busy ? 'Connected read-only · another viewer owns the keyboard' : 'Connected read-only · acquire keyboard explicitly' : 'Guest line unavailable · operator must reconnect it');controls();}
+        if(f.type==='state'){if(f.epoch!==proposalEpoch||!f.owner)clearProposal();owner=!!f.owner;connected=!!f.connected;epoch=f.epoch;status.textContent=f.message || (connected ? owner ? 'Connected · this window owns the guest keyboard' : f.busy ? 'Connected read-only · another viewer owns the keyboard' : 'Connected read-only · acquire keyboard explicitly' : 'Guest line unavailable · operator must reconnect it');controls();}
         else if(f.type==='output'){
           const raw=atob(f.data);if(queued+raw.length>65536)throw Error('Renderer backlog');queued+=raw.length;
           const bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
@@ -185,6 +195,23 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
               send({ type: 'ack', bytes: bytes.length });
             }
           });
+        } else if (f.type === 'proposal') {
+          // Cancellation can race an already queued response. Never revive it.
+          if (!proposalRequested || !$<HTMLInputElement>('[data-enable-proposals]').checked) {
+            if (owner) send({type: 'cancel-proposal', epoch});
+            return;
+          }
+          proposalRequested = false;
+          if (!owner || f.epoch !== epoch || typeof f.proposal_id !== 'string' || typeof f.data !== 'string' || !Number.isFinite(f.expires)) throw Error('Invalid proposal');
+          const exact = atob(f.data);
+          if (!['pwd\r', 'ls\r', 'ls /\r'].includes(exact)) throw Error('Unsupported proposal');
+          proposalID = f.proposal_id;
+          proposalEpoch = f.epoch;
+          $("[data-proposal-preview]").textContent = `Exact input: ${JSON.stringify(exact)} (\\r = Return) · expires ${new Date(f.expires).toLocaleTimeString()}`;
+          $<HTMLButtonElement>("[data-approve]").disabled = false;
+        } else if (f.type === 'proposal-result') {
+          clearProposal();
+          status.textContent = f.message;
         }else throw Error('Invalid terminal frame');
       }catch(error){disconnect(`${(error as Error).message || 'Terminal protocol error'}; disconnected without replay`);}
     };
@@ -222,6 +249,52 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
       saveArtifact("terminal-display.txt", lines.join("\n"));
     }
   };
+  $<HTMLButtonElement>("[data-share-selection]").onclick = () => {
+    try {
+      shareSelection(`${selector.value} / ${selector.selectedOptions[0]?.dataset.generation ?? "unknown"}`, term.getSelection());
+      window.dispatchEvent(new Event("pidp11-share-selection"));
+      status.textContent = "Selection copied to Companion for review; nothing sent.";
+    } catch (error) {
+      status.textContent = (error as Error).message;
+    }
+  };
+  const cancelProposal = () => {
+    const hadProposal = !!proposalID || proposalRequested;
+    clearProposal();
+    if (owner && hadProposal) send({type: 'cancel-proposal', epoch});
+  };
+  $<HTMLInputElement>("[data-enable-proposals]").onchange = async event => {
+    cancelProposal();
+    $<HTMLButtonElement>("[data-propose]").disabled = true;
+    if (!(event.target as HTMLInputElement).checked) return;
+    try {
+      const response = await fetch('/api/v1/features');
+      const config = await response.json();
+      if (!disposed && $<HTMLInputElement>("[data-enable-proposals]").checked && config.readonly_command_proposals === true) {
+        $<HTMLButtonElement>("[data-propose]").disabled = false;
+      } else {
+        status.textContent = "Command proposals are disabled by the service operator.";
+      }
+    } catch {
+      status.textContent = "Proposal support unavailable.";
+    }
+  };
+  $<HTMLButtonElement>("[data-propose]").onclick = () => {
+    clearProposal();
+    if (!owner) {
+      status.textContent = "Acquire keyboard before requesting review.";
+      return;
+    }
+    proposalRequested = true;
+    send({type: 'propose', epoch, data: btoa($<HTMLSelectElement>('[aria-label="Suggested read-only command"]').value + '\r')});
+  };
+  $<HTMLButtonElement>("[data-approve]").onclick = () => {
+    if (!proposalID || !owner) return;
+    const id = proposalID;
+    clearProposal();
+    if (send({type: 'approve', epoch, seq: seq + 1, proposal_id: id})) seq++;
+  };
+  $<HTMLButtonElement>("[data-cancel-proposal]").onclick = cancelProposal;
   const heartbeat=setInterval(()=>{if(owner)send({type:'renew',epoch});},2000);
   const hide=()=>disconnect('Page closed · guest connection remains independent');window.addEventListener('pagehide',hide);
   // Session inspection is read-only. It never connects to a line or grants input.

@@ -16,8 +16,10 @@ import (
 // Server exposes an existing Bridge through an independently provisioned access
 // Gate. It does not dial guest lines or own the HTTP listener; the command does.
 type Server struct {
-	Bridge Directory
-	Auth   *access.Gate
+	Bridge         Directory
+	Auth           *access.Gate
+	Register       func(*http.ServeMux)
+	AllowProposals bool
 }
 
 // Handler serves assets and terminal-only routes. Configure Bridge and Auth before
@@ -32,6 +34,9 @@ func (s *Server) Handler(assets fs.FS) http.Handler {
 	})))
 	mux.Handle("GET /api/v1/terminals/{id}/ws", s.Auth.Require(access.TerminalObserve, http.HandlerFunc(s.stream)))
 	mux.Handle("GET /api/v1/terminals/{id}/generation/{generation}/ws", s.Auth.Require(access.TerminalObserve, http.HandlerFunc(s.stream)))
+	if s.Register != nil {
+		s.Register(mux)
+	}
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) { http.Error(w, "guest terminal service only", 403) })
 	mux.Handle("/", web.ServeAssets(assets))
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -85,11 +90,12 @@ func (s *Server) stream(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			var m struct {
-				Type  string `json:"type"`
-				Epoch uint64 `json:"epoch"`
-				Seq   uint64 `json:"seq"`
-				Data  []byte `json:"data"`
-				Bytes int    `json:"bytes"`
+				Type       string `json:"type"`
+				Epoch      uint64 `json:"epoch"`
+				Seq        uint64 `json:"seq"`
+				Data       []byte `json:"data"`
+				Bytes      int    `json:"bytes"`
+				ProposalID string `json:"proposal_id"`
 			}
 			d := json.NewDecoder(bytes.NewReader(data))
 			d.DisallowUnknownFields()
@@ -102,6 +108,12 @@ func (s *Server) stream(w http.ResponseWriter, r *http.Request) {
 			}
 			if m.Type != "ack" && !s.Auth.Allowed(r, access.TerminalInput) {
 				return
+			}
+			if m.Type == "propose" || m.Type == "approve" || m.Type == "cancel-proposal" {
+				if !s.AllowProposals || e.ProposalOperation(client, m.Type, m.ProposalID, m.Epoch, m.Seq, m.Data) != nil {
+					return
+				}
+				continue
 			}
 			if e.Operation(client, m.Type, m.Epoch, m.Seq, m.Data, m.Bytes) != nil {
 				return

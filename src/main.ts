@@ -51,6 +51,7 @@ const apps = [
   ["terminal", "Terminal", "Independent mock session"],
   ["guest", "Guest terminal", "Authenticated real guest line · laboratory"],
   ["teletype", "Teletype", "ASR-33 paper presentation · approved guest line"],
+  ["device-observer", "Guest devices", "Read-only completed emulated-device output"],
   ["companion", "AI Companion", "Optional offline guide fixture · no guest control"],
   ["tek4010", "4010 graphics", "Tektronix byte fixture · no guest"],
   ["disks", "Disk drives", "RK05 / RL02"],
@@ -584,6 +585,17 @@ function openApp(id: string) {
     void import("./tek4010-app.ts").then(m => { if (el.isConnected) m.mountTek4010(el); }).catch(error => { el.textContent = String(error); });
     return;
   }
+  if (id === "device-observer") {
+    if (manager.store.windows.some(w => w.id === id)) { manager.restore(id); return; }
+    if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
+    const el = body("Loading device observer…");
+    let dispose = () => {};
+    manager.open(id, "Guest device output", el, {x: 180, y: 80, width: 900, height: 700}, () => dispose());
+    void import("./device-observer.ts").then(module => {
+      if (el.isConnected) dispose = module.mountDeviceObserver(el);
+    }).catch(() => { el.textContent = "Device observer unavailable"; });
+    return;
+  }
   if (id === "companion") {
     if (manager.store.windows.some(w => w.id === id)) { manager.restore(id); return; }
     if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
@@ -685,3 +697,5 @@ window.addEventListener("pageshow", (e) => {
 });
 openPanel();
 if (innerWidth > 900) openTerminal();
+
+window.addEventListener("pidp11-share-selection",()=>openApp("companion"));

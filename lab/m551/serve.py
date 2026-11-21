@@ -14,6 +14,13 @@ subprocess.run([service,'provision','-directory','/tmp/m551-config','-listen','1
 config_path=pathlib.Path('/tmp/m551-config/config.json');config=json.loads(config_path.read_text())
 config['control']='/tmp/m551-control/control.sock'
 config['endpoints']=[{'id':'v7-dc0','label':'Disposable UNIX V7 tty00','address':'127.0.0.1:40100','kind':'raw-guest-line'},{'id':'v7-dc2','label':'Disposable UNIX V7 tty02','address':'127.0.0.1:40102','kind':'raw-guest-line'}]
+# Optional reviewed laboratory additions; never accept general process or monitor hooks.
+if len(sys.argv) == 3:
+    options_path=pathlib.Path(sys.argv[2]).resolve()
+    assert root in options_path.parents
+    options=json.loads(options_path.read_text())
+    assert set(options) <= {'device_exports','companion','allow_readonly_command_proposals'}
+    config.update(options)
 config_path.write_text(json.dumps(config));pathlib.Path('/tmp/m551-control').mkdir(mode=0o700)
 for name in ['writer.token','observer.token']:(root/name).write_bytes((config_path.parent/name).read_bytes())
 sim=None;bridge=None;traditional=None
@@ -48,7 +55,7 @@ try:
     bridge=start_bridge();assert all(l['state']=='detached' for l in control()['lines'])
     (root/'detached-no-guest.json').write_text(json.dumps(control()))
     sim=Simh()
-    profile = pathlib.Path(sys.argv[1] if len(sys.argv) == 2 else '/lab/m50/guest.ini').resolve()
+    profile = pathlib.Path(sys.argv[1] if len(sys.argv) >= 2 else '/lab/m50/guest.ini').resolve()
     assert pathlib.Path('/lab') in profile.parents, 'Only reviewed mounted lab profiles are accepted'
     for line in profile.read_text().splitlines():
         if line and not line.startswith(';'):sim.command(line)
