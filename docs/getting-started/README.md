@@ -12,6 +12,7 @@ The long-term aim is to turn on a PiDP-11, select a guest using the physical swi
 
 ## Choose a starting point
 
+- [Choose an installation path](installation-paths.md): existing PiDP-11 owners or original software first on fresh Raspberry Pi OS Lite. The companion package remains a lab candidate.
 - [Explore the desktop](explore.md): open windows, try controls and print a sample listing.
 - [Understand the terminals](terminals.md): what a VT100 is, where commands go and what keyboard ownership means.
 - [Questions and troubleshooting](questions.md): simulation labels, disconnected guests and other common questions.
