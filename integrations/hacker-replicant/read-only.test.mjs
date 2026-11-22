@@ -222,3 +222,24 @@ test("browser closure cancels a delayed model and releases the single request sl
   await handler(req, retry);
   assert.equal(retry.statusCode, 502);
 });
+
+test('late successful provider reply cannot publish after browser cancellation', async (t) => {
+  const handler = routes(t).get('POST /api/chat');
+  const original = globalThis.fetch;
+  let finish, entered;
+  const ready = new Promise(resolve => { entered = resolve; });
+  globalThis.fetch = async url => {
+    if (String(url).includes('/references')) return Response.json({notes:[]});
+    entered();
+    return new Promise(resolve => { finish = resolve; });
+  };
+  t.after(() => {globalThis.fetch = original;});
+  const res = response();
+  const pending = handler({body:{messages:[{role:'user',content:'Explain'}]}},res);
+  await ready;
+  res.emit('close');
+  finish(Response.json({choices:[{message:{content:'late-private-canary'}}]}));
+  await pending;
+  assert.notEqual(res.statusCode,200);
+  assert.ok(!JSON.stringify(res.body).includes('late-private-canary'));
+});

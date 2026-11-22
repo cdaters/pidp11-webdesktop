@@ -64,6 +64,7 @@ export function installReadOnly(app) {
   });
   async function request(url, token, signal, options = {}) {
     const { selectionReceipt = false, ...fetchOptions } = options;
+    signal.throwIfAborted();
     const response = await fetch(url, {
       ...fetchOptions,
       signal,
@@ -73,6 +74,9 @@ export function installReadOnly(app) {
         "Content-Type": "application/json",
       },
     });
+    // A transport may finish after cancellation. Never turn a late completion
+    // into a successful publication or model answer.
+    signal.throwIfAborted();
     if (!response.ok)
       throw Error(`Optional service unavailable (${response.status})`);
     if (selectionReceipt) {
@@ -91,6 +95,7 @@ export function installReadOnly(app) {
       }
       chunks.push(chunk);
     }
+    signal.throwIfAborted();
     const bytes = Buffer.concat(chunks);
     return bytes.length ? JSON.parse(bytes) : null;
   }
