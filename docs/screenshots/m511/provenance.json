@@ -1,0 +1,47 @@
+[
+  {
+    "file": "rsx.png",
+    "width": 1440,
+    "height": 1000,
+    "sha256": "9570c6434f22ec97d9e1e6f39d2a879f37c0409208508c6e9cabad5840136a50",
+    "caption": "Actual RSX-11M-PLUS V4.6 HELP and beginning of PIP listing, Chromium VT100, keyboard released; no full-screen acceptance.",
+    "physicalHardware": false,
+    "originalCapture": true
+  },
+  {
+    "file": "bsd-vi.png",
+    "width": 1440,
+    "height": 1000,
+    "sha256": "352db657f9e7cc761b6dc9b8ade7630e24ca274322ef929d7c4f590bb452fdab",
+    "caption": "Actual 2.11BSD vi in VT220 subset, Chromium, keyboard owner; reused test text retains its M591 label.",
+    "physicalHardware": false,
+    "originalCapture": true
+  },
+  {
+    "file": "v7-tek.png",
+    "width": 1440,
+    "height": 1000,
+    "sha256": "c17b23b93be6ab7f56c58cb46a1ddea345f103cd626cfa5395fe6f2e262e1f1a",
+    "caption": "Actual V7 graph/plot -Ttek output, 22 vectors, Chromium read-only view.",
+    "physicalHardware": false,
+    "originalCapture": true
+  },
+  {
+    "file": "genuine-sharing.png",
+    "width": 1440,
+    "height": 1000,
+    "sha256": "be91ed288b064f01768457a7ec9499dbefe9f9de7154cf3bd830464e4254e125",
+    "caption": "Actual selected V7 pwd output and real Gemma response in the explicitly modified, independently authenticated Hacker Replicant app.",
+    "physicalHardware": false,
+    "originalCapture": true
+  },
+  {
+    "file": "equipment.png",
+    "width": 2240,
+    "height": 1700,
+    "sha256": "ee2fae628c3b8da42e12b6a83f540286638dd62232283bfd64eda58f01b234a1",
+    "caption": "Actual V7 text/plot and phase-one original LP11/PC11 output; companion is a labeled deterministic provider fixture, not Gemma.",
+    "physicalHardware": false,
+    "originalCapture": true
+  }
+]

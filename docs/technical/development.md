@@ -75,3 +75,7 @@ Use the [M5.5.1 lab instructions](../../lab/m551/README.md) for the offline orig
 Build the optional installation candidate with `sh packaging/build.sh FRESH_OUTPUT_DIRECTORY`. Do not use the existing `terminal-pilot` as an installed service: it retains its supervised one-shot startup connection. The new service, setup/private-file requirements, explicit local attachment and companion-only uninstall are described in [M5.6 implementation](../lab/M5.6-implementation.md). Actual Pi access still requires separate authorization.
 
 M5.9 adds [repeatable terminal/graphics and package checks](../../lab/m59/README.md). Genuine V7 plotting and installed ARM64 desktop checks remain separate from intercepted browser fixtures. [Setup paths](../getting-started/installation-paths.md) describe the candidate distribution boundary.
+
+## M5.11 focused checks
+
+Run `npm run test:replicant` for isolated optional-app route tests (no model or upstream process). `go test ./internal/peripheral -run '^$' -bench BenchmarkRetainedSpoolPoll -benchmem` measures the bounded retained-window check on a real temporary file. [M5.11 laboratory instructions](../../lab/m511/README.md) keep genuine guests, synthetic transport loads and real-model evidence distinct. Prior screenshots use their existing defaults; `M59_GRAPHICS_SCREENSHOT` and `M592_SCREENSHOT` provide separate capture destinations for new runs.

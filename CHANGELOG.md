@@ -1,5 +1,13 @@
 # Changelog
 
+## M5.11 integration hardening — 2026-11-21
+
+- Fenced concurrent sharing/revocation, bound questions to exact selection receipts, rejected malformed chats, and made peripheral shutdown permanent. Detect retained spool-byte rewrites between polls.
+- Added private viewer-lifetime status and a separate lab-only sharing guard; genuine V7 output reached the modified Hacker Replicant app and real Gemma with tested expiry/revocation.
+- Verified RSX-11M-PLUS V4.6 browser commands, RT-11SJ V05.03 and RSTS/E V7.0 console behavior, genuine V7/BSD lifecycle regressions, LP11/PC11 retention and V7 plotting.
+- Expanded to 34 source notes and 15 deterministic facts; measured new tutor answers and missed contradictions without factual-certification claims.
+- Exercised a real guest alongside protected ARM64 installation, upgrade/rollback, memory refusal and removal. [Report and exact limits](docs/lab/M5.11.md). No physical Pi access, website change or stable release.
+
 ## M5.10 presentation refresh — 2026-11-21
 
 - Reorganized the README, documentation navigation, current capabilities, limits, beginner guidance and alpha-package presentation.

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "rsts7-spd.pdf",
+    "url": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsts_e/V07/v1a_RSTS7.0_SPD_Feb80.pdf",
+    "sha256": "1c0221623d37b73bebc8bb41b94dd2ba79ae1da533c9c8f5a05b823e89bd3d7b",
+    "bytes": 824036,
+    "usedForNotes": true
+  },
+  {
+    "name": "rsx46-notes.pdf",
+    "url": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsx11m_plus/RSX11Mplus_V4.x/AA-H427L-TC_RSX-11M-PLUS_V4.6_Release_Notes_Jan99.pdf",
+    "sha256": "3faa771d0068849b0164941998f9fbac769a9077f2858df9775596e7cee307b8",
+    "bytes": 9576349,
+    "usedForNotes": true
+  },
+  {
+    "name": "rsts7-sysgen.pdf",
+    "url": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsts_e/V07/v1b_AA-2669E-TC_sygen_May79.pdf",
+    "sha256": "a9d584448053b3aef48fc0077fccf0344afadac00c9905a08747d4e7e03ac5ff",
+    "bytes": 23750128,
+    "usedForNotes": false
+  }
+]

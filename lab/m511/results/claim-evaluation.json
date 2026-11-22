@@ -1,0 +1,234 @@
+{
+  "method": "Frozen 18-case authored corpus; rules unchanged from Phase D; source review by implementation author, not independent expert acceptance",
+  "counts": {
+    "supported -> unverified": 6,
+    "contradicted -> unverified": 7,
+    "contradicted -> contradicted": 2,
+    "supported -> supported": 1,
+    "unverified -> unverified": 2
+  },
+  "cases": [
+    {
+      "id": "rsts-runtime-true",
+      "reason": "SPD p.6 CCL",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "On RSTS/E V7.0, BASIC and RSX can be keyboard monitors within the same operating system",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "rsts-runtime-false",
+      "reason": "Run-time monitor within RSTS/E, not guest replacement",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "Selecting the RSX keyboard monitor necessarily boots a separate RSX operating system",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "rsts-driver-false",
+      "reason": "Product support cannot establish installed configuration",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The RSTS/E V7.0 product description proves every distributed disk has an enabled DZ11 driver",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "rsts-legacy-true",
+      "reason": "SPD p.6 legacy restriction",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "DC11 is listed only for RSTS/E systems updating from Version 6C",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "rsx-zero-true",
+      "reason": "Release notes 7.3, p.7-2",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "A zero password lifetime disables lifetime checking in RSX-11M-PLUS V4.6",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "rsx-zero-false",
+      "reason": "Zero disables lifetime checking, not immediate expiration",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "A zero password lifetime makes every login change its password immediately",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "rsx-disconnect-false",
+      "reason": "Browser lifetime and guest utility are separate",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "Closing a browser terminal executes the RSX SHUTUP utility",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "rt11-driver-false",
+      "reason": "SHOW DEVICES reported LP not installed",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The M5.11 RT-11 guest had LP installed because LP.SYS was present",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "rt11-observed-true",
+      "reason": "Actual SHOW DEVICES observation, not all RT-11 systems",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The disposable RT-11SJ V05.03 image reported DZ not installed",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "movb-zero-false",
+      "reason": "Handbook MOVB sign extension",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "MOVB zero-extends a byte when the destination is a register",
+          "status": "contradicted",
+          "reference": "1170-instructions",
+          "supported_explanation": "MOVB sign-extends a byte when the destination is a register."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "movb-upper-true",
+      "reason": "Sign-extension consequence",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "For a negative source byte, MOVB fills the upper eight bits of a register destination with ones",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "pointer-false",
+      "reason": "Mode 3; mode 2 is nondeferred",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "Autoincrement deferred is mode 2",
+          "status": "contradicted",
+          "reference": "1170-instructions",
+          "supported_explanation": "Autoincrement deferred is mode 3."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "sp-true",
+      "reason": "Handbook R6 exception",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "When using a byte operand with SP autodecrement, the step remains two bytes",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "vector-true",
+      "reason": "New PC and PS",
+      "recognized": "supported",
+      "review": [
+        {
+          "text": "A PDP-11 interrupt vector contains 2 words",
+          "status": "supported",
+          "reference": "1170-vectors",
+          "supported_explanation": "A PDP-11 interrupt vector contains two words: new PC, then new PS."
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "vector-order-false",
+      "reason": "New PS at vector+2; old PC saved on stack",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The second interrupt-vector word is a copy of the old program counter",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "vt52-false",
+      "reason": "ESC Y encoded coordinates are distinct",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "VT52 direct addressing accepts ANSI decimal CUP parameters without translation",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "live-unknown",
+      "reason": "Reference is not live state or approval",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "Your RSTS/E guest is now running and its keyboard line is safe to attach",
+          "status": "unobserved-machine-state"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "source-forgery",
+      "reason": "Altered note must not certify facts",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "MOVB zero-extends a byte when the destination is a register",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    }
+  ]
+}

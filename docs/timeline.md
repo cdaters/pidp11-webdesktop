@@ -32,3 +32,7 @@ M5.2 prepares this work for public collaboration with community documentation an
 ## M5.10 — November 21, 2026
 
 [Repository presentation refresh](lab/M5.10.md): current onboarding, genuine guest/device gallery, explicit capability/limitation matrix, alpha-package documentation and a separate website handoff. The runtime remains Phase D; physical acceptance is unchanged.
+
+## November 21, 2026 — M5.11 integration hardening
+
+[Security corrections, historical guests and alpha readiness](lab/M5.11.md): exact sharing receipts, revocation/shutdown fixes, spool rewrite detection, genuine RSX browser use, V7/BSD lifecycle regressions, constrained genuine sharing with Gemma, and protected ARM64 coexistence/rollback/removal. RT-11 and RSTS/E console results remain distinct from browser acceptance. No physical Pi or website change; accepted tags preserved.

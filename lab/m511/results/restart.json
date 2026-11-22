@@ -1,0 +1,11 @@
+{
+  "sameEndpoint": true,
+  "genuineSimulators": true,
+  "guestLineEchoChanges": true,
+  "guestSafeExit": true,
+  "oldSessionRejected": true,
+  "oldTokenRejected": true,
+  "freshAttachmentStartsReadOnly": true,
+  "newGuestIndependent": true,
+  "pass": true
+}

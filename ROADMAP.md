@@ -1,5 +1,13 @@
 # Where the project is going
 
+## M5.11: integration hardening and genuine guest qualification
+
+[Implemented and measured](docs/lab/M5.11.md): five reproduced safety/reliability corrections; genuine RSX-11M-PLUS browser commands; RT-11/RSTS console inventories; V7/BSD lifecycle and device regressions; constrained real-guest sharing with the modified Hacker Replicant app; and genuine V7 alongside protected ARM64 upgrade, rollback and removal. The catalog has 34 notes and 15 deterministic facts.
+
+Recommended M5.12: independent historical/security review, a production-quality separately authorized attachment/producer supervisor, release-matched RT-11 and RSTS serial setup, and longer endurance measurements. The lab guard does not establish OS identity on a surviving stream. Physical repair, actual memory-controller readiness and a renewed supervised pilot remain separate owner-approved gates.
+
+The following sections preserve earlier milestones and recommendations in their original scope.
+
 ## M5.10: presentation and onboarding
 
 The repository now introduces the current desktop with genuine guest/device captures, a capability matrix, beginner navigation and versioned alpha-package guidance. [Verification](docs/lab/M5.10.md) and [website handoff](docs/website-sync/M5.10/README.md). This is a documentation milestone; it does not advance physical acceptance.

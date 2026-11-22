@@ -1,0 +1,96 @@
+{
+  "duration_per_scenario": "6s",
+  "results": [
+    {
+      "cpu_percent_one_core": 0.16612848750614115,
+      "echo_p95_ms": 0,
+      "echo_samples": 0,
+      "operations": 0,
+      "rss_kib": 9940,
+      "sampled_peak_rss_kib": 9940,
+      "scenario": "idle-detached",
+      "seconds": 6.019437214
+    },
+    {
+      "cpu_percent_one_core": 0.1653271171465919,
+      "echo_p95_ms": 0,
+      "echo_samples": 0,
+      "operations": 0,
+      "rss_kib": 10344,
+      "sampled_peak_rss_kib": 10344,
+      "scenario": "passive-observer",
+      "seconds": 6.048614512
+    },
+    {
+      "cpu_percent_one_core": 0.9987758525403483,
+      "echo_p95_ms": 1,
+      "echo_samples": 115,
+      "operations": 115,
+      "rss_kib": 11116,
+      "sampled_peak_rss_kib": 11100,
+      "scenario": "active-terminal",
+      "seconds": 6.007353887
+    },
+    {
+      "cpu_percent_one_core": 1.3251544818590313,
+      "echo_p95_ms": 0.936,
+      "echo_samples": 230,
+      "operations": 230,
+      "rss_kib": 13316,
+      "sampled_peak_rss_kib": 13316,
+      "scenario": "two-lines",
+      "seconds": 6.037031991
+    },
+    {
+      "cpu_percent_one_core": 4.9752760918518515,
+      "echo_p95_ms": 0,
+      "echo_samples": 0,
+      "operations": 0,
+      "rss_kib": 15672,
+      "sampled_peak_rss_kib": 15696,
+      "scenario": "eight-observers",
+      "seconds": 6.029816124
+    },
+    {
+      "cpu_percent_one_core": 0.16583702094959316,
+      "echo_p95_ms": 0,
+      "echo_samples": 0,
+      "operations": 0,
+      "rss_kib": 15180,
+      "sampled_peak_rss_kib": 15180,
+      "scenario": "lease-renewals",
+      "seconds": 6.030016665
+    },
+    {
+      "cpu_percent_one_core": 0.8286091743187849,
+      "echo_p95_ms": 0.893,
+      "echo_samples": 116,
+      "operations": 116,
+      "rss_kib": 15508,
+      "sampled_peak_rss_kib": 15508,
+      "scenario": "command-bursts",
+      "seconds": 6.034207869
+    },
+    {
+      "cpu_percent_one_core": 1.6532280754671487,
+      "echo_p95_ms": 0,
+      "echo_samples": 0,
+      "operations": 0,
+      "rss_kib": 15172,
+      "sampled_peak_rss_kib": 15972,
+      "scenario": "moderate-output",
+      "seconds": 6.048772186
+    },
+    {
+      "cpu_percent_one_core": 0.33245792230930143,
+      "echo_p95_ms": 0,
+      "echo_samples": 0,
+      "operations": 5,
+      "rss_kib": 15204,
+      "sampled_peak_rss_kib": 15204,
+      "scenario": "reconnect",
+      "seconds": 6.01579889
+    }
+  ],
+  "source": "Mac-hosted Linux ARM64; synthetic loopback TLS/WebSocket peers; not Pi or historical guest"
+}

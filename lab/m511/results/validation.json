@@ -1,0 +1,18 @@
+{
+  "goVet": "passed",
+  "goRaceSuite": "passed",
+  "typeScript": "passed",
+  "frontendUnitTests": 95,
+  "transportIntegrationTests": 1,
+  "replicantRouteTests": 3,
+  "browserFixtureTests": 114,
+  "browserEngines": [
+    "Chromium",
+    "Firefox",
+    "WebKit"
+  ],
+  "staticLinuxARM64Build": "passed",
+  "linuxProcessIdentityTests": "passed",
+  "actualGuestAndDeviceEvidence": "See guests.json, restart.json, crash.json, devices.json, sharing.json and package.json; separate from fixtures",
+  "independentExpertReview": false
+}

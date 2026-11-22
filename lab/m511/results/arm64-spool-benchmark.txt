@@ -1,0 +1,7 @@
+goos: linux
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/peripheral
+BenchmarkRetainedSpoolPoll-11    	   61107	     18725 ns/op	   65984 B/op	       4 allocs/op
+BenchmarkRetainedSpoolPoll-11    	   57430	     19301 ns/op	   65984 B/op	       4 allocs/op
+BenchmarkRetainedSpoolPoll-11    	   97957	     14649 ns/op	   65984 B/op	       4 allocs/op
+PASS

@@ -1,0 +1,287 @@
+{
+  "model": "gemma4:12b",
+  "thinking": false,
+  "questions": 10,
+  "narrowExpectedAnswers": 10,
+  "answersWithoutIdentifiedMaterialError": 9,
+  "method": "One sample per frozen question; manual source review by implementation author; not independent expert evaluation",
+  "medianSeconds": 3.4586126459999997,
+  "maxSeconds": 4.750173333,
+  "responses": [
+    {
+      "answer": "No, a different operating system is not necessarily booted. According to [ref:rsts70-monitors], the BASIC, RSX, and RT-11 keyboard monitors are run-time systems interpreting commands within RSTS/E. Their names do not signify that the machine has booted a different operating system. While they share some system commands, they differ in environment-specific commands and configuration-dependent commands via CCL. This applies specifically to RSTS/E V7.0.",
+      "claimReview": [
+        {
+          "text": "No, a different operating system is not necessarily booted",
+          "status": "unverified"
+        },
+        {
+          "text": "According to [ref:rsts70-monitors], the BASIC, RSX, and RT-11 keyboard monitors are run-time systems interpreting commands within RSTS/E",
+          "status": "unverified"
+        },
+        {
+          "text": "Their names do not signify that the machine has booted a different operating system",
+          "status": "unverified"
+        },
+        {
+          "text": "While they share some system commands, they differ in environment-specific commands and configuration-dependent commands via CCL",
+          "status": "unverified"
+        },
+        {
+          "text": "This applies specifically to RSTS/E V7.0",
+          "status": "unverified"
+        }
+      ],
+      "expected": "No; they are run-time command environments inside RSTS/E.",
+      "id": "rsts-monitors",
+      "question": "If the prompt switches from the BASIC monitor to the RSX keyboard monitor on RSTS/E V7.0, has a different OS necessarily booted?",
+      "reference": "rsts70-monitors",
+      "seconds": 4.750173333,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    },
+    {
+      "answer": "Based on the provided reference [ref:rsts70-terminals], the inclusion of DZ11 in the V7.0 product description lists technical capabilities and terminal interfaces, not specific configurations. The reference explicitly states that these are \"product capabilities, not evidence that a particular disk image was generated with a driver, that its lines are enabled, or that a browser terminal has been accepted.\" Therefore, the presence of DZ11 does not establish that the disk image has a configured serial driver.",
+      "claimReview": [
+        {
+          "text": "Based on the provided reference [ref:rsts70-terminals], the inclusion of DZ11 in the V7.0 product description lists technical capabilities and terminal interfaces, not specific configurations",
+          "status": "unverified"
+        },
+        {
+          "text": "The reference explicitly states that these are \"product capabilities, not evidence that a particular disk image was generated with a driver, that its lines are enabled, or that a browser terminal has been accepted.\" Therefore, the presence of DZ11 does not establish that the disk image has a configured serial driver",
+          "status": "unverified"
+        }
+      ],
+      "expected": "No; product support does not establish installed image configuration.",
+      "id": "rsts-driver",
+      "question": "The V7.0 SPD lists DZ11. Does that establish this disk image already has a configured serial driver?",
+      "reference": "rsts70-terminals",
+      "seconds": 3.593381417,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    },
+    {
+      "answer": "No, the DC11 is not listed with the unrestricted V7.0 terminal-interface choices. According to [ref:rsts70-terminals], the DL11, DJ11, DZ11, and DH11 interfaces are the primary listings, while the DC11 is only listed for systems updating from Version 6C. This information refers to product capabilities and does not confirm the presence of drivers or enabled lines in a specific disk image.",
+      "claimReview": [
+        {
+          "text": "No, the DC11 is not listed with the unrestricted V7.0 terminal-interface choices",
+          "status": "unverified"
+        },
+        {
+          "text": "According to [ref:rsts70-terminals], the DL11, DJ11, DZ11, and DH11 interfaces are the primary listings, while the DC11 is only listed for systems updating from Version 6C",
+          "status": "unverified"
+        },
+        {
+          "text": "This information refers to product capabilities and does not confirm the presence of drivers or enabled lines in a specific disk image",
+          "status": "unverified"
+        }
+      ],
+      "expected": "No; listed only for systems updating from Version 6C.",
+      "id": "rsts-legacy",
+      "question": "Is DC11 listed with the unrestricted V7.0 terminal-interface choices?",
+      "reference": "rsts70-terminals",
+      "seconds": 2.593983584,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    },
+    {
+      "answer": "Based on [ref:rsxplus46-password], a password lifetime of zero disables lifetime checking. Therefore, it does not force a password change. Expiration only forces a change when a non-zero value is set. Note that these are guest-account facilities, not browser authentication, and this information is derived from the provided reference.",
+      "claimReview": [
+        {
+          "text": "Based on [ref:rsxplus46-password], a password lifetime of zero disables lifetime checking",
+          "status": "unverified"
+        },
+        {
+          "text": "Therefore, it does not force a password change",
+          "status": "unverified"
+        },
+        {
+          "text": "Expiration only forces a change when a non-zero value is set",
+          "status": "unverified"
+        },
+        {
+          "text": "Note that these are guest-account facilities, not browser authentication, and this information is derived from the provided reference",
+          "status": "unverified"
+        }
+      ],
+      "expected": "No; zero disables lifetime checking.",
+      "id": "rsx-zero",
+      "question": "In RSX-11M-PLUS V4.6, does a zero password lifetime force an immediate password change?",
+      "reference": "rsxplus46-password",
+      "seconds": 2.83514775,
+      "validCitationIDs": true,
+      "sourceReview": "Main answer correct; extra assertion that expiration only forces a change when lifetime is nonzero is too broad: \u00a77.2 separately allows the expired flag."
+    },
+    {
+      "answer": "No, closing the browser terminal does not perform the system shutdown identified in the V4.6 release notes. Based on [ref:rsxplus46-shutdown], the shutdown is performed using the guest utility `RUN $SHUTUP` within the MCR. The reference distinguishes this guest utility from a browser disconnect or a SIMH quit command. I infer from these notes that the operator must manually interact with the utility to complete the shutdown procedure; the terminal closure is a separate action.",
+      "claimReview": [
+        {
+          "text": "No, closing the browser terminal does not perform the system shutdown identified in the V4.6 release notes",
+          "status": "unverified"
+        },
+        {
+          "text": "Based on [ref:rsxplus46-shutdown], the shutdown is performed using the guest utility `RUN $SHUTUP` within the MCR",
+          "status": "unverified"
+        },
+        {
+          "text": "The reference distinguishes this guest utility from a browser disconnect or a SIMH quit command",
+          "status": "unverified"
+        },
+        {
+          "text": "I infer from these notes that the operator must manually interact with the utility to complete the shutdown procedure; the terminal closure is a separate action",
+          "status": "unverified"
+        }
+      ],
+      "expected": "No; the guest shutdown utility is separate; disconnect is not shutdown.",
+      "id": "rsx-disconnect",
+      "question": "Does closing the browser terminal perform the system shutdown identified in the V4.6 release notes?",
+      "reference": "rsxplus46-shutdown",
+      "seconds": 3.323843875,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    },
+    {
+      "answer": "No, the presence of LP.SYS on the disk does not prove the LP device handler was installed. According to the reference [ref:rt11503-handlers], SHOW DEVICES specifically reported that LP was not installed, despite the file being found by the DIR command. The documentation clarifies that a handler file existing on disk does not equate to an installed status or a functional terminal. These are specific observations of the M5.11 image, not universal RT-11 configurations.",
+      "claimReview": [
+        {
+          "text": "No, the presence of LP.SYS on the disk does not prove the LP device handler was installed",
+          "status": "unverified"
+        },
+        {
+          "text": "According to the reference [ref:rt11503-handlers], SHOW DEVICES specifically reported that LP was not installed, despite the file being found by the DIR command",
+          "status": "unverified"
+        },
+        {
+          "text": "The documentation clarifies that a handler file existing on disk does not equate to an installed status or a functional terminal",
+          "status": "unverified"
+        },
+        {
+          "text": "These are specific observations of the M5.11 image, not universal RT-11 configurations",
+          "status": "unverified"
+        }
+      ],
+      "expected": "No; SHOW DEVICES reported LP not installed despite the handler file.",
+      "id": "rt11-handler",
+      "question": "M5.11 found LP.SYS on the RT-11SJ V05.03 disk. Does that prove LP was installed?",
+      "reference": "rt11503-handlers",
+      "seconds": 3.7810050410000002,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    },
+    {
+      "answer": "Based on [ref:1170-instructions], MOVB copies a byte and sign-extends it when the destination is a register. Therefore, R0 does not keep its old high byte; the high byte is derived via sign extension to ensure the byte's value is correctly represented within the 16-bit register. This reference indicates that the operation involves sign extension specifically for register destinations. I infer this means the upper bits of the register are filled based on the sign bit of the byte.",
+      "claimReview": [
+        {
+          "text": "Based on [ref:1170-instructions], MOVB copies a byte and sign-extends it when the destination is a register",
+          "status": "unverified"
+        },
+        {
+          "text": "movb copies a byte and sign-extends it when the destination is a register",
+          "scope": "recognized-fragment",
+          "status": "supported",
+          "reference": "1170-instructions",
+          "supported_explanation": "MOVB to a register sign-extends the byte."
+        },
+        {
+          "text": "Therefore, R0 does not keep its old high byte; the high byte is derived via sign extension to ensure the byte's value is correctly represented within the 16-bit register",
+          "status": "unverified"
+        },
+        {
+          "text": "This reference indicates that the operation involves sign extension specifically for register destinations",
+          "status": "unverified"
+        },
+        {
+          "text": "I infer this means the upper bits of the register are filled based on the sign bit of the byte",
+          "status": "unverified"
+        }
+      ],
+      "expected": "Sign extension; high byte becomes all ones, not old or source high-byte data.",
+      "id": "movb-high",
+      "question": "MOVB stores a byte whose sign bit is one into R0. Does R0 keep its old high byte or derive it by sign extension?",
+      "reference": "1170-instructions",
+      "seconds": 3.979905916,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    },
+    {
+      "answer": "Based on [ref:1170-deferred-stack], the `@(Rn)+` addressing mode is defined as mode 3: deferred autoincrement. In this specific mode, the register points to a word containing the operand address and advances by two, including byte instructions. This behavior is a defined characteristic of the PDP-11 architecture's mode 3 operation, rather than a standard byte-increment. I infer from the notes that R6/SP follows this same behavior, whereas `INCB -(R0)` behaves differently.",
+      "claimReview": [
+        {
+          "text": "Based on [ref:1170-deferred-stack], the `@(Rn)+` addressing mode is defined as mode 3: deferred autoincrement",
+          "status": "unverified"
+        },
+        {
+          "text": "In this specific mode, the register points to a word containing the operand address and advances by two, including byte instructions",
+          "status": "unverified"
+        },
+        {
+          "text": "This behavior is a defined characteristic of the PDP-11 architecture's mode 3 operation, rather than a standard byte-increment",
+          "status": "unverified"
+        },
+        {
+          "text": "I infer from the notes that R6/SP follows this same behavior, whereas `INCB -(R0)` behaves differently",
+          "status": "unverified"
+        }
+      ],
+      "expected": "The register addresses a word pointer, independent of operand byte size.",
+      "id": "deferred-byte",
+      "question": "For a byte instruction using @(R2)+, why does R2 advance by two rather than one?",
+      "reference": "1170-deferred-stack",
+      "seconds": 4.259376167,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    },
+    {
+      "answer": "Based on the provided reference [ref:1170-vectors], a PDP-11 interrupt vector consists of two words. The second word, located at vector address +2, contains the new processor status word. \n\nIt is important to distinguish this from general knowledge: the reference specifies that while the vector defines the transition, the old program counter (PC) and processor status (PS) are actually saved on the stack selected by the new status, and the vector itself is not a single instruction word.",
+      "claimReview": [
+        {
+          "text": "Based on the provided reference [ref:1170-vectors], a PDP-11 interrupt vector consists of two words",
+          "status": "unverified"
+        },
+        {
+          "text": "The second word, located at vector address +2, contains the new processor status word",
+          "status": "unverified"
+        },
+        {
+          "text": "It is important to distinguish this from general knowledge: the reference specifies that while the vector defines the transition, the old program counter (PC) and processor status (PS) are actually saved on the stack selected by the new status, and the vector itself is not a single instruction word",
+          "status": "unverified"
+        }
+      ],
+      "expected": "New processor status word, not another instruction or old PC.",
+      "id": "vector-second",
+      "question": "In a PDP-11 interrupt vector, what does the second word contain?",
+      "reference": "1170-vectors",
+      "seconds": 3.304794416,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    },
+    {
+      "answer": "Based on the provided reference [ref:vt52-distinction], a VT100 in VT52-compatible mode does not make the two protocols interchangeable. The reference specifies that VT52 direct cursor addressing uses `ESC Y` with an octal 040 offset, whereas ANSI CUP uses numeric parameters. Therefore, I infer that a guest cannot use ANSI numeric CUP bytes unchanged in VT52 mode, as the terminal distinguishes between these two distinct protocols. The source does not provide information regarding VT220 behavior.",
+      "claimReview": [
+        {
+          "text": "Based on the provided reference [ref:vt52-distinction], a VT100 in VT52-compatible mode does not make the two protocols interchangeable",
+          "status": "unverified"
+        },
+        {
+          "text": "The reference specifies that VT52 direct cursor addressing uses `ESC Y` with an octal 040 offset, whereas ANSI CUP uses numeric parameters",
+          "status": "calculation-required"
+        },
+        {
+          "text": "Therefore, I infer that a guest cannot use ANSI numeric CUP bytes unchanged in VT52 mode, as the terminal distinguishes between these two distinct protocols",
+          "status": "unverified"
+        },
+        {
+          "text": "The source does not provide information regarding VT220 behavior",
+          "status": "unverified"
+        }
+      ],
+      "expected": "No; VT52 uses ESC Y plus encoded row and column, a different protocol.",
+      "id": "vt52-position",
+      "question": "Can a guest use ANSI numeric CUP bytes unchanged when a terminal is in VT52 mode?",
+      "reference": "vt52-distinction",
+      "seconds": 3.316216292,
+      "validCitationIDs": true,
+      "sourceReview": "expected distinction answered; no material error identified"
+    }
+  ]
+}

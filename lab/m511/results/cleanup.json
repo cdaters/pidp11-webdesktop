@@ -1,0 +1,12 @@
+{
+  "disposableGuestsSyncedOrGuestSafelyHaltedAndExited": true,
+  "ownedContainersRemoved": true,
+  "arm64GuestMediaAndEvidenceExportedBeforeVMRemoval": true,
+  "disposableARM64VMRemoved": true,
+  "managedServiceConfigurationAccountsAndReleasesRemoved": true,
+  "ownedLocalServersAndRelaysStopped": true,
+  "unrelatedContainersAndExistingModelRunnerPreserved": true,
+  "acceptedTagsUnchanged": true,
+  "physicalPiAccess": false,
+  "privateEvidenceExcludedFromPublication": true
+}

@@ -97,3 +97,7 @@ For live use, the manifest writer would need a separately reviewed authoritative
 ## Proposed interoperability discussion — not sent
 
 A compact shared contract could let each project retain its terminal/control architecture: independently authenticated text selection; explicit endpoint, simulator and attachment generations; unknown status distinct from false/stopped; expiry/revoke; chat cancellation; and a small source-context interface. Tools should remain absent in a read-only mode. The proposed changes need Rolf’s review before any upstream-support claim. No contact or collaboration is implied by this implementation.
+
+## M5.11 laboratory extension
+
+The current optional module requires an exact per-publication receipt, rejects malformed chat elements, and displays the chosen local model/destination. The earlier manifest experiment remains synthetic. A separate [M5.11 harness](../../lab/m511/README.md) qualified actual V7 output using a process/attachment/sole-view lifetime guard. It is not a production identity writer and cannot detect an OS replacement on a surviving stream. [Results](../../docs/lab/M5.11.md). Run `npm run test:replicant` from the Web Desktop repository for the route regressions. No upstream merge or endorsement is implied.

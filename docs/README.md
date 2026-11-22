@@ -40,3 +40,5 @@ Start with the browser demonstration; it needs no Pi, guest disk or AI model. Ge
 - [M5.10 presentation verification](lab/M5.10.md) and [website handoff](website-sync/M5.10/README.md)
 
 Historical reports describe their own tested revision. Use the current capability matrix for present scope; a later overview never turns an earlier experiment into physical acceptance.
+
+Latest engineering evidence: [M5.11 hardening and guest validation](lab/M5.11.md), [reproduction notes](../lab/m511/README.md), and [separate M5.11 captures](screenshots/m511/README.md). The M5.10 presentation remains preserved.

@@ -1,0 +1,10 @@
+{
+  "genuineGuest": "UNIX V7",
+  "fault": "SIGKILL of exact owned bridge PID",
+  "bothConventionalPathsSurvive": true,
+  "staleSocketRecovery": "Dead process and refused socket verified; ordinary restart refused; exact companion socket removed",
+  "oldSessionRejected": true,
+  "explicitRecoveryReadOnly": true,
+  "guestSyncedAndExited": true,
+  "pass": true
+}

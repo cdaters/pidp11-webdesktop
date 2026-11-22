@@ -178,3 +178,7 @@ Next is separately authorized powered-off inspection using the matching board do
 ## M5.9.3 Phase D readiness
 
 [Phase D](lab/M5.9.3-D.md) adds deterministic source facts, conservative natural fragment review and an optional independently authenticated, read-only companion application. The exact static ARM64 service remains disabled by default and detached, with mandatory 96-MiB kernel memory containment. Its short isolated loopback sample does not replace the sustained Pi CPU/RSS/PSS/LAN targets above. Authoritative live selection lifecycle, independent historical/security review and matching RT-11 V5.3 documentation remain next gates. No physical hardware access or service deployment occurred.
+
+## M5.11 qualification update
+
+The [M5.11 report](lab/M5.11.md) adds genuine guest replacement, RSX browser use, constrained sharing and ARM64 service/guest coexistence. Six-second synthetic service measurements were 0.17% idle CPU and up to 4.98% with eight output observers; maximum sampled RSS was 15.60 MiB. Active echo p95 was at most 1.00 ms in the tested loopback scenarios. These are Mac-hosted ARM64 samples, not the target Pi workload or endurance acceptance. Preserve the targets above and all physical/memory gates. Next: independent review, supervised lifecycle authority, additional guest drivers and longer failure/endurance tests.

@@ -1,0 +1,42 @@
+{
+  "implementationRevision": "6786b4cb5103d5db2a97885c722183193c423cf8",
+  "runtimeSHA256": "13d440b0eb907e13b900f8aa31f92bd2570687fa4c8de1f3b33dbef61b978def",
+  "runtimeBytes": 7930018,
+  "staticARM64": true,
+  "buildFlags": "CGO_ENABLED=0 GOOS=linux GOARCH=arm64; trimpath; -s -w; GOFLAGS=-buildvcs=false",
+  "preflight": "Refused: Oscar launcher/panel installation absent; no dummy files supplied",
+  "genuineGuest": "Independent original SIMH UNIX V7",
+  "finalBrowser": {
+    "phase": "final",
+    "genuineV7": true,
+    "systemd": true,
+    "echoRoundtripMs": [
+      876.0099999999998,
+      876.439292,
+      875.5381669999997,
+      878.4897500000002,
+      871.5233749999998
+    ],
+    "disconnectThenRefreshNoKeyboard": true
+  },
+  "finalRollbackDetached": true,
+  "finalRestoredDetached": true,
+  "missingMemoryControllerRefusedBeforeListener": true,
+  "completeManagedUninstall": true,
+  "bothConventionalPathsSurvivedUninstall": true,
+  "guestSyncedAndExited": true,
+  "originalBinaryAndBaseHashesUnchanged": true,
+  "memoryMaxBytes": 100663296,
+  "memorySwapMaxBytes": 0,
+  "cpuTimeQuotaCores": 2,
+  "vmMemoryMaxBytes": 1073741824,
+  "linuxProcessIdentityTestPassed": true,
+  "testBuilds": {
+    "package-views": "383203606ceeff0d083d02c546c35a9b126887190b2dd6f6b8d6f843b79f4305",
+    "package-candidate": "d0ec319a5e35d34e4eb982cdddff9bc5e92f0b460386ff410773c852525be108",
+    "package-final": "13d440b0eb907e13b900f8aa31f92bd2570687fa4c8de1f3b33dbef61b978def"
+  },
+  "olderRollbackBinarySHA256": "18385f1156925adb0d2d95fdcb2a3f2260fda8329357dc6d61f44a2c7ecc1ef9",
+  "serviceCgroupPeakBytes": 10792960,
+  "physicalPiAccess": false
+}

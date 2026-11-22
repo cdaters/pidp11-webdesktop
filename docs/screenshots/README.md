@@ -73,3 +73,7 @@ Gemma is experimental. Phase D found factual errors and missed contradictions; t
 ## Earlier captures
 
 The [M5.9 development captures](ARCHIVE.md#m59-development-captures) and all earlier images remain preserved in the historical index.
+
+## Later engineering captures
+
+The [M5.11 laboratory gallery](m511/README.md) records new RSX, BSD, genuine selection-sharing and device tests separately. It does not replace these M5.10 presentation images.

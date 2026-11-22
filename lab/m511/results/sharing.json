@@ -1,0 +1,24 @@
+{
+  "genuineGuest": true,
+  "realModel": true,
+  "osIdentity": "unknown",
+  "survivingStreamReplacementDetected": false,
+  "excerpt": "login: dmr\n$ pwd\n/usr/dmr\n$",
+  "modelStatus": 200,
+  "conversation": "data: {\"type\":\"done\",\"response\":\"The data indicates a shell environment where the current working directory is `/usr/dmr`. The user `dmr` successfully authenticated and executed the `pwd` command, which returned the path as the current location.\",\"actionLog\":[],\"limitReached\":false}\n\n",
+  "explicitRevocation": true,
+  "crossPageSubstitutionRefused": true,
+  "expirationRefused": true,
+  "sourceDisconnectRefused": true,
+  "sameCountViewReplacementRefused": true,
+  "malformedChatRefused": true,
+  "independentConsole": true,
+  "pass": true,
+  "modelHostLoss": {
+    "ownedGatewayStopped": true,
+    "applicationHTTP": 502,
+    "automaticProviderFallback": false
+  },
+  "upstreamRevision": "6f8a2aca7786736e01bdf5ba9b44bf66a7f19349",
+  "modifiedReadOnlyMode": true
+}

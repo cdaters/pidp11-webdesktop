@@ -1,0 +1,9 @@
+goos: darwin
+goarch: arm64
+pkg: pidp11.local/webdesktop/internal/peripheral
+cpu: Apple M4 Pro
+BenchmarkRetainedSpoolPoll-12    	  132133	     11666 ns/op	   66048 B/op	       4 allocs/op
+BenchmarkRetainedSpoolPoll-12    	  150250	      8407 ns/op	   66048 B/op	       4 allocs/op
+BenchmarkRetainedSpoolPoll-12    	  152726	      8568 ns/op	   66048 B/op	       4 allocs/op
+PASS
+ok  	pidp11.local/webdesktop/internal/peripheral	4.315s
