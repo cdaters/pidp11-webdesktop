@@ -118,3 +118,16 @@ The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original
 ## M5.11 lifecycle and sharing boundaries
 
 `terminalbridge.Endpoint.Observation` returns an atomic connection/viewer snapshot under the endpoint lock. `terminalservice.Manager.Status` exposes that membership revision only on its private operator interface; public listings still convey attachment choices. A membership change is not an OS or CPU observation. `internal/replicant` fences revoke/publication races and assigns exact consent receipts. The modified optional app compares them before inference. `lab/m511/selection-guard` is an independent Linux test observer, excluded from the deployed executable; [its report](../lab/M5.11.md) states the surviving-stream and multi-view limitations. Peripheral `Close` is permanent and append polling checks the retained file bytes. These changes grant no additional control authority.
+
+## M5.12 supervised attachments
+
+`terminalservice.NewSupervised` marks explicitly named lines as requiring private
+ordered lifetime renewal. `supervision.go` owns verification/active deadlines and
+expiry retirement; `control.go` exposes renewal and bounded runtime counters only
+through the private Unix socket. `lab/m512/supervisor.py` observes Linux pidfds and
+owned sockets, and the updated lab selection guard additionally binds that proof.
+Neither observer ships in the executable or infers an OS. `replicant.PublishAt`
+requires the publication epoch captured before source observation, preventing a
+request delayed across revocation from restoring consent. See the
+[identity contract](supervised-guest-identity.md) and
+[security packet](../security/M5.12-replicant-review.md).

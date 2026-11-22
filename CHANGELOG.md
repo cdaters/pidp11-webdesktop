@@ -1,5 +1,13 @@
 # Changelog
 
+## M5.12 supervised identity and alpha qualification — 2026-11-22
+
+- Added opt-in ordered process/socket supervision, a bounded unpublished verification phase and fresh-approval requirements after loss. Guest OS identity remains explicitly operator-attested.
+- Fixed delayed HTTP selection publication crossing revocation; expanded cancellation and provider-failure tests.
+- Built a disposable RT-11FB multiterminal monitor and exercised the original MTTEST through the browser. Identified RSTS/E generated-line and missing-build-input blockers.
+- Ran genuine guest endurance, browser regressions, local-model sharing and protected ARM64 failure/rollback/uninstall checks. Preserved original media, accepted tags and presentation artwork.
+- Added two historical notes, corrected source distinctions, and published measured model/checker limits. Recommend experimental source alpha for demonstration/lab categories only; Pi and physical acceptance remain NO-GO. [Evidence](docs/lab/M5.12.md).
+
 ## M5.11 integration hardening — 2026-11-21
 
 - Fenced concurrent sharing/revocation, bound questions to exact selection receipts, rejected malformed chats, and made peripheral shutdown permanent. Detect retained spool-byte rewrites between polls.

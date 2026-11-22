@@ -1,5 +1,11 @@
 # Where the project is going
 
+## M5.12: supervised identity and bounded alpha scope
+
+[Implemented and measured](docs/lab/M5.12.md): ordered process/socket supervision, a delayed-publication revocation correction, genuine RT-11 application-terminal access, exact RSTS/E configuration blockers, sustained guest tests and protected ARM64 recovery/removal. The catalog has 36 notes and 15 deterministic facts. A surviving stream still cannot identify its OS.
+
+Recommended M5.13: independent security/historical review, production-observer privilege design, release-matched RT-11 diagnostic qualification, an authorized complete RSTS regeneration kit, and improved claim coverage using a separate development corpus. The experimental source alpha is limited to local demonstrations and controlled laboratories. Pi deployment, memory-controller changes and repaired physical coexistence remain separately authorized gates.
+
 ## M5.11: integration hardening and genuine guest qualification
 
 [Implemented and measured](docs/lab/M5.11.md): five reproduced safety/reliability corrections; genuine RSX-11M-PLUS browser commands; RT-11/RSTS console inventories; V7/BSD lifecycle and device regressions; constrained real-guest sharing with the modified Hacker Replicant app; and genuine V7 alongside protected ARM64 upgrade, rollback and removal. The catalog has 34 notes and 15 deterministic facts.

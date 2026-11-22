@@ -81,3 +81,18 @@ The following commands are **Linux administrator-shell examples**, tested only i
 See the [tested package lifecycle procedure](../lab/M5.6-implementation.md#upgrade-rollback-disable-and-uninstall). All operations affect the companion only. Stop and disable before replacing a release. Preserve private configuration backups separately; never bundle guest disks into a desktop rollback. Complete removal explicitly purges only the five known private files and dedicated identity, refusing unknown contents.
 
 If the service cannot start, run the file check as its account and inspect `journalctl -u pidp11-webdesktop.service` locally. Review the certificate expiry/name, private-file permissions, chosen port and any memory-containment refusal. If memory protection is unavailable, leave the companion stopped and retain the original physical-only experience; boot changes need separate authorization. An unavailable guest line calls for independent guest inspection, not an emulator restart by the companion. Do not delete a control socket or terminate unrelated processes to clear an error.
+
+## M5.12 laboratory supervision and rollback
+
+The optional `supervised_endpoints` key requires fresh local lifetime observations
+for named allowlisted lines. The accompanying observer is a separately operated
+Linux laboratory tool, not an installed service or production guest detector.
+The [identity contract](../technical/supervised-guest-identity.md) defines the
+operator-verification requirement and surviving-stream limitation.
+
+Older releases reject this key. While the companion is stopped, restore the
+previous reviewed private configuration together with the older executable during
+rollback. Preserve the newer configuration privately for a later return. Do not
+silently drop a supervision requirement or restart an emulator to make the
+companion work. M5.12's protected ARM64 rehearsal tested this exact compatibility
+boundary; it did not qualify a Pi installation.

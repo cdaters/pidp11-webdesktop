@@ -182,3 +182,13 @@ Next is separately authorized powered-off inspection using the matching board do
 ## M5.11 qualification update
 
 The [M5.11 report](lab/M5.11.md) adds genuine guest replacement, RSX browser use, constrained sharing and ARM64 service/guest coexistence. Six-second synthetic service measurements were 0.17% idle CPU and up to 4.98% with eight output observers; maximum sampled RSS was 15.60 MiB. Active echo p95 was at most 1.00 ms in the tested loopback scenarios. These are Mac-hosted ARM64 samples, not the target Pi workload or endurance acceptance. Preserve the targets above and all physical/memory gates. Next: independent review, supervised lifecycle authority, additional guest drivers and longer failure/endurance tests.
+
+## M5.12 qualification update
+
+The [M5.12 report](lab/M5.12.md) records ordered, expiring process/socket supervision,
+genuine RT-11 multiterminal application access, RSTS/E regeneration blockers,
+longer guest workloads and final protected ARM64 rollback/removal. These laboratory
+measurements do not replace the Pi CPU, memory, LAN-latency or physical-coexistence
+targets above. A/B experimental source-alpha scope is recommended; C/D remain
+NO-GO. Next: independent security/historical review, production observer privileges,
+release-matched guest build inputs and separately authorized repaired-hardware work.

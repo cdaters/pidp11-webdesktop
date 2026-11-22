@@ -39,3 +39,16 @@ The inspected source is Oscar's unchanged pinned [`26d20be`](https://github.com/
 Prefer an optional, narrowly scoped display-output observation hook or display backend, discussed upstream first. Keep device execution and interrupts in SIMH. A future transport needs a simulator generation, viewport/scale, intensity/aging semantics, bounded batches, sequence numbers and explicit loss/reset handling. Point output may be much larger than vector instructions; measure before choosing point batches, vector events or bounded raster frames. Browser disappearance must never block the CPU. Reset on generation change; never show old phosphor as current state.
 
 Begin output-only. Light-pen input changes emulator-visible state and requires its own explicit authority, geometry, timing and coexistence design. BlinkenBone panel RPC and the raw guest terminal bridge do not provide that authority. No simulator patch, graphics hook, VT11 transport or graphics guest has been implemented or tested in M5.6.
+
+## M5.12 scope check
+
+The same unchanged source paths were rechecked: `vt_svc` calls `vt11_cycle`,
+`vt_fetch` reads mapped PDP-11 memory, the display model emits intensity-bearing
+points, and `sim_ws.c` uses the local video/input API. No existing browser vector
+transport was found. The original execution/interrupt model should remain intact.
+A future output-only backend experiment should bound pending display batches,
+include simulator generations and sequence/reset messages, and drop/reset a slow
+observer instead of delaying the CPU. Measure point volume before choosing a wire
+format; light-pen input is a separate authority problem. No VT11 rendering experiment
+or graphics application acceptance was performed in M5.12. The examined RT-11
+multiterminal option excludes VT11/VS60, so it cannot silently double as that test.
