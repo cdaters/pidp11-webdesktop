@@ -10,6 +10,7 @@ import (
 // AND its exact source note was supplied. It does not certify the whole answer.
 type ClaimReview struct {
 	Text                 string `json:"text"`
+	Scope                string `json:"scope,omitempty"`
 	Status               string `json:"status"`
 	Reference            string `json:"reference,omitempty"`
 	SupportedExplanation string `json:"supported_explanation,omitempty"`
@@ -53,6 +54,10 @@ func ReviewClaims(question, answer string, found Retrieval) []ClaimReview {
 	units := sentenceBoundary.Split(answer, -1)
 	result := []ClaimReview{}
 	for i, unit := range units {
+		if len(result) >= 31 {
+			result = append(result, ClaimReview{Status: "unverified", Text: strings.Join(units[i:], ". ")})
+			break
+		}
 		if i >= 31 {
 			unit = strings.Join(units[i:], ". ")
 		}
@@ -86,6 +91,14 @@ func ReviewClaims(question, answer string, found Retrieval) []ClaimReview {
 			}
 		}
 		result = append(result, review)
+		if review.Status == "unverified" || review.Status == "calculation-required" {
+			for _, fragment := range naturalClaims(question, unit, available) {
+				if len(result) >= 30 {
+					break
+				}
+				result = append(result, fragment)
+			}
+		}
 		if i >= 31 {
 			break
 		}

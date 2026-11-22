@@ -149,7 +149,8 @@
     "system": "",
     "status": "focused-notes",
     "ids": [
-      "1170-registers"
+      "1170-registers",
+      "1170-deferred-stack"
     ]
   },
   {

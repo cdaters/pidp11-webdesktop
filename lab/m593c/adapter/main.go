@@ -17,12 +17,12 @@ func main() {
 		log.Fatal(err)
 	}
 	a, err := replicant.NewAdapter(strings.TrimSpace(string(token)), func() (replicant.Attachment, bool) {
-		return replicant.Attachment{Endpoint: "synthetic-guest-line", Generation: "fixture-generation-1"}, true
+		return replicant.Attachment{Simulator: "fixture-simulator-1", Endpoint: "synthetic-guest-line", Generation: "fixture-generation-1"}, true
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err = a.Publish(replicant.Selection{Endpoint: "synthetic-guest-line", Generation: "fixture-generation-1", Text: "SYNTHETIC SELECTION; NO GUEST ATTACHED\n$ pwd\n/usr/dmr"}, true); err != nil {
+	if err = a.Publish(replicant.Selection{Simulator: "fixture-simulator-1", Endpoint: "synthetic-guest-line", Generation: "fixture-generation-1", Text: "SYNTHETIC SELECTION; NO GUEST ATTACHED\n$ pwd\n/usr/dmr"}, true); err != nil {
 		log.Fatal(err)
 	}
 	server := http.Server{Addr: "127.0.0.1:19002", Handler: a, ReadHeaderTimeout: 3 * time.Second, ReadTimeout: 5 * time.Second, WriteTimeout: 5 * time.Second, IdleTimeout: 10 * time.Second, MaxHeaderBytes: 4096}

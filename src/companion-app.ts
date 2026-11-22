@@ -1,3 +1,5 @@
+import { mountExternalCompanion } from "./external-companion.ts";
+import { factAnswer, mountFactPicker, renderFactSource } from "./tutor-facts.ts";
 import { parseTutorCalculation, calculateTutor } from "./tutor-calculation.ts";
 import { renderClaimReview } from "./claim-review.ts";
 import { mountPDPValues } from "./pdp11-values.ts";
@@ -24,7 +26,7 @@ export function mountCompanion(
   host.classList.add("companion-app");
   host.innerHTML = `<div class="app-heading"><h2>AI Companion</h2><span class="source-tag">PROTOTYPE · OFFLINE FIXTURE</span></div>
     <p data-provider></p><div class="terminal-toolbar"><button type="button" data-configured>Use configured provider</button><button type="button" data-offline>Use offline guide</button><select aria-label="Companion model" hidden></select><button type="button" data-discover hidden>Test connection / list models</button><button type="button" data-cancel>Cancel request</button></div><p>Ask about UNIX V7 directories, ed, keyboard ownership or plotting. Model replies are suggestions, not machine observations. No commands are sent from chat.</p>
-    <div data-exact></div><details data-library><summary>Search historical references · offline</summary><label>Search <input aria-label="Reference search" maxlength="4096"></label><label>System <select aria-label="Reference system"><option value="">All systems</option></select></label><button type="button" data-search>Search references</button><div data-search-results></div></details><label><input type="checkbox" data-retrieve checked>Include up to two matching reference notes when I send a question</label><details data-tutor><summary>Historical computing reference desk</summary><label>Reference topic <select aria-label="Companion reference topic"></select></label><p data-reference-note></p><a data-reference-link target="_blank" rel="noopener noreferrer">Read the source record</a><button type="button" data-reference-question>Use this question</button><p>Curated reference notes are distinct from model explanations. Selecting a note sends nothing.</p></details><p data-sharing-scope role="status"></p><div class="companion-chat" role="log" aria-label="Companion conversation"></div>
+    <div data-exact></div><div data-facts></div><div data-external-companion></div><details data-library><summary>Search historical references · offline</summary><label>Search <input aria-label="Reference search" maxlength="4096"></label><label>System <select aria-label="Reference system"><option value="">All systems</option></select></label><button type="button" data-search>Search references</button><div data-search-results></div></details><label><input type="checkbox" data-retrieve checked>Include up to two matching reference notes when I send a question</label><details data-tutor><summary>Historical computing reference desk</summary><label>Reference topic <select aria-label="Companion reference topic"></select></label><p data-reference-note></p><a data-reference-link target="_blank" rel="noopener noreferrer">Read the source record</a><button type="button" data-reference-question>Use this question</button><p>Curated reference notes are distinct from model explanations. Selecting a note sends nothing.</p></details><p data-sharing-scope role="status"></p><div class="companion-chat" role="log" aria-label="Companion conversation"></div>
     <form><p>Exact request: <code>/calc 16 oct 177776</code>. This constrained command calculates locally, even with a provider selected. Use widths 8, 16 or 22; bases oct, dec, hex or bin. Optional: signed, and/or/xor mask, shl/shr count.</p><label>Your question<textarea aria-label="Companion question" maxlength="4096" rows="2" required></textarea></label>
     <details><summary>Deliberately share selected terminal text</summary><p>Copy only the text you want to share, then paste it here. Nothing is read from a terminal automatically.</p><label>Source terminal <input aria-label="Shared terminal source" maxlength="160" value="Manually pasted excerpt"></label><textarea aria-label="Shared terminal excerpt" maxlength="4096" rows="3"></textarea></details>
     <button type="submit">Send to offline fixture</button><button type="button" data-clear>Clear chat</button></form><p role="status" data-status></p>`;
@@ -210,12 +212,23 @@ export function mountCompanion(
       if (pending === controller) pending = undefined;
     }
   };
+  mountExternalCompanion(host.querySelector<HTMLElement>("[data-external-companion]")!);
+  mountFactPicker(host.querySelector<HTMLElement>("[data-facts]")!, question);
   form.onsubmit = async (event) => {
     event.preventDefault();
     if (pending || disposed) return;
     const text = question.value.trim();
     if (!text) return;
     try {
+      const fact = factAnswer(text);
+      if (fact) {
+        append("You", text);
+        append("Source fact · no model", fact.text);
+        renderFactSource(log, fact.reference);
+        question.value = "";
+        status.textContent = "Answered from the installed source table. No model request or guest action. Shared text remains unsent.";
+        return;
+      }
       const calculation = parseTutorCalculation(text);
       if (calculation) {
         const result = calculateTutor(calculation);

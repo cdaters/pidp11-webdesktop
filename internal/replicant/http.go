@@ -12,7 +12,11 @@ import (
 
 // Attachment identifies a guest-line lifetime, never an inferred operating
 // system or CPU state. Current must return false on detached/uncertain state.
-type Attachment struct{ Endpoint, Generation string }
+type Attachment struct {
+	Endpoint   string `json:"endpoint"`
+	Generation string `json:"generation"`
+	Simulator  string `json:"simulator_generation"`
+}
 
 // Adapter serves one explicitly published excerpt. The embedding caller owns
 // TLS, authentication-token delivery, listener shutdown and attachment tracking.
@@ -40,7 +44,7 @@ func NewAdapter(token string, current func() (Attachment, bool)) (*Adapter, erro
 // refreshed by reads. A later read rechecks identity; a mismatch erases it.
 func (a *Adapter) Publish(selection Selection, consent bool) error {
 	current, ok := a.current()
-	if !ok {
+	if !ok || current.Simulator == "" || len(current.Simulator) > 128 || selection.Simulator != current.Simulator {
 		return errors.New("no confirmed guest attachment")
 	}
 	if _, err := Readback(selection, current.Endpoint, current.Generation, consent); err != nil {
@@ -88,13 +92,14 @@ func (a *Adapter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/api/pidp11/status":
 		// Upstream's Boolean means Screen existence, which this adapter cannot
 		// observe. Null must never be replaced with a guessed false or CPU state.
-		json.NewEncoder(w).Encode(map[string]any{"os": nil, "running": nil, "cpu_running": "unknown", "semantics": "guest selection only; GNU Screen and OS unobserved"})
+		current, attached := a.current()
+		json.NewEncoder(w).Encode(map[string]any{"attachment": current, "attachment_confirmed": attached, "os": nil, "running": nil, "cpu_running": "unknown", "semantics": "guest selection only; GNU Screen and OS unobserved"})
 	case "/api/pidp11/screen":
 		current, ok := a.current()
 		a.mu.Lock()
 		defer a.mu.Unlock()
 		snapshot, err := Readback(a.selection, current.Endpoint, current.Generation, true)
-		if !ok || err != nil || !time.Now().Before(a.expires) {
+		if !ok || current.Simulator == "" || a.selection.Simulator != current.Simulator || err != nil || !time.Now().Before(a.expires) {
 			a.selection = Selection{}
 			a.expires = time.Time{}
 			http.Error(w, "Fresh explicit selection required", 409)

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "word-width",
+    "title": "PDP-11 word width",
+    "text": "The PDP-11/70 uses 16-bit words and 8-bit bytes.",
+    "reference": "1170-addresses"
+  },
+  {
+    "id": "virtual-address",
+    "title": "PDP-11/70 virtual addresses",
+    "text": "A PDP-11/70 program uses 16-bit virtual addresses: 64 KiB per address space. Separate instruction/data spaces do not make an individual virtual address wider.",
+    "reference": "1170-addresses"
+  },
+  {
+    "id": "physical-address",
+    "title": "PDP-11/70 physical addresses",
+    "text": "The PDP-11/70 MMU produces 22-bit physical addresses. The 4 MiB address range includes reserved device space; it does not imply 4 MiB of installed RAM.",
+    "reference": "1170-addresses"
+  },
+  {
+    "id": "registers",
+    "title": "PDP-11/70 register roles",
+    "text": "R7 is the program counter (PC); R6 is the stack pointer (SP). The /70 has separate Kernel, Supervisor and User stack pointers and two sets of R0\u2013R5.",
+    "reference": "1170-registers"
+  },
+  {
+    "id": "deferred-increment",
+    "title": "Autoincrement deferred",
+    "text": "@(Rn)+ is autoincrement deferred, mode 3: fetch a word pointer and increment the register by two, including for a byte operand. It differs from (Rn)+, mode 2.",
+    "reference": "1170-instructions"
+  },
+  {
+    "id": "movb-register",
+    "title": "MOVB to a register",
+    "text": "MOVB sign-extends a byte when the destination is a register. This is not the rule for every byte instruction or a byte stored in memory.",
+    "reference": "1170-instructions"
+  },
+  {
+    "id": "autodecrement",
+    "title": "Autodecrement ordering",
+    "text": "INCB -(R0) decrements R0 by one before using it as the byte address; INC -(R0) decrements R0 by two before accessing the word.",
+    "reference": "1170-autodecrement"
+  },
+  {
+    "id": "interrupt-vector",
+    "title": "Interrupt vector contents",
+    "text": "A PDP-11 interrupt vector contains two words: new PC, then new PS at vector address plus two. It is not just a handler address or a single instruction.",
+    "reference": "1170-vectors"
+  },
+  {
+    "id": "v7-list-order",
+    "title": "UNIX V7 listing order",
+    "text": "In UNIX V7, ls -t sorts by modification time, newest first; -r reverses ordering. Thus ls -tr lists oldest first.",
+    "reference": "v7-ls"
+  },
+  {
+    "id": "v7-redirection",
+    "title": "UNIX V7 output redirection",
+    "text": "In V7 sh, > creates or truncates the output file; >> appends or creates it. These operations can change guest files.",
+    "reference": "v7-redirection"
+  },
+  {
+    "id": "vt52-cursor",
+    "title": "VT52 and ANSI cursor positioning",
+    "text": "VT52 direct cursor addressing uses ESC Y followed by row and column characters with octal 040 added. ANSI CUP uses ESC [ with numeric parameters and H. They are different protocols.",
+    "reference": "vt52-distinction"
+  },
+  {
+    "id": "console-authority",
+    "title": "Guest terminal and simulator monitor",
+    "text": "A dedicated guest serial line is distinct from the GNU Screen operator console and SIMH monitor. Neither a reused TCP port nor a terminal label proves guest identity.",
+    "reference": "simh"
+  },
+  {
+    "id": "peripheral-driver",
+    "title": "Emulated device and guest driver",
+    "text": "SIMH device availability does not establish that the guest has the matching driver. A quiet browser does not prove a stopped CPU.",
+    "reference": "peripherals"
+  }
+]

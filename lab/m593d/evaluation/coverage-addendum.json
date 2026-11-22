@@ -1,0 +1,10 @@
+[
+ {"id":"a1","text":"The PDP-11/70 processor status word includes N, Z, V and C condition codes.","reference":"1170-registers","truth":"supported"},
+ {"id":"a2","text":"PDP-11 operand specifiers contain three mode bits and three register bits.","reference":"1170-instructions","truth":"supported"},
+ {"id":"a3","text":"For byte autodecrement on the PDP-11, R6/SP still steps by two.","reference":"1170-deferred-stack","truth":"supported"},
+ {"id":"a4","text":"The recorded RT-11SJ V05.03 baseline accepted DIR and SHOW CONFIG.","reference":"rt11","truth":"supported","reason":"Project observation, not a newly verified manual"},
+ {"id":"a5","text":"The lab 2.11BSD media contains /usr/ucb/vi and /usr/ucb/more.","reference":"bsd-vi","truth":"supported","reason":"Retained guest evidence, not all BSD installations"},
+ {"id":"a6","text":"PDP-11 MOV transfers only a byte to its destination.","reference":"1170-instructions","truth":"contradicted"},
+ {"id":"a7","text":"A PDP-11 trap vector has one words.","reference":"1170-vectors","truth":"contradicted"},
+ {"id":"a8","text":"Your switch register is now zero.","reference":"realcons","truth":"unverified","reason":"No current physical observation"}
+]

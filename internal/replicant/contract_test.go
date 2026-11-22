@@ -6,7 +6,7 @@ import (
 )
 
 func TestUpstreamWireShapesHaveNarrowerSemantics(t *testing.T) {
-	selection := Selection{"tty0", "generation-a", "$ pwd\n/usr/dmr"}
+	selection := Selection{Endpoint: "tty0", Generation: "generation-a", Text: "$ pwd\n/usr/dmr"}
 	got, err := Readback(selection, "tty0", "generation-a", true)
 	if err != nil || got.Text != selection.Text || !strings.Contains(got.Semantics, "not operator console") {
 		t.Fatal(got, err)

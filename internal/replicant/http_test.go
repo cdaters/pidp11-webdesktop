@@ -9,7 +9,7 @@ import (
 
 func TestReadOnlyHTTPSelectionLifecycle(t *testing.T) {
 	token := strings.Repeat("t", 32)
-	attachment := Attachment{"guest-line", "generation-a"}
+	attachment := Attachment{Endpoint: "guest-line", Generation: "generation-a", Simulator: "simulator-a"}
 	adapter, err := NewAdapter(token, func() (Attachment, bool) { return attachment, true })
 	if err != nil {
 		t.Fatal(err)
@@ -38,7 +38,7 @@ func TestReadOnlyHTTPSelectionLifecycle(t *testing.T) {
 			t.Fatal(c, w.Code)
 		}
 	}
-	selection := Selection{attachment.Endpoint, attachment.Generation, "$ pwd\n/synthetic"}
+	selection := Selection{Endpoint: attachment.Endpoint, Generation: attachment.Generation, Text: "$ pwd\n/synthetic", Simulator: attachment.Simulator}
 	if adapter.Publish(selection, false) == nil {
 		t.Fatal("missing consent")
 	}
