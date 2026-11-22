@@ -1,0 +1,13 @@
+{
+  "previewMutation": {
+    "reproducedBefore": true,
+    "regressionPassedAfter": true
+  },
+  "lateModelAfterCancellation": {
+    "reproducedBefore": true,
+    "regressionPassedAfter": true
+  },
+  "plotRootCause": "unresolved; initial M5.14 raw boundary trace unavailable",
+  "excludedCampaign": "Initial M5.15 plot and matrix campaigns accidentally overlapped; both stopped, guest synchronized/exited, working copy retained. Acceptance used a fresh guest and exclusive sequential campaigns.",
+  "documentationEvidenceGap": "M5.14 failure log retained, but its per-engine console filename was reused by the successful retry; it cannot establish the failed attempt transcript."
+}

@@ -1,0 +1,20 @@
+{
+  "noPhysicalPiAccess": true,
+  "ownedGuestsStoppedSafely": true,
+  "bridgeStoppedBeforeGuestShutdown": true,
+  "originalDeviceProducerCompletedAndExited": true,
+  "ownedGuestAndDiagnosticContainersRemoved": true,
+  "qemuFinalPoweroffVerified": true,
+  "privateKernelDisksTracesWorkingMediaRetained": true,
+  "ownedPreviewAndRelayPortsClosed": [
+    5173,
+    8080,
+    8445,
+    8446,
+    8448,
+    8449
+  ],
+  "preexistingContainersPreserved": true,
+  "preexistingModelRunnerUntouched": true,
+  "diagnosticBuildImageRetainedLocally": true
+}

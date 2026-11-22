@@ -1,0 +1,12 @@
+{
+  "release": "v0.5.13-source-alpha.1",
+  "sourceRevision": "ef643e59e5040adcbf7f7b1286fe3472ff08a00f",
+  "releaseMetadataAndAssetIdentitiesUnchanged": true,
+  "allRemoteTagRefsUnchanged": true,
+  "remoteTagRefLines": 20,
+  "downloadedArchiveBytes": 14663932,
+  "downloadedArchiveSHA256": "24fb624d4242972410c9f44616c74af6d89383bc7fb7b931b0a2e78cd9788f08",
+  "archiveMembers": 908,
+  "checksumFileMatches": true,
+  "newReleaseOrTagCreated": false
+}

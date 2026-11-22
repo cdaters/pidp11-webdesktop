@@ -67,7 +67,7 @@ try {
     .toMatch(/Directory|Total of/);
   await win.locator("[data-release]").click();
   await win.getByRole("button", { name: /Maximize \/ restore/ }).click();
-  await page.screenshot({ path: ".research/m512/rsx.png" });
+  await page.screenshot({ path: process.env.PIDP_RSX_SCREENSHOT ?? ".research/m512/rsx.png" });
   writeFileSync(
     root + "/browser-transcript-private.txt",
     await screen.innerText(),

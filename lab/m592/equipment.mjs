@@ -4,6 +4,10 @@ import { chromium, firefox, webkit, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, renameSync, existsSync } from "node:fs";
 import { harness, root } from "../m59/harness.mjs";
 let phase = 0;
+// Each attempt gets its own outcome record; a later success cannot overwrite
+// the failure boundary or imply that an unstarted peripheral phase passed.
+const attempt = Date.now() + "-" + process.pid;
+let stage = "setup";
 const completed = process.env.M592_COMPLETED === "1";
 async function devices(op) {
   const id = String(Date.now());
@@ -30,6 +34,7 @@ for (const [name, engine] of Object.entries({
   ([name]) =>
     !process.env.M592_DEMO_ENGINE || name === process.env.M592_DEMO_ENGINE,
 )) {
+  stage = "setup";
   const browser = await engine.launch();
   try {
     for (const id of ["v7-dc0", "v7-dc2"]) {
@@ -95,17 +100,19 @@ for (const [name, engine] of Object.entries({
       "console",
       "echo '0 0' > /tmp/m592.points; echo '1 1' >> /tmp/m592.points; echo '2 4' >> /tmp/m592.points; echo '3 2' >> /tmp/m592.points; echo '4 5' >> /tmp/m592.points\r",
     );
+    stage = "plot";
     const output = await harness(
       "console",
       "graph -g 1 -l 'V7 GRAPH' < /tmp/m592.points | plot -Ttek > /dev/tty00\r",
       3,
     );
-    writeFileSync(root + "/demo-" + name + "-console.txt", output);
+    writeFileSync(root + "/demo-" + attempt + "-" + name + "-console.txt", output);
     await expect
       .poll(() => tek.locator(".guest-tek line").count(), { timeout: 15000 })
       .toBeGreaterThan(10);
     await expect(tek.locator(".guest-tek")).toContainText("V7 GRAPH");
     await expect(tek.locator(".guest-heading")).toContainText("READ-ONLY");
+    stage = "peripherals";
     await page
       .getByRole("button", { name: "Open Guest devices", exact: true })
       .click();
@@ -233,6 +240,14 @@ for (const [name, engine] of Object.entries({
       windows: 5,
     });
     console.log(name + ": genuine equipment workflow passed");
+    stage = "completed";
+  } catch (error) {
+    writeFileSync(root + "/equipment-" + attempt + "-failure.json", JSON.stringify({
+      browser: name, stage, completedDevicePhases: phase,
+      peripheralPhaseStarted: stage === "peripherals",
+      passed: false, failure: error.message, automaticReplay: false,
+    }, null, 2));
+    throw error;
   } finally {
     await browser.close();
     writeFileSync(

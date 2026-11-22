@@ -1,0 +1,13 @@
+{
+  "initialResourceChecksPassed": true,
+  "initialTeardownPassed": false,
+  "observedInitBytes": 454,
+  "expectedReplacementInitBytes": 460,
+  "failedCommand": "powero: not found",
+  "kernelPanic": "Attempted to kill init, exit 127; not a Go provisioning signal",
+  "interpretation": "Old file length after journal recovery was consistent with replay undoing an offline edit; not evidence for original exit 139.",
+  "firstRecoveryCopy": "cp --sparse=always on Mac-backed share failed deallocating with EINVAL, leaving a short copy; shell incorrectly continued. Original disk preserved.",
+  "correctedProcedure": "Ordinary byte-verified copy to native Linux storage; e2fsck on that copy; verified init readback; remount root read-only and explicit BusyBox poweroff.",
+  "correctedResourceChecksPassed": true,
+  "correctedPoweroffPassed": true
+}

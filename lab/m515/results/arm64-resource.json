@@ -1,0 +1,14 @@
+{
+  "kernel": "6.12.118+deb13-arm64",
+  "physicalPi": false,
+  "unboundedCgroupRefusedBeforeListener": true,
+  "boundedStartupDetached": true,
+  "memoryMax": "100663296",
+  "memorySwapMax": "0",
+  "statusSnapshot": [
+    "VmRSS:\t   10924 kB",
+    "Threads:\t7"
+  ],
+  "cleanStopExit": 0,
+  "memoryEvents": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n"
+}

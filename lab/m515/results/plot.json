@@ -1,0 +1,44 @@
+[
+  {
+    "browser": "chromium",
+    "peripheralPhaseStarted": false,
+    "dispatchedAt": 1795378814920,
+    "beginObserved": true,
+    "endObserved": true,
+    "renderedLines": 22,
+    "serialBytes": 440,
+    "websocketBytes": 440,
+    "parserLines": 22,
+    "finalStatus": "Fresh display; ongoing guest line, no history replay",
+    "classification": "pass",
+    "guestPipelineBytes": 440
+  },
+  {
+    "browser": "firefox",
+    "peripheralPhaseStarted": false,
+    "dispatchedAt": 1795378823955,
+    "beginObserved": true,
+    "endObserved": true,
+    "renderedLines": 22,
+    "serialBytes": 440,
+    "websocketBytes": 440,
+    "parserLines": 22,
+    "finalStatus": "Fresh display; ongoing guest line, no history replay",
+    "classification": "pass",
+    "guestPipelineBytes": 440
+  },
+  {
+    "browser": "webkit",
+    "peripheralPhaseStarted": false,
+    "dispatchedAt": 1795378832697,
+    "beginObserved": true,
+    "endObserved": true,
+    "renderedLines": 22,
+    "serialBytes": 440,
+    "websocketBytes": 440,
+    "parserLines": 22,
+    "finalStatus": "Fresh display; ongoing guest line, no history replay",
+    "classification": "pass",
+    "guestPipelineBytes": 440
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "browser": "chromium",
+    "peripheralPhaseStarted": false,
+    "dispatchedAt": 1795378937609,
+    "injectedFault": "missing-input",
+    "beginObserved": true,
+    "endObserved": true,
+    "failure": "expect(received).toBeGreaterThan(expected)\n\nExpected: > 10\nReceived:   0\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate",
+    "serialBytes": 1,
+    "websocketBytes": 1,
+    "parserLines": 0,
+    "renderedLines": 0,
+    "finalStatus": "Fresh display; ongoing guest line, no history replay",
+    "classification": "observed-stream-lacks-expected-vectors"
+  }
+]

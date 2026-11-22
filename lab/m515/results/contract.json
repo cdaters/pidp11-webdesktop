@@ -1,0 +1,15 @@
+{
+  "sourceRevision": "c39647975fbf573e14c8bd4a16b8f017df3597b9",
+  "clientCases": 9,
+  "optionalAppRouteCases": 6,
+  "actualTLSBoundary": true,
+  "crossProcessNodeClientAndGoAdapter": true,
+  "ephemeralTrustedCertificate": true,
+  "browserLifetimeLoss": "controlled callback with explicit revocation; not a fresh full upstream browser/model campaign",
+  "expiration": "test moves adapter deadline into past; no claim of an independent clock audit",
+  "unknownOSAndCPU": true,
+  "concurrentHTTPPublicationOneWinner": true,
+  "freshUpstreamAppOrRealModelTest": false,
+  "independentProfessionalAudit": false,
+  "originalUpstreamModified": false
+}
