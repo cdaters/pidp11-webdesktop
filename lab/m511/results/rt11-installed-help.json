@@ -1,0 +1,25 @@
+{
+  "environment": "Network-none original SIMH; fresh copy of verified public RT-11 disk",
+  "guest": "RT-11SJ (S) V05.03",
+  "observed_commands": {
+    "SHOW CONFIG": [
+      "Booted from DL0:RT11SJ",
+      "No SYSGEN options enabled"
+    ],
+    "SHOW DEVICES": [
+      "TT installed",
+      "DZ not installed",
+      "LP not installed",
+      "PC not installed"
+    ],
+    "DIR LP.SYS": [
+      "LP.SYS exists, 2 blocks, 20-Dec-85"
+    ],
+    "HELP LOAD": [
+      "Loads a device handler into memory",
+      "LOAD device[=jobtype]",
+      "B background, F foreground"
+    ]
+  },
+  "limit": "Installed HELP and guest observations, not a complete V5.03 manual or serial-terminal acceptance."
+}

@@ -193,7 +193,7 @@
   {
     "id": "rsts-scope",
     "title": "RSTS/E: identify the release first",
-    "text": "This catalog has focused RSTS/E V9.0 DCL login, logout and directory notes. They do not establish commands for other releases or run-time systems. Identify the release and interpreter first. No system startup, shutdown, patch or driver-installation procedure is qualified here.",
+    "text": "This catalog has V7.0 product-scope notes and V9.0 DCL session notes. They do not establish commands for other releases or installed drivers. Identify the release and keyboard monitor first. No complete system startup, shutdown, patch or driver-installation procedure is qualified here.",
     "system": "rsts",
     "keywords": "rsts rsts/e basic dcl runtime",
     "source": "https://bitsavers.org/pdf/dec/pdp11/rsts_e/",
@@ -203,12 +203,12 @@
     "section": "No operational passage verified",
     "coverage": "incomplete",
     "question": "Explain RSTS/E: identify the release first.",
-    "note_sha256": "57b6a2ffc6d13501aa013aee7256c1139a9fc82ac3e93bd7c97ac88d64077f23"
+    "note_sha256": "58855a03db4a8f354e9b173edf38f34732703c84a1c582cefbdde21b68840bef"
   },
   {
     "id": "rsxplus-scope",
     "title": "RSX-11M-PLUS: separate version scope",
-    "text": "This catalog has a PIP listing note explicitly scoped to RSX-11M-PLUS V3.0. The older June 1977 RSX-11M note is not a PLUS procedure. Identify the installed release and interpreter; no PLUS system startup, shutdown or driver-installation sequence is qualified here.",
+    "text": "This catalog has a V3.0 PIP listing note and V4.6 release-note passages about password lifetime and the shutdown utility. The June 1977 RSX-11M note is not a PLUS procedure. Identify the installed release and interpreter; no complete PLUS startup, shutdown dialogue or driver-installation sequence is qualified here.",
     "system": "rsx11mplus",
     "keywords": "rsx11mplus rsx-11m-plus rsx11mp plus",
     "source": "https://bitsavers.org/pdf/dec/pdp11/rsx11m_s/",
@@ -218,7 +218,7 @@
     "section": "No PLUS operational passage verified",
     "coverage": "incomplete",
     "question": "Explain RSX-11M-PLUS: separate version scope.",
-    "note_sha256": "52392c18782d37ddc65ff547de96e2ed74c094368a0abe5c2a778aa4653bbef7"
+    "note_sha256": "4a362e3e9c03a0dca434a749f1666bf6edd1785791dbfc2c2b2a88b8a25689fa"
   },
   {
     "id": "1170-vectors",
@@ -459,5 +459,85 @@
     "question": "Explain Deferred pointers and the stack pointer.",
     "source_sha256": "c6a300eb330a4169539b635a4dae608f4de5012acef57aa51527a105c4802287",
     "note_sha256": "7c9a4d2a0791ffe8e0290a4903103c6767bc7e40708522e200b29b2e94e61b37"
+  },
+  {
+    "id": "rsts70-monitors",
+    "title": "RSTS/E V7.0 keyboard monitors",
+    "text": "RSTS/E V7.0 provides BASIC, RSX and RT-11 keyboard monitors: run-time systems interpreting commands within RSTS/E. Their names do not mean that the machine has booted a different operating system. They share system commands, while BASIC and RT-11 add environment-specific commands. Concise Command Language (CCL) lets an installation define additional commands, so local command availability depends on configuration. This description is for V7.0, not a V9.0 DCL procedure.",
+    "system": "rsts",
+    "keywords": "rsts rsts/e v7.0 basic rsx rt11 monitors runtime ccl rsts70-monitors",
+    "source": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsts_e/V07/v1a_RSTS7.0_SPD_Feb80.pdf",
+    "organization": "Digital Equipment Corporation",
+    "edition": "RSTS/E Version 7.0, February 1980",
+    "document": "Software Product Description, SPD 13.1.13",
+    "section": "Printed/PDF p. 6, CCL",
+    "coverage": "focused note",
+    "question": "Explain RSTS/E V7.0 keyboard monitors.",
+    "source_sha256": "1c0221623d37b73bebc8bb41b94dd2ba79ae1da533c9c8f5a05b823e89bd3d7b",
+    "note_sha256": "12ba05fa2b6a37da1d633f5dddd4e506417a3a1bd2e1ce248a7cb4d0f1cc6b7c"
+  },
+  {
+    "id": "rsts70-terminals",
+    "title": "RSTS/E V7.0 terminal interfaces",
+    "text": "The RSTS/E V7.0 product description lists DL11, DJ11, DZ11 and DH11 terminal interfaces and up to 127 terminals including the console. KL11, LC11 and DC11 are listed only for systems updating from Version 6C. Listed terminal types include VT52 and VT100. These are product capabilities, not evidence that a particular disk image was generated with a driver, that its lines are enabled, or that a browser terminal has been accepted.",
+    "system": "rsts",
+    "keywords": "rsts rsts/e v7.0 terminal terminals dz11 dl11 dh11 driver console rsts70-terminals",
+    "source": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsts_e/V07/v1a_RSTS7.0_SPD_Feb80.pdf",
+    "organization": "Digital Equipment Corporation",
+    "edition": "RSTS/E Version 7.0, February 1980",
+    "document": "Software Product Description, SPD 13.1.13",
+    "section": "Printed/PDF p. 6, Terminals",
+    "coverage": "focused note",
+    "question": "Explain RSTS/E V7.0 terminal interfaces.",
+    "source_sha256": "1c0221623d37b73bebc8bb41b94dd2ba79ae1da533c9c8f5a05b823e89bd3d7b",
+    "note_sha256": "301b753e758fa1fd2740f9efd18c23bac114be81bcaeb1db8cb8656a83d7eb80"
+  },
+  {
+    "id": "rsxplus46-password",
+    "title": "RSX-11M-PLUS V4.6 password lifetime",
+    "text": "The V4.6 release notes describe an account password lifetime of 0–127 days; zero disables lifetime checking. Expiration forces a password change at a later login, with an explicit exception for batch jobs and virtual terminals. HELLO is the login task in this discussion. These are guest-account facilities, separate from browser authentication; a browser login does not log into the historical guest. This note does not authorize account changes.",
+    "system": "rsx11mplus",
+    "keywords": "rsx11mplus v4.6 hello password lifetime login account rsxplus46-password",
+    "source": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsx11m_plus/RSX11Mplus_V4.x/AA-H427L-TC_RSX-11M-PLUS_V4.6_Release_Notes_Jan99.pdf",
+    "organization": "Digital Equipment Corporation",
+    "edition": "RSX-11M-PLUS V4.6, January 1999",
+    "document": "Release Notes, AA-H427L-TC",
+    "section": "§§7.2–7.3, printed p. 7-2; PDF p. 159",
+    "coverage": "focused note",
+    "question": "Explain RSX-11M-PLUS V4.6 password lifetime.",
+    "source_sha256": "3faa771d0068849b0164941998f9fbac769a9077f2858df9775596e7cee307b8",
+    "note_sha256": "35eebaf049c28d3a5f02b6ff2d574ce34b6c693b5352145c15932f5b7d1f5073"
+  },
+  {
+    "id": "rsxplus46-shutdown",
+    "title": "RSX-11M-PLUS V4.6 shutdown utility",
+    "text": "The V4.6 release notes identify RUN $SHUTUP in MCR as a system-shutdown step before rebooting after reconfiguration. This is a guest utility, not SIMH quit and not a browser disconnect. The cited passage does not supply the complete interactive dialogue or establish that jobs have finished; the operator must follow the utility and local operating procedure. No shutdown or emulator command is executed by this reference.",
+    "system": "rsx11mplus",
+    "keywords": "rsx11mplus v4.6 shutdown shutup mcr guest reboot rsxplus46-shutdown",
+    "source": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsx11m_plus/RSX11Mplus_V4.x/AA-H427L-TC_RSX-11M-PLUS_V4.6_Release_Notes_Jan99.pdf",
+    "organization": "Digital Equipment Corporation",
+    "edition": "RSX-11M-PLUS V4.6, January 1999",
+    "document": "Release Notes, AA-H427L-TC",
+    "section": "Appendix B.5, step 9; printed p. B-8; PDF p. 189",
+    "coverage": "focused note",
+    "question": "Explain RSX-11M-PLUS V4.6 shutdown utility.",
+    "source_sha256": "3faa771d0068849b0164941998f9fbac769a9077f2858df9775596e7cee307b8",
+    "note_sha256": "a95572e52a4fd4479d378c98b3ffef719c7951b9955e67965de596532649a82a"
+  },
+  {
+    "id": "rt11503-handlers",
+    "title": "RT-11SJ V05.03 installed handler evidence",
+    "text": "In the disposable RT-11SJ V05.03 image tested for M5.11, SHOW DEVICES reported DZ, LP and PC not installed. DIR found LP.SYS, and the installed HELP LOAD described loading a device handler into memory, with background/foreground job types. A handler file existing on disk does not mean it is installed or that a separate browser terminal works. These are observations of this image and its built-in help, not a universal RT-11 configuration or a substitute for a matching full manual.",
+    "system": "rt11",
+    "keywords": "rt11 v05.03 handlers devices lp.sys dz rt11503-handlers",
+    "source": "https://github.com/cdaters/pidp11-webdesktop/blob/main/lab/m511/results/rt11-installed-help.json",
+    "organization": "RT-11 installed HELP; observation by RetroRealm",
+    "edition": "RT-11SJ V05.03, disposable M5.11 observation",
+    "document": "Installed HELP LOAD, SHOW DEVICES and DIR",
+    "section": "Observed commands in rt11-installed-help.json",
+    "coverage": "focused note",
+    "question": "Does LP.SYS on disk mean an RT-11 printer driver is installed?",
+    "source_sha256": "5ddc4c43ad4840be71048981fb51d5dbe6caf81c11bd75eef6cce0f5ec4a40d8",
+    "note_sha256": "50c773d3e21f69efb6e436786580a33425bfe702da6ce7eb0be04591b4327de4"
   }
 ]

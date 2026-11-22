@@ -20,7 +20,7 @@
   {
     "id": "registers",
     "title": "PDP-11/70 register roles",
-    "text": "R7 is the program counter (PC); R6 is the stack pointer (SP). The /70 has separate Kernel, Supervisor and User stack pointers and two sets of R0\u2013R5.",
+    "text": "R7 is the program counter (PC); R6 is the stack pointer (SP). The /70 has separate Kernel, Supervisor and User stack pointers and two sets of R0–R5.",
     "reference": "1170-registers"
   },
   {
@@ -76,5 +76,17 @@
     "title": "Emulated device and guest driver",
     "text": "SIMH device availability does not establish that the guest has the matching driver. A quiet browser does not prove a stopped CPU.",
     "reference": "peripherals"
+  },
+  {
+    "id": "rsts70-monitors",
+    "title": "RSTS/E V7.0 command environments",
+    "text": "BASIC, RSX and RT-11 are keyboard monitors (run-time systems) within RSTS/E V7.0. Their names alone do not identify a different booted operating system.",
+    "reference": "rsts70-monitors"
+  },
+  {
+    "id": "rsts70-terminals",
+    "title": "RSTS/E V7.0 terminal-driver scope",
+    "text": "The V7.0 product description lists DL11, DJ11, DZ11 and DH11. A supported interface does not prove that a particular guest image has its driver configured.",
+    "reference": "rsts70-terminals"
   }
 ]

@@ -29,7 +29,8 @@
     "system": "rt11",
     "status": "focused-notes",
     "ids": [
-      "rt11"
+      "rt11",
+      "rt11503-handlers"
     ]
   },
   {
@@ -43,7 +44,8 @@
     "system": "rsx11mplus",
     "status": "incomplete",
     "ids": [
-      "rsxplus-scope"
+      "rsxplus-scope",
+      "rsxplus46-password"
     ]
   },
   {
@@ -51,7 +53,8 @@
     "system": "rsts",
     "status": "incomplete",
     "ids": [
-      "rsts-scope"
+      "rsts-scope",
+      "rsts70-monitors"
     ]
   },
   {
@@ -125,7 +128,8 @@
     "system": "",
     "status": "incomplete",
     "ids": [
-      "rsts-scope"
+      "rsts-scope",
+      "rsts70-monitors"
     ]
   },
   {
@@ -133,7 +137,8 @@
     "system": "",
     "status": "focused-notes",
     "ids": [
-      "rt11"
+      "rt11",
+      "rt11503-handlers"
     ]
   },
   {
@@ -191,6 +196,46 @@
     "status": "focused-notes",
     "ids": [
       "simh-storage"
+    ]
+  },
+  {
+    "query": "rt11503-handlers",
+    "system": "rt11",
+    "status": "focused-notes",
+    "ids": [
+      "rt11503-handlers"
+    ]
+  },
+  {
+    "query": "rsts70-monitors",
+    "system": "rsts",
+    "status": "focused-notes",
+    "ids": [
+      "rsts70-monitors"
+    ]
+  },
+  {
+    "query": "rsts70-terminals",
+    "system": "rsts",
+    "status": "focused-notes",
+    "ids": [
+      "rsts70-terminals"
+    ]
+  },
+  {
+    "query": "rsxplus46-password",
+    "system": "rsx11mplus",
+    "status": "focused-notes",
+    "ids": [
+      "rsxplus46-password"
+    ]
+  },
+  {
+    "query": "rsxplus46-shutdown",
+    "system": "rsx11mplus",
+    "status": "focused-notes",
+    "ids": [
+      "rsxplus46-shutdown"
     ]
   }
 ]
