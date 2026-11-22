@@ -1,0 +1,7 @@
+=== RUN   TestPrivateInputsAndControlSocket
+--- PASS: TestPrivateInputsAndControlSocket (0.00s)
+=== RUN   TestControlRejectsForeignOwner
+--- PASS: TestControlRejectsForeignOwner (0.00s)
+=== RUN   TestPrivateFileRejectsForeignOwner
+--- PASS: TestPrivateFileRejectsForeignOwner (0.00s)
+PASS

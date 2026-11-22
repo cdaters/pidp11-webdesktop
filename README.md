@@ -8,7 +8,7 @@ A browser workspace for exploring a PDP-11: vintage terminals, vector graphics, 
 
 The old computer still does the computing. SIMH runs the historical operating system; the browser displays its terminal and device output. Oscar’s original launcher, physical panel and conventional console remain independent of the optional desktop.
 
-[**Try it locally**](#try-the-local-desktop) · [Getting started](docs/getting-started/README.md) · [Gallery](docs/screenshots/README.md) · [Capabilities](docs/capabilities.md) · [Documentation](docs/README.md)
+[**Try it locally**](docs/getting-started/source-alpha.md) · [Getting started](docs/getting-started/README.md) · [Gallery](docs/screenshots/README.md) · [Capabilities](docs/capabilities.md) · [Documentation](docs/README.md)
 
 ![Actual Web Desktop with a UNIX V7 terminal, V7 Tektronix plot and completed LP11/PC11 device observations](docs/screenshots/m510/desktop.png)
 
@@ -19,7 +19,7 @@ The old computer still does the computing. SIMH runs the historical operating sy
 - **Use real guest terminals.** Open independent lines, share read-only views, and explicitly acquire a keyboard when you want to type.
 - **Explore terminal personalities.** Choose VT100, VT52, a VT220 subset, or an ASR-33-inspired paper presentation.
 - **Watch vector graphics and device output.** Display V7 plots, follow approved LP11/PC11 output, and download completed bytes.
-- **Learn without a model.** Search 29 source-linked historical notes, request 13 verified source facts, or calculate PDP-11 values exactly.
+- **Learn without a model.** Search 36 source-linked historical notes, request 15 source facts, or calculate PDP-11 values exactly.
 - **Explore without hardware.** The local demonstration includes an SVG PDP-11/70 panel, mock terminals, and simulated disk, tape and printer workflows.
 
 Windows move, resize, maximize and arrange like equipment on a workbench. The browser supplies the graphics; the optional Go service stays small and serves its application assets from one executable. No graphical desktop, Node runtime, database or container is required on the target Pi.
@@ -32,7 +32,7 @@ Windows move, resize, maximize and arrange like equipment on a workbench. The br
 
 *Fresh disposable 2.11BSD, original SIMH and the actual browser terminal. The editor’s filename contains a test identifier. [Terminal behavior](docs/technical/terminal-personalities.md) · [Guest demonstrations](docs/capabilities.md#terminals-and-operating-systems).*
 
-RT-11SJ V05.03 worked through the original physical launcher and console. That is **not** a verified Web Desktop RT-11 integration. RSX and RSTS/E historical references likewise do not establish browser guest acceptance.
+RT-11SJ V05.03 worked through the original physical launcher and console. A separately generated RT-11FB now supports genuine browser application I/O, with an explained older-diagnostic mismatch and no independent login-shell claim. RSX-11M-PLUS passed login/help/directory tests. RSTS/E remains console-only pending missing generation materials. [Current evidence](docs/lab/M5.13.md).
 
 ## Graphics and peripherals
 
@@ -54,7 +54,7 @@ A separately configured local model can discuss deliberately shared text and sou
 
 [Rolf Peters’ Hacker Replicant](https://github.com/rolfpeters-droid/pidp11-hacker-replicant) inspired aspects of our independently developed companion. Its GNU Screen operator-console approach differs from our dedicated guest serial lines and explicit attachment/keyboard protections.
 
-The actual application completed laboratory conversations through our model gateway. Phase D used an **explicitly modified** copy in a separately authenticated read-only mode, with synthetic selected text and no console control. This is not a supported full integration, merger or endorsement. [Optional integration and attribution](integrations/hacker-replicant/README.md).
+The actual application completed laboratory conversations through our model gateway. The later supervised lab used an **explicitly modified**, pinned copy in a separately authenticated read-only mode with deliberately shared genuine V7 text and no console control. This is not a supported full integration, merger or endorsement. [Optional integration and attribution](integrations/hacker-replicant/README.md).
 
 ## Try the local desktop
 

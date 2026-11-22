@@ -1,6 +1,6 @@
 # Capability and compatibility matrix
 
-Current through **M5.12**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Current through **M5.13**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
 
 **Genuine guest tested** identifies recorded operating-system behavior. **Genuine device tested** identifies CPU/device behavior. **Laboratory tested** identifies an isolated transport or safety experiment. **Implemented**, **experimental**, **simulated**, **planned**, and **not physically accepted** describe different limits; they are not a single maturity score.
 
@@ -19,9 +19,9 @@ Current through **M5.12**; the M5.10 presentation and gallery are preserved. A g
 | Opt-in process/socket supervision | Genuine Linux/V7 laboratory tested | Ordered expiring approvals; OS remains operator-attested; observer not production-installed |
 | Reconnect and attachment generations | Laboratory tested | Detached startup, explicit reconnect, no automatic keyboard/history replay; surviving-stream guest changes still need independent identity verification |
 | RT-11SJ V05.03 baseline | Genuine disposable boot/original console tested | Preserved; RT-11 DZ disk handler status is not DZ11 serial evidence |
-| Generated RT-11FB V05.03 | Genuine separate browser application terminal | M5.12 MTTEST line input/retype; no login shell or complete diagnostic acceptance |
+| Generated RT-11FB V05.03 | Genuine separate browser application terminal | M5.13 fresh build, line retype and asynchronous I/O; older status-word mismatch explained, no independent monitor or full diagnostic acceptance |
 | RSX-11M-PLUS V4.6 BL87 | Genuine DZ11/browser terminal tested | Chromium VT100 HELLO/HELP/PIP listing; no full-screen or broader release claim |
-| RSTS/E V7.0-07 | Genuine boot, login, BASIC and system status through original console | M5.12: DZ11 hardware seen but zero DZ11 lines generated; missing complete regeneration inputs; no browser acceptance |
+| RSTS/E V7.0-07 | Genuine boot, login, BASIC and system status through original console | M5.13 minimal/full image inventories: console only; exact retained batch identifies missing generation/patch volumes; no browser acceptance |
 
 [Detailed terminal protocols and tests](technical/terminal-personalities.md). Chromium, Firefox and WebKit are the tested automation engines; WebKit results are not native Safari acceptance.
 
@@ -52,7 +52,8 @@ Current through **M5.12**; the M5.10 presentation and gallery are preserved. A g
 | Source facts | Implemented, deterministic | 15 explicit `/fact` topics; no inference or terminal sharing |
 | Exact PDP-11 arithmetic | Implemented, deterministic | `/calc`: 8/16/22-bit values, bases, masks and shifts; no ambiguous-number guessing |
 | Local model gateway | Laboratory tested | Fixed model, authentication/TLS, bounded requests and cancellation; no management/tools |
-| Gemma conversation | Experimental, genuine model tested | Retained three-engine evidence; M5.12: 7/8 requested distinctions, one incomplete answer and one quotation-attribution weakness; not independent expert acceptance |
+| Gemma conversation | Experimental, genuine model tested | Retained three-engine evidence; M5.13: six of eight requested distinctions, two incomplete; one marked quotation withheld; not independent expert acceptance |
+| Source attribution | Conservative delivered-answer label; substantial marked quotations withheld | Catalog contains paraphrases, not authenticated quotation spans; unusual syntax and factual accuracy remain unverified |
 | Claim review | Experimental, narrow fragments | M5.12 new frozen corpus: 2/12 recognized, five missed contradictions; no whole-answer certification or independent expert benchmark |
 | Selected terminal text | Explicit user sharing | Nothing read automatically; submitted text cannot be recalled from a model |
 | Human-approved command proposals | Experimental, disabled by default | Only `pwd`, `ls`, `ls /`; separate review, current keyboard ownership and one-use approval; not general AI execution |

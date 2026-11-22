@@ -1,0 +1,69 @@
+{
+  "reviewer": "same implementation workflow; not independent",
+  "training": "prior M5.12 failures and unit tests; no tuning after held-out run",
+  "cases": [
+    {
+      "id": "memory-byte",
+      "coreAssessment": "requested distinction present",
+      "delivered": true,
+      "validCitationIDs": true,
+      "recognizedFragments": 0
+    },
+    {
+      "id": "stack-byte",
+      "coreAssessment": "incomplete",
+      "delivered": true,
+      "validCitationIDs": true,
+      "recognizedFragments": 0
+    },
+    {
+      "id": "address-width",
+      "coreAssessment": "requested distinction present",
+      "delivered": true,
+      "validCitationIDs": true,
+      "recognizedFragments": 1
+    },
+    {
+      "id": "rt-quote",
+      "coreAssessment": "requested distinction present",
+      "delivered": false,
+      "validCitationIDs": true,
+      "recognizedFragments": 0
+    },
+    {
+      "id": "rsts-generation",
+      "coreAssessment": "requested distinction present",
+      "delivered": true,
+      "validCitationIDs": true,
+      "recognizedFragments": 0
+    },
+    {
+      "id": "rsx-end",
+      "coreAssessment": "incomplete",
+      "delivered": true,
+      "validCitationIDs": true,
+      "recognizedFragments": 0
+    },
+    {
+      "id": "rsts-version",
+      "coreAssessment": "requested distinction present",
+      "delivered": true,
+      "validCitationIDs": true,
+      "recognizedFragments": 0
+    },
+    {
+      "id": "literal-request",
+      "coreAssessment": "requested distinction present",
+      "delivered": true,
+      "validCitationIDs": true,
+      "recognizedFragments": 0
+    }
+  ],
+  "limits": [
+    "Eight questions, one model run; not general accuracy",
+    "stack-byte uses an autodecrement example rather than answering R0 autoincrement directly",
+    "rsx-end does not firmly distinguish LOGOUT from system shutdown",
+    "rt-quote marked project-paraphrase quotation was withheld even though core distinction was correct",
+    "No primary quotation span catalog exists; no exact quotation is certified"
+  ]
+}

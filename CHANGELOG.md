@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.13 source-alpha preparation — 2026-11-22
+
+- Require service ownership of private control directories; reproduce wrong-owner refusal in ARM64 Linux and concurrent consent publication under race checks.
+- Apply source-status labels to generated answers and withhold unsupported marked quotations in both desktop and model-gateway routes. Clarify MOVB memory destinations; preserve deterministic offline tools.
+- Reproduce RT-11FB generation and identify the old MTTEST second-status-word assumption; extend genuine application tests without patching original diagnostics. Identify RSTS generation/patch dependencies from its retained batch.
+- Prepare external security/interoperability review packets, source-alpha onboarding and deterministic source packaging. Preserve previous tags, media and screenshots; no physical Pi access or public release approval is implied. [Report](docs/lab/M5.13.md).
+
 ## M5.12 supervised identity and alpha qualification — 2026-11-22
 
 - Added opt-in ordered process/socket supervision, a bounded unpublished verification phase and fresh-approval requirements after loss. Guest OS identity remains explicitly operator-attested.

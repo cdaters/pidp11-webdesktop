@@ -1,5 +1,7 @@
 # What is still experimental
 
+M5.13 prepares a source-only alpha and external review packets. It does not supply independent security approval. RT-11’s diagnostic mismatch is explained but still present; no original diagnostic was patched. RSTS needs the generation/patch volumes named by its retained batch. Model quotation formatting is conservatively refused and every delivered explanation labels its source status, but factual claim coverage remains weak. [Current report](lab/M5.13.md).
+
 M5.12 adds a supervised Linux laboratory subset, not verified OS discovery. It
 cannot detect a guest switch inside an unchanged process and stream. Stop the
 actual observer and bridge before guest changes, then verify and approve anew.

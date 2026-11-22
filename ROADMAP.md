@@ -1,5 +1,11 @@
 # Where the project is going
 
+## M5.13: source-alpha and external review readiness
+
+[Current work](docs/lab/M5.13.md) closes a private-control ownership gap, qualifies model attribution, reproduces RT-11 with a measured diagnosis, inventories exact RSTS build dependencies, and prepares source-only distribution and review packets. Independent review is still outstanding.
+
+Next gates: owner approval for source-alpha publication; external security/historical review; matched RT-11 diagnostic sources; legitimate RSTS generation and patch volumes; production observer privileges; and separately authorized repaired-panel/memory/readiness testing. No release decision enables Pi deployment or remote panel control.
+
 ## M5.12: supervised identity and bounded alpha scope
 
 [Implemented and measured](docs/lab/M5.12.md): ordered process/socket supervision, a delayed-publication revocation correction, genuine RT-11 application-terminal access, exact RSTS/E configuration blockers, sustained guest tests and protected ARM64 recovery/removal. The catalog has 36 notes and 15 deterministic facts. A surviving stream still cannot identify its OS.

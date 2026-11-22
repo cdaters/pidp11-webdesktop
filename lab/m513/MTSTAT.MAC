@@ -1,0 +1,34 @@
+; Original RetroRealm diagnostic, MIT, Craig Daters 2026.
+; Read one attached RT-11 multiterminal status block. Does not set status.
+        .MCALL .MTATCH,.MTGET,.MTDTCH,.PRINT,.EXIT
+START:  .MTATCH #AREA,#AST,#1
+        BCS FAIL
+        .MTGET #AREA,#TSB,#1
+        BCS FAIL
+        MOV #TSB,R4
+        MOV #4,R5
+NEXT:   MOV (R4)+,R2
+        MOV #TEXT+6,R3
+        MOV #6,R1
+DIGIT:  MOV R2,R0
+        BIC #177770,R0
+        ADD #60,R0
+        MOVB R0,-(R3)
+        CLC
+        ROR R2
+        ASR R2
+        ASR R2
+        SOB R1,DIGIT
+        .PRINT #TEXT
+        SOB R5,NEXT
+        .MTDTCH #AREA,#1
+        .EXIT
+FAIL:   .PRINT #ERROR
+        .EXIT
+AREA:   .BLKW 3
+AST:    .WORD 0
+TSB:    .BLKW 4
+TEXT:   .ASCIZ /000000/
+ERROR:  .ASCIZ /MTSTAT FAILED/
+        .EVEN
+        .END START

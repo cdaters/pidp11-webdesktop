@@ -1,3 +1,15 @@
+# Source-alpha decision for M5.13
+
+The current candidate is **source only**, for local demonstration and controlled
+guest labs. Start with [the source-alpha notes](M5.13-source-alpha.md),
+[quick start](../getting-started/source-alpha.md), [review checklist](M5.13-review-checklist.md)
+and [M5.13 findings](../lab/M5.13.md). Owner approval is still required before a
+public release tag or GitHub Release. No public downloadable binary is authorized.
+Physical deployment and general Pi installation remain NO-GO.
+
+The following retained ARM64 candidate procedure is a separate optional-service
+path, not a prerequisite for the local source demonstration.
+
 # Alpha package readiness
 
 **Current presentation: `m5.12-rc.1`, Linux ARM64 laboratory candidate.** This is a source-based preview, not a stable release or a promise of a hosted binary download. For any future Pi pilot, the original PiDP-11 must already work independently. Hardware repair, enforceable memory containment, guest-line identity and representative Pi measurements remain acceptance gates.

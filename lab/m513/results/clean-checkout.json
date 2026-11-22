@@ -1,0 +1,21 @@
+{
+  "sourceRevision": "ee7bbd6a46814942fff86f8846002aa358ae4eee",
+  "clone": "fresh HTTPS GitHub clone, no copied node_modules or private configuration",
+  "host": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "node": "v26.9.0",
+  "npm": "11.19.1",
+  "go": "go version go1.26.0 darwin/arm64",
+  "dependencyInstall": "npm ci; lockfile unchanged; 0 reported audit vulnerabilities at test time",
+  "browserInstall": "explicit npx playwright install; existing shared cache and downloaded missing Chromium build; no hidden symlinked dependencies",
+  "browserCases": 114,
+  "unexpected": 0,
+  "flaky": 0,
+  "frontendUnitCases": 100,
+  "typecheck": true,
+  "build": true,
+  "portsClosedAfterStop": [
+    5173,
+    8080
+  ],
+  "removal": "only this newly created checkout and generated mock binary removed; logs/results retained outside it; shared tool/browser caches preserved"
+}

@@ -1,0 +1,51 @@
+{
+  "originalArchiveSHA256": "14bcf83610737c2383ffbfa411ebbd067590705fd1c42caa679d1a5a63f60bd9",
+  "media": [
+    {
+      "base": "v7/disk0.base.hp",
+      "bytes": 174423040,
+      "sha256": "fc04dab1e7f2fbf3ea4b44603ed2c9d6ba15f4f86c702d4a27a1dac725966f39",
+      "unchanged": true
+    },
+    {
+      "base": "bsd/disk.base",
+      "bytes": 1000089600,
+      "sha256": "940608306ccf49b74780d3f6863476a4a5fea27651c9d1cc0a81b5c020dcbb1f",
+      "unchanged": true
+    },
+    {
+      "base": "guests/rt11/disk0.base",
+      "bytes": 10478080,
+      "sha256": "543277ee81fb4c024d19242bf6d6a04c81a257c48fe4cece256a42de3fe8dd98",
+      "unchanged": true
+    },
+    {
+      "base": "guests/rsx/disk0.base",
+      "bytes": 314880000,
+      "sha256": "516eea6dd72e89ac4c99453fbe203ece9fc801e902cb118257d6a650112b05bb",
+      "unchanged": true
+    },
+    {
+      "base": "guests/rsts/disk0.base",
+      "bytes": 5235200,
+      "sha256": "ffaa4eac79dd36b6c30d4f7087aee3544c14d680018eac3ccc16027a557e81e4",
+      "unchanged": true
+    },
+    {
+      "base": "guests/rsts/disk1.base",
+      "bytes": 5235200,
+      "sha256": "b412e94ed86857c7596249ec12624c1be714e65b67720aea176f204ba5bff626",
+      "unchanged": true
+    }
+  ],
+  "minimalRSTS": {
+    "sha256": "bf17d27c76ff9a3607296c34f1c61223c4050f82b9ada7ce1189a4ec3c8a7c58",
+    "bytes": 5235200,
+    "unchanged": true
+  },
+  "sourceRevision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+  "sourceProvenance": "pinned public tar archive; extracted source is not a Git checkout",
+  "originalSourceFilesCompared": 393,
+  "originalSourceArchiveSHA256": "3f857439ec9ab63de1f227dc7779c5c69df99d050f90e52209359330a6d9c070",
+  "originalSimulatorSHA256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237"
+}

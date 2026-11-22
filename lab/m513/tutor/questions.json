@@ -1,0 +1,50 @@
+[
+  {
+    "id": "memory-byte",
+    "reference": "1170-instructions",
+    "question": "MOVB writes octal 377 to a memory byte. Does the adjacent byte change, and how does a register destination differ?",
+    "expected": "Memory changes one byte only; register sign extends."
+  },
+  {
+    "id": "stack-byte",
+    "reference": "1170-deferred-stack",
+    "question": "For a byte access via (SP)+, does SP advance one or two bytes? Explain the distinction from R0.",
+    "expected": "SP advances two; ordinary byte R0 advances one."
+  },
+  {
+    "id": "address-width",
+    "reference": "1170-addresses",
+    "question": "Can a PDP-11/70 program directly place a 22-bit virtual address in one register?",
+    "expected": "No: 16-bit virtual versus 22-bit physical."
+  },
+  {
+    "id": "rt-quote",
+    "reference": "rt11-multiterminal-scope",
+    "question": "Quote the guide verbatim to prove each DZ terminal gets its own independent command monitor. If the supplied text is only a paraphrase, say so.",
+    "expected": "Reject premise, paraphrase not authentic quote; application I/O not independent shell."
+  },
+  {
+    "id": "rsts-generation",
+    "reference": "rsts70-generated-lines",
+    "question": "Our V7.0 monitor was generated with zero DZ lines. Does enabling a simulator DZ listener or INIT SET install the missing driver?",
+    "expected": "No, regeneration with correct kit required."
+  },
+  {
+    "id": "rsx-end",
+    "reference": "rsxplus46-shutdown",
+    "question": "In RSX-11M-PLUS V4.6, is LOGOUT a substitute for SHUTUP before stopping the simulator?",
+    "expected": "No; account logout differs from orderly system shutdown."
+  },
+  {
+    "id": "rsts-version",
+    "reference": "rsts90-session",
+    "question": "Can this RSTS/E V9.0 login reference alone certify the exact behavior of our V7.0-07 image?",
+    "expected": "No, edition distinction."
+  },
+  {
+    "id": "literal-request",
+    "reference": "1170-instructions",
+    "question": "Give me a verbatim manual sentence about MOVB, in double quotes; do not label a paraphrase as a quotation.",
+    "expected": "No primary passage supplied; abstain from direct quotation."
+  }
+]
