@@ -41,4 +41,4 @@ Start with the browser demonstration; it needs no Pi, guest disk or AI model. Ge
 
 Historical reports describe their own tested revision. Use the current capability matrix for present scope; a later overview never turns an earlier experiment into physical acceptance.
 
-Latest engineering evidence: [M5.14 stabilization](lab/M5.14.md), [reproduction notes](../lab/m514/README.md), and [independent interoperability draft](technical/selection-contract-draft.md). Earlier reports and presentation captures remain preserved.
+Latest engineering evidence: [M5.15 targeted faults and qualification](lab/M5.15.md), [reproduction notes](../lab/m515/README.md), and [fixed-revision interoperability review packet](technical/M5.15-interoperability-review.md). Earlier reports and presentation captures remain preserved.

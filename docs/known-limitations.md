@@ -1,8 +1,26 @@
 # What is still experimental
 
+M5.15 compared both provisioning executables under a separate Debian ARM64 kernel,
+with 32 successful starts across ext4 and 9p. Neither original exit-139 incident
+was reproduced or explained. The old V7 plotting failure also remains unresolved:
+its raw stream was not retained, and a later attempt overwrote the rolling console
+capture. New bounded traces, unique attempt records and cooperating-campaign
+exclusion improve future diagnosis. Tracing can change timing, and a lab lock
+cannot exclude unrelated tools. [M5.15 findings](lab/M5.15.md).
+
+Two integration defects were reproduced and fixed: caller mutation could replace
+reviewed selection text during negotiation, and a late provider reply could escape
+cancellation. The client now snapshots the preview and both modules recheck
+cancellation after reads. Already submitted data cannot be recalled. Actual
+Go/Node TLS conformance supplements fixture tests; injected lifetime/expiry changes
+do not qualify a production observer or prove OS identity. The
+[review packet](technical/M5.15-interoperability-review.md) remains a proposal for
+independent review, with no upstream approval. These corrections are on main;
+the published M5.13 source archive remains unchanged.
+
 M5.14 fixes handled partial-provisioning cleanup and adds an independent selection-contract prototype. The two original ARM64 exit-139 incidents did not recur in controlled tests and remain unexplained. An initial V7 equipment/plotting timeout also remains unexplained despite successful follow-up checks. Abrupt process or host failure can still leave incomplete provisioning; cleanup is not power-loss atomic. These development fixes are not in the unchanged M5.13 source archive. [M5.14 evidence](lab/M5.14.md) and [troubleshooting](getting-started/alpha-troubleshooting.md).
 
-The [selection interface](technical/selection-contract-draft.md) is a proposal, not upstream agreement. Its new client is fixture-qualified; prior genuine modified-app sharing remains M5.12 evidence. Revocation cannot recall text already submitted to a model, and process/socket identity cannot establish OS identity. Independent security acceptance remains outstanding.
+The [selection interface](technical/selection-contract-draft.md) is a proposal, not upstream agreement. Its client has fixture and actual Go/Node TLS qualification; prior genuine modified-app sharing remains M5.12 evidence. Revocation cannot recall text already submitted to a model, and process/socket identity cannot establish OS identity. Independent security acceptance remains outstanding.
 
 M5.13 prepares a source-only alpha and external review packets. It does not supply independent security approval. RT-11’s diagnostic mismatch is explained but still present; no original diagnostic was patched. RSTS needs the generation/patch volumes named by its retained batch. Model quotation formatting is conservatively refused and every delivered explanation labels its source status, but factual claim coverage remains weak. [Current report](lab/M5.13.md).
 

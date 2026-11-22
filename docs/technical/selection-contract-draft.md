@@ -8,6 +8,8 @@ The existing modified-application experiment pins upstream revision
 genuine M5.12 evidence remain in [the interoperability packet](hacker-replicant-interoperability.md).
 M5.14's new client is entirely outside that upstream tree.
 
+M5.15 adds a [fixed-revision review packet and qualification map](M5.15-interoperability-review.md). The client now snapshots and validates the preview before its first asynchronous operation and rechecks cancellation after reading a response. The draft version is unchanged; this corrects implementation behavior rather than extending authority.
+
 ## Smallest useful boundary
 
 Keep both applications independently installed, authenticated and stopped/started.
@@ -152,9 +154,9 @@ go test -race ./internal/replicant
 npm run test:replicant
 ```
 
-Six client conformance cases cover version/capability refusal, preview/credential
+Nine client conformance cases cover version/capability refusal, preview/credential
 separation, publication epoch, exact receipt, substitution/expiry, revocation,
-cancellation, oversized replies and fixed destinations. Go HTTP tests cover the
+cancellation (including late bodies), preview mutation, malformed input, oversized replies and fixed destinations. An opt-in Go-to-Node test additionally exercises actual trusted TLS. Go HTTP tests cover the
 actual adapter's authenticated metadata and receipt-before-text behavior; existing
 race tests cover delayed revocation and one-winner publication. Client transport
 fixtures are not a real upstream application, model or guest acceptance test.

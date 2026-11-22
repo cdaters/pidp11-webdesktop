@@ -91,3 +91,17 @@ M5.9 adds [repeatable terminal/graphics and package checks](../../lab/m59/README
 ## M5.11 focused checks
 
 Run `npm run test:replicant` for isolated optional-app route tests (no model or upstream process). `go test ./internal/peripheral -run '^$' -bench BenchmarkRetainedSpoolPoll -benchmem` measures the bounded retained-window check on a real temporary file. [M5.11 laboratory instructions](../../lab/m511/README.md) keep genuine guests, synthetic transport loads and real-model evidence distinct. Prior screenshots use their existing defaults; `M59_GRAPHICS_SCREENSHOT` and `M592_SCREENSHOT` provide separate capture destinations for new runs.
+
+## Targeted interoperability and diagnostic checks
+
+In the Mac shell, `npm run test:selection-contract` exercises the independent
+client and `npm run test:replicant` checks the optional app routes, including late
+responses after cancellation. `PIDP11_CONTRACT_TLS_TEST=1 go test -race ./internal/replicant -v`
+adds the actual Go-server/Node-client TLS test with a disposable trusted certificate.
+It requires Node, but no upstream app, model, guest or Pi. The opt-in test uses
+injected expiry/lifetime changes; it is not production-observer acceptance.
+
+Run `node --test lab/m515/instrumentation.test.mjs` for plotting-boundary and
+exclusive-campaign regressions. Genuine guest tests and the separate ARM64 kernel
+are deliberately separate procedures in the [M5.15 runbook](../../lab/m515/README.md).
+Their private traces and working media must not be committed.

@@ -1,10 +1,16 @@
 # Where the project is going
 
+## M5.15: targeted faults and interoperability qualification
+
+[Implemented and measured](docs/lab/M5.15.md): two consent/cancellation fixes, actual Go/Node TLS conformance, a separate-kernel ARM64 comparison, bounded V7 stream diagnostics and genuine guest/peripheral regressions. The original exit-139 incidents and plotting timeout remain unresolved. The [external-review packet](docs/technical/M5.15-interoperability-review.md) names the exact integration revision, trust boundaries and reproducible checks; it does not claim independent approval.
+
+Recommended **M5.16: external review and trace-on-recurrence qualification**. Seek owner-directed independent security/historical review and separately authorized interoperability feedback. Capture the next actual provisioning signal or plotting failure using preserved per-attempt evidence; avoid claiming a fix from successful repetitions. Production observer privileges, actual Pi memory containment, SR0 repair, representative performance and renewed supervised coexistence remain separate gates. No new release or physical deployment is implied.
+
 ## M5.14: stabilization and independent interoperability
 
 [Implemented and measured](docs/lab/M5.14.md): handled provisioning cleanup, safer diagnostics, clean-clone prerequisites, protected ARM64 fault/recovery checks, genuine guest/device regressions and an [independent selection-interface draft](docs/technical/selection-contract-draft.md). The two original exit-139 incidents and an initial plotting timeout remain unexplained. The published M5.13 archive is unchanged; corrections are development commits.
 
-Recommended M5.15: independent security/historical review and separately authorized interoperability feedback; traceable ARM64/plotting fault reproduction; least-privilege observer design; and matched RT-11/RSTS qualification inputs. No new release or physical deployment is implied. Actual Pi memory containment, SR0 repair, representative performance and a renewed supervised coexistence pilot remain separate gates.
+The M5.14 recommendation for M5.15 was independent security/historical review and separately authorized interoperability feedback; traceable ARM64/plotting fault reproduction; least-privilege observer design; and matched RT-11/RSTS qualification inputs. No new release or physical deployment is implied. Actual Pi memory containment, SR0 repair, representative performance and a renewed supervised coexistence pilot remain separate gates.
 
 ## M5.13: source-alpha and external review readiness
 

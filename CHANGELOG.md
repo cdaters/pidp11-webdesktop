@@ -1,5 +1,13 @@
 # Changelog
 
+## M5.15 targeted fault investigation — 2026-11-22
+
+- Froze consent-preview data before asynchronous negotiation and refused late optional-companion replies after cancellation; reproduced both defects before correction.
+- Qualified the independent selection client against the real Go adapter over TLS and prepared a fixed-revision external-review packet. This is implementer qualification, not independent approval.
+- Compared both ARM64 binaries across native ext4 and shared 9p under a separate Debian kernel: 32 provisioning starts passed, without reproducing the original exit-139 incidents.
+- Added bounded V7 stream tracing, exclusive lab campaigns and distinct failed-attempt records. Genuine three-browser plotting and LP11/PC11 tests passed; the earlier plotting timeout remains unresolved.
+- Rechecked historical guest subsets, 114 browser cases, resource refusal, clean-clone preview and release preservation. No Pi access, upstream contact or new release. [Report](docs/lab/M5.15.md).
+
 ## M5.14 alpha stabilization — 2026-11-22
 
 - Fixed handled provisioning failures leaving partial private configuration; added deterministic writes, narrow cleanup and safer configuration/socket diagnostics. The two earlier exit-139 incidents remain unexplained after controlled ARM64 comparisons.
