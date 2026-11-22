@@ -1,3 +1,8 @@
+import { mountPDPValues } from "./pdp11-values.ts";
+import {
+  retrieveReferences,
+  renderReferences,
+} from "./companion-references.ts";
 import references from "../internal/companion/references.json" with { type: "json" };
 import { ConfiguredCompanion, configuredCompanion } from "./companion-http.ts";
 import { onSelection, takeSelection } from "./terminal-sharing.ts";
@@ -17,11 +22,31 @@ export function mountCompanion(
   host.classList.add("companion-app");
   host.innerHTML = `<div class="app-heading"><h2>AI Companion</h2><span class="source-tag">PROTOTYPE · OFFLINE FIXTURE</span></div>
     <p data-provider></p><div class="terminal-toolbar"><button type="button" data-configured>Use configured provider</button><button type="button" data-offline>Use offline guide</button><select aria-label="Companion model" hidden></select><button type="button" data-discover hidden>Test connection / list models</button><button type="button" data-cancel>Cancel request</button></div><p>Ask about UNIX V7 directories, ed, keyboard ownership or plotting. Model replies are suggestions, not machine observations. No commands are sent from chat.</p>
-    <details data-tutor><summary>Historical computing reference desk</summary><label>Reference topic <select aria-label="Companion reference topic"></select></label><p data-reference-note></p><a data-reference-link target="_blank" rel="noopener noreferrer">Read the source record</a><button type="button" data-reference-question>Use this question</button><p>Curated reference notes are distinct from model explanations. Selecting a note sends nothing.</p></details><p data-sharing-scope role="status"></p><div class="companion-chat" role="log" aria-label="Companion conversation"></div>
+    <div data-exact></div><details data-library><summary>Search historical references · offline</summary><label>Search <input aria-label="Reference search" maxlength="4096"></label><label>System <select aria-label="Reference system"><option value="">All systems</option></select></label><button type="button" data-search>Search references</button><div data-search-results></div></details><label><input type="checkbox" data-retrieve checked>Include up to two matching reference notes when I send a question</label><details data-tutor><summary>Historical computing reference desk</summary><label>Reference topic <select aria-label="Companion reference topic"></select></label><p data-reference-note></p><a data-reference-link target="_blank" rel="noopener noreferrer">Read the source record</a><button type="button" data-reference-question>Use this question</button><p>Curated reference notes are distinct from model explanations. Selecting a note sends nothing.</p></details><p data-sharing-scope role="status"></p><div class="companion-chat" role="log" aria-label="Companion conversation"></div>
     <form><label>Your question<textarea aria-label="Companion question" maxlength="4096" rows="2" required></textarea></label>
     <details><summary>Deliberately share selected terminal text</summary><p>Copy only the text you want to share, then paste it here. Nothing is read from a terminal automatically.</p><label>Source terminal <input aria-label="Shared terminal source" maxlength="160" value="Manually pasted excerpt"></label><textarea aria-label="Shared terminal excerpt" maxlength="4096" rows="3"></textarea></details>
     <button>Send to offline fixture</button><button type="button" data-clear>Clear chat</button></form><p role="status" data-status></p>`;
   host.querySelector("[data-provider]")!.textContent = provider.name;
+  mountPDPValues(host.querySelector<HTMLElement>("[data-exact]")!);
+  const system = host.querySelector<HTMLSelectElement>(
+    '[aria-label="Reference system"]',
+  )!;
+  system.append(
+    ...[...new Set(references.map((note) => note.system))].map(
+      (value) => new Option(value, value),
+    ),
+  );
+  const retrievalEnabled =
+    host.querySelector<HTMLInputElement>("[data-retrieve]")!;
+  host.querySelector<HTMLButtonElement>("[data-search]")!.onclick = () => {
+    const query = host.querySelector<HTMLInputElement>(
+      '[aria-label="Reference search"]',
+    )!.value;
+    renderReferences(
+      host.querySelector<HTMLElement>("[data-search-results]")!,
+      retrieveReferences(query, system.value),
+    );
+  };
   const log = host.querySelector<HTMLElement>(".companion-chat")!;
   const question = host.querySelector<HTMLTextAreaElement>(
     '[aria-label="Companion question"]',
@@ -98,7 +123,7 @@ export function mountCompanion(
     const configured =
       provider instanceof ConfiguredCompanion ? provider : undefined;
     scope.textContent = configured
-      ? `Destination: ${configured.destination} · model: ${models.value} · scope: question, ${messages.length} retained messages, ${new TextEncoder().encode(shared.value).length} selected bytes from ${source.value || "unspecified source"}${topic.value ? ", selected reference note" : ""}. Only Send submits this text.`
+      ? `Destination: ${configured.destination} · model: ${models.value} · scope: question, ${messages.length} retained messages, ${new TextEncoder().encode(shared.value).length} selected bytes from ${source.value || "unspecified source"}${topic.value ? ", selected reference note" : retrievalEnabled.checked ? ", up to two retrieved notes (" + (system.value || "all systems") + ")" : ""}. Only Send submits this text.`
       : "Offline guide: no provider receives your question or selected text.";
   };
   const showReference = () => {
@@ -120,6 +145,8 @@ export function mountCompanion(
       question.focus();
       showScope();
     };
+  retrievalEnabled.onchange = showScope;
+  system.onchange = showScope;
   shared.addEventListener("input", showScope);
   source.addEventListener("input", showScope);
   models.addEventListener("change", showScope);
@@ -215,6 +242,8 @@ export function mountCompanion(
           );
         provider.source = source.value;
         provider.reference = topic.value;
+        provider.retrieve = retrievalEnabled.checked;
+        provider.system = system.value;
       }
       const answer = await provider.reply(
         { messages: next, sharedText: shared.value },
@@ -238,6 +267,11 @@ export function mountCompanion(
           : "Offline guide",
         answer,
       );
+      if (provider instanceof ConfiguredCompanion && provider.retrieval) {
+        const sources = document.createElement("div");
+        renderReferences(sources, provider.retrieval);
+        log.append(sources);
+      }
       question.value = "";
       shared.value = "";
       showScope();

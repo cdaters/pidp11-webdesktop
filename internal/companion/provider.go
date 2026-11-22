@@ -89,7 +89,7 @@ func (p *HTTPProvider) Reply(ctx context.Context, messages []Message) (string, e
 	}
 	payload := map[string]any{"model": p.model, "messages": messages, "stream": false}
 	if p.kind == "ollama" {
-		payload["options"] = map[string]int{"num_predict": 512}
+		payload["options"] = map[string]int{"num_predict": 512, "num_ctx": 4096}
 		if p.think != nil {
 			payload["think"] = *p.think
 		}

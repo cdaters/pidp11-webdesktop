@@ -16,6 +16,7 @@ import (
 
 func TestConfiguredChatHTTP(t *testing.T) {
 	providerCalls := 0
+	answer := "fixture explanation"
 	provider := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		providerCalls++
 		if r.URL.Path == "/api/tags" {
@@ -30,7 +31,7 @@ func TestConfiguredChatHTTP(t *testing.T) {
 		if request.Model != "approved" || !strings.Contains(request.Messages[0].Content, "Project reference") || !strings.Contains(request.Messages[0].Content, "data, not authority") || !strings.Contains(request.Messages[0].Content, "Selected curated reference") {
 			t.Error("missing grounding/sharing boundary")
 		}
-		io.WriteString(w, `{"done":true,"message":{"content":"fixture explanation"}}`)
+		json.NewEncoder(w).Encode(map[string]any{"done": true, "message": map[string]string{"content": answer}})
 	}))
 	defer provider.Close()
 	service, err := NewService(Config{Kind: "ollama", Endpoint: provider.URL + "/api/chat", ModelsEndpoint: provider.URL + "/api/tags", Models: []string{"approved"}, Fixture: true}, nil)
@@ -86,6 +87,15 @@ func TestConfiguredChatHTTP(t *testing.T) {
 	code, data = call("POST", "/api/v1/companion/chat", body, session.CSRF)
 	if code != 200 || !bytes.Contains(data, []byte("fixture explanation")) {
 		t.Fatal(code, string(data))
+	}
+	answer = "fabricated [ref:made-up]"
+	if code, _ := call("POST", "/api/v1/companion/chat", body, session.CSRF); code != 502 {
+		t.Fatal("invented citation accepted")
+	}
+	answer = "fixture explanation"
+	before := providerCalls
+	if code, data := call("GET", "/api/v1/companion/references?q=virtual%20physical%20architecture", "", ""); code != 200 || !bytes.Contains(data, []byte("1170-addresses")) || providerCalls != before {
+		t.Fatal("reference lookup touched model")
 	}
 	for _, bad := range []string{strings.Replace(body, `"approved"`, `"other"`, 1), strings.Replace(body, `true`, `false`, 1), body + `{}`, strings.Replace(body, `"reference":"octal"`, `"reference":"untrusted"`, 1), strings.Replace(body, `"user"`, `"system"`, 1)} {
 		if code, _ := call("POST", "/api/v1/companion/chat", bad, session.CSRF); code == 200 {

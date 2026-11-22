@@ -1,3 +1,5 @@
+import references from "../internal/companion/references.json" with { type: "json" };
+import type { Retrieval } from "./companion-references.ts";
 import type { CompanionProvider, CompanionRequest } from "./companion.ts";
 
 /** Same-origin chat only. Endpoint and credentials come solely from the owner's
@@ -6,6 +8,9 @@ export class ConfiguredCompanion implements CompanionProvider {
   readonly name: string;
   source = "Manually pasted excerpt";
   reference = "";
+  retrieve = true;
+  system = "";
+  retrieval?: Retrieval;
   readonly destination: string;
   model: string;
   readonly fixture: boolean;
@@ -36,6 +41,8 @@ export class ConfiguredCompanion implements CompanionProvider {
       body: JSON.stringify({
         model: this.model,
         reference: this.reference,
+        retrieve: this.retrieve,
+        system: this.system,
         messages: request.messages,
         shared_text: request.sharedText,
         source: this.source,
@@ -52,6 +59,28 @@ export class ConfiguredCompanion implements CompanionProvider {
       answer.answer.length > 4096
     )
       throw Error("Invalid provider response");
+    this.retrieval = undefined;
+    if ("retrieval" in answer) {
+      const result = answer.retrieval;
+      if (
+        !result ||
+        typeof result !== "object" ||
+        !("status" in result) ||
+        typeof result.status !== "string" ||
+        !("notes" in result) ||
+        !Array.isArray(result.notes) ||
+        result.notes.length > 2
+      )
+        throw Error("Invalid reference result");
+      const notes = result.notes.map((note: unknown) => {
+        if (!note || typeof note !== "object" || !("id" in note))
+          throw Error("Invalid reference ID");
+        const trusted = references.find((entry) => entry.id === note.id);
+        if (!trusted) throw Error("Reference missing from installed catalog");
+        return trusted;
+      });
+      this.retrieval = { status: result.status, notes };
+    }
     return answer.answer;
   }
   async discover(signal: AbortSignal): Promise<string[]> {
