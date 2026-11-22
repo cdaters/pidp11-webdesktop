@@ -23,6 +23,7 @@ type Selection struct {
 // Snapshot retains the upstream text field but identifies the narrower meaning.
 // The text is a selection, not a complete or current GNU Screen hardcopy.
 type Snapshot struct {
+	ExpiresUnixMS  int64  `json:"expires_unix_ms,omitempty"`
 	ViewerRevision uint64 `json:"viewer_revision,omitempty"`
 	SelectionID    string `json:"selection_id,omitempty"`
 	Simulator      string `json:"simulator_generation,omitempty"`

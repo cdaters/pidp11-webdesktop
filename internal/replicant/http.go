@@ -140,6 +140,15 @@ func (a *Adapter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	switch r.URL.Path {
+	case "/api/pidp11/capabilities":
+		// Draft metadata for an independently configured client, not upstream
+		// agreement or automatic discovery. Existing clients remain unchanged.
+		json.NewEncoder(w).Encode(map[string]any{
+			"protocol": "pidp11-explicit-selection", "version": "0.1-draft",
+			"capabilities": []string{"publication-epoch", "receipt-bound-read", "explicit-revoke", "expiry", "unknown-os"},
+			"authority":    []string{"selected-text-only"}, "maximum_selection_bytes": 4096,
+			"maximum_lifetime_seconds": 30,
+		})
 	case "/api/pidp11/status":
 		// Upstream's Boolean means Screen existence, which this adapter cannot
 		// observe. Null must never be replaced with a guessed false or CPU state.
@@ -162,7 +171,14 @@ func (a *Adapter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if r.Context().Err() != nil {
 			return
 		}
+		// The independent draft client requires this header. Legacy consumers
+		// still compare the returned receipt; neither path grants keyboard access.
+		if expected := r.Header.Get("X-Selection-ID"); expected != "" && expected != a.selectionID {
+			http.Error(w, "Exact selection receipt required", 409)
+			return
+		}
 		snapshot.SelectionID = a.selectionID
+		snapshot.ExpiresUnixMS = a.expires.UnixMilli()
 		json.NewEncoder(w).Encode(snapshot)
 	default:
 		http.Error(w, "Unsupported route", 404)
