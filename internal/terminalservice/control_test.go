@@ -171,8 +171,17 @@ func TestControlRejectsForeignOwner(t *testing.T) {
 		listener.Close()
 		t.Fatal("foreign-owned private directory accepted")
 	}
+	if !strings.Contains(err.Error(), "owned by the service account") {
+		t.Fatalf("expected owner refusal, got %v", err)
+	}
+	// UID 0 in a capability-restricted container may lack DAC override. Restore
+	// ownership of only this test directory before inspecting its contents;
+	// EACCES from Lstat is not evidence that a refused socket was created.
+	if err := os.Chown(dir, os.Geteuid(), os.Getegid()); err != nil {
+		t.Fatal(err)
+	}
 	if _, err := os.Lstat(filepath.Join(dir, "control.sock")); !os.IsNotExist(err) {
-		t.Fatal("refused control path was created")
+		t.Fatalf("refused control path was created or could not be inspected: %v", err)
 	}
 }
 

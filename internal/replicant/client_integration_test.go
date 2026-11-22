@@ -18,6 +18,7 @@ import (
 // This opt-in test exercises the independent JS client through actual trusted
 // TLS and the Go handler. Fault controls exist only in this test server, never
 // in the application. It is conformance evidence, not an independent audit.
+// Run with -count=1: Go's result cache does not track Node's transitive imports.
 func TestIndependentClientRealTLS(t *testing.T) {
 	if os.Getenv("PIDP11_CONTRACT_TLS_TEST") != "1" {
 		t.Skip("opt-in Node/TLS conformance")

@@ -27,6 +27,21 @@ for(const path of ['keys','shell','console','monitor','panel','start','switch'])
  assert.ok([403,404].includes(response.status));assert.ok(!(await response.text()).includes(selection.text));
 }
 outcomes.push('credential/origin separation; no machine authority');
+// Two independently constructed callers share one server-side slot. A fresh
+// publication invalidates the first receipt even when its text is identical.
+const secondPage = createSelectionClient(config);
+const secondReceipt = await secondPage.publish(selection, {previewConfirmed:true});
+assert.notEqual(secondReceipt, receipt);
+await assert.rejects(client.read(receipt));
+assert.equal((await secondPage.read(secondReceipt)).text, selection.text);
+// Pin the compatibility exception honestly: the legacy route permits an absent
+// receipt. New consumers still must supply and verify their exact receipt.
+assert.equal((await call('/api/pidp11/screen')).status, 200);
+await client.revoke();
+await assert.rejects(secondPage.read(secondReceipt));
+receipt = await client.publish(selection, {previewConfirmed:true});
+outcomes.push('two authenticated callers; identical-text replacement; global revoke; legacy receipt exception');
+
 await assert.rejects(client.read('b'.repeat(32)));
 await client.revoke();await assert.rejects(client.read(receipt));
 const epoch=(await (await call('/api/pidp11/status')).json()).publication_epoch;

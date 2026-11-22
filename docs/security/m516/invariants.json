@@ -1,0 +1,325 @@
+{
+  "implementationBaseline": "c39647975fbf573e14c8bd4a16b8f017df3597b9",
+  "claims": [
+    {
+      "id": "authentication",
+      "promise": "Provisioned capabilities, exact Origin and CSRF separate observers from writers.",
+      "source": [
+        "internal/access/access.go"
+      ],
+      "goPackage": "./internal/access",
+      "tests": [
+        "TestIndependentCapabilitiesCSRFAndExpiry",
+        "TestMalformedOriginCredentialsAndBounds"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "TLS trust and credential provisioning are external.",
+      "invalidatedBy": "Compromised browser/host, stolen credentials or incorrect configured Origin."
+    },
+    {
+      "id": "sessions",
+      "promise": "Secure bounded sessions expire and can be revoked; audit omits credential text.",
+      "source": [
+        "internal/access/access.go"
+      ],
+      "goPackage": "./internal/access",
+      "tests": [
+        "TestSecureOriginCookiesRevocationAndAudit",
+        "TestSlowLoginDoesNotHoldSessionLock"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Already delivered bytes are not recalled.",
+      "invalidatedBy": "Caller bypasses Gate or fails to close an expired transport."
+    },
+    {
+      "id": "attachment",
+      "promise": "Service starts detached; exact instance/revision approval is consumed once.",
+      "source": [
+        "internal/terminalservice/lifecycle.go"
+      ],
+      "goPackage": "./internal/terminalservice",
+      "tests": [
+        "TestDetachedAndGenerationFences",
+        "TestDetachDuringDial",
+        "TestGuestEOFRetiresAndConsumesApproval"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Approval is a trusted operator assertion.",
+      "invalidatedBy": "Operator approves the wrong guest line or its process changes without observable identity loss."
+    },
+    {
+      "id": "verification",
+      "promise": "A supervised connection remains unpublished until connected-socket proof; expiry retires it.",
+      "source": [
+        "internal/terminalservice/supervision.go"
+      ],
+      "goPackage": "./internal/terminalservice",
+      "tests": [
+        "TestSupervisionRequiresConnectedSocketVerification",
+        "TestSupervisionExpiryPermanentlyRetiresOldEndpoint",
+        "TestSupervisionExpiresWhileDialBlocked"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Not a hard real-time guarantee or CPU-stop mechanism.",
+      "invalidatedBy": "A trusted observer lies, accepts inherited descriptors incorrectly or stops receiving CPU time."
+    },
+    {
+      "id": "ordered-renewal",
+      "promise": "Only the exact next sequence can renew; concurrent contenders have one winner.",
+      "source": [
+        "internal/terminalservice/supervision.go"
+      ],
+      "goPackage": "./internal/terminalservice",
+      "tests": [
+        "TestConcurrentRenewalHasOnlyOneWinner",
+        "TestMalformedRenewalCannotConsumeOrPublishApproval"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Local operator/observer credentials remain trusted.",
+      "invalidatedBy": "An attacker controls the private socket or approved observer."
+    },
+    {
+      "id": "keyboard",
+      "promise": "Observation grants no keyboard lease; expiry/disconnect does not replay input.",
+      "source": [
+        "internal/terminalbridge/bridge.go"
+      ],
+      "goPackage": "./internal/terminalbridge",
+      "tests": [
+        "TestOwnershipOrderingExpiryAndNoReplay",
+        "TestLeaseExpiresWithoutInjectingBytes",
+        "TestHTTPAuthorizationAndDisconnect"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Bytes sent before revocation can already affect the guest.",
+      "invalidatedBy": "A guest terminal line is mistakenly wired to an operator monitor."
+    },
+    {
+      "id": "replacement",
+      "promise": "Late reader output and replacement listeners cannot revive a retired bridge.",
+      "source": [
+        "internal/terminalbridge/bridge.go"
+      ],
+      "goPackage": "./internal/terminalbridge",
+      "tests": [
+        "TestReplacementListenerRequiresFreshBridge",
+        "TestDetachedReaderCannotPublishBufferedOutput"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "An OS change within the surviving stream is invisible.",
+      "invalidatedBy": "Reuse of a generation outside the manager contract."
+    },
+    {
+      "id": "viewer-membership",
+      "promise": "Same-count replacement changes the viewer membership identity.",
+      "source": [
+        "internal/terminalbridge/bridge.go"
+      ],
+      "goPackage": "./internal/terminalbridge",
+      "tests": [
+        "TestObservationDistinguishesSameCountReplacement"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "The single-view guard is a lab policy; normal terminal supports multiple observers.",
+      "invalidatedBy": "A consumer tracks counts only, or treats a callback as independent OS identification."
+    },
+    {
+      "id": "bounded-transport",
+      "promise": "Inputs, credits, stalled writes and connection counts remain bounded.",
+      "source": [
+        "internal/terminalbridge/bridge.go"
+      ],
+      "goPackage": "./internal/terminalbridge",
+      "tests": [
+        "TestBoundsAndMalformedInput",
+        "TestInputRateLimitAndRecovery",
+        "TestStalledWriteIsBoundedAndNeverReplayed"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Host-level exhaustion and arbitrary adversarial load are not fully qualified.",
+      "invalidatedBy": "Callers bypass the bounded handler or future limits are removed."
+    },
+    {
+      "id": "listeners",
+      "promise": "Listener capacity is released when connections close.",
+      "source": [
+        "internal/terminalservice/listener.go"
+      ],
+      "goPackage": "./internal/terminalservice",
+      "tests": [
+        "TestListenerBoundsAndReleases"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "This is one resource bound, not complete denial-of-service assurance.",
+      "invalidatedBy": "An outer proxy accepts unbounded work."
+    },
+    {
+      "id": "epochs",
+      "promise": "Revocation fences pending and pre-HTTP publication; concurrent epoch use has one winner.",
+      "source": [
+        "internal/replicant/http.go"
+      ],
+      "goPackage": "./internal/replicant",
+      "tests": [
+        "TestRevokeFencesPendingPublication",
+        "TestRevokeFencesPublicationPreparedBeforeHTTPRequest",
+        "TestConcurrentPublicationsConsumeOneEpoch"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Epoch starts at status observation, not the user click.",
+      "invalidatedBy": "Client silently obtains a fresh epoch and retries without renewed consent."
+    },
+    {
+      "id": "receipts",
+      "promise": "Every publication gets a distinct receipt; malformed input cannot replace selection.",
+      "source": [
+        "internal/replicant/sharing.go"
+      ],
+      "goPackage": "./internal/replicant",
+      "tests": [
+        "TestSelectionReceiptChangesOnEveryPublication",
+        "TestSharingMalformedRequestsCannotReplaceSelection"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Legacy /screen permits absent receipt; current clients check exact returned receipt.",
+      "invalidatedBy": "A consumer ignores the receipt or includes saved excerpts without fresh approval."
+    },
+    {
+      "id": "model-gateway",
+      "promise": "Separate TLS credential and fixed model; no management/tools, queued inference or automatic retry.",
+      "source": [
+        "internal/modelhost/gateway.go"
+      ],
+      "goPackage": "./internal/modelhost",
+      "tests": [
+        "TestAuthenticatedTLSAndNoManagement",
+        "TestCancellationAndBusyDoNotQueue",
+        "TestGatewayQuotationAndDurableAttribution"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "A runner may retain submitted data or continue after cancellation.",
+      "invalidatedBy": "Gateway is pointed at an untrusted provider or its credential is leaked."
+    },
+    {
+      "id": "tutor-attribution",
+      "promise": "Every delivered explanation is qualified; marked unsupported quotations are withheld.",
+      "source": [
+        "internal/companion/attribution.go"
+      ],
+      "goPackage": "./internal/companion",
+      "tests": [
+        "TestQuotationCannotBorrowParaphraseAuthority",
+        "TestEveryModelAnswerCarriesSourceStatus",
+        "TestCitationCannotSuppressSourceQualification"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "The label and quotation heuristic do not establish factual correctness.",
+      "invalidatedBy": "A consumer hides the label, or prose contains an unrecognized unsupported claim."
+    },
+    {
+      "id": "peripheral-retirement",
+      "promise": "Unsafe producer change, retained-byte rewrite or completion mismatch retires observed bytes.",
+      "source": [
+        "internal/peripheral/follow.go"
+      ],
+      "goPackage": "./internal/peripheral",
+      "tests": [
+        "TestFollowRetiresOnUnsafeProducerChanges",
+        "TestFollowingRevokesOnSameSizeWriteAndCompletionMismatch",
+        "TestTruncateRegrowBetweenPollsRetiresObservedBytes"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Discarded history and malicious ancestor-directory changes are not authenticated.",
+      "invalidatedBy": "Untrusted producer lies about identity/completion or an ancestor owner replaces paths."
+    },
+    {
+      "id": "peripheral-closure",
+      "promise": "Closed followers cannot reopen; observers receive exact authorized completed exports.",
+      "source": [
+        "internal/peripheral/store.go"
+      ],
+      "goPackage": "./internal/peripheral",
+      "tests": [
+        "TestClosedFollowerCannotReopenOrRestart",
+        "TestEmptyExportAndObserverIsolation"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Original CPU/device tests do not qualify an OS printer driver.",
+      "invalidatedBy": "A producer is incorrectly approved or caller bypasses generation checks."
+    },
+    {
+      "id": "private-files",
+      "promise": "Private inputs reject unsafe types; control directory must belong to the service.",
+      "source": [
+        "internal/terminalservice/control.go"
+      ],
+      "goPackage": "./internal/terminalservice",
+      "tests": [
+        "TestPrivateInputsAndControlSocket",
+        "TestControlRejectsForeignOwner",
+        "TestPrivateFileRejectsForeignOwner"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Foreign-owner mutation cases skip on Mac; separate root Linux run required. Trusted ancestors remain required.",
+      "invalidatedBy": "Root/ancestor owner is hostile, or provisioning gives another account directory control."
+    },
+    {
+      "id": "memory",
+      "promise": "Mandatory installed-service guard refuses absent/excessive memory or swap containment.",
+      "source": [
+        "internal/memoryguard/check.go"
+      ],
+      "goPackage": "./internal/memoryguard",
+      "tests": [
+        "TestContainmentEvidence"
+      ],
+      "evidence": "deterministic fixtures unless the packet names an executed Linux check",
+      "limitations": "Go soft target alone is insufficient. Physical Pi memory controller remains disabled/unqualified.",
+      "invalidatedBy": "Service launched without mandatory flag, altered unit or controller limits changed after the startup check."
+    },
+    {
+      "id": "local-control",
+      "promise": "Malformed or stale local approvals fail; an occupied socket is preserved for explicit stopped recovery.",
+      "source": [
+        "internal/terminalservice/control.go"
+      ],
+      "goPackage": "./internal/terminalservice",
+      "tests": [
+        "TestLocalControlRejectsMalformedAndStale",
+        "TestStaleControlSocketRequiresExplicitStoppedRecovery"
+      ],
+      "evidence": "deterministic local socket fixtures",
+      "limitations": "Private directory ownership and trusted ancestors provide local authorization; no peer-user multi-tenant policy.",
+      "invalidatedBy": "Another account controls the socket parent or an operator deletes a live socket."
+    },
+    {
+      "id": "provisioning",
+      "promise": "Handled failures remove only newly created material and preserve unexpected files.",
+      "source": [
+        "cmd/webdesktop-service/provision.go"
+      ],
+      "goPackage": "./cmd/webdesktop-service",
+      "tests": [
+        "TestProvisionWriteFailureCleansOnlyNewMaterial",
+        "TestProvisionCleanupPreservesUnexpectedFile"
+      ],
+      "evidence": "injected filesystem failures; retained M5.14 Linux file-size refusal",
+      "limitations": "Not atomic against SIGKILL, power loss or failed cleanup. Original exit-139 incidents remain unexplained.",
+      "invalidatedBy": "A host crash or hostile parent hierarchy defeats the handled-error assumptions."
+    },
+    {
+      "id": "private-diagnostics",
+      "promise": "Invalid configuration diagnostics do not echo arbitrary private input.",
+      "source": [
+        "cmd/webdesktop-service/main.go"
+      ],
+      "goPackage": "./cmd/webdesktop-service",
+      "tests": [
+        "TestInvalidConfigurationDoesNotEchoPrivateInput"
+      ],
+      "evidence": "secret-canary fixture; source review of error paths",
+      "limitations": "Not a universal proof of zero sensitive logging. Explicit lab captures, downloads, browser history and provider retention are separate stores.",
+      "invalidatedBy": "Future logging prints requests, private config, console content or provider errors without review."
+    }
+  ]
+}
