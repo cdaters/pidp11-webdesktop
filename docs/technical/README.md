@@ -4,7 +4,9 @@ The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets an
 
 Latest optional tutor milestone: [Phase D results and screenshots](../lab/M5.9.3-D.md), [read-only app setup](../../integrations/hacker-replicant/README.md), and [reproduction](../../lab/m593d/README.md). Live-guest and physical acceptance remain separate.
 
-Latest qualification: [M5.16 findings](../lab/M5.16.md), [reproduction](../../lab/m516/README.md), [security review entry point](../security/M5.16-review.md), and [concise Hacker Replicant handoff](M5.16-hacker-replicant-handoff.md). This work does not change the published M5.13 release or authorize Pi deployment.
+Prior qualification: [M5.16 findings](../lab/M5.16.md), [reproduction](../../lab/m516/README.md), [security review entry point](../security/M5.16-review.md), and [concise Hacker Replicant handoff](M5.16-hacker-replicant-handoff.md). This work does not change the published M5.13 release or authorize Pi deployment.
+
+Latest qualification: [M5.17 candidate report](../lab/M5.17.md), [candidate decision](../releases/M5.17-candidate.md), [review intake](../security/review-intake/README.md) and [interoperability feedback matrix](M5.17-interoperability-feedback.md). No new release or physical deployment is authorized.
 
 ## Start here
 

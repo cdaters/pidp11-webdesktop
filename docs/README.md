@@ -1,5 +1,7 @@
 # Documentation
 
+Latest preparation: [M5.17 findings](lab/M5.17.md), [Source Alpha 2 candidate decision](releases/M5.17-candidate.md), [candidate quick start](getting-started/source-alpha-2.md), and [independent-review intake](security/review-intake/README.md). Alpha 2 is not published; the Alpha 1 download remains unchanged.
+
 Start with the browser demonstration; it needs no Pi, guest disk or AI model. Genuine guest access uses a separate, authenticated service and a deliberately approved terminal line. The [capability matrix](capabilities.md) distinguishes those experiences.
 
 ## Getting started

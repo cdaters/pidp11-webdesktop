@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.17 Source Alpha 2 candidate — 2026-11-22
+
+- Prepared a reproducible source-only Alpha 2 candidate with exact source identity, complete inventory, safe archive validation and three-engine onboarding from the extracted archive. Publication remains owner-gated; no new tag or release.
+- Consolidated Alpha 1 differences, reviewer invitation/finding intake and an unfilled Hacker Replicant feedback matrix. Independent review and upstream agreement remain pending; the 0.1 protocol is unchanged.
+- Passed security/race/TLS, 114 browser cases, fresh genuine guest/peripheral subsets and bounded separate-kernel memory checks. Original intermittent faults remain unresolved.
+- Preserved Alpha 1, accepted checkpoints, original media and unrelated services. No Pi access or production behavior change. [Report](docs/lab/M5.17.md) · [Candidate decision](docs/releases/M5.17-candidate.md).
+
 ## M5.16 review readiness and fault qualification — 2026-11-22
 
 - Prepared a pinned security-review packet mapping 21 assertions to 47 named tests, a minimal offline Linux review environment, and a concise Hacker Replicant handoff. Independent review and upstream agreement remain pending.

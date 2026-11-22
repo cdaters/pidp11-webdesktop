@@ -1,10 +1,16 @@
 # Where the project is going
 
+## M5.17: Source Alpha 2 candidate and review intake
+
+[Completed qualification](docs/lab/M5.17.md) of the [exact source-only candidate](docs/releases/M5.17-candidate.md): independent-checkout reproducibility, extracted-source onboarding/security/browser checks, genuine guest/device regressions and bounded ARM64 containment. No production behavior or draft protocol changed. Both intermittent faults remain unresolved; external review and upstream agreement are pending.
+
+Recommended **M5.18: owner-approved source publication and actual external-review response**. Craig must approve the exact archive and release description before any Alpha 2 tag/upload/release. Use the [review intake](docs/security/review-intake/README.md) and [feedback matrix](docs/technical/M5.17-interoperability-feedback.md) for actual received findings; sending invitations/replies needs separate authorization. Physical repair, memory containment, observer privileges, representative Pi performance and supervised coexistence remain independent gates.
+
 ## M5.16: external review readiness and fault qualification
 
 [Completed preparation](docs/lab/M5.16.md): a pinned [security entry point](docs/security/M5.16-review.md), 21 assertions/47 named tests, minimal Linux review environment and [concise interoperability handoff](docs/technical/M5.16-hacker-replicant-handoff.md). Native exit/signal capture and a six-run direct/tapped graphics comparison strengthen future diagnosis. No production behavior changed, and the old faults remain unresolved. Published-alpha and current-clone onboarding passed separately.
 
-Recommended **M5.17: independent review intake and correction qualification**. Craig can share the packets; reproduce actual outside findings and make focused corrections. Maintainer contact remains separately authorized. Prepare an Alpha 2 source candidate only against the report’s explicit archive/onboarding/review criteria, with separate approval before publication. Actual Pi memory containment, SR0 repair, observer privileges, representative performance and a renewed physical pilot remain separate gates.
+The M5.16 recommendation was **M5.17: independent review intake and correction qualification**. Craig can share the packets; reproduce actual outside findings and make focused corrections. Maintainer contact remains separately authorized. Prepare an Alpha 2 source candidate only against the report’s explicit archive/onboarding/review criteria, with separate approval before publication. Actual Pi memory containment, SR0 repair, observer privileges, representative performance and a renewed physical pilot remain separate gates.
 
 ## M5.15: targeted faults and interoperability qualification
 

@@ -1,6 +1,8 @@
 # Capability and compatibility matrix
 
-Current through **M5.16**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Current through **M5.17**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+
+[M5.17](lab/M5.17.md) qualifies a reproducible [Source Alpha 2 candidate](releases/M5.17-candidate.md) and repeats the recorded guest/device subsets from its extracted source. It adds no production feature and is not a published release.
 
 [M5.16](lab/M5.16.md) repeats the named guest/device subsets and qualifies review tools; it adds no new production feature. Its [security packet](security/M5.16-review.md) is ready for independent review, which remains pending.
 

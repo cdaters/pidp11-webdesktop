@@ -1,5 +1,12 @@
 # What is still experimental
 
+M5.17 supplies a tested [Source Alpha 2 candidate](releases/M5.17-candidate.md),
+not a published release or independent audit. Exact extracted-source tests and
+fresh guest/device checks passed; one bounded provision and separate-kernel
+memory enforcement passed. The original provisioning incidents and plotting
+timeout remain unresolved. Physical deployment remains NO-GO. See the
+[M5.17 report](lab/M5.17.md) and [review intake](security/review-intake/README.md).
+
 M5.16 prepares a [fixed-revision external review package](security/M5.16-review.md),
 not an independent audit. Four further bounded provisions and six direct/tapped
 V7 plots passed, but neither old fault was reproduced or explained. Native wait
