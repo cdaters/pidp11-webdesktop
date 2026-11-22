@@ -7,7 +7,7 @@
 One static Go executable with browser assets, a stopped/disabled systemd service candidate, installation/configuration/preflight/removal helpers, notices, compatibility metadata and checksums. No guest images, manuals, model weights, private configuration or development containers are included. M5.11 adds sharing and peripheral lifetime corrections plus source-reference additions. Its separately controlled genuine-guest tests do not qualify a physical installation.
 
 - [Release notes](M5.11-alpha-notes.md)
-- [Package qualification](../../lab/m511/results/package.json) · [Preserved M5.10 artifact](M5.10-package.md)
+- [Package identity](M5.11-package.md) · [Package qualification](../../lab/m511/results/package.json) · [Preserved M5.10 artifact](M5.10-package.md)
 - [Current compatibility](../capabilities.md) and [limitations](../known-limitations.md)
 - [Installation paths](../getting-started/installation-paths.md), [service/security setup and removal](../getting-started/optional-service.md)
 - [Troubleshooting](../getting-started/questions.md)

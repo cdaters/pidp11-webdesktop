@@ -38,5 +38,14 @@
   },
   "olderRollbackBinarySHA256": "18385f1156925adb0d2d95fdcb2a3f2260fda8329357dc6d61f44a2c7ecc1ef9",
   "serviceCgroupPeakBytes": 10792960,
-  "physicalPiAccess": false
+  "physicalPiAccess": false,
+  "archive": {
+    "file": "pidp11-webdesktop-m5.11-preview.1-linux-arm64.tar.gz",
+    "bytes": 3149216,
+    "sha256": "20718deb5977d888331144b9187affdd8ed82fdbb7de30b2311994e403167ae2",
+    "sourceRevision": "17f77bbf5c9f81e7f1f55331af84a355b15ff6e7",
+    "freshExtractionAndBothManifestChecksPassed": true,
+    "runtimeMatchesTestedFinalArtifact": true,
+    "githubReleasePublished": false
+  }
 }
