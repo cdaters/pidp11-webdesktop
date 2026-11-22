@@ -3,25 +3,34 @@
     "query": "PDP-11/70 virtual physical architecture",
     "system": "",
     "status": "focused-notes",
-    "ids": ["1170-addresses"]
+    "ids": [
+      "1170-addresses"
+    ]
   },
   {
     "query": "MOVB register instruction",
     "system": "pdp11",
     "status": "focused-notes",
-    "ids": ["1170-instructions", "octal"]
+    "ids": [
+      "1170-instructions",
+      "octal"
+    ]
   },
   {
     "query": "UNIX V7 ls directories",
     "system": "v7",
     "status": "focused-notes",
-    "ids": ["unix-v7"]
+    "ids": [
+      "unix-v7"
+    ]
   },
   {
     "query": "RT-11 DIR show config",
     "system": "rt11",
     "status": "focused-notes",
-    "ids": ["rt11"]
+    "ids": [
+      "rt11"
+    ]
   },
   {
     "query": "RSX directory",
@@ -33,43 +42,57 @@
     "query": "RSX-11M-PLUS",
     "system": "rsx11mplus",
     "status": "incomplete",
-    "ids": ["rsxplus-scope"]
+    "ids": [
+      "rsxplus-scope"
+    ]
   },
   {
     "query": "RSTS/E BASIC",
     "system": "rsts",
     "status": "incomplete",
-    "ids": ["rsts-scope"]
+    "ids": [
+      "rsts-scope"
+    ]
   },
   {
     "query": "2.11BSD vi TERM",
     "system": "211bsd",
     "status": "focused-notes",
-    "ids": ["bsd-vi"]
+    "ids": [
+      "bsd-vi"
+    ]
   },
   {
     "query": "SIMH emulator monitor",
     "system": "simh",
     "status": "focused-notes",
-    "ids": ["simh"]
+    "ids": [
+      "simh"
+    ]
   },
   {
     "query": "REALCONS START HALT",
     "system": "realcons",
     "status": "focused-notes",
-    "ids": ["realcons"]
+    "ids": [
+      "realcons"
+    ]
   },
   {
     "query": "LP11 PC11 paper tape printer",
     "system": "simh",
     "status": "focused-notes",
-    "ids": ["peripherals"]
+    "ids": [
+      "peripherals"
+    ]
   },
   {
     "query": "Tektronix 4010 graphics",
     "system": "terminal",
     "status": "focused-notes",
-    "ids": ["tek4010"]
+    "ids": [
+      "tek4010"
+    ]
   },
   {
     "query": "What is the current RUN lamp?",
@@ -93,18 +116,80 @@
     "query": "RSX-11M",
     "system": "",
     "status": "focused-notes",
-    "ids": ["rsx"]
+    "ids": [
+      "rsx"
+    ]
   },
   {
     "query": "RSTS/E",
     "system": "",
     "status": "incomplete",
-    "ids": ["rsts-scope"]
+    "ids": [
+      "rsts-scope"
+    ]
   },
   {
     "query": "RT-11",
     "system": "",
     "status": "focused-notes",
-    "ids": ["rt11"]
+    "ids": [
+      "rt11"
+    ]
+  },
+  {
+    "query": "interrupt vectors",
+    "system": "",
+    "status": "focused-notes",
+    "ids": [
+      "1170-vectors"
+    ]
+  },
+  {
+    "query": "registers stack pointer",
+    "system": "",
+    "status": "focused-notes",
+    "ids": [
+      "1170-registers"
+    ]
+  },
+  {
+    "query": "autodecrement predecrement",
+    "system": "",
+    "status": "focused-notes",
+    "ids": [
+      "1170-autodecrement"
+    ]
+  },
+  {
+    "query": "UNIBUS asynchronous",
+    "system": "",
+    "status": "focused-notes",
+    "ids": [
+      "1170-unibus"
+    ]
+  },
+  {
+    "query": "shell redirection",
+    "system": "",
+    "status": "focused-notes",
+    "ids": [
+      "v7-redirection"
+    ]
+  },
+  {
+    "query": "VT52 escape protocol",
+    "system": "",
+    "status": "focused-notes",
+    "ids": [
+      "vt52-distinction"
+    ]
+  },
+  {
+    "query": "RK05 RL02 disk",
+    "system": "",
+    "status": "focused-notes",
+    "ids": [
+      "simh-storage"
+    ]
   }
 ]

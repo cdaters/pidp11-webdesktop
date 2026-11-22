@@ -1,6 +1,7 @@
 // Package replicant translates deliberately shared guest excerpts into the
 // Hacker Replicant readback shape. It is NOT an adapter to the operator console.
-// No network, terminal read, keyboard write or process operation exists here.
+// The optional authenticated HTTP adapter serves only explicit selections.
+// No terminal read, keyboard write or process operation exists here.
 package replicant
 
 import (

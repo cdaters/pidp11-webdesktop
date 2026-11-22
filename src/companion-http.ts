@@ -1,3 +1,4 @@
+import { parseClaimReview, type ClaimReview } from "./claim-review.ts";
 import references from "../internal/companion/references.json" with { type: "json" };
 import type { Retrieval } from "./companion-references.ts";
 import type { CompanionProvider, CompanionRequest } from "./companion.ts";
@@ -11,6 +12,7 @@ export class ConfiguredCompanion implements CompanionProvider {
   retrieve = true;
   system = "";
   retrieval?: Retrieval;
+  review: ClaimReview[] = [];
   readonly destination: string;
   model: string;
   readonly fixture: boolean;
@@ -59,6 +61,7 @@ export class ConfiguredCompanion implements CompanionProvider {
       answer.answer.length > 4096
     )
       throw Error("Invalid provider response");
+    this.review = "review" in answer ? parseClaimReview(answer.review) : [];
     this.retrieval = undefined;
     if ("retrieval" in answer) {
       const result = answer.retrieval;
