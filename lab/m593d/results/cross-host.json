@@ -1,0 +1,63 @@
+{
+  "isolation": {
+    "pidp11-m593d-model": {
+      "distinct_network_and_pid_namespace": true
+    },
+    "pidp11-m593d-client": {
+      "distinct_network_and_pid_namespace": true
+    }
+  },
+  "authorized_models": "{\"data\":[{\"id\":\"gemma4:12b\",\"object\":\"model\"}]}\n\n200",
+  "missing_token_refused": true,
+  "wrong_token_refused": true,
+  "management_refused": true,
+  "no_model_fallback": true,
+  "wrong_tls_identity_refused": true,
+  "wrong_tls_root_refused": true,
+  "wrong_ssh_pin_refused": true,
+  "conversation": {
+    "answer": "A 16-bit virtual address represents a location within a process's private logical address space, whereas a 22-bit physical address identifies a specific unique location within the system's actual hardware memory.",
+    "fixture": false,
+    "guest_attachment": "none"
+  },
+  "tunnel_loss_refused": true,
+  "explicit_tunnel_recovery": true,
+  "host_restart_requires_manual_recovery": true,
+  "client_restart_explicit_recovery": true,
+  "after_restarts": {
+    "answer": "On the PDP-11/70, a 16-bit virtual address specifies a location within a process's private logical address space, while a 22-bit physical address identifies a unique byte-addressable location in the system's actual physical memory.",
+    "fixture": false,
+    "guest_attachment": "none"
+  },
+  "upstream_application": {
+    "fixtureSelection": true,
+    "realModel": true,
+    "readOnly": true,
+    "conversation": "data: {\"type\":\"done\",\"response\":\"The provided data represents a directory listing output. The `pwd` command identifies the current working directory as `/usr/dmr`. The text indicates a synthetic environment with no active guest attached to the system.\",\"actionLog\":[],\"limitReached\":false}\n\n",
+    "referenceRetrieval": true,
+    "revokedSelectionRefused": true,
+    "toolsRefused": true,
+    "foreignOriginRefused": true,
+    "expiredIdentityRefused": true,
+    "noIframe": true,
+    "independentLogin": true
+  },
+  "upstream_revision": "6f8a2aca7786736e01bdf5ba9b44bf66a7f19349",
+  "upstream_modified_optional_mode": true,
+  "genuine_guest_acceptance": false,
+  "runner_loss_no_fallback": true,
+  "fixture_timeout_seconds": 20.09260324999923,
+  "fixture_concurrent_refused": true,
+  "fixture_cancellation_state": {
+    "cancelled": 2,
+    "entered": 2
+  },
+  "upstream_cancellation": {
+    "fixture": true,
+    "buttonCancellationPropagated": true,
+    "concurrentRefused": true,
+    "browserDisconnectPropagated": true
+  },
+  "resource_snapshot": "pidp11-m593d-model 8.32MiB / 256MiB 0.00%\npidp11-m593d-client 47.18MiB / 256MiB 0.03%\n",
+  "pass": true
+}

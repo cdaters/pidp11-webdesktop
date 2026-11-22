@@ -1,6 +1,6 @@
 # Hacker Replicant interoperability foundation
 
-Reviewed upstream: Rolf Peters' [PiDP-11 Hacker Replicant, revision 6f8a2aca7786736e01bdf5ba9b44bf66a7f19349](https://github.com/rolfpeters-droid/pidp11-hacker-replicant/tree/6f8a2aca7786736e01bdf5ba9b44bf66a7f19349). This remained the current remote revision during Phase B. Its MIT license names Rolf Peters, copyright 2026. No upstream application code was imported, installed or executed, and no developer was contacted. This is an independently implemented compatibility foundation, not an endorsed or completed integration.
+Reviewed upstream: Rolf Peters' [PiDP-11 Hacker Replicant, revision 6f8a2aca7786736e01bdf5ba9b44bf66a7f19349](https://github.com/rolfpeters-droid/pidp11-hacker-replicant/tree/6f8a2aca7786736e01bdf5ba9b44bf66a7f19349). This remained the current remote revision when refreshed for Phase D. Its MIT license names Rolf Peters, copyright 2026. Phase B reviewed without execution; Phase C ran unchanged upstream through a lab shim; Phase D runs an explicitly modified optional read-only mode in a disposable checkout. No upstream application is bundled into the desktop package, and no developer was contacted. This is not an endorsed or production-qualified integration.
 
 ## What the current implementation actually does
 
@@ -57,3 +57,11 @@ Specific questions for a future owner-approved discussion with Rolf:
 5. Can browser disconnects cancel the corresponding model fetch, and can tools be administratively disabled rather than just toggled in the UI?
 
 No outreach, collaboration, endorsement or merged upstream work occurred. [Lab evidence and exact boundaries](../lab/M5.9.3-C.md).
+
+## Phase D: optional application mode
+
+The [integration guide and preparation helper](../../integrations/hacker-replicant/README.md) document the actual pinned app, independent HTTPS login, fixed-model/source interfaces, separate adapter read/publish credentials, disabled control path and cancellation. A genuine model conversation and deliberate synthetic sharing passed through its browser UI, not just direct adapter requests. `/keys` remains rejected. The iframe is neutralized before page delivery; navigation from the desktop passes no authority and requires a different hostname.
+
+The new standalone adapter accepts owner-attested endpoint, attachment and simulator generations with a private manifest expiring within 30 seconds. Text expires independently, reads recheck identity, and revoke clears the selection. Unknown CPU/OS/Screen state remains unknown. The manifest is **not an authoritative live lifecycle observer**; a wrong attestation cannot be detected from text. Production use and live-guest acceptance therefore remain unqualified.
+
+Compared with the retained Phase C section, a separately authenticated publication route now exists, prompt compaction is explicit read-only behavior, and actual app/browser cancellation propagates. The app’s optional mode intercepts chat before the original tool loop and requires explicit sharing for each request. The original upstream control application remains a different product mode. No Screen boot API or webconsole was run. See [measurements and limitations](../lab/M5.9.3-D.md#actual-hacker-replicant-application) and the unsent interoperability proposal at the end of the integration guide.

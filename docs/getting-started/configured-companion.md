@@ -100,3 +100,13 @@ Use **Exact PDP-11 values** for arithmetic. Its locally computed result remains 
 You can type `/calc 16 oct 177776` in the question box and press Send even with the provider selected. This calculates locally and sends neither the calculation nor selected terminal text to a model. The result is decimal `65534`, hex `FFFE` and signed 16-bit `-2`. The separate exact-values form also remains available offline.
 
 Model replies include **Claim review · limited checks, not certification** and the supplied reference passages. Expand both. “Unverified” does not necessarily mean false; the small checker cannot recognize most free-form explanations. A valid source ID does not make a command safe or correct. Confirm the historical system/version and use the exact calculator for numeric results. [Explanation and grammar](../technical/historical-reference-library.md).
+
+## Source facts and independent companion
+
+For an established fact, open **Source facts · no model required**, choose a topic and click **Prepare fact question**. Sending the prepared `/fact` request shows the source-backed statement and a link naming its edition and section. For example, `/fact movb-register` describes register sign extension without asking Gemma. An unknown topic gives an error. A selected terminal excerpt stays unsent, even if a model is configured.
+
+For a model explanation, expand **Claim review**. **Only this fragment** means the check applies to those words alone; the rest of the answer may still be wrong. Calculations belong in `/calc`. Specify the historical system and release when asking about commands, and inspect the source passage before relying on an explanation.
+
+The optional **Hacker Replicant · separate sign-in** control opens an independently configured read-only service. Enter its HTTPS origin on a different hostname from the desktop, then choose **Open independent companion**. A different port alone is insufficient because browser cookies are not port-scoped. No default destination is supplied, and opening the window shares no desktop token or terminal text. The other application requires its own login.
+
+The [optional integration guide](../../integrations/hacker-replicant/README.md) is a developer preview with an explicitly modified pinned upstream app. Its source lookup needs no model; pasted excerpts require approval and a separate checkbox for the next question. Expired or revoked text cannot be reread. Data already sent cannot be recalled. The demonstration uses labeled synthetic text and unknown machine status; live guest identity is not qualified. [Actual screenshots and results](../lab/M5.9.3-D.md).

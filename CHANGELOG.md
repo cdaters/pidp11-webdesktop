@@ -1,5 +1,13 @@
 # Changelog
 
+## M5.9.3 Phase D — 2026-11-21
+
+- Added five source-reviewed notes for RSTS/E V9.0, RSX-11M V4.2/M-PLUS V3.0 and PDP-11 deferred/stack behavior; exact RT-11 V5.3 manual coverage remains open.
+- Added 13 explicit `/fact` answers with source links, bypassing model/history access. Preserved exact `/calc` validation and arithmetic.
+- Added conservative natural fragment checks and measured both matches and misses against retained replies and separate reference-reviewed cases. Whole-answer certification remains unavailable.
+- Added an optional, explicitly modified pinned Hacker Replicant mode with separate login, bounded source-assisted chat, expiring consented selections, simulator/attachment identities, revoke and cancellation. No console or tool authority.
+- Passed 114 browser regressions, genuine conversations in three engines, cross-host application/fault tests and exact ARM64 lifecycle/memory-refusal/rollback/removal checks. [Results, screenshots and limits](docs/lab/M5.9.3-D.md). No physical Pi access or stable release.
+
 ## M5.9.3 Phase C — 2026-11-21
 
 - Expanded the historical catalog to 24 entries with ten source-verified summaries, provenance and shared retrieval tests.

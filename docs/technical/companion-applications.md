@@ -47,3 +47,7 @@ The [current Hacker Replicant review](hacker-replicant-interop.md) pins the upst
 ## Phase C selected-text adapter
 
 The optional Hacker Replicant HTTP adapter serves only explicit, expiring selections. It has no terminal read/write capability, no host process API and no guest lifecycle authority. Its local `Publish` caller supplies consent and an independently tracked attachment generation; later reads recheck identity. This is separate from the existing human-reviewed guest-command proposal flow. See [interop scope and remaining gaps](hacker-replicant-interop.md#phase-c-working-read-only-http-and-pinned-upstream-chat).
+
+## Phase D optional separate application
+
+An [explicit optional Hacker Replicant mode](../../integrations/hacker-replicant/README.md) now runs the pinned, modified app with its own HTTPS login. The desktop can open its independent origin without an iframe or credential transfer. A standalone Go adapter accepts only expiring owner-attested identities and deliberately published text; it has no terminal, console or lifecycle capability. Genuine app chat, synthetic sharing, source retrieval and cancellation passed. This does not qualify live guest identity or multiuser operation. The normal static ARM64 service package gains no Node dependency.

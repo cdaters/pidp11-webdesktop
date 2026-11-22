@@ -1,6 +1,12 @@
 # Where the project is going
 
-## M5.9.3 Phase C: implemented, experimental
+## M5.9.3 Phase D: implemented alpha, live integration unqualified
+
+The tutor has 29 source notes, 13 deterministic facts and limited natural fragment recognition. Actual pinned Hacker Replicant runs through a documented optional read-only mode with its own login, deliberate selection sharing, source lookup and cancellation. Synthetic sharing and the protected ARM64 package passed; the Pi was not accessed. [Evidence and remaining limits](docs/lab/M5.9.3-D.md).
+
+Next: independent historical review of whole natural responses; matching RT-11 V5.3 sources; security review of the optional app; and an authoritative selection-lifecycle writer tested against disposable guest changes. Owner-attested generation strings cannot yet establish live guest identity. Keep hardware repair, M5.8 deployment and any maintainer contact separately authorized. No model or companion becomes a prerequisite for the physical-only machine.
+
+## M5.9.3 Phase C: retained checkpoint
 
 The optional tutor now has 24 reference entries, visible limited claim review and exact in-chat calculations. A separate-network lab carried authenticated real model traffic; a selected-text HTTP adapter and pinned Hacker Replicant chat ran with tools disabled. [Results and limits](docs/lab/M5.9.3-C.md).
 
@@ -12,7 +18,7 @@ M5.9.2 delivers bounded live LP11/PC11 observation, sourced companion references
 
 M5.9.3 Phase B adds offline historical retrieval, provenance, exact PDP-11 arithmetic, source-assisted real-model conversations and an authenticated model-host gateway. Gemma 4 12B is the best tested operational option, still experimental: arithmetic and unsupported details remain wrong. The offline desk remains the default. Restricted SSH/TLS transport and service lifecycle passed in disposable ARM64 Linux. [Results](docs/lab/M5.9.3-B.md).
 
-Next AI increment: deepen verified RSTS/E/RSX-11M-PLUS manual coverage, test independent instruction questions and citation entailment, and review real model-host account/certificate setup separately. Hacker Replicant has a tested narrow contract and shared-provider foundation, not an embedded application or permission to control the console. Production integration remains separately gated.
+The earlier Phase B follow-up called for deeper RSTS/E/RSX-11M-PLUS coverage and citation review; Phase D adds narrowly scoped manuals while leaving administration and deployment qualification open. Hacker Replicant has a tested narrow contract and shared-provider foundation, not an embedded application or permission to control the console. Production integration remains separately gated.
 
 ## Completed foundations
 

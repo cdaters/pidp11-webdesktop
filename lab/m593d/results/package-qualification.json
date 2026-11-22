@@ -1,0 +1,26 @@
+{
+  "source_revision": "1c3a1c9a073bc2fc861dbdd5b6d18ffed294d648",
+  "binary_sha256": "18385f1156925adb0d2d95fdcb2a3f2260fda8329357dc6d61f44a2c7ecc1ef9",
+  "bytes": 7930018,
+  "platform": "Debian Trixie ARM64 disposable 1GiB VM",
+  "build_go_flags": "-buildvcs=false",
+  "exact_candidate_verified": true,
+  "disabled_by_default": true,
+  "memory_controller_refusal": true,
+  "rollback_to_actual_phase_c": true,
+  "phase_c_binary_sha256": "1b3783a8b0e385f4a4c095629404a2ab2e7e4fa0c798c37390fb38560beb1264",
+  "return_to_exact_candidate": true,
+  "private_configuration_unchanged": true,
+  "all_startups_detached": true,
+  "complete_package_removal": true,
+  "lab_override_removed": true,
+  "physical_pi_contacted": false,
+  "latency": {
+    "requests": 100,
+    "median_ms": 1.875,
+    "p95_ms": 2.15,
+    "maximum_ms": 6.397,
+    "scope": "authenticated detached directory via fresh loopback TLS; no model or guest"
+  },
+  "metrics": "MemoryCurrent=10772480\nMemoryPeak=10772480\nCPUUsageNSec=80436000\nTasksCurrent=13\nMemoryMax=100663296\nMemorySwapMax=0\n"
+}

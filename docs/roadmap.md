@@ -174,3 +174,7 @@ Next is separately authorized powered-off inspection using the matching board do
 ## M5.9.1 preparation update
 
 [Completed observation and configured companion](lab/M5.9.1.md) now have implementation and lab evidence. Original deployment gates and numerical performance targets above are unchanged. Next work should qualify a real model, OS printer driver and read-only device collector before extending authority. Short Mac-hosted transport measurements do not establish Pi throughput or long-duration thermal behavior.
+
+## M5.9.3 Phase D readiness
+
+[Phase D](lab/M5.9.3-D.md) adds deterministic source facts, conservative natural fragment review and an optional independently authenticated, read-only companion application. The exact static ARM64 service remains disabled by default and detached, with mandatory 96-MiB kernel memory containment. Its short isolated loopback sample does not replace the sustained Pi CPU/RSS/PSS/LAN targets above. Authoritative live selection lifecycle, independent historical/security review and matching RT-11 V5.3 documentation remain next gates. No physical hardware access or service deployment occurred.

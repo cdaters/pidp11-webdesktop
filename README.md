@@ -10,7 +10,7 @@ The goal is simple: turn on your PiDP-11, select an operating system with its ph
 
 **Genuine UNIX V7 browser sessions now work on the actual Raspberry Pi 3B+ in a controlled terminal-only pilot.** The pilot used the original installed simulator, preserved its installation, and was shut down after testing. You can explore the local desktop today without a Pi or guest disk.
 
-The optional [historical tutor](docs/technical/historical-reference-library.md) now includes 24 reference notes, limited claim review and exact local octal calculations. [Phase C](docs/lab/M5.9.3-C.md) records real Gemma comparisons, separate-network gateway tests and a read-only Hacker Replicant demonstration. Model explanations remain experimental.
+The optional [historical tutor](docs/technical/historical-reference-library.md) now includes 29 reference notes, 13 source-identified facts, limited fragment review and exact local octal calculations. [Phase D](docs/lab/M5.9.3-D.md) records genuine Gemma qualification and an independently authenticated optional Hacker Replicant mode. Model explanations remain experimental.
 
 [Start exploring](docs/getting-started/README.md) · [Technical documentation](docs/technical/README.md) · [Philosophy](PHILOSOPHY.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Contribute](CONTRIBUTING.md)
 
@@ -128,4 +128,4 @@ Original RetroRealm code and appropriate original software documentation are [MI
 
 ## Explore with references and exact values
 
-The [historical reference desk](docs/technical/historical-reference-library.md) works offline and separates curated facts from generated explanations. Convert octal, decimal, hexadecimal and binary exactly; inspect signed words, masks and virtual/physical widths without asking a model. The optional [configured companion](docs/getting-started/configured-companion.md) can use retrieved notes and a capable local model host. No inference runtime belongs on the Pi. [Hacker Replicant compatibility foundation](docs/technical/hacker-replicant-interop.md) documents the shared-provider path and the operator-console boundary; it is not a completed integration.
+The [historical reference desk](docs/technical/historical-reference-library.md) works offline and separates curated facts from generated explanations. Convert octal, decimal, hexadecimal and binary exactly; inspect signed words, masks and virtual/physical widths without asking a model. The optional [configured companion](docs/getting-started/configured-companion.md) can use retrieved notes and a capable local model host. No inference runtime belongs on the Pi. [Optional Hacker Replicant integration](integrations/hacker-replicant/README.md) runs the pinned application in a modified read-only mode with deliberate text sharing. Synthetic selected-text compatibility passed; live-guest acceptance remains open.

@@ -1,0 +1,11 @@
+{
+  "task_native_listeners_stopped": true,
+  "task_ssh_tunnel_stopped": true,
+  "task_containers_and_networks_removed": true,
+  "task_arm64_vm_removed_after_package_removal": true,
+  "existing_model_already_unloaded_at_cleanup": true,
+  "original_runner_preserved": true,
+  "unrelated_containers_preserved": true,
+  "accepted_tags_unchanged": true,
+  "physical_pi_contacted": false
+}

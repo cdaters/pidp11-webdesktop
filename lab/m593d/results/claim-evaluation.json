@@ -1,0 +1,612 @@
+{
+  "method": "Thirty reference-reviewed cases frozen after rule development and before evaluation. Eight supplemental topic cases added afterward to cover instruction fields, PS, traps and retained OS evidence; no rule tuned against either evaluation. Author review independent of Gemma, not a second reviewer. Original sentence remains unverified for fragment matches. These small authored corpora are not population error rates.",
+  "primary_summary": {
+    "supported": {
+      "total": 10,
+      "recognized": 6
+    },
+    "contradicted": {
+      "total": 11,
+      "recognized": 7
+    },
+    "unverified": {
+      "total": 9,
+      "recognized": 9
+    },
+    "false_support": 0,
+    "false_contradiction": 0,
+    "recognized_fact_cases": 13
+  },
+  "supplemental_summary": {
+    "supported": {
+      "total": 5,
+      "recognized": 0
+    },
+    "contradicted": {
+      "total": 2,
+      "recognized": 1
+    },
+    "unverified": {
+      "total": 1,
+      "recognized": 1
+    },
+    "false_support": 0,
+    "false_contradiction": 0,
+    "recognized_fact_cases": 1
+  },
+  "combined_summary": {
+    "supported": {
+      "total": 15,
+      "recognized": 6
+    },
+    "contradicted": {
+      "total": 13,
+      "recognized": 8
+    },
+    "unverified": {
+      "total": 10,
+      "recognized": 10
+    },
+    "false_support": 0,
+    "false_contradiction": 0,
+    "recognized_fact_cases": 14
+  },
+  "primary": [
+    {
+      "id": "s1",
+      "reason": "",
+      "recognized": "supported",
+      "review": [
+        {
+          "text": "Within this PDP-11/70, a program uses 16-bit virtual addresses for its data",
+          "status": "unverified"
+        },
+        {
+          "text": "a program uses 16-bit virtual addresses",
+          "scope": "recognized-fragment",
+          "status": "supported",
+          "reference": "1170-addresses",
+          "supported_explanation": "PDP-11/70 program virtual addresses are 16 bits."
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s2",
+      "reason": "",
+      "recognized": "supported",
+      "review": [
+        {
+          "text": "The PDP-11/70 MMU translates the result into 22-bit physical addresses",
+          "status": "unverified"
+        },
+        {
+          "text": "into 22-bit physical addresses",
+          "scope": "recognized-fragment",
+          "status": "supported",
+          "reference": "1170-addresses",
+          "supported_explanation": "The PDP-11/70 MMU produces 22-bit physical addresses."
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s3",
+      "reason": "",
+      "recognized": "supported",
+      "review": [
+        {
+          "text": "For the PDP-11/70, R7 is the program counter used by instructions",
+          "status": "unverified"
+        },
+        {
+          "text": "r7 is the program counter",
+          "scope": "recognized-fragment",
+          "status": "supported",
+          "reference": "1170-registers",
+          "supported_explanation": "R7 is PC; R6 is the stack pointer."
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s4",
+      "reason": "",
+      "recognized": "supported",
+      "review": [
+        {
+          "text": "On the PDP-11/70, R6 is the stack pointer in the current mode",
+          "status": "unverified"
+        },
+        {
+          "text": "r6 is the stack pointer",
+          "scope": "recognized-fragment",
+          "status": "supported",
+          "reference": "1170-registers",
+          "supported_explanation": "R6 is the stack pointer; R7 is PC."
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s5",
+      "reason": "",
+      "recognized": "supported",
+      "review": [
+        {
+          "text": "The PDP-11 interrupt vector contains two words in order",
+          "status": "unverified"
+        },
+        {
+          "text": "interrupt vector contains two words",
+          "scope": "recognized-fragment",
+          "status": "supported",
+          "reference": "1170-vectors",
+          "supported_explanation": "The interrupt vector contains two words: PC then PS."
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s6",
+      "reason": "",
+      "recognized": "supported",
+      "review": [
+        {
+          "text": "For MOVB, octal 200 has the sign bit set to 1",
+          "status": "calculation-required"
+        },
+        {
+          "text": "octal 200 has the sign bit set to 1",
+          "scope": "recognized-fragment",
+          "status": "supported",
+          "reference": "1170-instructions",
+          "supported_explanation": "Octal 200 is binary 10000000. MOVB to a register extends bit 7, which is one."
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s7",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "For PDP-11 byte operands, @(R2)+ advances the pointer by two",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s8",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "UNIX V7 ls -tr lists the oldest files first",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s9",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "RSTS/E V9.0 DCL DIRECTORY displays file information",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "s10",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "RSX-11M-PLUS V3.0 PIP /LI lists files from a UFD",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "c1",
+      "reason": "",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "The PDP-11/70 program uses 22-bit virtual addresses in every process",
+          "status": "unverified"
+        },
+        {
+          "text": "program uses 22-bit virtual addresses",
+          "scope": "recognized-fragment",
+          "status": "contradicted",
+          "reference": "1170-addresses",
+          "supported_explanation": "PDP-11/70 program virtual addresses are 16 bits."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c2",
+      "reason": "",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "For PDP-11/70, virtual addresses are 18 bits wide",
+          "status": "unverified"
+        },
+        {
+          "text": "virtual addresses are 18 bits wide",
+          "scope": "recognized-fragment",
+          "status": "contradicted",
+          "reference": "1170-addresses",
+          "supported_explanation": "PDP-11/70 virtual addresses are 16 bits."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c3",
+      "reason": "",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "The PDP-11/70 MMU translates results into 16-bit physical addresses",
+          "status": "unverified"
+        },
+        {
+          "text": "into 16-bit physical addresses",
+          "scope": "recognized-fragment",
+          "status": "contradicted",
+          "reference": "1170-addresses",
+          "supported_explanation": "The PDP-11/70 MMU produces 22-bit physical addresses."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c4",
+      "reason": "",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "R6 is the program counter on the PDP-11/70",
+          "status": "unverified"
+        },
+        {
+          "text": "r6 is the program counter",
+          "scope": "recognized-fragment",
+          "status": "contradicted",
+          "reference": "1170-registers",
+          "supported_explanation": "R7 is PC; R6 is the stack pointer."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c5",
+      "reason": "",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "R11 is the stack pointer on the PDP-11/70",
+          "status": "unverified"
+        },
+        {
+          "text": "r11 is the stack pointer",
+          "scope": "recognized-fragment",
+          "status": "contradicted",
+          "reference": "1170-registers",
+          "supported_explanation": "R6 is the stack pointer; R7 is PC."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c6",
+      "reason": "",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "The PDP-11 interrupt vector has one words",
+          "status": "unverified"
+        },
+        {
+          "text": "interrupt vector has one words",
+          "scope": "recognized-fragment",
+          "status": "contradicted",
+          "reference": "1170-vectors",
+          "supported_explanation": "The interrupt vector contains two words: PC then PS."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c7",
+      "reason": "",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "For MOVB, octal 200 has the sign bit set to 0",
+          "status": "calculation-required"
+        },
+        {
+          "text": "octal 200 has the sign bit set to 0",
+          "scope": "recognized-fragment",
+          "status": "contradicted",
+          "reference": "1170-instructions",
+          "supported_explanation": "Octal 200 is binary 10000000. MOVB to a register extends bit 7, which is one."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c8",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "INCB -(R0) increments R0 after accessing the byte",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c9",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The VT52 cursor addressing command is ANSI ESC [ 4 ; 9 H",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "c10",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "V7 sh > appends to an existing file",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "u1",
+      "reason": "Correct negation outside checker scope",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The PDP-11/70 does not use 22-bit virtual addresses",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u2",
+      "reason": "Reported speech, not endorsed assertion",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "Someone claims R6 is the program counter",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u3",
+      "reason": "Hypothetical",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "If a program uses 22-bit virtual addresses, it differs from this PDP-11",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u4",
+      "reason": "Different architecture",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "An ARM program uses 32-bit virtual addresses",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u5",
+      "reason": "No verified procedure",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "RT-11SJ V05.03 uses this universal shutdown procedure",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u6",
+      "reason": "No live observation",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "2.11BSD has an LP11 driver installed in your guest",
+          "status": "unobserved-machine-state"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u7",
+      "reason": "No supplied reference",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "PDP-11/70 virtual addresses are 16 bits wide",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u8",
+      "reason": "Altered untrusted reference",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "PDP-11/70 virtual addresses are 16 bits wide",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u9",
+      "reason": "Overbroad unsupported claim",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "All RSX variants use identical commands",
+          "status": "unverified"
+        }
+      ],
+      "truth": "unverified"
+    },
+    {
+      "id": "u10",
+      "reason": "Known contradiction outside numeric checker scope",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The simulator monitor is the same surface as a guest login",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    }
+  ],
+  "supplemental": [
+    {
+      "id": "a1",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The PDP-11/70 processor status word includes N, Z, V and C condition codes",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "a2",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "PDP-11 operand specifiers contain three mode bits and three register bits",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "a3",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "For byte autodecrement on the PDP-11, R6/SP still steps by two",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "a4",
+      "reason": "Project observation, not a newly verified manual",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The recorded RT-11SJ V05.03 baseline accepted DIR and SHOW CONFIG",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "a5",
+      "reason": "Retained guest evidence, not all BSD installations",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "The lab 2.11BSD media contains /usr/ucb/vi and /usr/ucb/more",
+          "status": "unverified"
+        }
+      ],
+      "truth": "supported"
+    },
+    {
+      "id": "a6",
+      "reason": "",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "PDP-11 MOV transfers only a byte to its destination",
+          "status": "unverified"
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "a7",
+      "reason": "",
+      "recognized": "contradicted",
+      "review": [
+        {
+          "text": "A PDP-11 trap vector has one words",
+          "status": "unverified"
+        },
+        {
+          "text": "vector has one words",
+          "scope": "recognized-fragment",
+          "status": "contradicted",
+          "reference": "1170-vectors",
+          "supported_explanation": "The interrupt vector contains two words: PC then PS."
+        }
+      ],
+      "truth": "contradicted"
+    },
+    {
+      "id": "a8",
+      "reason": "No current physical observation",
+      "recognized": "unverified",
+      "review": [
+        {
+          "text": "Your switch register is now zero",
+          "status": "unobserved-machine-state"
+        }
+      ],
+      "truth": "unverified"
+    }
+  ]
+}

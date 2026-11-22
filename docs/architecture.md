@@ -142,3 +142,20 @@ flowchart LR
 ```
 
 The arrows grant no host, emulator, media or physical-panel control. [Phase C evidence](lab/M5.9.3-C.md) distinguishes a working HTTP adapter, an adapted upstream chat experiment and unperformed genuine guest acceptance.
+
+## Phase D independent tutor application
+
+[ADR 0009](decisions/0009-source-facts-and-readonly-companion.md) adds explicit source facts before inference and fragment-scoped review afterward. The browser opens an optional external app only at a different HTTPS hostname, without sharing its session. The normal static service remains independent of that app and its Node runtime.
+
+```mermaid
+flowchart LR
+  Desktop[Desktop tutor] --> Facts[Local source facts and exact values]
+  Desktop -->|explicit separate window| Independent[Independent HTTPS login]
+  Independent --> Readonly[Optional modified Hacker Replicant]
+  Readonly -->|fixed model credential| Gateway[Bounded model gateway]
+  Readonly -->|distinct read and publish credentials| Selection[Expiring selected-text adapter]
+  Owner[Short-lived owner identity attestation] --> Selection
+  Selection --> Unknown[Unknown CPU, OS and Screen state]
+```
+
+The optional app supplies compact source context, rejects tools and propagates cancellation. Its selected-text manifest is not an authoritative live guest observer; separate lifecycle acceptance is required. [Phase D evidence](lab/M5.9.3-D.md) establishes real model/app behavior with synthetic selections and protected ARM64 service lifecycle, not physical integration.

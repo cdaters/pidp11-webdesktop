@@ -106,3 +106,11 @@ The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original
 - `src/tutor-calculation.ts`: constrained `/calc` parser and exact fixed-width arithmetic, sharing `pdp11-values.ts`; intercepts local requests before chat history/provider access.
 - `internal/replicant/http.go`: separately embedded token-authenticated, expiring selected-text adapter; caller owns authoritative identity, TLS and server lifecycle. No integration into the ordinary desktop listener.
 - `lab/m593c/`: synthetic historical comparison, separate-network gateway/upstream harness and protected ARM64 lifecycle checks; [reproduction](../../lab/m593c/README.md).
+
+## Phase D tutor and optional application
+
+- `src/tutor-facts.ts` and `internal/companion/facts.json` resolve explicit source facts locally before history or model access; `src/external-companion.ts` opens a separately authenticated HTTPS hostname without passing session authority.
+- `internal/companion/natural_claims.go` adds bounded fragment-only matches; `claims.go` retains unverified compound remainders. `lab/m593d/evaluation` and `review` report misses as well as matches against source-reviewed cases and retained natural responses.
+- `internal/replicant/sharing.go` adds a distinct writer credential. `cmd/replicant-adapter` owns loopback TLS, private-file validation and an expiring owner-attested identity callback; it does not observe actual guest lifecycle.
+- `integrations/hacker-replicant/` prepares an exact disposable upstream revision and provides optional read-only Node/UI modules. The app owns independent authentication, one in-flight chat, bounded context and cancellation; the adapter owns its mutex-protected expiring snapshot. Neither owns a terminal or emulator process.
+- `lab/m593d/` contains genuine-model, actual-app, cross-host fault, browser and ARM64 lifecycle harnesses. [Reproduction](../../lab/m593d/README.md) and [results](../lab/M5.9.3-D.md) distinguish synthetic selection identity from unperformed live-guest acceptance.
