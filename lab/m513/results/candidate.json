@@ -1,0 +1,42 @@
+{
+  "archive": "pidp11-webdesktop-m5.13-source-alpha.1.tar.gz",
+  "revision": "ef643e59e5040adcbf7f7b1286fe3472ff08a00f",
+  "sha256": "24fb624d4242972410c9f44616c74af6d89383bc7fb7b931b0a2e78cd9788f08",
+  "bytes": 14663932,
+  "files": 908,
+  "python": "3.14.7",
+  "zlib": "1.2.12",
+  "repeatedArchiveByteIdentical": true,
+  "memberChecksumsPassed": true,
+  "innerMembers": 908,
+  "excluded": [
+    "native executables",
+    "guest media",
+    "model weights",
+    "private credentials/configuration",
+    "private transcripts",
+    "node_modules",
+    ".git",
+    ".research"
+  ],
+  "nativeRuntimeReproducedSHA256": "ce3d7c9dbf4396931847a7da4a21f7b4d0fa00b3bb30e9b02018cb5eccc46b21",
+  "goVet": true,
+  "goRace": true,
+  "typescript": true,
+  "frontendUnitCases": 100,
+  "transportCases": 1,
+  "modifiedAppRouteCases": 5,
+  "sourcePackagingRefusalCases": [
+    "dirty checkout",
+    "existing output directory",
+    "disallowed private-key filename"
+  ],
+  "publishedRelease": false,
+  "publishedTag": false,
+  "publishedBinary": false,
+  "browserCases": 114,
+  "browserUnexpected": 0,
+  "browserFlaky": 0,
+  "browserSeconds": 84.227861,
+  "previewAndGuestRelaysStopped": true
+}

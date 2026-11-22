@@ -57,6 +57,9 @@ files and adds the two listed adapter files:
 | Added `read-only.mjs` | Separate login credential; exact-origin/session checks; fixed model/adapter destinations; bounded references, selected text, chat and request lifetime; no tools, console route or arbitrary destination |
 | Added `public/read-only-ui.js` | Explicit excerpt preview/publication/revocation, reference search and separate selected-text opt-in |
 
+A fresh pinned preparation reproduced exactly this inventory in M5.13
+([result](../../lab/m513/results/upstream-preparation.json)).
+
 The original tool/console code remains in the disposable upstream tree, but the
 opt-in mode intercepts the routes and refuses control. This is why the tested
 mode must be explicit and why an unmodified upstream deployment is not covered by

@@ -1,0 +1,14 @@
+{
+  "upstreamRevision": "6f8a2aca7786736e01bdf5ba9b44bf66a7f19349",
+  "trackedChanges": [
+    "public/index.html",
+    "server.js"
+  ],
+  "addedFiles": [
+    "public/read-only-ui.js",
+    "read-only.mjs"
+  ],
+  "originalControlServiceStarted": false,
+  "maintainerContacted": false,
+  "freshPreparationPassed": true
+}
