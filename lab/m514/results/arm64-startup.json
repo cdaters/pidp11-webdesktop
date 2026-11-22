@@ -1,0 +1,39 @@
+{
+  "originalRuntimeSHA256": "ce3d7c9dbf4396931847a7da4a21f7b4d0fa00b3bb30e9b02018cb5eccc46b21",
+  "testedRuntimeSHA256": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+  "architecture": "aarch64",
+  "kernel": "7.2.12-orbstack-00394-gbecdd6130068",
+  "originalExit139Reproduced": false,
+  "originalCause": "unresolved; no original signal/core trace exists",
+  "originalMacMountLinuxCopies": 12,
+  "originalMacHostCopies": 12,
+  "originalNativeOverlayCopies": 12,
+  "originalNativeBtrfsCopies": 12,
+  "straceOriginalExit": 0,
+  "gdbOriginalNormalExit": true,
+  "fixedMountAndOverlayStarts": 24,
+  "tmpfsNoexecErrno": 13,
+  "memoryEvents": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n",
+  "originalFileLimitFailure": {
+    "returncode": 1,
+    "signal": null,
+    "milliseconds": 3.502,
+    "stderrBytes": 97,
+    "createdFiles": [
+      "config.json"
+    ],
+    "directoryMode": "0o700"
+  },
+  "correctedFileLimitFailure": {
+    "returncode": 1,
+    "signal": null,
+    "milliseconds": 5.024,
+    "stderrBytes": 157,
+    "createdFiles": [],
+    "directoryMode": null
+  },
+  "initialHarnessFailure": "First diagnostic stopped at noexec tmpfs without a saved summary; repeated into fresh directories with exec-error recording. No noexec setting changed.",
+  "originalProvisionMedianMS": 4.843500000000001,
+  "correctedProvisionMedianMS": 16.0615,
+  "earlierCorrectionOnlyRuntimeStarts": 24
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "Regression replay of the unchanged M5.13 frozen questions; no claim of a new held-out evaluation",
+  "model": "gemma4:12b",
+  "questions": 8,
+  "validCitationIDs": 8,
+  "withheld": 1,
+  "deliveredSourceStatus": 7,
+  "coreDistinctions": 6,
+  "partial": [
+    "stack-byte: SP correct; R0 example still autodecrement instead of requested autoincrement",
+    "rsx-end: does not clearly distinguish logout from shutdown"
+  ],
+  "quoteCase": "rt-quote paraphrase quotation withheld, despite recognizing that no primary quotation was provided",
+  "HTTPBoundaryTests": "Full Go suite: TestConfiguredChatHTTP and TestGatewayQuotationAndDurableAttribution use deterministic provider responses; real model replay invokes shared qualifier directly",
+  "rulesOrReferenceChanges": false
+}

@@ -1,0 +1,18 @@
+{
+  "applicationCommit": "4b0b8f8a855573c5c9e7bd5ffad4bf5b71bd1197",
+  "goVet": true,
+  "goRace": true,
+  "typescript": true,
+  "frontendUnitCases": 101,
+  "transportCases": 1,
+  "modifiedAppRouteCases": 5,
+  "draftClientConformanceCases": 6,
+  "browserCases": 114,
+  "browserUnexpected": 0,
+  "browserFlaky": 0,
+  "browserSeconds": 87.845015,
+  "linuxProcessSocketCases": 4,
+  "actualARM64OwnershipAndProvisionTests": true,
+  "candidateRuntimeSHA256": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+  "noNewRuntimeDependencies": true
+}

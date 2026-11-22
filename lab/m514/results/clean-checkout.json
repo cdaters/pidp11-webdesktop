@@ -1,0 +1,35 @@
+{
+  "sourceRevision": "4b0b8f8a855573c5c9e7bd5ffad4bf5b71bd1197",
+  "clone": "independent local Git clone, no dependencies or build output inherited",
+  "missingDependenciesRefused": true,
+  "commands": [
+    {
+      "command": "npm ci",
+      "exit": 0
+    },
+    {
+      "command": "npm run doctor",
+      "exit": 0
+    },
+    {
+      "command": "npm run check",
+      "exit": 0
+    },
+    {
+      "command": "npm test",
+      "exit": 0
+    },
+    {
+      "command": "npm run test:selection-contract",
+      "exit": 0
+    },
+    {
+      "command": "npm run build:server",
+      "exit": 0
+    }
+  ],
+  "staticARM64MatchesGenuineTestRuntime": true,
+  "runtimeSHA256": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+  "freshLoopbackPreviewHTTP200": true,
+  "ownedPreviewStoppedPortClosed": true
+}

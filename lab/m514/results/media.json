@@ -1,0 +1,32 @@
+{
+  "sourceCopies": [
+    {
+      "guest": "bsd",
+      "sourceSHA256": "940608306ccf49b74780d3f6863476a4a5fea27651c9d1cc0a81b5c020dcbb1f",
+      "historicalBase": true,
+      "unchanged": true
+    },
+    {
+      "guest": "rsx",
+      "sourceSHA256": "516eea6dd72e89ac4c99453fbe203ece9fc801e902cb118257d6a650112b05bb",
+      "historicalBase": true,
+      "unchanged": true
+    },
+    {
+      "guest": "rt11",
+      "sourceSHA256": "543277ee81fb4c024d19242bf6d6a04c81a257c48fe4cece256a42de3fe8dd98",
+      "historicalBase": true,
+      "unchanged": true
+    },
+    {
+      "guest": "rt11",
+      "sourceSHA256": "a24d6fb4e92f196b46caca30bd7d7a682de47cf2ed8d5d947d869ad6e7d391b1",
+      "historicalBase": false,
+      "unchanged": true
+    }
+  ],
+  "v7BaseSHA256": "fc04dab1e7f2fbf3ea4b44603ed2c9d6ba15f4f86c702d4a27a1dac725966f39",
+  "workingDisksRetainedPrivately": true,
+  "rt11": "Copy of M5.13 generated working monitor plus fresh verified rescue disk; no new SYSGEN qualification",
+  "noPiAccess": true
+}

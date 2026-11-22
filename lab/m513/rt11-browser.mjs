@@ -2,7 +2,7 @@
 import { chromium, expect } from "@playwright/test";
 import { readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
-const root = ".research/m513/rt11",
+const root = process.env.PIDP_RT_WORK ?? ".research/m513/rt11",
   base = "https://127.0.0.1:8448";
 const browser = await chromium.launch();
 const frames = [];
@@ -55,7 +55,7 @@ try {
     .toBe(2);
   const text = await screen.innerText();
   writeFileSync(root + "/browser-transcript-private.txt", text);
-  await page.screenshot({ path: ".research/m513/rt11-mtty.png" });
+  await page.screenshot({ path: process.env.PIDP_RT_SCREENSHOT ?? ".research/m513/rt11-mtty.png" });
   await page.locator("[data-release]").click();
   await page.locator("[data-disconnect]").click();
   await page.locator("[data-connect]").click();

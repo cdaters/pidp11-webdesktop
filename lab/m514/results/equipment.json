@@ -1,0 +1,61 @@
+[
+  {
+    "browser": "chromium",
+    "genuineV7Text": true,
+    "genuineV7TekVectors": 22,
+    "liveDevicePhase": 1,
+    "deviceResult": {
+      "id": "1795376703030",
+      "result": {
+        "phase": 1,
+        "reader_bytes": 4096,
+        "host_lp11_bytes": 6735,
+        "host_punch_bytes": 4096
+      }
+    },
+    "completedDownloadsVerified": false,
+    "providerFixture": true,
+    "realModel": false,
+    "windows": 5
+  },
+  {
+    "browser": "firefox",
+    "genuineV7Text": true,
+    "genuineV7TekVectors": 22,
+    "liveDevicePhase": 2,
+    "deviceResult": {
+      "id": "1795376729601",
+      "result": {
+        "phase": 2,
+        "reader_bytes": 8192,
+        "host_lp11_bytes": 13470,
+        "host_punch_bytes": 8192
+      }
+    },
+    "completedDownloadsVerified": false,
+    "providerFixture": true,
+    "realModel": false,
+    "windows": 5
+  },
+  {
+    "browser": "webkit",
+    "genuineV7Text": true,
+    "genuineV7TekVectors": 22,
+    "liveDevicePhase": 3,
+    "deviceResult": {
+      "id": "1795376755619",
+      "result": {
+        "phase": 3,
+        "reader_bytes": 12288,
+        "host_lp11_bytes": 20205,
+        "host_punch_bytes": 12288,
+        "completed": true,
+        "reader_eof_csr_verified": true
+      }
+    },
+    "completedDownloadsVerified": true,
+    "providerFixture": true,
+    "realModel": false,
+    "windows": 5
+  }
+]

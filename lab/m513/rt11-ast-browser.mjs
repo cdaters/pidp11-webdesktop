@@ -2,7 +2,7 @@
 import { chromium, expect } from "@playwright/test";
 import { readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
-const root = ".research/m513/rt11",
+const root = process.env.PIDP_RT_WORK ?? ".research/m513/rt11",
   base = "https://127.0.0.1:8448";
 const browser = await chromium.launch();
 const frames = [];

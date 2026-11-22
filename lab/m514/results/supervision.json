@@ -1,0 +1,11 @@
+{
+  "guest": "UNIX V7",
+  "environment": "Mac-hosted ARM64 Linux",
+  "osIdentity": "operator-attested",
+  "genuineCommand": true,
+  "delayedRenewalCannotRevive": true,
+  "independentConsoleAndSerial": true,
+  "forcedTerminationAndExplicitStaleSocketRecovery": true,
+  "freshDetachedInstanceOldSessionRefused": true,
+  "pass": true
+}

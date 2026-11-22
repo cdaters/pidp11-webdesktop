@@ -1,0 +1,41 @@
+{
+  "architecture": "aarch64",
+  "kernel": "7.2.12-orbstack-00394-gbecdd6130068",
+  "physicalPi": false,
+  "originalNativeProvisionExits": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "straceExit": 0,
+  "gdbExitedNormally": true,
+  "nativeFilesystem": "btrfs",
+  "missingOriginalInstallationRefused": true,
+  "protections": {
+    "MemoryMax": "100663296",
+    "MemorySwapMax": "0",
+    "NoNewPrivileges": "yes",
+    "PrivateDevices": "yes",
+    "ProtectSystem": "strict",
+    "ProtectHome": "yes",
+    "Restart": "no"
+  },
+  "idleStatus": [
+    "VmRSS:\t    8736 kB",
+    "Threads:\t6"
+  ],
+  "killNoRestartFreshDetachedOldApprovalRefused": true,
+  "compatibleConfigRollbackAndReturn": true,
+  "missingMemoryControllerRefusedBeforeListener": true,
+  "restoredProtectedDetachedStartup": true,
+  "managedUninstallAndPrivateAccountRemoved": true
+}

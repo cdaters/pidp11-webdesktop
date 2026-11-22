@@ -1,0 +1,22 @@
+[
+  {
+    "phase": 1,
+    "reader_bytes": 4096,
+    "host_lp11_bytes": 6735,
+    "host_punch_bytes": 4096
+  },
+  {
+    "phase": 2,
+    "reader_bytes": 8192,
+    "host_lp11_bytes": 13470,
+    "host_punch_bytes": 8192
+  },
+  {
+    "phase": 3,
+    "reader_bytes": 12288,
+    "host_lp11_bytes": 20205,
+    "host_punch_bytes": 12288,
+    "completed": true,
+    "reader_eof_csr_verified": true
+  }
+]

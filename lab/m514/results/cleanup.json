@@ -1,0 +1,21 @@
+{
+  "physicalPiAccess": false,
+  "ownedGuestContainersRemoved": true,
+  "guestsStoppedBeforeContainerRemoval": true,
+  "companionStoppedBeforeGuestShutdown": true,
+  "ownedPreviewAndRelayPortsClosed": [
+    5173,
+    5174,
+    8080,
+    8445,
+    8446,
+    8448,
+    8449
+  ],
+  "ownedDiagnosticContainerRemoved": true,
+  "ownedARM64VMRemovedAfterManagedUninstall": true,
+  "privateDiagnosticsAndWorkingMediaPreserved": true,
+  "preexistingContainersUnchanged": true,
+  "preexistingModelRunnerLeftAlone": true,
+  "originalSIMH_SHA256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237"
+}

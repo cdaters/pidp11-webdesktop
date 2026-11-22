@@ -67,6 +67,13 @@ profiles["rt11-mtty"] = [
     "attach rl0 /work/disk0.work",
     "boot rl0",
 ]
+# Fresh rescue copy at RL0 plus an independent copy of a previously generated
+# multiterminal monitor at RL1. The operator must explicitly BOOT DL1:M513FB
+# from the rescue guest; a listener alone does not establish guest support.
+profiles["rt11-rescue"] = profiles["rt11-mtty"][:-2] + [
+    "attach rl0 /work/rescue.work", "set rl1 rl02",
+    "attach rl1 /work/disk0.work", "boot rl0",
+]
 # Cloning an immutable base can preserve its read-only mode. Refuse before
 # booting a writable guest rather than discovering this during startup writes.
 for media in root.glob("disk*.work"):
