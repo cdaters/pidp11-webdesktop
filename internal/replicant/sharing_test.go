@@ -85,3 +85,59 @@ func TestSharingMalformedRequestsCannotReplaceSelection(t *testing.T) {
 		t.Fatal("browser writer access")
 	}
 }
+
+func TestSelectionReceiptChangesOnEveryPublication(t *testing.T) {
+	identity := Attachment{Endpoint: "tty0", Generation: "a", Simulator: "s"}
+	adapter, _ := NewAdapter(strings.Repeat("r", 32), func() (Attachment, bool) { return identity, true })
+	handler, _ := WithSharing(adapter, strings.Repeat("w", 32))
+	body := `{"consent":true,"selection":{"endpoint":"tty0","generation":"a","simulator_generation":"s","text":"same text"}}`
+	publish := func() string {
+		request := httptest.NewRequest("POST", "/api/pidp11/selection", strings.NewReader(body))
+		request.Header.Set("Authorization", "Bearer "+strings.Repeat("w", 32))
+		response := httptest.NewRecorder()
+		handler.ServeHTTP(response, request)
+		receipt := response.Header().Get("X-Selection-ID")
+		if response.Code != 204 || len(receipt) != 32 {
+			t.Fatal("missing exact publication receipt")
+		}
+		return receipt
+	}
+	first, second := publish(), publish()
+	if first == second {
+		t.Fatal("publication replay indistinguishable")
+	}
+	request := httptest.NewRequest("GET", "/api/pidp11/screen", nil)
+	request.Header.Set("Authorization", "Bearer "+strings.Repeat("r", 32))
+	response := httptest.NewRecorder()
+	handler.ServeHTTP(response, request)
+	if !strings.Contains(response.Body.String(), second) || strings.Contains(response.Body.String(), first) {
+		t.Fatal("readback receipt mismatch")
+	}
+	adapter.Revoke()
+	third := publish()
+	if third == first || third == second {
+		t.Fatal("revoked receipt reused")
+	}
+}
+
+// Closing and reopening the same source window must not revive its old excerpt,
+// even though its terminal endpoint and simulator are unchanged.
+func TestViewerLifetimeRetiresSelection(t *testing.T) {
+	identity := Attachment{Endpoint: "tty0", Generation: "a", Simulator: "s", ViewerRevision: 1}
+	adapter, _ := NewAdapter(strings.Repeat("r", 32), func() (Attachment, bool) { return identity, true })
+	selection := Selection{Endpoint: "tty0", Generation: "a", Simulator: "s", ViewerRevision: 1, Text: "approved"}
+	if err := adapter.Publish(selection, true); err != nil {
+		t.Fatal(err)
+	}
+	identity.ViewerRevision = 3
+	request := httptest.NewRequest("GET", "/api/pidp11/screen", nil)
+	request.Header.Set("Authorization", "Bearer "+strings.Repeat("r", 32))
+	response := httptest.NewRecorder()
+	adapter.ServeHTTP(response, request)
+	if response.Code != 409 {
+		t.Fatal("old view excerpt survived source replacement")
+	}
+	if err := adapter.Publish(selection, true); err == nil {
+		t.Fatal("stale source approved")
+	}
+}

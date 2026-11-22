@@ -83,15 +83,16 @@ type Client struct {
 // own lock (send, remove, state, broadcastState, expire) require mu to be held.
 // Config and the injectable Now clock must not change after concurrent use begins.
 type Endpoint struct {
-	Config  Config
-	mu      sync.Mutex
-	conn    net.Conn
-	used    bool // One guest attachment per endpoint lifetime, including after Close.
-	clients map[*Client]bool
-	owner   *Client
-	epoch   uint64
-	until   time.Time
-	Now     func() time.Time
+	Config       Config
+	mu           sync.Mutex
+	conn         net.Conn
+	used         bool // One guest attachment per endpoint lifetime, including after Close.
+	clients      map[*Client]bool
+	viewRevision uint64 // Changes on every membership transition, including eviction.
+	owner        *Client
+	epoch        uint64
+	until        time.Time
+	Now          func() time.Time
 }
 
 // NewEndpoint creates a detached line. Callers outside New must validate c first.
@@ -178,6 +179,7 @@ func (e *Endpoint) remove(c *Client) {
 		return
 	}
 	delete(e.clients, c)
+	e.viewRevision++
 	close(c.done)
 	if e.owner == c {
 		e.owner = nil
@@ -193,6 +195,15 @@ func (e *Endpoint) broadcastState(message string) {
 	}
 }
 
+// Observation returns one atomic local-only connection/membership snapshot.
+// The revision distinguishes disconnect/reconnect even when viewer counts match.
+// It identifies browser subscriptions, not an OS, CPU state or user identity.
+func (e *Endpoint) Observation() (connected bool, revision uint64, viewers int) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	return e.conn != nil, e.viewRevision, len(e.clients)
+}
+
 // Subscribe starts a fresh view without replaying guest output or granting input.
 // The caller must Unsubscribe when its transport ends.
 func (e *Endpoint) Subscribe() (*Client, error) {
@@ -203,6 +214,7 @@ func (e *Endpoint) Subscribe() (*Client, error) {
 	}
 	c := &Client{out: make(chan Frame, 64), done: make(chan struct{})}
 	e.clients[c] = true
+	e.viewRevision++
 	e.send(c, e.state(c, "Fresh display; ongoing guest line, no history replay"))
 	return c, nil
 }

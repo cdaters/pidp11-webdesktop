@@ -63,8 +63,9 @@ export function installReadOnly(app) {
     next();
   });
   async function request(url, token, signal, options = {}) {
+    const { selectionReceipt = false, ...fetchOptions } = options;
     const response = await fetch(url, {
-      ...options,
+      ...fetchOptions,
       signal,
       redirect: "error",
       headers: {
@@ -74,6 +75,12 @@ export function installReadOnly(app) {
     });
     if (!response.ok)
       throw Error(`Optional service unavailable (${response.status})`);
+    if (selectionReceipt) {
+      const selectionId = response.headers.get("X-Selection-ID");
+      if (response.status !== 204 || !/^[a-f0-9]{32}$/.test(selectionId || ""))
+        throw Error("Selection receipt unavailable");
+      return { selectionId };
+    }
     if (!response.body) return null;
     const chunks = [];
     let length = 0;
@@ -106,6 +113,7 @@ export function installReadOnly(app) {
   app.get("/api/readonly", (_req, res) =>
     res.json({
       readOnly: true,
+      model,
       status: "Machine state unknown; no console access",
       selectionSeconds: 30,
     }),
@@ -132,15 +140,22 @@ export function installReadOnly(app) {
       const status = await request(adapter + "/status", readToken, signal);
       if (status.attachment_confirmed !== true)
         throw Error("Owner attachment approval absent or expired");
-      await request(adapter + "/selection", shareToken, signal, {
-        method: "POST",
-        body: JSON.stringify({
-          selection: { ...status.attachment, text },
-          consent: true,
-        }),
-      });
+      const receipt = await request(
+        adapter + "/selection",
+        shareToken,
+        signal,
+        {
+          selectionReceipt: true,
+          method: "POST",
+          body: JSON.stringify({
+            selection: { ...status.attachment, text },
+            consent: true,
+          }),
+        },
+      );
       res.json({
         shared: true,
+        selectionId: receipt.selectionId,
         attachment: status.attachment,
         expiresInSeconds: 30,
         semantics: "Manually selected text; not a live screen",
@@ -160,6 +175,8 @@ export function installReadOnly(app) {
       messages.length > 12 ||
       messages.some(
         (m) =>
+          !m ||
+          typeof m !== "object" ||
           !["user", "assistant"].includes(m.role) ||
           typeof m.content !== "string" ||
           Buffer.byteLength(m.content) > 2048,
@@ -169,6 +186,13 @@ export function installReadOnly(app) {
       return res
         .status(400)
         .json({ error: "Bounded read-only conversation required" });
+    if (
+      req.body?.includeSelection === true &&
+      !/^[a-f0-9]{32}$/.test(req.body.selectionId || "")
+    )
+      return res
+        .status(400)
+        .json({ error: "Exact selection approval required" });
     busy = true;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 22000);
@@ -201,6 +225,7 @@ export function installReadOnly(app) {
           controller.signal,
         );
         if (
+          selection.selection_id !== req.body.selectionId ||
           typeof selection.text !== "string" ||
           Buffer.byteLength(selection.text) > 4096
         )
@@ -243,13 +268,11 @@ export function installReadOnly(app) {
       );
     } catch (error) {
       if (!res.destroyed)
-        res
-          .status(502)
-          .json({
-            error: controller.signal.aborted
-              ? "Cancelled or timed out"
-              : error.message,
-          });
+        res.status(502).json({
+          error: controller.signal.aborted
+            ? "Cancelled or timed out"
+            : error.message,
+        });
     } finally {
       clearTimeout(timer);
       res.off("close", cancel);

@@ -50,10 +50,12 @@ type Status struct {
 
 // LineStatus exposes the revision required by the next local approval.
 type LineStatus struct {
-	ID       string `json:"id"`
-	Label    string `json:"label"`
-	Revision uint64 `json:"revision"`
-	State    string `json:"state"`
+	ID             string `json:"id"`
+	Label          string `json:"label"`
+	Revision       uint64 `json:"revision"`
+	State          string `json:"state"`
+	ViewerRevision uint64 `json:"viewer_revision"`
+	Viewers        int    `json:"viewers"`
 }
 
 // New validates the immutable allowlist and creates no network connections.
@@ -84,7 +86,15 @@ func (m *Manager) Status() Status {
 	defer m.mu.Unlock()
 	s := Status{Instance: m.instance, Lines: []LineStatus{}}
 	for id, l := range m.lines {
-		s.Lines = append(s.Lines, LineStatus{id, l.config.Label, l.revision, state(l)})
+		row := LineStatus{ID: id, Label: l.config.Label, Revision: l.revision, State: l.state}
+		if l.endpoint != nil {
+			connected, revision, viewers := l.endpoint.Observation()
+			row.ViewerRevision, row.Viewers = revision, viewers
+			if row.State == "attached" && !connected {
+				row.State = "unavailable"
+			}
+		}
+		s.Lines = append(s.Lines, row)
 	}
 	return s
 }

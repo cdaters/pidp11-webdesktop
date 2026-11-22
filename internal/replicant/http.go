@@ -1,7 +1,9 @@
 package replicant
 
 import (
+	"crypto/rand"
 	"crypto/subtle"
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -13,9 +15,10 @@ import (
 // Attachment identifies a guest-line lifetime, never an inferred operating
 // system or CPU state. Current must return false on detached/uncertain state.
 type Attachment struct {
-	Endpoint   string `json:"endpoint"`
-	Generation string `json:"generation"`
-	Simulator  string `json:"simulator_generation"`
+	ViewerRevision uint64 `json:"viewer_revision,omitempty"`
+	Endpoint       string `json:"endpoint"`
+	Generation     string `json:"generation"`
+	Simulator      string `json:"simulator_generation"`
 }
 
 // Adapter serves one explicitly published excerpt. The embedding caller owns
@@ -23,11 +26,13 @@ type Attachment struct {
 // mu protects the selection and expiration. Current runs outside mu and must be
 // concurrency-safe. No endpoint reads a terminal, invokes a tool or writes keys.
 type Adapter struct {
-	token     string
-	current   func() (Attachment, bool)
-	mu        sync.Mutex
-	selection Selection
-	expires   time.Time
+	token       string
+	current     func() (Attachment, bool)
+	mu          sync.Mutex
+	selection   Selection
+	expires     time.Time
+	revision    uint64 // Fences publications whose identity callback overlaps revocation.
+	selectionID string
 }
 
 // NewAdapter requires a private independent token and authoritative identity
@@ -43,24 +48,46 @@ func NewAdapter(token string, current func() (Attachment, bool)) (*Adapter, erro
 // required for each selection. The snapshot expires after 30 seconds and is not
 // refreshed by reads. A later read rechecks identity; a mismatch erases it.
 func (a *Adapter) Publish(selection Selection, consent bool) error {
+	_, err := a.PublishWithReceipt(selection, consent)
+	return err
+}
+
+// PublishWithReceipt returns an unpredictable receipt for this exact publication.
+// Consumers must bind a later read to that receipt, not merely to a guest line:
+// another authorized page may publish different text on the same attachment.
+func (a *Adapter) PublishWithReceipt(selection Selection, consent bool) (string, error) {
+	a.mu.Lock()
+	revision := a.revision
+	a.mu.Unlock()
 	current, ok := a.current()
-	if !ok || current.Simulator == "" || len(current.Simulator) > 128 || selection.Simulator != current.Simulator {
-		return errors.New("no confirmed guest attachment")
+	if !ok || current.Simulator == "" || len(current.Simulator) > 128 || selection.Simulator != current.Simulator || selection.ViewerRevision != current.ViewerRevision {
+		return "", errors.New("no confirmed guest attachment")
 	}
 	if _, err := Readback(selection, current.Endpoint, current.Generation, consent); err != nil {
-		return err
+		return "", err
+	}
+	var receipt [16]byte
+	if _, err := rand.Read(receipt[:]); err != nil {
+		return "", err
 	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
+	if a.revision != revision {
+		return "", errors.New("selection changed or revoked during publication")
+	}
+	a.revision++
+	a.selectionID = hex.EncodeToString(receipt[:])
 	a.selection = selection
 	a.expires = time.Now().Add(30 * time.Second)
-	return nil
+	return a.selectionID, nil
 }
 
 // Revoke forgets a selection on disconnect, explicit unsharing or shutdown.
 func (a *Adapter) Revoke() {
 	a.mu.Lock()
 	defer a.mu.Unlock()
+	a.revision++
+	a.selectionID = ""
 	a.selection = Selection{}
 	a.expires = time.Time{}
 }
@@ -99,7 +126,9 @@ func (a *Adapter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		a.mu.Lock()
 		defer a.mu.Unlock()
 		snapshot, err := Readback(a.selection, current.Endpoint, current.Generation, true)
-		if !ok || current.Simulator == "" || a.selection.Simulator != current.Simulator || err != nil || !time.Now().Before(a.expires) {
+		if !ok || current.Simulator == "" || a.selection.Simulator != current.Simulator || a.selection.ViewerRevision != current.ViewerRevision || err != nil || !time.Now().Before(a.expires) {
+			a.revision++
+			a.selectionID = ""
 			a.selection = Selection{}
 			a.expires = time.Time{}
 			http.Error(w, "Fresh explicit selection required", 409)
@@ -108,6 +137,7 @@ func (a *Adapter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if r.Context().Err() != nil {
 			return
 		}
+		snapshot.SelectionID = a.selectionID
 		json.NewEncoder(w).Encode(snapshot)
 	default:
 		http.Error(w, "Unsupported route", 404)

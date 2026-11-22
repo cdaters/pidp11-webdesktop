@@ -50,10 +50,12 @@ func WithSharing(adapter *Adapter, writer string) (http.Handler, error) {
 			http.Error(w, "Invalid bounded selection", 400)
 			return
 		}
-		if err := adapter.Publish(request.Selection, request.Consent); err != nil {
+		receipt, err := adapter.PublishWithReceipt(request.Selection, request.Consent)
+		if err != nil {
 			http.Error(w, "Selection identity, consent or size invalid", 409)
 			return
 		}
+		w.Header().Set("X-Selection-ID", receipt)
 		w.WriteHeader(204)
 	}), nil
 }

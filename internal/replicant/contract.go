@@ -13,20 +13,23 @@ import (
 // Selection is supplied by an explicit user sharing action. Caller must obtain
 // generation from the existing authenticated terminal, never a model response.
 type Selection struct {
-	Simulator  string `json:"simulator_generation,omitempty"`
-	Endpoint   string `json:"endpoint"`
-	Generation string `json:"generation"`
-	Text       string `json:"text"`
+	ViewerRevision uint64 `json:"viewer_revision,omitempty"`
+	Simulator      string `json:"simulator_generation,omitempty"`
+	Endpoint       string `json:"endpoint"`
+	Generation     string `json:"generation"`
+	Text           string `json:"text"`
 }
 
 // Snapshot retains the upstream text field but identifies the narrower meaning.
 // The text is a selection, not a complete or current GNU Screen hardcopy.
 type Snapshot struct {
-	Simulator  string `json:"simulator_generation,omitempty"`
-	Text       string `json:"text"`
-	Semantics  string `json:"semantics"`
-	Endpoint   string `json:"endpoint"`
-	Generation string `json:"generation"`
+	ViewerRevision uint64 `json:"viewer_revision,omitempty"`
+	SelectionID    string `json:"selection_id,omitempty"`
+	Simulator      string `json:"simulator_generation,omitempty"`
+	Text           string `json:"text"`
+	Semantics      string `json:"semantics"`
+	Endpoint       string `json:"endpoint"`
+	Generation     string `json:"generation"`
 }
 
 // Readback is a pure conversion, requiring caller-confirmed sharing and matching
@@ -35,7 +38,7 @@ func Readback(selection Selection, endpoint, generation string, consent bool) (S
 	if !consent || selection.Endpoint == "" || selection.Generation == "" || selection.Endpoint != endpoint || selection.Generation != generation || len(selection.Endpoint) > 128 || len(selection.Generation) > 128 || len(selection.Text) > 4096 || !utf8.ValidString(selection.Text) {
 		return Snapshot{}, errors.New("explicit bounded selection and current attachment required")
 	}
-	return Snapshot{Text: selection.Text, Semantics: "explicit-guest-selection; not operator console or live screen", Endpoint: selection.Endpoint, Generation: selection.Generation, Simulator: selection.Simulator}, nil
+	return Snapshot{ViewerRevision: selection.ViewerRevision, Text: selection.Text, Semantics: "explicit-guest-selection; not operator console or live screen", Endpoint: selection.Endpoint, Generation: selection.Generation, Simulator: selection.Simulator}, nil
 }
 
 // DecodeStatus preserves the upstream claim without turning Screen existence

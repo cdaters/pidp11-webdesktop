@@ -1,6 +1,7 @@
 package peripheral
 
 import (
+	"bytes"
 	"context"
 	"crypto/rand"
 	"crypto/sha256"
@@ -92,6 +93,7 @@ type Followers struct {
 	now      func() time.Time
 	cancel   context.CancelFunc
 	done     chan struct{}
+	closed   bool // Close is permanent; a late control request cannot reopen files.
 }
 
 func NewFollowers(configs []FollowConfig) (*Followers, error) {
@@ -120,7 +122,7 @@ func nonce() (string, error) {
 func (f *Followers) Start(ctx context.Context) {
 	f.mu.Lock()
 	defer f.mu.Unlock()
-	if f.cancel != nil {
+	if f.cancel != nil || f.closed {
 		return
 	}
 	ctx, f.cancel = context.WithCancel(ctx)
@@ -141,6 +143,7 @@ func (f *Followers) Start(ctx context.Context) {
 }
 func (f *Followers) Close() {
 	f.mu.Lock()
+	f.closed = true
 	cancel, done := f.cancel, f.done
 	f.mu.Unlock()
 	if cancel != nil {
@@ -227,7 +230,7 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 	f.mu.Lock()
 	defer f.mu.Unlock()
 	e := f.entries[a.ID]
-	if e == nil || a.Instance != f.instance || a.Revision != e.revision {
+	if f.closed || e == nil || a.Instance != f.instance || a.Revision != e.revision {
 		return errors.New("stale peripheral approval")
 	}
 	e.revision++
@@ -338,6 +341,18 @@ func (f *Followers) pollEntry(e *following) {
 	if err != nil || info.Size() < e.view.Total || info.Size() > MaxJobBytes {
 		retire(e, "faulted", "Spool truncated, unavailable or exceeded one MiB job bound")
 		return
+	}
+	// Verify the retained observed window before accepting an append. A spool
+	// can be truncated and regrown to a larger size between polls without changing
+	// its inode. This check is bounded to 64 KiB; older discarded prefixes still
+	// require the independently verified full-file hash at completion.
+	if len(e.retained) > 0 {
+		prior := make([]byte, len(e.retained))
+		n, err := e.file.ReadAt(prior, e.view.Total-int64(len(prior)))
+		if err != nil || n != len(prior) || !bytes.Equal(prior, e.retained) {
+			retire(e, "faulted", "Previously observed spool bytes changed; observation retired")
+			return
+		}
 	}
 	if info.Size() == e.view.Total {
 		if !info.ModTime().Equal(e.modified) {

@@ -2,6 +2,7 @@
 (async () => {
   const response = await fetch("/api/readonly");
   if (!response.ok) return;
+  const settings = await response.json();
   document
     .querySelectorAll("iframe, .rp-nav-link")
     .forEach((node) => node.remove());
@@ -24,8 +25,7 @@
   document.head.append(style);
   const host = document.querySelector(".hp-screen-inner");
   host.style.cssText = "display:block;overflow:auto;padding:16px;color:#dce9df";
-  host.textContent =
-    "Machine state unknown. This companion cannot read a console. Paste only text you explicitly choose to share.";
+  host.textContent = `Destination: ${location.origin} → local model ${settings.model}. Machine state unknown. This companion cannot read a console. Paste only text you explicitly choose to share.`;
   const text = document.createElement("textarea");
   text.maxLength = 4000;
   text.setAttribute("aria-label", "Selected excerpt");
@@ -45,6 +45,7 @@
   let pending = false;
   function forgetHistory() {
     include.checked = false;
+    delete include.dataset.selectionId;
     window.dispatchEvent(new Event("pidp11-revoke"));
   }
   async function change(body) {
@@ -66,6 +67,9 @@
         ? "Approved for at most 30 seconds. Machine state remains unknown."
         : "Selection revoked. Future questions start with empty history. Previously delivered text cannot be recalled.";
       if (data.shared) {
+        if (!/^[a-f0-9]{32}$/.test(data.selectionId || ""))
+          throw Error("Exact selection receipt unavailable");
+        include.dataset.selectionId = data.selectionId;
         expiry = setTimeout(() => {
           forgetHistory();
           status.textContent = "Approval expired; share again deliberately.";
