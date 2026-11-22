@@ -1,0 +1,13 @@
+{
+  "version": "m5.10-preview.1",
+  "source_revision": "fd16a98150d419bf5ebde8cf4e8f8206c26a4e8c",
+  "archive": "pidp11-webdesktop-m5.10-preview.1-linux-arm64.tar.gz",
+  "archive_sha256": "8cda0d340d1798d9134e37679a07ae54b128d3b2136c4d0503aea37681ed01dd",
+  "archive_bytes": 3144738,
+  "runtime_sha256": "18385f1156925adb0d2d95fdcb2a3f2260fda8329357dc6d61f44a2c7ecc1ef9",
+  "runtime_bytes": 7930018,
+  "runtime_equal_to_phase_D": true,
+  "outer_and_inner_checksums": "passed",
+  "archive_allowlist": "14 regular files; no links, media, manuals, models or private configuration",
+  "new_service_lifecycle_test": false
+}

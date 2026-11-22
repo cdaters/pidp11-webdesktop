@@ -1,0 +1,87 @@
+[
+  {
+    "url": "https://github.com/cdaters/pidp11-webdesktop",
+    "status": 200,
+    "final": "https://github.com/cdaters/pidp11-webdesktop"
+  },
+  {
+    "url": "https://github.com/cdaters/pidp11-webdesktop/discussions",
+    "status": 200,
+    "final": "https://github.com/cdaters/pidp11-webdesktop/discussions"
+  },
+  {
+    "url": "https://github.com/cdaters/pidp11-webdesktop/issues",
+    "status": 200,
+    "final": "https://github.com/cdaters/pidp11-webdesktop/issues"
+  },
+  {
+    "url": "https://github.com/j-hoppe/BlinkenBone",
+    "status": 200,
+    "final": "https://github.com/j-hoppe/BlinkenBone"
+  },
+  {
+    "url": "https://github.com/obsolescence/pidp11",
+    "status": 200,
+    "final": "https://github.com/obsolescence/pidp11"
+  },
+  {
+    "url": "https://github.com/rolfpeters-droid/pidp11-hacker-replicant",
+    "status": 200,
+    "final": "https://github.com/rolfpeters-droid/pidp11-hacker-replicant"
+  },
+  {
+    "url": "https://github.com/simh/simh",
+    "status": 200,
+    "final": "https://github.com/simh/simh"
+  },
+  {
+    "url": "https://retrorealm.org/",
+    "status": 200,
+    "final": "https://retrorealm.org/"
+  },
+  {
+    "url": "https://retrorealm.org/projects/pidp-11",
+    "status": 200,
+    "final": "https://retrorealm.org/projects/pidp-11"
+  },
+  {
+    "url": "https://retrorealm.org/projects/pidp-11/architecture",
+    "status": 200,
+    "final": "https://retrorealm.org/projects/pidp-11/architecture"
+  },
+  {
+    "url": "https://retrorealm.org/projects/pidp-11/build-log",
+    "status": 200,
+    "final": "https://retrorealm.org/projects/pidp-11/build-log"
+  },
+  {
+    "url": "https://retrorealm.org/projects/pidp-11/gallery",
+    "status": 200,
+    "final": "https://retrorealm.org/projects/pidp-11/gallery"
+  },
+  {
+    "url": "https://thehighnibble.com/imsai8080/",
+    "status": 200,
+    "final": "https://thehighnibble.com/imsai8080/"
+  },
+  {
+    "url": "https://vt100.net/dec/ek-vt5x-op-001.pdf",
+    "status": 200,
+    "final": "https://vt100.net/dec/ek-vt5x-op-001.pdf"
+  },
+  {
+    "url": "https://vt100.net/docs/vt100-ug/chapter3.html",
+    "status": 200,
+    "final": "https://vt100.net/docs/vt100-ug/chapter3.html"
+  },
+  {
+    "url": "https://www.bitsavers.org/communications/teletype/33/310B_Vol_1_33_Teletypewriter_Sets_Technical_Manual_Sep74.pdf",
+    "status": 200,
+    "final": "https://www.bitsavers.org/communications/teletype/33/310B_Vol_1_33_Teletypewriter_Sets_Technical_Manual_Sep74.pdf"
+  },
+  {
+    "url": "https://www.zx.net.nz/computers/dec/vt220/doc/vt220-rm/chapter4.html",
+    "status": 200,
+    "final": "https://www.zx.net.nz/computers/dec/vt220/doc/vt220-rm/chapter4.html"
+  }
+]

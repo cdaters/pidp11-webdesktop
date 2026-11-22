@@ -1,0 +1,56 @@
+[
+  {
+    "images": [
+      {
+        "alt": "Actual Web Desktop with a UNIX V7 terminal, V7 Tektronix plot and completed LP11/PC11 device observations",
+        "width": 1920,
+        "loaded": true
+      },
+      {
+        "alt": "Genuine 2.11BSD vi running through the VT220 subset",
+        "width": 1440,
+        "loaded": true
+      },
+      {
+        "alt": "Genuine UNIX V7 vector plot in the browser",
+        "width": 1920,
+        "loaded": true
+      }
+    ],
+    "documentWidth": 1280,
+    "viewport": 1280,
+    "tables": [
+      {
+        "width": 1012,
+        "content": 1012
+      }
+    ]
+  },
+  {
+    "images": [
+      {
+        "alt": "Actual Web Desktop with a UNIX V7 terminal, V7 Tektronix plot and completed LP11/PC11 device observations",
+        "width": 1920,
+        "loaded": true
+      },
+      {
+        "alt": "Genuine 2.11BSD vi running through the VT220 subset",
+        "width": 1440,
+        "loaded": true
+      },
+      {
+        "alt": "Genuine UNIX V7 vector plot in the browser",
+        "width": 1920,
+        "loaded": true
+      }
+    ],
+    "documentWidth": 390,
+    "viewport": 390,
+    "tables": [
+      {
+        "width": 358,
+        "content": 358
+      }
+    ]
+  }
+]

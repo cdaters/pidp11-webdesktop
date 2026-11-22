@@ -1,0 +1,16 @@
+{
+  "markdownFiles": 142,
+  "localLinks": 1080,
+  "markdownImages": 42,
+  "failures": [],
+  "installation_guide_helper_tests": 48,
+  "shell_examples_syntax_checked": 13,
+  "new_capture_helpers_syntax": "passed",
+  "external_URLs_HTTP_200": 17,
+  "fresh_images": 8,
+  "preserved_phase_D_images": 4,
+  "prior_images_unchanged": true,
+  "accepted_tags_unchanged": true,
+  "privacy_scan": "no private host paths, addresses, keys or token literals found in changed text; captures inspected",
+  "full_application_regressions_repeated": false
+}
