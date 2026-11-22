@@ -1,0 +1,175 @@
+{
+  "explicit139": {
+    "kernel": "7.2.12-orbstack-00394-gbecdd6130068",
+    "machine": "aarch64",
+    "executableSHA256Before": "273cb29e073b748379ba546affa562283ed795f84ff230349e12ce610e60975c",
+    "executableMode": "0o755",
+    "executableBytes": 6673712,
+    "timeoutSeconds": 10,
+    "events": [
+      {
+        "event": "prepared",
+        "unixNS": 1795389027566380077,
+        "monotonicNS": 102383933089907
+      },
+      {
+        "event": "forked",
+        "unixNS": 1795389027566646997,
+        "monotonicNS": 102383933361243,
+        "pid": 19
+      },
+      {
+        "event": "reaped",
+        "unixNS": 1795389027579990879,
+        "monotonicNS": 102383946699751,
+        "childReaped": true
+      }
+    ],
+    "automaticRetry": false,
+    "coreLimitBytes": 0,
+    "outputFileLimitBytes": 1048576,
+    "nativeWaitStatus": 35584,
+    "exited": true,
+    "exitCode": 139,
+    "signal": null,
+    "coreFlag": false,
+    "maxRSSKiB": 13540,
+    "userSeconds": 0.0038399999999999997,
+    "systemSeconds": 0.0019199999999999998,
+    "mappingSamples": 1,
+    "preExecFailure": null,
+    "executableSHA256After": "273cb29e073b748379ba546affa562283ed795f84ff230349e12ce610e60975c"
+  },
+  "signal11": {
+    "kernel": "7.2.12-orbstack-00394-gbecdd6130068",
+    "machine": "aarch64",
+    "executableSHA256Before": "273cb29e073b748379ba546affa562283ed795f84ff230349e12ce610e60975c",
+    "executableMode": "0o755",
+    "executableBytes": 6673712,
+    "timeoutSeconds": 10,
+    "events": [
+      {
+        "event": "prepared",
+        "unixNS": 1795389027582778907,
+        "monotonicNS": 102383949487528
+      },
+      {
+        "event": "forked",
+        "unixNS": 1795389027583032534,
+        "monotonicNS": 102383949745031,
+        "pid": 20
+      },
+      {
+        "event": "reaped",
+        "unixNS": 1795389027598314852,
+        "monotonicNS": 102383965023474,
+        "childReaped": true
+      }
+    ],
+    "automaticRetry": false,
+    "coreLimitBytes": 0,
+    "outputFileLimitBytes": 1048576,
+    "nativeWaitStatus": 11,
+    "exited": false,
+    "exitCode": null,
+    "signal": 11,
+    "coreFlag": false,
+    "maxRSSKiB": 13800,
+    "userSeconds": 0.005673,
+    "systemSeconds": 0.000945,
+    "mappingSamples": 1,
+    "preExecFailure": null,
+    "executableSHA256After": "273cb29e073b748379ba546affa562283ed795f84ff230349e12ce610e60975c"
+  },
+  "timeout": {
+    "kernel": "7.2.12-orbstack-00394-gbecdd6130068",
+    "machine": "aarch64",
+    "executableSHA256Before": "273cb29e073b748379ba546affa562283ed795f84ff230349e12ce610e60975c",
+    "executableMode": "0o755",
+    "executableBytes": 6673712,
+    "timeoutSeconds": 0.1,
+    "events": [
+      {
+        "event": "prepared",
+        "unixNS": 1795389027600879336,
+        "monotonicNS": 102383967587833
+      },
+      {
+        "event": "forked",
+        "unixNS": 1795389027601074380,
+        "monotonicNS": 102383967785835,
+        "pid": 21
+      },
+      {
+        "event": "deadline-kill",
+        "unixNS": 1795389027706432008,
+        "monotonicNS": 102384073141171,
+        "signal": 9
+      },
+      {
+        "event": "reaped",
+        "unixNS": 1795389027709930001,
+        "monotonicNS": 102384076638748,
+        "childReaped": true
+      }
+    ],
+    "automaticRetry": false,
+    "coreLimitBytes": 0,
+    "outputFileLimitBytes": 1048576,
+    "nativeWaitStatus": 9,
+    "exited": false,
+    "exitCode": null,
+    "signal": 9,
+    "coreFlag": false,
+    "maxRSSKiB": 13800,
+    "userSeconds": 0.0027029999999999997,
+    "systemSeconds": 0.001802,
+    "mappingSamples": 8,
+    "preExecFailure": null,
+    "executableSHA256After": "273cb29e073b748379ba546affa562283ed795f84ff230349e12ce610e60975c"
+  },
+  "permission": {
+    "kernel": "7.2.12-orbstack-00394-gbecdd6130068",
+    "machine": "aarch64",
+    "executableSHA256Before": "aabc4dc64ad6ffef101f0fec08a3d1ba6428d419e886c2cbc56a74ff0a5f7a3e",
+    "executableMode": "0o600",
+    "executableBytes": 14,
+    "timeoutSeconds": 10,
+    "events": [
+      {
+        "event": "prepared",
+        "unixNS": 1795389027710206754,
+        "monotonicNS": 102384076915209
+      },
+      {
+        "event": "forked",
+        "unixNS": 1795389027710445256,
+        "monotonicNS": 102384077159378,
+        "pid": 22
+      },
+      {
+        "event": "reaped",
+        "unixNS": 1795389027723576178,
+        "monotonicNS": 102384090284633,
+        "childReaped": true
+      }
+    ],
+    "automaticRetry": false,
+    "coreLimitBytes": 0,
+    "outputFileLimitBytes": 1048576,
+    "nativeWaitStatus": 32256,
+    "exited": true,
+    "exitCode": 126,
+    "signal": null,
+    "coreFlag": false,
+    "maxRSSKiB": 14204,
+    "userSeconds": 0.000605,
+    "systemSeconds": 0.0,
+    "mappingSamples": 1,
+    "preExecFailure": {
+      "type": "PermissionError",
+      "errno": 13
+    },
+    "executableSHA256After": "aabc4dc64ad6ffef101f0fec08a3d1ba6428d419e886c2cbc56a74ff0a5f7a3e"
+  }
+}

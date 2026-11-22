@@ -1,0 +1,13 @@
+{
+  "sha256": "7328d7dad3c1790323b67ed29ba2f4e58b64a73c6a188c6b6624979ffbc7c64e",
+  "revision": "38bcfad84dc0b100005542f3aee6752ee147c649",
+  "bytes": 14789290,
+  "members": 1026,
+  "uncompressedBytes": 19315265,
+  "root": "pidp11-webdesktop-m5.17-source-alpha.2",
+  "internalManifestVerified": true,
+  "identicalRebuild": true,
+  "independentClone": true,
+  "python": "3.14.7",
+  "zlib": "1.2.12"
+}

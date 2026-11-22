@@ -1,0 +1,38 @@
+[
+  {
+    "browser": "chromium",
+    "offlineReferenceSearch": true,
+    "terminalHELP": true,
+    "terminalExplicitlyFixture": true,
+    "samplePrinter": true,
+    "exactOfflineCalculation": true,
+    "outsideOriginRequests": false,
+    "pageErrors": [],
+    "genuineGuest": false,
+    "realModel": false
+  },
+  {
+    "browser": "firefox",
+    "offlineReferenceSearch": true,
+    "terminalHELP": true,
+    "terminalExplicitlyFixture": true,
+    "samplePrinter": true,
+    "exactOfflineCalculation": true,
+    "outsideOriginRequests": false,
+    "pageErrors": [],
+    "genuineGuest": false,
+    "realModel": false
+  },
+  {
+    "browser": "webkit",
+    "offlineReferenceSearch": true,
+    "terminalHELP": true,
+    "terminalExplicitlyFixture": true,
+    "samplePrinter": true,
+    "exactOfflineCalculation": true,
+    "outsideOriginRequests": false,
+    "pageErrors": [],
+    "genuineGuest": false,
+    "realModel": false
+  }
+]

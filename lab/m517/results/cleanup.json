@@ -1,0 +1,19 @@
+{
+  "ownedGuestContainersRemoved": 4,
+  "diagnosticContainerRemoved": true,
+  "reviewContainerRemoved": true,
+  "previewAndRelayPortsClosed": [
+    5173,
+    5176,
+    8080,
+    8445,
+    8446,
+    8448,
+    8449
+  ],
+  "guestSafeShutdownVerified": true,
+  "actualBridgesStoppedBeforeGuestShutdown": true,
+  "nativeEvidenceExportVerified": true,
+  "preexistingContainerInventoryUnchanged": true,
+  "physicalPiAccess": false
+}

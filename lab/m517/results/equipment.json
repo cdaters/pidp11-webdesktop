@@ -1,0 +1,32 @@
+[
+  {
+    "browser": "chromium",
+    "genuineV7Text": true,
+    "genuineV7TekVectors": 22,
+    "liveDevicePhase": 1,
+    "completedDownloadsVerified": false,
+    "providerFixture": true,
+    "realModel": false,
+    "windows": 5
+  },
+  {
+    "browser": "firefox",
+    "genuineV7Text": true,
+    "genuineV7TekVectors": 22,
+    "liveDevicePhase": 2,
+    "completedDownloadsVerified": false,
+    "providerFixture": true,
+    "realModel": false,
+    "windows": 5
+  },
+  {
+    "browser": "webkit",
+    "genuineV7Text": true,
+    "genuineV7TekVectors": 22,
+    "liveDevicePhase": 3,
+    "completedDownloadsVerified": true,
+    "providerFixture": true,
+    "realModel": false,
+    "windows": 5
+  }
+]

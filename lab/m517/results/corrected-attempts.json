@@ -1,0 +1,32 @@
+[
+  {
+    "case": "Restricted Linux image",
+    "initial": "Expected example image tag absent; Docker refused before testing",
+    "correction": "Built candidate Dockerfile under new owned tag; restricted test suite passed"
+  },
+  {
+    "case": "Build provenance",
+    "initial": "Build inside ignored extraction inherited enclosing Git VCS metadata and produced a different private executable",
+    "correction": "Rebuilt with documented GOFLAGS=-buildvcs=false; exact accepted runtime hash matched; stamped first binary retained privately, never published"
+  },
+  {
+    "case": "V7 wrapper directory",
+    "initial": "Milestone-specific wrapper refused new M5.17 path before guest input",
+    "correction": "Private compatibility path under the new work area points only to its fresh V7 directory; unmodified wrapper/plot scripts then ran sequentially; no old work directory touched"
+  },
+  {
+    "case": "BSD boot input",
+    "initial": "Literal backslash-r remained unsubmitted at loader prompt",
+    "correction": "Observed input, cleared that line with Ctrl-U and submitted unix once; successful boot; no guest command replay"
+  },
+  {
+    "case": "Archive privacy scan",
+    "initial": "Conservative path scan flagged three historical artwork/reference provenance records",
+    "correction": "Inspected and verified byte-identical to Alpha 1; retained attribution; no private credential or host configuration found"
+  },
+  {
+    "case": "Post-test documentation staging",
+    "initial": "Six main-navigation edits were mistakenly staged in the extracted candidate after all tests; final checksum check correctly refused them",
+    "correction": "Transferred only those documentation edits to main, restored extracted files from the unchanged candidate archive, and reverified every internal hash. Archive bytes and tested production source never changed."
+  }
+]

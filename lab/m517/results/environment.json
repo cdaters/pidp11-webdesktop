@@ -1,0 +1,9 @@
+{
+  "node": "v26.9.0",
+  "go": "go version go1.26.0 darwin/arm64",
+  "python": "3.14.7",
+  "zlib": "1.2.12",
+  "reviewImageID": "sha256:f62ee2a36a929e2f58d1208e6711fea3c740887650733a668071dc7a1c727a52",
+  "diagnosticImageID": "sha256:a6c5010fb1a2f56b64b536bb518e898570380e9db413827e682c0f11e3f7abbf",
+  "sourceRevision": "38bcfad84dc0b100005542f3aee6752ee147c649"
+}

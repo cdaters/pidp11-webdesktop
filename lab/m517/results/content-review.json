@@ -1,0 +1,15 @@
+{
+  "sourceFiles": 1024,
+  "allSourceBytesMatchRevision": true,
+  "reviewedHistoricalAssetProvenancePaths": [
+    "docs/references/README.md",
+    "docs/research/panel-m42-calibration.md",
+    "docs/research/panel-m43-geometry.md"
+  ],
+  "provenanceRecordsUnchangedFromAlpha1": true,
+  "privateCredentialsOrHostConfigurationFound": false,
+  "noGitOrPrivateBuildPaths": true,
+  "noticesPresent": true,
+  "guestMediaOrNativeExecutables": false,
+  "scanIsNotSecretProof": true
+}

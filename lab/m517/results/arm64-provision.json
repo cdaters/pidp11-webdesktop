@@ -1,0 +1,45 @@
+{
+  "kernel": "6.12.118+deb13-arm64",
+  "machine": "aarch64",
+  "executableSHA256Before": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+  "executableMode": "0o700",
+  "executableBytes": 8061090,
+  "timeoutSeconds": 60,
+  "events": [
+    {
+      "event": "prepared",
+      "unixNS": 1795389150436546304,
+      "monotonicNS": 6820700544
+    },
+    {
+      "event": "forked",
+      "unixNS": 1795389150446109408,
+      "monotonicNS": 6830191536,
+      "pid": 215
+    },
+    {
+      "event": "reaped",
+      "unixNS": 1795389150714204032,
+      "monotonicNS": 7098185776,
+      "childReaped": true
+    }
+  ],
+  "automaticRetry": false,
+  "coreLimitBytes": 0,
+  "outputFileLimitBytes": 1048576,
+  "memoryMax": "100663296",
+  "memorySwapMax": "0",
+  "memoryEventsBefore": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "nativeWaitStatus": 0,
+  "exited": true,
+  "exitCode": 0,
+  "signal": null,
+  "coreFlag": false,
+  "maxRSSKiB": 12624,
+  "userSeconds": 0.09683499999999999,
+  "systemSeconds": 0.07666099999999999,
+  "mappingSamples": 7,
+  "preExecFailure": null,
+  "executableSHA256After": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+  "memoryEventsAfter": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n"
+}

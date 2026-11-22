@@ -1,0 +1,32 @@
+[
+  {
+    "browser": "chromium",
+    "fixture": true,
+    "actualOptionalUIScript": true,
+    "explicitRevokeClearsLocalReceipt": true,
+    "expiryClearsLocalReceipt": true,
+    "historyResetEventDispatched": true,
+    "upstreamHistoryStorageVerified": false,
+    "realModel": false
+  },
+  {
+    "browser": "firefox",
+    "fixture": true,
+    "actualOptionalUIScript": true,
+    "explicitRevokeClearsLocalReceipt": true,
+    "expiryClearsLocalReceipt": true,
+    "historyResetEventDispatched": true,
+    "upstreamHistoryStorageVerified": false,
+    "realModel": false
+  },
+  {
+    "browser": "webkit",
+    "fixture": true,
+    "actualOptionalUIScript": true,
+    "explicitRevokeClearsLocalReceipt": true,
+    "expiryClearsLocalReceipt": true,
+    "historyResetEventDispatched": true,
+    "upstreamHistoryStorageVerified": false,
+    "realModel": false
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "realTLS": true,
+  "guestOrModel": false,
+  "independentAudit": false,
+  "outcomes": [
+    "trusted TLS; explicit unknown OS/CPU",
+    "credential/origin separation; no machine authority",
+    "two authenticated callers; identical-text replacement; global revoke; legacy receipt exception",
+    "receipt substitution, revocation and delayed old epoch refused",
+    "concurrent HTTP publishers consume one epoch",
+    "expiry, browser-lifetime loss and adapter restart retire consent",
+    "malformed/oversized HTTP publications and cancellation refused"
+  ],
+  "sourceRevision": "38bcfad84dc0b100005542f3aee6752ee147c649",
+  "uncachedExecution": true,
+  "draftVersion": "0.1-draft",
+  "selectedTextRouteImplemented": false,
+  "expiryAndBrowserLifetime": "Injected test-only callbacks, not automatic guest OS discovery"
+}
