@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"syscall"
 	"time"
 )
 
@@ -20,8 +21,9 @@ func ControlListener(path string) (net.Listener, error) {
 	if err != nil {
 		return nil, err
 	}
-	if !info.IsDir() || info.Mode().Perm()&0077 != 0 {
-		return nil, errors.New("control directory must be private (0700)")
+	owner, ok := info.Sys().(*syscall.Stat_t)
+	if !info.IsDir() || info.Mode().Perm()&0077 != 0 || !ok || int(owner.Uid) != os.Geteuid() {
+		return nil, errors.New("control directory must be private (0700) and owned by the service account")
 	}
 	listener, err := net.Listen("unix", path)
 	if err != nil {

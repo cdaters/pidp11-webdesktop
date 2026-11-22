@@ -118,3 +118,42 @@ func TestListenerBoundsAndReleases(t *testing.T) {
 		t.Fatal("slot not released")
 	}
 }
+
+// Root can bind inside another account's 0700 directory. Permissions alone do
+// not protect the control socket from that directory owner replacing its path.
+func TestControlRejectsForeignOwner(t *testing.T) {
+	if os.Geteuid() != 0 {
+		t.Skip("requires disposable Linux root for chown")
+	}
+	dir := t.TempDir()
+	if err := os.Chmod(dir, 0700); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Chown(dir, 65534, 65534); err != nil {
+		t.Fatal(err)
+	}
+	listener, err := ControlListener(filepath.Join(dir, "control.sock"))
+	if err == nil {
+		listener.Close()
+		t.Fatal("foreign-owned private directory accepted")
+	}
+	if _, err := os.Lstat(filepath.Join(dir, "control.sock")); !os.IsNotExist(err) {
+		t.Fatal("refused control path was created")
+	}
+}
+
+func TestPrivateFileRejectsForeignOwner(t *testing.T) {
+	if os.Geteuid() != 0 {
+		t.Skip("requires disposable Linux root for chown")
+	}
+	path := filepath.Join(t.TempDir(), "foreign")
+	if err := os.WriteFile(path, []byte("not a trusted credential"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Chown(path, 65534, 65534); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := ReadPrivate(path); err == nil {
+		t.Fatal("foreign-owned credential accepted")
+	}
+}

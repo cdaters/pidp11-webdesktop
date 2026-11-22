@@ -60,3 +60,30 @@ func TestRevokeFencesPublicationPreparedBeforeHTTPRequest(t *testing.T) {
 		t.Fatalf("delayed publication revived revoked consent: HTTP %d", result.Code)
 	}
 }
+
+func TestConcurrentPublicationsConsumeOneEpoch(t *testing.T) {
+	identity := Attachment{Endpoint: "tty0", Generation: "a", Simulator: "sim-a"}
+	entered := make(chan struct{}, 2)
+	release := make(chan struct{})
+	adapter, _ := NewAdapter(strings.Repeat("r", 32), func() (Attachment, bool) { entered <- struct{}{}; <-release; return identity, true })
+	epoch := adapter.PublicationEpoch()
+	results := make(chan error, 2)
+	for _, text := range []string{"page one", "page two"} {
+		go func(text string) {
+			_, err := adapter.PublishAt(Selection{Endpoint: "tty0", Generation: "a", Simulator: "sim-a", Text: text}, true, epoch)
+			results <- err
+		}(text)
+	}
+	<-entered
+	<-entered
+	close(release)
+	successes := 0
+	for range 2 {
+		if <-results == nil {
+			successes++
+		}
+	}
+	if successes != 1 {
+		t.Fatalf("one epoch published %d selections", successes)
+	}
+}
