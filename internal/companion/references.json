@@ -495,7 +495,7 @@
   {
     "id": "rsxplus46-password",
     "title": "RSX-11M-PLUS V4.6 password lifetime",
-    "text": "The V4.6 release notes describe an account password lifetime of 0–127 days; zero disables lifetime checking. Expiration forces a password change at a later login, with an explicit exception for batch jobs and virtual terminals. HELLO is the login task in this discussion. These are guest-account facilities, separate from browser authentication; a browser login does not log into the historical guest. This note does not authorize account changes.",
+    "text": "The V4.6 release notes describe an account password lifetime of 0–127 days; zero disables lifetime checking. A separately set expired-password flag can still require a change; zero is not a promise that every expiration condition is disabled. Expiration forces a password change at a later login, with an explicit exception for batch jobs and virtual terminals. HELLO is the login task in this discussion. These are guest-account facilities, separate from browser authentication; a browser login does not log into the historical guest. This note does not authorize account changes.",
     "system": "rsx11mplus",
     "keywords": "rsx11mplus v4.6 hello password lifetime login account rsxplus46-password",
     "source": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsx11m_plus/RSX11Mplus_V4.x/AA-H427L-TC_RSX-11M-PLUS_V4.6_Release_Notes_Jan99.pdf",
@@ -506,7 +506,7 @@
     "coverage": "focused note",
     "question": "Explain RSX-11M-PLUS V4.6 password lifetime.",
     "source_sha256": "3faa771d0068849b0164941998f9fbac769a9077f2858df9775596e7cee307b8",
-    "note_sha256": "35eebaf049c28d3a5f02b6ff2d574ce34b6c693b5352145c15932f5b7d1f5073"
+    "note_sha256": "a650206e8d15533f16398b0eb7afb40b93749569eb001dea5ad7b2f7e99a4f7d"
   },
   {
     "id": "rsxplus46-shutdown",
@@ -527,7 +527,7 @@
   {
     "id": "rt11503-handlers",
     "title": "RT-11SJ V05.03 installed handler evidence",
-    "text": "In the disposable RT-11SJ V05.03 image tested for M5.11, SHOW DEVICES reported DZ, LP and PC not installed. DIR found LP.SYS, and the installed HELP LOAD described loading a device handler into memory, with background/foreground job types. A handler file existing on disk does not mean it is installed or that a separate browser terminal works. These are observations of this image and its built-in help, not a universal RT-11 configuration or a substitute for a matching full manual.",
+    "text": "In the disposable RT-11SJ V05.03 image tested for M5.11, SHOW DEVICES reported LP and PC not installed. DIR found LP.SYS, and the installed HELP LOAD described loading a device handler into memory, with background/foreground job types. A handler file existing on disk does not mean it is installed or that a separate browser terminal works. These are observations of this image and its built-in help, not a universal RT-11 configuration or a substitute for a matching full manual.",
     "system": "rt11",
     "keywords": "rt11 v05.03 handlers devices lp.sys dz rt11503-handlers",
     "source": "https://github.com/cdaters/pidp11-webdesktop/blob/main/lab/m511/results/rt11-installed-help.json",
@@ -538,6 +538,38 @@
     "coverage": "focused note",
     "question": "Does LP.SYS on disk mean an RT-11 printer driver is installed?",
     "source_sha256": "5ddc4c43ad4840be71048981fb51d5dbe6caf81c11bd75eef6cce0f5ec4a40d8",
-    "note_sha256": "50c773d3e21f69efb6e436786580a33425bfe702da6ce7eb0be04591b4327de4"
+    "note_sha256": "ad8fbd56097ba98f49299869cc1bf4fad2d986d69b5bee69eb13d8faa235f3a0"
+  },
+  {
+    "id": "rt11-multiterminal-scope",
+    "title": "RT-11 multiterminal support versus terminal sessions",
+    "text": "The July 1984 RT-11 System Generation Guide permits multiterminal support in SJ, FB and XM monitors. It supplies programmed I/O for up to 16 terminals using DL11 or DZ11 interfaces; it does not by itself establish independent login shells. Applications must use the supported interfaces. This multiterminal configuration excludes VT11/VS60 graphics support. The same guide identifies DZ.MAC as the Professional-series RX50 diskette handler, not the DZ11 multiplexer driver. This earlier-edition reference is not proof that a particular V05.03 monitor was built with multiterminal support.",
+    "system": "rt11",
+    "keywords": "rt11 rt11-multiterminal-scope terminal serial configuration RT-11 multiterminal support versus terminal sessions",
+    "source": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rt11/v5.1_Jul84/AA-M240B-TC_RT-11_System_Generation_Guide_Jul84.pdf",
+    "organization": "Digital Equipment Corporation",
+    "edition": "July 1984, V5.1-era guide; explicitly earlier than V5.3",
+    "document": "System Generation Guide, AA-M240B-TC",
+    "section": "Printed pp. 1-12 and 1-22; PDF pp. 20 and 30",
+    "coverage": "focused note",
+    "question": "Explain RT-11 multiterminal support versus terminal sessions.",
+    "source_sha256": "f5b8f249e48d02eb651431fb4041a418b73c757399ec1925d3763106b0a97657",
+    "note_sha256": "238b92bd1625a5f243c5531d27cec8d2819e815e7b2faa9545bfa3f9274855c7"
+  },
+  {
+    "id": "rsts70-generated-lines",
+    "title": "RSTS/E V7.0 generated terminal lines",
+    "text": "The May 1979 RSTS/E System Generation Manual distinguishes hardware terminal interfaces from lines generated into the monitor. SYSGEN selects enabled line counts; a DZ11 has eight physical lines. Lines omitted during generation are treated as nonexistent and require regeneration before use. INIT SET can temporarily enable or disable already generated keyboards and modem controls; it cannot supply omitted terminal-driver code. A hardware inventory therefore cannot prove that a generated monitor can serve those lines.",
+    "system": "rsts",
+    "keywords": "rsts rsts70-generated-lines terminal serial configuration RSTS/E V7.0 generated terminal lines",
+    "source": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsts_e/V07/v1b_AA-2669E-TC_sygen_May79.pdf",
+    "organization": "Digital Equipment Corporation",
+    "edition": "RSTS/E V7.0, May 1979",
+    "document": "System Generation Manual, AA-2669E-TC",
+    "section": "Section 4.2.4.1, printed p. 4-7; PDF p. 179",
+    "coverage": "focused note",
+    "question": "Explain RSTS/E V7.0 generated terminal lines.",
+    "source_sha256": "a9d584448053b3aef48fc0077fccf0344afadac00c9905a08747d4e7e03ac5ff",
+    "note_sha256": "b0be7e7e7a7b873e55ee6caee4634ab335b6e620c9c75b3a46e92a622c7e2050"
   }
 ]
