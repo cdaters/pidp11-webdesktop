@@ -1,5 +1,10 @@
 # Changelog
 
+## M5.13 Source Alpha 1 publication — 2026-11-22
+
+- Published the owner-approved source-only experimental pre-release `v0.5.13-source-alpha.1` at `ef643e59e5040adcbf7f7b1286fe3472ff08a00f`, preserving the exact qualified archive and all prior tags.
+- Downloaded the public assets and verified the approved SHA-256, 14,663,932-byte size and matching checksum file. Updated source-alpha onboarding; no application change, binary download or physical deployment. [Publication record](docs/releases/M5.13-publication.md).
+
 ## M5.13 source-alpha preparation — 2026-11-22
 
 - Require service ownership of private control directories; reproduce wrong-owner refusal in ARM64 Linux and concurrent consent publication under race checks.

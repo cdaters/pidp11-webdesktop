@@ -10,6 +10,8 @@ The old computer still does the computing. SIMH runs the historical operating sy
 
 [**Try it locally**](docs/getting-started/source-alpha.md) · [Getting started](docs/getting-started/README.md) · [Gallery](docs/screenshots/README.md) · [Capabilities](docs/capabilities.md) · [Documentation](docs/README.md)
 
+[**M5.13 Source Alpha 1**](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1) is available as a source-only experimental pre-release for local demonstrations and controlled disposable guest labs. Use its named tarball and checksum. It is not an approved physical Pi installer or service deployment. [Publication verification](docs/releases/M5.13-publication.md).
+
 ![Actual Web Desktop with a UNIX V7 terminal, V7 Tektronix plot and completed LP11/PC11 device observations](docs/screenshots/m510/desktop.png)
 
 *Actual Chromium capture from a disposable Mac-hosted Linux lab. V7 supplies the terminal and plot; a separate diskless PDP-11 program supplies the printer and paper-tape bytes. This is not a physical Pi deployment or an operating-system printer-driver demonstration. [Full-size gallery and provenance](docs/screenshots/README.md).*

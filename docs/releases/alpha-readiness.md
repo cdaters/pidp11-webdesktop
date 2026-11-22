@@ -3,8 +3,9 @@
 The current candidate is **source only**, for local demonstration and controlled
 guest labs. Start with [the source-alpha notes](M5.13-source-alpha.md),
 [quick start](../getting-started/source-alpha.md), [review checklist](M5.13-review-checklist.md)
-and [M5.13 findings](../lab/M5.13.md). Owner approval is still required before a
-public release tag or GitHub Release. No public downloadable binary is authorized.
+and [M5.13 findings](../lab/M5.13.md). The owner approved the exact source candidate,
+published as [M5.13 Source Alpha 1](M5.13-publication.md) on November 22, 2026.
+No public downloadable binary is authorized.
 Physical deployment and general Pi installation remain NO-GO.
 
 The following retained ARM64 candidate procedure is a separate optional-service

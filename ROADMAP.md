@@ -4,7 +4,7 @@
 
 [Current work](docs/lab/M5.13.md) closes a private-control ownership gap, qualifies model attribution, reproduces RT-11 with a measured diagnosis, inventories exact RSTS build dependencies, and prepares source-only distribution and review packets. Independent review is still outstanding.
 
-Next gates: owner approval for source-alpha publication; external security/historical review; matched RT-11 diagnostic sources; legitimate RSTS generation and patch volumes; production observer privileges; and separately authorized repaired-panel/memory/readiness testing. No release decision enables Pi deployment or remote panel control.
+The owner-approved [M5.13 Source Alpha 1](docs/releases/M5.13-publication.md) is now published for local demonstrations and controlled disposable guest laboratories. Next gates: external security/historical review; matched RT-11 diagnostic sources; legitimate RSTS generation and patch volumes; production observer privileges; and separately authorized repaired-panel/memory/readiness testing. The source release does not enable Pi deployment or remote panel control.
 
 ## M5.12: supervised identity and bounded alpha scope
 

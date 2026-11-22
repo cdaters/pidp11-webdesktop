@@ -5,27 +5,53 @@ model or remote service. The commands below run in your **Mac development shell*
 compatible Linux/Windows development is possible but is not the recorded M5.13
 clean-checkout environment.
 
-1. Verify Git and Node.js 22.18 or newer with npm:
+1. Verify Node.js 22.18 or newer with npm:
 
    ```sh
-   git --version
    node --version
    npm --version
    ```
 
-2. Clone into a new directory and install the locked development dependencies.
-   This step uses the network; it does not install a system service.
+2. Download **`pidp11-webdesktop-m5.13-source-alpha.1.tar.gz`** and **`SHA256SUMS`**
+   from [M5.13 Source Alpha 1](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1)
+   into a new directory. Use this named, qualified tarball rather than GitHub's
+   automatic “Source code” archives. In a Mac shell opened in that directory,
+   verify its checksum:
 
    ```sh
-   git clone https://github.com/cdaters/pidp11-webdesktop.git
-   cd pidp11-webdesktop
-   git rev-parse HEAD
+   shasum -a 256 -c SHA256SUMS
+   ```
+
+   Expect the tarball name followed by `OK`. Stop on any error. Its expected size
+   is **14,663,932 bytes** and its SHA-256 is
+   `24fb624d4242972410c9f44616c74af6d89383bc7fb7b931b0a2e78cd9788f08`.
+   Inspect the archive before extraction:
+
+   ```sh
+   tar -tzf pidp11-webdesktop-m5.13-source-alpha.1.tar.gz
+   ```
+
+   Expect 908 files beneath `pidp11-webdesktop-m5.13-source-alpha.1/`, without
+   absolute paths or `..` components. Extract only in this new directory, then
+   verify the inner inventory:
+
+   ```sh
+   tar -xzf pidp11-webdesktop-m5.13-source-alpha.1.tar.gz
+   cd pidp11-webdesktop-m5.13-source-alpha.1
+   shasum -a 256 -c SOURCE_SHA256SUMS
+   ```
+
+   Expect every entry to report `OK`; stop on any mismatch. `SOURCE.json` records
+   version `m5.13-source-alpha.1` and source revision
+   `ef643e59e5040adcbf7f7b1286fe3472ff08a00f`. Checksums detect changed bytes;
+   they are not signatures. Install the locked development dependencies:
+
+   ```sh
    npm ci
    ```
 
-   For an exact approved candidate, use its recorded commit rather than assuming
-   that a later `main` has identical behavior. An extracted source archive can
-   skip cloning: verify its checksums and use its `SOURCE.json` identity instead.
+   This step uses the network; it does not install a system service. No Go,
+   container, model or historical guest setup is needed for this demonstration.
 
 3. Start the local preview:
 
@@ -60,11 +86,27 @@ clean-checkout environment.
    host configuration or Pi setting was installed.
 
 7. For removal, preserve any source changes or downloaded listings you want,
-   then move this **specific new clone** to the Trash using Finder. That removes
+   then move this **specific new source directory** to the Trash using Finder. That removes
    its `node_modules` and build output too. Do not remove your original project,
    unrelated checkout or any guest disk. Browser preferences can be cleared through
    that site's browser settings. npm/browser development caches are separate and
    can remain for other projects.
+
+## Prefer a Git checkout?
+
+With Git installed, the equivalent release source can be selected explicitly:
+
+```sh
+git clone https://github.com/cdaters/pidp11-webdesktop.git
+cd pidp11-webdesktop
+git checkout --detach v0.5.13-source-alpha.1
+git rev-parse HEAD
+```
+
+Expect `ef643e59e5040adcbf7f7b1286fe3472ff08a00f`, then run `npm ci` and continue
+at step 3. The archive's added `SOURCE.json` and `SOURCE_SHA256SUMS` are packaging
+metadata, not files in the Git tree. Later documentation commits on `main` do not
+change this release or its tag. [Publication verification](../releases/M5.13-publication.md).
 
 ## Automated checks and optional backend
 

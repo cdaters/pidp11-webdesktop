@@ -1,0 +1,38 @@
+{
+  "releaseURL": "https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1",
+  "releaseID": 454655284,
+  "publishedAt": "2026-11-22T18:25:56Z",
+  "tag": "v0.5.13-source-alpha.1",
+  "sourceRevision": "ef643e59e5040adcbf7f7b1286fe3472ff08a00f",
+  "prerelease": true,
+  "draft": false,
+  "latestStableHTTP": 404,
+  "archive": "pidp11-webdesktop-m5.13-source-alpha.1.tar.gz",
+  "bytes": 14663932,
+  "sha256": "24fb624d4242972410c9f44616c74af6d89383bc7fb7b931b0a2e78cd9788f08",
+  "members": 908,
+  "downloadMatchesApprovedCandidate": true,
+  "checksumFileByteIdentical": true,
+  "assets": [
+    {
+      "name": "pidp11-webdesktop-m5.13-source-alpha.1.tar.gz",
+      "bytes": 14663932,
+      "downloadURL": "https://github.com/cdaters/pidp11-webdesktop/releases/download/v0.5.13-source-alpha.1/pidp11-webdesktop-m5.13-source-alpha.1.tar.gz"
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 112,
+      "downloadURL": "https://github.com/cdaters/pidp11-webdesktop/releases/download/v0.5.13-source-alpha.1/SHA256SUMS"
+    }
+  ],
+  "unauthenticatedDownloadLinks": [
+    {
+      "name": "pidp11-webdesktop-m5.13-source-alpha.1.tar.gz",
+      "publicHTTP": 200
+    },
+    {
+      "name": "SHA256SUMS",
+      "publicHTTP": 200
+    }
+  ]
+}
