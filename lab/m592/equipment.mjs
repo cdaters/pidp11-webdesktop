@@ -90,6 +90,7 @@ for (const [name, engine] of Object.entries({
     await tek.locator("[data-disconnect]").click();
     await tek.getByLabel("Guest terminal personality").selectOption("tek4010");
     await tek.locator("[data-connect]").click();
+    await expect(tek.locator(".guest-heading")).toContainText("READ-ONLY");
     await harness(
       "console",
       "echo '0 0' > /tmp/m592.points; echo '1 1' >> /tmp/m592.points; echo '2 4' >> /tmp/m592.points; echo '3 2' >> /tmp/m592.points; echo '4 5' >> /tmp/m592.points\r",
@@ -215,7 +216,9 @@ for (const [name, engine] of Object.entries({
     await expect(page.locator(".desktop-window:visible")).toHaveCount(5);
     if (name === "chromium" && !completed)
       await page.screenshot({
-        path: "docs/screenshots/m592-equipment-room.png",
+        path:
+          process.env.M592_SCREENSHOT ??
+          "docs/screenshots/m592-equipment-room.png",
       });
     expect(errors).toEqual([]);
     results.push({

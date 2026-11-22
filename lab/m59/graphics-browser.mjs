@@ -92,7 +92,11 @@ for (const [name, engine] of Object.entries({
         .evaluate((el) => {
           el.scrollTop = 0;
         });
-      await page.screenshot({ path: "docs/screenshots/m59-v7-tek.png" });
+      await page.screenshot({
+        path:
+          process.env.M59_GRAPHICS_SCREENSHOT ??
+          "docs/screenshots/m59-v7-tek.png",
+      });
     }
     results.push({
       browser: name,

@@ -29,6 +29,10 @@ export async function expandBSD({
       "SECOND LINE",
     );
     await page.locator("[data-release]").click();
+    // Wait for the server-confirmed release epoch before acquiring from another page.
+    await expect(observer.locator(".guest-status")).toContainText(
+      "acquire keyboard explicitly",
+    );
     await observer.locator("[data-acquire]").click();
     await expect(observer.locator("[data-release]")).toBeEnabled();
     await observer.locator(".guest-xterm textarea").focus();
@@ -49,6 +53,9 @@ export async function expandBSD({
   } finally {
     await observer.close();
   }
+  await expect(page.locator(".guest-status")).toContainText(
+    "acquire keyboard explicitly",
+  );
   await page.locator("[data-acquire]").click();
   await expect(page.locator("[data-release]")).toBeEnabled();
   const numbers = Array.from({ length: 40 }, (_, i) =>

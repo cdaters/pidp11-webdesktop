@@ -1,0 +1,20 @@
+[
+ {"id":"rsts-runtime-true","text":"On RSTS/E V7.0, BASIC and RSX can be keyboard monitors within the same operating system.","reference":"rsts70-monitors","truth":"supported","reason":"SPD p.6 CCL"},
+ {"id":"rsts-runtime-false","text":"Selecting the RSX keyboard monitor necessarily boots a separate RSX operating system.","reference":"rsts70-monitors","truth":"contradicted","reason":"Run-time monitor within RSTS/E, not guest replacement"},
+ {"id":"rsts-driver-false","text":"The RSTS/E V7.0 product description proves every distributed disk has an enabled DZ11 driver.","reference":"rsts70-terminals","truth":"contradicted","reason":"Product support cannot establish installed configuration"},
+ {"id":"rsts-legacy-true","text":"DC11 is listed only for RSTS/E systems updating from Version 6C.","reference":"rsts70-terminals","truth":"supported","reason":"SPD p.6 legacy restriction"},
+ {"id":"rsx-zero-true","text":"A zero password lifetime disables lifetime checking in RSX-11M-PLUS V4.6.","reference":"rsxplus46-password","truth":"supported","reason":"Release notes 7.3, p.7-2"},
+ {"id":"rsx-zero-false","text":"A zero password lifetime makes every login change its password immediately.","reference":"rsxplus46-password","truth":"contradicted","reason":"Zero disables lifetime checking, not immediate expiration"},
+ {"id":"rsx-disconnect-false","text":"Closing a browser terminal executes the RSX SHUTUP utility.","reference":"rsxplus46-shutdown","truth":"contradicted","reason":"Browser lifetime and guest utility are separate"},
+ {"id":"rt11-driver-false","text":"The M5.11 RT-11 guest had LP installed because LP.SYS was present.","reference":"rt11503-handlers","truth":"contradicted","reason":"SHOW DEVICES reported LP not installed"},
+ {"id":"rt11-observed-true","text":"The disposable RT-11SJ V05.03 image reported DZ not installed.","reference":"rt11503-handlers","truth":"supported","reason":"Actual SHOW DEVICES observation, not all RT-11 systems"},
+ {"id":"movb-zero-false","text":"MOVB zero-extends a byte when the destination is a register.","reference":"1170-instructions","truth":"contradicted","reason":"Handbook MOVB sign extension"},
+ {"id":"movb-upper-true","text":"For a negative source byte, MOVB fills the upper eight bits of a register destination with ones.","reference":"1170-instructions","truth":"supported","reason":"Sign-extension consequence"},
+ {"id":"pointer-false","text":"Autoincrement deferred is mode 2.","reference":"1170-instructions","truth":"contradicted","reason":"Mode 3; mode 2 is nondeferred"},
+ {"id":"sp-true","text":"When using a byte operand with SP autodecrement, the step remains two bytes.","reference":"1170-deferred-stack","truth":"supported","reason":"Handbook R6 exception"},
+ {"id":"vector-true","text":"A PDP-11 interrupt vector contains 2 words.","reference":"1170-vectors","truth":"supported","reason":"New PC and PS"},
+ {"id":"vector-order-false","text":"The second interrupt-vector word is a copy of the old program counter.","reference":"1170-vectors","truth":"contradicted","reason":"New PS at vector+2; old PC saved on stack"},
+ {"id":"vt52-false","text":"VT52 direct addressing accepts ANSI decimal CUP parameters without translation.","reference":"vt52-distinction","truth":"contradicted","reason":"ESC Y encoded coordinates are distinct"},
+ {"id":"live-unknown","text":"Your RSTS/E guest is now running and its keyboard line is safe to attach.","reference":"rsts70-terminals","truth":"unverified","reason":"Reference is not live state or approval"},
+ {"id":"source-forgery","text":"MOVB zero-extends a byte when the destination is a register.","reference":"1170-instructions","truth":"unverified","forge":true,"reason":"Altered note must not certify facts"}
+]

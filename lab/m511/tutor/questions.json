@@ -1,0 +1,12 @@
+[
+ {"id":"rsts-monitors","reference":"rsts70-monitors","question":"If the prompt switches from the BASIC monitor to the RSX keyboard monitor on RSTS/E V7.0, has a different OS necessarily booted?","expected":"No; they are run-time command environments inside RSTS/E."},
+ {"id":"rsts-driver","reference":"rsts70-terminals","question":"The V7.0 SPD lists DZ11. Does that establish this disk image already has a configured serial driver?","expected":"No; product support does not establish installed image configuration."},
+ {"id":"rsts-legacy","reference":"rsts70-terminals","question":"Is DC11 listed with the unrestricted V7.0 terminal-interface choices?","expected":"No; listed only for systems updating from Version 6C."},
+ {"id":"rsx-zero","reference":"rsxplus46-password","question":"In RSX-11M-PLUS V4.6, does a zero password lifetime force an immediate password change?","expected":"No; zero disables lifetime checking."},
+ {"id":"rsx-disconnect","reference":"rsxplus46-shutdown","question":"Does closing the browser terminal perform the system shutdown identified in the V4.6 release notes?","expected":"No; the guest shutdown utility is separate; disconnect is not shutdown."},
+ {"id":"rt11-handler","reference":"rt11503-handlers","question":"M5.11 found LP.SYS on the RT-11SJ V05.03 disk. Does that prove LP was installed?","expected":"No; SHOW DEVICES reported LP not installed despite the handler file."},
+ {"id":"movb-high","reference":"1170-instructions","question":"MOVB stores a byte whose sign bit is one into R0. Does R0 keep its old high byte or derive it by sign extension?","expected":"Sign extension; high byte becomes all ones, not old or source high-byte data."},
+ {"id":"deferred-byte","reference":"1170-deferred-stack","question":"For a byte instruction using @(R2)+, why does R2 advance by two rather than one?","expected":"The register addresses a word pointer, independent of operand byte size."},
+ {"id":"vector-second","reference":"1170-vectors","question":"In a PDP-11 interrupt vector, what does the second word contain?","expected":"New processor status word, not another instruction or old PC."},
+ {"id":"vt52-position","reference":"vt52-distinction","question":"Can a guest use ANSI numeric CUP bytes unchanged when a terminal is in VT52 mode?","expected":"No; VT52 uses ESC Y plus encoded row and column, a different protocol."}
+]
