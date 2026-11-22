@@ -8,9 +8,9 @@ A browser workspace for exploring a PDP-11: vintage terminals, vector graphics, 
 
 The old computer still does the computing. SIMH runs the historical operating system; the browser displays its terminal and device output. Oscar’s original launcher, physical panel and conventional console remain independent of the optional desktop.
 
-[**Try it locally**](docs/getting-started/source-alpha.md) · [Getting started](docs/getting-started/README.md) · [Gallery](docs/screenshots/README.md) · [Capabilities](docs/capabilities.md) · [Documentation](docs/README.md)
+[**Try it locally**](docs/getting-started/source-alpha-2.md) · [Getting started](docs/getting-started/README.md) · [Gallery](docs/screenshots/README.md) · [Capabilities](docs/capabilities.md) · [Documentation](docs/README.md)
 
-[**M5.13 Source Alpha 1**](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1) is available as a source-only experimental pre-release for local demonstrations and controlled disposable guest labs. Use its named tarball and checksum. It is not an approved physical Pi installer or service deployment. [Publication verification](docs/releases/M5.13-publication.md).
+[**Source Alpha 2**](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.17-source-alpha.2) is available as a source-only experimental pre-release for local demonstrations and controlled historical-computing laboratories. Use its named tarball and checksum. It is not an approved installation for physical PiDP-11 hardware. [Publication verification](docs/releases/M5.18-publication.md). [Alpha 1](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1) remains unchanged.
 
 ![Actual Web Desktop with a UNIX V7 terminal, V7 Tektronix plot and completed LP11/PC11 device observations](docs/screenshots/m510/desktop.png)
 

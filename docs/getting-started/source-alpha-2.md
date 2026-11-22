@@ -1,15 +1,16 @@
-# Try the Source Alpha 2 candidate locally
+# Try Source Alpha 2 locally
 
-This candidate is for local demonstrations and controlled historical-computing
-laboratories. **It is not a supported PiDP-11 physical-hardware installation.**
-It has not been published as a release. Craig must approve its exact archive and
-release description first. The published [Alpha 1 guide](source-alpha.md) still
-points to that unchanged release.
+[Source Alpha 2](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.17-source-alpha.2)
+is a public experimental source-only pre-release for local demonstrations and
+controlled historical-computing laboratories. **It is not an approved installation
+for physical PiDP-11 hardware.** [Publication verification](../releases/M5.18-publication.md)
+records the exact approved source and downloaded-artifact checks. The
+[Alpha 1 guide](source-alpha.md) still points to that unchanged older release.
 
 The basic demonstration needs Node.js **22.18 or newer** with npm. Go, Docker,
 Python, guest disks, a Pi and an AI model are not required to use it. Use a new
-folder for the supplied `pidp11-webdesktop-m5.17-source-alpha.2.tar.gz` and
-`SHA256SUMS`; do not unpack over an existing project or guest-media directory.
+folder for the [named source archive](https://github.com/cdaters/pidp11-webdesktop/releases/download/v0.5.17-source-alpha.2/pidp11-webdesktop-m5.17-source-alpha.2.tar.gz) and
+[SHA256SUMS](https://github.com/cdaters/pidp11-webdesktop/releases/download/v0.5.17-source-alpha.2/SHA256SUMS); do not unpack over an existing project or guest-media directory.
 
 In a **Mac shell**, from that new folder:
 
@@ -21,10 +22,10 @@ tar -tzf pidp11-webdesktop-m5.17-source-alpha.2.tar.gz
 ```
 
 Stop if the checksum fails. The checksum detects changed bytes; it is not a signed
-identity. Compare it with the separately supplied approved candidate record. The
+identity. Compare it with the [published identity](../releases/M5.18-publication.md). The
 archive listing must contain only ordinary source files under
 `pidp11-webdesktop-m5.17-source-alpha.2/`, no absolute paths, `..` components,
-links, disks or executables. The maintainer's validator checks those properties
+links, guest disks or native executables. The maintainer's validator checks those properties
 before distribution; do not extract an untrusted replacement.
 
 ```sh
@@ -65,3 +66,9 @@ Genuine guests require separate authorized disposable media and the
 beginner setup. See [troubleshooting](alpha-troubleshooting.md) and
 [limitations](../known-limitations.md); report your revision, environment and
 sanitized reproduction through [CONTRIBUTING](../../CONTRIBUTING.md).
+
+The tag points to `38bcfad84dc0b100005542f3aee6752ee147c649`. The archive is
+14,789,290 bytes / 1,026 regular members, with SHA-256
+`7328d7dad3c1790323b67ed29ba2f4e58b64a73c6a188c6b6624979ffbc7c64e`.
+The packaged copy of this guide retains its candidate-era wording; this updated
+main-branch guide records publication without changing the archive or tag.

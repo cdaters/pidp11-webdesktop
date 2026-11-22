@@ -1,8 +1,8 @@
 # Capability and compatibility matrix
 
-Current through **M5.17**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Engineering through **M5.17**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
 
-[M5.17](lab/M5.17.md) qualifies a reproducible [Source Alpha 2 candidate](releases/M5.17-candidate.md) and repeats the recorded guest/device subsets from its extracted source. It adds no production feature and is not a published release.
+[M5.17](lab/M5.17.md) qualifies a reproducible [Source Alpha 2 candidate](releases/M5.17-candidate.md) and repeats the recorded guest/device subsets from its extracted source. M5.18 [published that exact candidate](releases/M5.18-publication.md) as an experimental source-only pre-release; publication adds no production capability.
 
 [M5.16](lab/M5.16.md) repeats the named guest/device subsets and qualifies review tools; it adds no new production feature. Its [security packet](security/M5.16-review.md) is ready for independent review, which remains pending.
 
@@ -76,6 +76,6 @@ Current through **M5.17**; the M5.10 presentation and gallery are preserved. A g
 | Optional static ARM64 service | Laboratory tested; detached, authenticated, memory-limited, disabled by default; not production accepted |
 | Remote front-panel control | Not a production feature; START-release and blocked-RPC safety limits remain |
 | Fresh-card tutorial | Reconstructed from actual successful installation; independent complete replay outstanding |
-| Release availability | Published M5.13 source-only experimental alpha; later development corrections are separate. No stable release or binary download |
+| Release availability | Published Source Alpha 2 includes the qualified M5.14–M5.16 corrections; Alpha 1 remains unchanged. No stable release or binary download |
 
 See [installation paths](getting-started/installation-paths.md), [known limitations](known-limitations.md) and [alpha readiness](releases/alpha-readiness.md). All historical reports retain their original test scope.

@@ -1,7 +1,7 @@
 # What is still experimental
 
-M5.17 supplies a tested [Source Alpha 2 candidate](releases/M5.17-candidate.md),
-not a published release or independent audit. Exact extracted-source tests and
+M5.18 [published the exact Source Alpha 2 candidate](releases/M5.18-publication.md)
+qualified in M5.17. This is an experimental source release, not an independent audit. Exact extracted-source tests and
 fresh guest/device checks passed; one bounded provision and separate-kernel
 memory enforcement passed. The original provisioning incidents and plotting
 timeout remain unresolved. Physical deployment remains NO-GO. See the
@@ -18,7 +18,7 @@ receipt; current clients supply/check one. A mandatory-receipt `/selected-text`
 route is a future discussion proposal. One authorized publisher can replace or
 revoke another page’s selection; another page or provider can retain already
 delivered text. Local receipt/history-reset-event tests do not prove global erasure.
-The published Alpha 1 remains older than M5.14/M5.15 fixes; Alpha 2 is not approved.
+The published Alpha 1 remains older than M5.14/M5.15 fixes; Alpha 2 is published for demos/labs, without physical deployment approval.
 
 M5.15 compared both provisioning executables under a separate Debian ARM64 kernel,
 with 32 successful starts across ext4 and 9p. Neither original exit-139 incident

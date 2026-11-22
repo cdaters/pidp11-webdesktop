@@ -1,5 +1,11 @@
 # Changelog
 
+## M5.18 Source Alpha 2 publication — 2026-11-22
+
+- Published the owner-approved source-only experimental pre-release `v0.5.17-source-alpha.2` at exact source `38bcfad84dc0b100005542f3aee6752ee147c649`.
+- Reverified the unchanged 14,789,290-byte archive, 1,026 members, internal hashes and source identity; public downloads match the approved archive/checksum bytes.
+- Preserved Alpha 1, previous assets, accepted tags and history. No Pi access, binary installer, production-readiness claim or third-party announcement. [Publication verification](docs/releases/M5.18-publication.md).
+
 ## M5.17 Source Alpha 2 candidate — 2026-11-22
 
 - Prepared a reproducible source-only Alpha 2 candidate with exact source identity, complete inventory, safe archive validation and three-engine onboarding from the extracted archive. Publication remains owner-gated; no new tag or release.
