@@ -3,10 +3,44 @@ package terminalservice
 import (
 	"context"
 	"net"
+	"net/http"
+	"net/http/httptest"
+	"strings"
 	"sync"
 	"testing"
 	"time"
 )
+
+func TestMalformedRenewalCannotConsumeOrPublishApproval(t *testing.T) {
+	m, approval, _ := supervised(t)
+	if err := m.Attach(context.Background(), approval); err != nil {
+		t.Fatal(err)
+	}
+	// Isolate decoding from scheduling-dependent expiry, tested separately below.
+	m.mu.Lock()
+	m.lines["guest"].deadline = time.Now().Add(time.Minute)
+	m.mu.Unlock()
+	before := m.Status().Lines[0]
+	handler := m.ControlHandler()
+	for _, body := range []string{
+		`{`, `{"unknown":true}`, `{} {}`, `{"sequence":-1}`,
+		`{"sequence":18446744073709551616}`,
+		`{"instance":"` + strings.Repeat("x", 2048) + `"}`,
+	} {
+		response := httptest.NewRecorder()
+		handler.ServeHTTP(response, httptest.NewRequest("POST", "/renew", strings.NewReader(body)))
+		if response.Code != http.StatusBadRequest {
+			t.Fatalf("malformed renewal: HTTP %d", response.Code)
+		}
+		after := m.Status().Lines[0]
+		if after.Revision != before.Revision || after.Sequence != 0 || after.State != "verifying" || m.List()[0].Connected {
+			t.Fatal("malformed input changed or published authority")
+		}
+	}
+	if err := m.Renew(renewal(m)); err != nil {
+		t.Fatal("malformed input consumed the valid first observation:", err)
+	}
+}
 
 func supervised(t *testing.T) (*Manager, Approval, net.Conn) {
 	t.Helper()
