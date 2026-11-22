@@ -80,3 +80,42 @@ test('configuration refuses plaintext, URL credentials, path discovery and share
   }
   assert.throws(() => createSelectionClient({origin: 'https://adapter.invalid', readToken: 'r'.repeat(32), publicationToken: 'r'.repeat(32)}));
 });
+
+test('publication uses the exact preview snapshot across asynchronous negotiation', async () => {
+  const preview = {...selection};
+  const {client, calls} = fixture({status: () => {
+    preview.text = 'unreviewed replacement';
+    preview.generation = 'different attachment';
+    return Response.json({attachment_confirmed: true, publication_epoch: 'instance:1'});
+  }});
+  await client.publish(preview, {previewConfirmed: true});
+  assert.deepEqual(JSON.parse(calls.at(-1).body).selection, selection);
+});
+
+test('malformed publication is refused locally before any network operation', async () => {
+  for (const value of [null, [], {...selection, text: '\ud800'}, {...selection, endpoint: ''},
+    {...selection, generation: 3}, {...selection, simulator_generation: 's'.repeat(129)},
+    {...selection, viewer_revision: -1}, {...selection, keys: 'CONT'}]) {
+    const {client, calls} = fixture();
+    await assert.rejects(client.publish(value, {previewConfirmed: true}));
+    assert.equal(calls.length, 0);
+  }
+});
+
+test('cancellation observed during a delayed body cannot deliver an excerpt', async () => {
+  const controller = new AbortController();
+  const {client, calls} = fixture({screen: () => new Response(new ReadableStream({
+    start(stream) {
+      setTimeout(() => {
+        controller.abort();
+        // Model/transport may finish after cancellation. The consumer still
+        // checks cancellation before returning the completed private response.
+        stream.enqueue(new TextEncoder().encode(JSON.stringify({...selection,
+          selection_id: receipt, expires_unix_ms: Date.now()+20000})));
+        stream.close();
+      }, 10);
+    },
+  }))});
+  await assert.rejects(client.read(receipt,{signal:controller.signal}));
+  assert.equal(calls.length,2);
+});

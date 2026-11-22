@@ -14,6 +14,29 @@ export function negotiate(value) {
   }
 }
 
+
+// Copy the approved primitive values before the first await. A caller can reuse
+// or edit its preview object while negotiation is in flight; those edits must
+// never change the publication that the user actually reviewed.
+function previewSnapshot(selection) {
+  const allowed = ['endpoint', 'generation', 'simulator_generation', 'viewer_revision', 'text'];
+  if (!selection || Array.isArray(selection) || typeof selection !== 'object'
+      || Object.keys(selection).some(key => !allowed.includes(key))) {
+    throw new Error('Malformed selection preview');
+  }
+  const copy = {endpoint: selection.endpoint, generation: selection.generation,
+    simulator_generation: selection.simulator_generation, text: selection.text};
+  if (selection.viewer_revision !== undefined) copy.viewer_revision = selection.viewer_revision;
+  const boundedString = (value, limit, empty = false) => typeof value === 'string'
+    && value.isWellFormed() && (empty || value.length > 0) && encoder.encode(value).length <= limit;
+  if (!boundedString(copy.text, 4096, true)
+      || !['endpoint', 'generation', 'simulator_generation'].every(key => boundedString(copy[key], 128))
+      || (copy.viewer_revision !== undefined && (!Number.isSafeInteger(copy.viewer_revision) || copy.viewer_revision < 0))) {
+    throw new Error('Malformed or oversized selection preview');
+  }
+  return Object.freeze(copy);
+}
+
 async function boundedJSON(response) {
   const reader = response.body?.getReader();
   if (!reader) throw new Error('Missing adapter response');
@@ -57,8 +80,11 @@ export function createSelectionClient({origin, readToken, publicationToken, fetc
         await response.body?.cancel();
         throw new Error('request refused');
       }
+      bounded.throwIfAborted();
       if (response.status === 204) return response.headers.get('X-Selection-ID');
-      return await boundedJSON(response);
+      const value = await boundedJSON(response);
+      bounded.throwIfAborted();
+      return value;
     } catch {
       // Do not echo transport errors, private response text, URLs or tokens.
       throw new Error('Selection operation failed, expired or cancelled; no retry');
@@ -70,16 +96,17 @@ export function createSelectionClient({origin, readToken, publicationToken, fetc
   return Object.freeze({
     capabilities,
     async publish(selection, {previewConfirmed, signal} = {}) {
-      if (previewConfirmed !== true || typeof selection?.text !== 'string' || encoder.encode(selection.text).length > 4096) {
+      if (previewConfirmed !== true) {
         throw new Error('Exact bounded preview and explicit consent required');
       }
+      const reviewed = previewSnapshot(selection);
       await capabilities(signal);
       const status = await call('status', 'GET', readToken, signal);
       if (status?.attachment_confirmed !== true || typeof status.publication_epoch !== 'string') {
         throw new Error('Current attested attachment required');
       }
       const receipt = await call('selection', 'POST', publicationToken, signal,
-        {selection, consent: true, publication_epoch: status.publication_epoch});
+        {selection: reviewed, consent: true, publication_epoch: status.publication_epoch});
       if (!/^[a-f0-9]{32}$/.test(receipt ?? '')) throw new Error('Missing publication receipt');
       return receipt;
     },
