@@ -1,0 +1,45 @@
+{
+  "injectedFixtureOnly": true,
+  "originalGoFaultReproduction": false,
+  "cases": {
+    "explicit139": {
+      "nativeWaitStatus": 35584,
+      "exited": true,
+      "exitCode": 139,
+      "signal": null,
+      "coreFlag": false,
+      "preExecFailure": null,
+      "deadlineIntervention": false
+    },
+    "signal11": {
+      "nativeWaitStatus": 11,
+      "exited": false,
+      "exitCode": null,
+      "signal": 11,
+      "coreFlag": false,
+      "preExecFailure": null,
+      "deadlineIntervention": false
+    },
+    "timeout": {
+      "nativeWaitStatus": 9,
+      "exited": false,
+      "exitCode": null,
+      "signal": 9,
+      "coreFlag": false,
+      "preExecFailure": null,
+      "deadlineIntervention": true
+    },
+    "permission": {
+      "nativeWaitStatus": 32256,
+      "exited": true,
+      "exitCode": 126,
+      "signal": null,
+      "coreFlag": false,
+      "preExecFailure": {
+        "type": "PermissionError",
+        "errno": 13
+      },
+      "deadlineIntervention": false
+    }
+  }
+}

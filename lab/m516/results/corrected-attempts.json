@@ -1,0 +1,8 @@
+{
+  "missingLabOptIn": "First Linux review refused before running tests; rerun with explicit isolation flag.",
+  "capabilityRestrictedRootTest": "Production owner check refused as intended. Old test mistook EACCES inspecting foreign-owned directory for socket creation. Test now requires owner-specific refusal, restores only its test directory ownership and confirms absence. Same restricted container passes.",
+  "goCache": "An initial TLS invocation returned cached evidence. Qualification uses -count=1 and confirms new multi-caller probe output.",
+  "rsxStartup": "Terminal-ID response arrived after the startup timeout, at the date prompt. Invalid answer retained; inspected prompt, cleared only that input line, entered date once, then waited for boot completion. No guest command or peripheral phase replayed.",
+  "nativeExport": "Initial tar attempted inner-guest /root/m516 in outer container and failed, producing an empty archive. Shell incorrectly continued. Full powered-off VM disk was copied before container removal and retained read-only; read-only debugfs extraction then verified both binary hashes and native configs. Failed archive retained and not treated as evidence.",
+  "relayCleanup": "Initial exact-process check refused because Mac executable basename was Python rather than lowercase python. Case-insensitive basename plus exact two-argument path matched four owned processes; no broad termination."
+}

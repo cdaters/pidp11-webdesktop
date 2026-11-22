@@ -1,0 +1,18 @@
+{
+  "python": "3.13.5",
+  "kernel": "7.2.12-orbstack-00394-gbecdd6130068",
+  "machine": "aarch64",
+  "reviewImageID": "sha256:c0db5670dca8fd0991bf8a2dae2e063933fb8cda4bc0399481c469205f97311a",
+  "base": "debian:trixie-slim@sha256:a72b4433de1cf7d6bae0c4cee74d0547f58601a643b3375f070c51600d63b6b2",
+  "node": "v26.9.0",
+  "go": "go version go1.26.0 darwin/arm64",
+  "physicalPi": false,
+  "separateQEMUKernel": "6.12.118+deb13-arm64",
+  "runtimeReviewNetwork": "none",
+  "runtimeReviewMemoryBytes": 134217728,
+  "runtimeReviewAdditionalSwapBytes": 0,
+  "runtimeReviewCapabilities": [
+    "CHOWN"
+  ],
+  "goRootOwnershipTestsHaveNoDACOverride": true
+}

@@ -1,0 +1,204 @@
+{
+  "separateKernel": true,
+  "qemuTCG": true,
+  "physicalHardware": false,
+  "cases": [
+    {
+      "kernel": "6.12.118+deb13-arm64",
+      "machine": "aarch64",
+      "executableSHA256Before": "ce3d7c9dbf4396931847a7da4a21f7b4d0fa00b3bb30e9b02018cb5eccc46b21",
+      "executableMode": "0o700",
+      "executableBytes": 7995554,
+      "timeoutSeconds": 60,
+      "events": [
+        {
+          "event": "prepared",
+          "unixNS": 1795382887356497968,
+          "monotonicNS": 6707502656
+        },
+        {
+          "event": "forked",
+          "unixNS": 1795382887368636704,
+          "monotonicNS": 6719602608,
+          "pid": 216
+        },
+        {
+          "event": "reaped",
+          "unixNS": 1795382887643155584,
+          "monotonicNS": 6993995440,
+          "childReaped": true
+        }
+      ],
+      "automaticRetry": false,
+      "coreLimitBytes": 0,
+      "outputFileLimitBytes": 1048576,
+      "memoryMax": "100663296",
+      "memorySwapMax": "0",
+      "memoryEventsBefore": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "nativeWaitStatus": 0,
+      "exited": true,
+      "exitCode": 0,
+      "signal": null,
+      "coreFlag": false,
+      "maxRSSKiB": 10804,
+      "userSeconds": 0.11398399999999999,
+      "systemSeconds": 0.074679,
+      "mappingSamples": 5,
+      "preExecFailure": null,
+      "executableSHA256After": "ce3d7c9dbf4396931847a7da4a21f7b4d0fa00b3bb30e9b02018cb5eccc46b21",
+      "memoryEventsAfter": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "version": "original",
+      "filesystem": "native-ext4",
+      "sourceMatches": true
+    },
+    {
+      "kernel": "6.12.118+deb13-arm64",
+      "machine": "aarch64",
+      "executableSHA256Before": "ce3d7c9dbf4396931847a7da4a21f7b4d0fa00b3bb30e9b02018cb5eccc46b21",
+      "executableMode": "0o700",
+      "executableBytes": 7995554,
+      "timeoutSeconds": 60,
+      "events": [
+        {
+          "event": "prepared",
+          "unixNS": 1795382888691176896,
+          "monotonicNS": 8042017216
+        },
+        {
+          "event": "forked",
+          "unixNS": 1795382888698993472,
+          "monotonicNS": 8050103872,
+          "pid": 223
+        },
+        {
+          "event": "reaped",
+          "unixNS": 1795382889351248688,
+          "monotonicNS": 8702107536,
+          "childReaped": true
+        }
+      ],
+      "automaticRetry": false,
+      "coreLimitBytes": 0,
+      "outputFileLimitBytes": 1048576,
+      "memoryMax": "100663296",
+      "memorySwapMax": "0",
+      "memoryEventsBefore": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "nativeWaitStatus": 0,
+      "exited": true,
+      "exitCode": 0,
+      "signal": null,
+      "coreFlag": false,
+      "maxRSSKiB": 10940,
+      "userSeconds": 0.100772,
+      "systemSeconds": 0.201544,
+      "mappingSamples": 8,
+      "preExecFailure": null,
+      "executableSHA256After": "ce3d7c9dbf4396931847a7da4a21f7b4d0fa00b3bb30e9b02018cb5eccc46b21",
+      "memoryEventsAfter": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "version": "original",
+      "filesystem": "shared-9p",
+      "sourceMatches": true
+    },
+    {
+      "kernel": "6.12.118+deb13-arm64",
+      "machine": "aarch64",
+      "executableSHA256Before": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+      "executableMode": "0o700",
+      "executableBytes": 8061090,
+      "timeoutSeconds": 60,
+      "events": [
+        {
+          "event": "prepared",
+          "unixNS": 1795382890275035184,
+          "monotonicNS": 9625879488
+        },
+        {
+          "event": "forked",
+          "unixNS": 1795382890282463344,
+          "monotonicNS": 9633634400,
+          "pid": 230
+        },
+        {
+          "event": "reaped",
+          "unixNS": 1795382890551997600,
+          "monotonicNS": 9902837664,
+          "childReaped": true
+        }
+      ],
+      "automaticRetry": false,
+      "coreLimitBytes": 0,
+      "outputFileLimitBytes": 1048576,
+      "memoryMax": "100663296",
+      "memorySwapMax": "0",
+      "memoryEventsBefore": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "nativeWaitStatus": 0,
+      "exited": true,
+      "exitCode": 0,
+      "signal": null,
+      "coreFlag": false,
+      "maxRSSKiB": 10940,
+      "userSeconds": 0.117697,
+      "systemSeconds": 0.053153,
+      "mappingSamples": 6,
+      "preExecFailure": null,
+      "executableSHA256After": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+      "memoryEventsAfter": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "version": "current",
+      "filesystem": "native-ext4",
+      "sourceMatches": true
+    },
+    {
+      "kernel": "6.12.118+deb13-arm64",
+      "machine": "aarch64",
+      "executableSHA256Before": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+      "executableMode": "0o700",
+      "executableBytes": 8061090,
+      "timeoutSeconds": 60,
+      "events": [
+        {
+          "event": "prepared",
+          "unixNS": 1795382891674606672,
+          "monotonicNS": 11025446112
+        },
+        {
+          "event": "forked",
+          "unixNS": 1795382891680750288,
+          "monotonicNS": 11031767472,
+          "pid": 238
+        },
+        {
+          "event": "reaped",
+          "unixNS": 1795382892405177120,
+          "monotonicNS": 11756018480,
+          "childReaped": true
+        }
+      ],
+      "automaticRetry": false,
+      "coreLimitBytes": 0,
+      "outputFileLimitBytes": 1048576,
+      "memoryMax": "100663296",
+      "memorySwapMax": "0",
+      "memoryEventsBefore": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "nativeWaitStatus": 0,
+      "exited": true,
+      "exitCode": 0,
+      "signal": null,
+      "coreFlag": false,
+      "maxRSSKiB": 10940,
+      "userSeconds": 0.090725,
+      "systemSeconds": 0.196571,
+      "mappingSamples": 8,
+      "preExecFailure": null,
+      "executableSHA256After": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+      "memoryEventsAfter": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "version": "current",
+      "filesystem": "shared-9p",
+      "sourceMatches": true
+    }
+  ],
+  "original139Reproduced": false,
+  "tracedOriginalProvisionExit": 0,
+  "tracerWaitStatusBelongsToTracer": true,
+  "coreDumpProduced": false,
+  "guestReadonlyRemountAndPoweroffVerified": true
+}

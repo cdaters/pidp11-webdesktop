@@ -1,0 +1,11 @@
+{
+  "browser": "Chromium",
+  "terminalHELP": true,
+  "terminalExplicitlyFixture": true,
+  "samplePrinter": true,
+  "exactOfflineCalculation": true,
+  "outsideOriginRequests": false,
+  "pageErrors": [],
+  "genuineGuest": false,
+  "realModel": false
+}

@@ -1,0 +1,32 @@
+{
+  "reviewSourceRevision": "87bc750543154f65489f91413ce33ceda0b6f6e5",
+  "cleanCloneRevision": "9dd04fd38ce3083b4eb5cf16377cf225f55d9519",
+  "goVet": true,
+  "fullUncachedGoRace": true,
+  "typescript": true,
+  "frontendUnits": 102,
+  "transportCases": 1,
+  "independentClientCases": 9,
+  "optionalModuleCases": 6,
+  "diagnosticHelperCases": 2,
+  "reviewInvariants": 21,
+  "namedGoTests": 47,
+  "realUncachedGoNodeTLS": true,
+  "realLinuxObserverCases": 4,
+  "realLinuxOwnershipCases": 3,
+  "selectionUIFixtureEngines": 3,
+  "browser": {
+    "startTime": "2026-11-22T21:36:51.058Z",
+    "duration": 104825.57400000001,
+    "expected": 114,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "staticRuntimeSHA256": "27e8972ce8dd35e808564444ae65ab054d21267cfbdf72b0dcc8e132e01a9f90",
+  "cleanCloneRuntimeMatches": true,
+  "newProductionBehavior": false,
+  "newRuntimeDependencies": false,
+  "newFullSystemdInstallationCampaign": false,
+  "freshRealModelInference": false
+}

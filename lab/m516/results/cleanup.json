@@ -1,0 +1,11 @@
+{
+  "noPhysicalPiAccess": true,
+  "ownedGuestsSafelyStopped": true,
+  "originalMediaUnchanged": true,
+  "ownedContainersRemoved": true,
+  "allPreexistingContainerIdentitiesPreserved": true,
+  "ownedRelaysAndPreviewsStopped": true,
+  "workingMediaRawEvidenceAndDiagnosticDiskRetainedPrivately": true,
+  "reviewToolImageRetainedLocally": true,
+  "newPermanentServices": false
+}
