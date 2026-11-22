@@ -18,6 +18,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"time"
 
@@ -42,7 +43,7 @@ func provision(args []string) error {
 	}
 	u, err := url.Parse(*origin)
 	if err != nil {
-		return err
+		return errors.New("invalid HTTPS origin; use an HTTPS hostname and matching unprivileged port")
 	}
 	if _, err = access.NewSecure(*origin, nil); err != nil {
 		return err
@@ -92,23 +93,76 @@ func provision(args []string) error {
 	if err != nil {
 		return err
 	}
-	if err = os.Mkdir(*directory, 0700); err != nil {
+	if err = writeProvisionFiles(*directory, files, writePrivateFile); err != nil {
 		return err
-	}
-	for name, data := range files {
-		out, e := os.OpenFile(filepath.Join(*directory, name), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
-		if e != nil {
-			return e
-		}
-		_, e = out.Write(data)
-		closeErr := out.Close()
-		if e != nil {
-			return e
-		}
-		if closeErr != nil {
-			return closeErr
-		}
 	}
 	fmt.Printf("Created private configuration. No guest contacted. Certificate SHA-256: %x\n", sha256.Sum256(der))
 	return nil
+}
+
+// writeProvisionFiles commits config.json last. On a handled write failure it
+// removes only files created by this invocation, through an anchored directory.
+// A killed process or host crash can still leave a private incomplete directory;
+// provisioning never overwrites that evidence or automatically retries it.
+func writeProvisionFiles(directory string, files map[string][]byte, write func(*os.File, []byte) error) (result error) {
+	if err := os.Mkdir(directory, 0700); err != nil {
+		return fmt.Errorf("create new private configuration directory (existing material is never overwritten): %w", err)
+	}
+	root, err := os.OpenRoot(directory)
+	if err != nil {
+		return fmt.Errorf("open newly created private directory; inspect it before retrying: %w", err)
+	}
+	defer root.Close()
+	identity, err := root.Stat(".")
+	if err != nil {
+		return err
+	}
+	created := []string{}
+	defer func() {
+		if result == nil {
+			return
+		}
+		for _, name := range created {
+			if err := root.Remove(name); err != nil {
+				result = errors.Join(result, fmt.Errorf("partial configuration cleanup failed; retain and inspect directory: %w", err))
+			}
+		}
+		current, err := os.Lstat(directory)
+		if err != nil || !os.SameFile(identity, current) {
+			result = errors.Join(result, errors.New("configuration directory identity changed; manual inspection required"))
+			return
+		}
+		// Remove only an empty directory; never recursively remove unknown data.
+		if err := os.Remove(directory); err != nil {
+			result = errors.Join(result, fmt.Errorf("incomplete directory retained for inspection: %w", err))
+		}
+	}()
+	names := make([]string, 0, len(files))
+	for name := range files {
+		if name != "config.json" {
+			names = append(names, name)
+		}
+	}
+	sort.Strings(names)
+	names = append(names, "config.json")
+	for _, name := range names {
+		out, err := root.OpenFile(name, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
+		if err != nil {
+			return fmt.Errorf("create private %s: %w", name, err)
+		}
+		created = append(created, name)
+		writeErr := write(out, files[name])
+		closeErr := out.Close()
+		if err := errors.Join(writeErr, closeErr); err != nil {
+			return fmt.Errorf("write private %s; provisioning incomplete: %w", name, err)
+		}
+	}
+	return nil
+}
+
+func writePrivateFile(file *os.File, data []byte) error {
+	if _, err := file.Write(data); err != nil {
+		return err
+	}
+	return file.Sync()
 }

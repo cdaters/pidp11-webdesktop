@@ -79,7 +79,9 @@ func Load(path string) (Config, *access.Gate, tls.Certificate, error) {
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
 	if err = decoder.Decode(&c); err != nil {
-		return c, nil, cert, err
+		// Decoder errors can quote an unknown field supplied in private JSON.
+		// Do not echo arbitrary input into a terminal or service journal.
+		return c, nil, cert, errors.New("invalid configuration JSON: check field names, value types and syntax")
 	}
 	var extra any
 	if decoder.Decode(&extra) != io.EOF {

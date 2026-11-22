@@ -3,6 +3,7 @@ package terminalservice
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -19,7 +20,7 @@ import (
 func ControlListener(path string) (net.Listener, error) {
 	info, err := os.Lstat(filepath.Dir(path))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("control directory unavailable; create a private directory owned by the service account: %w", err)
 	}
 	owner, ok := info.Sys().(*syscall.Stat_t)
 	if !info.IsDir() || info.Mode().Perm()&0077 != 0 || !ok || int(owner.Uid) != os.Geteuid() {
@@ -27,7 +28,7 @@ func ControlListener(path string) (net.Listener, error) {
 	}
 	listener, err := net.Listen("unix", path)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("control socket unavailable; existing entries are preserved; verify the companion is stopped before inspecting a stale socket: %w", err)
 	}
 	if err = os.Chmod(path, 0600); err != nil {
 		listener.Close()

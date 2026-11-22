@@ -119,6 +119,40 @@ func TestListenerBoundsAndReleases(t *testing.T) {
 	}
 }
 
+func TestStaleControlSocketRequiresExplicitStoppedRecovery(t *testing.T) {
+	dir, err := os.MkdirTemp("/tmp", "m514-socket-")
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() { os.RemoveAll(dir) })
+	path := filepath.Join(dir, "control.sock")
+	listener, err := ControlListener(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	listener.(*net.UnixListener).SetUnlinkOnClose(false)
+	listener.Close() // Retain the same artifact left by forced process termination.
+	before, err := os.Lstat(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := ControlListener(path); err == nil || !strings.Contains(err.Error(), "verify the companion is stopped") {
+		t.Fatal("stale socket silently replaced or no recovery guidance", err)
+	}
+	after, err := os.Lstat(path)
+	if err != nil || !os.SameFile(before, after) {
+		t.Fatal("stale evidence changed")
+	}
+	if err := os.Remove(path); err != nil {
+		t.Fatal(err)
+	}
+	replacement, err := ControlListener(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	replacement.Close()
+}
+
 // Root can bind inside another account's 0700 directory. Permissions alone do
 // not protect the control socket from that directory owner replacing its path.
 func TestControlRejectsForeignOwner(t *testing.T) {
