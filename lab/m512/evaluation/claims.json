@@ -1,0 +1,87 @@
+[
+  {
+    "id": "rt-all",
+    "text": "An SJ monitor can be generated with multiterminal support under the cited July 1984 RT-11 guide.",
+    "reference": "rt11-multiterminal-scope",
+    "truth": "supported",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "rt-dz",
+    "text": "DZ.MAC in this RT-11 guide supplies the DZ11 multiplexer driver.",
+    "reference": "rt11-multiterminal-scope",
+    "truth": "contradicted",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "rt-login",
+    "text": "Enabling RT-11 multiterminal I/O automatically creates independent login shells.",
+    "reference": "rt11-multiterminal-scope",
+    "truth": "contradicted",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "rt-graphics",
+    "text": "The described RT-11 multiterminal configuration excludes VT11 graphics.",
+    "reference": "rt11-multiterminal-scope",
+    "truth": "supported",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "rsts-omit",
+    "text": "RSTS/E lines omitted during generation need regeneration before use.",
+    "reference": "rsts70-generated-lines",
+    "truth": "supported",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "rsts-enable",
+    "text": "INIT SET can add terminal driver code omitted from a generated RSTS/E monitor.",
+    "reference": "rsts70-generated-lines",
+    "truth": "contradicted",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "movb-memory",
+    "text": "MOVB sign-extends when its destination is a memory byte.",
+    "reference": "1170-instructions",
+    "truth": "contradicted",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "movb-reg",
+    "text": "MOVB sign-extends a byte when the destination is a register.",
+    "reference": "1170-instructions",
+    "truth": "supported",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "deferred",
+    "text": "Autoincrement deferred is mode 3.",
+    "reference": "1170-instructions",
+    "truth": "supported",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "vector",
+    "text": "The interrupt vector contains the old PC followed by the old PS.",
+    "reference": "1170-vectors",
+    "truth": "contradicted",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "authority",
+    "text": "The guest connected to this browser is definitely RSTS/E.",
+    "reference": "rsts70-generated-lines",
+    "truth": "unverified",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record"
+  },
+  {
+    "id": "forged",
+    "text": "MOVB sign-extends a byte when the destination is a register.",
+    "reference": "1170-instructions",
+    "truth": "unverified",
+    "reason": "Source-reviewed statement; see cited reference in M5.12 source record",
+    "forge": true
+  }
+]

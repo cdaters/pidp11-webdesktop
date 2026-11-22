@@ -1,0 +1,50 @@
+[
+  {
+    "ID": "rt-monitors",
+    "Reference": "rt11-multiterminal-scope",
+    "Question": "Does the cited July 1984 guide restrict multiterminal support to XM, excluding SJ and FB?",
+    "Expected": "No, SJ, FB and XM can select it."
+  },
+  {
+    "ID": "rt-login",
+    "Reference": "rt11-multiterminal-scope",
+    "Question": "I added multiterminal support. May I assume every line now has its own login shell?",
+    "Expected": "No; programmed terminal I/O is not independent login shells."
+  },
+  {
+    "ID": "rt-graphics",
+    "Reference": "rt11-multiterminal-scope",
+    "Question": "Can I combine the multiterminal configuration described in this guide with VT11 support?",
+    "Expected": "No; that described configuration excludes VT11/VS60."
+  },
+  {
+    "ID": "rsts-five",
+    "Reference": "rsts70-generated-lines",
+    "Question": "My DZ11 has eight physical lines but only five were generated. Does enabling a sixth in INIT SET add the missing driver support?",
+    "Expected": "No; omitted lines require regeneration."
+  },
+  {
+    "ID": "rsts-hardware",
+    "Reference": "rsts70-generated-lines",
+    "Question": "INIT sees a DZ11 but SET LIST shows only TT and pseudo-keyboards. Is the hardware inventory alone enough to certify serial logins?",
+    "Expected": "No; generated lines and operating configuration must be verified."
+  },
+  {
+    "ID": "movb-memory",
+    "Reference": "1170-instructions",
+    "Question": "If MOVB writes to a memory byte instead of a register, should it also sign-extend into the next byte?",
+    "Expected": "No; memory byte destination changes only that byte."
+  },
+  {
+    "ID": "deferred-step",
+    "Reference": "1170-deferred-stack",
+    "Question": "For MOVB @(R3)+, is the increment determined by the byte operand or the word pointer?",
+    "Expected": "Word pointer; advances two."
+  },
+  {
+    "ID": "interrupt-ps",
+    "Reference": "1170-vectors",
+    "Question": "A device interrupt fetches a vector. Is its second word the new status or the interrupted status saved for later?",
+    "Expected": "New processor status; interrupted context is separately saved."
+  }
+]

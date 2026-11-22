@@ -1,0 +1,59 @@
+{
+  "guest": "UNIX V7",
+  "host": "Mac-hosted ARM64 Linux, network-none Docker",
+  "containerMemoryMaxBytes": 100663296,
+  "scope": "whole container includes SIMH, bridge and supervisor",
+  "commands": 121,
+  "handoffs": 24,
+  "refreshes": 10,
+  "explicitReauthentications": 3,
+  "elapsedSeconds": 1812.997,
+  "pass": true,
+  "resources": {
+    "rss_kib": {
+      "min": 10676,
+      "max": 14768,
+      "first": 14332,
+      "last": 13912
+    },
+    "fds": {
+      "min": 11,
+      "max": 15,
+      "first": 13,
+      "last": 12
+    },
+    "goroutines": {
+      "min": 14,
+      "max": 19,
+      "first": 17,
+      "last": 14
+    },
+    "heap_bytes": {
+      "min": 1463088,
+      "max": 3504632,
+      "first": 2344216,
+      "last": 1915928
+    },
+    "cgroup_bytes": {
+      "min": 71266304,
+      "max": 98832384,
+      "first": 98832384,
+      "last": 79872000
+    }
+  },
+  "cpuSeconds": 9.510000000000002,
+  "cpuPercentOneCore": 0.5245458210907133,
+  "allocatedBytes": 315266016,
+  "gcCycles": 141,
+  "lastCgroupEvents": "low 0\nhigh 0\nmax 53\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n",
+  "echoMs": {
+    "min": 361.40795799996704,
+    "max": 884.0287080002017,
+    "median": 872.5806660000235,
+    "p95": 882.6505829999223
+  },
+  "sampledViewerCounts": [
+    2,
+    3
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "platform": "Disposable ARM64 Debian Trixie, 1 GiB, two-core CPU-time quota",
+  "originalGuest": "UNIX V7 original SIMH independent process",
+  "preflight": "Refused absent Oscar launcher/panel executables; separate lab simulator is not a full installation",
+  "phases": [
+    "old-browser",
+    "new-browser",
+    "rollback-browser"
+  ],
+  "restartDetached": true,
+  "metrics": "MemoryCurrent=3395584\nMemoryPeak=3657728\nCPUUsageNSec=31078000\nTasksCurrent=7\nMemoryMax=100663296\nMemorySwapMax=0\n"
+}

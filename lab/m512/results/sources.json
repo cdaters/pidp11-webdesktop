@@ -1,0 +1,24 @@
+[
+  {
+    "file": "rt11-v51-sysgen.pdf",
+    "url": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rt11/v5.1_Jul84/AA-M240B-TC_RT-11_System_Generation_Guide_Jul84.pdf",
+    "bytes": 4489951,
+    "sha256": "f5b8f249e48d02eb651431fb4041a418b73c757399ec1925d3763106b0a97657",
+    "reviewed_pages": [
+      "PDF 20 / printed 1-12",
+      "PDF 30 / printed 1-22",
+      "PDF 46 / printed 1-38",
+      "PDF 55 / printed 2-1"
+    ],
+    "scope": "Earlier V5.1-era guide, not a release-matched V5.3 manual"
+  },
+  {
+    "url": "https://archive.decromancer.ca/bitsavers.org/pdf/dec/pdp11/rsts_e/V07/v1b_AA-2669E-TC_sygen_May79.pdf",
+    "sha256": "a9d584448053b3aef48fc0077fccf0344afadac00c9905a08747d4e7e03ac5ff",
+    "reviewed_pages": [
+      "PDF 173 / printed 4-1",
+      "PDF 179 / printed 4-7"
+    ],
+    "scope": "Release-matched RSTS/E V7 generation and omitted lines"
+  }
+]

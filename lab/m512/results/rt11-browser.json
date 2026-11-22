@@ -1,0 +1,10 @@
+{
+  "guest": "RT-11FB (S) V05.03",
+  "monitor": "locally generated M512FB",
+  "application": "original MTTEST",
+  "independentLoginShell": false,
+  "echoAndApplicationRetype": true,
+  "reconnectReadOnly": true,
+  "fullDiagnosticPass": false,
+  "pass": true
+}

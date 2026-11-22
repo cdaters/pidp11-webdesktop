@@ -1,0 +1,100 @@
+{
+  "goVet": {
+    "privateLog": "vet-publish.log",
+    "pass": true
+  },
+  "goRace": {
+    "privateLog": "race-publish.log",
+    "pass": true
+  },
+  "typescript": {
+    "privateLog": "typescript.log",
+    "bytes": 50,
+    "tail": [
+      "",
+      "> pidp11-web-desktop@0.5.0 check",
+      "> tsc --noEmit",
+      ""
+    ]
+  },
+  "frontend": {
+    "privateLog": "frontend.log",
+    "bytes": 7746,
+    "tail": [
+      "\u2139 tests 100",
+      "\u2139 suites 0",
+      "\u2139 pass 100",
+      "\u2139 fail 0",
+      "\u2139 cancelled 0",
+      "\u2139 skipped 0",
+      "\u2139 todo 0",
+      "\u2139 duration_ms 1099.373167"
+    ]
+  },
+  "transport": {
+    "privateLog": "transport-tests.log",
+    "bytes": 298,
+    "tail": [
+      "\u2139 tests 1",
+      "\u2139 suites 0",
+      "\u2139 pass 1",
+      "\u2139 fail 0",
+      "\u2139 cancelled 0",
+      "\u2139 skipped 0",
+      "\u2139 todo 0",
+      "\u2139 duration_ms 394.579916"
+    ]
+  },
+  "replicant": {
+    "privateLog": "replicant-expanded.log",
+    "bytes": 651,
+    "tail": [
+      "\u2139 tests 5",
+      "\u2139 suites 0",
+      "\u2139 pass 5",
+      "\u2139 fail 0",
+      "\u2139 cancelled 0",
+      "\u2139 skipped 0",
+      "\u2139 todo 0",
+      "\u2139 duration_ms 123.60725"
+    ]
+  },
+  "browserFixtures": {
+    "privateLog": "browser-fixtures.log",
+    "bytes": 16907,
+    "tail": [
+      "  \u2713  109 [webkit] \u203a browser-tests/terminal-profiles.spec.ts:23:1 \u203a VT100 cursor, margins, DEC graphics, reverse video, CR/LF, keypad and fixed geometry (686ms)",
+      "  \u2713  110 [webkit] \u203a browser-tests/terminal-profiles.spec.ts:55:1 \u203a VT52 text parser, split position, edge behavior, ID ownership and fresh personality (680ms)",
+      "  \u2713  111 [webkit] \u203a browser-tests/terminal-profiles.spec.ts:76:1 \u203a 4010 fixture renders whole/split identically and erases without a connection (451ms)",
+      "  \u2713  112 [webkit] \u203a browser-tests/terminal-profiles.spec.ts:88:1 \u203a VT220 replies require keyboard ownership; C1 and editing keys are distinct (598ms)",
+      "  \u2713  113 [webkit] \u203a browser-tests/terminal-profiles.spec.ts:104:1 \u203a Teletype prints uppercase paper, exports it, and multiple windows stay independent (552ms)",
+      "  \u2713  114 [webkit] \u203a browser-tests/terminal-profiles.spec.ts:119:1 \u203a 4010 guest transport, GIN ownership, hardcopy and reconnect reset (718ms)",
+      "",
+      "  114 passed (1.4m)"
+    ]
+  },
+  "linuxObserver": {
+    "privateLog": "linux-observer-final.log",
+    "bytes": 102,
+    "tail": [
+      "....",
+      "----------------------------------------------------------------------",
+      "Ran 4 tests in 0.068s",
+      "",
+      "OK"
+    ]
+  },
+  "scope": "Mac development checks; Linux observer tests in owned network-none ARM64 lab. No physical Pi.",
+  "counts": {
+    "frontend": 95,
+    "transport": 1,
+    "modifiedApp": 5,
+    "threeEngineFixtures": 114,
+    "linuxObserver": 4
+  },
+  "malformedRenewal": {
+    "cases": 6,
+    "authorityUnchanged": true,
+    "privateLog": "malformed-renewal.log"
+  }
+}

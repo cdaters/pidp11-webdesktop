@@ -1,0 +1,8 @@
+{
+  "supervisionLossRetiredAttachment": true,
+  "bothConventionalPathsContinued": true,
+  "oldBridgeActuallyStopped": true,
+  "newFinalRuntimeDetached": true,
+  "nextPhase": "explicit manual guest approval and original diskless devices",
+  "nextWholeContainerLimitBytes": 134217728
+}

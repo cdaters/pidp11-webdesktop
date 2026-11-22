@@ -1,0 +1,21 @@
+{
+  "genuineGuest": true,
+  "realModel": true,
+  "osIdentity": "unknown",
+  "survivingStreamReplacementDetected": false,
+  "modelStatus": 200,
+  "explicitRevocation": true,
+  "crossPageSubstitutionRefused": true,
+  "expirationRefused": true,
+  "sourceDisconnectRefused": true,
+  "sameCountViewReplacementRefused": true,
+  "malformedChatRefused": true,
+  "independentConsole": true,
+  "pass": true,
+  "gatewayStoppedThenRestarted": {
+    "failureHTTP": 502,
+    "newExplicitRequestHTTP": 200,
+    "fallback": false,
+    "includedSelectionOnRestart": false
+  }
+}

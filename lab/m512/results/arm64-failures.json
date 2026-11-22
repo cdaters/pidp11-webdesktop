@@ -1,0 +1,7 @@
+{
+  "observerDelayedBeyondLeaseRefused": true,
+  "resumedObserverCannotRevive": true,
+  "bridgeSIGKILLNoAutomaticRestart": true,
+  "explicitRestartDetachedNewInstance": true,
+  "sameOriginalSIMHProcess": true
+}

@@ -1,0 +1,35 @@
+{
+  "guest": "RSTS/E V7.0-07",
+  "originalConsole": true,
+  "basicArithmeticResult": 42,
+  "INIT_DZ_CSR_octal": "160100",
+  "INIT_DZ_vector_octal": "300",
+  "keyboards": [
+    "KB0 TT",
+    "KB1 PK0",
+    "KB2 PK1",
+    "KB3 PK2",
+    "KB4 PK3"
+  ],
+  "suppliedConfig": {
+    "DZ11": 0,
+    "DJ11": 0,
+    "DH11": 0,
+    "MULTTY": 1
+  },
+  "present": [
+    "SYSGEN.SAV",
+    "SYSBAT.SAV",
+    "historical CREATE.LOG"
+  ],
+  "CREATE_SAV_found": false,
+  "completeRegenerationInputsFound": false,
+  "rawProbe": {
+    "listenerConnected": true,
+    "guestResponseBytes": 0,
+    "seconds": 3,
+    "browserAccepted": false
+  },
+  "browserAccepted": false,
+  "guestSHUTUPThenSIMHQuit": true
+}

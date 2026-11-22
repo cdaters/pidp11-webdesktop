@@ -1,0 +1,12 @@
+{
+  "guestBasesUnchanged": true,
+  "V7SyncedAndSIMHQuit": true,
+  "BSDGuestSyncAndHALT": true,
+  "RT11ApplicationExitedAndIdleMonitorBeforeQuit": true,
+  "RSTSSafeShutdown": true,
+  "RSXSHUTUPCompleteAndHALT": true,
+  "RSXShutdownDismountTimeoutRecorded": true,
+  "deviceProducerExitedAfterVerifiedCompletion": true,
+  "workingMediaAndRawEvidenceRetainedPrivately": true,
+  "PiAccess": false
+}

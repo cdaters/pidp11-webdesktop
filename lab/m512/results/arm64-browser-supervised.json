@@ -1,0 +1,13 @@
+{
+  "phase": "supervised",
+  "genuineV7": true,
+  "systemd": true,
+  "echoRoundtripMs": [
+    877.6232909999999,
+    873.8478329999998,
+    875.1779590000001,
+    879.2307920000003,
+    876.3478750000004
+  ],
+  "disconnectThenRefreshNoKeyboard": true
+}

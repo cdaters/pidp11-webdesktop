@@ -1,0 +1,13 @@
+{
+  "oldBinaryRefusesNewConfig": true,
+  "rollbackWithPriorReviewedConfigDetached": true,
+  "newSupervisionConfigRestoredDetached": true,
+  "confinement": "Restart=no\nMemoryMax=100663296\nMemorySwapMax=0\nPrivateDevices=yes\nProtectHome=yes\nProtectSystem=strict\nNoNewPrivileges=yes\n",
+  "uninstallLog": "Companion, known private inputs, and dedicated account removed. No guest or original installation paths touched.\n",
+  "completeManagedUninstall": true,
+  "bothConventionalPathsSurvivedUninstall": true,
+  "memoryControllerDisabledRefusedBeforeHTTPS": true,
+  "guestSyncedAndOriginalSimulatorQuit": true,
+  "immutableOriginalHashesUnchanged": true,
+  "disposableVMRemovedAfterEvidenceExport": true
+}

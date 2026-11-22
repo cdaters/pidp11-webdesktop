@@ -1,0 +1,37 @@
+{
+  "implementationRevision": "7bdc8c11fc35a390823b2df73d05f96345364f65",
+  "runtimeSHA256": "31401adb97cacd8f2699d6860028fbd030317fac56eb1411c8af4f3e7f62e469",
+  "runtimeBytes": 7995554,
+  "buildFlags": "CGO_ENABLED=0 GOOS=linux GOARCH=arm64; trimpath; -s -w; GOFLAGS=-buildvcs=false",
+  "preflight": "Refused absent Oscar programs; isolated package rehearsal separately authorized",
+  "finalBrowser": {
+    "phase": "final-supervised",
+    "genuineV7": true,
+    "systemd": true,
+    "echoRoundtripMs": [
+      875.00225,
+      874.8403750000002,
+      872.7761249999999,
+      869.3163329999998,
+      875.4245000000001
+    ],
+    "disconnectThenRefreshNoKeyboard": true
+  },
+  "memoryMaxBytes": 100663296,
+  "memorySwapMaxBytes": 0,
+  "vmMemoryMaxBytes": 1073741824,
+  "cpuTimeQuotaCores": 2,
+  "physicalPiAccess": false,
+  "olderRollbackBinarySHA256": "13d440b0eb907e13b900f8aa31f92bd2570687fa4c8de1f3b33dbef61b978def",
+  "testBuilds": {
+    "package-soak": "a1448d91672c74e4c5fb68c0b1fcc1b9a77294b63834578078a1381a0e49e0d3",
+    "package-qualified": "909f81df0893fb0f678ace4d3e7e974364e2637b197c8a6294ca015954e57c34",
+    "package-final": "31401adb97cacd8f2699d6860028fbd030317fac56eb1411c8af4f3e7f62e469"
+  },
+  "testBuildScope": {
+    "package-soak": "V7 supervised endurance workload; before initial-verification grace and final reference-note changes",
+    "package-qualified": "BSD, RSX, RT-11, first supervised ARM64 browser; same final runtime logic, earlier note wording",
+    "package-final": "Final protected ARM64 supervised browser, rollback/refusal/uninstall; original three-phase LP11/PC11 and V7 Tek workflow in three engines"
+  },
+  "staticARM64": true
+}

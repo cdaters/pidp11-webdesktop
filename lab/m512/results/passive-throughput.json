@@ -1,0 +1,10 @@
+{
+  "genuineGuest": true,
+  "inputBytes": 0,
+  "deliveredOutputBytes": 7259,
+  "outputFrames": 1818,
+  "elapsedSeconds": 93.506,
+  "rendererStallSeconds": 3,
+  "recoveredReadOnly": true,
+  "scope": "sampled workload throughput, not link capacity or backpressure saturation"
+}

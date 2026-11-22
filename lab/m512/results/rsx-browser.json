@@ -1,0 +1,13 @@
+{
+  "guest": "RSX-11M-PLUS V4.6 BL87",
+  "browser": "Chromium",
+  "line": "DZ11",
+  "browserGuestVerified": true,
+  "fullscreenVerified": false,
+  "commands": [
+    "HELLO",
+    "HELP",
+    "PIP /LI"
+  ],
+  "readOnlyAtCapture": true
+}
