@@ -1,5 +1,9 @@
 # What is still experimental
 
+M5.14 fixes handled partial-provisioning cleanup and adds an independent selection-contract prototype. The two original ARM64 exit-139 incidents did not recur in controlled tests and remain unexplained. An initial V7 equipment/plotting timeout also remains unexplained despite successful follow-up checks. Abrupt process or host failure can still leave incomplete provisioning; cleanup is not power-loss atomic. These development fixes are not in the unchanged M5.13 source archive. [M5.14 evidence](lab/M5.14.md) and [troubleshooting](getting-started/alpha-troubleshooting.md).
+
+The [selection interface](technical/selection-contract-draft.md) is a proposal, not upstream agreement. Its new client is fixture-qualified; prior genuine modified-app sharing remains M5.12 evidence. Revocation cannot recall text already submitted to a model, and process/socket identity cannot establish OS identity. Independent security acceptance remains outstanding.
+
 M5.13 prepares a source-only alpha and external review packets. It does not supply independent security approval. RT-11’s diagnostic mismatch is explained but still present; no original diagnostic was patched. RSTS needs the generation/patch volumes named by its retained batch. Model quotation formatting is conservatively refused and every delivered explanation labels its source status, but factual claim coverage remains weak. [Current report](lab/M5.13.md).
 
 M5.12 adds a supervised Linux laboratory subset, not verified OS discovery. It

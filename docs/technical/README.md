@@ -4,6 +4,8 @@ The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets an
 
 Latest optional tutor milestone: [Phase D results and screenshots](../lab/M5.9.3-D.md), [read-only app setup](../../integrations/hacker-replicant/README.md), and [reproduction](../../lab/m593d/README.md). Live-guest and physical acceptance remain separate.
 
+Latest stabilization: [M5.14 findings](../lab/M5.14.md), [reproduction](../../lab/m514/README.md), [setup diagnostics](../getting-started/alpha-troubleshooting.md), and [independent selection-contract proposal](selection-contract-draft.md). This work does not change the published M5.13 release or authorize Pi deployment.
+
 ## Start here
 
 - [Development environment and tests](development.md)

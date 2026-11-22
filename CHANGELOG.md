@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.14 alpha stabilization — 2026-11-22
+
+- Fixed handled provisioning failures leaving partial private configuration; added deterministic writes, narrow cleanup and safer configuration/socket diagnostics. The two earlier exit-139 incidents remain unexplained after controlled ARM64 comparisons.
+- Added no-network prerequisite checks and verified clean-clone onboarding, protected ARM64 lifecycle/rollback/refusal, genuine guest/device regressions and 114 browser cases. Retained an unexplained initial plotting timeout.
+- Prepared an independent capability/receipt-based selection client, conformance tests and an interoperability discussion draft without modifying upstream. Replayed frozen local-model questions with attribution safeguards and measured limitations.
+- Preserved M5.13 release/tag/assets and all accepted checkpoints. No Pi access, external acceptance or new release. [Report](docs/lab/M5.14.md).
+
 ## M5.13 Source Alpha 1 publication — 2026-11-22
 
 - Published the owner-approved source-only experimental pre-release `v0.5.13-source-alpha.1` at `ef643e59e5040adcbf7f7b1286fe3472ff08a00f`, preserving the exact qualified archive and all prior tags.

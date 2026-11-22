@@ -15,6 +15,13 @@ npm run dev
 
 Open the loopback URL Vite prints. The browser-only desktop uses simulated panel/media data. This is a local developer preview, not a hosted demo or Pi connection. Stop it with Ctrl-C.
 
+On current development source, `npm ci` checks the Node prerequisite and
+`npm run dev` checks required installed packages before starting Vite.
+`npm run doctor` runs those checks without starting a listener or installing
+anything. If a dependency is missing, run `npm ci` in the same source directory.
+These diagnostics were added after Source Alpha 1; its immutable archive retains
+the earlier workflow. [Troubleshooting](../getting-started/alpha-troubleshooting.md).
+
 ## Embedded Go service
 
 Go **1.25 or newer** is required. On the tested Mac development host:
@@ -44,6 +51,11 @@ The TypeScript integration command uses a deterministic socket fixture. Go packa
 For browser checks, install the Playwright engines locally if needed with `npx playwright install`. Start Vite on port 5173 and the built mock service on port 8080 in separate shells, then run `npm run test:browser`. The suite covers Chromium, Firefox and WebKit. Native Safari is a distinct test target; a WebKit pass is not a native Safari result.
 
 The M5.0 baseline records 46 TypeScript tests, one transport integration test and 45 desktop browser cases, alongside Go race checks and genuine guest acceptance. Counts can change with later contributions. Existing browser tests may write capture files under `docs/screenshots`; inspect changes before committing. Do not replace an accepted baseline screenshot unintentionally.
+
+Set `PIDP11_BROWSER_RESULTS` to a fresh private JSON path for milestone runs.
+Without it, the suite retains its historical rolling report location under
+`.research`. Preserve that rolling report before another run if it is evidence
+you need to retain. Screenshots and traces have their separate configured paths.
 
 ## Genuine guest laboratory
 

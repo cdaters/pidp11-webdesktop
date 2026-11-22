@@ -9,7 +9,7 @@ Start with the browser demonstration; it needs no Pi, guest disk or AI model. Ge
 - [Original-software Trixie guide and evidence](installation/README.md)
 - [Optional service: authentication, TLS, attachment and removal](getting-started/optional-service.md)
 - [Optional AI setup](getting-started/configured-companion.md)
-- [Questions and troubleshooting](getting-started/questions.md)
+- [Questions and troubleshooting](getting-started/questions.md) and [alpha setup diagnostics](getting-started/alpha-troubleshooting.md)
 - [Alpha package, checksums and acceptance status](releases/alpha-readiness.md)
 
 ## Using the desktop
@@ -41,4 +41,4 @@ Start with the browser demonstration; it needs no Pi, guest disk or AI model. Ge
 
 Historical reports describe their own tested revision. Use the current capability matrix for present scope; a later overview never turns an earlier experiment into physical acceptance.
 
-Latest engineering evidence: [M5.11 hardening and guest validation](lab/M5.11.md), [reproduction notes](../lab/m511/README.md), and [separate M5.11 captures](screenshots/m511/README.md). The M5.10 presentation remains preserved.
+Latest engineering evidence: [M5.14 stabilization](lab/M5.14.md), [reproduction notes](../lab/m514/README.md), and [independent interoperability draft](technical/selection-contract-draft.md). Earlier reports and presentation captures remain preserved.

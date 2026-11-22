@@ -1,8 +1,14 @@
 # Where the project is going
 
+## M5.14: stabilization and independent interoperability
+
+[Implemented and measured](docs/lab/M5.14.md): handled provisioning cleanup, safer diagnostics, clean-clone prerequisites, protected ARM64 fault/recovery checks, genuine guest/device regressions and an [independent selection-interface draft](docs/technical/selection-contract-draft.md). The two original exit-139 incidents and an initial plotting timeout remain unexplained. The published M5.13 archive is unchanged; corrections are development commits.
+
+Recommended M5.15: independent security/historical review and separately authorized interoperability feedback; traceable ARM64/plotting fault reproduction; least-privilege observer design; and matched RT-11/RSTS qualification inputs. No new release or physical deployment is implied. Actual Pi memory containment, SR0 repair, representative performance and a renewed supervised coexistence pilot remain separate gates.
+
 ## M5.13: source-alpha and external review readiness
 
-[Current work](docs/lab/M5.13.md) closes a private-control ownership gap, qualifies model attribution, reproduces RT-11 with a measured diagnosis, inventories exact RSTS build dependencies, and prepares source-only distribution and review packets. Independent review is still outstanding.
+[Completed M5.13 work](docs/lab/M5.13.md) closes a private-control ownership gap, qualifies model attribution, reproduces RT-11 with a measured diagnosis, inventories exact RSTS build dependencies, and prepares source-only distribution and review packets. Independent review is still outstanding.
 
 The owner-approved [M5.13 Source Alpha 1](docs/releases/M5.13-publication.md) is now published for local demonstrations and controlled disposable guest laboratories. Next gates: external security/historical review; matched RT-11 diagnostic sources; legitimate RSTS generation and patch volumes; production observer privileges; and separately authorized repaired-panel/memory/readiness testing. The source release does not enable Pi deployment or remote panel control.
 

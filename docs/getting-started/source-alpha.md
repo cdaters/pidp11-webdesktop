@@ -135,3 +135,7 @@ retrying. If the page is blank, inspect the actual printed URL and browser conso
 An unavailable genuine line calls for checking the separately owned lab, not
 starting a Pi or bypassing service approval. Report reproducible problems through
 [the contribution guide](../../CONTRIBUTING.md), with private data removed.
+
+Development source after M5.13 also provides `npm run doctor` and focused
+[setup diagnostics](alpha-troubleshooting.md). That command and the M5.14 service
+corrections are not present in the immutable release archive above.
