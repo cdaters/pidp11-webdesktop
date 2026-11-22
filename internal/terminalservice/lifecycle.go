@@ -184,7 +184,7 @@ func (m *Manager) Attach(ctx context.Context, a Approval) error {
 		l.proof = &proof
 	}
 	l.sequence = 0
-	l.deadline = time.Now().Add(supervisionLifetime)
+	l.deadline = time.Now().Add(verificationLifetime)
 	l.revision++
 	revision := l.revision
 	l.state = "attaching"

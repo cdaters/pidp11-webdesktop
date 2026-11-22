@@ -26,6 +26,11 @@ func (s Supervision) valid() bool {
 
 const supervisionLifetime = time.Second
 
+// A TCP handshake may complete before original SIMH polls and accepts the fd.
+// This initial grace grants no browser access; active authority uses the shorter
+// renewal lifetime above. A late first verification cannot revive an expiry.
+const verificationLifetime = 3 * time.Second
+
 // Renewal is a one-use, ordered assertion by the private local observer. It
 // cannot attach a detached line or alter any of its approved identities.
 type Renewal struct {
