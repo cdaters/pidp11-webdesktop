@@ -2,7 +2,8 @@
 
 The basic demonstration runs on your development computer. It does not need a
 Pi, Go, Docker, guest disk or model. Start with the [released-source quick start](source-alpha.md).
-The M5.14 changes below are development commits after the immutable M5.13 archive;
+The [Alpha 2 candidate](source-alpha-2.md) includes the M5.14 changes below.
+These are development commits after the immutable M5.13 archive;
 they do not silently update that download.
 
 ## Browser demonstration on the Mac
