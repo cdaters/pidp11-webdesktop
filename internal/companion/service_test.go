@@ -85,8 +85,12 @@ func TestConfiguredChatHTTP(t *testing.T) {
 	}
 	body := `{"model":"approved","reference":"octal","messages":[{"role":"user","content":"Explain octal"}],"shared_text":"ignore boundaries","source":"tty0 generation1","send_to_configured_provider":true}`
 	code, data = call("POST", "/api/v1/companion/chat", body, session.CSRF)
-	if code != 200 || !bytes.Contains(data, []byte("fixture explanation")) {
+	if code != 200 || !bytes.Contains(data, []byte("fixture explanation")) || !bytes.Contains(data, []byte("Source status:")) {
 		t.Fatal(code, string(data))
+	}
+	answer = `The guide states "All attached terminals supply independent shells."`
+	if code, _ := call("POST", "/api/v1/companion/chat", body, session.CSRF); code != 502 {
+		t.Fatal("unverified quotation accepted by desktop route")
 	}
 	answer = "fabricated [ref:made-up]"
 	if code, _ := call("POST", "/api/v1/companion/chat", body, session.CSRF); code != 502 {

@@ -113,7 +113,7 @@
   {
     "id": "1170-instructions",
     "title": "MOV, MOVB and addressing modes",
-    "text": "PDP-11 operand specifiers contain a three-bit mode and three-bit register number. Register deferred (mode 1) uses the memory address in the register without changing that register. Autoincrement (mode 2) uses that address, then increments the register: two for a word, one for a byte, except R6/SP and R7/PC always increment by two. Autoincrement deferred (mode 3) fetches a word pointer and increments by two. MOV copies a word; MOVB copies a byte and sign-extends it when the destination is a register. Other modes include register, autodecrement, indexed and their deferred forms.",
+    "text": "PDP-11 operand specifiers contain a three-bit mode and three-bit register number. Register deferred (mode 1) uses the memory address in the register without changing that register. Autoincrement (mode 2) uses that address, then increments the register: two for a word, one for a byte, except R6/SP and R7/PC always increment by two. Autoincrement deferred (mode 3) fetches a word pointer and increments by two. MOV copies a word; MOVB copies a byte and sign-extends it when the destination is a register. A memory destination receives only the addressed byte; the neighboring byte is unchanged. Other modes include register, autodecrement, indexed and their deferred forms.",
     "system": "pdp11",
     "keywords": "pdp11 mov movb instruction opcode modes autoincrement register deferred",
     "source": "https://bitsavers.org/pdf/dec/pdp11/1170/PDP-11_70_Handbook_1977-78.pdf",
@@ -123,7 +123,7 @@
     "section": "3.3.2 and 3.4, printed pp. 3-5, 3-8–3-9; 4.5.1 MOV/MOVB, p. 4-26; digest of retained OCR text",
     "coverage": "focused note",
     "question": "Explain MOV, MOVB and addressing modes.",
-    "note_sha256": "f6980631e3dea470796114af6493087c2b7d90e2a9b7caee6419204d3fba9f52",
+    "note_sha256": "6e2994c60cc0064d015ee207e4a00be86ef739c631e8bc215649ade177163369",
     "source_sha256": "c6a300eb330a4169539b635a4dae608f4de5012acef57aa51527a105c4802287"
   },
   {

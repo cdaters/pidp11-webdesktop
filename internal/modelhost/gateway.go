@@ -89,6 +89,11 @@ func New(token, model string, provider companion.Provider) http.Handler {
 			http.Error(w, "Model unavailable, cancelled or invalid response", 502)
 			return
 		}
+		answer, err = companion.QualifyAnswer(answer)
+		if err != nil {
+			http.Error(w, err.Error(), 502)
+			return
+		}
 		json.NewEncoder(w).Encode(map[string]any{"choices": []any{map[string]any{"index": 0, "finish_reason": "stop", "message": map[string]string{"role": "assistant", "content": answer}}}})
 	})
 }

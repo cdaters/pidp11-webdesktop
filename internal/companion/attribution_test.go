@@ -1,0 +1,33 @@
+package companion
+
+import (
+	"strings"
+	"testing"
+)
+
+func TestQuotationCannotBorrowParaphraseAuthority(t *testing.T) {
+	n, ok := reference("rt11-multiterminal-scope")
+	if !ok {
+		t.Fatal("missing development note")
+	}
+	for _, answer := range []string{
+		"The manual states: \"" + n.Text + "\" [ref:" + n.ID + "]",
+		"According to DEC:\n> Multiterminal support gives each serial connection an independent shell.",
+		"The source says “Every serial line automatically supplies a login shell.”",
+	} {
+		if _, err := QualifyAnswer(answer); err == nil {
+			t.Fatal("unverified quotation accepted")
+		}
+	}
+}
+func TestEveryModelAnswerCarriesSourceStatus(t *testing.T) {
+	for _, answer := range []string{"Use `DIR` in the documented RT-11 context.", "The manual allegedly says 'all lines are shells'.", "A purported source quotation without markers."} {
+		got, err := QualifyAnswer(answer)
+		if err != nil || got != AttributionNotice+answer {
+			t.Fatalf("missing durable label: %q %v", got, err)
+		}
+	}
+	if _, err := QualifyAnswer(strings.Repeat("x", 4096)); err == nil {
+		t.Fatal("bounded response exceeded")
+	}
+}

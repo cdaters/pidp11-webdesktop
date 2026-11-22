@@ -235,11 +235,17 @@ func (s *Service) Register(mux *http.ServeMux, gate *access.Gate) {
 				http.Error(w, "Model cited an unavailable reference; answer withheld", 502)
 				return
 			}
+			rawAnswer := answer
+			answer, err = QualifyAnswer(answer)
+			if err != nil {
+				http.Error(w, err.Error(), 502)
+				return
+			}
 			if !gate.Allowed(r, access.CompanionChat) {
 				http.Error(w, "Session revoked", 403)
 				return
 			}
-			json.NewEncoder(w).Encode(map[string]any{"answer": answer, "fixture": s.config.Fixture, "retrieval": found, "review": ReviewClaims(lastQuestion.Content, answer, found)})
+			json.NewEncoder(w).Encode(map[string]any{"answer": answer, "fixture": s.config.Fixture, "retrieval": found, "review": ReviewClaims(lastQuestion.Content, rawAnswer, found)})
 		})))
 	}
 }

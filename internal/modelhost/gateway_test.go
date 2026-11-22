@@ -117,3 +117,26 @@ func TestCancellationAndBusyDoNotQueue(t *testing.T) {
 	}
 	<-done
 }
+
+func TestGatewayQuotationAndDurableAttribution(t *testing.T) {
+	token := strings.Repeat("q", 32)
+	for _, c := range []struct {
+		answer string
+		code   int
+	}{
+		{`The guide says "Every terminal has its own monitor session."`, 502},
+		{"A cautious paraphrase.", 200},
+	} {
+		h := New(token, "approved", testProvider(func(context.Context, []companion.Message) (string, error) { return c.answer, nil }))
+		r := httptest.NewRequest("POST", "/v1/chat/completions", strings.NewReader(`{"model":"approved","messages":[{"role":"user","content":"Explain RT-11"}]}`))
+		r.Header.Set("Authorization", "Bearer "+token)
+		w := httptest.NewRecorder()
+		h.ServeHTTP(w, r)
+		if w.Code != c.code {
+			t.Fatal(w.Code, w.Body.String())
+		}
+		if c.code == 200 && !strings.Contains(w.Body.String(), "Source status:") {
+			t.Fatal("gateway omitted durable label")
+		}
+	}
+}
