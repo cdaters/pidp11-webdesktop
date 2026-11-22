@@ -1,0 +1,18 @@
+{
+  "source_revision": "87b3fdf564cb3fbd6f63cc42ad68da4633c88a89",
+  "binary_sha256": "1b3783a8b0e385f4a4c095629404a2ab2e7e4fa0c798c37390fb38560beb1264",
+  "bytes": 7930018,
+  "platform": "Debian Trixie ARM64 disposable 1GiB VM",
+  "build_go_flags": "-buildvcs=false",
+  "exact_candidate_verified": true,
+  "disabled_by_default": true,
+  "memory_controller_refusal": true,
+  "rollback_to_actual_phase_b": true,
+  "phase_b_binary_sha256": "5a7aacf7be74dc218b1a3195a64d181b49be2ff5ae02e59da2dab278415e518a",
+  "return_to_exact_candidate": true,
+  "private_configuration_unchanged": true,
+  "all_startups_detached": true,
+  "complete_package_removal": true,
+  "lab_override_removed": true,
+  "physical_pi_contacted": false
+}

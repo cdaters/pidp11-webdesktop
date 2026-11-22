@@ -98,3 +98,11 @@ The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original
 - `internal/modelhost` and `cmd/model-gateway` expose authenticated chat/models/reference lookup to an existing local runner. The command owns loopback TLS and shutdown; the handler owns one in-flight slot. No runner management, browser CORS, tools or terminal authority.
 - `internal/replicant` is a pure, explicit-selection/readback and status-claim contract. Automatic keys always fail. It is not an installed Hacker Replicant endpoint or operator-console integration.
 - `lab/m593b` contains real model qualification, three-engine conversations, held-out addressing probes and isolated ARM64 SSH/TLS and lifecycle rehearsals. Fixtures, genuine inference and untested deployment boundaries are distinguished in the [report](../lab/M5.9.3-B.md).
+
+## Phase C tutor additions
+
+- `internal/companion/claims.go`: bounded atomic-rule review of an answer against exact supplied catalog notes; no execution authority.
+- `src/claim-review.ts`: runtime validation and text-only annotation rendering beside source passages.
+- `src/tutor-calculation.ts`: constrained `/calc` parser and exact fixed-width arithmetic, sharing `pdp11-values.ts`; intercepts local requests before chat history/provider access.
+- `internal/replicant/http.go`: separately embedded token-authenticated, expiring selected-text adapter; caller owns authoritative identity, TLS and server lifecycle. No integration into the ordinary desktop listener.
+- `lab/m593c/`: synthetic historical comparison, separate-network gateway/upstream harness and protected ARM64 lifecycle checks; [reproduction](../../lab/m593c/README.md).

@@ -123,3 +123,22 @@ Physical selection must be diagnosable without booting an original writable gues
 [ADR 0005](decisions/0005-detached-terminal-service.md) implements the optional service boundary without changing the original pilot entry point. Startup serves embedded assets but never dials a guest. A private local approval names a service instance, endpoint and revision; browsers then connect only to that exact generation. Detach, failed dialing and restart cannot transfer a keyboard or silently follow a reused port. Operator verification remains necessary because an unchanged serial stream is not authoritative guest identity.
 
 [Package/lifecycle testing](lab/M5.6-implementation.md) ran on disposable Mac-hosted Linux; production deployment and physical coexistence acceptance remain blocked. [Performance work](lab/M5.5.1-performance.md) reduced repeated allocations without weakening bounds; eight busy observers still exceeded the numeric CPU target in the Linux lab. The [optional copilot boundary](lab/M5.5.1-community.md) is a proposal only. No new panel or emulator-control capability was added.
+
+## Phase C optional tutor and interoperability boundary
+
+Reference retrieval and exact arithmetic remain offline. Configured model replies are annotated after inference against the supplied catalog; annotations cannot authorize guest operations. The optional selected-text adapter is a separate embedding surface, not a new route with console access in the normal service.
+
+```mermaid
+flowchart LR
+  Browser[Optional tutor] --> Exact[Local exact calculator]
+  Browser --> Catalog[Offline reference catalog]
+  Browser --> Service[Authenticated desktop service]
+  Service --> Review[Bounded claim annotations]
+  Service --> Tunnel[Manually established authenticated transport]
+  Tunnel --> Gateway[TLS model gateway]
+  Gateway --> Model[Fixed local model]
+  Selection[Explicit selection and attachment generation] --> Adapter[Separate read-only adapter]
+  Adapter --> Readback[Expiring text; unknown machine status]
+```
+
+The arrows grant no host, emulator, media or physical-panel control. [Phase C evidence](lab/M5.9.3-C.md) distinguishes a working HTTP adapter, an adapted upstream chat experiment and unperformed genuine guest acceptance.

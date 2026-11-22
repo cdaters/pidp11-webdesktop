@@ -66,3 +66,5 @@ Private capture paths mentioned in reports intentionally do not resolve to publi
 - [Private model-host transport](hosted-local-companion.md)
 - [Hacker Replicant interoperability foundation](hacker-replicant-interop.md)
 - [Phase B findings and reproduction](../lab/M5.9.3-B.md)
+
+- [M5.9.3 Phase C](../lab/M5.9.3-C.md): expanded references, limited claim review, exact in-chat calculations, separate-network model gateway and read-only upstream interoperability evidence.

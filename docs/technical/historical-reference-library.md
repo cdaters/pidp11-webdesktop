@@ -15,9 +15,9 @@ The deterministic offline chat guide remains available separately. Searching the
 
 ## Sources and integrity
 
-[`references.json`](../../internal/companion/references.json) is the single Go/TypeScript catalog. Its 14 entries cover V7, RT-11SJ V05.03, RSX-11M, 2.11BSD, PDP-11/70 addresses/instructions, octal, SIMH, REALCONS, terminal personalities, Tektronix graphics and LP11/PC11. Two entries explicitly record missing RSTS/E/PLUS operational coverage.
+[`references.json`](../../internal/companion/references.json) is the single Go/TypeScript catalog. Its 24 entries cover V7, RT-11SJ V05.03, RSX-11M, 2.11BSD, PDP-11/70 addresses/instructions, octal, SIMH, REALCONS, terminal personalities, Tektronix graphics and LP11/PC11. Two entries explicitly record missing RSTS/E/PLUS operational coverage.
 
-The distribution contains original short explanatory notes and source metadata. It does **not** contain DEC manual PDFs, model weights, guest disks or private captures. Existing project source/evidence links are pinned to the Phase A revision. Historical facts use the retained DEC PDP-11/70 1977–78 handbook text and the previously reviewed RSX-11M Beginner's Guide (June 1977), section 3.2.1. The remaining focused notes link to tested project records, which distinguish modern browser behavior from original hardware behavior.
+The distribution contains original short explanatory notes and source metadata. It does **not** contain DEC manual PDFs, model weights, guest disks or private captures. Existing project source/evidence links are pinned to the Phase A revision. Historical facts use the retained DEC PDP-11/70 1977–78 handbook text and the previously reviewed RSX-11M Beginner's Guide (June 1977), section 3.2.1. Ten Phase C additions use the handbook, V7 manual source preserved by TUHS, the VT100 User Guide transcription and the August 11, 2022 SIMH manual; [metadata and source digests](../../lab/m593c/results/sources.json) identify each retained input. Other focused notes link to tested project records, which distinguish modern browser behavior from original hardware behavior.
 
 Every note has a SHA-256 digest of its exact UTF-8 text. Source digests are provided for available local project records and the retained handbook **OCR text**, explicitly identified as such. An OCR digest is not the PDF's digest. The RSX manual and archive-only scope notices do not claim an unavailable source-file checksum. Several original archive endpoints refused new retrieval during this milestone; retained reviewed excerpts were used where available. Full manual coverage remains work to do.
 
@@ -44,3 +44,15 @@ Open **Exact PDP-11 values**, choose an input radix and width, enter a value and
 - Formatting a word as an instruction does not decode, validate or execute it. A 16-bit virtual value does not reveal its mapped physical address. The calculator performs no emulator or memory operation.
 
 The exact result is not sent automatically to a provider. A user can deliberately quote it in a question, but generated prose remains separately labeled. The benchmark demonstrates why address arithmetic should use this utility rather than a chatbot.
+
+## Exact calculations in the question box
+
+Enter `/calc 16 oct 177776`, then use the normal Send button. The interface displays octal `177776`, decimal `65534`, hexadecimal `FFFE`, binary, signed 16-bit `-2` and the set bit positions. This is local integer arithmetic even when a model is selected. Shared text remains unsent, and the calculation does not enter model history.
+
+The grammar is `/calc WIDTH BASE VALUE [signed] [OP OPERAND]`. WIDTH is 8, 16 or 22; BASE is `oct`, `dec`, `hex` or `bin`. `signed` permits signed decimal 16-bit input. OP is `and`, `or`, `xor`, `shl` or `shr`. Masks use the selected base; shift counts are decimal, from zero to one less than WIDTH. Right shifts fill with zeros, and left-shift overflow is rejected. Arbitrary expressions and natural-language guesses are not evaluated. For example, `/calc 16 hex FFFE shr 1` gives `7FFF`.
+
+## What claim review means
+
+Model answers remain labeled **unverified explanation**. The expandable review distinguishes recognized support, contradiction, unverified prose, calculations, unobserved machine state and version-dependent commands. A supported annotation applies only to one complete recognized atomic statement and its exact supplied catalog passage. It does not approve the answer, a command or a guest action.
+
+The nine current fact rules are deliberately narrow: word/address widths, three addressing-mode numbers, MOVB register sign extension, vector size and V7 `ls`. Correct paraphrases, quoted claims and compound statements often remain unverified. The 45-response Phase C comparison produced no atomic support/contradiction matches, despite a passing 20-case adversarial rule corpus. Read the actual passages; a valid citation is not a correctness test. [Measured limits](../lab/M5.9.3-C.md).

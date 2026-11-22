@@ -1,5 +1,13 @@
 # Changelog
 
+## M5.9.3 Phase C — 2026-11-21
+
+- Expanded the historical catalog to 24 entries with ten source-verified summaries, provenance and shared retrieval tests.
+- Added conservative claim annotations and a constrained `/calc` question-box command that computes locally without contacting a model or guest.
+- Evaluated 45 comparable actual Gemma replies; Phase C improved useful answers but still produced factual errors. The narrow checker did not recognize these varied model claims as contradictions.
+- Demonstrated authenticated real-model access across separate disposable network namespaces and a read-only Hacker Replicant HTTP adapter. Tested the pinned upstream application with tools off through a documented lab shim.
+- Qualified browser behavior, protected ARM64 service lifecycle, missing-memory-controller refusal and cleanup. Physical hardware and production integration remain separate. [Report](docs/lab/M5.9.3-C.md).
+
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
 ## M5.9.3 Phase B — 2026-11-21

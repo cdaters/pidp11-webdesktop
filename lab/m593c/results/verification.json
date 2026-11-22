@@ -1,0 +1,27 @@
+{
+  "implementation": "87b3fdf564cb3fbd6f63cc42ad68da4633c88a89",
+  "go_vet": "passed",
+  "go_race": "passed",
+  "typescript": "passed",
+  "frontend_tests": 92,
+  "transport_fixture_tests": 1,
+  "browser_cases": 108,
+  "browser_engines": [
+    "Chromium",
+    "Firefox",
+    "WebKit"
+  ],
+  "real_model_browser_engines": 3,
+  "constructed_claim_cases": 20,
+  "model_comparison_responses": 45,
+  "new_reference_entries": 10,
+  "total_reference_entries": 24,
+  "physical_pi_contacted": false,
+  "genuine_guest_retest": false,
+  "accepted_tags_unchanged": true,
+  "stable_release_created": false,
+  "model_unloaded": true,
+  "owned_previews_stopped": true,
+  "owned_containers_and_networks_removed": true,
+  "disposable_vm_removed": true
+}

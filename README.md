@@ -10,6 +10,8 @@ The goal is simple: turn on your PiDP-11, select an operating system with its ph
 
 **Genuine UNIX V7 browser sessions now work on the actual Raspberry Pi 3B+ in a controlled terminal-only pilot.** The pilot used the original installed simulator, preserved its installation, and was shut down after testing. You can explore the local desktop today without a Pi or guest disk.
 
+The optional [historical tutor](docs/technical/historical-reference-library.md) now includes 24 reference notes, limited claim review and exact local octal calculations. [Phase C](docs/lab/M5.9.3-C.md) records real Gemma comparisons, separate-network gateway tests and a read-only Hacker Replicant demonstration. Model explanations remain experimental.
+
 [Start exploring](docs/getting-started/README.md) · [Technical documentation](docs/technical/README.md) · [Philosophy](PHILOSOPHY.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Contribute](CONTRIBUTING.md)
 
 ![PiDP-11 Web Desktop with front panel and two terminal windows](docs/screenshots/m43-arranged-retina.png)

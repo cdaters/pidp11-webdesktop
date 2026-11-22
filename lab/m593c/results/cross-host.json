@@ -1,0 +1,69 @@
+{
+  "isolation": {
+    "pidp11-m593c-model": {
+      "hostname": "pidp11-m593c-model",
+      "netns": "net:[4026532634]",
+      "pidns": "pid:[4026532632]"
+    },
+    "pidp11-m593c-client": {
+      "hostname": "pidp11-m593c-client",
+      "netns": "net:[4026532838]",
+      "pidns": "pid:[4026532836]"
+    }
+  },
+  "authorized_models": "{\"data\":[{\"id\":\"gemma4:12b\",\"object\":\"model\"}]}\n\n200",
+  "missing_token_refused": true,
+  "wrong_token_refused": true,
+  "management_refused": true,
+  "no_model_fallback": true,
+  "wrong_tls_identity_refused": true,
+  "wrong_tls_root_refused": true,
+  "wrong_ssh_pin_refused": true,
+  "conversation": {
+    "answer": "A 16-bit virtual address represents a location within a process's private logical address space, while a 22-bit physical address identifies the actual location in the system's main memory.",
+    "fixture": false,
+    "guest_attachment": "none"
+  },
+  "tunnel_loss_refused": true,
+  "explicit_tunnel_recovery": true,
+  "host_restart_requires_manual_recovery": true,
+  "client_restart_explicit_recovery": true,
+  "after_restarts": {
+    "answer": "A 16-bit virtual address represents a location within a process's private, logical address space, while a 22-bit physical address represents the actual location in the system's physical memory (including hardware registers and shared memory) where that data resides.",
+    "fixture": false,
+    "guest_attachment": "none"
+  },
+  "upstream_direct_prompt_rejected": true,
+  "adapter_selected_readback": {
+    "text": "SYNTHETIC SELECTION; NO GUEST ATTACHED\n$ pwd\n/usr/dmr",
+    "semantics": "explicit-guest-selection; not operator console or live screen",
+    "endpoint": "synthetic-guest-line",
+    "generation": "fixture-generation-1"
+  },
+  "adapter_status_unknown": true,
+  "adapter_keys_refused": true,
+  "upstream_adapted_events": [
+    {
+      "type": "status",
+      "text": "thinking..."
+    },
+    {
+      "type": "done",
+      "response": "De SIMH-monitor is de \"meta-laag\" van de emulator (besturing van de hardware). Een guest terminal (DZ) is een virtuele terminal binnen het OS; je typt daar commando's die de PDP-11-kernel uitvoert, niet de emulator zelf.",
+      "actionLog": [],
+      "limitReached": false
+    }
+  ],
+  "upstream_revision": "6f8a2aca7786736e01bdf5ba9b44bf66a7f19349",
+  "upstream_tools_disabled": true,
+  "genuine_guest_acceptance": false,
+  "runner_loss_no_fallback": true,
+  "fixture_timeout_seconds": 20.135888916000113,
+  "fixture_concurrent_refused": true,
+  "fixture_cancellation_state": {
+    "cancelled": 2,
+    "entered": 2
+  },
+  "resource_snapshot": "pidp11-m593c-model 14.75MiB / 256MiB 0.01%\npidp11-m593c-client 74.43MiB / 256MiB 0.00%\n",
+  "pass": true
+}

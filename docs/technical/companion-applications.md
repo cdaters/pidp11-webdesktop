@@ -43,3 +43,7 @@ A future integration should run on a capable owner-controlled host, never make t
 ## Phase B compatibility foundation
 
 The [current Hacker Replicant review](hacker-replicant-interop.md) pins the upstream revision and distinguishes its GNU Screen operator console from our guest-only line. A small tested readback/status contract and a shared chat-only model gateway now exist; no application has been imported or embedded. Automatic `/keys` behavior remains refused, and all existing lease, generation and human-review checks are unchanged. The [historical library](historical-reference-library.md) also has a bounded authenticated search interface usable without inference.
+
+## Phase C selected-text adapter
+
+The optional Hacker Replicant HTTP adapter serves only explicit, expiring selections. It has no terminal read/write capability, no host process API and no guest lifecycle authority. Its local `Publish` caller supplies consent and an independently tracked attachment generation; later reads recheck identity. This is separate from the existing human-reviewed guest-command proposal flow. See [interop scope and remaining gaps](hacker-replicant-interop.md#phase-c-working-read-only-http-and-pinned-upstream-chat).

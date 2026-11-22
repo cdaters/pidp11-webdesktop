@@ -94,3 +94,9 @@ Phase B used Ollama 0.40.16 and the Apple Silicon MLX/NVFP4 variant, approximate
 Open **Search historical references** for offline lookup. Before sending a model question, inspect the system filter and the checkbox that includes up to two matched notes. An explicitly selected reference topic takes precedence. Returned passages are available below the answer, with actual catalog links and incomplete-coverage labels. Unknown citation IDs cause the answer to be withheld; correct IDs do not prove the model's explanation is correct.
 
 Use **Exact PDP-11 values** for arithmetic. Its locally computed result remains separate from generated text. No model or guest is contacted by the calculator or offline search. The optional cross-host gateway is a separate, manual model-host program; [its isolated transport test](../../lab/m593b/README.md) does not authorize Pi deployment or changes to Mac SSH settings.
+
+## Check a value or explanation
+
+You can type `/calc 16 oct 177776` in the question box and press Send even with the provider selected. This calculates locally and sends neither the calculation nor selected terminal text to a model. The result is decimal `65534`, hex `FFFE` and signed 16-bit `-2`. The separate exact-values form also remains available offline.
+
+Model replies include **Claim review · limited checks, not certification** and the supplied reference passages. Expand both. “Unverified” does not necessarily mean false; the small checker cannot recognize most free-form explanations. A valid source ID does not make a command safe or correct. Confirm the historical system/version and use the exact calculator for numeric results. [Explanation and grammar](../technical/historical-reference-library.md).

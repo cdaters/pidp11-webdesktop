@@ -1,5 +1,11 @@
 # Where the project is going
 
+## M5.9.3 Phase C: implemented, experimental
+
+The optional tutor now has 24 reference entries, visible limited claim review and exact in-chat calculations. A separate-network lab carried authenticated real model traffic; a selected-text HTTP adapter and pinned Hacker Replicant chat ran with tools disabled. [Results and limits](docs/lab/M5.9.3-C.md).
+
+Next: improve measured claim recognition against independently reviewed examples; add release-specific historical sources; agree status, selection identity, prompt size and cancellation contracts before supported upstream integration. Keep physical switch repair and M5.8 deployment separately authorized. Neither AI nor its host becomes a prerequisite for terminals, peripherals or the original PiDP-11.
+
 These are directions for experimentation, not delivery promises. The [timeline](docs/timeline.md) and [changelog](CHANGELOG.md) record completed work; the [technical roadmap](docs/roadmap.md) retains resource targets and engineering gates.
 
 M5.9.2 delivers bounded live LP11/PC11 observation, sourced companion references, deliberate sharing, an equipment layout and expanded genuine BSD applications. [Results and limits](docs/lab/M5.9.2.md). Next: owner-approved real-model qualification, independently supervised producer identity under faults, additional historical applications and OS printer-driver investigation. Production coexistence remains separately gated.

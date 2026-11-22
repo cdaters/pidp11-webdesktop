@@ -1,0 +1,8 @@
+{
+  "platform": "disposable ARM64 Linux",
+  "restart_changes_instance": true,
+  "restart_detached": true,
+  "prior_session_revoked": true,
+  "original_emulator_present": false,
+  "metrics": "MemoryCurrent=3428352\nMemoryPeak=3428352\nCPUUsageNSec=16609000\nTasksCurrent=8\nMemoryMax=100663296\nMemorySwapMax=0\n"
+}

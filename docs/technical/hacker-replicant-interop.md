@@ -39,3 +39,21 @@ The existing browser companion still uses its existing authenticated routes. No 
 - Would optional, independently authenticated navigation to an external companion be preferable to embedding code with access to our browser session?
 
 These are proposed discussion topics, not agreed changes. A future application integration needs a separate security and genuine-guest acceptance review. Original console, physical controls, guest lifecycle and media must remain independent of either assistant.
+
+## Phase C: working read-only HTTP and pinned upstream chat
+
+The Phase B contract now has an optional `internal/replicant.Adapter`. An embedding application publishes a consented, bounded selection locally; no publish endpoint or terminal reader is exposed. Token-authenticated GET `/api/pidp11/screen` returns the upstream `text` field plus `endpoint`, `generation` and narrower semantics. A selection expires in 30 seconds, is checked against the current attachment and is forgotten on mismatch. GET `/status` returns `os:null`, `running:null`, `cpu_running:"unknown"`; this adapter cannot observe GNU Screen or CPU RUN. `/keys` refuses every request. The embedding host must supply TLS, private token delivery and authoritative, concurrency-safe attachment tracking.
+
+Upstream revision `6f8a2aca7786736e01bdf5ba9b44bf66a7f19349` was refreshed and tested unchanged in a disposable network namespace, with tools OFF. A real Gemma response arrived through the authenticated model gateway. Direct use rejected the upstream prompt because it exceeds the gateway's 4,096-byte message limit. A **lab-only shim** splits a bounded system prompt into messages while preserving the production 20-message/16-KiB limits. It also translates unknown status into upstream's unavailable-status path because upstream otherwise mistakes `running:null` for stopped.
+
+These results establish a working selected-text adapter and an adapted upstream chat demonstration. They do not establish unmodified full compatibility, upstream UI selection sharing or genuine guest acceptance. Upstream tools-disabled chat does not automatically call readback; the harness separately exercised it with labeled synthetic text. The upstream browser disconnect does not cancel its pending model fetch; our gateway deadline bounds it, while direct desktop/gateway cancellation was verified separately. No Screen, SIMH monitor or guest keyboard authority was added.
+
+Specific questions for a future owner-approved discussion with Rolf:
+
+1. Can status explicitly distinguish absent/unknown Screen, verified guest identity and CPU state?
+2. Can a read-only selected-text capability carry attachment generation and expiry without implying operator-console access?
+3. Could the backend support authenticated boot-API requests and reject non-loopback exposure by default?
+4. Can model prompt limits be negotiated or bounded messages supported without enabling tool calls?
+5. Can browser disconnects cancel the corresponding model fetch, and can tools be administratively disabled rather than just toggled in the UI?
+
+No outreach, collaboration, endorsement or merged upstream work occurred. [Lab evidence and exact boundaries](../lab/M5.9.3-C.md).
