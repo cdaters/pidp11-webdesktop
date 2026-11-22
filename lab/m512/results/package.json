@@ -33,5 +33,14 @@
     "package-qualified": "BSD, RSX, RT-11, first supervised ARM64 browser; same final runtime logic, earlier note wording",
     "package-final": "Final protected ARM64 supervised browser, rollback/refusal/uninstall; original three-phase LP11/PC11 and V7 Tek workflow in three engines"
   },
-  "staticARM64": true
+  "staticARM64": true,
+  "archive": {
+    "file": "pidp11-webdesktop-m5.12-rc.1-linux-arm64.tar.gz",
+    "bytes": 3157505,
+    "sha256": "eb8f6ef86997874a4b6a73d26d9ca8b210805e7dd2b1c2d350694ceaa516aaf4",
+    "sourceRevision": "21f10567f1631729b6029cc49f03dfc371cceaf6",
+    "freshExtractionAndBothManifestChecksPassed": true,
+    "runtimeMatchesTestedFinalArtifact": true,
+    "githubReleasePublished": false
+  }
 }
