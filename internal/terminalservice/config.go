@@ -25,18 +25,19 @@ import (
 // Config contains only operator-provisioned addresses and private file paths.
 // No attachment approvals or sessions are serialized here.
 type Config struct {
-	Followers      []peripheral.FollowConfig `json:"device_followers,omitempty"`
-	AllowProposals bool                      `json:"allow_readonly_command_proposals,omitempty"`
-	Listen         string                    `json:"listen"`
-	Origin         string                    `json:"origin"`
-	Control        string                    `json:"control"`
-	Certificate    string                    `json:"certificate"`
-	Key            string                    `json:"key"`
-	Writer         string                    `json:"writer_token"`
-	Observer       string                    `json:"observer_token"`
-	Endpoints      []terminalbridge.Config   `json:"endpoints"`
-	Devices        []peripheral.Config       `json:"device_exports,omitempty"`
-	Companion      *companion.Config         `json:"companion,omitempty"`
+	SupervisedEndpoints []string                  `json:"supervised_endpoints,omitempty"`
+	Followers           []peripheral.FollowConfig `json:"device_followers,omitempty"`
+	AllowProposals      bool                      `json:"allow_readonly_command_proposals,omitempty"`
+	Listen              string                    `json:"listen"`
+	Origin              string                    `json:"origin"`
+	Control             string                    `json:"control"`
+	Certificate         string                    `json:"certificate"`
+	Key                 string                    `json:"key"`
+	Writer              string                    `json:"writer_token"`
+	Observer            string                    `json:"observer_token"`
+	Endpoints           []terminalbridge.Config   `json:"endpoints"`
+	Devices             []peripheral.Config       `json:"device_exports,omitempty"`
+	Companion           *companion.Config         `json:"companion,omitempty"`
 }
 
 // ReadPrivate opens once, refuses links/special files and bounds private inputs.
@@ -107,6 +108,11 @@ func Load(path string) (Config, *access.Gate, tls.Certificate, error) {
 	if err = terminalbridge.Validate(c.Endpoints); err != nil {
 		return c, nil, cert, err
 	}
+	manager, err := NewSupervised(c.Endpoints, c.SupervisedEndpoints)
+	if err != nil {
+		return c, nil, cert, err
+	}
+	manager.Close()
 	paths := []string{c.Writer, c.Observer, c.Certificate, c.Key}
 	parts := make([][]byte, len(paths))
 	for i, path := range paths {

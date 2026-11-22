@@ -16,10 +16,16 @@ import (
 )
 
 type line struct {
-	config   terminalbridge.Config
-	endpoint *terminalbridge.Endpoint
-	revision uint64
-	state    string
+	config       terminalbridge.Config
+	endpoint     *terminalbridge.Endpoint
+	revision     uint64
+	state        string
+	supervised   bool
+	proof        *Supervision
+	deadline     time.Time
+	sequence     uint64
+	localAddress string
+	peerAddress  string
 }
 
 // Manager.mu serializes approval publication, not network dialing. Each generation
@@ -36,10 +42,11 @@ type Manager struct {
 
 // Approval fences one local operator action to the observed service and line.
 type Approval struct {
-	Instance  string `json:"instance"`
-	ID        string `json:"id"`
-	Revision  uint64 `json:"revision"`
-	Confirmed bool   `json:"guest_and_line_verified"`
+	Instance    string       `json:"instance"`
+	ID          string       `json:"id"`
+	Revision    uint64       `json:"revision"`
+	Confirmed   bool         `json:"guest_and_line_verified"`
+	Supervision *Supervision `json:"supervision,omitempty"`
 }
 
 // Status is a fresh local inventory, not evidence of guest identity.
@@ -50,16 +57,27 @@ type Status struct {
 
 // LineStatus exposes the revision required by the next local approval.
 type LineStatus struct {
-	ID             string `json:"id"`
-	Label          string `json:"label"`
-	Revision       uint64 `json:"revision"`
-	State          string `json:"state"`
-	ViewerRevision uint64 `json:"viewer_revision"`
-	Viewers        int    `json:"viewers"`
+	ID                  string       `json:"id"`
+	Label               string       `json:"label"`
+	Revision            uint64       `json:"revision"`
+	State               string       `json:"state"`
+	ViewerRevision      uint64       `json:"viewer_revision"`
+	Viewers             int          `json:"viewers"`
+	Supervision         *Supervision `json:"supervision,omitempty"`
+	SupervisionRequired bool         `json:"supervision_required"`
+	Sequence            uint64       `json:"supervision_sequence,omitempty"`
+	LocalAddress        string       `json:"local_address,omitempty"`
+	PeerAddress         string       `json:"peer_address,omitempty"`
 }
 
 // New validates the immutable allowlist and creates no network connections.
 func New(configs []terminalbridge.Config) (*Manager, error) {
+	return NewSupervised(configs, nil)
+}
+
+// NewSupervised requires independent lifetime renewal for the named lines.
+// The manager verifies freshness, not the observer's claims or the guest OS.
+func NewSupervised(configs []terminalbridge.Config, required []string) (*Manager, error) {
 	if err := terminalbridge.Validate(configs); err != nil {
 		return nil, err
 	}
@@ -70,6 +88,13 @@ func New(configs []terminalbridge.Config) (*Manager, error) {
 	m := &Manager{instance: hex.EncodeToString(nonce[:]), lines: map[string]*line{}, dial: (&net.Dialer{Timeout: time.Second}).DialContext}
 	for _, c := range configs {
 		m.lines[c.ID] = &line{config: c, state: "detached"}
+	}
+	for _, id := range required {
+		l := m.lines[id]
+		if l == nil || l.supervised {
+			return nil, errors.New("unique configured supervised endpoint required")
+		}
+		l.supervised = true
 	}
 	return m, nil
 }
@@ -86,7 +111,12 @@ func (m *Manager) Status() Status {
 	defer m.mu.Unlock()
 	s := Status{Instance: m.instance, Lines: []LineStatus{}}
 	for id, l := range m.lines {
-		row := LineStatus{ID: id, Label: l.config.Label, Revision: l.revision, State: l.state}
+		m.expireLocked(l, time.Now())
+		row := LineStatus{ID: id, Label: l.config.Label, Revision: l.revision, State: l.state, SupervisionRequired: l.supervised, Sequence: l.sequence, LocalAddress: l.localAddress, PeerAddress: l.peerAddress}
+		if l.proof != nil {
+			proof := *l.proof
+			row.Supervision = &proof
+		}
 		if l.endpoint != nil {
 			connected, revision, viewers := l.endpoint.Observation()
 			row.ViewerRevision, row.Viewers = revision, viewers
@@ -106,6 +136,7 @@ func (m *Manager) List() []terminalbridge.Listing {
 	defer m.mu.Unlock()
 	rows := []terminalbridge.Listing{}
 	for id, l := range m.lines {
+		m.expireLocked(l, time.Now())
 		s := state(l)
 		rows = append(rows, terminalbridge.Listing{ID: id, Label: l.config.Label, Connected: s == "attached", State: s, Generation: m.generation(l), Kind: "real-guest-line", Columns: 80, Rows: 24})
 	}
@@ -118,6 +149,9 @@ func (m *Manager) Lookup(id, generation string) *terminalbridge.Endpoint {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	l := m.lines[id]
+	if l != nil {
+		m.expireLocked(l, time.Now())
+	}
 	if m.closed || l == nil || generation != m.generation(l) || state(l) != "attached" {
 		return nil
 	}
@@ -130,13 +164,27 @@ func (m *Manager) Lookup(id, generation string) *terminalbridge.Endpoint {
 func (m *Manager) Attach(ctx context.Context, a Approval) error {
 	m.mu.Lock()
 	l := m.lines[a.ID]
-	if m.closed || l == nil || a.Instance != m.instance || a.Revision != l.revision || !a.Confirmed || state(l) == "attached" || l.state == "attaching" {
+	if l != nil {
+		m.expireLocked(l, time.Now())
+	}
+	if m.closed || l == nil || a.Instance != m.instance || a.Revision != l.revision || !a.Confirmed || state(l) == "attached" || l.state == "attaching" || l.state == "verifying" {
 		m.mu.Unlock()
 		return errors.New("fresh approval for a detached or unavailable line required")
+	}
+	if l.supervised != (a.Supervision != nil) || (a.Supervision != nil && !a.Supervision.valid()) {
+		m.mu.Unlock()
+		return errors.New("configured supervision and complete explicit binding required")
 	}
 	if l.endpoint != nil {
 		l.endpoint.Close()
 	}
+	l.proof = nil
+	if a.Supervision != nil {
+		proof := *a.Supervision
+		l.proof = &proof
+	}
+	l.sequence = 0
+	l.deadline = time.Now().Add(supervisionLifetime)
 	l.revision++
 	revision := l.revision
 	l.state = "attaching"
@@ -168,6 +216,13 @@ func (m *Manager) Attach(ctx context.Context, a Approval) error {
 	}
 	l.endpoint = endpoint
 	l.state = "attached"
+	if l.supervised {
+		l.localAddress, l.peerAddress = conn.LocalAddr().String(), conn.RemoteAddr().String()
+		l.state = "verifying"
+		if m.expireLocked(l, time.Now()) {
+			return errors.New("supervision expired while dialing")
+		}
+	}
 	return nil
 }
 
@@ -181,6 +236,8 @@ func (m *Manager) Detach(a Approval) error {
 	}
 	l.revision++
 	l.state = "detached"
+	l.proof = nil
+	l.localAddress, l.peerAddress = "", ""
 	if l.endpoint != nil {
 		l.endpoint.Close()
 		l.endpoint = nil
@@ -196,6 +253,8 @@ func (m *Manager) Close() {
 	for _, l := range m.lines {
 		l.revision++
 		l.state = "detached"
+		l.proof = nil
+		l.localAddress, l.peerAddress = "", ""
 		if l.endpoint != nil {
 			l.endpoint.Close()
 			l.endpoint = nil
@@ -215,6 +274,7 @@ func (m *Manager) Run(ctx context.Context) {
 		case <-ticker.C:
 			m.mu.Lock()
 			for _, l := range m.lines {
+				m.expireLocked(l, time.Now())
 				if l.endpoint != nil {
 					l.endpoint.Tick()
 				}

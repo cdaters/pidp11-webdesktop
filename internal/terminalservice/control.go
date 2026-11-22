@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime"
 	"time"
 )
 
@@ -36,6 +37,12 @@ func ControlListener(path string) (net.Listener, error) {
 // ControlHandler must be served only on the private local control socket.
 func (m *Manager) ControlHandler() http.Handler {
 	mux := http.NewServeMux()
+	// Private, bounded runtime counters only: no profiles, addresses or secrets.
+	mux.HandleFunc("GET /metrics", func(w http.ResponseWriter, r *http.Request) {
+		var stats runtime.MemStats
+		runtime.ReadMemStats(&stats)
+		json.NewEncoder(w).Encode(map[string]uint64{"goroutines": uint64(runtime.NumGoroutine()), "heap_bytes": stats.HeapAlloc, "total_allocated_bytes": stats.TotalAlloc, "gc_cycles": uint64(stats.NumGC)})
+	})
 	mux.HandleFunc("GET /status", func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(m.Status()) })
 	for _, op := range []string{"attach", "detach"} {
 		mux.HandleFunc("POST /"+op, func(w http.ResponseWriter, r *http.Request) {
@@ -61,6 +68,22 @@ func (m *Manager) ControlHandler() http.Handler {
 			json.NewEncoder(w).Encode(m.Status())
 		})
 	}
+	mux.HandleFunc("POST /renew", func(w http.ResponseWriter, r *http.Request) {
+		r.Body = http.MaxBytesReader(w, r.Body, 1024)
+		decoder := json.NewDecoder(r.Body)
+		decoder.DisallowUnknownFields()
+		var renewal Renewal
+		var extra any
+		if decoder.Decode(&renewal) != nil || decoder.Decode(&extra) != io.EOF {
+			http.Error(w, "invalid renewal", 400)
+			return
+		}
+		if err := m.Renew(renewal); err != nil {
+			http.Error(w, err.Error(), 409)
+			return
+		}
+		json.NewEncoder(w).Encode(m.Status())
+	})
 	return mux
 }
 

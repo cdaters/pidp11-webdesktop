@@ -33,7 +33,7 @@ func serve(ctx context.Context, path string) error {
 	if err != nil {
 		return err
 	}
-	manager, err := terminalservice.New(config.Endpoints)
+	manager, err := terminalservice.NewSupervised(config.Endpoints, config.SupervisedEndpoints)
 	if err != nil {
 		return err
 	}

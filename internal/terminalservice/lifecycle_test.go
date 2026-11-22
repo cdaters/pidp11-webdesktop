@@ -20,7 +20,7 @@ func manager(t *testing.T) *Manager {
 }
 func approval(m *Manager) Approval {
 	s := m.Status()
-	return Approval{s.Instance, "guest", s.Lines[0].Revision, true}
+	return Approval{Instance: s.Instance, ID: "guest", Revision: s.Lines[0].Revision, Confirmed: true}
 }
 func TestDetachedAndGenerationFences(t *testing.T) {
 	m := manager(t)
