@@ -1,0 +1,102 @@
+# Historical application screenshots
+
+These are existing captures of the actual application, not stock images or generated mockups. Their milestone labels matter: older captures preserve the appearance tested at that checkpoint. No screenshot here establishes a live physical-Pi deployment.
+
+## Desktop and full panel
+
+![Arranged panel and terminal desktop](m43-arranged-retina.png)
+
+*M4.3: simulated SVG panel and two mock terminal sessions.*
+
+![Full PDP-11/70 panel](m431-full-panel.png)
+
+*M4.3.1: full panel presentation with original SVG paddle artwork; simulated state.*
+
+## Disks and tape
+
+![RK05 and RL02 disk windows](m431-devices.png)
+
+*M4.3.1: simulated disk mounting/write-protection workflows. No guest disk image is attached.*
+
+<img src="m43-mobile.png" alt="Magnetic tape application on a narrow screen" width="390">
+
+*M4.3: TU10-style simulated tape application on a narrow screen. Its transport advances synthetic blocks.*
+
+## Continuous-form printer
+
+![Line printer](m432-printer-maximized.png)
+
+*M4.3.2: bounded continuous-form paper viewer, still a simulated spool. [Printer behavior and evidence](../printer-m432.md).*
+
+## Genuine UNIX V7
+
+![Actual guest commands](m50-real-unix-v7.png)
+
+![VT100-style sequences emitted by the guest](m50-real-vt100-sequences.png)
+
+*M5.0: genuine UNIX V7 input/output through the authenticated Go bridge in the isolated Mac-hosted Linux lab. The guest emitted the clear/home, reverse-video and line-drawing sequence shown above. [Reproduction and limitations](../lab/M5.0.md).*
+
+## Actual Pi terminal pilot — M5.3
+
+![Genuine UNIX V7 on the actual Pi](m53-pi-unix-v7.png)
+
+Actual Chromium capture through the SSH tunnel to the Pi-hosted V7 guest. Panel/peripheral windows remain simulated; the inherited footer is not a hardware-status indicator. See the [M5.3 evidence and cleanup](../lab/M5.3.md).
+
+## M5.9 development captures
+
+Captured from actual Chromium application windows on the Mac, November 21, 2026. Existing baseline images remain unchanged.
+
+- [V7 Tektronix plot](m59-v7-tek.png): genuine disposable V7 `graph | plot -Ttek` through unmodified SIMH and the real bridge; read-only browser, no intercepted transport.
+- [Printer snapshot](m59-printer-snapshot.png): a genuine V7 `pr` listing captured through the conventional console and explicitly imported from a local text file. The paper is a local snapshot, **not a live LP0 connection**. The guest's 1969 date is its unconfigured lab clock, not the capture date.
+- [Offline companion](m59-offline-companion.png): deterministic guide fixture responding to an actual submitted question. No language model or network provider is connected. The surrounding panel and mock applications are demonstrations.
+
+## M5.9.1 genuine equipment and editor
+
+- [Equipment room](m591-equipment-room.png): actual Chromium application, genuine V7 text and Tektronix stream, completed LP11 CPU-device export from a separate run, and visibly labeled deterministic provider fixture. Four normal application windows; no intercepted transport or synthetic guest login.
+- [2.11BSD vi](m591-bsd-vi.png): genuine `/usr/ucb/vi`, guest TERM=vt100, original SIMH DZ11 line, disposable media.
+
+The captures are application evidence, not physical Pi or real-model evidence. Baseline screenshots remain preserved. [Results and qualifications](../lab/M5.9.1.md).
+
+
+## Later development captures
+
+These original files remain at their established paths so milestone links keep working. Current selected images are in the [gallery](README.md).
+
+- [m42-desktop.png](m42-desktop.png)
+- [m42-full-panel.png](m42-full-panel.png)
+- [m42-mobile.png](m42-mobile.png)
+- [m43-desktop.png](m43-desktop.png)
+- [m43-devices.png](m43-devices.png)
+- [m43-full-panel.png](m43-full-panel.png)
+- [m43-mobile-panel.png](m43-mobile-panel.png)
+- [m43-paddle-details.png](m43-paddle-details.png)
+- [m43-switch-comparison.png](m43-switch-comparison.png)
+- [m43-switch-side-by-side.png](m43-switch-side-by-side.png)
+- [m431-about.png](m431-about.png)
+- [m431-before-after-switches.png](m431-before-after-switches.png)
+- [m431-compact-panel.png](m431-compact-panel.png)
+- [m431-desktop.png](m431-desktop.png)
+- [m431-function-paddles.png](m431-function-paddles.png)
+- [m431-paddle-details.png](m431-paddle-details.png)
+- [m431-switch-comparison.png](m431-switch-comparison.png)
+- [m431-switch-side-by-side.png](m431-switch-side-by-side.png)
+- [m432-printer-132-columns.png](m432-printer-132-columns.png)
+- [m432-printer-before-after.png](m432-printer-before-after.png)
+- [m432-printer-before.png](m432-printer-before.png)
+- [m432-printer-compact.png](m432-printer-compact.png)
+- [m432-printer-dense.png](m432-printer-dense.png)
+- [m432-printer-empty.png](m432-printer-empty.png)
+- [m432-printer-pages.png](m432-printer-pages.png)
+- [m432-printer-short.png](m432-printer-short.png)
+- [m56-4010-fixture.png](m56-4010-fixture.png)
+- [m592-bsd-vi.png](m592-bsd-vi.png)
+- [m592-equipment-room.png](m592-equipment-room.png)
+- [m593a-companion.png](m593a-companion.png)
+- [m593b-companion.png](m593b-companion.png)
+- [m593b-exact-values.png](m593b-exact-values.png)
+- [m593c-companion.png](m593c-companion.png)
+- [m593c-exact-values.png](m593c-exact-values.png)
+- [m593d-companion.png](m593d-companion.png)
+- [m593d-exact-values.png](m593d-exact-values.png)
+- [m593d-offline-desktop.png](m593d-offline-desktop.png)
+- [m593d-replicant.png](m593d-replicant.png)

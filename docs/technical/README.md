@@ -1,6 +1,6 @@
 # Technical documentation
 
-The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets and bounded streams. SIMH does the actual PDP-11 emulation. The normal executable remains a mock service, while the separate M5.0 laboratory command connects to genuine guest lines.
+The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets and bounded streams. SIMH does the actual PDP-11 emulation. The normal executable remains a mock service. Genuine guest labs and the separate optional service use the established terminal bridge; the candidate service starts detached and requires explicit local approval. [Current capabilities](../capabilities.md) and [service procedure](../getting-started/optional-service.md).
 
 Latest optional tutor milestone: [Phase D results and screenshots](../lab/M5.9.3-D.md), [read-only app setup](../../integrations/hacker-replicant/README.md), and [reproduction](../../lab/m593d/README.md). Live-guest and physical acceptance remain separate.
 

@@ -1,6 +1,6 @@
 # Preparing the optional desktop service
 
-This is a **laboratory-tested installation candidate**, now extended by [M5.9 packaging and preflight](installation-paths.md), not an accepted physical Pi deployment. The owner has not authorized installing it on the assembled machine. Original PiDP-11 operation remains the fallback. A later supervised deployment must first resolve the physical-selection discrepancy and review network access, certificate trust and guest-line ownership.
+This is a **laboratory-tested installation candidate**, now extended by [M5.9 packaging and preflight](installation-paths.md), not an accepted physical Pi deployment. The owner has not authorized installing it on the physical machine. Original PiDP-11 operation remains the fallback. A later supervised deployment must first resolve the physical-selection discrepancy and review network access, certificate trust and guest-line ownership.
 
 The package contains a static Linux ARM64 executable with the desktop inside it. The target needs systemd and normal Linux administration tools, but no Node runtime, container, database or graphical desktop. It installs only under `/opt/pidp11-webdesktop`, `/etc/pidp11-webdesktop` and its own systemd/runtime locations. It does not change Oscar's installation or start an emulator.
 
@@ -23,7 +23,7 @@ The following commands are **Linux administrator-shell examples**, tested only i
    ```sh
    cd /reviewed/package
    sha256sum -c PACKAGE_SHA256SUMS
-   sudo sh install.sh /reviewed/package m571-candidate
+   sudo sh install.sh /reviewed/package m5.10-preview.1
    ```
 
    Expected: installed, stopped and disabled. No guest has been contacted.

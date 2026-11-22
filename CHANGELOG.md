@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.10 presentation refresh — 2026-11-21
+
+- Reorganized the README, documentation navigation, current capabilities, limits, beginner guidance and alpha-package presentation.
+- Added eight fresh genuine Mac-lab captures and explicit provenance for four retained Phase D images; preserved historical screenshots and checkpoints.
+- Prepared a first-person website synchronization handoff without editing or deploying the website.
+- Updated candidate release notes without changing application behavior. Bounded guest/device capture checks, documentation checks and package verification are recorded in the [M5.10 report](docs/lab/M5.10.md). No Pi access, stable release or physical acceptance.
+
 ## M5.9.3 Phase D — 2026-11-21
 
 - Added five source-reviewed notes for RSTS/E V9.0, RSX-11M V4.2/M-PLUS V3.0 and PDP-11 deferred/stack behavior; exact RT-11 V5.3 manual coverage remains open.

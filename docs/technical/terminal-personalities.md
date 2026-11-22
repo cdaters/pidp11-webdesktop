@@ -16,7 +16,7 @@ The [DEC VT100 User Guide, programmer information](https://vt100.net/docs/vt100-
 
 These details follow [DECscope VT50/VT52 Operator's Manual, EK-VT5X-OP-001](https://vt100.net/dec/ek-vt5x-op-001.pdf), printed pages 15–22. Graphics characters, copier operations, serial BREAK/flow control and extended PC keys are outside the subset. Unrecognized escape commands are ignored; no automatic ANSI-mode detection is promised. It rejects high-bit output and chunks above 64 KiB. Parser storage is constant; expanded display output is bounded by the input chunk. Only a current keyboard owner may send a query reply, so read-only observers never answer the host.
 
-Unit tests exercise every split of cursor-address fixtures, bounds, reset and keys. Browser tests exercise rendered positions, non-wrap, ownership-gated identification and switching back to VT100 after disconnect. Genuine V7 regression verifies ordinary login/command I/O in each personality; it does not prove a full-screen VT52 application.
+Unit tests exercise every split of cursor-address fixtures, bounds, reset and keys. Browser tests exercise rendered positions, non-wrap, ownership-gated identification and switching back to VT100 after disconnect. Genuine V7 regression verifies ordinary login/command I/O in each personality; that original regression did not prove a full-screen VT52 application. Later 2.11BSD evidence is summarized below.
 
 ## Reproducing the checks
 
@@ -51,3 +51,6 @@ The [Teletype Model 33 technical manual](https://www.bitsavers.org/communication
 | Tektronix | Compressed/incremental coordinates, bounds, GIN ownership and hardcopy | Original V7 plotting, three engines; no genuine GIN test |
 
 The M5.9 table above is the historical baseline. M5.9.1 additionally retained eight genuine 2.11BSD `/usr/ucb/vi` cases: VT100 and VT52 in all three engines, VT220 in Chromium and Firefox. The guest TERM matched the presentation. Insert/write/redraw/delete/quit and read-only reconnect passed; the VT220/WebKit result was not retained after a volume interruption and is not counted. This is scoped application evidence, not full DEC conformance. [M5.9.1 details](../lab/M5.9.1.md#historical-full-screen-evidence).
+
+
+M5.9.2 completed the missing VT220/WebKit case and expanded genuine BSD `vi`/`more`, ownership and observer checks. [Current evidence](../lab/M5.9.2.md). M5.10 adds a fresh Chromium VT220 `vi` capture and V7 VT52/teletype presentation captures; it does not repeat the entire three-engine suite. [Current gallery](../screenshots/README.md).

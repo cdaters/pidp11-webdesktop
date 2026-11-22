@@ -1,23 +1,31 @@
 # Questions and troubleshooting
 
-**Do I need a physical kit to explore this?** No. The browser-only desktop runs locally without a Pi. Reproducing the real guest demonstration needs the separate laboratory setup.
+**Do I need a physical kit?** No. The [local desktop](../../README.md#try-the-local-desktop) needs only the development tools. Genuine guest demonstrations require separate disposable media and the authenticated laboratory service.
 
-**Why do the panel and devices say “simulated”?** Those labels identify their actual data source. A convincing panel or disk window is not evidence of a live device connection. Real guest terminals have a separate connection/status display.
+**Why does a convincing device say “simulated”?** Its label describes the data source. The ordinary front panel, disk/tape controls and local printer spool are demonstrations. **Guest terminal** and **Guest devices** have separate connection and provenance displays.
 
-**Guest terminal says disconnected. Is something broken?** The normal local demo has no real guest service. A real-guest service must be explicitly prepared and started before Guest terminal can authenticate and connect. The completed M5.3 Pi pilot was shut down; it is not an always-on service. There is no one-click Pi installer yet.
+**Guest terminal is disconnected.** This is expected in the browser-only preview. A separately started service needs an identified guest line and explicit local approval. The project does not discover guests, start Oscar’s launcher or silently reconnect after a guest change. Earlier Pi pilots were shut down and rolled back.
 
-**Does the Trixie guide install the Web Desktop?** No. It prepares Oscar's original PiDP-11 software. Its successful installation history and still-unrepeated complete blank-card tutorial are explained in the [guide status](../installation/README.md).
+**Typing does nothing.** Check the selected line, connection state and keyboard ownership. Connecting starts read-only; observer credentials cannot type. Check the guest’s terminal type and Backspace encoding. A reconnect can encounter an existing login or unfinished input; inspect it before typing.
 
-**Can I use my regular console at the same time?** Independence is a core requirement. The lab uses separate guest lines and an operator console. M5.3 also verified an independent Screen console on the actual Pi during browser closure and bridge restart. Normal-launcher and physical-panel coexistence remain separate future tests.
+**Can the original console keep working?** That is a core requirement. Dedicated guest lines keep browser typing separate from the operator console. Specific Screen and physical-panel coexistence checks passed, but the unexpected physical boot selection blocked overall acceptance. [Physical findings](../lab/M5.5-physical-pilot.md).
 
-**Typing does nothing.** Check whether the terminal is a mock or real guest, whether it is connected, and whether this window owns the keyboard. A viewer cannot type. For UNIX V7, also check the Backspace selection; DEL and `#` are different guest inputs.
+**A window is missing or cramped.** Restore it from the taskbar, maximize it or use Reset layout. Arrange equipment groups useful windows. Text size changes readability; it does not change the guest’s historical screen dimensions.
 
-**A window is lost or too small.** Restore it from the taskbar, maximize it or use Reset layout. The real terminal keeps its historical 80 × 24 size and scrolls when its window is narrower.
+**The printer stops updating.** Distinguish the local sample spool from an approved device observation. A live producer may buffer bytes, become stale or complete. Check the reported generation and state. Download only completed output when enabled; do not restart the emulator to repair a browser display. [Observation guide](../technical/observed-peripherals.md).
 
-**Will my demonstration disks and printer jobs survive a refresh?** No. These are memory-only models. Download a printer spool you want to keep. Window positions are the main saved preference.
+**Does a refresh preserve my demonstration media?** No. Those models are memory-only. Save a printer spool or completed device output you want to retain. Window positions are saved locally; keyboard leases are not.
 
-**Can I put this on the Internet?** There is no supported Internet-facing deployment. Use the documented loopback demo or isolated lab. Authentication, guest privileges, raw terminal ports and panel RPC all need deliberate deployment design.
+**The companion has no model.** Offline references, source facts and exact calculation still work. A real model needs explicit [configuration](configured-companion.md), authentication and transport. A cited model answer can still be wrong; annotations do not verify a whole response.
 
-**The setup command failed.** Stop at that command and save its error. Check the documented Node/Go versions and that you are in the repository folder. Report the command, OS/browser and commit in an issue after removing private data. Do not “fix” a local desktop failure by changing your Pi installation.
+**The service refuses to start.** In an authorized lab, inspect its local journal and run the documented file check as the service account. Check certificate expiry/name, private-file permissions, exact HTTPS origin and port. A browser certificate warning requires fingerprint/name verification, not globally disabling TLS checks. Never publish tokens or put them in a URL.
 
-For the engineering boundaries behind these answers, see [known limitations](../known-limitations.md).
+**Memory protection is unavailable.** Leave the companion stopped. The candidate requires effective kernel memory and zero-swap limits; `GOMEMLIMIT` alone cannot enforce them. The assessed Pi had its memory controller disabled. Do not weaken the startup guard; boot changes need separate owner-approved maintenance. [Memory prerequisite](installation-paths.md#memory-controller-prerequisite-after-hardware-repair).
+
+**Can I expose it to the Internet?** There is no supported Internet-facing deployment. Keep guest and RPC ports private. Initial authorized reviews use loopback and an owner-managed protected connection; public authentication is not a complete network-security design.
+
+**Does the Trixie guide install this desktop?** No. It documents Oscar’s original software. Its complete reconstructed procedure has not been independently replayed from a blank card. [Installation evidence](../installation/README.md).
+
+**A setup command failed.** Stop there, keep the error and check the documented tool versions and working directory. Report the command, OS/browser and commit after removing credentials, private addresses and captures. Do not change your Pi to fix a local preview failure.
+
+[Known limitations](../known-limitations.md) · [Documentation index](../README.md)

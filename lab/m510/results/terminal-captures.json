@@ -1,0 +1,16 @@
+[
+  {
+    "personality": "vt52",
+    "guest": "UNIX V7",
+    "browser": "Chromium",
+    "genuineGuest": true,
+    "readOnlyAtCapture": true
+  },
+  {
+    "personality": "asr33",
+    "guest": "UNIX V7",
+    "browser": "Chromium",
+    "genuineGuest": true,
+    "readOnlyAtCapture": true
+  }
+]

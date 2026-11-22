@@ -1,58 +1,75 @@
-# Real application screenshots
+# Actual application gallery
 
-These are existing captures of the actual application, not stock images or generated mockups. Their milestone labels matter: older captures preserve the appearance tested at that checkpoint. No screenshot here establishes a live physical-Pi deployment.
+These images show the real application. Eight fresh M5.10 Chromium captures use disposable V7/2.11BSD guests and original emulated devices on the Mac; four Phase D captures preserve the actual offline/model/app evidence. No image establishes a current physical Pi deployment.
 
-## Desktop and full panel
+Open any image for full resolution. Captures retain their original dimensions; fresh PNGs received lossless compression only. [Machine-readable dimensions, hashes, captions and provenance](m510/provenance.json) · [M5.10 procedure and results](../lab/M5.10.md) · [Historical archive](ARCHIVE.md).
 
-![Arranged panel and terminal desktop](m43-arranged-retina.png)
+## The equipment desk
 
-*M4.3: simulated SVG panel and two mock terminal sessions.*
+![Actual Web Desktop with V7 text and plotting above completed LP11 and PC11 observations](m510/desktop.png)
 
-![Full PDP-11/70 panel](m431-full-panel.png)
+*Fresh Chromium capture. V7 supplies terminal and vector output; a separate diskless original SIMH CPU program drives the devices. Completed output is read-only. No model or physical Pi is connected.*
 
-*M4.3.1: full panel presentation with original SVG paddle artwork; simulated state.*
+## Historical guests and terminal personalities
 
-## Disks and tape
+![Genuine UNIX V7 directory listing in the VT100 terminal](m510/unix-v7.png)
 
-![RK05 and RL02 disk windows](m431-devices.png)
+*Fresh V7 guest commands over the authenticated bridge, captured read-only after releasing the keyboard.*
 
-*M4.3.1: simulated disk mounting/write-protection workflows. No guest disk image is attached.*
+![Genuine 2.11BSD vi editing two lines through the VT220 subset](m510/bsd-vi.png)
 
-<img src="m43-mobile.png" alt="Magnetic tape application on a narrow screen" width="390">
+*Fresh original SIMH/disposable 2.11BSD capture. The retained M591 string is a test identifier from the reused editor harness. Insert, save, redraw, delete, quit, readback and read-only reconnect passed.*
 
-*M4.3: TU10-style simulated tape application on a narrow screen. Its transport advances synthetic blocks.*
+![Genuine V7 commands displayed with the VT52 subset](m510/v7-vt52.png)
 
-## Continuous-form printer
+*Fresh Chromium capture of V7 text. Historical subset, not complete VT52 conformance.*
 
-![Line printer](m432-printer-maximized.png)
+![Genuine V7 echo and working-directory output on uppercase paper](m510/v7-asr33.png)
 
-*M4.3.2: bounded continuous-form paper viewer, still a simulated spool. [Printer behavior and evidence](../printer-m432.md).*
+*Fresh ASR-33-inspired 72-column presentation; captured while command output was arriving. Mechanical timing and physical teletype behavior are not emulated.*
 
-## Genuine UNIX V7
+## Graphics and emulated devices
 
-![Actual guest commands](m50-real-unix-v7.png)
+![UNIX V7 graph output rendered as Tektronix vectors](m510/v7-tek.png)
 
-![VT100-style sequences emitted by the guest](m50-real-vt100-sequences.png)
+*Fresh genuine graph | plot -Ttek output over a dedicated V7 guest line. No intercepted graphics fixture; genuine GIN remains unqualified.*
 
-*M5.0: genuine UNIX V7 input/output through the authenticated Go bridge in the isolated Mac-hosted Linux lab. The guest emitted the clear/home, reverse-video and line-drawing sequence shown above. [Reproduction and limitations](../lab/M5.0.md).*
+![Incremental original LP11 device output on continuous paper](m510/lp11-live.png)
 
-## Actual Pi terminal pilot — M5.3
+*Fresh observation during phase 1 of the diskless CPU/device test. The original LP11 registers produced the bytes. This is not an operating-system printer-driver demonstration.*
 
-![Genuine UNIX V7 on the actual Pi](m53-pi-unix-v7.png)
+![Incremental PC11 paper-tape bytes and reader progress](m510/pc11-live.png)
 
-Actual Chromium capture through the SSH tunnel to the Pi-hosted V7 guest. Panel/peripheral windows remain simulated; the inherited footer is not a hardware-status indicator. See the [M5.3 evidence and cleanup](../lab/M5.3.md).
+*Fresh original PC11 reader/punch exercise. Three phases later completed 12,288 bytes with exact download verification; the capture itself shows the live first phase.*
 
-## M5.9 development captures
+## Reference desk and optional AI
 
-Captured from actual Chromium application windows on the Mac, November 21, 2026. Existing baseline images remain unchanged.
+![Offline historical source search and MOVB fact beside a simulated panel](m593d-offline-desktop.png)
 
-- [V7 Tektronix plot](m59-v7-tek.png): genuine disposable V7 `graph | plot -Ttek` through unmodified SIMH and the real bridge; read-only browser, no intercepted transport.
-- [Printer snapshot](m59-printer-snapshot.png): a genuine V7 `pr` listing captured through the conventional console and explicitly imported from a local text file. The paper is a local snapshot, **not a live LP0 connection**. The guest's 1969 date is its unconfigured lab clock, not the capture date.
-- [Offline companion](m59-offline-companion.png): deterministic guide fixture responding to an actual submitted question. No language model or network provider is connected. The surrounding panel and mock applications are demonstrations.
+*Preserved Phase D capture: actual offline reference search, inspectable RSTS/E passage and deterministic MOVB fact. Panel and mock terminal are simulations; no model is required.*
 
-## M5.9.1 genuine equipment and editor
+![Actual experimental Gemma conversation with an inspectable address-space note](m593d-companion.png)
 
-- [Equipment room](m591-equipment-room.png): actual Chromium application, genuine V7 text and Tektronix stream, completed LP11 CPU-device export from a separate run, and visibly labeled deterministic provider fixture. Four normal application windows; no intercepted transport or synthetic guest login.
-- [2.11BSD vi](m591-bsd-vi.png): genuine `/usr/ucb/vi`, guest TERM=vt100, original SIMH DZ11 line, disposable media.
+*Preserved Phase D actual model conversation, with source inspection and the limited claim-review control. Sharing uses a labeled synthetic excerpt, not a live guest. The review panel is collapsed in this capture; it is not proof of whole-answer verification.*
 
-The captures are application evidence, not physical Pi or real-model evidence. Baseline screenshots remain preserved. [Results and qualifications](../lab/M5.9.1.md).
+![Exact octal word calculation alongside experimental model prose](m593d-exact-values.png)
+
+*Preserved Phase D capture. The calculator computes 177776 octal = 65534 decimal = FFFE hex locally. Model prose remains a separate unverified explanation.*
+
+## Hacker Replicant laboratory interoperability
+
+![Actual modified Hacker Replicant in read-only mode after revoking synthetic selection sharing](m593d-replicant.png)
+
+*Preserved Phase D laboratory capture of Rolf Peters’ independently authored application with our explicit optional patch. Actual model traffic, separate login and synthetic selection/revoke workflow; no live console, supported full integration or endorsement.*
+
+## Reading the evidence
+
+The inherited M5.0 footer is a UI version label, not a hardware-status indicator. Public disposable-guest paths and test identifiers are not private host paths. Session tokens and private configuration are absent. Older captures remain unchanged and retain their original qualifications.
+
+Gemma is experimental. Phase D found factual errors and missed contradictions; the claim-review control checks only recognized fragments. [Measured limits](../lab/M5.9.3-D.md). Source passages are original project summaries with links, not redistributed manuals. [Credits](../../ACKNOWLEDGMENTS.md) and [third-party notices](../../THIRD_PARTY_NOTICES.md) apply throughout.
+
+<a id="m59-development-captures"></a>
+
+## Earlier captures
+
+The [M5.9 development captures](ARCHIVE.md#m59-development-captures) and all earlier images remain preserved in the historical index.

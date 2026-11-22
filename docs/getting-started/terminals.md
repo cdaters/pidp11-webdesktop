@@ -1,37 +1,46 @@
 # A terminal is a conversation with a computer
 
-A DEC VT100 is a text terminal: a keyboard and screen that exchange characters with another computer. The computer can also send instructions that move the cursor, clear the screen or draw lines. Our browser terminal uses xterm.js to render a tested VT100-style subset. It is not yet a complete reproduction of every DEC terminal model.
+A DEC VT100 exchanges characters with another computer. The computer can also send instructions that move the cursor or clear the screen. Web Desktop interprets tested subsets of these instructions; selecting a familiar faceplate does not establish complete historical conformance.
 
-Three prompts can look similar while controlling different things:
+## Know where commands go
 
-| Where you are | What commands affect |
+| Window or prompt | What commands affect |
 |---|---|
-| Mac or Raspberry Pi Linux shell | The host computer: files, programs and services |
-| SIMH `sim>` monitor | The emulated machine: devices, disks and execution |
-| PDP-11 guest terminal | The historical operating system running inside SIMH |
+| Mac or Raspberry Pi Linux shell | The host’s files, programs and services |
+| SIMH `sim>` monitor | The emulated machine, disks and execution |
+| PDP-11 guest terminal | The historical operating system inside SIMH |
+| Desktop **Terminal** demonstration | A bounded mock command model; try `HELP` |
 
-Do not paste a Linux installation command into a guest terminal, or a SIMH command into a guest shell. Prompt appearance is a useful clue, but read the window's source/status label too.
+Read the source/status label as well as the prompt. Never paste a host installation command into a guest or an emulator command into a guest shell.
 
-## The real demonstration
+## Choose a personality
 
-In M5.0, a genuine UNIX V7 guest ran under original SIMH/REALCONS in an isolated Linux environment on the Mac. The browser executed `ls /` and other real commands through a Go bridge connected to dedicated DC11 serial lines. The independent operator console remained usable when a browser closed or the bridge stopped.
+Select the personality before connecting. Set the guest application’s terminal type separately; the menu does not configure the operating system.
 
-![Real UNIX V7 browser session](../screenshots/m50-real-unix-v7.png)
+| Choice | Current evidence |
+|---|---|
+| VT100, VT52, VT220 subset | Genuine V7 commands and scoped 2.11BSD `vi` tests; see the detailed compatibility guide |
+| ASR-33-inspired | Genuine V7 text on 72-column uppercase paper; mechanical timing is not emulated |
+| Tektronix 4010 | Genuine V7 vector plots; not complete 4014 or genuine GIN acceptance |
 
-*Actual M5.0 guest output. The background front panel is still simulated; this is not a photograph or a live physical-Pi connection.*
+DEC text uses 80 × 24 cells; smaller windows scroll instead of changing guest geometry. VT220 extensions remain limited, and input remains ASCII7. [Detailed personalities and exclusions](../technical/terminal-personalities.md).
 
-M5.3 subsequently ran genuine UNIX V7 on the actual Pi using its original installed simulator, a disposable disk and an independent Screen console. Chromium, Firefox and WebKit passed through an SSH tunnel. The pilot was shut down and originals verified unchanged; see the [Pi report and screenshot](../lab/M5.3.md).
+![Genuine 2.11BSD vi on the VT220 subset](../screenshots/m510/bsd-vi.png)
 
-## Sharing a guest line
+*Actual disposable guest, captured in Chromium. This establishes scoped editor behavior, not a physical Pi connection.*
 
-Several browsers can watch the same terminal output, but only one may own its keyboard. Connecting starts read-only. **Acquire keyboard** requests control, **Release keyboard** gives it up, and **Disconnect** closes that browser connection. A different guest line can have a different keyboard owner where the operating system supports it.
+## Connect and share a guest line
 
-Refreshing does not silently take control. Reconnecting is explicit and starts with a fresh display; the guest may still be logged in or have unfinished input. Closing a browser does not shut down the guest. Stopping the bridge can disconnect the guest terminal line and affect that login, even while the PDP-11 and its operator console keep running.
+A real guest needs the [optional service](optional-service.md), an independently running guest and a locally approved guest-only serial line. Sign in, refresh the available lines, select the intended one and connect. Connection starts **read-only**. **Acquire keyboard** requests the single keyboard lease; **Release keyboard** returns it. Different configured lines can have different owners. Observer credentials never acquire control.
 
-## Typing and paste
+Disconnecting closes your browser view, not the guest. Reconnecting is explicit, gives a fresh display and does not replay input or automatically acquire control. The guest may still have a login or unfinished command on that line. Stopping the bridge can hang up the line even though the independent operator console and CPU keep running.
 
-The real adapter currently uses ASCII7 and a fixed 80 × 24 screen. Backspace encoding can be selected explicitly: DEL, BS or UNIX V7's `#` erase character. The correct choice depends on the guest's terminal settings.
+Before changing guests or restarting SIMH, the administrator must stop the actual bridge process. Reusing a port is not evidence of guest identity. A guest change that leaves the same stream open may be undetectable; independent verification and fresh approval remain necessary.
 
-Paste is captured for review. Only one bounded ASCII line without Return is accepted; **Send reviewed paste** does not press Return for you. Inspect what you are sending before executing a guest command.
+## Type deliberately
 
-VT52, fuller VT220 support, Tektronix 4010 and VT11/VR14 graphics are future directions, not current guest-terminal claims. Developers can follow the [M5.0 reproduction guide](../lab/M5.0-runbook.md) and [terminal architecture](../lab/M5.0.md).
+Choose the Backspace encoding that your guest expects: DEL, BS or V7’s `#` erase character. Reviewed paste accepts one bounded ASCII line without Return; sending the reviewed line does not execute it automatically.
+
+Selected text can be shared deliberately with the optional companion. Ordinary chat cannot type into the guest. The separately enabled command-proposal experiment has narrow allowlisted UNIX suggestions, attachment checks and human approval; it is not general AI console control.
+
+[Current guest evidence](../capabilities.md#terminals-and-operating-systems) · [Questions](questions.md) · [Original Pi pilot](../lab/M5.3.md)

@@ -1,0 +1,13 @@
+[
+  {
+    "personality": "vt220",
+    "browser": "chromium",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt220",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": false
+  }
+]

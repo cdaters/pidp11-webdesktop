@@ -28,3 +28,7 @@ M5.2 prepares this work for public collaboration with community documentation an
 ## November 19, 2026 — M5.6 local expansion
 
 [Terminal personalities and deployment preparation](lab/M5.6.md): initial VT52 plus VT100 conformance and genuine V7 regressions, a bounded 4010 fixture, a clearer optional setup workflow, final systemd lifecycle rehearsal and read-only physical-platform compatibility evidence. No GPIO execution or physical deployment; the M5.5 selection discrepancy remains open.
+
+## M5.10 — November 21, 2026
+
+[Repository presentation refresh](lab/M5.10.md): current onboarding, genuine guest/device gallery, explicit capability/limitation matrix, alpha-package documentation and a separate website handoff. The runtime remains Phase D; physical acceptance is unchanged.

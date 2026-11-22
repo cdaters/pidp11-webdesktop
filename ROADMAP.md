@@ -1,5 +1,11 @@
 # Where the project is going
 
+## M5.10: presentation and onboarding
+
+The repository now introduces the current desktop with genuine guest/device captures, a capability matrix, beginner navigation and versioned alpha-package guidance. [Verification](docs/lab/M5.10.md) and [website handoff](docs/website-sync/M5.10/README.md). This is a documentation milestone; it does not advance physical acceptance.
+
+Recommended next software milestone: independent historical and security review of the optional tutor, with measured whole-response errors and an authoritative selection-lifecycle writer in disposable guest-change tests. Keep hardware repair, effective memory protection and a renewed supervised physical-only/coexistence pilot as separate owner-approved gates. Broader guest printer-driver support remains a distinct investigation.
+
 ## M5.9.3 Phase D: implemented alpha, live integration unqualified
 
 The tutor has 29 source notes, 13 deterministic facts and limited natural fragment recognition. Actual pinned Hacker Replicant runs through a documented optional read-only mode with its own login, deliberate selection sharing, source lookup and cancellation. Synthetic sharing and the protected ARM64 package passed; the Pi was not accessed. [Evidence and remaining limits](docs/lab/M5.9.3-D.md).
@@ -41,7 +47,7 @@ M5.7.1 [compared SR0 UP and DOWN](docs/lab/M5.7.1.md): it remained asserted at t
 
 ## M5.9 development increment
 
-[Implemented and tested](docs/lab/M5.9.md): initial VT220, teletype presentation, genuine V7 Tektronix plotting, multiple guest windows, manual printer snapshot import, offline AI guide and separate provider contracts, read-only preflight and versioned ARM64 packaging. No physical machine was contacted. Full-screen qualification, live peripherals, VT11 output observation and configured model wiring remain next increments.
+[Implemented and tested](docs/lab/M5.9.md): initial VT220, teletype presentation, genuine V7 Tektronix plotting, multiple guest windows, manual printer snapshot import, offline AI guide and separate provider contracts, read-only preflight and versioned ARM64 packaging. No physical machine was contacted. That historical increment preceded the later full-screen, live-observation and configured-model tests above; VT11 output observation remains open.
 
 ## Sharing the work
 

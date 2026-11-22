@@ -7,7 +7,7 @@ Web Desktop is an optional companion to Oscar Vermeulen's PiDP-11. Its installer
 Keep your original physical-only setup as the fallback. These are staged instructions for an authorized Linux administrator; stop at a failed check.
 
 1. Confirm the original machine works independently: physical selection, lamps, HALT/CONT and conventional console. Preserve a verified backup and record the installed version. The desktop does not repair or validate electrical hardware.
-2. Obtain a reviewed candidate archive and its `SHA256SUMS` from the same trusted source revision. In a **Linux shell**, verify the archive before extracting it into a new directory:
+2. Prepare or obtain a reviewed candidate archive and its `SHA256SUMS` from the same trusted source revision. There is no hosted binary download promised here; developers can use the [alpha packaging procedure](../releases/alpha-readiness.md). In a **Linux shell**, verify the archive before extracting it into a new directory:
 
    ```sh
    sha256sum -c SHA256SUMS
@@ -44,4 +44,6 @@ M5.9 tested missing-controller refusal and restoration in a disposable systemd s
 
 ## Current development candidate
 
-[M5.9.2 candidate verification](../lab/M5.9.2-package.md) adds optional live-device observation and a historical reference desk. Neither is required for terminal use. Live followers need a separately reviewed local supervisor; the companion model remains optional and real-model acceptance is pending. This increment changes neither setup path nor the hardware, guest-identity and enforced-memory gates above.
+The [M5.10 alpha presentation](../releases/alpha-readiness.md) packages the Phase D runtime with current documentation. Optional live-device observation, offline references, exact facts/calculations and actual local-model conversations have laboratory evidence. The model remains experimental and unnecessary for terminal use. See the [capability matrix](../capabilities.md) for the distinctions.
+
+The [Phase D report](../lab/M5.9.3-D.md) records protected ARM64 lifecycle tests; M5.10 performs packaging and presentation checks, not a fresh physical deployment. Neither increment changes the hardware, guest-identity and enforced-memory gates above.

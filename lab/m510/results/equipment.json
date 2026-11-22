@@ -1,0 +1,12 @@
+{
+  "browser": "Chromium",
+  "genuineV7Text": true,
+  "genuineV7TekVectors": 22,
+  "devicePhases": 3,
+  "completedDownloadsByteEqual": true,
+  "LP11Bytes": 20205,
+  "PC11ReaderAndPunchBytes": 12288,
+  "providerFixture": false,
+  "realModelInM510": false,
+  "hero": "recaptured after completion; individual device images preserve live phase 1"
+}

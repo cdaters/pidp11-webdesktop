@@ -4,7 +4,7 @@ Start the [local preview](../../README.md#try-the-local-desktop), then open the 
 
 ## Make room on the desk
 
-Use the launcher on the left to open applications. Drag a title bar to move a window, double-click it to maximize, and use the lower-right corner to resize. The taskbar brings minimized windows back. **Arrange terminals** and **Reset layout** help if the desk becomes crowded. Window geometry is saved locally; tokens, media and control leases are not.
+Use the launcher on the left to open applications. Drag a title bar to move a window, double-click it to maximize, and use the lower-right corner to resize. The taskbar brings minimized windows back. **Arrange terminals**, **Arrange equipment** and **Reset layout** help if the desk becomes crowded. Window geometry is saved locally; tokens, media and control leases are not.
 
 ## Try the panel
 
@@ -36,3 +36,15 @@ Open **Line printer**, add a sample job and print the queue. The listing appears
 **Download spool** saves the original text. The paper styling does not alter the spool. This printer is a local demonstration, not guest LP0 output, and ordinary browser printing is not a supported whole-listing export. Save anything you want to keep before closing/reloading the browser.
 
 ![Continuous-form printer](../screenshots/m432-printer-maximized.png)
+
+## Watch genuine devices
+
+With a separately configured guest service, **Guest devices** can show completed exports or approved live LP11 printer and PC11 paper-tape output. Select the exact offered generation and explicitly begin observation. These are read-only views; they cannot start the simulator, load media or feed arbitrary bytes into it. A stale producer or lost observation needs review, not an automatic reconnect.
+
+The [current device guide](../technical/observed-peripherals.md) explains completion, downloads and resource limits. Genuine tests used PDP-11 CPU programs driving original emulated device registers. That is different from a guest operating system’s printer driver. The normal **Line printer** and **Paper tape** applications remain demonstrations.
+
+## Find an explanation
+
+Open **AI Companion** for the offline guide. Search the historical reference desk and inspect its source-linked passages. `/fact movb-register` retrieves a deterministic source fact; `/calc 16 oct 177776` calculates the exact word value. These paths need no model.
+
+A configured local model is optional and experimental. Use **Share selected text** deliberately; review the excerpt and its destination. Sharing text does not give the model keyboard ownership. An answer or claim annotation can be wrong or incomplete. [Setup, consent and limits](configured-companion.md).

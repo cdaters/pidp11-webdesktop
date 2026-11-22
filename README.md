@@ -1,96 +1,60 @@
 # PiDP-11 Web Desktop
 
-**Craig Daters · [RetroRealm.org](https://retrorealm.org/)**
+**Craig Daters · [RetroRealm.org](https://retrorealm.org/projects/pidp-11)**
 
-**Experimental · Active Development · [MIT original project code](LICENSE)**
+**Experimental alpha · Independent project · [MIT original code](LICENSE)**
 
-A modern browser as a desk full of vintage terminals and peripherals, connected to a real PDP-11 operating system. PiDP-11 Web Desktop is an independent companion for [Oscar Vermeulen's PiDP-11/70](https://github.com/obsolescence/pidp11), built for exploration, preservation and the pleasure of using these machines.
+A browser workspace for exploring a PDP-11: vintage terminals, vector graphics, continuous-form paper, and an optional historical reference companion. Inspired by The High Nibble’s IMSAI 8080 desktop, this project brings those tools together around [Oscar Vermeulen’s PiDP-11/70](https://github.com/obsolescence/pidp11).
 
-The goal is simple: turn on your PiDP-11, select an operating system with its physical switches, then open a browser terminal from your Mac, Windows PC, Linux computer or tablet. The Raspberry Pi stays headless; the browser draws the interface. The original panel, console, SSH, GNU Screen and serial terminals remain independent.
+The old computer still does the computing. SIMH runs the historical operating system; the browser displays its terminal and device output. Oscar’s original launcher, physical panel and conventional console remain independent of the optional desktop.
 
-**Genuine UNIX V7 browser sessions now work on the actual Raspberry Pi 3B+ in a controlled terminal-only pilot.** The pilot used the original installed simulator, preserved its installation, and was shut down after testing. You can explore the local desktop today without a Pi or guest disk.
+[**Try it locally**](#try-the-local-desktop) · [Getting started](docs/getting-started/README.md) · [Gallery](docs/screenshots/README.md) · [Capabilities](docs/capabilities.md) · [Documentation](docs/README.md)
 
-The optional [historical tutor](docs/technical/historical-reference-library.md) now includes 29 reference notes, 13 source-identified facts, limited fragment review and exact local octal calculations. [Phase D](docs/lab/M5.9.3-D.md) records genuine Gemma qualification and an independently authenticated optional Hacker Replicant mode. Model explanations remain experimental.
+![Actual Web Desktop with a UNIX V7 terminal, V7 Tektronix plot and completed LP11/PC11 device observations](docs/screenshots/m510/desktop.png)
 
-[Start exploring](docs/getting-started/README.md) · [Technical documentation](docs/technical/README.md) · [Philosophy](PHILOSOPHY.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Contribute](CONTRIBUTING.md)
+*Actual Chromium capture from a disposable Mac-hosted Linux lab. V7 supplies the terminal and plot; a separate diskless PDP-11 program supplies the printer and paper-tape bytes. This is not a physical Pi deployment or an operating-system printer-driver demonstration. [Full-size gallery and provenance](docs/screenshots/README.md).*
 
-![PiDP-11 Web Desktop with front panel and two terminal windows](docs/screenshots/m43-arranged-retina.png)
+## A desk for historical computing
 
-*Actual M4.3 desktop: the SVG panel and these mock terminals are local demonstrations. Windows can be moved, resized and arranged without a graphical desktop on the Pi.*
+- **Use real guest terminals.** Open independent lines, share read-only views, and explicitly acquire a keyboard when you want to type.
+- **Explore terminal personalities.** Choose VT100, VT52, a VT220 subset, or an ASR-33-inspired paper presentation.
+- **Watch vector graphics and device output.** Display V7 plots, follow approved LP11/PC11 output, and download completed bytes.
+- **Learn without a model.** Search 29 source-linked historical notes, request 13 verified source facts, or calculate PDP-11 values exactly.
+- **Explore without hardware.** The local demonstration includes an SVG PDP-11/70 panel, mock terminals, and simulated disk, tape and printer workflows.
 
-## From a browser to UNIX V7
+Windows move, resize, maximize and arrange like equipment on a workbench. The browser supplies the graphics; the optional Go service stays small and serves its application assets from one executable. No graphical desktop, Node runtime, database or container is required on the target Pi.
 
-M5.0 connected xterm.js in the browser to a genuine Research UNIX Seventh Edition guest running under original SIMH/REALCONS. A small Go bridge carries terminal bytes over authenticated WebSockets to dedicated DC11 guest lines. The guest runs the commands; the browser displays their output.
+## Genuine operating systems, with specific evidence
 
-Chromium, Firefox and WebKit passed the lab demonstration, including multiple observers, exclusive keyboard ownership, independent terminal lines and reconnects. The conventional operator console continued working when browsers closed and while the bridge was stopped. A fresh disposable disk repeated the demonstration.
+**Research UNIX V7** has run through the browser in disposable laboratories and in a completed terminal-only pilot on the actual Raspberry Pi. **2.11BSD** has passed genuine `vi` editing and `more` paging through the browser. Full-screen application tests cover specified terminal subsets, not complete historical-terminal conformance.
 
-M5.3 repeated the genuine terminal demonstration on the actual Pi using one disposable V7 disk, an independent Screen console and an SSH tunnel. All three browser engines passed. [Read the Pi pilot results](docs/lab/M5.3.md).
+![Genuine 2.11BSD vi running through the VT220 subset](docs/screenshots/m510/bsd-vi.png)
 
-![Genuine UNIX V7 commands on the Raspberry Pi](docs/screenshots/m53-pi-unix-v7.png)
+*Fresh disposable 2.11BSD, original SIMH and the actual browser terminal. The editor’s filename contains a test identifier. [Terminal behavior](docs/technical/terminal-personalities.md) · [Guest demonstrations](docs/capabilities.md#terminals-and-operating-systems).*
 
-*Actual M5.3 Pi-hosted guest session through the SSH tunnel. The background panel remains simulated. Later [M5.5 physical-pilot findings](docs/lab/M5.5-physical-pilot.md) distinguish successful V7 coexistence checks from a failed fallback selection.*
+RT-11SJ V05.03 worked through the original physical launcher and console. That is **not** a verified Web Desktop RT-11 integration. RSX and RSTS/E historical references likewise do not establish browser guest acceptance.
 
-[Read the demonstration report](docs/lab/M5.0.md) · [Reproduce the lab](docs/lab/M5.0-runbook.md)
+## Graphics and peripherals
 
-## Choose a setup path
+The Tektronix 4010 renderer receives genuine UNIX V7 `graph | plot -Ttek` output. LP11 and PC11 observation follows output from the original SIMH devices; a PDP-11 CPU test program exercises those registers and transfers actual bytes. Guest printer-driver integration remains unverified.
 
-- **Already own a working PiDP-11?** Use [Path A: optional companion](docs/getting-started/installation-paths.md#path-a-you-already-have-a-working-pidp-11), with read-only preflight, private setup, rollback and removal. The ARM64 package is a laboratory candidate; hardware and memory-protection gates still apply.
-- **Starting with Raspberry Pi OS Lite?** Use [Path B: original software first](docs/getting-started/installation-paths.md#path-b-start-with-raspberry-pi-os-lite). Verify independent physical operation before considering the companion. A fresh-card installation was not replayed in M5.9.
+![Genuine UNIX V7 vector plot in the browser](docs/screenshots/m510/v7-tek.png)
 
-## What works today
+The separate disk, magnetic-tape, paper-tape and system-management applications are **simulations**. They do not attach or rewrite real guest media. VT11/VR14 work remains research. [Graphics guide](docs/technical/graphics-foundations.md) · [Device observation](docs/technical/observed-peripherals.md).
 
-| Part of the desktop | Current status |
-|---|---|
-| PDP-11/70 panel | Interactive SVG reconstruction with simulated lamps, switches and selectors |
-| Desktop | Movable/resizable windows, taskbar, keyboard controls, layout preferences and touch-friendly controls |
-| Mock terminals | Four independent local demonstration sessions with a tested DEC-style renderer |
-| Genuine guest terminal | UNIX V7/DC11 demonstrated in the isolated lab **and on the actual Pi**; M5.9 tests VT100, initial VT52/VT220 and teletype presentations in genuine disposable V7 |
-| 4010 graphics | Bounded Tektronix parser now displays genuine V7 `graph` / `plot -Ttek` output in three browser engines; VT11 remains separate future work |
-| Disk, tape, paper tape and OS profiles | Working **simulated** workflows; no real guest media is changed |
-| Continuous-form line printer | Simulated spool preserved; new authenticated Guest devices view receives verified completed LP11 exports from genuine PDP-11 CPU/device tests, with exact downloads. M5.9.2 also adds bounded live observation; no verified OS printer driver yet |
-| AI Companion | Offline historical search and exact PDP-11 values; optional source-assisted local model, qualified through real three-engine conversations. Models still make factual errors. Explicit sharing and separate, disabled-by-default command review. [Phase B findings](docs/lab/M5.9.3-B.md) |
-| Passive panel observation | Laboratory experiments; no production Pi observation service installed |
-| Optional installation candidate | Detached Go service and ARM64 package tested in disposable Linux; not deployed to the Pi. [M5.9 results](docs/lab/M5.9.md) · [setup candidate](docs/getting-started/optional-service.md) |
-| Physical Pi integration | V7/browser/physical checks passed in M5.5, but fallback selected the wrong guest; acceptance blocked, temporary changes rolled back, machine left stopped |
-| Remote front-panel control | Separate unresolved safety work; not a production feature |
+## An optional companion for learning
 
-![Continuous-form line-printer listing](docs/screenshots/m432-printer-maximized.png)
+The offline reference desk, source facts and exact calculator work without AI. For example, `/calc 16 oct 177776` gives decimal **65534** and hexadecimal **FFFE**; `/fact movb-register` retrieves a source-backed explanation.
 
-*Actual M4.3.2 simulated line printer. Paper presentation is independent of the downloadable text spool; it is not yet connected to guest LP0.*
+A separately configured local model can discuss deliberately shared text and source passages. Genuine Gemma conversations passed in three browser engines, but Gemma still makes factual and arithmetic errors. Claim annotations check only narrowly recognized statements; a source citation does not certify an answer. Nothing in chat automatically operates the host, simulator, guest or panel. The separate, disabled-by-default command-proposal experiment allows only three reviewed UNIX suggestions with explicit human approval.
 
-See the [gallery](docs/screenshots/README.md) for the full panel, disk and tape applications. [Known limitations](docs/known-limitations.md) explains the boundaries without requiring you to read every engineering report.
+[Use the companion](docs/getting-started/configured-companion.md) · [Reference library](docs/technical/historical-reference-library.md) · [Measured limits](docs/lab/M5.9.3-D.md).
 
-![Genuine V7 Tektronix graphics in the browser](docs/screenshots/m59-v7-tek.png)
+### Hacker Replicant is a separate project
 
-*Actual M5.9 disposable V7 plotting output through unmodified SIMH. [Evidence, limits and remaining work](docs/lab/M5.9.md).*
+[Rolf Peters’ Hacker Replicant](https://github.com/rolfpeters-droid/pidp11-hacker-replicant) inspired aspects of our independently developed companion. Its GNU Screen operator-console approach differs from our dedicated guest serial lines and explicit attachment/keyboard protections.
 
-## M5.9.3 Phase A: genuine local companion
-
-The optional companion now has real local-model acceptance in Chromium, Firefox and WebKit, including deliberate excerpt sharing, follow-up conversation and cancellation. Qwen 3 14B through Ollama works with optional reasoning disabled. Both tested Qwen models made factual errors, so the sourced offline guide remains the recommended default. No model was downloaded, no hosted inference was contacted and the Pi was untouched.
-
-[Inventory, model results and free-provider comparison](docs/lab/M5.9.3-A.md) · [Tested configuration](docs/getting-started/configured-companion.md) · [Private model-host design](docs/technical/hosted-local-companion.md)
-
-## M5.9.2 live equipment workspace
-
-The optional desktop now follows approved LP11/PC11 output while original SIMH devices are active. Two read-only device windows can sit beside genuine UNIX V7 text, Tektronix graphics and the optional companion. **Arrange equipment** organizes the windows; terminal titles and the taskbar show connection and keyboard ownership. Tablet layouts use task switching.
-
-![Genuine guest terminals and live device observation](docs/screenshots/m592-equipment-room.png)
-
-*Actual disposable V7 and original CPU-driven LP11/PC11, with a clearly labeled deterministic companion fixture. No physical Pi connection or real-model inference is shown.*
-
-Fresh 2.11BSD VT220 vi/more checks passed in all three browser engines, including the previously missing WebKit case, observer redraw and keyboard handoff. The companion adds sourced historical notes and a visible summary of text being shared. Real-model acceptance and production peripheral supervision remain pending.
-
-[Development report](docs/lab/M5.9.2.md) · [Live observation](docs/technical/observed-peripherals.md) · [Candidate record](docs/lab/M5.9.2-package.md)
-
-## M5.9.1 equipment and applications
-
-Completed LP11/PC11 output, configured companion requests and eight retained genuine 2.11BSD `vi` cases now have working code and laboratory evidence. Twelve fresh V7 terminal cases and the combined equipment workflow passed across Chromium, Firefox and WebKit. The physical Pi was not contacted.
-
-![V7 terminals, genuine completed printer output and a labeled provider fixture](docs/screenshots/m591-equipment-room.png)
-
-*Actual laboratory application. V7 text/graphics are live guest streams; paper is a completed CPU-device export; the companion response is a deterministic fixture, not a real model.*
-
-[Results and limits](docs/lab/M5.9.1.md) · [Observe device output](docs/technical/observed-peripherals.md) · [Configure the companion](docs/getting-started/configured-companion.md)
+The actual application completed laboratory conversations through our model gateway. Phase D used an **explicitly modified** copy in a separately authenticated read-only mode, with synthetic selected text and no console control. This is not a supported full integration, merger or endorsement. [Optional integration and attribution](integrations/hacker-replicant/README.md).
 
 ## Try the local desktop
 
@@ -103,29 +67,33 @@ npm ci
 npm run dev
 ```
 
-Open the loopback address printed by Vite, normally `http://127.0.0.1:5173`. This starts the browser-only demonstration; it does not connect to your Pi. Open **Terminal**, acquire its keyboard and type `HELP`, or open **Line printer** and add a sample listing. Stop the preview with Ctrl-C.
+Open the loopback address printed by Vite, normally `http://127.0.0.1:5173`. Open **Terminal**, acquire its keyboard and type `HELP`, or add a sample job in **Line printer**. Stop the preview with Ctrl-C.
 
-The separate **Guest terminal** needs an explicitly prepared real-guest service. The repeatable local route is the M5.0/M5.3 lab; the completed Pi pilot is not left running. The companion installer is a **laboratory candidate**, not production deployment acceptance. For the embedded Go mock server, offline HTML build and tests, use the [developer setup](docs/technical/development.md).
+This demonstration requires **no Pi, guest disk or model**. It does not connect to hardware. **Guest terminal** is a separate application that needs an explicitly prepared guest service. [Explore the controls](docs/getting-started/explore.md) · [Troubleshooting](docs/getting-started/questions.md).
 
-## Find your way around
+## Choose an installation path
 
-| If you want to… | Start here |
+| Your starting point | Where to go |
 |---|---|
-| Understand the desktop and guest terminals | [Beginner guide](docs/getting-started/README.md) |
-| See how the project evolved | [Development timeline](docs/timeline.md) and [changelog](CHANGELOG.md) |
-| Inspect the implementation | [Technical guide](docs/technical/README.md), [coding standards](docs/technical/CODING-STANDARDS.md) and [architecture decisions](docs/development/DECISIONS.md) |
-| Prepare Oscar's original software on Trixie Lite | [Headless installation guide](docs/installation/README.md) — **not a Web Desktop installer** |
-| Review coexistence results and the unresolved fallback | [M5.5 physical pilot](docs/lab/M5.5-physical-pilot.md) · [Mac preparation](docs/lab/M5.5.md) · [M5.5.1 diagnostics and service work](docs/lab/M5.5.1.md) · [M5.6 implementation](docs/lab/M5.6-implementation.md) |
-| Plan original-launcher coexistence | [M5.4 Mac-only design and lifecycle safeguards](docs/lab/M5.4.md) · [proposed supervised pilot](docs/lab/M5.4-pilot-plan.md) |
-| Review the actual Pi findings | [M5.1 assessment](docs/lab/M5.1.md) and [M5.3 completed terminal pilot](docs/lab/M5.3.md) |
-| Suggest an idea, report a bug or help | [Contributing](CONTRIBUTING.md), [Issues](https://github.com/cdaters/pidp11-webdesktop/issues) and [Discussions](https://github.com/cdaters/pidp11-webdesktop/discussions) |
+| I want to explore on my computer | [Local demonstration](#try-the-local-desktop) |
+| I already own a working PiDP-11 | [Path A: optional companion candidate](docs/getting-started/installation-paths.md#path-a-you-already-have-a-working-pidp-11) |
+| I have an empty microSD card | [Path B: Oscar’s original software first](docs/getting-started/installation-paths.md#path-b-start-with-raspberry-pi-os-lite) |
+| I want to reproduce a genuine guest lab | [Developer instructions](docs/technical/development.md) and [lab reproduction](lab/m510/README.md) |
 
-## Built with the community's work
+The optional ARM64 package is **laboratory tested, not accepted for production deployment**. It starts detached, stays disabled by default, requires HTTPS/authentication and enforceable memory protection, and never starts an emulator. There is no published binary download implied by these instructions. [Alpha package preparation](docs/releases/alpha-readiness.md).
 
-Thank you to Oscar and the PiDP contributors, Bob Supnik and the SIMH contributors, Jörg Hoppe and BlinkenBone/REALCONS, xterm.js, and the people preserving historical hardware and software. The High Nibble's IMSAI 8080 desktop inspired this project. [Full acknowledgments](ACKNOWLEDGMENTS.md) include the development tools and AI assistance used along the way.
+The original-software installation tutorial was reconstructed from a successful installation; the complete guide has **not** passed an independent blank-card replay.
 
-Original RetroRealm code and appropriate original software documentation are [MIT licensed](LICENSE), copyright 2026 Craig Daters. Separately identified materials retain their [existing notices](THIRD_PARTY_NOTICES.md). This is an independent hobby project, not an official DEC product or an endorsement by Obsolescence Guaranteed.
+## Current boundaries
 
-## Explore with references and exact values
+Physical coexistence was partially demonstrated, but the original installation’s unexpected SR0/boot-selection behavior blocked acceptance. The machine is currently disassembled awaiting switch repair. Memory-controller readiness and representative Pi resource measurements also remain unresolved. Remote front-panel control is not a production feature.
 
-The [historical reference desk](docs/technical/historical-reference-library.md) works offline and separates curated facts from generated explanations. Convert octal, decimal, hexadecimal and binary exactly; inspect signed words, masks and virtual/physical widths without asking a model. The optional [configured companion](docs/getting-started/configured-companion.md) can use retrieved notes and a capable local model host. No inference runtime belongs on the Pi. [Optional Hacker Replicant integration](integrations/hacker-replicant/README.md) runs the pinned application in a modified read-only mode with deliberate text sharing. Synthetic selected-text compatibility passed; live-guest acceptance remains open.
+The original physical-only operating experience is the fallback and must remain independent of this project. [Capability matrix](docs/capabilities.md) · [Known limitations](docs/known-limitations.md) · [Roadmap](ROADMAP.md).
+
+## Explore, contribute and give credit
+
+Browse the [current gallery](docs/screenshots/README.md), [documentation](docs/README.md), [project philosophy](PHILOSOPHY.md) and [development history](docs/timeline.md). Historical-system experience, terminal quirks, clearer instructions and small fixes are welcome. Start with [Contributing](CONTRIBUTING.md), [Issues](https://github.com/cdaters/pidp11-webdesktop/issues) or [Discussions](https://github.com/cdaters/pidp11-webdesktop/discussions).
+
+Thank you to Oscar Vermeulen, SIMH, Jörg Hoppe’s BlinkenBone/REALCONS, The High Nibble, Rolf Peters, xterm.js and the wider preservation community. [Acknowledgments](ACKNOWLEDGMENTS.md) identify their work and the development assistance used here.
+
+Original RetroRealm code and appropriate original documentation use [MIT](LICENSE), copyright 2026 Craig Daters. Other materials retain their [own notices](THIRD_PARTY_NOTICES.md). This independent hobby project claims no official DEC, PiDP-11 or upstream endorsement.
