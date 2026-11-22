@@ -2,7 +2,7 @@
 
 The offline guide works without a model. A configured companion can send your question, recent conversation and deliberately shared excerpt to an owner-selected Ollama or OpenAI-compatible service. The model can run on a capable Mac or another explicitly chosen host; the Pi does not need a model runtime. The desktop continues working when the provider is unavailable.
 
-M5.9.3 Phase A verified genuine local Ollama conversations in Chromium, Firefox and WebKit. Qwen 3 14B with thinking explicitly disabled worked for short, deliberately shared excerpts, but both tested Qwen models made important historical and arithmetic errors. Keep the sourced offline guide as the default; model replies need checking. LM Studio discovery worked, but GPT-OSS inference was deferred for memory headroom. [Results and exact limitations](../lab/M5.9.3-A.md). No models or software were downloaded and no hosted inference provider was contacted.
+M5.9.3 Phase B verified genuine Gemma 4 12B conversations in Chromium, Firefox and WebKit, with reference retrieval and an exact calculator. Gemma is an experimental option, not a trusted historical or arithmetic authority. Keep the offline desk as the default and inspect source passages. Earlier Qwen results and the inventory changes are preserved in the [Phase B report](../lab/M5.9.3-B.md). No hosted inference or physical Pi was used.
 
 ## Configure the host
 
@@ -33,7 +33,7 @@ Check the private configuration using the installed `webdesktop-service check` c
 4. Type a question. Optionally select terminal text and choose **Share selected text**, or paste a small excerpt into the companion. Review the exact text and source before sending. Provider changes clear the previous conversation and excerpt.
 5. Choose **Send text to configured provider**. This sends the question, retained conversation, displayed excerpt/source and compact project reference notes. Nothing is sent automatically from another session. Cancel stops the local request; it cannot retract content already received by the provider. Clear or close discards local conversation state.
 
-The backend allows one in-flight provider request, a 20-second timeout, at most 18 submitted conversation messages, 12,000 total input bytes, 4,096 bytes per message/excerpt and a bounded response. A limit error means shorten the excerpt or clear the conversation. Responses are suggestions, not observations of the machine; the model may be wrong. The supplied notes cover basic V7/RT-11 differences, octal, PDP-11 instructions and links to project documentation, not a complete historical reference library.
+The backend allows one in-flight provider request, a 20-second timeout, at most 18 submitted conversation messages, 12,000 total input bytes, 4,096 bytes per message/excerpt and a bounded response. A limit error means shorten the excerpt or clear the conversation. Responses are suggestions, not observations of the machine; the model may be wrong. The source library covers focused historical topics and explicitly marks missing RSTS/E/PLUS operational coverage. See the [reference desk and exact calculator](../technical/historical-reference-library.md).
 
 ## Reviewing a suggested command
 
@@ -53,7 +53,7 @@ The configured path limits each message and shared excerpt to 4,096 UTF-8 bytes,
 
 Command review now names the terminal and attachment generation alongside exact escaped bytes and expiration. Expired review disappears and cannot be approved. Keyboard ownership and the server's single-use/generation checks remain authoritative; closing a window or losing a response never causes a retry. These controls remain disabled by default and separate from chat.
 
-## Tested local Qwen 3 configuration
+## Historical Phase A Qwen 3 configuration
 
 On the **Mac development service host**, after confirming Ollama is running locally and this model is already installed, the tested optional object is:
 
@@ -73,4 +73,24 @@ Check `ollama ps` and memory before inference. The recorded runtime used context
 
 Timeout, cancellation and unavailable-server errors now have distinct messages. A response cut off by the Ollama output limit is refused instead of presented as complete. Shorten the question, review the runner's state, or use the offline guide; there is no automatic retry. To end an owned test, close the companion request, stop only the test desktop process, and unload only the model that test loaded. Leave preexisting runner applications alone.
 
-For the alternate installed Coder model, change the approved model to `qwen2.5-coder:14b` and omit `ollama_think`. Its real API worked, but the qualification found wrong hexadecimal/addressing answers. This is an experimental fallback, not a more accurate tutor. LM Studio's installed GPT-OSS model is not yet chat-qualified on this host. [Reproducible bounded tests](../../lab/m593a/README.md).
+Phase A also tested `qwen2.5-coder:14b` without `ollama_think`. Its API worked, but it gave wrong hexadecimal/addressing answers. That model and the untested GPT-OSS weights were subsequently removed in Phase B; this historical record is not the current inventory. [Reproducible bounded tests](../../lab/m593a/README.md).
+
+## Current experimental Gemma configuration
+
+For the **Mac model host**, with the exact model already installed in Ollama, the current tested companion object is:
+
+```json
+{
+  "kind": "ollama",
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "models_endpoint": "http://127.0.0.1:11434/api/tags",
+  "models": ["gemma4:12b"],
+  "ollama_think": false
+}
+```
+
+Phase B used Ollama 0.40.16 and the Apple Silicon MLX/NVFP4 variant, approximately 7.71 GB on disk and 8.5 GB reported loaded. The application now explicitly requests a 4,096-token context and at most 512 output tokens. Use the [model compatibility guide](../technical/model-compatibility.md) rather than assuming every tag selects the same format. The earlier Qwen models and untested GPT-OSS weights were removed after restore records were preserved; the old examples describe earlier qualification, not the final installed inventory.
+
+Open **Search historical references** for offline lookup. Before sending a model question, inspect the system filter and the checkbox that includes up to two matched notes. An explicitly selected reference topic takes precedence. Returned passages are available below the answer, with actual catalog links and incomplete-coverage labels. Unknown citation IDs cause the answer to be withheld; correct IDs do not prove the model's explanation is correct.
+
+Use **Exact PDP-11 values** for arithmetic. Its locally computed result remains separate from generated text. No model or guest is contacted by the calculator or offline search. The optional cross-host gateway is a separate, manual model-host program; [its isolated transport test](../../lab/m593b/README.md) does not authorize Pi deployment or changes to Mac SSH settings.

@@ -58,3 +58,11 @@ Private capture paths mentioned in reports intentionally do not resolve to publi
 
 - [Completed device observation](observed-peripherals.md), [configured companion](../getting-started/configured-companion.md) and [architecture decision](../decisions/0007-completed-devices-and-companion.md).
 - [Genuine guest and ARM64 evidence](../lab/M5.9.1.md), [reproduction](../../lab/m591/README.md) and [candidate record](../lab/M5.9.1-package.md).
+
+## Source-assisted companion
+
+- [Historical references and exact PDP-11 values](historical-reference-library.md)
+- [Model compatibility and qualification](model-compatibility.md)
+- [Private model-host transport](hosted-local-companion.md)
+- [Hacker Replicant interoperability foundation](hacker-replicant-interop.md)
+- [Phase B findings and reproduction](../lab/M5.9.3-B.md)

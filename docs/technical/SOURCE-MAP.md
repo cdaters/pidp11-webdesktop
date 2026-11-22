@@ -90,3 +90,11 @@ The shared terminal HTTP layer consumes `terminalbridge.Directory`: the original
 - `internal/companion/provider.go` accepts an optional native-Ollama thinking preference, preserves unset behavior, and distinguishes bounded timeout, cancellation, unavailable server and truncated-output errors. No model lifecycle or tool API is exposed.
 - `lab/m593a` contains bounded loopback tutor probes, real three-engine companion acceptance and sanitized response evidence. [Results](../lab/M5.9.3-A.md) separate model accuracy from transport acceptance.
 - `browser-tests/m593.spec.ts` protects visible review of explicitly shared terminal text. [Host-side transport design](hosted-local-companion.md) is a future deployment proposal, not an installed tunnel.
+
+### M5.9.3 Phase B additions
+
+- `internal/companion/references.go` and the shared catalog provide bounded lexical retrieval, explicit version scope, note integrity and citation-ID checks. `companion-references.ts` supplies offline search and catalog-owned links; shared retrieval cases guard both implementations. A valid citation ID is not proof of a supported claim.
+- `pdp11-values.ts` performs exact, bounded integer conversion/masking and owns its offline controls. Its results are separate from generated answers and have no guest/provider effects.
+- `internal/modelhost` and `cmd/model-gateway` expose authenticated chat/models/reference lookup to an existing local runner. The command owns loopback TLS and shutdown; the handler owns one in-flight slot. No runner management, browser CORS, tools or terminal authority.
+- `internal/replicant` is a pure, explicit-selection/readback and status-claim contract. Automatic keys always fail. It is not an installed Hacker Replicant endpoint or operator-console integration.
+- `lab/m593b` contains real model qualification, three-engine conversations, held-out addressing probes and isolated ARM64 SSH/TLS and lifecycle rehearsals. Fixtures, genuine inference and untested deployment boundaries are distinguished in the [report](../lab/M5.9.3-B.md).

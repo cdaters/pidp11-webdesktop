@@ -4,7 +4,9 @@ These are directions for experimentation, not delivery promises. The [timeline](
 
 M5.9.2 delivers bounded live LP11/PC11 observation, sourced companion references, deliberate sharing, an equipment layout and expanded genuine BSD applications. [Results and limits](docs/lab/M5.9.2.md). Next: owner-approved real-model qualification, independently supervised producer identity under faults, additional historical applications and OS printer-driver investigation. Production coexistence remains separately gated.
 
-M5.9.3 Phase A establishes genuine local-model transport and browser acceptance. Factual qualification remains incomplete: neither tested model is a trusted historical tutor. Next AI work should use held-out questions, verified references, context/truncation checks and an independently reviewed low-memory test of the installed GPT-OSS candidate. [Phase A findings](docs/lab/M5.9.3-A.md).
+M5.9.3 Phase B adds offline historical retrieval, provenance, exact PDP-11 arithmetic, source-assisted real-model conversations and an authenticated model-host gateway. Gemma 4 12B is the best tested operational option, still experimental: arithmetic and unsupported details remain wrong. The offline desk remains the default. Restricted SSH/TLS transport and service lifecycle passed in disposable ARM64 Linux. [Results](docs/lab/M5.9.3-B.md).
+
+Next AI increment: deepen verified RSTS/E/RSX-11M-PLUS manual coverage, test independent instruction questions and citation entailment, and review real model-host account/certificate setup separately. Hacker Replicant has a tested narrow contract and shared-provider foundation, not an embedded application or permission to control the console. Production integration remains separately gated.
 
 ## Completed foundations
 

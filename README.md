@@ -45,8 +45,8 @@ M5.3 repeated the genuine terminal demonstration on the actual Pi using one disp
 | Genuine guest terminal | UNIX V7/DC11 demonstrated in the isolated lab **and on the actual Pi**; M5.9 tests VT100, initial VT52/VT220 and teletype presentations in genuine disposable V7 |
 | 4010 graphics | Bounded Tektronix parser now displays genuine V7 `graph` / `plot -Ttek` output in three browser engines; VT11 remains separate future work |
 | Disk, tape, paper tape and OS profiles | Working **simulated** workflows; no real guest media is changed |
-| Continuous-form line printer | Simulated spool preserved; new authenticated Guest devices view receives verified completed LP11 exports from genuine PDP-11 CPU/device tests, with exact downloads. No continuous tail or verified OS printer driver yet |
-| AI Companion | Optional offline guide or owner-configured provider; explicit terminal sharing and separately approved, disabled-by-default three-command suggestions. Deterministic provider/fake-guest acceptance; real model untested |
+| Continuous-form line printer | Simulated spool preserved; new authenticated Guest devices view receives verified completed LP11 exports from genuine PDP-11 CPU/device tests, with exact downloads. M5.9.2 also adds bounded live observation; no verified OS printer driver yet |
+| AI Companion | Offline historical search and exact PDP-11 values; optional source-assisted local model, qualified through real three-engine conversations. Models still make factual errors. Explicit sharing and separate, disabled-by-default command review. [Phase B findings](docs/lab/M5.9.3-B.md) |
 | Passive panel observation | Laboratory experiments; no production Pi observation service installed |
 | Optional installation candidate | Detached Go service and ARM64 package tested in disposable Linux; not deployed to the Pi. [M5.9 results](docs/lab/M5.9.md) · [setup candidate](docs/getting-started/optional-service.md) |
 | Physical Pi integration | V7/browser/physical checks passed in M5.5, but fallback selected the wrong guest; acceptance blocked, temporary changes rolled back, machine left stopped |
@@ -123,3 +123,7 @@ The separate **Guest terminal** needs an explicitly prepared real-guest service.
 Thank you to Oscar and the PiDP contributors, Bob Supnik and the SIMH contributors, Jörg Hoppe and BlinkenBone/REALCONS, xterm.js, and the people preserving historical hardware and software. The High Nibble's IMSAI 8080 desktop inspired this project. [Full acknowledgments](ACKNOWLEDGMENTS.md) include the development tools and AI assistance used along the way.
 
 Original RetroRealm code and appropriate original software documentation are [MIT licensed](LICENSE), copyright 2026 Craig Daters. Separately identified materials retain their [existing notices](THIRD_PARTY_NOTICES.md). This is an independent hobby project, not an official DEC product or an endorsement by Obsolescence Guaranteed.
+
+## Explore with references and exact values
+
+The [historical reference desk](docs/technical/historical-reference-library.md) works offline and separates curated facts from generated explanations. Convert octal, decimal, hexadecimal and binary exactly; inspect signed words, masks and virtual/physical widths without asking a model. The optional [configured companion](docs/getting-started/configured-companion.md) can use retrieved notes and a capable local model host. No inference runtime belongs on the Pi. [Hacker Replicant compatibility foundation](docs/technical/hacker-replicant-interop.md) documents the shared-provider path and the operator-console boundary; it is not a completed integration.

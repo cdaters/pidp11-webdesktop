@@ -1,0 +1,1 @@
+{"model": "gemma4:12b", "think": false, "first_content_seconds": 0.48974687499867287, "seconds": 1.2305648749970715, "answer": "The octal number 177776 is equal to 10,110 in decimal and 276E in hexadecimal.", "metrics": {"done_reason": "stop", "eval_count": 32, "eval_duration": 1016048708, "prompt_eval_count": 32, "load_duration": 1799000}}

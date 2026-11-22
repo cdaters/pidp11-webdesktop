@@ -2,6 +2,14 @@
 
 Actual development milestones, newest first. These are checkpoints, not stable semantic-version releases. Dates use recorded local commit dates (America/Phoenix). The browser package retains its M5.0 identifier; the M5.3 pilot is identified by its separate command, checkpoint and tested binary hash.
 
+## M5.9.3 Phase B — 2026-11-21
+
+- Added bounded offline historical search, edition/provenance metadata, visible retrieved passages and refusal of unavailable citation IDs. Incomplete manual coverage stays explicit.
+- Added exact octal/decimal/hex/binary, signed-word, address-width and bit-mask utilities that remain independent of model prose.
+- Compared three real local models using 90 raw/grounded responses; retained Gemma 4 12B as an experimental option, with factual failures recorded and the offline guide still default. Reclaimed superseded local model storage; no weights are published.
+- Implemented a chat-only authenticated model-host gateway and a narrow Hacker Replicant readback/status/refused-keys contract. Validated restricted SSH/TLS transport, failure handling and protected service lifecycle in disposable ARM64 Linux.
+- Passed 102 browser regression cases, genuine Gemma conversations in all three engines, Go race/vet, TypeScript, retrieval/arithmetic and transport tests. No Pi access, guest-media changes or stable release. [Report](docs/lab/M5.9.3-B.md).
+
 ## M5.9.3 Phase A — 2026-11-21
 
 - Qualified real local Ollama conversations and sharing/cancellation across three browser engines; recorded factual errors, memory pressure and an untested LM Studio candidate honestly.

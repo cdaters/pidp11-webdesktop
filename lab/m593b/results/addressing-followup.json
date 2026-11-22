@@ -1,0 +1,23 @@
+[
+  {
+    "answer": "Register deferred (mode 1) does not change the register; it uses the memory address in the register without modification. In contrast, autoincrement (mode 2) uses the address and then increments the register (by one or two depending on the operand size). [ref:1170-instructions]",
+    "citation_ids_valid": true,
+    "note_sha256": "f6980631e3dea470796114af6493087c2b7d90e2a9b7caee6419204d3fba9f52",
+    "question": "Explain in at most 60 words: Does PDP-11 register deferred change the pointer register? How does autoincrement differ? Give their mode numbers.",
+    "seconds": 3.722863708
+  },
+  {
+    "answer": "For a byte autoincrement, R6 always increments by two [ref:1170-instructions]. An ordinary general register differs because it specifies a specific register for data transfer without the automatic incrementing behavior of the autoincrement mode [ref:1170-instructions]. Note: This is an inference based on the provided reference regarding register-specific exceptions.",
+    "citation_ids_valid": true,
+    "note_sha256": "f6980631e3dea470796114af6493087c2b7d90e2a9b7caee6419204d3fba9f52",
+    "question": "Explain in at most 60 words: For a PDP-11 autoincrement byte operation, does R6 advance by one? How does an ordinary general register differ?",
+    "seconds": 2.586860208
+  },
+  {
+    "answer": "No, they are different. Register deferred (mode 1) uses the memory address in a register without changing it. Autoincrement deferred (mode 3) fetches a word pointer and increments that pointer by two. Based on [ref:1170-instructions], register deferred does not change the register, while autoincrement deferred involves a fetch and increment operation.",
+    "citation_ids_valid": true,
+    "note_sha256": "f6980631e3dea470796114af6493087c2b7d90e2a9b7caee6419204d3fba9f52",
+    "question": "Explain in at most 60 words: Is autoincrement deferred the same as register deferred? What is fetched, and is the register changed?",
+    "seconds": 2.052367791
+  }
+]

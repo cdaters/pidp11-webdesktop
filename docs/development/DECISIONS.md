@@ -27,3 +27,9 @@ These decisions describe the current direction. The linked reports retain the ev
 The [philosophy](../../PHILOSOPHY.md) explains the priorities behind these choices. The [technical index](../technical/README.md) is the starting point for implementation details.
 
 - [0007: completed device observations and optional companion requests](../decisions/0007-completed-devices-and-companion.md): immutable bounded exports, explicit provider use and single-use limited terminal approval.
+
+## Phase B: evidence before generated advice
+
+The historical catalog is shared data with original notes, explicit edition/system scope and provenance. Bounded keyword search is sufficient for this initial library; no embedding service or database is needed. Exact values use local integer arithmetic and remain separate from generated explanations. A citation-ID check refuses unknown references but cannot prove semantic accuracy. Model qualification preserves failures, including errors after retrieval. See the [reference design](../technical/historical-reference-library.md).
+
+Inference belongs on an optional capable host. A narrow token-authenticated TLS gateway, reachable through a restricted manual SSH forward, avoids forwarding a runner's administrative API. Only the mechanism has passed isolated ARM64 testing; actual model-host accounts and Pi deployment remain separately reviewed. Hacker Replicant's GNU Screen control interface cannot inherit dedicated guest-line authority; the initial contract refuses automatic keys. See [transport](../technical/hosted-local-companion.md) and [interoperability](../technical/hacker-replicant-interop.md).

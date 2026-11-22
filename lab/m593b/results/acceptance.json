@@ -1,0 +1,44 @@
+{
+  "application_commit": "b0d9280",
+  "tests": {
+    "frontend_unit": 82,
+    "browser_regressions": 102,
+    "final_focused_browser": 6,
+    "retrieval_cases_each_language": 18,
+    "real_model_comparison_responses": 90,
+    "addressing_followups": 3
+  },
+  "arm64": {
+    "platform": "disposable ARM64 Linux",
+    "restart_changes_instance": true,
+    "restart_detached": true,
+    "prior_session_revoked": true,
+    "original_emulator_present": false,
+    "metrics": "MemoryCurrent=3215360\nMemoryPeak=3215360\nCPUUsageNSec=16327000\nTasksCurrent=8\nMemoryMax=100663296\nMemorySwapMax=0\n"
+  },
+  "package": {
+    "bytes": 7930018,
+    "sha256": "5a7aacf7be74dc218b1a3195a64d181b49be2ff5ae02e59da2dab278415e518a"
+  },
+  "reload_observation": {
+    "model": "gemma4:12b",
+    "empty_inventory_verified": true,
+    "first_answer_seconds": 5.212,
+    "other_initial_seconds": [
+      1.364,
+      0.951
+    ],
+    "architecture_seconds": [
+      2.904,
+      2.462,
+      3.395
+    ]
+  },
+  "cleanup": {
+    "models_unloaded": true,
+    "disposable_vm_removed": true,
+    "owned_previews_stopped": true,
+    "accepted_tags_unchanged": true,
+    "physical_pi_contacted": false
+  }
+}
