@@ -19,6 +19,9 @@ func TestSharingCredentialAndSimulatorFence(t *testing.T) {
 	}
 	body := `{"consent":true,"selection":{"endpoint":"tty0","generation":"attach-a","simulator_generation":"sim-a","text":"synthetic"}}`
 	call := func(method, path, token, body string) int {
+		if method == "POST" {
+			body = strings.Replace(body, `{"consent":`, `{"publication_epoch":"`+adapter.PublicationEpoch()+`","consent":`, 1)
+		}
 		r := httptest.NewRequest(method, path, strings.NewReader(body))
 		r.Header.Set("Authorization", "Bearer "+token)
 		w := httptest.NewRecorder()
@@ -92,6 +95,7 @@ func TestSelectionReceiptChangesOnEveryPublication(t *testing.T) {
 	handler, _ := WithSharing(adapter, strings.Repeat("w", 32))
 	body := `{"consent":true,"selection":{"endpoint":"tty0","generation":"a","simulator_generation":"s","text":"same text"}}`
 	publish := func() string {
+		body := strings.Replace(body, `{"consent":`, `{"publication_epoch":"`+adapter.PublicationEpoch()+`","consent":`, 1)
 		request := httptest.NewRequest("POST", "/api/pidp11/selection", strings.NewReader(body))
 		request.Header.Set("Authorization", "Bearer "+strings.Repeat("w", 32))
 		response := httptest.NewRecorder()

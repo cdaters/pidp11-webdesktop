@@ -40,8 +40,9 @@ func WithSharing(adapter *Adapter, writer string) (http.Handler, error) {
 			return
 		}
 		var request struct {
-			Selection Selection `json:"selection"`
-			Consent   bool      `json:"consent"`
+			Selection        Selection `json:"selection"`
+			Consent          bool      `json:"consent"`
+			PublicationEpoch string    `json:"publication_epoch"`
 		}
 		dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, 6144))
 		dec.DisallowUnknownFields()
@@ -50,7 +51,7 @@ func WithSharing(adapter *Adapter, writer string) (http.Handler, error) {
 			http.Error(w, "Invalid bounded selection", 400)
 			return
 		}
-		receipt, err := adapter.PublishWithReceipt(request.Selection, request.Consent)
+		receipt, err := adapter.PublishAt(request.Selection, request.Consent, request.PublicationEpoch)
 		if err != nil {
 			http.Error(w, "Selection identity, consent or size invalid", 409)
 			return

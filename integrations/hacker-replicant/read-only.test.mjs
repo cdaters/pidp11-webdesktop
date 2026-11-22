@@ -153,3 +153,72 @@ test("matching receipt sends only the explicitly approved excerpt; missing recei
     "UNTRUSTED SELECTED TEXT; NOT LIVE MACHINE STATE:\nbounded approved text",
   );
 });
+
+test("publication carries its pre-revoke epoch and never retries a refused write", async (t) => {
+  const handler = routes(t).get("POST /api/selection");
+  const original = globalThis.fetch;
+  let writes = 0;
+  globalThis.fetch = async (url, options) => {
+    if (String(url).endsWith("/status"))
+      return Response.json({
+        attachment_confirmed: true,
+        publication_epoch: "old-instance:3",
+        attachment: {
+          endpoint: "tty0",
+          generation: "a",
+          simulator_generation: "s",
+        },
+      });
+    writes++;
+    assert.equal(JSON.parse(options.body).publication_epoch, "old-instance:3");
+    return new Response("retired", { status: 409 });
+  };
+  t.after(() => (globalThis.fetch = original));
+  const res = response();
+  await handler({ body: { consent: true, text: "approved passage" } }, res);
+  assert.equal(res.statusCode, 409);
+  assert.equal(writes, 1);
+});
+
+test("browser closure cancels a delayed model and releases the single request slot", async (t) => {
+  const handler = routes(t).get("POST /api/chat");
+  const original = globalThis.fetch;
+  let entered;
+  const ready = new Promise((resolve) => (entered = resolve));
+  let cancelled = false;
+  globalThis.fetch = async (url, options) => {
+    if (String(url).includes("/references"))
+      return Response.json({ notes: [] });
+    entered();
+    return new Promise((resolve, reject) =>
+      options.signal.addEventListener(
+        "abort",
+        () => {
+          cancelled = true;
+          reject(Error("cancelled"));
+        },
+        { once: true },
+      ),
+    );
+  };
+  t.after(() => (globalThis.fetch = original));
+  const req = {
+      body: { messages: [{ role: "user", content: "Explain MOVB" }] },
+    },
+    res = response();
+  const pending = handler(req, res);
+  await ready;
+  const busy = response();
+  await handler(req, busy);
+  assert.equal(busy.statusCode, 429);
+  res.emit("close");
+  await pending;
+  assert.equal(cancelled, true);
+  globalThis.fetch = async (url) =>
+    String(url).includes("/references")
+      ? Response.json({ notes: [] })
+      : new Response("unavailable", { status: 503 });
+  const retry = response();
+  await handler(req, retry);
+  assert.equal(retry.statusCode, 502);
+});

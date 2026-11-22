@@ -138,7 +138,10 @@ export function installReadOnly(app) {
           .status(400)
           .json({ error: "Explicit bounded selection required" });
       const status = await request(adapter + "/status", readToken, signal);
-      if (status.attachment_confirmed !== true)
+      if (
+        status.attachment_confirmed !== true ||
+        typeof status.publication_epoch !== "string"
+      )
         throw Error("Owner attachment approval absent or expired");
       const receipt = await request(
         adapter + "/selection",
@@ -148,6 +151,7 @@ export function installReadOnly(app) {
           selectionReceipt: true,
           method: "POST",
           body: JSON.stringify({
+            publication_epoch: status.publication_epoch,
             selection: { ...status.attachment, text },
             consent: true,
           }),

@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -33,6 +34,7 @@ type Adapter struct {
 	expires     time.Time
 	revision    uint64 // Fences publications whose identity callback overlaps revocation.
 	selectionID string
+	instance    string
 }
 
 // NewAdapter requires a private independent token and authoritative identity
@@ -41,7 +43,11 @@ func NewAdapter(token string, current func() (Attachment, bool)) (*Adapter, erro
 	if len(token) < 32 || len(token) > 128 || strings.TrimSpace(token) != token || current == nil {
 		return nil, errors.New("private token and attachment callback required")
 	}
-	return &Adapter{token: token, current: current}, nil
+	var nonce [16]byte
+	if _, err := rand.Read(nonce[:]); err != nil {
+		return nil, err
+	}
+	return &Adapter{token: token, current: current, instance: hex.EncodeToString(nonce[:])}, nil
 }
 
 // Publish is a local application operation, not an HTTP endpoint. Consent is
@@ -56,8 +62,26 @@ func (a *Adapter) Publish(selection Selection, consent bool) error {
 // Consumers must bind a later read to that receipt, not merely to a guest line:
 // another authorized page may publish different text on the same attachment.
 func (a *Adapter) PublishWithReceipt(selection Selection, consent bool) (string, error) {
+	return a.PublishAt(selection, consent, a.PublicationEpoch())
+}
+
+// PublicationEpoch fences the complete status-to-publication exchange, including
+// requests delayed before reaching this process. It is not an authorization token.
+func (a *Adapter) PublicationEpoch() string {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+	return a.instance + ":" + strconv.FormatUint(a.revision, 16)
+}
+
+// PublishAt requires the exact epoch observed before preparing the publication.
+// Revocation, replacement and service restart invalidate old preparation.
+func (a *Adapter) PublishAt(selection Selection, consent bool, epoch string) (string, error) {
 	a.mu.Lock()
 	revision := a.revision
+	if epoch != a.instance+":"+strconv.FormatUint(revision, 16) {
+		a.mu.Unlock()
+		return "", errors.New("publication preparation retired")
+	}
 	a.mu.Unlock()
 	current, ok := a.current()
 	if !ok || current.Simulator == "" || len(current.Simulator) > 128 || selection.Simulator != current.Simulator || selection.ViewerRevision != current.ViewerRevision {
@@ -119,8 +143,9 @@ func (a *Adapter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/api/pidp11/status":
 		// Upstream's Boolean means Screen existence, which this adapter cannot
 		// observe. Null must never be replaced with a guessed false or CPU state.
+		epoch := a.PublicationEpoch()
 		current, attached := a.current()
-		json.NewEncoder(w).Encode(map[string]any{"attachment": current, "attachment_confirmed": attached, "os": nil, "running": nil, "cpu_running": "unknown", "semantics": "guest selection only; GNU Screen and OS unobserved"})
+		json.NewEncoder(w).Encode(map[string]any{"publication_epoch": epoch, "attachment": current, "attachment_confirmed": attached, "os": nil, "running": nil, "cpu_running": "unknown", "semantics": "guest selection only; GNU Screen and OS unobserved"})
 	case "/api/pidp11/screen":
 		current, ok := a.current()
 		a.mu.Lock()
