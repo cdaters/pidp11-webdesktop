@@ -321,5 +321,6 @@
       "limitations": "Not a universal proof of zero sensitive logging. Explicit lab captures, downloads, browser history and provider retention are separate stores.",
       "invalidatedBy": "Future logging prints requests, private config, console content or provider errors without review."
     }
-  ]
+  ],
+  "reviewRevision": "87bc750543154f65489f91413ce33ceda0b6f6e5"
 }

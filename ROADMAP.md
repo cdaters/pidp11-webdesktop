@@ -1,10 +1,16 @@
 # Where the project is going
 
+## M5.16: external review readiness and fault qualification
+
+[Completed preparation](docs/lab/M5.16.md): a pinned [security entry point](docs/security/M5.16-review.md), 21 assertions/47 named tests, minimal Linux review environment and [concise interoperability handoff](docs/technical/M5.16-hacker-replicant-handoff.md). Native exit/signal capture and a six-run direct/tapped graphics comparison strengthen future diagnosis. No production behavior changed, and the old faults remain unresolved. Published-alpha and current-clone onboarding passed separately.
+
+Recommended **M5.17: independent review intake and correction qualification**. Craig can share the packets; reproduce actual outside findings and make focused corrections. Maintainer contact remains separately authorized. Prepare an Alpha 2 source candidate only against the report’s explicit archive/onboarding/review criteria, with separate approval before publication. Actual Pi memory containment, SR0 repair, observer privileges, representative performance and a renewed physical pilot remain separate gates.
+
 ## M5.15: targeted faults and interoperability qualification
 
 [Implemented and measured](docs/lab/M5.15.md): two consent/cancellation fixes, actual Go/Node TLS conformance, a separate-kernel ARM64 comparison, bounded V7 stream diagnostics and genuine guest/peripheral regressions. The original exit-139 incidents and plotting timeout remain unresolved. The [external-review packet](docs/technical/M5.15-interoperability-review.md) names the exact integration revision, trust boundaries and reproducible checks; it does not claim independent approval.
 
-Recommended **M5.16: external review and trace-on-recurrence qualification**. Seek owner-directed independent security/historical review and separately authorized interoperability feedback. Capture the next actual provisioning signal or plotting failure using preserved per-attempt evidence; avoid claiming a fix from successful repetitions. Production observer privileges, actual Pi memory containment, SR0 repair, representative performance and renewed supervised coexistence remain separate gates. No new release or physical deployment is implied.
+The M5.15 recommendation was **M5.16: external review and trace-on-recurrence qualification**. Seek owner-directed independent security/historical review and separately authorized interoperability feedback. Capture the next actual provisioning signal or plotting failure using preserved per-attempt evidence; avoid claiming a fix from successful repetitions. Production observer privileges, actual Pi memory containment, SR0 repair, representative performance and renewed supervised coexistence remain separate gates. No new release or physical deployment is implied.
 
 ## M5.14: stabilization and independent interoperability
 

@@ -10,6 +10,11 @@ M5.14's new client is entirely outside that upstream tree.
 
 M5.15 adds a [fixed-revision review packet and qualification map](M5.15-interoperability-review.md). The client now snapshots and validates the preview before its first asynchronous operation and rechecks cancellation after reading a response. The draft version is unchanged; this corrects implementation behavior rather than extending authority.
 
+M5.16 supplies a [concise review handoff](M5.16-hacker-replicant-handoff.md) and
+fresh uncached TLS checks for multiple authenticated callers. `/selected-text`
+with a mandatory receipt is recommended for a future negotiated version only;
+no new route/version is implemented and the legacy experiment is preserved.
+
 ## Smallest useful boundary
 
 Keep both applications independently installed, authenticated and stopped/started.

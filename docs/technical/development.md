@@ -96,7 +96,7 @@ Run `npm run test:replicant` for isolated optional-app route tests (no model or 
 
 In the Mac shell, `npm run test:selection-contract` exercises the independent
 client and `npm run test:replicant` checks the optional app routes, including late
-responses after cancellation. `PIDP11_CONTRACT_TLS_TEST=1 go test -race ./internal/replicant -v`
+responses after cancellation. `PIDP11_CONTRACT_TLS_TEST=1 go test -race -count=1 ./internal/replicant -v`
 adds the actual Go-server/Node-client TLS test with a disposable trusted certificate.
 It requires Node, but no upstream app, model, guest or Pi. The opt-in test uses
 injected expiry/lifetime changes; it is not production-observer acceptance.
@@ -105,3 +105,10 @@ Run `node --test lab/m515/instrumentation.test.mjs` for plotting-boundary and
 exclusive-campaign regressions. Genuine guest tests and the separate ARM64 kernel
 are deliberately separate procedures in the [M5.15 runbook](../../lab/m515/README.md).
 Their private traces and working media must not be committed.
+
+The [M5.16 review entry point](../security/M5.16-review.md) maps 21 invariants to
+47 named Go tests and distinguishes real Linux ownership/process checks from
+fixtures. Use `-count=1` for cross-language qualification: Go does not track the
+Node probe’s transitive imports in its result cache. The concise
+[interoperability handoff](M5.16-hacker-replicant-handoff.md) keeps proposed route
+changes separate from the unchanged 0.1 implementation.

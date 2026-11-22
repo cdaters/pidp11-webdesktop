@@ -1,6 +1,8 @@
 # Capability and compatibility matrix
 
-Current through **M5.13**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Current through **M5.16**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+
+[M5.16](lab/M5.16.md) repeats the named guest/device subsets and qualifies review tools; it adds no new production feature. Its [security packet](security/M5.16-review.md) is ready for independent review, which remains pending.
 
 **Genuine guest tested** identifies recorded operating-system behavior. **Genuine device tested** identifies CPU/device behavior. **Laboratory tested** identifies an isolated transport or safety experiment. **Implemented**, **experimental**, **simulated**, **planned**, and **not physically accepted** describe different limits; they are not a single maturity score.
 
@@ -67,11 +69,11 @@ Current through **M5.13**; the M5.10 presentation and gallery are preserved. A g
 |---|---|
 | Original PiDP-11 independence | Non-negotiable design requirement; conventional-console independence demonstrated in recorded pilots |
 | Physical/browser coexistence | Partially demonstrated, **not physically accepted**; M5.5 fallback selected an unexpected guest |
-| Hardware readiness | SR0 signal-path discrepancy observed; machine disassembled pending switch repair; no M5.12 hardware test |
+| Hardware readiness | SR0 signal-path discrepancy observed; machine disassembled pending switch repair; no M5.16 hardware access |
 | Memory readiness | Assessed Pi’s memory controller disabled; current service refuses uncontained startup; actual Pi correction unperformed |
 | Optional static ARM64 service | Laboratory tested; detached, authenticated, memory-limited, disabled by default; not production accepted |
 | Remote front-panel control | Not a production feature; START-release and blocked-RPC safety limits remain |
 | Fresh-card tutorial | Reconstructed from actual successful installation; independent complete replay outstanding |
-| Release availability | Source and local candidate-building procedure; no stable release or implied binary download |
+| Release availability | Published M5.13 source-only experimental alpha; later development corrections are separate. No stable release or binary download |
 
 See [installation paths](getting-started/installation-paths.md), [known limitations](known-limitations.md) and [alpha readiness](releases/alpha-readiness.md). All historical reports retain their original test scope.

@@ -1,5 +1,13 @@
 # Changelog
 
+## M5.16 review readiness and fault qualification — 2026-11-22
+
+- Prepared a pinned security-review packet mapping 21 assertions to 47 named tests, a minimal offline Linux review environment, and a concise Hacker Replicant handoff. Independent review and upstream agreement remain pending.
+- Expanded actual TLS qualification for multiple authenticated callers, global revoke and legacy receipt behavior; verified local UI expiry/revoke events in three engines. Production protocol and behavior are unchanged.
+- Added bounded native wait-status capture and explicit exit/signal/timeout controls. Four separate-kernel provisions and six direct/tapped V7 plots passed; the two older intermittent faults remain unresolved.
+- Corrected an ownership-test assumption for restricted root and forced uncached cross-language conformance. Retained failed lab attempts and verified guest-safe cleanup.
+- Rechecked genuine guests/devices, 114 browser cases and published-alpha/current-clone onboarding separately. Alpha 2 criteria are recommendations only; no Pi access, new release or accepted-tag change. [Report](docs/lab/M5.16.md).
+
 ## M5.15 targeted fault investigation — 2026-11-22
 
 - Froze consent-preview data before asynchronous negotiation and refused late optional-companion replies after cancellation; reproduced both defects before correction.

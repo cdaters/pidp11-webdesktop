@@ -1,5 +1,18 @@
 # What is still experimental
 
+M5.16 prepares a [fixed-revision external review package](security/M5.16-review.md),
+not an independent audit. Four further bounded provisions and six direct/tapped
+V7 plots passed, but neither old fault was reproduced or explained. Native wait
+status now distinguishes explicit exit 139 from a signal; the deliberate signal
+control is not a Go fault recurrence. [Evidence and failed attempts](lab/M5.16.md).
+
+The 0.1 selection protocol is unchanged. Legacy `/screen` still permits an absent
+receipt; current clients supply/check one. A mandatory-receipt `/selected-text`
+route is a future discussion proposal. One authorized publisher can replace or
+revoke another page’s selection; another page or provider can retain already
+delivered text. Local receipt/history-reset-event tests do not prove global erasure.
+The published Alpha 1 remains older than M5.14/M5.15 fixes; Alpha 2 is not approved.
+
 M5.15 compared both provisioning executables under a separate Debian ARM64 kernel,
 with 32 successful starts across ext4 and 9p. Neither original exit-139 incident
 was reproduced or explained. The old V7 plotting failure also remains unresolved:

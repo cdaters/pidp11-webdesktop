@@ -95,3 +95,18 @@ compatible private configuration. Newer keys can be rejected by older binaries;
 restore the prior configuration deliberately while stopped rather than silently
 dropping required protections. After rollback, require detached startup and fresh
 approval. The no-Pi browser demonstration remains independent of this service path.
+
+## Reporting an intermittent startup or graphics fault
+
+State the exact source revision and whether you used the published M5.13 archive
+or current development. Include your OS/browser, the failed step, expected result
+and actual error. A shell status of 139 alone does not prove a signal termination.
+Preserve the failed private directory and original output before deliberately
+starting a separate attempt; do not automatically retry a guest command.
+
+The [M5.16 runbook](../../lab/m516/README.md) provides bounded native-status and
+plotting diagnostics for disposable Linux. These are optional development tools,
+not required for the browser demonstration or instructions to test a physical Pi.
+Report a sanitized summary through the [contribution guidance](../../CONTRIBUTING.md);
+keep tokens, private configuration, terminal content, disks and process mappings
+out of public issues. Use [private security reporting](../../SECURITY.md) when relevant.
