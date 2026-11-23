@@ -6,6 +6,15 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **Active assignment:** M5.22 practical equipment operation/history/recovery.
+  Work in `.research/m522/`. Before experiments, independently verified incremental
+  M5.21 backup M5.22-incremental-20261123T183000Z; 158 files / 5 directories,
+  348802328 logical bytes, archive 349435904 bytes. SHA-256
+  `ab23bf0c41cefe215c9cbaa76020f9b3335090120b4917cb30161b2fc664bfa2`.
+  Private recovery pointer: project-level `Backups/WebDesktop-M5.22-incremental-20261123T183000Z/backup.json`.
+  Previous backups unchanged; no source deleted. This precedes new M5.22 evidence.
+
+
 - **Latest completed engineering milestone:** M5.21 supervised equipment sessions,
   completed work, not owner acceptance or production approval. See [report](docs/lab/M5.21.md),
   [session design](docs/technical/equipment-sessions.md), [runbook](lab/m521-equipment/README.md)
