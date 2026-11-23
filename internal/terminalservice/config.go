@@ -19,12 +19,14 @@ import (
 	"pidp11.local/webdesktop/internal/access"
 	"pidp11.local/webdesktop/internal/companion"
 	"pidp11.local/webdesktop/internal/peripheral"
+	"pidp11.local/webdesktop/internal/storage"
 	"pidp11.local/webdesktop/internal/terminalbridge"
 )
 
 // Config contains only operator-provisioned addresses and private file paths.
 // No attachment approvals or sessions are serialized here.
 type Config struct {
+	Storage             []storage.Config          `json:"storage_snapshots,omitempty"`
 	SupervisedEndpoints []string                  `json:"supervised_endpoints,omitempty"`
 	Followers           []peripheral.FollowConfig `json:"device_followers,omitempty"`
 	AllowProposals      bool                      `json:"allow_readonly_command_proposals,omitempty"`
@@ -91,6 +93,9 @@ func Load(path string) (Config, *access.Gate, tls.Certificate, error) {
 		return c, nil, cert, err
 	}
 	if _, err = peripheral.NewFollowers(c.Followers); err != nil {
+		return c, nil, cert, err
+	}
+	if _, err = storage.New(c.Storage); err != nil {
 		return c, nil, cert, err
 	}
 	if c.Companion != nil {

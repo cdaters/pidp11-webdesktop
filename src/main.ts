@@ -1,3 +1,4 @@
+import { mountStorageWorkspace } from "./storage-workspace.ts";
 import { PrinterApp } from "./printer-app.ts";
 import { mountEquipmentWorkspace, type EquipmentView } from "./equipment-workspace.ts";
 import { APP_MILESTONE } from "./version.ts";
@@ -500,6 +501,19 @@ function refreshApps() {
   }
 }
 function renderApp(id: string, el: HTMLElement) {
+  if (id === "disks" || id === "tapes") {
+    let app = equipmentApps.get(el);
+    if (!app) {
+      app = mountStorageWorkspace(el, id === "tapes", content => ({
+        update() { content.innerHTML = mediaHTML(id === "tapes"); wireMedia(content); },
+        dispose() { content.replaceChildren(); },
+      }));
+      equipmentApps.set(el, app);
+    }
+    app.update();
+    return;
+  }
+
   if (id === "printer" || id === "paper") {
     let app = equipmentApps.get(el);
     if (!app) {

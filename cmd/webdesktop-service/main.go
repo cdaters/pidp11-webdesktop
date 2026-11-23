@@ -23,6 +23,7 @@ import (
 	"pidp11.local/webdesktop/internal/companion"
 	"pidp11.local/webdesktop/internal/memoryguard"
 	"pidp11.local/webdesktop/internal/peripheral"
+	"pidp11.local/webdesktop/internal/storage"
 	"pidp11.local/webdesktop/internal/terminalbridge"
 	"pidp11.local/webdesktop/internal/terminalservice"
 	"pidp11.local/webdesktop/internal/web"
@@ -43,6 +44,10 @@ func serve(ctx context.Context, path string) error {
 		return err
 	}
 	followers, err := peripheral.NewFollowers(config.Followers)
+	if err != nil {
+		return err
+	}
+	storageViews, err := storage.New(config.Storage)
 	if err != nil {
 		return err
 	}
@@ -70,6 +75,7 @@ func serve(ctx context.Context, path string) error {
 	controlMux := http.NewServeMux()
 	controlMux.Handle("/devices/", devices.ControlHandler())
 	controlMux.Handle("/streams/", followers.ControlHandler())
+	controlMux.Handle("/storage/", storageViews.ControlHandler())
 	controlMux.Handle("/", admin.Handler)
 	admin.Handler = controlMux
 	server := &http.Server{Handler: (&terminalbridge.Server{Bridge: manager, Auth: gate, AllowProposals: config.AllowProposals, Register: func(mux *http.ServeMux) {
@@ -78,6 +84,7 @@ func serve(ctx context.Context, path string) error {
 		})))
 		devices.Register(mux, gate)
 		followers.Register(mux, gate)
+		storageViews.Register(mux, gate)
 		chat.Register(mux, gate)
 	}}).Handler(web.Assets()), TLSConfig: &tls.Config{MinVersion: tls.VersionTLS13, Certificates: []tls.Certificate{cert}}, ReadHeaderTimeout: time.Second, ReadTimeout: 3 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}
 	defer server.Close()
