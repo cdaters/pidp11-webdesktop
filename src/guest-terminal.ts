@@ -1,7 +1,10 @@
+import { renderEquipmentDescription } from "./equipment.ts";
 import { shareSelection } from "./terminal-sharing.ts";
 import { Tek4010 } from "./tek4010.ts";
 import { renderTek, saveArtifact } from "./tek-display.ts";
 import { TerminalProfile, type TerminalPersonality } from "./terminal-profile.ts";
+import { mountTerminalWorkstation } from "./terminal-workstation.ts";
+import { localTerminalShortcut, terminalKey } from "./terminal-keyboard.ts";
 import { terminalDocument } from "./terminal.ts";
 import type { Terminal } from "@xterm/xterm";
 
@@ -19,7 +22,8 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
   host.innerHTML = `<div class="guest-heading"><strong>Real guest terminal · dedicated guest line</strong><span class="source-tag">NOT CONNECTED</span></div>
     <form class="guest-login"><label>Terminal access token <input type="password" autocomplete="off" aria-label="Terminal access token"></label><button>Sign in</button></form>
     <div class="terminal-toolbar"><select aria-label="Guest endpoint" disabled></select><button data-refresh disabled>Refresh lines</button><button data-connect disabled>Connect</button><button data-disconnect disabled>Disconnect</button><button data-acquire disabled>Acquire keyboard</button><button data-release disabled>Release keyboard</button><button data-logout disabled>Sign out</button></div>
-    <div class="terminal-toolbar"><label>Personality <select aria-label="Guest terminal personality"><option value="vt100">VT100 · tested subset</option><option value="vt52">VT52 · initial text subset</option><option value="vt220">VT220 · seven-bit subset</option><option value="asr33">ASR-33 · paper presentation</option><option value="tek4010">Tektronix 4010 · experimental</option></select></label><label>Text size <select aria-label="Guest terminal text size"><option value="11">Small</option><option value="13" selected>Normal</option><option value="16">Large</option></select></label></div>
+    <div class="terminal-toolbar"><label>Personality <select aria-label="Guest terminal personality"><option value="vt100">VT100 · tested subset</option><option value="vt52">VT52 · text subset</option><option value="vt220">VT220 · seven-bit subset</option><option value="asr33">ASR-33 · paper presentation</option><option value="tek4010">Tektronix 4010 · experimental</option></select></label><label>Text size <select aria-label="Guest terminal text size"><option value="11">Small</option><option value="13" selected>Normal</option><option value="16">Large</option><option value="20">Extra large</option></select></label></div>
+    <details class="equipment-description"><summary>Connection and equipment details</summary><dl></dl></details>
     <div class="guest-status" role="status">Sign in to list configured guest lines. No automatic keyboard takeover.</div>
     <div class="terminal-toolbar"><button data-save-output>Save display</button><button data-share-selection>Share selected text</button><label><input type="checkbox" data-uppercase> Uppercase keyboard (teletype)</label><span data-paper-status></span></div>
     <svg class="tek-display guest-tek" viewBox="0 0 1024 781" tabindex="0" role="img" aria-label="Guest Tektronix display" hidden></svg>
@@ -56,6 +60,11 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     $<HTMLButtonElement>("[data-approve]").disabled = true;
   };
  let socket:WebSocket|undefined, owner=false,connected=false,epoch=0,seq=0,canInput=false,csrf="",disposed=false,queued=0;
+  const workstation = mountTerminalWorkstation(host, () => profile.personality, focus, code => {
+    input(code === "LineFeed" ? "\n" : code === "Escape" ? "\x1b" : profile.key(code, term.modes.applicationKeypadMode, term.modes.applicationCursorKeysMode) ?? "");
+  });
+  workstation.bind(term);
+  workstation.authority(false);
   const controls=()=>{
     const open=socket?.readyState===WebSocket.OPEN;
     $<HTMLButtonElement>("[data-connect]").disabled=!selector.options.length || !!socket || selector.selectedOptions[0]?.dataset.state !== "attached";
@@ -66,6 +75,21 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     selector.disabled=!!socket || !selector.options.length;
     personality.disabled = !!socket;
     badge.textContent=connected ? owner ? "KEYBOARD OWNER" : "REAL GUEST · READ-ONLY" : (selector.selectedOptions[0]?.dataset.state === "attached" ? "DISCONNECTED" : (selector.selectedOptions[0]?.dataset.state ?? "detached").toUpperCase());
+    workstation.authority(owner && connected);
+    renderEquipmentDescription($(".equipment-description dl"), {
+      identity: `${selector.value || "No line selected"} · ${personality.value.toUpperCase()}`,
+      role: "Independent guest serial terminal",
+      protocol: "Configured raw guest byte stream through authenticated WebSocket; ASCII7 input",
+      environments: "Qualified subsets: UNIX V7, 2.11BSD, RSX; RT-11 application I/O only. RSTS/E console-only.",
+      provider: "Operator-configured Go terminal bridge; no GPIO/REALCONS requirement",
+      direction: owner && connected ? "input/output" : "output",
+      attachment: connected ? "Connected to the selected approval" : "Disconnected; selected line is not a browser connection",
+      authority: owner && connected ? "supervised interaction" : "observation",
+      generation: selector.selectedOptions[0]?.dataset.generation || "Not supplied; never inferred from port or guest output",
+      failure: "Disconnect without replay or automatic reconnect; original console and guest remain independent",
+      operations: owner && connected ? "Observe, copy/export, lease-gated keys and reviewed paste" : "Observe/copy/export when connected; acquire keyboard explicitly",
+      limitations: "Partial terminal conformance; configured guest identity is operator-attested, not automatically authoritative",
+    });
     onStatus(`${selector.value || "No line"} · ${personality.value.toUpperCase()} · ${badge.textContent}`);
   };
   const send = (message: object) => {
@@ -95,16 +119,33 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     if (profile.personality === "asr33" && $<HTMLInputElement>("[data-uppercase]").checked) data = data.toUpperCase();
     if(send({type:'input',epoch,seq:seq+1,data:btoa(data)}))seq++;
   };
-  const configureKeys=()=>term.attachCustomKeyEventHandler(e=>{
-    if(e.type!=='keydown'||e.altKey||e.ctrlKey||e.metaKey)return true;
-    const encoded= e.code==='Backspace'?String.fromCharCode(Number($<HTMLSelectElement>('[aria-label="Backspace encoding"]').value)):profile.key(e.code,term.modes.applicationKeypadMode,term.modes.applicationCursorKeysMode);
-    if(encoded===undefined)return true;e.preventDefault();term.input(encoded,true);return false;
-  });
-  configureKeys();
-  let handler=term.onData(input);
-  $<HTMLSelectElement>('[aria-label="Guest terminal text size"]').onchange = e => {
-    term.options.fontSize = Number((e.target as HTMLSelectElement).value);
+  const configureKeys = () => {
+    // DA/DECID identify a base VT100, not xterm's later VT-series capabilities.
+    // Parser hooks retain chunk/OSC boundaries and replies use the current lease.
+    if (profile.personality === "vt100") {
+      term.parser.registerCsiHandler({ final: "c" }, params => {
+        if (params.length === 1 && params[0] === 0) input("\x1b[?1;0c");
+        return true;
+      });
+      term.parser.registerEscHandler({ final: "Z" }, () => { input("\x1b[?1;0c"); return true; });
+      term.parser.registerCsiHandler({ prefix: ">", final: "c" }, () => true);
+    }
+    term.attachCustomKeyEventHandler(event => {
+      if (localTerminalShortcut(event)) {
+        if (event.type === "keydown" && (!event.metaKey || ["KeyC"].includes(event.code))) workstation.shortcut(event);
+        return false;
+      }
+      if (event.type !== "keydown") return true;
+      const encoded = terminalKey(event, profile, Number($<HTMLSelectElement>('[aria-label="Backspace encoding"]').value),
+        term.modes.applicationKeypadMode, term.modes.applicationCursorKeysMode);
+      if (encoded === undefined) return true;
+      event.preventDefault();
+      if (encoded) term.input(encoded, true);
+      return false;
+    });
   };
+  configureKeys();
+  let handler = term.onData(input);
   // Stop native clipboard paste before xterm; nothing is sent until explicit review.
   const paste=(e:ClipboardEvent)=>{e.preventDefault();e.stopImmediatePropagation();const value=e.clipboardData?.getData('text/plain')??'';const box=$<HTMLInputElement>('.guest-paste input');try { box.value=safeGuestPaste(value); status.textContent='Paste captured for review; nothing sent'; } catch (error) { box.value=''; status.textContent=(error as Error).message; } $<HTMLDetailsElement>('.guest-paste').open=true;box.focus();};
   $(".guest-screen").addEventListener('paste',paste,true);
@@ -169,6 +210,7 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     }
     term.options.fontSize = Number($<HTMLSelectElement>('[aria-label="Guest terminal text size"]').value);
     term.open($(".guest-xterm"));
+    workstation.bind(term);
     term.write(profile.initial);
     configureKeys();
     handler = term.onData(input);
@@ -312,6 +354,7 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     window.removeEventListener('pagehide', hide);
     disconnect();
     handler.dispose();
+    workstation.dispose();
     term.dispose();
   };
 }

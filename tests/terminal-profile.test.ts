@@ -56,7 +56,7 @@ test("VT220 identity, editing keys, C1 input and bounded sequences differ from V
 });
 test("Teletype paper keeps CR/LF distinct, overprints, bounds history and never executes escapes", () => {
   const p = new TerminalProfile("asr33");
-  assert.equal(p.feed(bytes("abc\rZ\nq\x07\x1b[2J")).display,"ABC\rZ\nQ[2J");
+  assert.equal(p.feed(bytes("abc\rZ\nq\x07\x1b[2J")).display,"ABC\rZ\nQ\x07[2J");
   assert.equal(p.paper.text,"ZBC\n Q[2J");
   assert.equal(p.paper.bells,1);
   assert.equal(p.key("ArrowUp"), "");

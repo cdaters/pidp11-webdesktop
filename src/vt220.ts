@@ -21,6 +21,14 @@ export class VT220Profile {
       F10: "21",
       F11: "23",
       F12: "24",
+      F13: "25",
+      F14: "26",
+      F15: "28", // HELP
+      F16: "29", // DO
+      F17: "31",
+      F18: "32",
+      F19: "33",
+      F20: "34",
     };
     return editing[code] ? `\x1b[${editing[code]}~` : undefined;
   }
@@ -66,7 +74,7 @@ export class VT220Profile {
         if (csi && !/[@-~]/.test(char)) continue;
         const sequence = this.pending;
         this.pending = "";
-        if (/^\x1b\[(0)?c$/.test(sequence)) replies.push("\x1b[?62c");
+        if (sequence === "\x1bZ" || /^\x1b\[(0)?c$/.test(sequence)) replies.push("\x1b[?62c");
         else if (/^\x1b\[>(0)?c$/.test(sequence)) replies.push("\x1b[>1;0;0c");
         else if (sequence === "\x1b G" || /^\x1b\[62;(0|2)"p$/.test(sequence)) {
           throw Error(

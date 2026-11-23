@@ -32,7 +32,7 @@ export class TerminalProfile {
     if (arrows[code]) return `\x1b${arrows[code]}`;
     // The VT52 has three function keys, unlike the VT100's four PF keys.
     if (/^F[1-3]$/.test(code)) return `\x1b${String.fromCharCode(79 + Number(code[1]))}`;
-    if (code === "F4") return "";
+    if (/^(F([4-9]|1[0-9]|20)|Home|End|Insert|PageUp|PageDown)$/.test(code)) return "";
     if (/^Numpad[0-9]$/.test(code) || code === "NumpadDecimal" || code === "NumpadEnter") {
       return decKey(code, this.alternateKeypad)?.replace("\x1bO", "\x1b?");
     }

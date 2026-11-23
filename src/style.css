@@ -1186,3 +1186,26 @@ table button {
 .pdp-values-fields label { display:flex; flex-direction:column; gap:4px; }
 .pdp-values-fields input:not([type="checkbox"]) { width:10em; }
 .companion-app [aria-label="Exact result"] { overflow:auto; white-space:pre-wrap; }
+
+/* Workstation effects are static, optional, and never alter terminal geometry. */
+.terminal-workstation { border-top:1px solid #b7beb0; padding:6px 0; }
+.terminal-workstation summary { cursor:pointer; font-weight:600; }
+.terminal-workstation .terminal-toolbar { flex-wrap:wrap; margin-top:8px; }
+.terminal-help { font-size:12px; line-height:1.5; max-width:90ch; }
+.terminal-workstation input[type=search] { max-width:220px; }
+.terminal-workstation [data-workstation-status] { min-height:1.5em; }
+.guest-screen { position:relative; }
+.terminal-scanlines .guest-xterm { background-image:repeating-linear-gradient(0deg, transparent 0 2px, #0002 2px 3px); }
+.terminal-scanlines .xterm-screen::after { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg, transparent 0 2px, #0002 2px 3px); }
+.terminal-glow .xterm-rows { text-shadow:0 0 2px currentColor; }
+[data-terminal-brightness="80"] .guest-xterm { filter:brightness(.8); }
+[data-terminal-brightness="120"] .guest-xterm { filter:brightness(1.2); }
+@media (prefers-reduced-motion: reduce), (prefers-contrast: more), (forced-colors: active) {
+  .terminal-scanlines .xterm-screen::after { display:none; }
+  .terminal-glow .xterm-rows { text-shadow:none; }
+  [data-terminal-brightness] .guest-xterm { filter:none; }
+}
+
+.equipment-description dl { display:grid; grid-template-columns:110px minmax(0,1fr); font-size:12px; gap:6px 12px; }
+.equipment-description dt { font-weight:600; }
+.equipment-description dd { margin:0; overflow-wrap:anywhere; }

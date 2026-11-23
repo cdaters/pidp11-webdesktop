@@ -16,6 +16,7 @@ export class TeletypePaper {
       if (byte > 127) throw Error("Teletype requires ASCII7");
       if (byte === 7) {
         this.bells++;
+        display += "\x07";
         continue;
       }
       if (byte === 13) {
