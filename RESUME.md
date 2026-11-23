@@ -6,6 +6,19 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **Active assignment:** M5.21 supervised equipment sessions. Incremental backup
+  of all new M5.20 evidence verified before experiments: 130 files / 8 directories,
+  681,998,188 logical bytes, archive 682,530,304 bytes, SHA-256
+  `d941b0872c81c5cb03fc45ec04bd18a37257fa09bcf5da2604d14f13f91cdfa0`.
+  Version `M5.21-incremental-20261123T173629Z` on the same private NAS; all file
+  hashes and supported metadata passed independent readback. Exact creation times
+  recorded, no full restore. Previous full backup unchanged; no source deleted.
+- New private work belongs in `.research/m521-equipment/`; the older `.research/m521/`
+  is unrelated historical evidence and must remain unchanged. Private recovery
+  pointer: project-level `Backups/WebDesktop-M5.21-incremental-20261123T173629Z/backup.json`.
+- Starting state: main `153a9d1`, clean tree, seven unrelated Docker containers,
+  no owned M5.20 lab/preview listeners. No M5.21 guest has started yet.
+
 - **Latest completed engineering milestone:** M5.20, genuine printer/paper-tape
   workflows; completed work, not owner acceptance or production approval.
 - **Report:** [M5.20](docs/lab/M5.20.md), [runbook](lab/m520/README.md), curated
