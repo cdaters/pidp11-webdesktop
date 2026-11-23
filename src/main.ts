@@ -1,4 +1,5 @@
 import { PrinterApp } from "./printer-app.ts";
+import { mountEquipmentWorkspace, type EquipmentView } from "./equipment-workspace.ts";
 import { APP_MILESTONE } from "./version.ts";
 import {
   SimulatedPanelAdapter,
@@ -455,7 +456,7 @@ function systemsHTML() {
       "",
     )}<a class="reference-link" href="https://obsolescence.dev/pidp11/PiDP-11_Manual.pdf" target="_blank" rel="noreferrer">Official PiDP-11 manual ↗</a>`;
 }
-const printerApps = new WeakMap<HTMLElement, PrinterApp>();
+const equipmentApps = new WeakMap<HTMLElement, EquipmentView>();
 function paperHTML() {
   return `<div class="app-heading"><div><h2>Paper tape</h2><p>Read and punch local bytes · 8 KiB per tape.</p></div><span class="source-tag">SIMULATION</span></div><div class="paper-columns"><section><h3>Reader / PTR</h3><label class="file-label">Load local tape<input type="file" data-paper-file aria-label="Load local paper tape"></label><p>${devices.paper.length} bytes loaded</p><div class="punched-strip" aria-label="First 32 bytes as punched holes">${Array.from(
     devices.paper.slice(0, 32),
@@ -499,17 +500,27 @@ function refreshApps() {
   }
 }
 function renderApp(id: string, el: HTMLElement) {
-  if (id === "printer") {
-    let app = printerApps.get(el);
-    if (!app) { app = new PrinterApp(el, devices, safe, download); printerApps.set(el, app); }
-    app.update(devices);
+  if (id === "printer" || id === "paper") {
+    let app = equipmentApps.get(el);
+    if (!app) {
+      app = mountEquipmentWorkspace(el, id === "printer" ? "lp11" : "pc11-punch", (content) => {
+        if (id === "printer") {
+          const printer = new PrinterApp(content, devices, safe, download);
+          return { update: () => printer.update(devices), dispose: () => printer.dispose() };
+        }
+        renderApp("paper-demo", content);
+        return { update() {}, dispose: () => content.remove() };
+      });
+      equipmentApps.set(el, app);
+    }
+    app.update();
     return;
   }
   const html: Record<string, () => string> = {
     disks: () => mediaHTML(),
     tapes: () => mediaHTML(true),
     systems: systemsHTML,
-    paper: paperHTML,
+    "paper-demo": paperHTML,
     sessions: sessionsHTML,
     diagnostics: diagnosticsHTML,
   };
@@ -533,8 +544,10 @@ function renderApp(id: string, el: HTMLElement) {
       const file = (e.target as HTMLInputElement).files?.[0];
       if (!file) return;
       if (file.size > 8192) return notify("Paper-tape limit is 8 KiB.", true);
-      devices.loadPaper(new Uint8Array(await file.arrayBuffer()));
-      renderApp("paper", el);
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      if (!el.isConnected) return; // Closing or changing mode cancels this import.
+      devices.loadPaper(bytes);
+      renderApp("paper-demo", el);
       refreshApps();
     },
   );
@@ -553,7 +566,7 @@ function renderApp(id: string, el: HTMLElement) {
         devices.punch(
           el.querySelector<HTMLTextAreaElement>("[data-punch-input]")!.value,
         );
-        renderApp("paper", el);
+        renderApp("paper-demo", el);
       }),
   );
   el.querySelector<HTMLButtonElement>("[data-new-terminal]")?.addEventListener(
@@ -627,7 +640,7 @@ function openApp(id: string) {
     y: 70 + (manager.store.windows.length % 3) * 30,
     width: id === "printer" ? 960 : id === "paper" ? 760 : 680,
     height: id === "printer" ? 740 : id === "about" ? 680 : 470,
-  }, () => { printerApps.get(el)?.dispose(); printerApps.delete(el); });
+  }, () => { equipmentApps.get(el)?.dispose(); equipmentApps.delete(el); });
 }
 $("arrange-equipment").onclick = () => {
   notify(manager.arrangeEquipment() ? "Equipment arranged. Use the taskbar to switch windows on narrow displays; connections and ownership are unchanged." : "Open a guest terminal, device observer or companion first.");

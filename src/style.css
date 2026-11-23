@@ -1103,6 +1103,13 @@ table button {
   display: flex; flex-direction: column; gap: 9px;
   padding: 14px; overflow: auto;
 }
+.equipment-workspace.utility-app {
+  display: flex; flex-direction: column; gap: 9px; padding: 14px;
+}
+.equipment-workspace > .printer-app {
+  display: flex; flex-direction: column; gap: 9px; flex: 1; min-height: 0;
+}
+.printer-app > .paper-position { flex: none; }
 .printer-app .app-heading { margin: 0; align-items: center; }
 .printer-app h2 { font-size: 20px; margin: 0 0 4px; }
 .printer-controls, .paper-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
@@ -1146,7 +1153,7 @@ table button {
 .printer-jobs summary { cursor: pointer; }
 .printer-jobs .job-list { max-height: 85px; overflow: auto; margin: 4px 0 0; }
 @media (max-width: 600px) {
-  .printer-app.utility-app { padding: 8px; gap: 6px; }
+  .printer-app.utility-app, .equipment-workspace.utility-app { padding: 8px; gap: 6px; }
   .printer-app h2 { font-size: 17px; }
   .printer-app .app-heading p { font-size: 10px; }
 }

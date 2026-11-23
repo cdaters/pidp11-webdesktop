@@ -1,4 +1,6 @@
 import { PaperViewer } from "./printer.ts";
+import type { PeripheralKind } from "./equipment-workspace.ts";
+import { mountPeripheralDetails } from "./peripheral-details.ts";
 
 interface Device {
   id: string;
@@ -37,9 +39,9 @@ function validate(value: unknown): Device {
 
 /** Completed SIMH exports only. Selection never silently follows a new generation.
  * One request at a time, no reconnect loop, file paths, media writes or controls. */
-export function mountDeviceObserver(host: HTMLElement): () => void {
+export function mountDeviceObserver(host: HTMLElement, kind?: PeripheralKind): () => void {
   host.classList.add("printer-app");
-  host.innerHTML = `<div class="app-heading"><h2>Guest device output</h2><span class="source-tag">READ-ONLY · COMPLETED EXPORTS</span></div><p>Operator-approved LP11 and PC11 output. These are completed spool snapshots, not a live device attachment.</p><div class="terminal-toolbar"><button data-refresh-devices>Refresh observations</button><select aria-label="Observed device"></select><button data-view-device disabled>View selected generation</button><button data-download-device disabled>Save exact device bytes</button><label>Paper <select aria-label="Observed printer columns"><option>80</option><option>132</option></select></label></div><p data-device-status role="status">Sign in through Guest terminal, then refresh. No automatic attachment.</p><p data-device-identity></p><div class="paper-position"></div><div class="paper-viewport" tabindex="0" role="region" aria-label="Observed printer paper"></div><pre data-punch hidden></pre>`;
+  host.innerHTML = `<div class="app-heading"><h2>Guest device output</h2><span class="source-tag">OBSERVATION · COMPLETED EXPORTS</span></div><p>Operator-approved LP11 and PC11 output. These are completed spool snapshots, not a live device attachment.</p><div class="terminal-toolbar"><button data-refresh-devices>Refresh observations</button><select aria-label="Observed device"></select><button data-view-device disabled>View selected generation</button><button data-download-device disabled>Save exact device bytes</button><label>Paper <select aria-label="Observed printer columns"><option>80</option><option>132</option></select></label></div><p data-device-status role="status">Sign in through Guest terminal, then refresh. No automatic attachment.</p><p data-device-identity></p><div class="paper-position"></div><div class="paper-viewport" tabindex="0" role="region" aria-label="Observed printer paper"></div><pre data-punch hidden></pre>`;
   const select = host.querySelector<HTMLSelectElement>(
     '[aria-label="Observed device"]',
   )!;
@@ -55,6 +57,12 @@ export function mountDeviceObserver(host: HTMLElement): () => void {
     host.querySelector<HTMLElement>(".paper-position")!,
     true,
   );
+  const describe = mountPeripheralDetails(host);
+  const textDownload = document.createElement("button");
+  textDownload.textContent = "Save completed text";
+  textDownload.disabled = true;
+  host.querySelector(".terminal-toolbar")!.append(textDownload);
+  let selected: Device | undefined;
   let rows: Device[] = [],
     bytes: Uint8Array | undefined,
     disposed = false,
@@ -67,6 +75,9 @@ export function mountDeviceObserver(host: HTMLElement): () => void {
   const reset = () => {
     bytes = undefined;
     download.disabled = true;
+    textDownload.disabled = true;
+    selected = undefined;
+    describe();
     paper.update("");
     punch.textContent = "";
     host.querySelector("[data-device-identity]")!.textContent = "";
@@ -95,7 +106,7 @@ export function mountDeviceObserver(host: HTMLElement): () => void {
         if (!Array.isArray(data) || data.length > 4)
           throw Error("Invalid device inventory");
         if (disposed || pending !== request) return;
-        rows = data.map(validate).filter((row) => row.state === "completed");
+        rows = data.map(validate).filter((row) => row.state === "completed" && (!kind || row.kind === kind));
         select.replaceChildren(
           new Option("Choose a completed export", ""),
           ...rows.map(
@@ -118,13 +129,13 @@ export function mountDeviceObserver(host: HTMLElement): () => void {
     view.disabled = !select.value;
   });
   view.onclick = async () => {
-    const selected = rows.find((row) => row.id === select.value);
-    if (!selected) return;
+    const target = rows.find((row) => row.id === select.value);
+    if (!target) return;
     const request = begin();
     reset();
     try {
       const response = await fetch(
-        `/api/v1/devices/${encodeURIComponent(selected.id)}/${encodeURIComponent(selected.generation)}`,
+        `/api/v1/devices/${encodeURIComponent(target.id)}/${encodeURIComponent(target.generation)}`,
         { signal: request.signal },
       );
       if (!response.ok)
@@ -133,7 +144,10 @@ export function mountDeviceObserver(host: HTMLElement): () => void {
         );
       const data = validate(await response.json());
       if (
-        data.generation !== selected.generation ||
+        data.generation !== target.generation ||
+        data.id !== target.id || data.kind !== target.kind ||
+        data.simulator_generation !== target.simulator_generation ||
+        data.guest_generation !== target.guest_generation ||
         typeof data.data !== "string" ||
         data.data.length > 87384
       )
@@ -142,6 +156,8 @@ export function mountDeviceObserver(host: HTMLElement): () => void {
         char.charCodeAt(0),
       );
       if (decoded.length !== data.bytes) throw Error("Device size mismatch");
+      if (data.kind === "lp11" && decoded.some((byte) => byte > 127))
+        throw Error("LP11 requires ASCII7 bytes");
       const digest = Array.from(
         new Uint8Array(await crypto.subtle.digest("SHA-256", decoded)),
         (n) => n.toString(16).padStart(2, "0"),
@@ -149,6 +165,9 @@ export function mountDeviceObserver(host: HTMLElement): () => void {
       if (digest !== data.sha256) throw Error("Device checksum mismatch");
       if (disposed || pending !== request) return;
       bytes = decoded;
+      selected = data;
+      textDownload.disabled = data.kind !== "lp11";
+      describe(data);
       download.disabled = false;
       host.querySelector("[data-device-identity]")!.textContent =
         `${data.kind} · simulator ${data.simulator_generation} · guest ${data.guest_generation} · completed observation`;
@@ -170,17 +189,19 @@ export function mountDeviceObserver(host: HTMLElement): () => void {
         status.textContent = (error as Error).message;
     }
   };
-  download.onclick = () => {
-    if (!bytes) return;
+  const save = (text: boolean) => {
+    if (!bytes || !selected || (text && selected.kind !== "lp11")) return;
     const url = URL.createObjectURL(
-      new Blob([bytes as Uint8Array<ArrayBuffer>]),
+      new Blob([bytes as Uint8Array<ArrayBuffer>], { type: text ? "text/plain;charset=us-ascii" : "application/octet-stream" }),
     );
     const link = document.createElement("a");
     link.href = url;
-    link.download = "device-output.bin";
+    link.download = `${selected.id}-${selected.generation}-completed.${text ? "txt" : "bin"}`;
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
+  download.onclick = () => save(false);
+  textDownload.onclick = () => save(true);
   return () => {
     disposed = true;
     pending?.abort();

@@ -1,4 +1,6 @@
 import { PaperViewer } from "./printer.ts";
+import type { PeripheralKind } from "./equipment-workspace.ts";
+import { mountPeripheralDetails } from "./peripheral-details.ts";
 
 interface Activity {
   id: string;
@@ -70,8 +72,8 @@ async function digest(bytes: Uint8Array<ArrayBuffer>): Promise<string> {
     (b) => b.toString(16).padStart(2, "0"),
   ).join("");
 }
-function save(bytes: Uint8Array<ArrayBuffer>, name: string) {
-  const url = URL.createObjectURL(new Blob([bytes]));
+function save(bytes: Uint8Array<ArrayBuffer>, name: string, type = "application/octet-stream") {
+  const url = URL.createObjectURL(new Blob([bytes], { type }));
   const link = document.createElement("a");
   link.href = url;
   link.download = name;
@@ -82,9 +84,9 @@ function save(bytes: Uint8Array<ArrayBuffer>, name: string) {
 /** One explicitly selected generation, one outstanding poll and a 64-KiB tail.
  * Network failure stops observation; reconnect is a deliberate new selection.
  * No browser request renews producer authority or modifies a device/file. */
-export function mountLiveDevices(host: HTMLElement): () => void {
+export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () => void {
   host.classList.add("printer-app");
-  host.innerHTML = `<div class="app-heading"><h2>Peripheral activity</h2><span class="source-tag">READ-ONLY · EXPERIMENTAL</span></div><p>Approved simulator output, as bytes become visible in its local spool. Buffered device output may arrive in bursts. This observer does not operate the simulator.</p><div class="terminal-toolbar"><button data-another-observer>Open another observer</button><button data-inventory>Refresh devices</button><select aria-label="Live peripheral"></select><button data-follow disabled>Observe selected generation</button><button data-stop>Stop observing</button><button data-save disabled>Save completed output</button><button data-reader disabled>Save read-only reader image</button><label>Paper <select aria-label="Live printer columns"><option>80</option><option>132</option></select></label></div><p data-activity-status role="status">Detached · sign in through Guest terminal, then refresh.</p><p data-activity-identity></p><p data-activity-count></p><div class="paper-position"></div><div class="paper-viewport" tabindex="0" role="region" aria-label="Live printer paper"></div><pre data-punch-bytes hidden></pre>`;
+  host.innerHTML = `<div class="app-heading"><h2>Peripheral activity</h2><span class="source-tag">OBSERVATION · READ-ONLY</span></div><p>Approved simulator output, as bytes become visible in its local spool. Buffered device output may arrive in bursts. This observer does not operate the simulator.</p><div class="terminal-toolbar"><button data-another-observer>Open another observer</button><button data-inventory>Refresh devices</button><select aria-label="Live peripheral"></select><button data-follow disabled>Observe selected generation</button><button data-stop>Stop observing</button><button data-save disabled>Save completed output</button><button data-reader disabled>Save read-only reader image</button><label>Paper <select aria-label="Live printer columns"><option>80</option><option>132</option></select></label></div><p data-activity-status role="status">Detached · sign in through Guest terminal, then refresh.</p><p data-activity-identity></p><p data-activity-count></p><div class="paper-position"></div><div class="paper-viewport" tabindex="0" role="region" aria-label="Live printer paper"></div><pre data-punch-bytes hidden></pre>`;
   const $ = <T extends Element>(query: string) => host.querySelector<T>(query)!;
   const select = $<HTMLSelectElement>('[aria-label="Live peripheral"]');
   const follow = $<HTMLButtonElement>("[data-follow]");
@@ -98,6 +100,22 @@ export function mountLiveDevices(host: HTMLElement): () => void {
     $<HTMLElement>(".paper-position"),
     true,
   );
+  const describe = mountPeripheralDetails(host);
+  const partial = document.createElement("button");
+  partial.textContent = "Save incomplete bytes";
+  partial.dataset.savePartial = "";
+  const text = document.createElement("button");
+  text.textContent = "Save retained text";
+  text.dataset.saveText = "";
+  const top = document.createElement("button");
+  top.textContent = "Top of retained paper";
+  top.onclick = () => paper.jump(false);
+  const latest = document.createElement("button");
+  latest.textContent = "Latest output";
+  latest.onclick = () => paper.jump(true);
+  $(".terminal-toolbar").append(partial, text, top, latest);
+  partial.disabled = text.disabled = true;
+  let completed = false;
   let inventory: Activity[] = [],
     selected: Activity | undefined;
   let retained = new Uint8Array(0),
@@ -120,6 +138,10 @@ export function mountLiveDevices(host: HTMLElement): () => void {
     retained = new Uint8Array(0);
     cursor = sequence = first = 0;
     download.disabled = reader.disabled = true;
+    download.textContent = "Save completed output";
+    partial.disabled = text.disabled = true;
+    completed = false;
+    describe();
     paper.update("");
     punch.textContent = "";
     $("[data-activity-identity]").textContent = "";
@@ -153,7 +175,7 @@ export function mountLiveDevices(host: HTMLElement): () => void {
       if (!Array.isArray(rows) || rows.length > 4)
         throw Error("Invalid device inventory");
       if (disposed || pending !== request) return;
-      inventory = rows.map(activity).filter((row) => row.generation);
+      inventory = rows.map(activity).filter((row) => row.generation && (!kind || row.kind === kind));
       select.replaceChildren(
         new Option("Select an approved observation", ""),
         ...inventory.map(
@@ -186,8 +208,13 @@ export function mountLiveDevices(host: HTMLElement): () => void {
       if (disposed || pending !== request) return;
       if (
         next.generation !== target.generation ||
+        next.id !== target.id || next.kind !== target.kind ||
         next.simulator_generation !== target.simulator_generation ||
         next.guest_generation !== target.guest_generation ||
+        next.reader_sha256 !== target.reader_sha256 ||
+        next.reader_length !== target.reader_length ||
+        next.reader_bytes < target.reader_bytes ||
+        (target.reader_eof && !next.reader_eof) ||
         next.sequence < sequence
       )
         throw Error("Peripheral identity or order changed");
@@ -200,6 +227,7 @@ export function mountLiveDevices(host: HTMLElement): () => void {
       );
       if (
         chunk.length > 8192 ||
+        (next.kind === "lp11" && chunk.some((byte) => byte > 127)) ||
         next.next_offset !== cursor + chunk.length ||
         next.next_offset > next.total_bytes
       )
@@ -213,6 +241,8 @@ export function mountLiveDevices(host: HTMLElement): () => void {
         combined.set(chunk, retained.length);
         retained = combined.slice(-65536);
         first = cursor - retained.length;
+        partial.disabled = false;
+        text.disabled = next.kind !== "lp11";
         if (next.kind === "lp11")
           paper.update(new TextDecoder().decode(retained));
         else
@@ -229,6 +259,9 @@ export function mountLiveDevices(host: HTMLElement): () => void {
           throw Error("Completed output checksum mismatch");
         if (disposed || pending !== request) return;
         download.disabled = false;
+        completed = true;
+        partial.disabled = true;
+        text.disabled = next.kind !== "lp11";
         download.textContent = first
           ? "Save retained tail (partial)"
           : "Save completed output";
@@ -242,6 +275,8 @@ export function mountLiveDevices(host: HTMLElement): () => void {
       if (!disposed && pending === request) {
         stop();
         download.disabled = true;
+        completed = false;
+        partial.disabled = !retained.length;
         status.textContent =
           (error as Error).message +
           " · cached bytes are not current device state.";
@@ -253,9 +288,11 @@ export function mountLiveDevices(host: HTMLElement): () => void {
     if (!target) return;
     reset();
     selected = target;
+    describe(target);
     cursor = first = target.start_offset;
     viewport.hidden = target.kind !== "lp11";
     punch.hidden = target.kind !== "pc11-punch";
+    text.hidden = top.hidden = latest.hidden = target.kind !== "lp11";
     $("[data-activity-identity]").textContent =
       `${target.id} · simulator ${target.simulator_generation} · guest ${target.guest_generation} · observation ${target.generation}`;
     void poll();
@@ -263,6 +300,16 @@ export function mountLiveDevices(host: HTMLElement): () => void {
   download.onclick = () => {
     if (selected && !download.disabled)
       save(retained, `${selected.id}${first ? "-partial" : "-completed"}.bin`);
+  };
+  // An interrupted or still-running job is useful evidence, but never a
+  // completed artifact. Include its generation and exact retained byte range.
+  const retainedName = () => `${selected!.id}-${selected!.generation}-${first}-${cursor}-${completed ? (first ? "partial" : "completed") : "incomplete"}`;
+  partial.onclick = () => {
+    if (selected && !partial.disabled) save(retained, retainedName() + ".bin");
+  };
+  text.onclick = () => {
+    if (selected?.kind === "lp11" && !text.disabled)
+      save(retained, retainedName() + ".txt", "text/plain;charset=us-ascii");
   };
   reader.onclick = async () => {
     if (!selected || reader.disabled) return;
