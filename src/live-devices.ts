@@ -1,8 +1,15 @@
+import { mountReaderCatalog } from "./reader-catalog.ts";
 import { PaperViewer } from "./printer.ts";
 import type { PeripheralKind } from "./equipment-workspace.ts";
 import { mountPeripheralDetails } from "./peripheral-details.ts";
 
 interface Activity {
+  owner?: string;
+  job?: string;
+  phase?: string;
+  device?: string;
+  label?: string;
+  produced_bytes?: number;
   id: string;
   kind: "lp11" | "pc11-punch";
   generation: string;
@@ -64,6 +71,10 @@ function activity(value: unknown): Activity {
     throw Error("Peripheral bounds exceeded");
   if (v.data !== null && (typeof v.data !== "string" || v.data.length > 10924))
     throw Error("Invalid peripheral chunk");
+  for (const key of ["owner", "job", "phase", "device", "label"])
+    if (v[key] !== undefined && (typeof v[key] !== "string" || (v[key] as string).length > 160)) throw Error("Invalid equipment session");
+  if (v.phase !== undefined && !["observing", "guest-returned", "drained", "closed", "completed", "disconnected", "faulted", "detached"].includes(String(v.phase))) throw Error("Invalid session phase");
+  if (v.produced_bytes !== undefined && (!Number.isSafeInteger(v.produced_bytes) || Number(v.produced_bytes) < 0 || Number(v.produced_bytes) > 1048576)) throw Error("Invalid device length");
   return v as unknown as Activity;
 }
 async function digest(bytes: Uint8Array<ArrayBuffer>): Promise<string> {
@@ -102,6 +113,10 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
     true,
   );
   const describe = mountPeripheralDetails(host);
+  const disposeCatalog = kind === "pc11-punch" ? mountReaderCatalog(host) : () => {};
+  const session = document.createElement("p");
+  session.dataset.equipmentSession = "";
+  $("[data-activity-count]").after(session);
   const partial = document.createElement("button");
   partial.textContent = "Save incomplete bytes";
   partial.dataset.savePartial = "";
@@ -132,10 +147,12 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
     clearTimeout(timer);
     pending?.abort();
     pending = undefined;
+    if (selected?.job) session.textContent = `Cached job ${selected.job}; no active observation. Refresh and select a generation explicitly to resume.`;
   };
   const reset = () => {
     stop();
     selected = undefined;
+    session.textContent = "";
     retained = new Uint8Array(0);
     cursor = sequence = first = 0;
     download.disabled = reader.disabled = true;
@@ -180,7 +197,7 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
       select.replaceChildren(
         new Option("Select an approved observation", ""),
         ...inventory.map(
-          (row) => new Option(`${row.id} · ${row.kind} · ${row.state}`, row.id),
+          (row) => new Option(`${row.job ?? row.id} · ${row.device ?? row.kind} · ${row.state}`, row.id),
         ),
       );
       status.textContent = inventory.length
@@ -209,6 +226,8 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
       if (disposed || pending !== request) return;
       if (
         next.generation !== target.generation ||
+        next.owner !== target.owner || next.job !== target.job || next.device !== target.device ||
+        next.label !== target.label ||
         next.id !== target.id || next.kind !== target.kind ||
         next.simulator_generation !== target.simulator_generation ||
         next.guest_generation !== target.guest_generation ||
@@ -219,6 +238,12 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
         next.sequence < sequence
       )
         throw Error("Peripheral identity or order changed");
+      const stages = ["observing", "guest-returned", "drained", "closed"];
+      if (target.phase && (
+        !next.phase ||
+        (next.state === "observing" && stages.indexOf(next.phase) < stages.indexOf(target.phase)) ||
+        (next.state === "completed" && next.phase !== "completed")
+      )) throw Error("Equipment session stage changed unexpectedly");
       if (next.lost || next.start_offset !== cursor)
         throw Error(
           "Output loss detected: this observer fell behind. Refresh to review the retained tail explicitly.",
@@ -254,6 +279,15 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
       $("[data-activity-count]").textContent =
         `${cursor} / ${next.total_bytes} host-visible bytes · retained from ${first}${first ? " · earlier bytes omitted; paper origin is approximate" : ""}${next.reader_sha256 ? ` · reported reader ${next.reader_bytes}/${next.reader_length}${next.reader_eof ? " · end-of-tape reported" : ""}` : ""}`;
       status.textContent = `${next.state.toUpperCase()} · ${next.message}`;
+      const phases: Record<string, string> = {
+        observing: "Observing host-visible output; completion not established",
+        "guest-returned": "Guest utility returned; device drain and flush still require verification",
+        drained: "Device drain attested; host-file close still required",
+        closed: "Host-file close attested; final artifact verification pending",
+        completed: "Artifact verified complete", disconnected: "Approval ended; retained output may be incomplete",
+        faulted: "Session failed; inspect retained evidence", detached: "No active session",
+      };
+      session.textContent = next.job ? `${next.label} · device ${next.device} · job ${next.job}. ${phases[next.phase ?? "observing"]}${next.produced_bytes ? ` · independently reported device length ${next.produced_bytes}` : ""}` : "Legacy observation; no equipment-session stages supplied.";
       reader.disabled = !next.reader_sha256;
       if (next.state === "completed" && cursor === next.total_bytes) {
         if (!first && (await digest(retained)) !== next.sha256)
@@ -352,6 +386,7 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
   };
   return () => {
     disposed = true;
+    disposeCatalog();
     stop();
     paper.dispose();
     retained = new Uint8Array(0);

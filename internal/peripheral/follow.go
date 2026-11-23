@@ -25,48 +25,60 @@ const (
 // FollowConfig names reserved local files. ReaderPath optionally pairs an
 // immutable PC11 input with its punch. No browser can supply either path.
 type FollowConfig struct {
-	ID         string `json:"id"`
-	Kind       string `json:"kind"`
-	Path       string `json:"path"`
-	ReaderPath string `json:"reader_path,omitempty"`
+	Session    *SessionConfig `json:"session,omitempty"`
+	ID         string         `json:"id"`
+	Kind       string         `json:"kind"`
+	Path       string         `json:"path"`
+	ReaderPath string         `json:"reader_path,omitempty"`
 }
 
 // FollowApproval is local-operator authority only. Renewals attest continued
 // producer identity; they do not prove CPU execution or provide simulator control.
 type FollowApproval struct {
-	Instance     string `json:"instance"`
-	ID           string `json:"id"`
-	Revision     uint64 `json:"revision"`
-	Simulator    string `json:"simulator_generation"`
-	Guest        string `json:"guest_generation"`
-	Verified     bool   `json:"producer_verified"`
-	SHA256       string `json:"sha256,omitempty"`
-	ReaderSHA256 string `json:"reader_sha256,omitempty"`
-	ReaderBytes  int    `json:"reader_bytes,omitempty"`
-	ReaderEOF    bool   `json:"reader_eof,omitempty"`
+	Generation    string `json:"generation,omitempty"`
+	Owner         string `json:"owner,omitempty"`
+	Job           string `json:"job,omitempty"`
+	Evidence      string `json:"evidence,omitempty"`
+	ProducedBytes int64  `json:"produced_bytes,omitempty"`
+	Instance      string `json:"instance"`
+	ID            string `json:"id"`
+	Revision      uint64 `json:"revision"`
+	Simulator     string `json:"simulator_generation"`
+	Guest         string `json:"guest_generation"`
+	Verified      bool   `json:"producer_verified"`
+	SHA256        string `json:"sha256,omitempty"`
+	ReaderSHA256  string `json:"reader_sha256,omitempty"`
+	ReaderBytes   int    `json:"reader_bytes,omitempty"`
+	ReaderEOF     bool   `json:"reader_eof,omitempty"`
 }
 
 // FollowView is an ordered slice of a specific observation, never a live-machine
 // identity oracle. Reader progress is explicitly reported by the local operator.
 type FollowView struct {
-	ID           string `json:"id"`
-	Kind         string `json:"kind"`
-	Generation   string `json:"generation"`
-	Simulator    string `json:"simulator_generation"`
-	Guest        string `json:"guest_generation"`
-	State        string `json:"state"`
-	Message      string `json:"message"`
-	Sequence     uint64 `json:"sequence"`
-	Start        int64  `json:"start_offset"`
-	Next         int64  `json:"next_offset"`
-	Total        int64  `json:"total_bytes"`
-	Lost         bool   `json:"lost"`
-	Data         []byte `json:"data"`
-	SHA256       string `json:"sha256"`
-	ReaderLength int    `json:"reader_length"`
-	ReaderBytes  int    `json:"reader_bytes"`
-	ReaderEOF    bool   `json:"reader_eof"`
-	ReaderSHA256 string `json:"reader_sha256"`
+	Owner         string `json:"owner,omitempty"`
+	Job           string `json:"job,omitempty"`
+	Phase         string `json:"phase,omitempty"`
+	Device        string `json:"device,omitempty"`
+	Label         string `json:"label,omitempty"`
+	ProducedBytes int64  `json:"produced_bytes,omitempty"`
+	ID            string `json:"id"`
+	Kind          string `json:"kind"`
+	Generation    string `json:"generation"`
+	Simulator     string `json:"simulator_generation"`
+	Guest         string `json:"guest_generation"`
+	State         string `json:"state"`
+	Message       string `json:"message"`
+	Sequence      uint64 `json:"sequence"`
+	Start         int64  `json:"start_offset"`
+	Next          int64  `json:"next_offset"`
+	Total         int64  `json:"total_bytes"`
+	Lost          bool   `json:"lost"`
+	Data          []byte `json:"data"`
+	SHA256        string `json:"sha256"`
+	ReaderLength  int    `json:"reader_length"`
+	ReaderBytes   int    `json:"reader_bytes"`
+	ReaderEOF     bool   `json:"reader_eof"`
+	ReaderSHA256  string `json:"reader_sha256"`
 }
 
 type following struct {
@@ -108,6 +120,9 @@ func NewFollowers(configs []FollowConfig) (*Followers, error) {
 	for _, c := range configs {
 		if !identifier.MatchString(c.ID) || !filepath.IsAbs(c.Path) || (c.Kind != "lp11" && c.Kind != "pc11-punch") || f.entries[c.ID] != nil || (c.ReaderPath != "" && (!filepath.IsAbs(c.ReaderPath) || c.Kind != "pc11-punch")) {
 			return nil, errors.New("invalid peripheral follower allowlist")
+		}
+		if err := validateSession(c); err != nil {
+			return nil, err
 		}
 		f.entries[c.ID] = &following{config: c, view: FollowView{ID: c.ID, Kind: c.Kind, State: "detached"}}
 	}
@@ -220,6 +235,9 @@ func retire(e *following, state, message string) {
 		e.file = nil
 	}
 	e.view.State = state
+	if e.config.Session != nil {
+		e.view.Phase = state
+	}
 	e.view.Message = message
 	e.view.Sequence++
 }
@@ -233,6 +251,10 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 	if f.closed || e == nil || a.Instance != f.instance || a.Revision != e.revision {
 		return errors.New("stale peripheral approval")
 	}
+	// A delayed owner must not revoke or complete a replacement generation.
+	if e.config.Session != nil && (a.Generation != e.view.Generation || (op != "follow" && a.Owner != e.view.Owner)) {
+		return errors.New("stale equipment session owner or generation")
+	}
 	e.revision++
 	fail := func(message string) error { retire(e, "faulted", message); return errors.New(message) }
 	if op == "detach" {
@@ -243,6 +265,20 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 		return fail("verified producer identities required")
 	}
 	if op == "follow" {
+		if e.config.Session != nil {
+			if e.view.State == "observing" {
+				return errors.New("active session must be explicitly retired first")
+			}
+			if !identifier.MatchString(a.Owner) || !identifier.MatchString(a.Job) {
+				return errors.New("explicit supervisor and job identities required")
+			}
+		}
+		// Prepare a supervised replacement transactionally. A missing/old spool
+		// or invalid reader must not erase the prior generation's retained data.
+		previous := e
+		if e.config.Session != nil {
+			e = &following{config: previous.config, revision: previous.revision}
+		}
 		retire(e, "detached", "Starting a new approved observation")
 		generation, err := nonce()
 		if err != nil {
@@ -252,6 +288,13 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 		e.reader = nil
 		e.digest = sha256.New()
 		e.view = FollowView{ID: e.config.ID, Kind: e.config.Kind, Generation: f.instance + "-" + generation, Simulator: a.Simulator, Guest: a.Guest, State: "detached"}
+		if c := e.config.Session; c != nil {
+			e.view.Owner, e.view.Job, e.view.Phase = a.Owner, a.Job, "observing"
+			e.view.Device, e.view.Label = c.Device, c.Label
+			if c.Reader != nil && a.ReaderSHA256 != c.Reader.SHA256 {
+				return fail("reader is not the allowlisted media identity")
+			}
+		}
 		file, info, err := openRegular(e.config.Path, 0)
 		if err != nil {
 			return fail("fresh empty spool required; old output is never replayed")
@@ -268,7 +311,7 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 			after, statErr := reader.Stat()
 			reader.Close()
 			sum := sha256.Sum256(data)
-			if readErr != nil || statErr != nil || len(data) > MaxBytes || int64(len(data)) != before.Size() || after.Size() != before.Size() || !after.ModTime().Equal(before.ModTime()) || hex.EncodeToString(sum[:]) != a.ReaderSHA256 {
+			if (e.config.Session != nil && before.Mode().Perm()&0222 != 0) || readErr != nil || statErr != nil || len(data) > MaxBytes || int64(len(data)) != before.Size() || after.Size() != before.Size() || !after.ModTime().Equal(before.ModTime()) || hex.EncodeToString(sum[:]) != a.ReaderSHA256 {
 				return fail("reader image checksum or identity changed")
 			}
 			e.reader = data
@@ -279,6 +322,9 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 		e.view.State = "observing"
 		e.view.Message = "Following host-visible device writes; producer identity is operator verified"
 		e.view.Sequence++
+		if e != previous {
+			*previous = *e
+		}
 		return nil
 	}
 	if e.file == nil || e.view.State != "observing" || a.Simulator != e.view.Simulator || a.Guest != e.view.Guest || !f.now().Before(e.deadline) {
@@ -294,6 +340,10 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 		e.view.ReaderBytes = a.ReaderBytes
 		e.view.ReaderEOF = a.ReaderEOF
 		e.view.Sequence++
+	case "guest-returned", "drained", "closed":
+		if err := advanceSession(e, op, a); err != nil {
+			return fail(err.Error())
+		}
 	case "complete":
 		// At most one MiB is drained. Completion requires producer close/flush and an
 		// independently computed full-file checksum, not an idle-period heuristic.
@@ -306,6 +356,9 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 			if e.view.Total == before {
 				break
 			}
+		}
+		if e.config.Session != nil && (e.view.Phase != "closed" || e.view.Total != e.view.ProducedBytes) {
+			return fail("explicit safe close and exact flushed length required")
 		}
 		sum := hex.EncodeToString(e.digest.Sum(nil))
 		if a.SHA256 != sum {
