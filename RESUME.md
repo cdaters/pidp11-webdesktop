@@ -6,19 +6,26 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **Active assignment:** M5.20, genuine printer/paper-tape workflows. Development
-  is blocked on the owner's required verified private `.research/` backup.
-- **Backup preflight, 2026-11-23 UTC:** 38,778 regular files, 5,344 directories,
-  60 symlinks; 40,753,880,985 logical bytes / 39,330,615,296 allocated bytes.
-  TheBench had 35,088,527,360 bytes free, insufficient for the separate copy.
-  No sockets/FIFOs/special entries or traversal errors were found. These are
-  inventory counts, not file hashes or a verified backup.
-- **Next action:** obtain sufficient free space or an alternate private local backup
-  destination, recheck active resources, then create and independently verify the
-  versioned backup before substantial M5.20 work. Do not delete existing evidence
-  or backups, rely on unmeasured compression, or upload private material to cloud/Git.
-  A private preflight record is retained outside the repository in the project's
-  Backups directory; no source backup was created. No M5.20 guest was started.
+- **Active assignment:** M5.20, genuine printer/paper-tape workflows. The required
+  private research backup passed independent verification on 2026-11-23 UTC;
+  application implementation and fresh disposable-guest qualification are next.
+- **Backup:** version `M5.20-20261123T055815Z` on the owner's selected private NAS.
+  38,778 regular files, 5,344 subdirectories plus the root, and 60 symlinks;
+  40,753,880,985 logical bytes verified against every original file hash.
+  The native Mac archive is 39,394,457,088 bytes, SHA-256
+  `7d5e5a32e5b8ac132f9dd775528b01a5d498616c5f9c80e8eff5b6102859e21c`.
+  Permissions, ownership, nanosecond modification times, extended attributes,
+  hidden flags and symlinks passed readback. Exact creation timestamps are recorded
+  separately; no extended ACLs were present. No full restore was performed.
+- **Private recovery records:** the project-level `Backups/` directory, outside
+  this repository, contains `WebDesktop-M5.20-verified-20261123T064653Z/backup.json`
+  with the actual destination. A copy is in ignored `.research/m520/`.
+  Initial ACL-reader and base64-padding verifier errors are retained privately;
+  the corrected full verification passed and all original source entries remained
+  stable. Earlier insufficient-space and failed-attempt records are preserved.
+- **Current work/resources:** `.research/m520/` is newly created. No M5.20 guest,
+  bridge or preview has started and no application code has changed yet. Preserve
+  unrelated Docker services. No Pi access, release or hardware authority is granted.
 
 - **Latest completed engineering milestone:** M5.19, genuine terminal workstation.
   This records completed work, not owner acceptance or production approval.
