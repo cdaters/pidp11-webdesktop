@@ -50,6 +50,12 @@ test('workstation search, presentation persistence, keyboard gate and no restore
   await page.getByLabel('Terminal phosphor').selectOption('amber');
   await page.getByLabel('Terminal cursor',{exact:true}).selectOption('bar');
   await page.getByLabel('Guest terminal text size').selectOption('20');
+  await page.locator('[data-focus]').click();
+  await expect(page.locator('.terminal-workstation')).not.toHaveAttribute('open');
+  const screenBox = await page.locator('.guest-screen').boundingBox();
+  const windowBox = await page.locator('.guest-terminal-app').boundingBox();
+  expect(screenBox!.y).toBeGreaterThanOrEqual(windowBox!.y - 1);
+  expect(screenBox!.y + screenBox!.height).toBeLessThanOrEqual(windowBox!.y + windowBox!.height + 1);
   const saved = await page.evaluate(()=>JSON.parse(localStorage.getItem('pidp11.terminal.display.v1')!));
   expect(Object.keys(saved).sort()).toEqual(['brightness','cursor','fontSize','glow','phosphor','scanlines']);
   await page.reload();
@@ -99,10 +105,25 @@ test('BEL is parser-driven, gesture-gated, muted globally and suppressed outside
   await page.getByRole('button',{name:'Open Guest terminal',exact:true}).focus();
   f.output('\x07'); await expect(page.locator('[data-bell-count]')).toHaveText('4 BEL events');
   expect((await audio()).starts).toBe(1);
+  await page.locator('[data-terminal-mute]').check();
+  await page.locator('.guest-xterm textarea').focus();
+  await page.waitForTimeout(250); // Deliberately exceed the audio rate-limit window.
+  f.output('\x07'); await expect(page.locator('[data-bell-count]')).toHaveText('5 BEL events');
+  expect((await audio()).starts).toBe(1);
+  await page.locator('[data-terminal-mute]').uncheck();
+  await page.locator('.guest-xterm textarea').focus();
+  await page.evaluate(()=>Object.defineProperty(document,'hidden',{configurable:true,value:true}));
+  await page.waitForTimeout(250);
+  f.output('\x07'); await expect(page.locator('[data-bell-count]')).toHaveText('6 BEL events');
+  expect((await audio()).starts).toBe(1);
+  await page.evaluate(()=>Reflect.deleteProperty(document,'hidden'));
+  f.output('\x07');await expect.poll(async()=>(await audio()).starts).toBe(2);
   await page.locator('[data-disconnect]').click();
   await page.locator('[data-connect]').click();
   await expect(page.locator('[data-bell-count]')).toHaveText('0 BEL events');
   expect(f.inputs).toEqual([]);
+  await page.locator('[data-window="guest"]').getByRole('button',{name:'Close Real guest terminal',exact:true}).click();
+  await expect.poll(async()=>(await audio()).closes).toBe(1);
 });
 
 test('VT100 identification, insert/delete, wrap, reset and VT220 DECID', async ({page}) => {

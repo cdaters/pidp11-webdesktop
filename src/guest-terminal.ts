@@ -39,7 +39,17 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
   let profile = new TerminalProfile(initialPersonality);
   let tek = new Tek4010();
   const graphic = $<SVGSVGElement & HTMLElement>(".guest-tek");
-  const focus = () => personality.value === "tek4010" ? graphic.focus() : term.focus();
+  const focus = () => {
+    if (personality.value === "tek4010") {
+      graphic.focus();
+      graphic.scrollIntoView({ block: "nearest", inline: "nearest" });
+    } else {
+      term.focus();
+      // Expanded workstation controls can scroll the screen out of its window.
+      // Return the actual display to view without changing its guest geometry.
+      $(".guest-screen").scrollIntoView({ block: "nearest", inline: "nearest" });
+    }
+  };
   const displayMode = () => {
     const kind = personality.value;
     host.classList.toggle("teletype-mode", kind === "asr33");
@@ -132,7 +142,10 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     }
     term.attachCustomKeyEventHandler(event => {
       if (localTerminalShortcut(event)) {
-        if (event.type === "keydown" && (!event.metaKey || ["KeyC"].includes(event.code))) workstation.shortcut(event);
+        if (event.type === "keydown" && (!event.metaKey || event.code === "KeyC")) {
+          if (!event.metaKey && event.code !== "KeyV") event.preventDefault();
+          workstation.shortcut(event);
+        }
         return false;
       }
       if (event.type !== "keydown") return true;

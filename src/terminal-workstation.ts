@@ -93,7 +93,7 @@ export function mountTerminalWorkstation(host: HTMLElement, getPersonality: () =
   };
   query<HTMLButtonElement>("[data-copy]").onclick = () => { void copy(); };
   query<HTMLButtonElement>("[data-select-all]").onclick = () => term.selectAll();
-  query<HTMLButtonElement>("[data-focus]").onclick = focus;
+  query<HTMLButtonElement>("[data-focus]").onclick = () => { panel.open = false; focus(); };
   query<HTMLButtonElement>("[data-bottom]").onclick = () => { term.clearSelection(); term.scrollToBottom(); focus(); };
   for (const button of panel.querySelectorAll<HTMLButtonElement>("[data-terminal-key]")) button.onclick = () => { sendKey(button.dataset.terminalKey!); focus(); };
   const findBox = query<HTMLInputElement>('[aria-label="Find terminal text"]');
@@ -132,7 +132,14 @@ export function mountTerminalWorkstation(host: HTMLElement, getPersonality: () =
       apply();
     },
     authority(enabled: boolean): void {
-      for (const button of panel.querySelectorAll<HTMLButtonElement>("[data-terminal-key]")) button.disabled = !enabled || (button.hasAttribute("data-vt220-key") && getPersonality() !== "vt220");
+      const personality = getPersonality();
+      for (const button of panel.querySelectorAll<HTMLButtonElement>("[data-terminal-key]")) {
+        const code = button.dataset.terminalKey!;
+        button.disabled = !enabled ||
+          (button.hasAttribute("data-vt220-key") && personality !== "vt220") ||
+          (personality === "vt52" && code === "F4") ||
+          (personality === "asr33" && code.startsWith("F"));
+      }
     },
     shortcut(event: KeyboardEvent): void {
       if (event.code === "KeyC") void copy();
