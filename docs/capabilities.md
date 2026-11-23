@@ -1,6 +1,12 @@
 # Capability and compatibility matrix
 
-Engineering through **M5.17**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Engineering through **M5.19**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+
+[M5.19](lab/M5.19.md) adds a genuine terminal workstation, DEC keyboard/identity improvements,
+optional BEL audio, search/copy and presentation preferences. It extends genuine RSX
+EDT and BSD game evidence while keeping the published Alpha 2 unchanged. The
+[product direction](product/virtual-computer-room.md) gives equal priority to physical
+PiDP-11 owners and ordinary SIMH installations without GPIO or REALCONS.
 
 [M5.17](lab/M5.17.md) qualifies a reproducible [Source Alpha 2 candidate](releases/M5.17-candidate.md) and repeats the recorded guest/device subsets from its extracted source. M5.18 [published that exact candidate](releases/M5.18-publication.md) as an experimental source-only pre-release; publication adds no production capability.
 
@@ -18,13 +24,16 @@ Engineering through **M5.17**, publication through **M5.18**; the M5.10 presenta
 | VT52 | Genuine guest tested; initial text subset | V7 I/O and BSD vi in three engines; graphics/copier/serial behavior incomplete |
 | VT220 | Genuine guest tested; seven-bit subset | BSD vi/more including WebKit; full character sets, 132 columns and reset fidelity unqualified |
 | ASR-33-style teletype | Genuine V7 I/O tested; modern paper approximation | 72 columns, bounded uppercase display; no mechanical timing/acoustic emulation |
+| Workstation display/search/copy | Implemented; three-engine fixtures | Bounded retained text and six presentation preferences; no saved authority, guest or connection |
+| Optional BEL audio | Genuine BSD BEL received; three-engine browser API and gating checks | Synthetic, opt-in, focused-window only; no acoustic fidelity or speaker test |
+| BSD robots | Genuine VT100 game tested in three engines with workaround | Initial board needs Ctrl-L redraw in every retained case; cause unresolved, not a clean first-screen pass |
 | Multiple guest windows | Genuine guest/laboratory tested | Independent configured lines and observers; OS must supply the corresponding services |
 | Exclusive keyboard ownership | Laboratory and genuine guest tested | Explicit acquisition; observer credentials cannot type; [terminal guide](getting-started/terminals.md) |
 | Opt-in process/socket supervision | Genuine Linux/V7 laboratory tested | Ordered expiring approvals; OS remains operator-attested; observer not production-installed |
 | Reconnect and attachment generations | Laboratory tested | Detached startup, explicit reconnect, no automatic keyboard/history replay; surviving-stream guest changes still need independent identity verification |
 | RT-11SJ V05.03 baseline | Genuine disposable boot/original console tested | Preserved; RT-11 DZ disk handler status is not DZ11 serial evidence |
 | Generated RT-11FB V05.03 | Genuine separate browser application terminal | M5.13 fresh build, line retype and asynchronous I/O; older status-word mismatch explained, no independent monitor or full diagnostic acceptance |
-| RSX-11M-PLUS V4.6 BL87 | Genuine DZ11/browser terminal tested | Chromium VT100 HELLO/HELP/PIP listing; no full-screen or broader release claim |
+| RSX-11M-PLUS V4.6 BL87 | Genuine DZ11/browser terminal tested | HELLO/HELP/PIP plus VT100 EDT screen editing, Gold/keypad commands, save/readback in three engines; [M5.19](lab/M5.19.md), partial application qualification |
 | RSTS/E V7.0-07 | Genuine boot, login, BASIC and system status through original console | M5.13 minimal/full image inventories: console only; exact retained batch identifies missing generation/patch volumes; no browser acceptance |
 
 [Detailed terminal protocols and tests](technical/terminal-personalities.md). Chromium, Firefox and WebKit are the tested automation engines; WebKit results are not native Safari acceptance.

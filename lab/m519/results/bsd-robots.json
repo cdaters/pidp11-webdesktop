@@ -1,0 +1,38 @@
+[
+  {
+    "browser": "chromium",
+    "guest": "2.11BSD #11",
+    "personality": "vt100",
+    "application": "/usr/games/robots",
+    "initialRedrawRequired": true,
+    "stepOrBlockedStepResponse": true,
+    "redraw": true,
+    "quitToShell": true,
+    "genuineBEL": true,
+    "reconnectReadOnly": true
+  },
+  {
+    "browser": "firefox",
+    "guest": "2.11BSD #11",
+    "personality": "vt100",
+    "application": "/usr/games/robots",
+    "initialRedrawRequired": true,
+    "stepOrBlockedStepResponse": true,
+    "redraw": true,
+    "quitToShell": true,
+    "genuineBEL": true,
+    "reconnectReadOnly": true
+  },
+  {
+    "browser": "webkit",
+    "guest": "2.11BSD #11",
+    "personality": "vt100",
+    "application": "/usr/games/robots",
+    "initialRedrawRequired": true,
+    "stepOrBlockedStepResponse": true,
+    "redraw": true,
+    "quitToShell": true,
+    "genuineBEL": true,
+    "reconnectReadOnly": true
+  }
+]

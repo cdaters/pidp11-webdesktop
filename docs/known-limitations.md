@@ -1,5 +1,16 @@
 # What is still experimental
 
+M5.19 development main adds [workstation controls](technical/terminal-workstation.md),
+not a new release or physical installation approval. All terminal personalities
+remain subsets: 132 columns, full character sets/reset fidelity and several hardware
+functions remain unqualified. BSD `robots` requires an initial Ctrl-L redraw in all
+three retained browser cases; the missing initial output's cause is unresolved.
+RSX EDT now has genuine three-engine screen/keypad/save evidence, scoped to the
+recorded configuration. Search is bounded, audio is an opt-in approximation, and
+preferences cannot restore authority. Automated accessibility/audio checks are not
+native assistive-technology or speaker certification. [Results and corrected attempts](lab/M5.19.md).
+
+
 M5.18 [published the exact Source Alpha 2 candidate](releases/M5.18-publication.md)
 qualified in M5.17. This is an experimental source release, not an independent audit. Exact extracted-source tests and
 fresh guest/device checks passed; one bounded provision and separate-kernel

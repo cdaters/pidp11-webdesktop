@@ -1,0 +1,54 @@
+{
+  "v7": {
+    "periodSeconds": 5.005095706001157,
+    "cpuPercentOneCore": 0.1997963792782205,
+    "process": {
+      "VmHWM": "9184 kB",
+      "VmRSS": "3260 kB",
+      "Threads": "7"
+    },
+    "openFDs": 8,
+    "cgroupMemoryMax": "134217728",
+    "cgroupSwapMax": "0",
+    "source": "Disposable ARM64 Linux bridge after campaign; V7 detached, other endpoints attached; not a Pi measurement"
+  },
+  "bsd": {
+    "periodSeconds": 5.005084122996777,
+    "cpuPercentOneCore": 0.0,
+    "process": {
+      "VmHWM": "14268 kB",
+      "VmRSS": "14268 kB",
+      "Threads": "7"
+    },
+    "openFDs": 9,
+    "cgroupMemoryMax": "134217728",
+    "cgroupSwapMax": "0",
+    "source": "Disposable ARM64 Linux bridge after campaign; V7 detached, other endpoints attached; not a Pi measurement"
+  },
+  "rsx": {
+    "periodSeconds": 5.005085622993647,
+    "cpuPercentOneCore": 0.0,
+    "process": {
+      "VmHWM": "14428 kB",
+      "VmRSS": "8648 kB",
+      "Threads": "7"
+    },
+    "openFDs": 9,
+    "cgroupMemoryMax": "134217728",
+    "cgroupSwapMax": "0",
+    "source": "Disposable ARM64 Linux bridge after campaign; V7 detached, other endpoints attached; not a Pi measurement"
+  },
+  "rt11": {
+    "periodSeconds": 5.003685538991704,
+    "cpuPercentOneCore": 0.0,
+    "process": {
+      "VmHWM": "13556 kB",
+      "VmRSS": "6740 kB",
+      "Threads": "7"
+    },
+    "openFDs": 9,
+    "cgroupMemoryMax": "134217728",
+    "cgroupSwapMax": "0",
+    "source": "Disposable ARM64 Linux bridge after campaign; V7 detached, other endpoints attached; not a Pi measurement"
+  }
+}

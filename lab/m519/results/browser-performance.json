@@ -1,0 +1,19 @@
+{
+  "kind": "intercepted Chromium rendering fixture, Mac host",
+  "chunks": 80,
+  "lines": 1920,
+  "bytes": 139120,
+  "ackMilliseconds": {
+    "median": 2.0571670000000495,
+    "p95": 3.2867919999999913,
+    "max": 3.9403330000000096
+  },
+  "retainedHeapBytes": {
+    "before": 3632236,
+    "after": 4094684,
+    "delta": 462448
+  },
+  "taskCPUSeconds": 0.053177,
+  "visibleRows": 24,
+  "limits": "80x24 / 300 scrollback; no guest or network latency claim"
+}

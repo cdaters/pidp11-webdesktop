@@ -1,5 +1,36 @@
 # Terminal personalities and conformance
 
+## M5.19 implementation inventory
+
+This table describes the current development code. All personalities remain partial;
+no terminal certification or physical deployment is claimed. See the
+[workstation guide](terminal-workstation.md) and [genuine results](../lab/M5.19.md).
+
+| Area | VT100 | VT52 | VT220 |
+|---|---|---|---|
+| Controls / positioning | xterm CR/LF/BS/HT/BEL and ANSI cursor operations | Explicit bounded DECscope translator, no wrap, ESC Y address | C1 normalization plus xterm common display operations |
+| Erase / scroll / edit | Erase and margins verified; ICH/DCH are renderer extensions, not base-VT100 authenticity claims | ESC J/K, LF and reverse index; no ANSI insertion mode | Common ANSI editing through xterm; selective erase unqualified |
+| Attributes / character sets | DEC graphics and inverse video fixture-tested; complete sets/double-size unqualified | Text only; graphics/copier unimplemented | Seven-bit DEC graphics; supplemental/national sets unqualified or rejected |
+| Keyboard | Application cursor/keypad, PF1–4, explicit erase choice | Three PF keys; alternate keypad; Shift/Control keypad correction; unsupported PC edits suppressed | Editing keys, F6–F20, Help/Do and common keypad/cursor modes |
+| Identity | M5.19 intercepts DA and DECID as base VT100 `ESC[?1;0c`; suppresses later secondary DA | `ESC/K` | `ESC[?62c`; M5.19 adds DECID; existing secondary identity retained |
+| Reset / wrap | Renderer RIS and wrap fixture-tested | Fresh connection resets parser/keypad; right margin overwrites | Renderer RIS/soft reset; seven-bit DECSCL; no full reset fidelity claim |
+| Columns | Fixed 80×24; 132-column mode unqualified | Fixed 80×24 | Fixed 80×24; 132 columns unqualified |
+| Bell | Parser event, optional gated audio | Translated BEL to same event | Normalized BEL to same event |
+
+M5.19 deliberately improves identification and keyboard behavior instead of replacing
+xterm's proven display parser. Replies still pass through the current keyboard
+lease. The VT100 identity follows the [DEC VT100 programmer information](https://vt100.net/docs/vt100-ug/chapter3.html).
+VT52 modifier behavior follows the [DECscope manual](https://vt100.net/dec/ek-vt5x-op-001.pdf),
+printed page 15. VT220 keys and DECID follow the [DEC transmitted-code chapter](https://www.zx.net.nz/computers/dec/vt220/doc/vt220-rm/chapter3.html)
+and [received-code chapter, §4.17.3](https://www.zx.net.nz/computers/dec/vt220/doc/vt220-rm/chapter4.html).
+Identity replies advertise a compatibility choice, not complete emulation.
+
+The sections below preserve the earlier implementation history. Their statements
+that audio or later function keys are absent are superseded by this inventory.
+Guest tty settings, echo/erase, flow control and application terminal databases
+remain guest responsibilities; browser colors do not configure them.
+
+
 M5.6 separates a terminal's interpretation of bytes from its connection. M5.9 adds **VT220**, **ASR-33** and **Tektronix 4010** beside **VT100** and **VT52**; choose a personality in **Guest terminal** before connecting. All use the existing configured guest line, generation checks, read-only initial state and keyboard lease. Selection does not configure the guest's terminal setting, negotiate Telnet, start a guest or acquire its keyboard. Choose the corresponding terminal type within a guest application independently.
 
 Text screens stay **80 columns × 24 rows**, except the teletype’s 72-column paper. Tektronix uses a separate 1024×781 SVG viewport. Text size changes readability, not geometry; a smaller window scrolls. Reconnecting creates a fresh renderer and personality parser, discards incomplete escape sequences and returns without keyboard authority. The separate mock command editor remains a VT100-style demonstration; it is not a VT52 guest test.

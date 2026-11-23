@@ -21,6 +21,16 @@ Read this alongside the [architecture decisions](../development/DECISIONS.md). T
 
 RPC transport does not itself turn registration into a production service. The original C/Go interoperability and registration experiments are described in [M3](../lab/M3.md); their commands remain laboratory procedures.
 
+## M5.19 workstation modules
+
+`terminal-workstation.ts` owns local display/search/audio controls and releases its
+subscriptions on rebind/disposal. `terminal-preferences.ts` whitelists presentation
+fields; `terminal-keyboard.ts` distinguishes local shortcuts from DEC keys;
+`terminal-audio.ts` owns a shared optional context and per-window sound state.
+`equipment.ts` renders descriptive status without granting authority. The existing
+`guest-terminal.ts` still owns transport, current lease checks and explicit reconnect.
+See [the workstation contract](terminal-workstation.md) and [M5.19](../lab/M5.19.md).
+
 ## Browser modules
 
 | Start here | Responsibility and resource owner |

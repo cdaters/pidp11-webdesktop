@@ -1,5 +1,10 @@
 # Documentation
 
+Current development: [M5.19 workstation findings](lab/M5.19.md),
+[virtual-computer-room direction](product/virtual-computer-room.md),
+[workstation controls](technical/terminal-workstation.md) and [resume handoff](../RESUME.md).
+These are development-main additions, separate from the published release below.
+
 Latest publication: [Source Alpha 2 verification](releases/M5.18-publication.md) and [local quick start](getting-started/source-alpha-2.md). [M5.17 findings](lab/M5.17.md) retain the engineering scope; [independent review](security/review-intake/README.md) remains pending. Alpha 1 is unchanged.
 
 Start with the browser demonstration; it needs no Pi, guest disk or AI model. Genuine guest access uses a separate, authenticated service and a deliberately approved terminal line. The [capability matrix](capabilities.md) distinguishes those experiences.

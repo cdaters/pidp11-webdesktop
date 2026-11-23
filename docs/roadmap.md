@@ -1,9 +1,22 @@
 # Roadmap, resource budget and open questions
 
+## Current product direction — M5.19
+
+The [virtual computer room](product/virtual-computer-room.md) is the enduring direction for both physical
+PiDP-11 owners and ordinary SIMH users without a panel. Everyday genuine terminals
+come first, followed by understandable guest connections, printer/paper tape, storage,
+communications, graphics, repaired/qualified physical observation and separately
+gated control research. The linked priority table defines evidence needed for each.
+Security and independent operation remain acceptance criteria. Historical milestones
+below remain records of their time; they do not supersede this equipment roadmap.
+[M5.19 results](lab/M5.19.md) record the completed workstation increment; genuine
+printer/paper-tape guest workflows are the next recommended scope.
+
+
 **M5.9 update:** [first implementation increment](lab/M5.9.md) adds genuine V7 Tektronix output, initial VT220/teletype, optional offline companion and manual printer snapshots. [Two installation paths](getting-started/installation-paths.md) retain the memory-protection and physical-operation gates. This local development checkpoint does not advance hardware acceptance or change the targets below.
 
 
-Originally recorded 2026-11-16; M5.5 update 2026-11-19. The table below contains **acceptance targets**, not measurements. M5.3 subsequently recorded short standalone Pi measurements; M5.4 is Mac-only preparation. Historical milestone sections retain their original scope; the latest status is at the end.
+Originally recorded 2026-11-16; M5.5 update 2026-11-19. The table below contains **acceptance targets**, not measurements. M5.3 subsequently recorded short standalone Pi measurements; M5.4 is Mac-only preparation. Historical milestone sections retain their original scope; the current product direction is at the top.
 
 ## Performance targets
 

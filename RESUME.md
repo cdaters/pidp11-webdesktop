@@ -6,15 +6,26 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **Latest completed milestone:** M5.18, Source Alpha 2 publication.
-- **Completed documentation checkpoint:** `7753caa7327e2dca60c44900e19d525c0ede9044`.
-- **Active assignment:** M5.19, genuine terminal workstation and virtual-computer-room
-  product direction. Owner authorized Mac/disposable-Linux implementation, genuine
-  tests on verified working copies, documentation and verified pushes to main.
-- **M5.19 status:** starting implementation review; no M5.19 acceptance claimed yet.
-- **Immediate work:** inspect terminal behavior, add a durable product direction and
-  practical equipment roadmap, implement bounded terminal/keyboard/audio/usability
-  improvements, qualify genuine guests and publish an accurate M5.19 report.
+- **Latest completed engineering milestone:** M5.19, genuine terminal workstation.
+  This records completed work, not owner acceptance or production approval.
+- **Latest publication:** M5.18, immutable Source Alpha 2; no M5.19 release exists.
+- **Implementation checkpoints:** `1ce8ffb` (genuine-tested workstation) and
+  `72e5e2d` (final local focus/shortcut behavior and extended audio checks).
+- **Report:** [M5.19](docs/lab/M5.19.md), with curated [results](lab/m519/results/).
+  Check recent Git history for the accompanying final documentation commit.
+- **Validation:** Go vet/uncached race (22 packages), 105 frontend units, transport
+  and client-contract fixtures, 129 cases in three browsers, clean-checkout build;
+  V7 12 cases, BSD vi/pager 9, BSD robots 3 with initial redraw, RSX EDT 3, RT-11
+  application/AST subset. Exact scope and failed attempts are in the report.
+- **Resources:** all four owned M5.19 guests/bridges were safely stopped, containers
+  removed and relays/previews stopped. Working disks/evidence retained privately;
+  original media, unrelated containers, accepted tags and both releases unchanged.
+  Verify actual state before new work; this is a historical observation.
+- **Next recommended scope:** genuine printer/paper-tape guest workflows, as defined
+  in the [product direction](docs/product/virtual-computer-room.md). Await the
+  owner's next assignment; do not infer hardware or release authority.
+- **New limitation:** BSD robots needs Ctrl-L to complete its initial screen in all
+  final engine cases. Cause unresolved; explicit redraw is a workaround, not a fix.
 
 ## Start a fresh session
 
@@ -26,7 +37,7 @@ request; historical approvals do not authorize new hardware, releases or message
 3. Read [current capabilities](docs/capabilities.md), [known limitations](docs/known-limitations.md),
    [roadmap](ROADMAP.md) and [documentation index](docs/README.md). Historical plans
    describe their time; later verified reports supersede pending-status wording.
-4. Read the latest completed [publication record](docs/releases/M5.18-publication.md)
+4. Read the current [M5.19 report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
    and [M5.17 engineering report](docs/lab/M5.17.md). Follow relevant subsystem/lab
    runbooks instead of reconstructing commands from memory.
 5. Identify any owned running lab/preview before starting another. One outstanding
@@ -86,12 +97,11 @@ Never commit that directory or substitute its working media for immutable bases.
 
 Local M5.17 artifacts/evidence are under `.research/m517/`; the approved archive
 is in `candidate-a/`. M5.18 public-download verification is under `.research/m518/`.
-New M5.19 work belongs in a fresh `.research/m519/` area. Missing local assets must
+M5.19 evidence is retained in `.research/m519/`; do not reuse its media or filenames for another run. Missing local assets must
 be reconstructed from documented authorized sources or requested, not invented.
 A new clone can run the basic no-Pi demo without any of these private files.
 
-M5.17 ended with its owned guests, bridges, relays and previews stopped. M5.18
-started none. This is a historical observation, not proof of current process state.
+M5.19 ended with its owned guests, bridges, relays and previews stopped. This is a historical observation, not proof of current process state.
 Preserve unrelated services/containers and accepted screenshot baselines.
 
 ## Maintaining this handoff

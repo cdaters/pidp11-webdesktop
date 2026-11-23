@@ -1,0 +1,38 @@
+[
+  {
+    "browser": "chromium",
+    "guest": "RSX-11M-PLUS V4.6 BL87",
+    "personality": "vt100",
+    "application": "EDT",
+    "screenInsert": true,
+    "arrowEdit": true,
+    "goldKeypadCommand": true,
+    "lineModeVerify": true,
+    "exitSaveAndRead": true,
+    "reconnectReadOnly": true
+  },
+  {
+    "browser": "firefox",
+    "guest": "RSX-11M-PLUS V4.6 BL87",
+    "personality": "vt100",
+    "application": "EDT",
+    "screenInsert": true,
+    "arrowEdit": true,
+    "goldKeypadCommand": true,
+    "lineModeVerify": true,
+    "exitSaveAndRead": true,
+    "reconnectReadOnly": true
+  },
+  {
+    "browser": "webkit",
+    "guest": "RSX-11M-PLUS V4.6 BL87",
+    "personality": "vt100",
+    "application": "EDT",
+    "screenInsert": true,
+    "arrowEdit": true,
+    "goldKeypadCommand": true,
+    "lineModeVerify": true,
+    "exitSaveAndRead": true,
+    "reconnectReadOnly": true
+  }
+]

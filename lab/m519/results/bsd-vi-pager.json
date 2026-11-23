@@ -1,0 +1,101 @@
+[
+  {
+    "personality": "vt100",
+    "browser": "chromium",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt100",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  },
+  {
+    "personality": "vt100",
+    "browser": "firefox",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt100",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  },
+  {
+    "personality": "vt100",
+    "browser": "webkit",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt100",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  },
+  {
+    "personality": "vt52",
+    "browser": "chromium",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt52",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  },
+  {
+    "personality": "vt52",
+    "browser": "firefox",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt52",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  },
+  {
+    "personality": "vt52",
+    "browser": "webkit",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt52",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  },
+  {
+    "personality": "vt220",
+    "browser": "chromium",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt220",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  },
+  {
+    "personality": "vt220",
+    "browser": "firefox",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt220",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  },
+  {
+    "personality": "vt220",
+    "browser": "webkit",
+    "guest": "2.11BSD",
+    "application": "/usr/ucb/vi",
+    "term": "vt220",
+    "insertWriteRedrawDeleteQuit": true,
+    "reconnectReadOnly": true,
+    "passed": true,
+    "expandedObserverPager": true
+  }
+]

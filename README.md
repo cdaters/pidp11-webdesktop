@@ -6,11 +6,21 @@
 
 A browser workspace for exploring a PDP-11: vintage terminals, vector graphics, continuous-form paper, and an optional historical reference companion. Inspired by The High Nibble’s IMSAI 8080 desktop, this project brings those tools together around [Oscar Vermeulen’s PiDP-11/70](https://github.com/obsolescence/pidp11).
 
+The destination is a [genuine virtual PDP-11 computer room](docs/product/virtual-computer-room.md)
+for both physical PiDP-11 owners and ordinary SIMH users without a panel. Everyday
+terminals come first, followed by working printer, paper-tape and other equipment.
+The browser must remain optional in both environments.
+
 The old computer still does the computing. SIMH runs the historical operating system; the browser displays its terminal and device output. Oscar’s original launcher, physical panel and conventional console remain independent of the optional desktop.
 
 [**Try it locally**](docs/getting-started/source-alpha-2.md) · [Getting started](docs/getting-started/README.md) · [Gallery](docs/screenshots/README.md) · [Capabilities](docs/capabilities.md) · [Documentation](docs/README.md)
 
 [**Source Alpha 2**](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.17-source-alpha.2) is available as a source-only experimental pre-release for local demonstrations and controlled historical-computing laboratories. Use its named tarball and checksum. It is not an approved installation for physical PiDP-11 hardware. [Publication verification](docs/releases/M5.18-publication.md). [Alpha 1](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1) remains unchanged.
+
+**Development main:** [M5.19](docs/lab/M5.19.md) adds terminal search/copy, display
+preferences, optional BEL audio and DEC keyboard improvements, with genuine BSD
+and RSX application tests. These changes are newer than the immutable Source Alpha 2.
+For a new development session, start with [RESUME.md](RESUME.md).
 
 ![Actual Web Desktop with a UNIX V7 terminal, V7 Tektronix plot and completed LP11/PC11 device observations](docs/screenshots/m510/desktop.png)
 

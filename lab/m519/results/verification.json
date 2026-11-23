@@ -1,0 +1,37 @@
+{
+  "implementationCommit": "72e5e2d1fe7647c92c869267004bbeda34a0c118",
+  "genuineRuntimeSourceCommit": "1ce8ffb6738e83d79afd509003f4023025b01972",
+  "goVet": "pass",
+  "goRace": {
+    "uncached": true,
+    "testedPackages": 22,
+    "pass": true
+  },
+  "typeScript": "pass",
+  "frontendUnits": 105,
+  "transportIntegrationFixtures": 1,
+  "independentClientFixtures": 9,
+  "browsers": {
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "passed": 129,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "scope": "genuine guest tests separately recorded; no physical Pi; final focus/shortcut changes browser-regressed",
+  "cleanCheckout": {
+    "commit": "72e5e2d1fe7647c92c869267004bbeda34a0c118",
+    "dependencyInstall": "pass",
+    "typeCheck": "pass",
+    "build": "pass"
+  },
+  "finalBuild": {
+    "prototypeBytes": 571936,
+    "privateStaticARM64Bytes": 8061090,
+    "publishedBinary": false
+  }
+}
