@@ -1,5 +1,12 @@
 # Source map and subsystem boundaries
 
+## M5.22 operation and retained history
+
+- `internal/equipmentsession/guided.go` translates narrow local operator commands into the existing ordered supervisor protocol. `cmd/equipment-supervisor` prepares exclusive private configuration and starts the guide; neither controls SIMH.
+- `internal/peripheral/history.go` copies up to eight terminal records independently of live/export slots. `archive.go` bounds explicit private records and validates metadata/data. `cmd/equipment-records` saves or explicitly recovers data without authority.
+- `src/equipment-history.ts` owns explicit list/selection, immutable identity checks, retained paper/raw exports and cancellation. `equipment-workspace.ts` adds Job history alongside existing modes.
+- [Operator guide](equipment-operator.md), [history contract](equipment-history.md), [lab runbook](../../lab/m522/README.md) and [report](../lab/M5.22.md) distinguish operator attestations, regression fixtures and genuine output.
+
 ## M5.21 equipment sessions
 
 [`cmd/equipment-supervisor`](../../cmd/equipment-supervisor/main.go) and

@@ -1,0 +1,47 @@
+{
+  "history_empty": true,
+  "device_views": [
+    {
+      "id": "lp",
+      "kind": "lp11",
+      "generation": "",
+      "simulator_generation": "",
+      "guest_generation": "",
+      "state": "detached",
+      "message": "",
+      "sequence": 0,
+      "start_offset": 0,
+      "next_offset": 0,
+      "total_bytes": 0,
+      "lost": false,
+      "data": null,
+      "sha256": "",
+      "reader_length": 0,
+      "reader_bytes": 0,
+      "reader_eof": false,
+      "reader_sha256": ""
+    },
+    {
+      "id": "punch",
+      "kind": "pc11-punch",
+      "generation": "",
+      "simulator_generation": "",
+      "guest_generation": "",
+      "state": "detached",
+      "message": "",
+      "sequence": 0,
+      "start_offset": 0,
+      "next_offset": 0,
+      "total_bytes": 0,
+      "lost": false,
+      "data": null,
+      "sha256": "",
+      "reader_length": 0,
+      "reader_bytes": 0,
+      "reader_eof": false,
+      "reader_sha256": ""
+    }
+  ],
+  "terminal_lines_detached": true,
+  "automatic_recovery": false
+}

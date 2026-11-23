@@ -1,6 +1,6 @@
 # Where the project is going
 
-## Current product direction — M5.21
+## Current product direction — M5.22
 
 The [virtual computer room](docs/product/virtual-computer-room.md) is the enduring direction for both physical
 PiDP-11 owners and ordinary SIMH users without a panel. Everyday genuine terminals
@@ -18,9 +18,13 @@ completes the genuine terminal workstation increment. [M5.20](docs/lab/M5.20.md)
 now qualifies RSX PIP printer and paper-tape subsets with exact browser artifacts.
 [M5.21](docs/lab/M5.21.md) now qualifies supervised live RSX punching, repeated
 jobs/new generations, real supervisor crash/expiry and console-operated RT-11 LP/PC.
-Next: **M5.22 operator workflow and bounded session history**—make independent local
-approvals easier to follow, qualify export reuse/service-restart recovery with genuine
-jobs, measure active resources and investigate RT-11 browser observation separately.
+[M5.22](docs/lab/M5.22.md) adds the guided local workflow, eight immutable terminal-job
+records, explicit data-only recovery, genuine reused slots and RT-11 browser exports.
+Active ARM64 samples remain laboratory measurements.
+Next: **M5.23 genuine disk and magnetic-tape discovery and read-only status**. Begin
+with original device inventory, legitimate disposable media, attachment provenance,
+write-protection and bounded metadata. Keep mounts/writes operator-owned. Do not plan
+another broad LP11/PC11 refinement unless a demonstrated defect blocks this next step.
 Reader selection remains a catalog/operator-assisted workflow until independent
 safe-state and actual-attachment checks support more. No new release or physical
 access is authorized.

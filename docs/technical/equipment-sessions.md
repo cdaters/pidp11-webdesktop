@@ -84,13 +84,16 @@ observing cancels only that browser's requests; it does not retire producer auth
 or stop the device. Reopening never restores observation automatically. Expired or
 replaced generations cannot reconnect silently. Cached text is labeled as cached.
 
-Four slots bound history. A live slot retains a 64 KiB tail of at most a 1 MiB job;
+Four slots bound live observations and their current completed exports. A live slot retains a 64 KiB tail of at most a 1 MiB job;
 each response carries at most 8 KiB. Reader and completed-export snapshots each
 have a 64 KiB ceiling. A completed export is copied in memory and survives changes
 to its live spool, until explicit replacement in that export slot or service exit.
 This is not a durable print queue or unlimited archive. A service restart loses
 RAM history and requires new approvals; private spool files remain operator-owned.
-Download important artifacts before replacing a completed-export slot.
+M5.22 separately retains eight terminal job records across slot reuse and provides
+explicit private save/data-only recovery. Unsaved history still disappears on exit.
+See the [history contract](equipment-history.md) and [guided operator procedure](equipment-operator.md).
+Save important records before eviction or service exit.
 
 ## Reader selection: qualified subset only
 

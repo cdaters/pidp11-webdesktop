@@ -1,6 +1,10 @@
 # Documentation
 
-Current development: [M5.21 supervised equipment findings](lab/M5.21.md),
+Current development: [M5.22 operation and recovery findings](lab/M5.22.md),
+[local operator guide](technical/equipment-operator.md),
+[bounded history and recovery](technical/equipment-history.md),
+[reproduction runbook](../lab/m522/README.md),
+[M5.21 supervised equipment findings](lab/M5.21.md),
 [equipment-session design](technical/equipment-sessions.md),
 [M5.20 genuine printer/paper-tape findings](lab/M5.20.md),
 [M5.19 workstation findings](lab/M5.19.md),

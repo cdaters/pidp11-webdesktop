@@ -1,0 +1,10 @@
+{
+  "expiryAfterQuitMs": 4820,
+  "id": "c52f7e84367c3fd8ac17943ebe0d221be4859710ec38ab1c9e2ef5caf43d03a3",
+  "generation": "675385bb7331f0621dfff689eb185f3a-26ee02a365b6c4a9f1af1f6dbd382082",
+  "retainedBytes": 40960,
+  "sha256": "9c10f3c24e729b608355b222ab80ca93fe5a6bb0b39dd325f20ba956feaa0cb9",
+  "supervisorExit": 0,
+  "simulatorSignalled": false,
+  "completedDownloadDisabled": true
+}

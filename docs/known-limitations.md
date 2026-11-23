@@ -1,15 +1,19 @@
 # What is still experimental
 
-[M5.21](lab/M5.21.md) demonstrates live RSX punch observation, repeated printer/tape
-jobs and independently supervised completion. This remains a laboratory supervisor,
-not automatic safe-state or guest discovery. Original device buffering delays visible
-output; a returned prompt, reader EOF or idle stream cannot complete a job. Reader
-selection is a read-only catalog plus independent operator procedure; browser mounting
-is disabled. Four slots bound volatile history, and replacing an export slot or
-service exit can discard its prior RAM artifact. RT-11 LP/PC results are a console
-ASCII subset, not new browser qualification. Final rejected-replacement/cached-label
-corrections were regression-tested after genuine runs. No new release or physical
-access is implied; [session limits](technical/equipment-sessions.md) remain explicit.
+[M5.22](lab/M5.22.md) demonstrates repeated RSX jobs, bounded history, controlled
+observer restart and genuine RT-11 browser exports. The local guide still requires
+independent guest/device checks: a prompt, EOF or idle stream cannot establish safe
+completion. Eight terminal records retain at most 64 KiB each; older RAM records are
+evicted and unsaved history is lost on service exit. Explicit private archives are
+bounded, refuse overwrite and are not a power-loss durability guarantee. Recovery
+restores data only, never ownership. A trusted local archive owner can forge evidence;
+checksums do not authenticate historical attestations. See the
+[history contract](technical/equipment-history.md) and [operator guide](technical/equipment-operator.md).
+RT-11's small outputs were buffered until close; sustained live RT-11 growth and an
+independent browser login shell remain unqualified. Active resource/latency samples
+are short, deliberately slowed ARM64 laboratory runs, not physical Pi measurements.
+Reader selection remains read-only; mounting, automatic safe-state discovery and
+production supervision remain unqualified. No new release or physical access.
 
 M5.19 development main adds [workstation controls](technical/terminal-workstation.md),
 not a new release or physical installation approval. All terminal personalities

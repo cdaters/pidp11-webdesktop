@@ -1,0 +1,20 @@
+[
+  {
+    "job": "rt11-print-1",
+    "bytes": 152,
+    "sha256": "ae62de70f5e39303cf9e7d9de22548ceccde46d8fdc6cf44bb9c7dd8e78b4492",
+    "observedEmptyBeforeCommand": true,
+    "completionWithheldUntilSafeClose": true,
+    "exactBrowserDownload": true,
+    "guestCommandViaIndependentConsole": true
+  },
+  {
+    "job": "rt11-tape-1",
+    "bytes": 512,
+    "sha256": "43e74317850a6fc385e48cb006bd2ebfd0063552c50e6b934da21432c98592fc",
+    "observedEmptyBeforeCommand": true,
+    "completionWithheldUntilSafeClose": true,
+    "exactBrowserDownload": true,
+    "guestCommandViaIndependentConsole": true
+  }
+]

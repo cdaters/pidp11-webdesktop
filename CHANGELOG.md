@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.22 practical equipment operation and recovery — 2026-11-23 (development main)
+
+- Added a guided local operator, eight immutable retained jobs, explicit private archive/save/recovery and a compact browser history selector. Recovery restores data only; live observation always needs fresh approval.
+- Qualified repeated RSX jobs reusing the same slots, supervisor expiry, actual observer restart, exact three-engine recovery downloads and genuine RT-11 printer/tape browser exports.
+- Measured bounded active ARM64 resources, verified the incremental M5.21 evidence backup, preserved original media and safely stopped the disposable guests.
+- Passed Go vet/uncached race, frontend/build, 192 full browser cases and 24 final affected cases. [Report](docs/lab/M5.22.md). No release/tag, Pi access or production deployment; disk/magnetic tape is next.
+
 ## M5.21 supervised equipment sessions — 2026-11-23 (development main)
 
 - Added a small isolated-Linux supervisor with owner/job/generation checks, independent expiry and ordered operator-attested completion. It never controls SIMH.

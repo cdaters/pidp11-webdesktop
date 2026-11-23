@@ -1,0 +1,109 @@
+{
+  "device_outputs": [
+    {
+      "job": "rsx-print-1",
+      "bytes": 172,
+      "sha256": "7e4c5b19ee72837da7ebaf02818c7b0a478b9568a2b6685ebff416f1096944db",
+      "exact_transform": true
+    },
+    {
+      "job": "rsx-print-2",
+      "bytes": 172,
+      "sha256": "dba2df127036c4b78ead93b9801e45e6bb81b6440204f7c6a34f212f91ad3daa",
+      "exact_transform": true
+    },
+    {
+      "job": "rsx-reader",
+      "bytes": 44017,
+      "sha256": "131cafa675b62c160a37a92a83a95849c00aa40b42aff0030beb0bbc4fbd8de1",
+      "exact_transform": true
+    },
+    {
+      "job": "rsx-tape-1",
+      "bytes": 44341,
+      "sha256": "5347179138fe313022562aeb2f2ded5c7dc67b04afdbd54d0ac67eef5d18d606",
+      "exact_transform": true
+    },
+    {
+      "job": "rsx-tape-2",
+      "bytes": 44341,
+      "sha256": "5347179138fe313022562aeb2f2ded5c7dc67b04afdbd54d0ac67eef5d18d606",
+      "exact_transform": true
+    },
+    {
+      "job": "rsx-expired-later-closed-not-completed",
+      "bytes": 44341,
+      "sha256": "5347179138fe313022562aeb2f2ded5c7dc67b04afdbd54d0ac67eef5d18d606",
+      "exact_transform": true
+    },
+    {
+      "job": "rt11-print-1",
+      "bytes": 152,
+      "sha256": "ae62de70f5e39303cf9e7d9de22548ceccde46d8fdc6cf44bb9c7dd8e78b4492",
+      "exact_transform": true
+    },
+    {
+      "job": "rt11-reader",
+      "bytes": 113,
+      "sha256": "b8d21ff126db71ab32e7ae324021cc9175fccd7df0a6163f1a08e0782a769de4",
+      "exact_transform": true
+    },
+    {
+      "job": "rt11-tape-1",
+      "bytes": 512,
+      "sha256": "43e74317850a6fc385e48cb006bd2ebfd0063552c50e6b934da21432c98592fc",
+      "exact_transform": true
+    }
+  ],
+  "saved_records": [
+    {
+      "job": "rsx-interrupted",
+      "state": "expired",
+      "bytes": 40960,
+      "sha256": "9c10f3c24e729b608355b222ab80ca93fe5a6bb0b39dd325f20ba956feaa0cb9",
+      "metadata_and_bytes_verified": true
+    },
+    {
+      "job": "rsx-print-1",
+      "state": "completed",
+      "bytes": 172,
+      "sha256": "7e4c5b19ee72837da7ebaf02818c7b0a478b9568a2b6685ebff416f1096944db",
+      "metadata_and_bytes_verified": true
+    },
+    {
+      "job": "rsx-tape-2",
+      "state": "completed",
+      "bytes": 44341,
+      "sha256": "5347179138fe313022562aeb2f2ded5c7dc67b04afdbd54d0ac67eef5d18d606",
+      "metadata_and_bytes_verified": true
+    },
+    {
+      "job": "rsx-print-2",
+      "state": "completed",
+      "bytes": 172,
+      "sha256": "dba2df127036c4b78ead93b9801e45e6bb81b6440204f7c6a34f212f91ad3daa",
+      "metadata_and_bytes_verified": true
+    },
+    {
+      "job": "rsx-tape-1",
+      "state": "completed",
+      "bytes": 44341,
+      "sha256": "5347179138fe313022562aeb2f2ded5c7dc67b04afdbd54d0ac67eef5d18d606",
+      "metadata_and_bytes_verified": true
+    },
+    {
+      "job": "rt11-tape-1",
+      "state": "completed",
+      "bytes": 512,
+      "sha256": "43e74317850a6fc385e48cb006bd2ebfd0063552c50e6b934da21432c98592fc",
+      "metadata_and_bytes_verified": true
+    },
+    {
+      "job": "rt11-print-1",
+      "state": "completed",
+      "bytes": 152,
+      "sha256": "ae62de70f5e39303cf9e7d9de22548ceccde46d8fdc6cf44bb9c7dd8e78b4492",
+      "metadata_and_bytes_verified": true
+    }
+  ]
+}

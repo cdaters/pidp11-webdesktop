@@ -1,0 +1,48 @@
+{
+  "go_vet": "pass",
+  "uncached_go_race_test_packages": 23,
+  "typescript_build": "pass",
+  "frontend_units": 105,
+  "transport": 1,
+  "selection_contract": 9,
+  "full_browser": {
+    "startTime": "2026-11-23T18:37:44.049Z",
+    "duration": 152357.941,
+    "expected": 192,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "final_affected_browser": {
+    "startTime": "2026-11-23T19:06:14.825Z",
+    "duration": 15376.109,
+    "expected": 24,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "genuine_history_downloads": 33,
+  "additional_rt11_live_view_completed_downloads": 2,
+  "python_and_node_syntax": "pass",
+  "standalone_bytes": 587570,
+  "existing_large_bundle_warning": true,
+  "late_ui_only_changes": [
+    "top/latest paper navigation",
+    "readable responsive job selector",
+    "invalidate selection while asynchronous checksum verification waits"
+  ],
+  "late_ui_verified_after_genuine_runtime": true,
+  "prior_affected_browser": {
+    "startTime": "2026-11-23T18:55:12.931Z",
+    "duration": 13521.53,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "reproduced_checksum_cancellation_failure": {
+    "browser": "chromium",
+    "failed_before_fix": true,
+    "passed_after_fix_in_three_engines": true
+  }
+}

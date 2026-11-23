@@ -1,0 +1,26 @@
+{
+  "guests": [
+    {
+      "guest": "rsx",
+      "exit_code": 0,
+      "bridge_stopped_first": true,
+      "independent_console_responded_after_bridge_stop": true,
+      "safe_guest_boundary_before_quit": true
+    },
+    {
+      "guest": "rt11",
+      "exit_code": 0,
+      "bridge_stopped_first": true,
+      "independent_console_responded_after_bridge_stop": true,
+      "safe_guest_boundary_before_quit": true
+    }
+  ],
+  "no_physical_pi_access": true,
+  "preview_relay_ports_stopped": [
+    5173,
+    8080,
+    8449
+  ],
+  "original_media_hashes_metadata_unchanged": true,
+  "unrelated_containers_preserved": 7
+}

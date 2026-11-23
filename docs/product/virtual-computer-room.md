@@ -77,7 +77,7 @@ remote SIMH command channel. Browsers must not supply arbitrary host paths, moni
 commands or mount operations, share writable disks, start emulators or manipulate
 physical controls.
 
-## M5.21 equipment progress and next step
+## M5.22 equipment progress and next step
 
 [M5.20](../lab/M5.20.md) demonstrates actual RSX PIP printing, a separate RSX
 reader-to-punch utility copy and full-byte CPU/device transfer. The existing printer
@@ -90,8 +90,12 @@ observation before output, repeated jobs/new generations, supervised close and e
 exports. A real supervisor crash expired observation while the original console
 continued. RT-11 LP/PC handlers passed a separate console ASCII subset.
 
-Next improve the independent operator workflow and bounded artifact history, qualify
-export-slot reuse/service restart with genuine jobs and measure active resources.
+[M5.22](../lab/M5.22.md) provides the guided operator, bounded immutable job history,
+explicit saved-data recovery, genuine slot reuse/restart tests, RT-11 browser exports
+and bounded active measurements. The next dedicated equipment milestone should be
+**disk and magnetic tape**: original device inventory and read-only attachment/status
+with legitimate disposable media. Further broad LP11/PC11 refinement needs a specific
+demonstrated blocker; it is not the default next milestone.
 Reader selection currently means a read-only catalog and operator assistance. Do not
 expose attachment controls before safe state, authority, cancellation and actual
 attachment are independently verified. These subsets do not qualify production media

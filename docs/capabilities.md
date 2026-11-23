@@ -1,16 +1,16 @@
 # Capability and compatibility matrix
 
-[M5.21](lab/M5.21.md) qualifies supervised live RSX punch observation, two distinct
-printer jobs and two tape jobs with exact three-engine completed exports. Original
-RT-11 LP/PC handlers also passed a conventional-console ASCII subset. Read-only
-reader catalog, staged completion and expiry are implemented; mounting and automatic
-safe-state discovery remain unqualified.
+[M5.22](lab/M5.22.md) qualifies a guided independent operator workflow, repeated RSX
+jobs in reused slots, bounded retained history and explicit saved-data recovery after
+observer restart. Genuine RT-11 printer/punch output also passed exact three-engine
+history downloads. Utilities ran through the original console; safe state and guest
+identity remain operator-attested. Browser mounting remains disabled.
 
-Engineering through **M5.21**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Engineering through **M5.22**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
 
 [M5.20](lab/M5.20.md) qualifies RSX PIP printer output and a reader-to-punch copy,
 with exact browser exports. Existing equipment windows now separate simulation,
-live observation and completed exports. Media attachment remains local and supervised.
+live observation, completed exports and retained Job history. Media attachment remains local and supervised.
 
 [M5.19](lab/M5.19.md) adds a genuine terminal workstation, DEC keyboard/identity improvements,
 optional BEL audio, search/copy and presentation preferences. It extends genuine RSX
@@ -55,8 +55,8 @@ PiDP-11 owners and ordinary SIMH installations without GPIO or REALCONS.
 | Tektronix 4010 | Genuine V7 plotting tested | Original `graph` / `plot -Ttek`; [graphics foundation](technical/graphics-foundations.md) |
 | 4010 keyboard/GIN | Laboratory fixtures | No genuine GIN application acceptance; not full 4014 conformance |
 | VT11/VR14 | Research / planned transport | Different display-device interface; not supplied by the 4010 renderer |
-| LP11 output | Genuine RSX/RT-11 guest and CPU/device tested | [M5.20](lab/M5.20.md) large RSX listing; [M5.21](lab/M5.21.md) two separate 172-byte RSX jobs with three-engine exports, 152-byte RT-11 console job |
-| PC11 reader/punch | Genuine RSX/RT-11 guest and CPU/device tested | M5.21 RSX: two 48,817-byte inputs / 49,141-byte outputs, live observation before command and exact exports; RT-11 console ASCII copy: 113-byte input / 512-byte output. No browser mounting |
+| LP11 output | Genuine RSX/RT-11 guest and CPU/device tested | [M5.20](lab/M5.20.md) large RSX listing; [M5.21](lab/M5.21.md) two separate 172-byte RSX jobs with three-engine exports, M5.22 152-byte RT-11 job with exact browser exports |
+| PC11 reader/punch | Genuine RSX/RT-11 guest and CPU/device tested | M5.21 RSX: two 48,817-byte inputs / 49,141-byte outputs, live observation before command and exact exports; M5.22 RT-11 console-operated ASCII copy: 113-byte input / 512-byte output with exact browser exports. No browser mounting |
 | Device observation | Experimental, laboratory tested | Read-only, bounded, generation-bound; local supervisor must establish producer identity |
 | Completed exports | Implemented and laboratory tested | Download exact LP11/punch/reader bytes only after explicit completion; no control through downloads |
 | Guest printer drivers | Narrow RSX and RT-11 installed-driver qualification | RSX LPDRV/PIP; RT-11 LP/COPY ASCII through original console. V7/BSD/RSTS/E printer integrations remain unqualified |

@@ -1,0 +1,203 @@
+{
+  "job": 2,
+  "observedBeforeCommand": true,
+  "liveBeforeGuestReturned": true,
+  "samples": [
+    {
+      "elapsedMs": 55,
+      "bytes": 0,
+      "hostBytes": 0,
+      "commandEchoed": false,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 114,
+      "bytes": 0,
+      "hostBytes": 0,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 169,
+      "bytes": 0,
+      "hostBytes": 0,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 224,
+      "bytes": 0,
+      "hostBytes": 4096,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 280,
+      "bytes": 0,
+      "hostBytes": 4096,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 335,
+      "bytes": 0,
+      "hostBytes": 8192,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 395,
+      "bytes": 0,
+      "hostBytes": 8192,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 459,
+      "bytes": 4096,
+      "hostBytes": 8192,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 520,
+      "bytes": 4096,
+      "hostBytes": 12288,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 581,
+      "bytes": 4096,
+      "hostBytes": 12288,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 639,
+      "bytes": 8192,
+      "hostBytes": 16384,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 696,
+      "bytes": 8192,
+      "hostBytes": 16384,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 751,
+      "bytes": 8192,
+      "hostBytes": 20480,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 811,
+      "bytes": 16384,
+      "hostBytes": 20480,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 870,
+      "bytes": 16384,
+      "hostBytes": 24576,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 930,
+      "bytes": 16384,
+      "hostBytes": 24576,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 990,
+      "bytes": 16384,
+      "hostBytes": 24576,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1049,
+      "bytes": 24576,
+      "hostBytes": 28672,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1111,
+      "bytes": 24576,
+      "hostBytes": 28672,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1173,
+      "bytes": 24576,
+      "hostBytes": 32768,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1230,
+      "bytes": 32768,
+      "hostBytes": 32768,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1291,
+      "bytes": 32768,
+      "hostBytes": 36864,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1353,
+      "bytes": 32768,
+      "hostBytes": 36864,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1414,
+      "bytes": 32768,
+      "hostBytes": 40960,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1474,
+      "bytes": 40960,
+      "hostBytes": 40960,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1534,
+      "bytes": 40960,
+      "hostBytes": 40960,
+      "commandEchoed": true,
+      "guestReturned": true
+    }
+  ],
+  "liveWhileHostGrowing": true,
+  "requestDurationMs": [
+    1.388916015625,
+    2.656005859375,
+    1.43115234375,
+    2.2451171875,
+    2.037109375,
+    2.647216796875,
+    1.740966796875,
+    1.320068359375
+  ],
+  "guestReturned": true,
+  "partialHostBytes": 40960,
+  "partialSHA256": "9c10f3c24e729b608355b222ab80ca93fe5a6bb0b39dd325f20ba956feaa0cb9"
+}

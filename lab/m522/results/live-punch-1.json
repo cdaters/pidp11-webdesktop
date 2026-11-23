@@ -1,0 +1,217 @@
+{
+  "job": 1,
+  "observedBeforeCommand": true,
+  "liveBeforeGuestReturned": true,
+  "samples": [
+    {
+      "elapsedMs": 54,
+      "bytes": 0,
+      "hostBytes": 0,
+      "commandEchoed": false,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 109,
+      "bytes": 0,
+      "hostBytes": 0,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 163,
+      "bytes": 0,
+      "hostBytes": 0,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 217,
+      "bytes": 0,
+      "hostBytes": 4096,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 274,
+      "bytes": 0,
+      "hostBytes": 4096,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 330,
+      "bytes": 0,
+      "hostBytes": 8192,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 386,
+      "bytes": 0,
+      "hostBytes": 8192,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 442,
+      "bytes": 4096,
+      "hostBytes": 8192,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 498,
+      "bytes": 4096,
+      "hostBytes": 12288,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 560,
+      "bytes": 4096,
+      "hostBytes": 12288,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 615,
+      "bytes": 8192,
+      "hostBytes": 16384,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 672,
+      "bytes": 8192,
+      "hostBytes": 16384,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 729,
+      "bytes": 8192,
+      "hostBytes": 16384,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 782,
+      "bytes": 8192,
+      "hostBytes": 20480,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 838,
+      "bytes": 16384,
+      "hostBytes": 20480,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 894,
+      "bytes": 16384,
+      "hostBytes": 24576,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 950,
+      "bytes": 16384,
+      "hostBytes": 24576,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1007,
+      "bytes": 16384,
+      "hostBytes": 28672,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1066,
+      "bytes": 20480,
+      "hostBytes": 28672,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1123,
+      "bytes": 20480,
+      "hostBytes": 28672,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1180,
+      "bytes": 20480,
+      "hostBytes": 32768,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1235,
+      "bytes": 28672,
+      "hostBytes": 32768,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1289,
+      "bytes": 28672,
+      "hostBytes": 36864,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1344,
+      "bytes": 28672,
+      "hostBytes": 36864,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1400,
+      "bytes": 28672,
+      "hostBytes": 36864,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1456,
+      "bytes": 32768,
+      "hostBytes": 40960,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1513,
+      "bytes": 32768,
+      "hostBytes": 40960,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1570,
+      "bytes": 32768,
+      "hostBytes": 40960,
+      "commandEchoed": true,
+      "guestReturned": true
+    }
+  ],
+  "liveWhileHostGrowing": true,
+  "requestDurationMs": [
+    1.367,
+    2.004,
+    1.502,
+    1.529,
+    1.613,
+    1.802,
+    1.954,
+    1.47
+  ],
+  "guestReturned": true,
+  "partialHostBytes": 32768,
+  "partialSHA256": "2daceb65249b831eebb3304e6e26f58945e9f45dcb577d39196af213779e966d"
+}
