@@ -1,3 +1,4 @@
+import { mountEquipmentHistory } from "./equipment-history.ts";
 import { mountDeviceObserver } from "./device-observer.ts";
 import { mountLiveDevices } from "./live-devices.ts";
 
@@ -19,7 +20,7 @@ export function mountEquipmentWorkspace(
   const controls = document.createElement("div");
   controls.className = "terminal-toolbar";
   controls.setAttribute("aria-label", "Equipment mode");
-  const buttons = ["Local simulation", "Observe device", "Completed exports"].map((label) => {
+  const buttons = ["Local simulation", "Observe device", "Completed exports", "Job history"].map((label) => {
     const button = document.createElement("button");
     button.textContent = label;
     controls.append(button);
@@ -38,7 +39,7 @@ export function mountEquipmentWorkspace(
     else {
       const dispose = mode === 1
         ? mountLiveDevices(content, kind)
-        : mountDeviceObserver(content, kind);
+        : mode === 2 ? mountDeviceObserver(content, kind) : mountEquipmentHistory(content, kind);
       current = { update() {}, dispose };
     }
     current.update();

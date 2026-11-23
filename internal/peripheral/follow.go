@@ -82,6 +82,8 @@ type FollowView struct {
 }
 
 type following struct {
+	started  time.Time
+	recorded bool
 	config   FollowConfig
 	revision uint64
 	view     FollowView
@@ -99,6 +101,7 @@ type following struct {
 // socket write runs under it. Only reserved regular local files are supported.
 // Start's context owns polling; Close releases descriptors and waits for it.
 type Followers struct {
+	history  []Record
 	mu       sync.Mutex
 	instance string
 	entries  map[string]*following
@@ -168,7 +171,10 @@ func (f *Followers) Close() {
 	f.mu.Lock()
 	defer f.mu.Unlock()
 	for _, e := range f.entries {
-		retire(e, "disconnected", "Observer service stopped")
+		if e.view.State == "observing" {
+			retire(e, "disconnected", "Observer service stopped")
+			f.remember(e)
+		}
 	}
 }
 func (f *Followers) Status() Status {
@@ -255,6 +261,7 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 	if e.config.Session != nil && (a.Generation != e.view.Generation || (op != "follow" && a.Owner != e.view.Owner)) {
 		return errors.New("stale equipment session owner or generation")
 	}
+	defer func() { f.remember(f.entries[a.ID]) }()
 	e.revision++
 	fail := func(message string) error { retire(e, "faulted", message); return errors.New(message) }
 	if op == "detach" {
@@ -319,6 +326,8 @@ func (f *Followers) Apply(op string, a FollowApproval) error {
 			e.view.ReaderSHA256 = a.ReaderSHA256
 		}
 		e.deadline = f.now().Add(ProducerLease)
+		e.started = f.now()
+		e.recorded = false
 		e.view.State = "observing"
 		e.view.Message = "Following host-visible device writes; producer identity is operator verified"
 		e.view.Sequence++
@@ -377,6 +386,7 @@ func (f *Followers) poll() {
 	for _, e := range f.entries {
 		if e.file != nil {
 			f.pollEntry(e)
+			f.remember(e)
 		}
 	}
 }

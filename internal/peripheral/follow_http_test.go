@@ -41,8 +41,10 @@ func TestFollowHTTPAuthorityAndRetirement(t *testing.T) {
 		}
 		return response.StatusCode, data
 	}
-	if code, _ := call("GET", "/api/v1/device-streams", ""); code != 403 {
-		t.Fatal(code)
+	for _, path := range []string{"/api/v1/device-streams", "/api/v1/device-media", "/api/v1/equipment-history", "/api/v1/equipment-history/missing"} {
+		if code, _ := call("GET", path, ""); code != 403 {
+			t.Fatal(path, code)
+		}
 	}
 	if code, _ := call("POST", "/login", `{"token":"`+token+`"}`); code != 200 {
 		t.Fatal(code)
@@ -56,7 +58,7 @@ func TestFollowHTTPAuthorityAndRetirement(t *testing.T) {
 			t.Fatal("invalid offset accepted", suffix)
 		}
 	}
-	for _, path := range []string{"/streams/status", "/streams/follow"} {
+	for _, path := range []string{"/streams/status", "/streams/follow", "/streams/recover"} {
 		if code, _ := call("POST", path, "{}"); code != 404 {
 			t.Fatal("private authority exposed", code)
 		}

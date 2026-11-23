@@ -42,6 +42,14 @@ func start(pid int) (string, error) {
 }
 func run() error {
 	path := flag.String("config", "", "private operator configuration")
+	guided := flag.Bool("guided", false, "guided local operator commands; independent console checks still required")
+	prepare := flag.Bool("prepare", false, "write a new private configuration for an independently verified existing process; never start it")
+	pid := flag.Int("pid", 0, "independently verified simulator PID (prepare only)")
+	guest := flag.String("guest", "", "operator-attested guest identity (prepare only)")
+	simulator := flag.String("simulator", "", "operator-assigned simulator identity (prepare only)")
+	socket := flag.String("socket", "", "private observer control socket (prepare only)")
+	slots := flag.String("slots", "", "comma-separated configured equipment slots (prepare only)")
+	verified := flag.Bool("guest-and-devices-verified", false, "independent guest, device and producer checks completed")
 	flag.Parse()
 	if runtime.GOOS != "linux" || os.Getenv("PIDP11_ISOLATED_LAB") != "1" {
 		return errors.New("isolated Linux laboratory only; production supervision unqualified")
@@ -54,6 +62,47 @@ func run() error {
 		if i.Flags&net.FlagLoopback == 0 {
 			return errors.New("non-loopback network forbidden in lab")
 		}
+	}
+	if *prepare {
+		if !*verified || *pid <= 0 || *guest == "" || *simulator == "" || *socket == "" || *slots == "" {
+			return errors.New("prepare requires explicit PID, guest, simulator, socket, slots and independent verification")
+		}
+		began, err := start(*pid)
+		if err != nil {
+			return err
+		}
+		file, err := os.Open(fmt.Sprintf("/proc/%d/exe", *pid))
+		if err != nil {
+			return err
+		}
+		digest := sha256.New()
+		_, readErr := io.Copy(digest, file)
+		file.Close()
+		if readErr != nil {
+			return readErr
+		}
+		c := equipmentsession.Config{Socket: *socket, PID: *pid, Start: began, ExecutableSHA256: hex.EncodeToString(digest.Sum(nil)), Simulator: *simulator, Guest: *guest, Attested: true, Jobs: strings.Split(*slots, ",")}
+		if len(c.Jobs) > 4 {
+			return errors.New("at most four configured slots")
+		}
+		data, err := json.MarshalIndent(c, "", "  ")
+		if err != nil {
+			return err
+		}
+		output, err := os.OpenFile(*path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
+		if err != nil {
+			return err
+		}
+		_, writeErr := output.Write(data)
+		closeErr := output.Close()
+		if writeErr != nil {
+			return writeErr
+		}
+		if closeErr != nil {
+			return closeErr
+		}
+		fmt.Println("Private configuration created. Review it, then run with -guided. No observation approved or guest controlled.")
+		return nil
 	}
 	data, err := terminalservice.ReadPrivate(*path)
 	if err != nil {
@@ -99,6 +148,9 @@ func run() error {
 	}
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
+	if *guided {
+		return supervisor.RunGuided(ctx, os.Stdin, os.Stdout)
+	}
 	return supervisor.Run(ctx, os.Stdin, os.Stdout)
 }
 func main() {

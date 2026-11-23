@@ -12,6 +12,8 @@ import (
 // Register adds read-only bounded polling. No per-browser goroutine, subscription
 // queue or emulator backpressure exists; slow viewers receive explicit offset loss.
 func (f *Followers) Register(mux *http.ServeMux, gate *access.Gate) {
+	mux.Handle("GET /api/v1/equipment-history", gate.Require(access.DeviceObserve, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(f.History()) })))
+	mux.Handle("GET /api/v1/equipment-history/{id}", gate.Require(access.DeviceObserve, f.historyHandler()))
 	mux.Handle("GET /api/v1/device-media", gate.Require(access.DeviceObserve, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(f.Media()) })))
 	mux.Handle("GET /api/v1/device-streams", gate.Require(access.DeviceObserve, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(f.List()) })))
 	mux.Handle("GET /api/v1/device-streams/{id}/{generation}", gate.Require(access.DeviceObserve, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -43,6 +45,23 @@ func (f *Followers) Register(mux *http.ServeMux, gate *access.Gate) {
 }
 func (f *Followers) ControlHandler() http.Handler {
 	mux := http.NewServeMux()
+	mux.Handle("GET /streams/history/{id}", f.historyHandler())
+	mux.HandleFunc("GET /streams/history", func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(f.History()) })
+	mux.HandleFunc("POST /streams/recover", func(w http.ResponseWriter, r *http.Request) {
+		decoder := json.NewDecoder(http.MaxBytesReader(w, r.Body, 100000))
+		decoder.DisallowUnknownFields()
+		var record Record
+		var extra any
+		if decoder.Decode(&record) != nil || decoder.Decode(&extra) != io.EOF {
+			http.Error(w, "invalid bounded record", 400)
+			return
+		}
+		if err := f.Recover(record); err != nil {
+			http.Error(w, err.Error(), 409)
+			return
+		}
+		json.NewEncoder(w).Encode(map[string]bool{"retained_data_only": true})
+	})
 	mux.HandleFunc("GET /streams/views", func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(f.List()) })
 	mux.HandleFunc("GET /streams/status", func(w http.ResponseWriter, r *http.Request) { json.NewEncoder(w).Encode(f.Status()) })
 	for _, op := range []string{"follow", "renew", "progress", "complete", "detach", "guest-returned", "drained", "closed"} {
@@ -63,4 +82,15 @@ func (f *Followers) ControlHandler() http.Handler {
 		})
 	}
 	return mux
+}
+
+func (f *Followers) historyHandler() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		record, ok := f.HistoryRecord(r.PathValue("id"))
+		if !ok {
+			http.Error(w, "retained job unavailable or evicted", 404)
+			return
+		}
+		json.NewEncoder(w).Encode(record)
+	})
 }

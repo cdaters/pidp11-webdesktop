@@ -1220,3 +1220,12 @@ table button {
 /* Equipment actions must remain readable at ordinary desktop window widths. */
 .equipment-workspace .terminal-toolbar { flex-wrap: wrap; }
 .equipment-workspace .terminal-toolbar > button { flex-shrink: 0; }
+
+/* Retained job names need more room than the compact terminal personality menu. */
+.equipment-history .terminal-toolbar select {
+  margin-left: 0;
+  flex: 1 1 18rem;
+  min-width: 0;
+  max-width: 100%;
+}
+.equipment-history details pre { white-space: pre-wrap; overflow-wrap: anywhere; }
