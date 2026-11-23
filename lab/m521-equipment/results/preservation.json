@@ -1,0 +1,20 @@
+{
+  "original_media_unchanged": [
+    {
+      "source": ".research/m512/guests/rsx/disk0.base",
+      "sha256": "516eea6dd72e89ac4c99453fbe203ece9fc801e902cb118257d6a650112b05bb",
+      "size": 314880000,
+      "mode": 33024,
+      "mtime_ns": 1795323190475078579
+    },
+    {
+      "source": ".research/m512/guests/rt11/disk0.base",
+      "sha256": "543277ee81fb4c024d19242bf6d6a04c81a257c48fe4cece256a42de3fe8dd98",
+      "size": 10478080,
+      "mode": 33024,
+      "mtime_ns": 1795327069233304419
+    }
+  ],
+  "remote_tag_refs_unchanged": 22,
+  "alpha1_alpha2_asset_metadata_unchanged": true
+}

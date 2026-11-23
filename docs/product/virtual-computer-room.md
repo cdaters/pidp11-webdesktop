@@ -77,7 +77,7 @@ remote SIMH command channel. Browsers must not supply arbitrary host paths, moni
 commands or mount operations, share writable disks, start emulators or manipulate
 physical controls.
 
-## M5.20 equipment progress and next step
+## M5.21 equipment progress and next step
 
 [M5.20](../lab/M5.20.md) demonstrates actual RSX PIP printing, a separate RSX
 reader-to-punch utility copy and full-byte CPU/device transfer. The existing printer
@@ -85,12 +85,17 @@ and paper-tape windows now expose explicitly selected observation/completed mode
 alongside simulation. Originals remain independent; only the private lab operator
 attached and safely closed disposable media.
 
-Next qualify a trustworthy equipment-session supervisor: live RSX punch observation
-before output starts, repeated jobs with new generations and safe completion,
-and narrowly authorized reader selection. Installed RT-11 handlers are a practical
-second-guest candidate. Do not expose attachment controls before safe state,
-authority, cancellation and failure recovery are demonstrated. The completed RSX
-subset does not imply broad guest-driver or production-media management support.
+[M5.21](../lab/M5.21.md) adds the bounded independent supervisor: live RSX punch
+observation before output, repeated jobs/new generations, supervised close and exact
+exports. A real supervisor crash expired observation while the original console
+continued. RT-11 LP/PC handlers passed a separate console ASCII subset.
+
+Next improve the independent operator workflow and bounded artifact history, qualify
+export-slot reuse/service restart with genuine jobs and measure active resources.
+Reader selection currently means a read-only catalog and operator assistance. Do not
+expose attachment controls before safe state, authority, cancellation and actual
+attachment are independently verified. These subsets do not qualify production media
+management, unattended completion or remote physical control.
 
 ## Recorded M5.19 recommendation
 

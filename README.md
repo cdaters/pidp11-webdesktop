@@ -17,8 +17,9 @@ The old computer still does the computing. SIMH runs the historical operating sy
 
 [**Source Alpha 2**](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.17-source-alpha.2) is available as a source-only experimental pre-release for local demonstrations and controlled historical-computing laboratories. Use its named tarball and checksum. It is not an approved installation for physical PiDP-11 hardware. [Publication verification](docs/releases/M5.18-publication.md). [Alpha 1](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1) remains unchanged.
 
-**Development main:** [M5.20](docs/lab/M5.20.md) adds genuine RSX printer and
-paper-tape workflows with exact browser exports and explicit equipment modes.
+**Development main:** [M5.21](docs/lab/M5.21.md) adds supervised equipment sessions,
+live RSX punch observation, repeated printer/tape jobs and genuine RT-11 console
+device tests. The reader catalog is read-only; media mounting remains operator-owned.
 [M5.19](docs/lab/M5.19.md) supplies the terminal workstation improvements.
 These changes are newer than the immutable Source Alpha 2.
 For a new development session, start with [RESUME.md](RESUME.md).
@@ -49,7 +50,7 @@ RT-11SJ V05.03 worked through the original physical launcher and console. A sepa
 
 ## Graphics and peripherals
 
-The Tektronix 4010 renderer receives genuine UNIX V7 `graph | plot -Ttek` output. LP11 and PC11 observation follows output from the original SIMH devices; a PDP-11 CPU test program exercises those registers and transfers actual bytes. M5.20 additionally qualifies RSX PIP/LPDRV printing and PRDRV/PPDRV tape copying; other guest printer integrations remain unqualified.
+The Tektronix 4010 renderer receives genuine UNIX V7 `graph | plot -Ttek` output. LP11 and PC11 observation follows output from the original SIMH devices; a PDP-11 CPU test program exercises those registers and transfers actual bytes. M5.20 and M5.21 additionally qualify RSX PIP/LPDRV printing and PRDRV/PPDRV tape copying, including supervised live observation and sequential jobs. M5.21 separately verifies RT-11 LP/PC handlers through its conventional console; other guest printer integrations remain unqualified.
 
 ![Genuine UNIX V7 vector plot in the browser](docs/screenshots/m510/v7-tek.png)
 

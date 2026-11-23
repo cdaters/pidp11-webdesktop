@@ -1,6 +1,8 @@
 # Documentation
 
-Current development: [M5.20 genuine printer/paper-tape findings](lab/M5.20.md),
+Current development: [M5.21 supervised equipment findings](lab/M5.21.md),
+[equipment-session design](technical/equipment-sessions.md),
+[M5.20 genuine printer/paper-tape findings](lab/M5.20.md),
 [M5.19 workstation findings](lab/M5.19.md),
 [virtual-computer-room direction](product/virtual-computer-room.md),
 [workstation controls](technical/terminal-workstation.md) and [resume handoff](../RESUME.md).

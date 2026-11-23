@@ -1,0 +1,24 @@
+{
+  "idle_restarted_supervisor": {
+    "cpu_ticks": 0,
+    "clock_ticks_per_second": 100,
+    "interval_seconds": 5.005206987989368,
+    "fds": 6,
+    "memory": {
+      "VmHWM": "6800 kB",
+      "VmRSS": "6800 kB",
+      "Threads": "8"
+    }
+  },
+  "observer_service": {
+    "cpu_ticks": 0,
+    "clock_ticks_per_second": 100,
+    "interval_seconds": 5.00531569699524,
+    "fds": 9,
+    "memory": {
+      "VmHWM": "14388 kB",
+      "VmRSS": "13008 kB",
+      "Threads": "8"
+    }
+  }
+}

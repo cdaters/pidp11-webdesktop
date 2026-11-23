@@ -1,0 +1,25 @@
+{
+  "owned_containers": [
+    {
+      "name": "pidp11-m521-rsx",
+      "exit_code": 0,
+      "guest_safe_before_exit": true
+    },
+    {
+      "name": "pidp11-m521-rt11",
+      "exit_code": 0,
+      "guest_safe_before_exit": true
+    }
+  ],
+  "bridge_stopped": {
+    "exact_process_stopped": true,
+    "control_socket_removed": true
+  },
+  "no_physical_pi_access": true,
+  "owned_preview_relay_ports_no_listeners": [
+    5173,
+    8080,
+    8449
+  ],
+  "unrelated_containers_preserved": 7
+}

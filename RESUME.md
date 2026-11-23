@@ -6,65 +6,71 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **Active assignment:** M5.21 supervised equipment sessions. Incremental backup
-  of all new M5.20 evidence verified before experiments: 130 files / 8 directories,
-  681,998,188 logical bytes, archive 682,530,304 bytes, SHA-256
+- **Latest completed engineering milestone:** M5.21 supervised equipment sessions,
+  completed work, not owner acceptance or production approval. See [report](docs/lab/M5.21.md),
+  [session design](docs/technical/equipment-sessions.md), [runbook](lab/m521-equipment/README.md)
+  and [curated results](lab/m521-equipment/results/). Publication remains Source Alpha 2.
+- **Checkpoint sequence:** starting M5.20 `153a9d1`; `9cfe97e` records the verified
+  incremental backup; `e88959b` adds M5.21 implementation, tests and lab helpers.
+  The final documentation commit follows on main; use `git log` for its revision. No new milestone tag or release.
+- **Implemented:** optional isolated-Linux Go supervisor, exact owner/job/generation
+  approvals, ordered operator-attested completion, stale-owner rejection, independent
+  expiry, immutable completed exports and read-only reader catalog. No browser mounts,
+  monitor commands or emulator lifecycle authority. Four slots bound volatile history.
+- **Genuine RSX:** two printer jobs, 172 bytes each; two 48,817-byte reader inputs /
+  49,141-byte punch outputs with distinct identities. Twelve exact completed downloads
+  across three engines. Firefox recorded growing host/browser output from a fresh
+  preapproved empty spool before guest return, using disclosed original PTP TIME delay.
+- **Failure evidence:** actual supervisor-only kill; WebKit expired in 4,862 ms,
+  retained 45,056 incomplete bytes, refused old live generation and preserved the
+  prior completed export. Original console remained usable. New supervisor could
+  not complete an unowned session. No retrospective completion of expired job.
+- **RT-11:** genuine console-only LP/PC ASCII operations, 152-byte printer and
+  113-byte reader / 512-byte punch. Initial handler-memory failure resolved only in
+  disposable guest by removing verified unused CT/DM handlers. No new browser login
+  or RT-11 live observation qualification.
+- **Validation:** Go vet and uncached race in 23 tested packages; 105 frontend units,
+  one transport, nine selection-contract tests; TypeScript/build; 174 full-suite
+  browser passes with zero skips/flakes/failures; helper syntax and exact artifact
+  verification. Final replacement-retention/cached-label fixes were fixture-tested
+  after the genuine runtime. Existing large-bundle warning remains.
+- **Resource sample:** ARM64 lab observer RSS 13,008 KiB / high-water 14,388 KiB;
+  separate idle supervisor 6,800 KiB. Both zero measured ticks over about five seconds.
+  Not active peak/latency or Pi measurements. 96 MiB companion/zero-swap gate remains.
+- **Cleanup:** RSX bridge stopped first, original console answered, SHUTUP completed
+  final dismount/HALT before quit. RT-11 exited at its idle monitor after device/file
+  operations. Both owned containers exited zero and were removed. Relays, Vite/mock
+  stopped; loopback ports 5173/8080/8449 had no listeners. Seven unrelated containers
+  remained. Working disks, captures and failed-attempt evidence retained. No Pi access.
+- **Preservation:** original RSX/RT-11 SHA-256, size, mode and nanosecond mtime unchanged;
+  22 remote tag refs and Alpha 1/2 asset metadata match baseline. No release/binary/media upload.
+- **Incremental backup:** all new M5.20 evidence (`.research/m520`) independently
+  verified before M5.21 experiments: 130 files / 8 directories, 681,998,188 logical
+  bytes, archive 682,530,304 bytes, SHA-256
   `d941b0872c81c5cb03fc45ec04bd18a37257fa09bcf5da2604d14f13f91cdfa0`.
-  Version `M5.21-incremental-20261123T173629Z` on the same private NAS; all file
-  hashes and supported metadata passed independent readback. Exact creation times
-  recorded, no full restore. Previous full backup unchanged; no source deleted.
-- New private work belongs in `.research/m521-equipment/`; the older `.research/m521/`
-  is unrelated historical evidence and must remain unchanged. Private recovery
-  pointer: project-level `Backups/WebDesktop-M5.21-incremental-20261123T173629Z/backup.json`.
-- Starting state: main `153a9d1`, clean tree, seven unrelated Docker containers,
-  no owned M5.20 lab/preview listeners. No M5.21 guest has started yet.
-
-- **Latest completed engineering milestone:** M5.20, genuine printer/paper-tape
-  workflows; completed work, not owner acceptance or production approval.
-- **Report:** [M5.20](docs/lab/M5.20.md), [runbook](lab/m520/README.md), curated
-  [results](lab/m520/results/). Read these before reconstructing a guest experiment.
-- **Checkpoints:** `4d63e8f` verified private backup; `ed0d970` explicit equipment
-  modes/lifecycle tests; `df91a51` genuine RSX/CPU lab helpers and final presentation
-  corrections. The final documentation commit follows these in Git history.
-- **Genuine RSX results:** PIP/LPDRV printing from a real Chromium terminal,
-  160 records / 10,241 bytes; partial live observation and completed exact downloads
-  in all three engines. Separate PIP/PRDRV/PPDRV tape copy through the original
-  console: 401-byte input / 725-byte output with verified leader/trailer transform;
-  completed browser exports in all engines. Not live RSX punch qualification.
-- **CPU/device result:** separate diskless original SIMH copied all byte values
-  through PC11, 12,288 bytes in three phases, exact progress/EOF/downloads. This
-  remains distinct from OS-driver evidence.
-- **Validation:** Go vet/uncached race (22 tested packages), 105 frontend units,
-  one transport and nine selection-contract tests, TypeScript/build; 153 full-suite
-  browser passes, then 45 affected passes after final visibility/overflow changes.
-  Genuine runs preceded the last presentation-only correction; see report scope.
-- **Private backup:** version `M5.20-20261123T055815Z` on the owner's selected NAS.
-  38,778 files, 5,345 directories including root, 60 symlinks; 40,753,880,985 logical
-  bytes independently verified. Archive SHA-256
+  Version `M5.21-incremental-20261123T173629Z` on the owner-selected private NAS.
+  Supported metadata passed readback, exact creation times recorded; no full restore.
+  Project-level private recovery pointer:
+  `Backups/WebDesktop-M5.21-incremental-20261123T173629Z/backup.json`.
+  This supplement predates M5.21 evidence; it is not a backup of that new work.
+- **Previous full backup preserved:** `M5.20-20261123T055815Z`, 38,778 files / 5,345
+  directories including root / 60 symlinks; 40,753,880,985 logical bytes; archive SHA-256
   `7d5e5a32e5b8ac132f9dd775528b01a5d498616c5f9c80e8eff5b6102859e21c`.
-  File metadata readback passed; exact creation times recorded separately; no full
-  restore tested. This backup predates the new M5.20 lab evidence.
-- **Private recovery pointer:** project-level `Backups/`, outside this repository,
-  contains `WebDesktop-M5.20-verified-20261123T064653Z/backup.json`; a copy is in
-  ignored `.research/m520/backup-verification.json`. That record contains the actual
-  private destination. Earlier backups and failed attempts are preserved.
-- **Resources at completion:** both RSX guests safely completed SHUTUP/final
-  dismount/HALT; RT-11 inventory and separate diskless CPU ended cleanly. Exact
-  bridges stopped first and both original RSX consoles still answered. Owned
-  containers removed, relays/Vite/mock stopped; seven unrelated containers preserved.
-  Verify actual current state before new work. No Pi was accessed.
-- **Preservation:** original RSX/RT-11 hashes, lengths, modes and nanosecond mtimes
-  unchanged; all accepted tag refs and Alpha 1/2 asset metadata matched baseline.
-  No new release/tag or binary/media upload. Public source release remains Alpha 2.
-- **Next recommendation:** supervised equipment sessions: live RSX punch from a
-  fresh approved spool, repeated jobs/new generations, independently verified
-  completion and safe reader-selection authority; RT-11 as a second guest candidate.
-  This recommendation is not authorization for hardware or production controls.
-- **Failures retained:** failed backup-verifier assumptions corrected before
-  verification; setup path/read-only/no-exec failures before successful bridge;
-  printer cleanup click obscured after successful printing, recovered read-only
-  without reprinting; initial guessed print transform rejected; finished spool
-  correctly refused as a fresh live follower, then published as completed export.
+  Exact destination is in project-level `Backups/WebDesktop-M5.20-verified-20261123T064653Z/backup.json`.
+  No source deleted or cloud destination used.
+- **Private evidence:** `.research/m521-equipment/`; the older `.research/m521/` is
+  unrelated historical material and was preserved. The first completed RSX punch is
+  `rsx/punch1-completed.bin`; `rsx/punch1.bin` is the later interruption-test output.
+  Never replay scripts over either. Raw credentials/console captures stay private.
+- **Corrected attempts:** first live overlap timing insufficient, stronger second
+  run recorded host growth; RT-11 handler-memory error; immediate pause assertion;
+  mock compile during asset regeneration; wrong readiness URL; literal backslash-r
+  at shutdown cleared before submission. Details are in the report, not hidden.
+- **Recommended next increment:** M5.22 independent operator workflow and bounded
+  session history, actual export reuse/service restart, active resource/latency
+  measurements and separate RT-11 browser observation. Browser mounting remains
+  disabled until independent safe-state/attachment checks qualify it. No hardware
+  or release authorization is implied by that recommendation.
 
 ## Start a fresh session
 
@@ -76,7 +82,7 @@ request; historical approvals do not authorize new hardware, releases or message
 3. Read [current capabilities](docs/capabilities.md), [known limitations](docs/known-limitations.md),
    [roadmap](ROADMAP.md) and [documentation index](docs/README.md). Historical plans
    describe their time; later verified reports supersede pending-status wording.
-4. Read the current [M5.20 report](docs/lab/M5.20.md) and [M5.19 workstation report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
+4. Read the current [M5.21 report](docs/lab/M5.21.md) and [M5.20 report](docs/lab/M5.20.md) and [M5.19 workstation report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
    and [M5.17 engineering report](docs/lab/M5.17.md). Follow relevant subsystem/lab
    runbooks instead of reconstructing commands from memory.
 5. Identify any owned running lab/preview before starting another. One outstanding
@@ -94,7 +100,7 @@ request; historical approvals do not authorize new hardware, releases or message
 Alpha 2 is public, source-only and experimental: 14,789,290 bytes / 1,026 members.
 Only its archive and SHA256SUMS were attached. Both releases and all accepted tags
 must remain unchanged. Do not republish them or tag current main as their source.
-No new release or binary publication is authorized for M5.20.
+No new release or binary publication is authorized for M5.21.
 
 ## Product and operating boundaries
 
@@ -122,10 +128,11 @@ not reconnect guests, restore authority, mount media or start emulators.
   remain pending. Citation IDs do not certify AI explanations.
 - RT-11 is verified application I/O, not an independent browser shell or complete
   MTTEST pass. RSTS/E remains console-only. Terminal conformance is partial.
-- LP11/PC11 now have narrow RSX PIP driver qualification plus separate CPU/device
-  evidence. Other guests, live RSX punch streaming, repeated-job supervision and
-  browser media selection remain unqualified. Ordinary panel/media controls remain
-  simulations. Identity and completion require the independent operator.
+- LP11/PC11 now have narrow RSX PIP and RT-11 console ASCII qualification plus
+  separate CPU/device evidence. RSX live punch/sequential supervision is lab tested;
+  automatic safe-state detection, browser mounting and production supervision remain
+  unqualified. Ordinary panel/media controls remain simulations. Identity and
+  completion require the independent operator; RAM artifact retention is bounded.
 - Pi memory-controller readiness, switch repair, observer privileges, representative
   performance and renewed supervised coexistence are separate physical gates.
 

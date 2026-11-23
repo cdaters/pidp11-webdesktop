@@ -1,6 +1,12 @@
 # Capability and compatibility matrix
 
-Engineering through **M5.20**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+[M5.21](lab/M5.21.md) qualifies supervised live RSX punch observation, two distinct
+printer jobs and two tape jobs with exact three-engine completed exports. Original
+RT-11 LP/PC handlers also passed a conventional-console ASCII subset. Read-only
+reader catalog, staged completion and expiry are implemented; mounting and automatic
+safe-state discovery remain unqualified.
+
+Engineering through **M5.21**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
 
 [M5.20](lab/M5.20.md) qualifies RSX PIP printer output and a reader-to-punch copy,
 with exact browser exports. Existing equipment windows now separate simulation,
@@ -49,11 +55,13 @@ PiDP-11 owners and ordinary SIMH installations without GPIO or REALCONS.
 | Tektronix 4010 | Genuine V7 plotting tested | Original `graph` / `plot -Ttek`; [graphics foundation](technical/graphics-foundations.md) |
 | 4010 keyboard/GIN | Laboratory fixtures | No genuine GIN application acceptance; not full 4014 conformance |
 | VT11/VR14 | Research / planned transport | Different display-device interface; not supplied by the 4010 renderer |
-| LP11 output | Genuine RSX guest and CPU/device tested | RSX PIP/LPDRV: 160 records, 10,241 exact bytes; live partial observation and three-engine completed downloads; [M5.20](lab/M5.20.md) |
-| PC11 reader/punch | Genuine RSX guest and CPU/device tested | RSX PIP/PRDRV/PPDRV: 401-byte input, documented 725-byte output; separate live full-byte CPU round trip/EOF. No browser mounting or tape replacement |
+| LP11 output | Genuine RSX/RT-11 guest and CPU/device tested | [M5.20](lab/M5.20.md) large RSX listing; [M5.21](lab/M5.21.md) two separate 172-byte RSX jobs with three-engine exports, 152-byte RT-11 console job |
+| PC11 reader/punch | Genuine RSX/RT-11 guest and CPU/device tested | M5.21 RSX: two 48,817-byte inputs / 49,141-byte outputs, live observation before command and exact exports; RT-11 console ASCII copy: 113-byte input / 512-byte output. No browser mounting |
 | Device observation | Experimental, laboratory tested | Read-only, bounded, generation-bound; local supervisor must establish producer identity |
 | Completed exports | Implemented and laboratory tested | Download exact LP11/punch/reader bytes only after explicit completion; no control through downloads |
-| Guest printer drivers | Narrow RSX installed-driver qualification | LPDRV/PIP subset only; V7/BSD/RT-11/RSTS/E printer integrations remain unqualified |
+| Guest printer drivers | Narrow RSX and RT-11 installed-driver qualification | RSX LPDRV/PIP; RT-11 LP/COPY ASCII through original console. V7/BSD/RSTS/E printer integrations remain unqualified |
+| Equipment supervisor | Isolated-Linux lab tested | Explicit owner/job/generation, ordered operator completion, real supervisor crash/expiry; no SIMH control or production installation |
+| Reader-media catalog | Implemented and fixture tested | Up to four readonly, hash-verified entries; informational snapshot. Browser-originated mounting remains disabled |
 | Continuous-form local printer | Simulated spool / explicit snapshot | Sample jobs and imported text; separate from observed LP11 output |
 | Browser disk, magnetic tape, paper-tape and OS management | Simulated | Genuine tape input was prepared/attached by the independent lab operator; browser controls cannot attach, replace, write media or boot an OS |
 | Virtual front panel | Simulated interactive SVG | Passive observation/control experiments remain separate from the ordinary desktop |

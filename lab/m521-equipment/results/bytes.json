@@ -1,0 +1,62 @@
+[
+  {
+    "job": "rsx-lp1",
+    "bytes": 172,
+    "sha256": "118e8969743a133baf7007de8802fdc08fa0e8d21d5d7bd95dbe9e61d2f99982",
+    "exact_transform": true
+  },
+  {
+    "job": "rsx-reader1",
+    "bytes": 48817,
+    "sha256": "70ced1b46758b5a7e68f1e673ea9d08c578592a01f60a36aaeaa1183e05f38a7",
+    "exact_transform": true
+  },
+  {
+    "job": "rsx-punch1",
+    "bytes": 49141,
+    "sha256": "18ef57f65f9f3524b30745a6f9ad9ecc0e1f4238b30accd51405c176fd1f1143",
+    "exact_transform": true
+  },
+  {
+    "job": "rsx-interrupted-not-published",
+    "bytes": 49141,
+    "sha256": "18ef57f65f9f3524b30745a6f9ad9ecc0e1f4238b30accd51405c176fd1f1143",
+    "exact_transform": true
+  },
+  {
+    "job": "rsx-lp2",
+    "bytes": 172,
+    "sha256": "db0c519e7e2e42cb141c75716c730cbf8b2d5258382a04006d39c726f0b978cd",
+    "exact_transform": true
+  },
+  {
+    "job": "rsx-reader2",
+    "bytes": 48817,
+    "sha256": "c9a05f1f54f5dcefd33e9298209655c57e8cb5139c2783bcc1cb1a5f1f2b501c",
+    "exact_transform": true
+  },
+  {
+    "job": "rsx-punch2",
+    "bytes": 49141,
+    "sha256": "cdccf0838542ddd9b78bb9e939d4ea9093fc80ee776fc615de2b5746e7f399a6",
+    "exact_transform": true
+  },
+  {
+    "job": "rt11-printer",
+    "bytes": 152,
+    "sha256": "88fe152c0f4021459ee05a292b4982dcfb8ac909e1329a64a10491b577b7d04a",
+    "exact_transform": true
+  },
+  {
+    "job": "rt11-reader",
+    "bytes": 113,
+    "sha256": "a62b6e2aab76ddf0e174d52074f48a08d69dc3eee9cb191321bed09153db546c",
+    "exact_transform": true
+  },
+  {
+    "job": "rt11-punch",
+    "bytes": 512,
+    "sha256": "de43d4f115425eddacdff8bdbc84e131eedb16c4438eecda3b839301abdfda0a",
+    "exact_transform": true
+  }
+]

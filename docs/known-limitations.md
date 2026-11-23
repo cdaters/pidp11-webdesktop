@@ -1,11 +1,15 @@
 # What is still experimental
 
-[M5.20](lab/M5.20.md) adds genuine RSX PIP/LP11 printing and a supervised RSX
-reader-to-punch copy with completed browser export. Live RSX punch streaming,
-repeated job supervision, browser reader selection and automatic safe completion
-remain unqualified. Original device buffering can delay visible output; a paused
-stream does not establish completion. The final presentation changes were tested
-with fixtures after the genuine runs. No new release or physical access is implied.
+[M5.21](lab/M5.21.md) demonstrates live RSX punch observation, repeated printer/tape
+jobs and independently supervised completion. This remains a laboratory supervisor,
+not automatic safe-state or guest discovery. Original device buffering delays visible
+output; a returned prompt, reader EOF or idle stream cannot complete a job. Reader
+selection is a read-only catalog plus independent operator procedure; browser mounting
+is disabled. Four slots bound volatile history, and replacing an export slot or
+service exit can discard its prior RAM artifact. RT-11 LP/PC results are a console
+ASCII subset, not new browser qualification. Final rejected-replacement/cached-label
+corrections were regression-tested after genuine runs. No new release or physical
+access is implied; [session limits](technical/equipment-sessions.md) remain explicit.
 
 M5.19 development main adds [workstation controls](technical/terminal-workstation.md),
 not a new release or physical installation approval. All terminal personalities

@@ -1,0 +1,71 @@
+{
+  "job": 2,
+  "observedBeforeCommand": true,
+  "liveBeforeGuestReturned": true,
+  "samples": [
+    {
+      "elapsedMs": 206,
+      "bytes": 4096,
+      "hostBytes": 4096,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 417,
+      "bytes": 8192,
+      "hostBytes": 8192,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 624,
+      "bytes": 16384,
+      "hostBytes": 16384,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 835,
+      "bytes": 20480,
+      "hostBytes": 24576,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1046,
+      "bytes": 28672,
+      "hostBytes": 28672,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1256,
+      "bytes": 32768,
+      "hostBytes": 36864,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1467,
+      "bytes": 40960,
+      "hostBytes": 45056,
+      "commandEchoed": true,
+      "guestReturned": false
+    },
+    {
+      "elapsedMs": 1678,
+      "bytes": 45056,
+      "hostBytes": 45056,
+      "commandEchoed": true,
+      "guestReturned": true
+    }
+  ],
+  "liveWhileHostGrowing": true,
+  "guestReturned": true,
+  "partialHostBytes": 45056,
+  "partialSHA256": "624eb0f6fb1459639de5e2241bce3e972017eb59a338b704e838abad7431ca86",
+  "engine": "firefox",
+  "original_ptp_time_decimal": 100,
+  "visibility_test_ptp_time_decimal": 10000,
+  "timing_is_not_a_performance_claim": true
+}

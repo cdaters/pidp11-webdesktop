@@ -1,0 +1,27 @@
+{
+  "guest": "RT-11SJ (S) V05.03",
+  "handlers": [
+    "LP.SYS",
+    "PC.SYS"
+  ],
+  "initial_install": "KMON-F-No room",
+  "resolution": "REMOVE CT:,DM: in disposable idle monitor; INSTALL LP:,PC:",
+  "commands": [
+    "COPY/ASCII TT: LP:",
+    "COPY/ASCII PC: T521.TXT",
+    "TYPE T521.TXT",
+    "COPY/ASCII T521.TXT PC:"
+  ],
+  "printer_bytes": 152,
+  "printer_sha256": "88fe152c0f4021459ee05a292b4982dcfb8ac909e1329a64a10491b577b7d04a",
+  "printer_transform": "Leading FF; three input records each followed by LF; one additional trailing LF; CR absent",
+  "reader_bytes": 113,
+  "reader_sha256": "a62b6e2aab76ddf0e174d52074f48a08d69dc3eee9cb191321bed09153db546c",
+  "punch_bytes": 512,
+  "punch_sha256": "de43d4f115425eddacdff8bdbc84e131eedb16c4438eecda3b839301abdfda0a",
+  "tape_transform": "NUL leader and SUB removed; three CRLF records retained, then zero padding to 512 bytes",
+  "reader_eof_csr": "100000",
+  "punch_ready_csr": "000200",
+  "browser_qualified": false,
+  "completed_after_safe_close": true
+}

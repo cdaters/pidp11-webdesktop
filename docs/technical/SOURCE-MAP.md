@@ -1,5 +1,16 @@
 # Source map and subsystem boundaries
 
+## M5.21 equipment sessions
+
+[`cmd/equipment-supervisor`](../../cmd/equipment-supervisor/main.go) and
+[`internal/equipmentsession`](../../internal/equipmentsession/supervisor.go) own
+private ordered approvals and periodic renewal in isolated Linux. They never control
+SIMH. [`internal/peripheral/session.go`](../../internal/peripheral/session.go) validates
+owner/job phases and the readonly catalog; [`src/reader-catalog.ts`](../../src/reader-catalog.ts)
+owns explicit catalog retrieval/cancellation. [Session contract](equipment-sessions.md)
+and [lab runbook](../../lab/m521-equipment/README.md) distinguish operator attestations,
+actual device evidence, bounded retention and the independent private harness.
+
 Read this alongside the [architecture decisions](../development/DECISIONS.md). The normal mock desktop, passive-observation lab, genuine guest-terminal lab and M5.3 terminal-only pilot are distinct entry points. None is a production Pi installation procedure.
 
 ## Go services and interfaces

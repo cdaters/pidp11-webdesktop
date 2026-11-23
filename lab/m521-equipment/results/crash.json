@@ -1,0 +1,9 @@
+{
+  "originalGuestSignalled": false,
+  "oldGenerationRejected": true,
+  "expiredAfterKillMs": 4862,
+  "retainedBytes": 45056,
+  "partialSHA256": "117bd1070e3e6f0b76e0fc1e5d900fecfebb1845fd08d5327279506dbd4d051f",
+  "completedDownloadDisabled": true,
+  "oldCompletedArtifactUnchanged": true
+}

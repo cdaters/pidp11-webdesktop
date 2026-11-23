@@ -1,0 +1,24 @@
+{
+  "status": "verified",
+  "counts": {
+    "dir": 8,
+    "file": 130
+  },
+  "logical_bytes": 681998188,
+  "verified_bytes": 681998188,
+  "archive_bytes": 682530304,
+  "archive_sha256": "d941b0872c81c5cb03fc45ec04bd18a37257fa09bcf5da2604d14f13f91cdfa0",
+  "manifest_sha256": "ba96b1fe166b5d62b1bfa270fad9e84dd48c28fd1a7e9f7114b0c739e0ddd594",
+  "appledouble_entries": 138,
+  "special_entries_excluded": [],
+  "all_file_hashes_verified": true,
+  "modes_owners_mtime_xattrs_symlinks_verified": true,
+  "originals_stable": true,
+  "metadata_note": "Native AppleDouble stores Mac ACLs/metadata; original ACL text, flags and creation/access/change timestamps also retained in manifest. Ctime is a record, not a restorable POSIX timestamp.",
+  "source_deleted": false,
+  "cloud_upload": false,
+  "source_revision": "153a9d1d7c7186cee82755a3628b7538bc127ada",
+  "source_scope": ".research/m520 only; incremental supplement to M5.20-20261123T055815Z",
+  "creation_timestamps_recorded": 138,
+  "full_restore_tested": false
+}

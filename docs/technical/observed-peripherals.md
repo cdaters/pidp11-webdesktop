@@ -1,5 +1,10 @@
 # Observing emulated-device output
 
+M5.21 adds optional [equipment-session ownership and staged completion](equipment-sessions.md)
+to these existing interfaces, plus a read-only reader catalog. The [genuine report](../lab/M5.21.md)
+records live RSX punching, sequential jobs and real supervisor expiry. Legacy followers
+retain their prior API; the new supervisor does not operate SIMH or mount media.
+
 The **Line printer** and **Paper tape** windows offer explicit **Local simulation**,
 **Observe device** and **Completed exports** modes. The older **Guest devices**
 window remains available. Observation reads actual allowlisted original-SIMH output

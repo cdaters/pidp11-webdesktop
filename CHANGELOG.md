@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.21 supervised equipment sessions — 2026-11-23 (development main)
+
+- Added a small isolated-Linux supervisor with owner/job/generation checks, independent expiry and ordered operator-attested completion. It never controls SIMH.
+- Qualified two genuine RSX printer and two tape jobs, live punch observation, twelve byte-exact three-engine downloads and a real supervisor crash with retained partial data and independent console operation.
+- Added a read-only reader catalog and clearer equipment phases/cached state; browser mounting remains disabled. Original RT-11 LP/PC handlers passed a separate console ASCII subset.
+- Verified the incremental M5.20 private backup, 174 browser cases, Go vet/uncached race in 23 packages, frontend/build and preservation checks. [Report](docs/lab/M5.21.md). No release/tag, physical access or production deployment.
+
 ## M5.20 genuine equipment workflows — 2026-11-23 (development main)
 
 - Added explicit simulation, live observation and completed-export modes to the existing printer and paper-tape windows, with source details, retained incomplete downloads and stronger identity/cancellation checks.
