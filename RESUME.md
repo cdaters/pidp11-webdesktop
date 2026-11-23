@@ -6,6 +6,20 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **Active assignment:** M5.20, genuine printer/paper-tape workflows. Development
+  is blocked on the owner's required verified private `.research/` backup.
+- **Backup preflight, 2026-11-23 UTC:** 38,778 regular files, 5,344 directories,
+  60 symlinks; 40,753,880,985 logical bytes / 39,330,615,296 allocated bytes.
+  TheBench had 35,088,527,360 bytes free, insufficient for the separate copy.
+  No sockets/FIFOs/special entries or traversal errors were found. These are
+  inventory counts, not file hashes or a verified backup.
+- **Next action:** obtain sufficient free space or an alternate private local backup
+  destination, recheck active resources, then create and independently verify the
+  versioned backup before substantial M5.20 work. Do not delete existing evidence
+  or backups, rely on unmeasured compression, or upload private material to cloud/Git.
+  A private preflight record is retained outside the repository in the project's
+  Backups directory; no source backup was created. No M5.20 guest was started.
+
 - **Latest completed engineering milestone:** M5.19, genuine terminal workstation.
   This records completed work, not owner acceptance or production approval.
 - **Latest publication:** M5.18, immutable Source Alpha 2; no M5.19 release exists.
@@ -21,9 +35,9 @@ request; historical approvals do not authorize new hardware, releases or message
   removed and relays/previews stopped. Working disks/evidence retained privately;
   original media, unrelated containers, accepted tags and both releases unchanged.
   Verify actual state before new work; this is a historical observation.
-- **Next recommended scope:** genuine printer/paper-tape guest workflows, as defined
-  in the [product direction](docs/product/virtual-computer-room.md). Await the
-  owner's next assignment; do not infer hardware or release authority.
+- **Product scope:** the owner has now authorized M5.20 printer/paper-tape work
+  after the backup prerequisite above. Follow the [product direction](docs/product/virtual-computer-room.md);
+  no hardware or release authority is implied.
 - **New limitation:** BSD robots needs Ctrl-L to complete its initial screen in all
   final engine cases. Cause unresolved; explicit redraw is a workaround, not a fix.
 
