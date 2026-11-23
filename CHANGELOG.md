@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.23 genuine storage snapshots — 2026-11-23 (development main)
+
+- Added a bounded local snapshot collector and read-only disk/tape views with explicit selection, freshness, retained metadata and generation retirement. No monitor, mount or emulator-control route is exposed.
+- Inventoried the original simulator and RT-11 handlers; verified actual RL02 directory access and TM11 CPU DMA, filemarks and end-of-image. Tape guest-driver integration and live I/O remain unqualified.
+- Verified the M5.22 evidence backup, actual observer restart and original-media preservation. Passed 24 Go race-tested packages, frontend/build, 225 browser cases and a fresh independent checkout build. [Report](docs/lab/M5.23.md).
+- No physical access, release/tag, binary/media publication or deployment. Existing Source Alpha 1/2 are unchanged.
+
 ## M5.22 practical equipment operation and recovery — 2026-11-23 (development main)
 
 - Added a guided local operator, eight immutable retained jobs, explicit private archive/save/recovery and a compact browser history selector. Recovery restores data only; live observation always needs fresh approval.

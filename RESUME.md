@@ -6,82 +6,77 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **Active assignment:** M5.23 genuine disk/tape discovery and read-only snapshots.
-  Before experiments, verified M5.22 evidence backup `M5.23-incremental-20261123T213751Z`: 217 files /
-  nine directories, 417,600,495 logical bytes; archive 418,473,984 bytes, SHA-256
+- **Latest completed engineering milestone:** M5.23 genuine disk/tape discovery and
+  captured read-only status. This is completed engineering, not owner acceptance or
+  physical/production approval. Read the [report](docs/lab/M5.23.md),
+  [inventory](docs/technical/storage-inventory.md), [contract](docs/technical/storage-observation.md)
+  and [runbook](lab/m523/README.md). Source Alpha 2 remains the latest release.
+- **Checkpoint sequence:** starting M5.22 `73dadb2`; `0a16f9f` records the verified
+  incremental M5.22 evidence backup; `fca1061` adds implementation, tests and lab
+  helpers. Final documentation follows separately on main; inspect Git for its exact
+  revision. No new tag, release, binary or guest-media publication.
+- **Implemented:** narrow local `storage-snapshot` collector, read-only whole-image
+  identity/hash verification, private instance/revision approvals, captured generations,
+  30-second freshness, explicit revocation and empty restart. Existing disk/tape
+  windows add observation and retained-snapshot modes beside simulation. Only
+  RL0/RL11/RL02 and TM0/TM11/TU10 unit zero are qualified. No monitor/mount/guest control.
+- **Disk evidence:** fresh RT-11SJ (S) V05.03 boot from DL0/RL02; resident DL driver,
+  actual directory listings, captured original RL11/attachment/registers, 10,478,080
+  image bytes versus 10,485,760 logical capacity. Original and working image hash
+  `543277ee81fb4c024d19242bf6d6a04c81a257c48fe4cece256a42de3fe8dd98`.
+- **Tape evidence:** original TM11/TU10 read a 42-byte authored record by CPU DMA,
+  then two filemarks and end-of-image; readonly SIMH tape 58 bytes, logical positions
+  0/50/54/58/58. Original status preserved, including expected EOF/error summary.
+  No guest tape-driver claim: RT-11 MT/MS/MM files exist but were not installed or used.
+- **Observation boundary:** named register EXAMINE can notify REALCONS. The collector
+  never contacts SIMH; independent fixed lab captures used halted/idle boundaries,
+  REALCONS disconnected. FrontPanel API 12 sampling remains a separate unqualified
+  interface. Current state is always unknown; a recent capture is not live telemetry.
+- **Lifecycle/browser evidence:** six genuine disk/tape views across three engines,
+  every captured field matched. Captures were correctly labeled stale. Explicit
+  revoke, actual observer stop/restart, empty inventory and both old URLs returning
+  404 passed. No automatic fetch on window open or restored terminal/device approval.
+  Original RT-11 console remained usable after capture and after bridge stops.
+- **Validation:** Go vet/uncached race in 24 packages; 105 frontend units, one transport,
+  nine selection checks; TypeScript/build; one full 225-pass browser run with zero
+  skips/failures/flakes. Additional affected-package race covered blocked-writer
+  revocation. Fresh independent `fca1061` checkout passed offline dependency install,
+  embedded asset build and Go command builds without private inputs. Bundle warning
+  remains; standalone prototype 595,464 bytes.
+- **Measurements:** 100 local TLS snapshot reads / 5.54 seconds, max service RSS/HWM
+  12,664 KiB, nine descriptors/eight threads, 11 CPU ticks (~2.01% one core), 2,430-byte
+  max response. Metadata/TLS lab measurements, not block I/O or physical Pi benchmarks.
+  Existing future 96 MiB enforced companion/zero-swap gate unchanged.
+- **Corrected attempts:** initial imports refused tabs in normalized register text;
+  fixed the lab formatter, preserved rejected configs and took new captures. First
+  browser attempt lacked published records; second had an incorrect close-button
+  locator. No guest/CPU operation failed or uncertain guest command was replayed.
+- **Cleanup:** actual observer stopped first; original console answered. RT-11 exited
+  at its idle monitor; diskless tape CPU was halted before quit. Both owned containers
+  exited zero and were removed. Owned preview/mock/relay stopped, seven unrelated
+  running containers and previous stopped resources preserved. No physical Pi access.
+- **Preservation:** original RT-11 hash/size/mode/nanosecond mtime and readonly authored
+  tape hash unchanged. Accepted tags and Alpha 1/2 metadata preserved. Working disks,
+  raw captures, rejected attempts and browser evidence remain in `.research/m523/`.
+  Do not rerun scripts over that directory or change its retained evidence.
+- **Verified M5.22 incremental backup:** `M5.23-incremental-20261123T213751Z` on the
+  owner-selected NAS; 217 files / nine directories, 417,600,495 logical bytes;
+  archive 418,473,984 bytes, SHA-256
   `d2bacb19f2646117c1440e667c4964e3e8e47cf2cca675129b0435e2a08b37ba`.
-  Private recovery pointer: project-level `Backups/WebDesktop-M5.23-incremental-20261123T213751Z/backup.json`.
-  Contents/supported metadata independently reread; originals and previous backups preserved.
-  Work root `.research/m523/`; no physical Pi or publication of new releases authorized.
-
-- **Latest completed engineering milestone:** M5.22 practical equipment operation,
-  history and recovery. Completed engineering is not owner acceptance or production
-  approval. Read the [report](docs/lab/M5.22.md), [operator guide](docs/technical/equipment-operator.md),
-  [history contract](docs/technical/equipment-history.md), [runbook](lab/m522/README.md)
-  and [curated results](lab/m522/results/). Publication remains Source Alpha 2.
-- **Checkpoint sequence:** starting M5.21 `72e9a98`; `3c9788a` records the verified
-  incremental M5.21 evidence backup; `b265d20` adds M5.22 implementation, regression
-  tests and lab helpers. Final documentation follows separately on main; inspect
-  `git log` for its exact revision. No new tag.
-- **Implemented:** guided local equipment commands and exclusive configuration
-  preparation; eight immutable terminal-job records, each at most 64 KiB; explicit
-  private archive/save and data-only recovery. The browser adds Job history with
-  distinct jobs, provenance, complete/incomplete labels and verified downloads.
-  No guest lifecycle, browser mounting or automatic reconnect/adoption authority.
-- **Genuine RSX:** two 172-byte printer jobs and two 44,341-byte punch outputs from
-  44,017-byte inputs reused the same slots and spool paths. Original PIP/LPDRV/PRDRV/
-  PPDRV produced the bytes. PTP TIME 10000 enabled visible growth; restored to 100.
-  Twelve exact history downloads before restart; fifteen after recovery, across
-  Chromium/Firefox/WebKit. Same tape checksum does not merge distinct job identities.
-- **Restart/partial evidence:** guided supervisor quit; actual expiry 4,820 ms,
-  40,960 incomplete bytes retained. New supervisor could not complete the unowned
-  session. Actual observer restart had empty history and detached devices/terminal;
-  five explicit recoveries restored only saved data. Expired output was never
-  retrospectively completed. Independent original console answered after bridge stop.
-- **RT-11:** original LP/PC ASCII subset produced 152 printer bytes and 512 punch
-  bytes from 113-byte input. Chromium completed observations and six three-engine
-  history downloads matched exactly. Utilities ran through the independent console;
-  no new browser login shell or sustained small-job live stream is claimed.
-- **Validation:** Go vet and uncached race in 23 tested packages; 105 frontend units,
-  one transport, nine selection tests; TypeScript/build; 192 full browser passes,
-  then 24 final affected cases, zero skips/flakes. Late leading-FF/navigation/selector
-  changes and a reproduced checksum-wait selection race were fixture-tested after
-  genuine runs. Failed reproduction retained; no guest replay for these corrections.
-  Existing large-bundle warning remains; standalone prototype 587,570 bytes.
-- **Active resources:** maximum sampled observer RSS/HWM 14,556 KiB, supervisor
-  8,524 KiB. Short deliberately slowed ARM64 windows, not physical Pi measurements.
-  Sampled host-growth-to-visible-count lag 57–341 ms; five recovered records held
-  129,986 bytes. Future 96 MiB enforced companion/zero-swap gate remains unchanged.
-- **Cleanup:** actual bridges stopped first; independent consoles answered. RSX
-  SHUTUP completed final dismount/HALT before quit; RT-11 exited at its idle monitor.
-  Both owned containers exited zero and were removed. Relays/preview stopped; seven
-  unrelated containers preserved. Working media and raw records retained; no Pi access.
-- **Preservation:** original RSX/RT-11 hashes, lengths, modes and nanosecond mtimes
-  unchanged; 22 accepted remote tag refs and Alpha 1/2 metadata preserved. No release,
-  binary, guest media or private transcript upload. Development main only.
-- **M5.21 incremental backup:** version `M5.22-incremental-20261123T183000Z` on the
-  owner-selected private NAS, 158 files / five directories, 348,802,328 logical bytes;
-  archive 349,435,904 bytes, SHA-256
-  `ab23bf0c41cefe215c9cbaa76020f9b3335090120b4917cb30161b2fc664bfa2`.
-  Independently reread content/supported metadata. Creation times recorded; no full
-  restore. Project-level private pointer:
-  `Backups/WebDesktop-M5.22-incremental-20261123T183000Z/backup.json`.
-  This predates new M5.22 evidence, which remains local and needs a future incremental.
-- **Previous backups preserved:** M5.21 incremental `M5.21-incremental-20261123T173629Z`
-  of M5.20 evidence, archive hash
-  `d941b0872c81c5cb03fc45ec04bd18a37257fa09bcf5da2604d14f13f91cdfa0`;
-  full `M5.20-20261123T055815Z`, archive hash
-  `7d5e5a32e5b8ac132f9dd775528b01a5d498616c5f9c80e8eff5b6102859e21c`.
-  Private recovery pointers remain under project-level `Backups/`. No source deleted.
-- **Private evidence:** `.research/m522/`, earlier `.research/m521-equipment/` and
-  `.research/m520/` unchanged. In M5.22 RSX, `lp-first.out`/`punch-first.bin` and
-  `lp-second.out`/`punch-second.bin` preserve completed originals; `punch1.bin` is the
-  later full interruption-test output, not the retained partial record. Never rerun
-  helpers over these paths. Credentials/console captures/archives stay private.
-- **Recommended M5.23:** genuine disk and magnetic-tape inventory and read-only
-  status/provenance using legitimate disposable media. Keep writes/mounts under
-  independent console ownership. No further broad LP11/PC11 milestone unless a
-  demonstrated defect blocks this next step. No hardware or release authorization.
+  Contents/supported metadata independently reread; creation times recorded, no full
+  restore. Private project-level pointer:
+  `Backups/WebDesktop-M5.23-incremental-20261123T213751Z/backup.json`.
+  This predates new M5.23 evidence; a future milestone needs its own incremental backup.
+- **Prior backups preserved:** M5.22 incremental of M5.21 evidence
+  `M5.22-incremental-20261123T183000Z`, M5.21 incremental of M5.20 evidence
+  `M5.21-incremental-20261123T173629Z`, and full `M5.20-20261123T055815Z`.
+  Exact manifests/hashes/pointers remain in project-level `Backups/` and prior reports.
+  No prior backup or source was deleted; no cloud destination was used.
+- **Recommended M5.24:** qualify a documented historical guest magnetic-tape workflow
+  with the inventoried legitimate handlers; broaden read-only disk provenance with
+  exact attachment/guest evidence. Continuous telemetry needs separate qualification.
+  Media control stays independent. No hardware, new release or broad LP11/PC11 work
+  is authorized by this recommendation.
 
 ## Start a fresh session
 
@@ -93,7 +88,7 @@ request; historical approvals do not authorize new hardware, releases or message
 3. Read [current capabilities](docs/capabilities.md), [known limitations](docs/known-limitations.md),
    [roadmap](ROADMAP.md) and [documentation index](docs/README.md). Historical plans
    describe their time; later verified reports supersede pending-status wording.
-4. Read the current [M5.22 report](docs/lab/M5.22.md), [M5.21 report](docs/lab/M5.21.md) and [M5.20 report](docs/lab/M5.20.md) and [M5.19 workstation report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
+4. Read the current [M5.23 report](docs/lab/M5.23.md), [M5.22 report](docs/lab/M5.22.md), [M5.21 report](docs/lab/M5.21.md) and [M5.20 report](docs/lab/M5.20.md) and [M5.19 workstation report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
    and [M5.17 engineering report](docs/lab/M5.17.md). Follow relevant subsystem/lab
    runbooks instead of reconstructing commands from memory.
 5. Identify any owned running lab/preview before starting another. One outstanding
@@ -111,7 +106,7 @@ request; historical approvals do not authorize new hardware, releases or message
 Alpha 2 is public, source-only and experimental: 14,789,290 bytes / 1,026 members.
 Only its archive and SHA256SUMS were attached. Both releases and all accepted tags
 must remain unchanged. Do not republish them or tag current main as their source.
-No new release or binary publication is authorized for M5.22.
+No new release or binary publication is authorized for M5.23.
 
 ## Product and operating boundaries
 
@@ -130,6 +125,11 @@ keyboard leases, generation retirement and resource bounds. Saved preferences mu
 not reconnect guests, restore authority, mount media or start emulators.
 
 ## Open limits to preserve
+
+- Disk/tape browser output is captured metadata, not live I/O. Guest OS and safe
+  attachment remain operator-attested; unreported transitions can obsolete a capture
+  immediately. Snapshot recovery never grants authority. TM11 is CPU/device-qualified,
+  not a guest tape utility or physical transport. No automatic media management.
 
 - Two original ARM64 provisioning exit-139 incidents and the initial V7 plotting
   timeout remain unexplained. Use retained bounded diagnostics on recurrence;

@@ -1,0 +1,78 @@
+{
+  "scope": "genuine CPU/TM11 device, no guest tape driver",
+  "payload_bytes": 42,
+  "dma_matches_authored_record": true,
+  "write_protected": true,
+  "stages": [
+    {
+      "stage": "attached-at-bot",
+      "captured_at": "2026-11-23T21:45:08.726531Z",
+      "registers": {
+        "MTS": "000145",
+        "MTC": "000200",
+        "MTBRC": "000000",
+        "MTCMA": "000000",
+        "UST[0]": "000144",
+        "POS[0]": "0"
+      },
+      "image_bytes": 58,
+      "image_sha256": "a2b62e0ade533d3a20037755c75ba410bfddc128184b9a83298cfa9e7698c777"
+    },
+    {
+      "stage": "record",
+      "captured_at": "2026-11-23T21:45:11.176239Z",
+      "registers": {
+        "MTS": "000105",
+        "MTC": "000202",
+        "MTBRC": "000000",
+        "MTCMA": "002052",
+        "UST[0]": "000104",
+        "POS[0]": "50"
+      },
+      "image_bytes": 58,
+      "image_sha256": "a2b62e0ade533d3a20037755c75ba410bfddc128184b9a83298cfa9e7698c777"
+    },
+    {
+      "stage": "filemark-one",
+      "captured_at": "2026-11-23T21:45:13.771591Z",
+      "registers": {
+        "MTS": "040105",
+        "MTC": "100202",
+        "MTBRC": "177726",
+        "MTCMA": "002000",
+        "UST[0]": "040104",
+        "POS[0]": "54"
+      },
+      "image_bytes": 58,
+      "image_sha256": "a2b62e0ade533d3a20037755c75ba410bfddc128184b9a83298cfa9e7698c777"
+    },
+    {
+      "stage": "filemark-two",
+      "captured_at": "2026-11-23T21:45:16.227718Z",
+      "registers": {
+        "MTS": "040105",
+        "MTC": "100202",
+        "MTBRC": "177726",
+        "MTCMA": "002000",
+        "UST[0]": "040104",
+        "POS[0]": "58"
+      },
+      "image_bytes": 58,
+      "image_sha256": "a2b62e0ade533d3a20037755c75ba410bfddc128184b9a83298cfa9e7698c777"
+    },
+    {
+      "stage": "end-of-medium",
+      "captured_at": "2026-11-23T21:45:18.656917Z",
+      "registers": {
+        "MTS": "000505",
+        "MTC": "100202",
+        "MTBRC": "177726",
+        "MTCMA": "002000",
+        "UST[0]": "000104",
+        "POS[0]": "58"
+      },
+      "image_bytes": 58,
+      "image_sha256": "a2b62e0ade533d3a20037755c75ba410bfddc128184b9a83298cfa9e7698c777"
+    }
+  ]
+}

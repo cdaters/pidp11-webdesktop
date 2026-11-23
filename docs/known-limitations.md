@@ -1,5 +1,16 @@
 # What is still experimental
 
+[M5.23 storage views](lab/M5.23.md) are captured metadata, never continuous device
+telemetry. An unreported guest/media transition can obsolete a snapshot immediately;
+the UI always says current state is unknown. Only RL0/RL11/RL02 and TM0/TM11/TU10
+are accepted. Guest identity, actual attachment and quiescent capture remain operator
+attestations. The local collector verifies image bytes without write access; it does
+not discover a guest or monitor. Tape evidence is CPU/device-only despite available
+RT-11 tape handler files. No tape-utility workflow, physical-length/EOT measurement,
+automatic restart adoption, durable snapshot archive or browser mounting is qualified.
+Named register examination can notify REALCONS; production capture and FrontPanel
+sampling need separate review. [Contract](technical/storage-observation.md).
+
 [M5.22](lab/M5.22.md) demonstrates repeated RSX jobs, bounded history, controlled
 observer restart and genuine RT-11 browser exports. The local guide still requires
 independent guest/device checks: a prompt, EOF or idle stream cannot establish safe

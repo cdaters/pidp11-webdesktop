@@ -1,0 +1,29 @@
+{
+  "simulator": "PDP-11 V4.0-0 Current REALCONS build Nov 17 2026; FrontPanel API 12",
+  "sha256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+  "default_cpu": "11/73; RL controller reports RLV12 here, RL11 on tested 11/70",
+  "devices": {
+    "show RK": "RK\taddress=17777400-17777417, vector=220, BR5, 8 units\n  RK0\t1247KW, not attached, write enabled\n  RK1\t1247KW, not attached, write enabled\n  RK2\t1247KW, not attached, write enabled\n  RK3\t1247KW, not attached, write enabled\n  RK4\t1247KW, not attached, write enabled\n  RK5\t1247KW, not attached, write enabled\n  RK6\t1247KW, not attached, write enabled\n  RK7\t1247KW, not attached, write enabled",
+    "show RL": "RL\tRLV12, address=17774400-17774411, vector=160, BR5, 4 units\n  RL0\t2621KW, not attached, on line\n\twrite enabled, SIMH format, autosize\n  RL1\t2621KW, not attached, on line\n\twrite enabled, SIMH format, autosize\n  RL2\t2621KW, not attached, on line\n\twrite enabled, SIMH format, autosize\n  RL3\t2621KW, not attached, on line\n\twrite enabled, SIMH format, autosize",
+    "show HK": "HK\taddress=17777440-17777477, vector=210, BR5, 8 units\n  HK0\t6944KW, not attached, write enabled\n\tSIMH format, autosize\n  HK1\t6944KW, not attached, write enabled\n\tSIMH format, autosize\n  HK2\t6944KW, not attached, write enabled\n\tSIMH format, autosize\n  HK3\t6944KW, not attached, write enabled\n\tSIMH format, autosize\n  HK4\t6944KW, not attached, write enabled\n\tSIMH format, autosize\n  HK5\t6944KW, not attached, write enabled\n\tSIMH format, autosize\n  HK6\t6944KW, not attached, write enabled\n\tSIMH format, autosize\n  HK7\t6944KW, not attached, write enabled\n\tSIMH format, autosize",
+    "show RP": "RP\tMassbus adapter 0 (RHA), 8 units\n  RP0\t33MW, not attached, write enabled\n\tSIMH format, autosize\n  RP1\t33MW, not attached, write enabled\n\tSIMH format, autosize\n  RP2\t33MW, not attached, write enabled\n\tSIMH format, autosize\n  RP3\t33MW, not attached, write enabled\n\tSIMH format, autosize\n  RP4\t33MW, not attached, write enabled\n\tSIMH format, autosize\n  RP5\t33MW, not attached, write enabled\n\tSIMH format, autosize\n  RP6\t33MW, not attached, write enabled\n\tSIMH format, autosize\n  RP7\t33MW, not attached, write enabled\n\tSIMH format, autosize",
+    "show RQ": "RQ\taddress=17772150-17772153, no vector, BR5, RQDX3, 4 units\n  RQ0\t159MB, not attached, write enabled\n\tRD54, autosize, SIMH format\n  RQ1\t159MB, not attached, write enabled\n\tRD54, autosize, SIMH format\n  RQ2\t159MB, not attached, write enabled\n\tRD54, autosize, SIMH format\n  RQ3\t409KB, not attached, write enabled\n\tRX50, autosize, SIMH format",
+    "show RQB": "RQB\tdisabled",
+    "show RQC": "RQC\tdisabled",
+    "show RQD": "RQD\tdisabled",
+    "show RX": "RX\taddress=17777170-17777173, vector=264, BR5, 2 units\n  RX0\t256KB, not attached, write enabled\n  RX1\t256KB, not attached, write enabled",
+    "show RY": "RY\tdisabled",
+    "show RC": "RC\tdisabled",
+    "show RF": "RF\tdisabled",
+    "show TM": "TM\taddress=17772520-17772533, vector=224, BR5, 8 units\n  TM0\tnot attached, write enabled, SIMH format\n\tunlimited capacity\n  TM1\tnot attached, write enabled, SIMH format\n\tunlimited capacity\n  TM2\tnot attached, write enabled, SIMH format\n\tunlimited capacity\n  TM3\tnot attached, write enabled, SIMH format\n\tunlimited capacity\n  TM4\tnot attached, write enabled, SIMH format\n\tunlimited capacity\n  TM5\tnot attached, write enabled, SIMH format\n\tunlimited capacity\n  TM6\tnot attached, write enabled, SIMH format\n\tunlimited capacity\n  TM7\tnot attached, write enabled, SIMH format\n\tunlimited capacity",
+    "show TS": "TS\tdisabled",
+    "show TU": "TU\tdisabled",
+    "show TQ": "TQ\tTK50 (94MB), address=17774500-17774503, no vector, BR5, 4 units\n  TQ0\tnot attached, write enabled, SIMH format\n\tcapacity=98MB\n  TQ1\tnot attached, write enabled, SIMH format\n\tcapacity=98MB\n  TQ2\tnot attached, write enabled, SIMH format\n\tcapacity=98MB\n  TQ3\tnot attached, write enabled, SIMH format\n\tcapacity=98MB",
+    "show TA": "TA\tdisabled",
+    "show TC": "TC\tdisabled"
+  },
+  "additional_default_states": {
+    "RS": "disabled",
+    "TDC": "disabled"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "upstream_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+  "files": {
+    "scp.c": "3549049ae5928b3b6bac2a337a4de3a2a69a630e19e817c1f3a9ac3220767609",
+    "sim_tape.c": "0e541a420e0a19a245ad923ea0e51b364d2bd561d3a71dfbe92ae8b9a0a20d8e",
+    "sim_frontpanel.c": "0ab04601c2224091189e7a5cf74722059509eadc9bf98eef664b742fa44dfa55",
+    "sim_console.c": "71b54d589b52e45eb99a107a14ab20bc52aac71c4752a33497558e66a6d261a5",
+    "PDP11/pdp11_sys.c": "facfb92f885ce0705d529decc7f0f2b911e6913ad907272521b102e9982c5604",
+    "PDP11/pdp11_rk.c": "2cfef23191d65cffd890239a1f6fdf8eba2120cfb05ae59241626856bb27a85f",
+    "PDP11/pdp11_rl.c": "b00b482ee094daa712e6edf91285938b32895f89b8cda4215967081b5261e52b",
+    "PDP11/pdp11_hk.c": "c553c52a23a722c06d84168ec66a47c0b19f427f370409065d8fed5f9caac9f9",
+    "PDP11/pdp11_rp.c": "ddfcbb0335b06f1926edb763d0fa69c0a9b8bba27867e98da4b517c6879d0b54",
+    "PDP11/pdp11_rq.c": "e7f4749b9ad4ead961f273166bb8df60e2b8633f59c49d9ccbb98fd939b51ae5",
+    "PDP11/pdp11_rx.c": "5d6ff3d66b7be6828c7e7d773ecaca6499508439e7ab6465de8bcc917e7cc97a",
+    "PDP11/pdp11_ry.c": "01ab40020df615eefeda91e424c2cc80a7702860ad1e1218d4f0cff073babc91",
+    "PDP11/pdp11_rc.c": "897c061c58d43c50038db660127162b0de2980cdbb5db4d0c577e9ce5e6fdc71",
+    "PDP11/pdp11_rf.c": "12eae2486d8cc2273c1f5e9f113aa1bb640775976377febae97b07770e57d10a",
+    "PDP11/pdp11_rs.c": "50c05faf2ab36dce8d297a60421c4df462b2d300f35a8afbb42854645b159121",
+    "PDP11/pdp11_tm.c": "cdcd0cdcaa2ab4d8d52ea2e4390f12b86caf4213807b27476bc3aaea724979fc",
+    "PDP11/pdp11_ts.c": "02565359df76ceed27a9980b9b7c5eea3a1c7a31cea6f1adca0133d83ca92351",
+    "PDP11/pdp11_tu.c": "dbd23e6ee8c1ae253e2b0fd57b63a7dda50f357e87ea0f4ff648508daafb85cb",
+    "PDP11/pdp11_tq.c": "dbd6b38ec67750c38c80b62e7bd13660cf1f84aa53eb80ff916ecb389f64375f",
+    "PDP11/pdp11_ta.c": "6f7ce7f180e0681dfdf9697a0c180845b166ae1f1ecfef578aa45a10bccc4bd4",
+    "PDP11/pdp11_tc.c": "00f30dbd88dd80e3cc99d52418f594793baaf82d07eaaf36a21e0733df642805",
+    "PDP11/pdp11_td.c": "32e5ec9724a381504e0fc269098c05b024ad1026717e364b81a59b1188e69229"
+  }
+}

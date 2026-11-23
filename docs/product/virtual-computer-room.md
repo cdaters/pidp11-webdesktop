@@ -63,7 +63,8 @@ framework, driver implementation, remote-control API or authority token.
 | Guest terminal / teletype / Tek guest display | Go serial bridge; observation or supervised input; explicit attachment generation and keyboard epoch | Copy/save output; approved keyboard/paste; loss disconnects without replay; guest identity remains attested |
 | Guest devices: completed LP11/PC11 | Immutable allowlisted export; observation; simulator/guest generation and checksum | View/download approved bounded snapshot; cached result is not a live driver |
 | Guest devices: live LP11/PC11 | Approved file follower; observation; producer identities, sequence/offset and renewal | Read/output completion and download; stale approval or missing bytes stops observation |
-| Media observation schema | Offline fixture; no running collector | Descriptive validation only, no disk/tape attach or activity claim |
+| Original media observation schema | Offline fixture, separate from the captured storage contract | Descriptive validation only; busy/activity vocabulary is not genuine telemetry |
+| Captured RL02/TM11 storage | Independent local capture and read-only hash collector; bounded service/capture generations | Explicit view/retain, stale/current-unknown labels, no live I/O or media control |
 | Standalone 4010 window | Local vector fixture; simulation | Draw/erase/export fixture; genuine Tek is a separately selected guest terminal |
 | References / Companion | Local reference corpus or optional explanation provider; no equipment authority | Search, selection review and explanation; AI never receives machine control |
 
@@ -77,7 +78,7 @@ remote SIMH command channel. Browsers must not supply arbitrary host paths, moni
 commands or mount operations, share writable disks, start emulators or manipulate
 physical controls.
 
-## M5.22 equipment progress and next step
+## M5.23 equipment progress and next step
 
 [M5.20](../lab/M5.20.md) demonstrates actual RSX PIP printing, a separate RSX
 reader-to-punch utility copy and full-byte CPU/device transfer. The existing printer
@@ -92,9 +93,11 @@ continued. RT-11 LP/PC handlers passed a separate console ASCII subset.
 
 [M5.22](../lab/M5.22.md) provides the guided operator, bounded immutable job history,
 explicit saved-data recovery, genuine slot reuse/restart tests, RT-11 browser exports
-and bounded active measurements. The next dedicated equipment milestone should be
-**disk and magnetic tape**: original device inventory and read-only attachment/status
-with legitimate disposable media. Further broad LP11/PC11 refinement needs a specific
+and bounded active measurements. [M5.23](../lab/M5.23.md) adds captured RL02/TM11
+attachment/status, real RT-11 filesystem reads and CPU tape DMA/filemarks.
+Next qualify a **documented historical guest magnetic-tape workflow** and broaden
+read-only storage provenance using legitimate disposable media. Live telemetry needs
+separate interface qualification. Further broad LP11/PC11 refinement needs a specific
 demonstrated blocker; it is not the default next milestone.
 Reader selection currently means a read-only catalog and operator assistance. Do not
 expose attachment controls before safe state, authority, cancellation and actual

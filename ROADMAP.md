@@ -1,6 +1,6 @@
 # Where the project is going
 
-## Current product direction — M5.22
+## Current product direction — M5.23
 
 The [virtual computer room](docs/product/virtual-computer-room.md) is the enduring direction for both physical
 PiDP-11 owners and ordinary SIMH users without a panel. Everyday genuine terminals
@@ -21,10 +21,13 @@ jobs/new generations, real supervisor crash/expiry and console-operated RT-11 LP
 [M5.22](docs/lab/M5.22.md) adds the guided local workflow, eight immutable terminal-job
 records, explicit data-only recovery, genuine reused slots and RT-11 browser exports.
 Active ARM64 samples remain laboratory measurements.
-Next: **M5.23 genuine disk and magnetic-tape discovery and read-only status**. Begin
-with original device inventory, legitimate disposable media, attachment provenance,
-write-protection and bounded metadata. Keep mounts/writes operator-owned. Do not plan
-another broad LP11/PC11 refinement unless a demonstrated defect blocks this next step.
+[M5.23](docs/lab/M5.23.md) establishes explicit RL02/TM11 captured snapshots, actual
+RT-11 disk access, genuine CPU tape reads/filemarks and detached observer restart.
+Next: **M5.24 historical guest magnetic-tape workflow and broader read-only storage
+provenance**. Qualify documented guest tape utilities using the inventoried legitimate
+handlers and disposable media; broaden disk support only with exact attachment and
+guest evidence. Continuous telemetry needs separate interface qualification. Keep
+mounts/writes operator-owned; another broad LP11/PC11 milestone needs a demonstrated blocker.
 Reader selection remains a catalog/operator-assisted workflow until independent
 safe-state and actual-attachment checks support more. No new release or physical
 access is authorized.

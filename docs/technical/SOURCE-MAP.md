@@ -1,5 +1,12 @@
 # Source map and subsystem boundaries
 
+## M5.23 captured storage observations
+
+- `internal/storage` owns strict RL0/TM0 metadata, private approval revisions, immutable generations, expiry/revocation, bounded HTTP output and read-only media verification. It never opens a simulator interface.
+- `cmd/storage-snapshot` reads private operator capture/configuration, independently verifies the allowlisted image and publishes once through the existing Unix socket. `terminalservice.Config.Storage` contains only device tuples; restart has no saved captures.
+- `src/storage-workspace.ts` owns the existing Disk/Magnetic tape windows' explicit modes, capture identity checks, local freshness timer, one retained copy and disposal. Simulation keeps the shared device model in `main.ts`.
+- [Architecture/field provenance](storage-observation.md), [original inventory](storage-inventory.md), [lab runbook](../../lab/m523/README.md) and [results](../lab/M5.23.md) separate genuine snapshots, guest access and CPU/device evidence.
+
 ## M5.22 operation and retained history
 
 - `internal/equipmentsession/guided.go` translates narrow local operator commands into the existing ordered supervisor protocol. `cmd/equipment-supervisor` prepares exclusive private configuration and starts the guide; neither controls SIMH.

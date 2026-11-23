@@ -1,6 +1,10 @@
 # Documentation
 
-Current development: [M5.22 operation and recovery findings](lab/M5.22.md),
+Current development: [M5.23 disk/tape findings](lab/M5.23.md),
+[original storage inventory](technical/storage-inventory.md),
+[captured observation contract](technical/storage-observation.md),
+[M5.23 runbook](../lab/m523/README.md),
+[M5.22 operation and recovery findings](lab/M5.22.md),
 [local operator guide](technical/equipment-operator.md),
 [bounded history and recovery](technical/equipment-history.md),
 [reproduction runbook](../lab/m522/README.md),

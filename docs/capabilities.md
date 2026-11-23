@@ -1,12 +1,17 @@
 # Capability and compatibility matrix
 
+[M5.23](lab/M5.23.md) adds explicit captured storage observations: genuine RT-11/RL02
+configuration, attachment and filesystem access; separate TM11/TU10 CPU DMA/filemark/
+end-of-image evidence. All three browsers display captured facts and retained data.
+This is not live I/O telemetry, guest tape-utility qualification or media management.
+
 [M5.22](lab/M5.22.md) qualifies a guided independent operator workflow, repeated RSX
 jobs in reused slots, bounded retained history and explicit saved-data recovery after
 observer restart. Genuine RT-11 printer/punch output also passed exact three-engine
 history downloads. Utilities ran through the original console; safe state and guest
 identity remain operator-attested. Browser mounting remains disabled.
 
-Engineering through **M5.22**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Engineering through **M5.23**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
 
 [M5.20](lab/M5.20.md) qualifies RSX PIP printer output and a reader-to-punch copy,
 with exact browser exports. Existing equipment windows now separate simulation,
@@ -63,6 +68,9 @@ PiDP-11 owners and ordinary SIMH installations without GPIO or REALCONS.
 | Equipment supervisor | Isolated-Linux lab tested | Explicit owner/job/generation, ordered operator completion, real supervisor crash/expiry; no SIMH control or production installation |
 | Reader-media catalog | Implemented and fixture tested | Up to four readonly, hash-verified entries; informational snapshot. Browser-originated mounting remains disabled |
 | Continuous-form local printer | Simulated spool / explicit snapshot | Sample jobs and imported text; separate from observed LP11 output |
+| RL02 disk observation | Genuine captured RT-11/RL11 subset | Verified configuration/attachment/hash, resident DL filesystem access, capacity/geometry and named registers. No live activity feed |
+| TM11/TU10 tape observation | Genuine captured CPU/device subset | Exact DMA record, two filemarks, end-of-image, readonly media and logical image offsets. Guest tape driver not qualified |
+| Storage snapshot lifecycle | Laboratory tested | Explicit local capture/publication, 30-second freshness, stale-generation rejection, retained data and empty observer restart; no automatic transition detection |
 | Browser disk, magnetic tape, paper-tape and OS management | Simulated | Genuine tape input was prepared/attached by the independent lab operator; browser controls cannot attach, replace, write media or boot an OS |
 | Virtual front panel | Simulated interactive SVG | Passive observation/control experiments remain separate from the ordinary desktop |
 

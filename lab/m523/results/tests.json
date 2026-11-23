@@ -1,0 +1,29 @@
+{
+  "go_vet": "pass",
+  "uncached_race_packages": 24,
+  "frontend_units": 105,
+  "transport": 1,
+  "selection_contract": 9,
+  "typescript_build": "pass",
+  "browser": {
+    "startTime": "2026-11-23T21:50:10.659Z",
+    "duration": 168327.435,
+    "expected": 225,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "genuine_device_views": 6,
+  "genuine_observer_restart_browser": "pass",
+  "late_slow_writer_test": "uncached affected-package race pass",
+  "standalone_bytes": 595464,
+  "large_bundle_warning": true,
+  "clean_checkout": {
+    "source": "fca106195991406fda5358789386ab7f3983810c",
+    "dependency_install": "npm ci --offline",
+    "build_server_assets": true,
+    "go_commands_built": true,
+    "no_private_evidence_present": true,
+    "working_tree_clean_after_build": true
+  }
+}
