@@ -1,5 +1,11 @@
 # Where the project is going
 
+[Resume from the current point](RESUME.md). M5.18 published Source Alpha 2 at the
+approved source; its [publication record](docs/releases/M5.18-publication.md)
+supersedes the earlier pending-publication recommendations below. M5.19 is active:
+genuine terminal workstation work and a product roadmap for both physical PiDP-11
+owners and ordinary SIMH users. No new release or physical access is authorized.
+
 ## M5.17: Source Alpha 2 candidate and review intake
 
 [Completed qualification](docs/lab/M5.17.md) of the [exact source-only candidate](docs/releases/M5.17-candidate.md): independent-checkout reproducibility, extracted-source onboarding/security/browser checks, genuine guest/device regressions and bounded ARM64 containment. No production behavior or draft protocol changed. Both intermittent faults remain unresolved; external review and upstream agreement are pending.

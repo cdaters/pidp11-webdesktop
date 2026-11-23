@@ -1,5 +1,7 @@
 # PiDP-11 Web Desktop working instructions
 
+Read [RESUME.md](RESUME.md) first for the latest checkpoint, active work and recovery boundaries. Keep that handoff current at milestone completion or before leaving unfinished work.
+
 These instructions are self-contained for a standalone clone. Start with [CONTRIBUTING.md](CONTRIBUTING.md), the [coding standards](docs/technical/CODING-STANDARDS.md), and the [source map](docs/technical/SOURCE-MAP.md). No private workspace or AI tool is required for ordinary development.
 
 ## Engineering boundaries
