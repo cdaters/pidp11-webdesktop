@@ -6,47 +6,52 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **Active assignment:** M5.20, genuine printer/paper-tape workflows. The required
-  private research backup passed independent verification on 2026-11-23 UTC;
-  application implementation and fresh disposable-guest qualification are next.
-- **Backup:** version `M5.20-20261123T055815Z` on the owner's selected private NAS.
-  38,778 regular files, 5,344 subdirectories plus the root, and 60 symlinks;
-  40,753,880,985 logical bytes verified against every original file hash.
-  The native Mac archive is 39,394,457,088 bytes, SHA-256
+- **Latest completed engineering milestone:** M5.20, genuine printer/paper-tape
+  workflows; completed work, not owner acceptance or production approval.
+- **Report:** [M5.20](docs/lab/M5.20.md), [runbook](lab/m520/README.md), curated
+  [results](lab/m520/results/). Read these before reconstructing a guest experiment.
+- **Checkpoints:** `4d63e8f` verified private backup; `ed0d970` explicit equipment
+  modes/lifecycle tests; `df91a51` genuine RSX/CPU lab helpers and final presentation
+  corrections. The final documentation commit follows these in Git history.
+- **Genuine RSX results:** PIP/LPDRV printing from a real Chromium terminal,
+  160 records / 10,241 bytes; partial live observation and completed exact downloads
+  in all three engines. Separate PIP/PRDRV/PPDRV tape copy through the original
+  console: 401-byte input / 725-byte output with verified leader/trailer transform;
+  completed browser exports in all engines. Not live RSX punch qualification.
+- **CPU/device result:** separate diskless original SIMH copied all byte values
+  through PC11, 12,288 bytes in three phases, exact progress/EOF/downloads. This
+  remains distinct from OS-driver evidence.
+- **Validation:** Go vet/uncached race (22 tested packages), 105 frontend units,
+  one transport and nine selection-contract tests, TypeScript/build; 153 full-suite
+  browser passes, then 45 affected passes after final visibility/overflow changes.
+  Genuine runs preceded the last presentation-only correction; see report scope.
+- **Private backup:** version `M5.20-20261123T055815Z` on the owner's selected NAS.
+  38,778 files, 5,345 directories including root, 60 symlinks; 40,753,880,985 logical
+  bytes independently verified. Archive SHA-256
   `7d5e5a32e5b8ac132f9dd775528b01a5d498616c5f9c80e8eff5b6102859e21c`.
-  Permissions, ownership, nanosecond modification times, extended attributes,
-  hidden flags and symlinks passed readback. Exact creation timestamps are recorded
-  separately; no extended ACLs were present. No full restore was performed.
-- **Private recovery records:** the project-level `Backups/` directory, outside
-  this repository, contains `WebDesktop-M5.20-verified-20261123T064653Z/backup.json`
-  with the actual destination. A copy is in ignored `.research/m520/`.
-  Initial ACL-reader and base64-padding verifier errors are retained privately;
-  the corrected full verification passed and all original source entries remained
-  stable. Earlier insufficient-space and failed-attempt records are preserved.
-- **Current work/resources:** `.research/m520/` is newly created. No M5.20 guest,
-  bridge or preview has started and no application code has changed yet. Preserve
-  unrelated Docker services. No Pi access, release or hardware authority is granted.
-
-- **Latest completed engineering milestone:** M5.19, genuine terminal workstation.
-  This records completed work, not owner acceptance or production approval.
-- **Latest publication:** M5.18, immutable Source Alpha 2; no M5.19 release exists.
-- **Implementation checkpoints:** `1ce8ffb` (genuine-tested workstation) and
-  `72e5e2d` (final local focus/shortcut behavior and extended audio checks).
-- **Report:** [M5.19](docs/lab/M5.19.md), with curated [results](lab/m519/results/).
-  Check recent Git history for the accompanying final documentation commit.
-- **Validation:** Go vet/uncached race (22 packages), 105 frontend units, transport
-  and client-contract fixtures, 129 cases in three browsers, clean-checkout build;
-  V7 12 cases, BSD vi/pager 9, BSD robots 3 with initial redraw, RSX EDT 3, RT-11
-  application/AST subset. Exact scope and failed attempts are in the report.
-- **Resources:** all four owned M5.19 guests/bridges were safely stopped, containers
-  removed and relays/previews stopped. Working disks/evidence retained privately;
-  original media, unrelated containers, accepted tags and both releases unchanged.
-  Verify actual state before new work; this is a historical observation.
-- **Product scope:** the owner has now authorized M5.20 printer/paper-tape work
-  after the backup prerequisite above. Follow the [product direction](docs/product/virtual-computer-room.md);
-  no hardware or release authority is implied.
-- **New limitation:** BSD robots needs Ctrl-L to complete its initial screen in all
-  final engine cases. Cause unresolved; explicit redraw is a workaround, not a fix.
+  File metadata readback passed; exact creation times recorded separately; no full
+  restore tested. This backup predates the new M5.20 lab evidence.
+- **Private recovery pointer:** project-level `Backups/`, outside this repository,
+  contains `WebDesktop-M5.20-verified-20261123T064653Z/backup.json`; a copy is in
+  ignored `.research/m520/backup-verification.json`. That record contains the actual
+  private destination. Earlier backups and failed attempts are preserved.
+- **Resources at completion:** both RSX guests safely completed SHUTUP/final
+  dismount/HALT; RT-11 inventory and separate diskless CPU ended cleanly. Exact
+  bridges stopped first and both original RSX consoles still answered. Owned
+  containers removed, relays/Vite/mock stopped; seven unrelated containers preserved.
+  Verify actual current state before new work. No Pi was accessed.
+- **Preservation:** original RSX/RT-11 hashes, lengths, modes and nanosecond mtimes
+  unchanged; all accepted tag refs and Alpha 1/2 asset metadata matched baseline.
+  No new release/tag or binary/media upload. Public source release remains Alpha 2.
+- **Next recommendation:** supervised equipment sessions: live RSX punch from a
+  fresh approved spool, repeated jobs/new generations, independently verified
+  completion and safe reader-selection authority; RT-11 as a second guest candidate.
+  This recommendation is not authorization for hardware or production controls.
+- **Failures retained:** failed backup-verifier assumptions corrected before
+  verification; setup path/read-only/no-exec failures before successful bridge;
+  printer cleanup click obscured after successful printing, recovered read-only
+  without reprinting; initial guessed print transform rejected; finished spool
+  correctly refused as a fresh live follower, then published as completed export.
 
 ## Start a fresh session
 
@@ -58,7 +63,7 @@ request; historical approvals do not authorize new hardware, releases or message
 3. Read [current capabilities](docs/capabilities.md), [known limitations](docs/known-limitations.md),
    [roadmap](ROADMAP.md) and [documentation index](docs/README.md). Historical plans
    describe their time; later verified reports supersede pending-status wording.
-4. Read the current [M5.19 report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
+4. Read the current [M5.20 report](docs/lab/M5.20.md) and [M5.19 workstation report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
    and [M5.17 engineering report](docs/lab/M5.17.md). Follow relevant subsystem/lab
    runbooks instead of reconstructing commands from memory.
 5. Identify any owned running lab/preview before starting another. One outstanding
@@ -76,7 +81,7 @@ request; historical approvals do not authorize new hardware, releases or message
 Alpha 2 is public, source-only and experimental: 14,789,290 bytes / 1,026 members.
 Only its archive and SHA256SUMS were attached. Both releases and all accepted tags
 must remain unchanged. Do not republish them or tag current main as their source.
-No new release or binary publication is authorized for M5.19.
+No new release or binary publication is authorized for M5.20.
 
 ## Product and operating boundaries
 
@@ -104,8 +109,10 @@ not reconnect guests, restore authority, mount media or start emulators.
   remain pending. Citation IDs do not certify AI explanations.
 - RT-11 is verified application I/O, not an independent browser shell or complete
   MTTEST pass. RSTS/E remains console-only. Terminal conformance is partial.
-- LP11/PC11 qualification is genuine CPU/device behavior, not guest printer-driver
-  acceptance. Ordinary panel/media controls remain simulations.
+- LP11/PC11 now have narrow RSX PIP driver qualification plus separate CPU/device
+  evidence. Other guests, live RSX punch streaming, repeated-job supervision and
+  browser media selection remain unqualified. Ordinary panel/media controls remain
+  simulations. Identity and completion require the independent operator.
 - Pi memory-controller readiness, switch repair, observer privileges, representative
   performance and renewed supervised coexistence are separate physical gates.
 
@@ -122,7 +129,11 @@ M5.19 evidence is retained in `.research/m519/`; do not reuse its media or filen
 be reconstructed from documented authorized sources or requested, not invented.
 A new clone can run the basic no-Pi demo without any of these private files.
 
-M5.19 ended with its owned guests, bridges, relays and previews stopped. This is a historical observation, not proof of current process state.
+M5.20 evidence is in ignored `.research/m520/`; do not overwrite its working media,
+output files or failed-attempt records. Its private backup does not include evidence
+generated after backup completion.
+
+M5.20 ended with its owned guests, bridges, relays and previews stopped. This is a historical observation, not proof of current process state.
 Preserve unrelated services/containers and accepted screenshot baselines.
 
 ## Maintaining this handoff

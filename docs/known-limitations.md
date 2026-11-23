@@ -1,5 +1,12 @@
 # What is still experimental
 
+[M5.20](lab/M5.20.md) adds genuine RSX PIP/LP11 printing and a supervised RSX
+reader-to-punch copy with completed browser export. Live RSX punch streaming,
+repeated job supervision, browser reader selection and automatic safe completion
+remain unqualified. Original device buffering can delay visible output; a paused
+stream does not establish completion. The final presentation changes were tested
+with fixtures after the genuine runs. No new release or physical access is implied.
+
 M5.19 development main adds [workstation controls](technical/terminal-workstation.md),
 not a new release or physical installation approval. All terminal personalities
 remain subsets: 132 columns, full character sets/reset fidelity and several hardware
@@ -84,7 +91,7 @@ The desktop has genuine guest and device evidence, but it is not an accepted pro
 | Terminal scope | V7 and 2.11BSD applications passed specific subsets. VT100/VT52/VT220 are not complete device emulations. Input is ASCII7; DEC text is 80 × 24. ASR-33 paper is a 72-column approximation without mechanical timing. |
 | Other guests | RT-11SJ baseline and RSTS/E V7.0 remain console-qualified. Separately generated RT-11FB passed a browser application test, not a login-shell or full diagnostic test. RSX-11M-PLUS V4.6 passed a Chromium text-terminal test; full-screen applications and other releases remain unqualified. |
 | Graphics | V7 Tektronix plotting is genuine. GIN is fixture-tested only; full 4014 and VT11/VR14 transport remain unqualified/planned. |
-| Device observation | Genuine CPU programs drive original LP11/PC11 devices. Guest OS printer-driver integration is unverified. Live observation needs a trusted separate producer and explicit generation approval; host-visible bytes may arrive in bursts. |
+| Device observation | Genuine CPU programs drive original LP11/PC11 devices; RSX PIP/LPDRV and PRDRV/PPDRV have the narrow M5.20 qualification. Other guest printer drivers remain unverified. Live observation needs a trusted separate producer and explicit generation approval; host-visible bytes may arrive in bursts. |
 | Simulated media | Disk, magnetic-tape, paper-tape and system-selection controls do not manage real media. Local printer jobs are temporary. Download preserves text; printing the visible DOM is not a supported full-spool export. |
 | AI accuracy | Models produce factual and arithmetic errors. M5.11 had 10/10 narrow expected distinctions but one incorrect additional claim. Its unchanged checker recognized 3/18 new cases and missed seven contradictions and six true claims. Source links and annotations do not certify a whole answer. |
 | Source review | 36 notes and 15 deterministic facts have source review by the same development workflow, not independent expert acceptance. Matching RT-11 V5.3 sources and broader review remain open. |

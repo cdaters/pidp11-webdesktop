@@ -77,7 +77,22 @@ remote SIMH command channel. Browsers must not supply arbitrary host paths, moni
 commands or mount operations, share writable disks, start emulators or manipulate
 physical controls.
 
-## M5.19 and the next equipment milestone
+## M5.20 equipment progress and next step
+
+[M5.20](../lab/M5.20.md) demonstrates actual RSX PIP printing, a separate RSX
+reader-to-punch utility copy and full-byte CPU/device transfer. The existing printer
+and paper-tape windows now expose explicitly selected observation/completed modes
+alongside simulation. Originals remain independent; only the private lab operator
+attached and safely closed disposable media.
+
+Next qualify a trustworthy equipment-session supervisor: live RSX punch observation
+before output starts, repeated jobs with new generations and safe completion,
+and narrowly authorized reader selection. Installed RT-11 handlers are a practical
+second-guest candidate. Do not expose attachment controls before safe state,
+authority, cancellation and failure recovery are demonstrated. The completed RSX
+subset does not imply broad guest-driver or production-media management support.
+
+## Recorded M5.19 recommendation
 
 M5.19 implements terminal workstation improvements and reports their actual
 qualification in [the engineering record](../lab/M5.19.md). Source Alpha 2 remains

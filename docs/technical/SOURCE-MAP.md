@@ -21,6 +21,18 @@ Read this alongside the [architecture decisions](../development/DECISIONS.md). T
 
 RPC transport does not itself turn registration into a production service. The original C/Go interoperability and registration experiments are described in [M3](../lab/M3.md); their commands remain laboratory procedures.
 
+## M5.20 equipment modes
+
+`equipment-workspace.ts` owns explicit simulation/observation/completed-mode
+lifetimes inside existing printer and tape windows. `peripheral-details.ts` explains
+the selected source and authority. `live-devices.ts` validates stream identity,
+reader continuity and bounded retained downloads; `device-observer.ts` verifies
+immutable completed exports. Neither module controls the simulator or media.
+`browser-tests/m520.spec.ts` covers replacement, malformed identity, EOF separation
+and cancellation; `internal/peripheral/reader_lifecycle_test.go` covers paired-reader
+validation and independent producer behavior. [The lab](../../lab/m520/README.md)
+contains separate private-operator helpers, not production supervision.
+
 ## M5.19 workstation modules
 
 `terminal-workstation.ts` owns local display/search/audio controls and releases its

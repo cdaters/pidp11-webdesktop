@@ -1,0 +1,26 @@
+[
+  {
+    "engine": "chromium",
+    "bytes": 10241,
+    "sha256": "706f20f081598b6834338580165df8bbf981a8fe749a50d81143fc0066a6a8f1",
+    "completed": true,
+    "genuineLP11": true,
+    "keyboardAcquired": false
+  },
+  {
+    "engine": "firefox",
+    "bytes": 10241,
+    "sha256": "706f20f081598b6834338580165df8bbf981a8fe749a50d81143fc0066a6a8f1",
+    "completed": true,
+    "genuineLP11": true,
+    "keyboardAcquired": false
+  },
+  {
+    "engine": "webkit",
+    "bytes": 10241,
+    "sha256": "706f20f081598b6834338580165df8bbf981a8fe749a50d81143fc0066a6a8f1",
+    "completed": true,
+    "genuineLP11": true,
+    "keyboardAcquired": false
+  }
+]

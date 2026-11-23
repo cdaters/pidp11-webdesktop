@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.20 genuine equipment workflows — 2026-11-23 (development main)
+
+- Added explicit simulation, live observation and completed-export modes to the existing printer and paper-tape windows, with source details, retained incomplete downloads and stronger identity/cancellation checks.
+- Qualified actual RSX PIP/LPDRV printing and PIP/PRDRV/PPDRV tape copy, plus a separate full-byte CPU PC11 round trip. Completed original-device bytes matched downloads in all three browsers; live RSX punching and browser media selection remain unqualified.
+- Verified the private evidence backup, fresh disposable media, independent consoles and safe cleanup. Passed 153 browser cases, 45 final affected cases, Go vet/race, frontend and contract checks. [Report](docs/lab/M5.20.md).
+- No new release, physical Pi access, production deployment or changes to accepted tags/assets. Source Alpha 2 remains immutable.
+
 ## M5.18 Source Alpha 2 publication — 2026-11-22
 
 - Published the owner-approved source-only experimental pre-release `v0.5.17-source-alpha.2` at exact source `38bcfad84dc0b100005542f3aee6752ee147c649`.

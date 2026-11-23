@@ -1,0 +1,26 @@
+{
+  "browser-full": {
+    "startTime": "2026-11-23T07:16:26.486Z",
+    "duration": 120586.83200000001,
+    "expected": 153,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browser-final-equipment": {
+    "startTime": "2026-11-23T07:18:47.592Z",
+    "duration": 38338.971,
+    "expected": 45,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "frontend_units": 105,
+  "transport_tests": 1,
+  "selection_contract_tests": 9,
+  "go_race_tested_packages": 22,
+  "go_vet": "pass",
+  "typescript": "pass",
+  "build": "pass; existing large-chunk warning",
+  "scope": "Full 153-case suite before final visibility/overflow correction; final affected 45-case suite after correction"
+}

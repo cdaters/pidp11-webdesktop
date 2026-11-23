@@ -1,0 +1,16 @@
+{
+  "guest": "RSX-11M-PLUS V4.6 BL87",
+  "program": "PIP M2101 (ANSI)",
+  "command": "PIP PP:=PR:",
+  "input_bytes": 401,
+  "input_sha256": "ef24164931c24825ef990c46a3280e33e1b9697a108702927d0bfab89f136d9b",
+  "output_bytes": 725,
+  "output_sha256": "8ad18e40c82fc9db2268231ab881695402f3b15fed8d089613abbe5d2d08995d",
+  "records": 12,
+  "transformation": "16 NUL input leader removed; 170 NUL leader and trailer added; CRLF records and SUB preserved",
+  "reader_eof_csr": "100000",
+  "punch_ready_csr": "000200",
+  "completed_after_safe_close": true,
+  "application_entered_through": "independent conventional console",
+  "browser_observation": "completed artifact; live OS-driver streaming not tested"
+}

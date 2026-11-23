@@ -1,0 +1,4 @@
+{"artifact": "RSX LP11", "bytes": 10241, "sha256": "706f20f081598b6834338580165df8bbf981a8fe749a50d81143fc0066a6a8f1"}
+{"artifact": "CPU PC11 input/output", "bytes": 12288, "sha256": "8dec5fb0de8a0b457c0cf7be559e4ef488e9cf39d5ddb0ff7464b23372ab21fa"}
+{"artifact": "RSX PC11 input", "bytes": 401, "sha256": "ef24164931c24825ef990c46a3280e33e1b9697a108702927d0bfab89f136d9b"}
+{"artifact": "RSX PC11 output", "bytes": 725, "sha256": "8ad18e40c82fc9db2268231ab881695402f3b15fed8d089613abbe5d2d08995d"}

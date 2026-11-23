@@ -1,6 +1,10 @@
 # Capability and compatibility matrix
 
-Engineering through **M5.19**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Engineering through **M5.20**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+
+[M5.20](lab/M5.20.md) qualifies RSX PIP printer output and a reader-to-punch copy,
+with exact browser exports. Existing equipment windows now separate simulation,
+live observation and completed exports. Media attachment remains local and supervised.
 
 [M5.19](lab/M5.19.md) adds a genuine terminal workstation, DEC keyboard/identity improvements,
 optional BEL audio, search/copy and presentation preferences. It extends genuine RSX
@@ -45,13 +49,13 @@ PiDP-11 owners and ordinary SIMH installations without GPIO or REALCONS.
 | Tektronix 4010 | Genuine V7 plotting tested | Original `graph` / `plot -Ttek`; [graphics foundation](technical/graphics-foundations.md) |
 | 4010 keyboard/GIN | Laboratory fixtures | No genuine GIN application acceptance; not full 4014 conformance |
 | VT11/VR14 | Research / planned transport | Different display-device interface; not supplied by the 4010 renderer |
-| LP11 output | Genuine device tested | CPU-driven output through original SIMH; live observation and completed byte-exact downloads |
-| PC11 reader/punch | Genuine device tested | All-byte-value transfer, position and EOF; no browser tape mounting or guest input operation |
+| LP11 output | Genuine RSX guest and CPU/device tested | RSX PIP/LPDRV: 160 records, 10,241 exact bytes; live partial observation and three-engine completed downloads; [M5.20](lab/M5.20.md) |
+| PC11 reader/punch | Genuine RSX guest and CPU/device tested | RSX PIP/PRDRV/PPDRV: 401-byte input, documented 725-byte output; separate live full-byte CPU round trip/EOF. No browser mounting or tape replacement |
 | Device observation | Experimental, laboratory tested | Read-only, bounded, generation-bound; local supervisor must establish producer identity |
 | Completed exports | Implemented and laboratory tested | Download exact LP11/punch/reader bytes only after explicit completion; no control through downloads |
-| Guest printer drivers | Not qualified | CPU-device output does not prove V7/BSD/RSTS/E printer-driver integration |
+| Guest printer drivers | Narrow RSX installed-driver qualification | LPDRV/PIP subset only; V7/BSD/RT-11/RSTS/E printer integrations remain unqualified |
 | Continuous-form local printer | Simulated spool / explicit snapshot | Sample jobs and imported text; separate from observed LP11 output |
-| Disk, magnetic tape, paper-tape and OS management | Simulated | No real guest-media attachment, writes or OS booting |
+| Browser disk, magnetic tape, paper-tape and OS management | Simulated | Genuine tape input was prepared/attached by the independent lab operator; browser controls cannot attach, replace, write media or boot an OS |
 | Virtual front panel | Simulated interactive SVG | Passive observation/control experiments remain separate from the ordinary desktop |
 
 [Device contract and producer limits](technical/observed-peripherals.md) · [Current gallery](screenshots/README.md).

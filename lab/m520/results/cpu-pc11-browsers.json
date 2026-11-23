@@ -1,0 +1,29 @@
+[
+  {
+    "engine": "chromium",
+    "phase": 1,
+    "bytes": 4096,
+    "sha256": "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193",
+    "completed": false,
+    "readerToCPUToPunch": true,
+    "osDriver": false
+  },
+  {
+    "engine": "firefox",
+    "phase": 2,
+    "bytes": 8192,
+    "sha256": "dc404a613fedaeb54034514bc6505f56b933caa5250299ba7d094377a51caa46",
+    "completed": false,
+    "readerToCPUToPunch": true,
+    "osDriver": false
+  },
+  {
+    "engine": "webkit",
+    "phase": 3,
+    "bytes": 12288,
+    "sha256": "8dec5fb0de8a0b457c0cf7be559e4ef488e9cf39d5ddb0ff7464b23372ab21fa",
+    "completed": true,
+    "readerToCPUToPunch": true,
+    "osDriver": false
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "engine": "chromium",
+    "bytes": 8192,
+    "sha256": "936708bfdc05daa048cefc53058266860319b52bf5bd84c1b042d2164bd59be9",
+    "completed": false,
+    "genuineLP11": true,
+    "keyboardAcquired": false
+  }
+]

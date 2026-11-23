@@ -1,6 +1,7 @@
 # Documentation
 
-Current development: [M5.19 workstation findings](lab/M5.19.md),
+Current development: [M5.20 genuine printer/paper-tape findings](lab/M5.20.md),
+[M5.19 workstation findings](lab/M5.19.md),
 [virtual-computer-room direction](product/virtual-computer-room.md),
 [workstation controls](technical/terminal-workstation.md) and [resume handoff](../RESUME.md).
 These are development-main additions, separate from the published release below.

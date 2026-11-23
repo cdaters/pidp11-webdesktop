@@ -1,0 +1,8 @@
+{
+  "input_records": 160,
+  "transformation": "One leading form feed; each ASCII input record has a leading LF and trailing CR",
+  "bytes": 10241,
+  "sha256": "706f20f081598b6834338580165df8bbf981a8fe749a50d81143fc0066a6a8f1",
+  "all_records_exact": true,
+  "transformation_observed_then_checked_against_independent_input_records": true
+}

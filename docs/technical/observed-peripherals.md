@@ -1,6 +1,12 @@
 # Observing emulated-device output
 
-The **Guest devices** window offers separate **Completed exports** and **Live activity** modes. The completed mode displays LP11 printer and PC11 punch output through the optional Go service. It is separate from the simulated Line printer and Paper tape applications. M5.9.1 verified actual PDP-11 CPU instructions writing the original simulator's device registers; this is not a claim that the supplied UNIX V7 kernel has a printer driver.
+The **Line printer** and **Paper tape** windows offer explicit **Local simulation**,
+**Observe device** and **Completed exports** modes. The older **Guest devices**
+window remains available. Observation reads actual allowlisted original-SIMH output
+through the optional Go service; local simulation is a separate browser model.
+[M5.20](../lab/M5.20.md) verified RSX PIP/LPDRV printing and PIP/PRDRV/PPDRV tape copy,
+as well as a separate full-byte CPU/device transfer. This does not qualify the
+supplied V7/BSD printer drivers or authorize browser media attachment.
 
 ## What crosses the boundary
 
@@ -40,14 +46,19 @@ Use a **Linux administrator shell on a separately authorized host**. In the isol
 2. Start the companion manually. All terminal lines remain detached and all device observations offline. Verify the existing protected service checks pass.
 3. Independently verify the producer, guest and output completion. Close/detach the simulator output through its conventional operator interface before hashing it; never through a browser monitor endpoint. Preserve the source bytes. Compute SHA-256 with `sha256sum` in the Linux shell.
 4. Read fresh local status using `curl --unix-socket /run/pidp11-webdesktop/control.sock http://local/devices/status`. Create a private approval JSON file with that instance/revision, verified identities and checksum. Review it, then submit with `curl --fail --unix-socket /run/pidp11-webdesktop/control.sock -H 'Content-Type: application/json' --data-binary @approval.json http://local/devices/publish`.
-5. In the browser, sign in through Guest terminal, open **Guest devices**, choose **Refresh observations**, select the device and choose **View selected generation**. Confirm its producer labels and checksum-verified status. Writer and observer credentials both permit observation; neither permits publication.
+5. In the browser, sign in through Guest terminal, open **Line printer** or **Paper tape**, choose **Completed exports**, then **Refresh observations**, select the device and choose **View selected generation**. Confirm its producer labels and checksum-verified status. Writer and observer credentials both permit observation; neither permits publication.
 6. **Save exact device bytes** downloads the original snapshot. Multiple observers can independently read it. Selecting another device clears the old display; an unavailable or retired generation requires a fresh explicit selection. Restart clears all publications. Retraction uses the fresh instance/id/revision with `/devices/retract`.
 
 Stop at a failed publication and inspect the producer and file. Do not retry using an old approval or relabel an uncertain file as a new guest. Already downloaded or displayed snapshots cannot be remotely erased; the UI identifies them as cached completed observations.
 
 ## Paper and media limits
 
-LP11 output must be ASCII7. The device view applies CR as carriage return, LF as a new row, FF as a new form and BS as a backstep. The latest glyph occupies an overprinted cell; this is not physical ink simulation. Partial final lines are visible. Paper offers 80/132 columns without changing downloads. The existing simulated printer keeps its previous normalization behavior. PC11 preserves all eight bits; its display is limited to 512 bytes while the bounded download remains complete. Empty exports are valid.
+LP11 output must be ASCII7. The device view applies CR as carriage return, LF as a new row, FF as a new form and BS as a backstep. The latest glyph occupies an overprinted cell; this is not physical ink simulation. Partial final lines are visible. Paper offers 80/132 columns without changing downloads. The existing simulated printer keeps its previous normalization behavior. M5.20 adds retained incomplete byte/text downloads with generation and byte-range
+labels. They preserve available evidence, not a promise of a complete job. A new
+producer always requires explicit selection. Switching equipment modes cancels the
+old observer and any pending local paper-tape import.
+
+PC11 preserves all eight bits; its display is limited to 512 bytes while the bounded download remains complete. Empty exports are valid.
 
 `media-observation.ts` defines a separate read-only status contract for PC11 reader/punch, RK05, RL02 and TM11. It validates media type, access mode, position/length, sequence and simulator/guest generation, rejects unknown fields, and refuses implicit generation replacement. This is fixture-tested schema work, **not a running collector**. No remote mount, reset or disk/tape activity integration is delivered. M5.9.2 adds the separate LP11/PC11 follower below, including explicitly reported reader EOF.
 

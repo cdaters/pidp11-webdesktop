@@ -1,6 +1,6 @@
 # Where the project is going
 
-## Current product direction — M5.19
+## Current product direction — M5.20
 
 The [virtual computer room](docs/product/virtual-computer-room.md) is the enduring direction for both physical
 PiDP-11 owners and ordinary SIMH users without a panel. Everyday genuine terminals
@@ -14,9 +14,12 @@ below remain records of their time; they do not supersede this equipment roadmap
 [Resume from the current point](RESUME.md). M5.18 published Source Alpha 2 at the
 approved source; its [publication record](docs/releases/M5.18-publication.md)
 supersedes the earlier pending-publication recommendations below. [M5.19](docs/lab/M5.19.md)
-completes the genuine terminal workstation increment and records its limits. The next
-recommended milestone is genuine printer/paper-tape guest workflows. No new release
-or physical access is authorized.
+completes the genuine terminal workstation increment. [M5.20](docs/lab/M5.20.md)
+now qualifies RSX PIP printer and paper-tape subsets with exact browser artifacts.
+Next: supervised equipment sessions, live RSX punching from a fresh approved spool,
+repeated jobs/new generations and separately verified reader-selection authority.
+RT-11 installed handlers offer a second guest investigation. No new release or
+physical access is authorized.
 
 ## M5.17: Source Alpha 2 candidate and review intake
 
