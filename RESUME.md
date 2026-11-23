@@ -6,6 +6,14 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **Active assignment:** M5.23 genuine disk/tape discovery and read-only snapshots.
+  Before experiments, verified M5.22 evidence backup `M5.23-incremental-20261123T213751Z`: 217 files /
+  nine directories, 417,600,495 logical bytes; archive 418,473,984 bytes, SHA-256
+  `d2bacb19f2646117c1440e667c4964e3e8e47cf2cca675129b0435e2a08b37ba`.
+  Private recovery pointer: project-level `Backups/WebDesktop-M5.23-incremental-20261123T213751Z/backup.json`.
+  Contents/supported metadata independently reread; originals and previous backups preserved.
+  Work root `.research/m523/`; no physical Pi or publication of new releases authorized.
+
 - **Latest completed engineering milestone:** M5.22 practical equipment operation,
   history and recovery. Completed engineering is not owner acceptance or production
   approval. Read the [report](docs/lab/M5.22.md), [operator guide](docs/technical/equipment-operator.md),
