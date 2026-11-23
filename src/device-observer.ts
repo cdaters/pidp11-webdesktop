@@ -172,6 +172,9 @@ export function mountDeviceObserver(host: HTMLElement, kind?: PeripheralKind): (
       host.querySelector("[data-device-identity]")!.textContent =
         `${data.kind} · simulator ${data.simulator_generation} · guest ${data.guest_generation} · completed observation`;
       viewport.hidden = data.kind !== "lp11";
+      host.querySelector<HTMLElement>(".paper-position")!.hidden = data.kind !== "lp11";
+      host.querySelector<HTMLSelectElement>('[aria-label="Observed printer columns"]')!.parentElement!.hidden = data.kind !== "lp11";
+      textDownload.hidden = data.kind !== "lp11";
       punch.hidden = data.kind !== "pc11-punch";
       if (data.kind === "lp11") paper.update(new TextDecoder().decode(bytes));
       else

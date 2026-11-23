@@ -92,6 +92,7 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
   const follow = $<HTMLButtonElement>("[data-follow]");
   const download = $<HTMLButtonElement>("[data-save]");
   const reader = $<HTMLButtonElement>("[data-reader]");
+  reader.hidden = kind === "lp11";
   const status = $<HTMLElement>("[data-activity-status]");
   const viewport = $<HTMLElement>(".paper-viewport");
   const punch = $<HTMLElement>("[data-punch-bytes]");
@@ -291,6 +292,8 @@ export function mountLiveDevices(host: HTMLElement, kind?: PeripheralKind): () =
     describe(target);
     cursor = first = target.start_offset;
     viewport.hidden = target.kind !== "lp11";
+    $<HTMLElement>(".paper-position").hidden = target.kind !== "lp11";
+    $<HTMLSelectElement>('[aria-label="Live printer columns"]').parentElement!.hidden = target.kind !== "lp11";
     punch.hidden = target.kind !== "pc11-punch";
     text.hidden = top.hidden = latest.hidden = target.kind !== "lp11";
     $("[data-activity-identity]").textContent =

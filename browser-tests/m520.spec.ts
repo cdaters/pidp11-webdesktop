@@ -102,6 +102,8 @@ test("reader EOF never completes punch output and reader download pauses observa
   await page.route("**/api/v1/device-streams/punch/one/reader", r => r.fulfill({ json: { generation: "one", data: bytes.toString("base64") } }));
   const win = await open(page, "Paper tape");
   await expect(win.locator("[data-activity-count]")).toContainText("end-of-tape reported");
+  await expect(win.locator(".paper-position")).toBeHidden();
+  await expect(win.getByLabel("Live printer columns")).toBeHidden();
   await expect(win.locator("[data-save]")).toBeDisabled();
   expect((await downloaded(page, win.locator("[data-reader]"))).bytes).toEqual(bytes);
   const count = calls;
