@@ -51,8 +51,9 @@ status now distinguishes explicit exit 139 from a signal; the deliberate signal
 control is not a Go fault recurrence. [Evidence and failed attempts](lab/M5.16.md).
 
 The 0.1 selection protocol is unchanged. Legacy `/screen` still permits an absent
-receipt; current clients supply/check one. A mandatory-receipt `/selected-text`
-route is a future discussion proposal. One authorized publisher can replace or
+receipt; current clients supply/check one. A mandatory-receipt selected-text route and Desktop-owned publication now have
+owner-relayed architectural agreement; the [0.2 wire proposal](technical/selection-contract-0.2-proposal.md)
+is unimplemented and its detailed choices await review. One authorized publisher can replace or
 revoke another page’s selection; another page or provider can retain already
 delivered text. Local receipt/history-reset-event tests do not prove global erasure.
 The published Alpha 1 remains older than M5.14/M5.15 fixes; Alpha 2 is published for demos/labs, without physical deployment approval.
@@ -77,7 +78,7 @@ the published M5.13 source archive remains unchanged.
 
 M5.14 fixes handled partial-provisioning cleanup and adds an independent selection-contract prototype. The two original ARM64 exit-139 incidents did not recur in controlled tests and remain unexplained. An initial V7 equipment/plotting timeout also remains unexplained despite successful follow-up checks. Abrupt process or host failure can still leave incomplete provisioning; cleanup is not power-loss atomic. These development fixes are not in the unchanged M5.13 source archive. [M5.14 evidence](lab/M5.14.md) and [troubleshooting](getting-started/alpha-troubleshooting.md).
 
-The [selection interface](technical/selection-contract-draft.md) is a proposal, not upstream agreement. Its client has fixture and actual Go/Node TLS qualification; prior genuine modified-app sharing remains M5.12 evidence. Revocation cannot recall text already submitted to a model, and process/socket identity cannot establish OS identity. Independent security acceptance remains outstanding.
+The implemented [0.1 selection experiment](technical/selection-contract-draft.md) is not native upstream compatibility. [M5.23.1](technical/M5.23.1-interoperability-review.md) records architectural agreement, not wire-protocol or code acceptance. Its client has fixture and actual Go/Node TLS qualification; prior genuine modified-app sharing remains M5.12 evidence. Revocation cannot recall text already submitted to a model, and process/socket identity cannot establish OS identity. Independent security acceptance remains outstanding.
 
 M5.13 prepares a source-only alpha and external review packets. It does not supply independent security approval. RT-11’s diagnostic mismatch is explained but still present; no original diagnostic was patched. RSTS needs the generation/patch volumes named by its retained batch. Model quotation formatting is conservatively refused and every delivered explanation labels its source status, but factual claim coverage remains weak. [Current report](lab/M5.13.md).
 

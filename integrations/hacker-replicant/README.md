@@ -1,5 +1,7 @@
 # Optional read-only Hacker Replicant mode
 
+> This runbook describes the unchanged experimental 0.1 integration, including its companion-held publication credential. The [M5.23.1 proposal](../../docs/technical/selection-contract-0.2-proposal.md) instead places publication/consent in Web Desktop and makes Hacker Replicant consumer-only. Do not apply proposed credential ownership to these existing commands: migration and implementation need separate authorization and qualification.
+
 This developer preview runs Rolf Peters’ [Hacker Replicant](https://github.com/rolfpeters-droid/pidp11-hacker-replicant) as a separate application. It retains his application, artwork and MIT notices, and applies a small pinned-source preparation script plus original integration modules. It is **modified upstream**, not an official plugin, an endorsement or a production installation. [Phase D evidence](../../docs/lab/M5.9.3-D.md) includes genuine model chat through its actual browser UI.
 
 It has no operator console, `/keys` permission, terminal discovery, guest lifecycle action or shell tool. It does not join the Web Desktop service package. Run it on a capable development/model host, not the physical Pi. A model, desktop and companion may each be stopped without controlling an emulator.

@@ -1,5 +1,10 @@
 # Changelog
 
+## M5.23.1 interoperability design — 2026-11-23 (documentation only)
+
+- Recorded Rolf Peters’ five architectural directions as relayed by the owner; prepared a separate 0.2 selected-text proposal, credential/receipt boundary, source change inventory and future conformance plan.
+- Added a concise review handoff and refreshed the recovery pointer. The implemented 0.1 experiment, M5.23 engineering status, tests and releases are unchanged. No upstream contact or protocol implementation. [Review packet](docs/technical/M5.23.1-interoperability-review.md).
+
 ## M5.23 genuine storage snapshots — 2026-11-23 (development main)
 
 - Added a bounded local snapshot collector and read-only disk/tape views with explicit selection, freshness, retained metadata and generation retirement. No monitor, mount or emulator-control route is exposed.

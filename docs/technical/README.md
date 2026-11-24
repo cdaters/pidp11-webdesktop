@@ -1,5 +1,7 @@
 # Technical documentation
 
+M5.23.1 documentation update: [Rolf feedback and change inventory](M5.23.1-interoperability-review.md), [short review handoff](M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](selection-contract-0.2-proposal.md) and [planned conformance](selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. M5.23 remains the latest engineering milestone.
+
 The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets and bounded streams. SIMH does the actual PDP-11 emulation. The normal executable remains a mock service. Genuine guest labs and the separate optional service use the established terminal bridge; the candidate service starts detached and requires explicit local approval. [Current capabilities](../capabilities.md) and [service procedure](../getting-started/optional-service.md).
 
 Latest optional tutor milestone: [Phase D results and screenshots](../lab/M5.9.3-D.md), [read-only app setup](../../integrations/hacker-replicant/README.md), and [reproduction](../../lab/m593d/README.md). Live-guest and physical acceptance remain separate.

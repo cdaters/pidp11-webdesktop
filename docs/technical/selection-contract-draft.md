@@ -1,5 +1,7 @@
 # Explicit selection interoperability: 0.1 draft
 
+> Historical implemented 0.1 draft. M5.23.1 records the owner-relayed architectural agreement and a separate [0.2 proposal](selection-contract-0.2-proposal.md). The design questions below describe their original review stage; this file's wire contract and runtime remain unchanged.
+
 This is a proposal for discussion with Rolf Peters, independent author of
 [Hacker Replicant](https://github.com/rolfpeters-droid/pidp11-hacker-replicant).
 It is not an upstream agreement, supported plugin or production interface.

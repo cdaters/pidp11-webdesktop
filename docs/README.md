@@ -1,5 +1,7 @@
 # Documentation
 
+M5.23.1 documentation update: [Rolf feedback and change inventory](technical/M5.23.1-interoperability-review.md), [short review handoff](technical/M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](technical/selection-contract-0.2-proposal.md) and [planned conformance](technical/selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. M5.23 remains the latest engineering milestone.
+
 Current development: [M5.23 disk/tape findings](lab/M5.23.md),
 [original storage inventory](technical/storage-inventory.md),
 [captured observation contract](technical/storage-observation.md),

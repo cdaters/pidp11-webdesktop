@@ -6,6 +6,22 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **Latest documentation/design checkpoint: M5.23.1.** The owner supplied Rolf
+  Peters' agreement on five architectural directions: optional provider, mandatory
+  selected-text receipts, Desktop-owned publication/consent, one slot and local
+  reset with retention limits. Read the [decision/change inventory](docs/technical/M5.23.1-interoperability-review.md),
+  [0.2 proposal](docs/technical/selection-contract-0.2-proposal.md),
+  [short handoff](docs/technical/M5.23.1-hacker-replicant-handoff.md) and
+  [planned conformance](docs/technical/selection-contract-0.2-conformance.md).
+  This is documentation only; 0.1 runtime, credentials and tests are unchanged.
+  Manual receipt transfer, exact wire schema and exclusive migration profile are
+  recommendations, not separately agreed or implemented. No upstream code approval,
+  new genuine integration result or maintainer contact. Further implementation,
+  migration and sending the packet require separate authorization. M5.23 below
+  remains the completed engineering milestone and storage work is undisturbed.
+  Documentation links, JSON examples, pinned code links and publication scope were
+  checked; no runtime tests or genuine experiments were rerun for this prose-only work.
+
 - **Latest completed engineering milestone:** M5.23 genuine disk/tape discovery and
   captured read-only status. This is completed engineering, not owner acceptance or
   physical/production approval. Read the [report](docs/lab/M5.23.md),
@@ -13,8 +29,7 @@ request; historical approvals do not authorize new hardware, releases or message
   and [runbook](lab/m523/README.md). Source Alpha 2 remains the latest release.
 - **Checkpoint sequence:** starting M5.22 `73dadb2`; `0a16f9f` records the verified
   incremental M5.22 evidence backup; `fca1061` adds implementation, tests and lab
-  helpers. Final documentation follows separately on main; inspect Git for its exact
-  revision. No new tag, release, binary or guest-media publication.
+  helpers; `845f885` records final documentation and verified development-main push. No new tag, release, binary or guest-media publication.
 - **Implemented:** narrow local `storage-snapshot` collector, read-only whole-image
   identity/hash verification, private instance/revision approvals, captured generations,
   30-second freshness, explicit revocation and empty restart. Existing disk/tape
@@ -135,8 +150,9 @@ not reconnect guests, restore authority, mount media or start emulators.
   timeout remain unexplained. Use retained bounded diagnostics on recurrence;
   successful repetitions are not a fix.
 - Guest OS identity is operator-attested; a surviving process/socket is insufficient.
-- Independent security/historical review and Hacker Replicant protocol agreement
-  remain pending. Citation IDs do not certify AI explanations.
+- Independent security/historical review and Hacker Replicant wire-protocol/code
+  acceptance remain pending; M5.23.1 records agreed architectural direction only.
+  Citation IDs do not certify AI explanations.
 - RT-11 is verified application I/O, not an independent browser shell or complete
   MTTEST pass. RSTS/E remains console-only. Terminal conformance is partial.
 - LP11/PC11 now have narrow RSX PIP and RT-11 console-operated ASCII/browser qualification plus

@@ -1,5 +1,7 @@
 # Hacker Replicant: proposed read-only interoperability boundary
 
+> Historical experimental integration packet. Rolf's architectural feedback is now recorded in [M5.23.1](M5.23.1-interoperability-review.md), with a new [review handoff](M5.23.1-hacker-replicant-handoff.md). The older diagram and setup below describe the preserved companion-owned publication experiment; they do not implement the proposed Desktop-owned flow.
+
 Prepared for possible owner-directed review with Rolf Peters. No contact, upstream
 issue, pull request, endorsement or agreement is implied. Hacker Replicant remains
 an independent project. Its original notices and license stay with its checkout;

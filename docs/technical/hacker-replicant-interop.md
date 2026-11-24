@@ -1,5 +1,7 @@
 # Hacker Replicant interoperability foundation
 
+> Current design update: [M5.23.1](M5.23.1-interoperability-review.md) incorporates Rolf's five architectural directions as relayed by the owner. The [0.2 selected-text proposal](selection-contract-0.2-proposal.md) moves publication/consent to Web Desktop. The implementation history below remains accurate for its recorded phases, not a claim of native upstream support.
+
 Reviewed upstream: Rolf Peters' [PiDP-11 Hacker Replicant, revision 6f8a2aca7786736e01bdf5ba9b44bf66a7f19349](https://github.com/rolfpeters-droid/pidp11-hacker-replicant/tree/6f8a2aca7786736e01bdf5ba9b44bf66a7f19349). This remained the current remote revision when refreshed for Phase D. Its MIT license names Rolf Peters, copyright 2026. Phase B reviewed without execution; Phase C ran unchanged upstream through a lab shim; Phase D runs an explicitly modified optional read-only mode in a disposable checkout. No upstream application is bundled into the desktop package, and no developer was contacted. This is not an endorsed or production-qualified integration.
 
 ## What the current implementation actually does

@@ -90,7 +90,7 @@ PiDP-11 owners and ordinary SIMH installations without GPIO or REALCONS.
 | Claim review | Experimental, narrow fragments | M5.12 new frozen corpus: 2/12 recognized, five missed contradictions; no whole-answer certification or independent expert benchmark |
 | Selected terminal text | Explicit user sharing | Nothing read automatically; submitted text cannot be recalled from a model |
 | Human-approved command proposals | Experimental, disabled by default | Only `pwd`, `ls`, `ls /`; separate review, current keyboard ownership and one-use approval; not general AI execution |
-| Hacker Replicant interoperability | Actual application laboratory tested | Explicitly modified pinned app; genuine V7 selection and real model under a lab-only process/attachment/view guard; production identity remains unqualified |
+| Hacker Replicant interoperability | Existing modified-application laboratory evidence | Genuine V7 selection and real model under a lab-only process/attachment/view guard. M5.23.1 records agreed architecture and an unimplemented 0.2 proposal; no native upstream compatibility or production identity qualification |
 
 [M5.12 evidence](lab/M5.12.md) · [Retained Phase D evidence](lab/M5.9.3-D.md) · [User setup](getting-started/configured-companion.md) · [Independent application and attribution](../integrations/hacker-replicant/README.md).
 
