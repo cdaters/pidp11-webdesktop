@@ -6,6 +6,14 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **M5.25 active:** bounded TM11 completion-event feasibility in disposable source/build copies.
+  M5.24 evidence backup verified: `M5.25-incremental-20261124T064928Z`, 2,703 files / 339 directories / six symlinks,
+  373,080,685 logical bytes; archive 384,715,264 bytes, SHA-256
+  `c8d438a4c5714bd9ac0652fa903925e74aa3081920cd20a6cde56fb699de7973`. All file bytes and supported metadata independently reread; no full restore.
+  Private recovery pointer: `Backups/WebDesktop-M5.25-incremental-20261124T064928Z/backup.json`.
+  New work belongs in `.research/m525/`; original source/media, ordinary builds, physical Pi
+  and interoperability remain untouched. No running M5.24 processes found at start.
+
 - **M5.24 completed:** genuine RT-11 MT/PIP tape reads and V7 RH70/RP06 captured status.
   Backup prerequisite completed: `M5.24-incremental-20261124T041941Z`, 123 files / seven directories,
   42,097,705 logical bytes; archive 42,601,472 bytes, SHA-256
