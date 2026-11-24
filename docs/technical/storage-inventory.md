@@ -1,5 +1,9 @@
 # Original simulator storage inventory
 
+M5.24 additions: [RT-11 MT/PIP workflow](rt11-magnetic-tape.md) and
+[RH70/RP06 guest/browser evidence](../lab/M5.24.md). Older inventory rows below
+retain their original discovery scope where no new qualification exists.
+
 This inventory concerns the exact retained, unmodified-source laboratory build,
 not every SIMH release or the owner's current Pi. M5.23 ran `SHOW VERSION`,
 `SHOW CONFIGURATION` and fixed `SHOW device` commands in a fresh diskless instance.
@@ -25,9 +29,9 @@ the actual RT-11 test used 11/70, so RL changed from RLV12 to RL11 accordingly.
 | SIMH family | Historical controller / media | Media units | Observed default / capacity scope | Guest evidence and observation restrictions |
 |---|---|---:|---|---|
 | RK | RK11/RKV11, RK05 cartridge | 8 | Enabled, 1247 KW display per unit, write enabled | RT-11 RK handler file exists, not installed; no new guest test. Named RK registers are candidate captured status only |
-| RL | RL11/RLV12, RL01/RL02 cartridge | 4 | Enabled/autosize initially; qualified RL0 explicitly RL02 | RT-11 resident DL driver boot and directory access passed. This is the implemented disk snapshot subset |
+| RL | RL11/RLV12, RL01/RL02 cartridge | 4 | Enabled/autosize initially; qualified RL0 explicitly RL02 | RT-11 resident DL driver boot and directory access passed. This remains a qualified disk snapshot subset |
 | HK | RK611, RK06/RK07 | 8 | Enabled/autosize, 6944 KW display default | RT-11 DM installed; no mounted-volume test this milestone |
-| RP | RH Massbus, RP04/05/06/07 and RM02/03/05/80 | 8 | Enabled, Massbus adapter RHA, model-dependent geometry | Retained V7 lab config uses RP0/RP06; RT-11 DP installed. No new RP browser qualification |
+| RP | RH Massbus, RP04/05/06/07 and RM02/03/05/80 | 8 | Enabled, Massbus adapter RHA, model-dependent geometry | M5.24 V7 RP0/RP06 on RH70 has genuine filesystem and three-browser snapshot qualification; other RP/RM models remain unqualified |
 | RQ, RQB–RQD | MSCP; selectable RQDX/UDA-family controllers, RD/RA disks and RX50/RX33 floppies | 4 per controller | RQ enabled as RQDX3; units 0–2 RD54, unit 3 RX50; B–D disabled | Retained RSX boots RQ0 autosized. RT-11 DU present but not installed. MSCP packets are not decoded by M5.23 |
 | RX | RX11, RX01 floppy | 2 | Enabled, 256 KB display, write enabled | RT-11 DX present/not installed; no new mounted-volume result |
 | RY | RX211/RXV21, RX02 floppy | 2 | Disabled; single/double density format choices are source-defined | RT-11 DY present/not installed; no new qualification |
@@ -38,8 +42,8 @@ the actual RT-11 test used 11/70, so RL changed from RLV12 to RL11 accordingly.
 The disk modules define write-enable/lock and device-specific register state. Supported
 image formats vary: RK/RX have their own raw representations; the RL/HK/RP/RQ/RY/RS
 modules use the disk library to differing degrees. A format advertised by the global
-framework is not proof that every controller accepts it. Only the tested RL02 SIMH
-flat image is admitted by the new collector. Other attached formats, exact per-model
+framework is not proof that every controller accepts it. The tested RL02 and M5.24 RP06 SIMH
+flat images are admitted by the collector. Other attached formats, exact per-model
 geometry, readiness and activity remain unqualified; no default animation is used.
 
 For the qualified RL02, the original source defines **512 cylinders × two heads ×
@@ -53,7 +57,7 @@ real directory listing through the resident DL driver.
 
 | SIMH name | Controller / transport family | Media units | Exact-build evidence / current qualification |
 |---|---|---:|---|
-| TM | TM11/TU10 nine-track tape | 8 | Enabled by default, SIMH format, unlimited configured capacity. TM0 readonly authored image, real CPU DMA, two filemarks and end-of-image qualified |
+| TM | TM11/TU10 nine-track tape | 8 | Enabled by default, SIMH format, unlimited configured capacity. TM0 readonly authored image, M5.23 CPU DMA/filemarks/end-of-image plus M5.24 RT-11 MT/PIP labeled-file reads qualified |
 | TS | TS11/TSV05 | 1 | Compiled, disabled. RT-11 MS handler present/not installed; no new guest/controller test |
 | TU | Massbus TM02/TM03; TU16/TU45/TU77 models | 8 | Compiled, disabled. RT-11 MM handler present/not installed; no new device test |
 | TQ | TQK50/TMSCP, selectable transports | 4 | Enabled as TK50, 94 MB nominal model, 98 MB capacity display. No TMSCP decoding/guest tape qualification |
@@ -82,17 +86,34 @@ Fresh M5.23 RT-11SJ (S) V05.03 `SHOW CONFIG`, `SHOW DEVICES` and `DIR *.SYS` con
 DL resident; CT/DM/DP/TT installed; MT/MS/MM/DU/RK/RF/DX/DY and many other handler
 files present but not installed. Availability of `MT.SYS` is **not** guest tape access.
 COPY and directory utilities have previous genuine console evidence; a matched
-magnetic-tape label/record/utility workflow has not been qualified. M5.23 deliberately
+magnetic-tape label/record/utility workflow had not been qualified at that checkpoint. M5.23 deliberately
 uses authored CPU/controller tape evidence, rather than claiming the handler is
-missing or inventing a guest tape command.
+missing or inventing a guest tape command. M5.24 subsequently qualified the
+[MT/PIP workflow](rt11-magnetic-tape.md) on a fresh disposable copy.
 
-Retained legitimate configurations, not newly replayed in this milestone:
+Retained legitimate configurations, not newly replayed during M5.23:
 [V7](../../lab/m50/guest.ini) uses RP0/RP06; [RSX and RSTS profiles](../../lab/m512/guest-inventory.py)
 use RQ0 and two RL01 units respectively. Their earlier guest results establish those
-specific configurations, not browser storage telemetry or support for every driver
-listed here. Unknown guest support remains unknown until tested.
+specific configurations, not continuous browser storage telemetry or support for every
+driver listed here. M5.24 newly replayed the V7/RP06 configuration described below. Unknown guest support remains unknown until tested.
 
 For general background, the [Open SIMH PDP-11 guide](https://opensimh.org/simdocs/pdp11_doc.html)
 and [simulator guide](https://opensimh.org/simdocs/simh_doc.html) describe controller
 families and tape representations. Exact-build claims above come from the pinned
 local sources and actual inventory, not newer documentation alone.
+
+## M5.24 RP06 addition
+
+The actual new V7 guest used CPU 11/70 and RP0 explicitly set RP06. SHOW RP identified
+Massbus adapter 0 (RHA). In pinned `pdp11_cpumod.c`, selecting a model initializes
+`cpu_opt` from its standard options; `SOP_1170` in `pdp11_cpumod.h` excludes
+`OPT_RH11`. `pdp11_rh.c` therefore takes its RH70 path. RH70 is a source-grounded
+interpretation of this exact configuration, not a claim that the RHA label alone
+identifies all possible adapters.
+
+RP06 geometry is 815 cylinders × 19 heads × 22 sectors × 512 bytes = 174,423,040
+bytes, matching the stored image length. Independent V7 `ls /` and `sync` completed.
+Captured DS[0]=010700 has MOL, DPR, RDY and VV; ER1[0]=000000. Local CS1[0]=000000 is
+not substituted for the drive's DS ready bit. No new guest or controller activity
+feed follows from these values. The retained RSX RQ image exceeds the unchanged
+256 MiB hashing bound, so it was not admitted by relaxing that limit.

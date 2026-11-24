@@ -1,10 +1,10 @@
 # Captured disk and magnetic-tape observations
 
-M5.23 implements an explicitly approved **snapshot**, not continuous storage
-telemetry. The original simulator and guest console remain independent. The browser
+M5.24 extends the explicitly approved **snapshot** interface introduced in M5.23.
+It does not provide continuous storage telemetry. The original simulator and guest console remain independent. The browser
 cannot mount/eject media, move tape, issue monitor commands or start/stop a guest.
-The [inventory](storage-inventory.md), [lab report](../lab/M5.23.md) and
-[runbook](../../lab/m523/README.md) identify the tested subset.
+The [inventory](storage-inventory.md), [latest lab report](../lab/M5.24.md) and
+[runbook](../../lab/m524/README.md) identify the tested subset.
 
 ```mermaid
 flowchart LR
@@ -46,16 +46,18 @@ guest identity and guest-access claims remain independent operator attestations.
 3. **Guest access:** a conventional guest command has independently demonstrated
    filesystem/volume access. CPU DMA tests are a different evidence category.
 
-The qualified RL02 has all three. The TM11 test has the first two plus actual CPU
-DMA/filemark/end-of-image behavior; guest tape-driver access remains unavailable.
+The qualified RL02 and M5.24 RH70/RP06 have all three. M5.24 also establishes
+TM11 guest access through RT-11 MT/PIP, distinct from the earlier CPU DMA/filemark/
+end-of-image test. [Exact tape qualification](rt11-magnetic-tape.md).
 A path, file timestamp, controller done bit or successful directory listing does
 not create a live block-I/O feed. Activity is always `unavailable` in this contract.
 
 ## Bounded records and state
 
-`internal/storage` supports only `RL0/RL11/RL02` and `TM0/TM11/TU10`, unit zero.
+`internal/storage` supports only `RL0/RL11/RL02`, `RP0/RH70/RP06` and
+`TM0/TM11/TU10`, unit zero.
 The general ceiling is four configured slots, but duplicate devices are refused;
-this milestone therefore has at most two qualified device records. Other inventory
+this milestone therefore has at most three qualified device records. Other inventory
 families are deliberately rejected until qualified. No database or background
 collector is required.
 
@@ -138,7 +140,7 @@ lists captures; viewing requires an explicit generation choice. Every field is
 validated and compared with the selected inventory identity. Changed facts, stale
 URLs and late replies cannot silently select a replacement.
 
-A one-second local timer updates freshness only; it never fetches media or invents
+A one-second local timer updates freshness and capture age only; it never fetches media or invents
 activity. Stop viewing cancels pending work. Switching modes/closing cancels requests
 and disposes the timer. One copied metadata record per window can be viewed in
 Retained snapshot without network access. Closing the window loses it; no durable
@@ -147,3 +149,9 @@ archive, auto-import or restored device authority is implemented.
 The older `media-observation.ts` descriptor remains a separate future-interface
 fixture. Its `busy`/position vocabulary is not treated as proof of genuine telemetry.
 The new narrow snapshot contract does not promote that demonstration into hardware.
+
+M5.24 makes provenance and geometry visible with the other facts. A future-dated
+capture has unknown age and expires; retained mode continues to say not connected.
+RP06 has a fixed qualified capacity/geometry contract; RH11, other models and units
+remain rejected. The [future activity proposal](storage-activity-proposal.md) is
+investigation only and adds no observer connection or authority.

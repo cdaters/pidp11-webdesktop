@@ -1,0 +1,10 @@
+{
+  "source_revision": "73341f9a4a8a9f7b9d1e21360e635c5a95d87fa6",
+  "checkout": "fresh detached Git worktree",
+  "private_inputs_used": false,
+  "npm_ci_offline": "passed",
+  "embedded_frontend_build": "passed",
+  "go_commands_native_build": "passed",
+  "go_commands_linux_arm64_build": "passed",
+  "working_tree_clean": true
+}

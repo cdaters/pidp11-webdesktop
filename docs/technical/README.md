@@ -1,6 +1,8 @@
 # Technical documentation
 
-M5.23.1 documentation update: [Rolf feedback and change inventory](M5.23.1-interoperability-review.md), [short review handoff](M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](selection-contract-0.2-proposal.md) and [planned conformance](selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. M5.23 remains the latest engineering milestone.
+Current storage work: [M5.24 report](../lab/M5.24.md), [RT-11 tape workflow](rt11-magnetic-tape.md), [future passive activity proposal](storage-activity-proposal.md).
+
+M5.23.1 documentation update: [Rolf feedback and change inventory](M5.23.1-interoperability-review.md), [short review handoff](M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](selection-contract-0.2-proposal.md) and [planned conformance](selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. M5.24 is the latest engineering milestone; that interoperability work remains unchanged.
 
 The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets and bounded streams. SIMH does the actual PDP-11 emulation. The normal executable remains a mock service. Genuine guest labs and the separate optional service use the established terminal bridge; the candidate service starts detached and requires explicit local approval. [Current capabilities](../capabilities.md) and [service procedure](../getting-started/optional-service.md).
 

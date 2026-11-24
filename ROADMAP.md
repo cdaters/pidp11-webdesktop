@@ -1,6 +1,6 @@
 # Where the project is going
 
-## Current product direction — M5.23
+## Current product direction — M5.24
 
 The [virtual computer room](docs/product/virtual-computer-room.md) is the enduring direction for both physical
 PiDP-11 owners and ordinary SIMH users without a panel. Everyday genuine terminals
@@ -23,11 +23,14 @@ records, explicit data-only recovery, genuine reused slots and RT-11 browser exp
 Active ARM64 samples remain laboratory measurements.
 [M5.23](docs/lab/M5.23.md) establishes explicit RL02/TM11 captured snapshots, actual
 RT-11 disk access, genuine CPU tape reads/filemarks and detached observer restart.
-Next: **M5.24 historical guest magnetic-tape workflow and broader read-only storage
-provenance**. Qualify documented guest tape utilities using the inventoried legitimate
-handlers and disposable media; broaden disk support only with exact attachment and
-guest evidence. Continuous telemetry needs separate interface qualification. Keep
-mounts/writes operator-owned; another broad LP11/PC11 milestone needs a demonstrated blocker.
+[M5.24](docs/lab/M5.24.md) now qualifies RT-11 MT/PIP labeled tape reads with exact
+bytes and V7 RH70/RP06 snapshots. Provenance, geometry and capture age are visible.
+Next recommended equipment milestone: **bounded passive storage activity feasibility**
+using one optional disposable instrumented build and an unmodified control build,
+as scoped in the [proposal](docs/technical/storage-activity-proposal.md). This is a
+recommendation requiring a new assignment, not implemented telemetry or physical
+approval. Preserve captured-only fallback and independent media operation. Further
+guest tape-writing/backup work needs its own disposable-media qualification.
 Reader selection remains a catalog/operator-assisted workflow until independent
 safe-state and actual-attachment checks support more. No new release or physical
 access is authorized.
