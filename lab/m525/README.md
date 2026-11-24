@@ -47,6 +47,7 @@ final independent activity-expiry timer; final expiry/cancel fixtures are separa
 | `events.c`, `events.h`, `ring-test.c` | Fixed-memory producer/worker and synthetic concurrency/pressure tests |
 | `observer/` | Separate unprivileged Linux reader, local operator approval, read-only bounded HTTP and fixture tests |
 | `workload.py` | Original-console RT-11 six-mode comparison and optional crash/reapproval or late-reader checks |
+| `active-crash.py` | Actual reader SIGKILL during an ongoing authored CPU read stream; 200 serviced interrupts despite reader loss |
 | `interrupts.py` | Authored CPU test of four actually serviced TM11 interrupts, DMA and saved status |
 | `browser_workload.py` | Independent original-console workload and halted media-replacement check |
 | `viewer.ts`, `browser.mjs` | Lab-only injection and genuine three-engine render measurements |
@@ -143,3 +144,11 @@ estimate; it is not a device service time or a cross-host clock subtraction.
 The second campaign's original request counter extended past its timing interval;
 public rates use the aligned render samples instead. The driver now records its
 request counter at the interval boundary. Do not reuse that discarded rate.
+
+The separate `active-crash.py` test uses only authored tape records and an authored
+CPU program. Supply the final reader as `event-reader-final` in the same private
+overlay and a fresh empty `/work`. The original CPU intentionally executes a delay
+loop between reads, allowing the host to kill the actual reader during the stream.
+The recorded run observed three completions before SIGKILL and all 200 serviced
+interrupts afterward, then quit cleanly with input unchanged. It is CPU/device
+evidence, not another historical guest workload.

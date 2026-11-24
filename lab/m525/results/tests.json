@@ -18,5 +18,6 @@
   "ordinary_full_browser_suite": "not rerun; ordinary UI unchanged; lab injection tested in three engines",
   "c_thread_sanitizer": "not run",
   "final_viewer_expiry_cancel_timeout_fixtures": "passed in Chromium, Firefox and WebKit after genuine browser campaign",
-  "patch_reproduction": "221 simulator-subtree files byte-identical, repeat application refused"
+  "patch_reproduction": "221 simulator-subtree files byte-identical, repeat application refused",
+  "active_stream_reader_sigkill": "passed: reader killed after 3 completions; original-C CPU serviced all 200 TM interrupts; input unchanged"
 }

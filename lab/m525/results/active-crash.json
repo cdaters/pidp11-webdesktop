@@ -1,0 +1,27 @@
+{
+  "kind": "authored original-C CPU/device test, not historical guest",
+  "reader_killed_during_ongoing_stream": true,
+  "approved_summary_before_kill": {
+    "event_age_ms": 14.679916,
+    "max_queue_at_drain": 3,
+    "pending_at_drain": 0,
+    "mode": "approved-lab",
+    "reason": "",
+    "instance": "f402c3164b4382b7",
+    "generation": 1,
+    "guest": "authored-cpu-read-stream",
+    "sequence": 3,
+    "lost": 0,
+    "events": 3,
+    "bytes": 1536,
+    "filemarks": 0,
+    "activity": "recent verified read completion",
+    "last_event_to_reader_ms": 2.569625,
+    "max_event_to_reader_ms": 48.979622
+  },
+  "reader_exit": -9,
+  "final_serviced_interrupts": 200,
+  "simulator_exit": 0,
+  "authored_input_unchanged": true,
+  "input_sha256": "bea1a1c4c2dc0b7ec3f6248ab6ef1c5651239e45e7229ac215003f47a96c699b"
+}
