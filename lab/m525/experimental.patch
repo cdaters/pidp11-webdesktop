@@ -1,0 +1,226 @@
+--- a/src/02.3_simh/4.x+realcons/src/PDP11/pdp11_tm.c
++++ b/src/02.3_simh/4.x+realcons/src/PDP11/pdp11_tm.c
+@@ -1,3 +1,4 @@
++#include "events.h"
+ /* pdp11_tm.c: PDP-11 magnetic tape simulator
+ 
+    Copyright (c) 1993-2013, Robert M Supnik
+@@ -398,6 +399,7 @@
+ {
+ int32 f, t, u;
+ uint32 xma;
++uint32 m525_requested, m525_completed = 0;
+ t_mtrlnt tbc, cbc;
+ t_stat st, r = SCPE_OK;
+ 
+@@ -405,6 +407,7 @@
+ f = GET_FNC (tm_cmd);                                   /* get command */
+ xma = GET_EMA (tm_cmd) | tm_ca;                         /* get mem addr */
+ cbc = 0200000 - tm_bc;                                  /* get bc */
++m525_requested = cbc;
+ 
+ if (uptr->USTAT & STA_REW) {                            /* rewind? */
+     sim_tape_rewind (uptr);                             /* update position */
+@@ -449,6 +452,7 @@
+             }
+         xma = (xma + cbc) & 0777777;                    /* inc bus addr */
+         tm_bc = (tm_bc + cbc) & 0177777;                /* inc byte cnt */
++        m525_completed = cbc;
+         break;
+ 
+     case MTC_WRITE:                                     /* write */
+@@ -500,6 +504,9 @@
+ if (DEBUG_PRS (tm_dev))
+     fprintf (sim_deb, ">>TM: sta=%o, ma=%o, bc=%o, pos=%d\n",
+              tm_sta, tm_ca, tm_bc, uptr->pos);
++if (u == 0 && f == MTC_READ)
++    m525_complete(m525_service_time(), m525_requested, m525_completed, tm_sta, tm_cmd,
++                   (int_req[IPL_TM] & INT_TM) != 0);
+ return r;
+ }
+ 
+@@ -610,6 +617,7 @@
+ t_stat r;
+ int32 u = uptr - tm_dev.units;
+ 
++if (u == 0) m525_generation(); /* Retire even a failed replacement attempt. */
+ r = sim_tape_attach (uptr, cptr);
+ if (r != SCPE_OK)
+     return r;
+@@ -631,6 +639,7 @@
+     uptr->USTAT = 0;
+ if (u == GET_UNIT (tm_cmd))
+     tm_updcsta (uptr);
++if (u == 0) m525_generation();
+ return sim_tape_detach (uptr);
+ }
+ 
+--- a/src/02.3_simh/4.x+realcons/src/events.c
++++ b/src/02.3_simh/4.x+realcons/src/events.c
+@@ -0,0 +1,117 @@
++/* M5.25 laboratory-only experiment; see events.h and README.md.
++ * Producers never wait: contention/full queue drops the new event. The internal
++ * worker copies at most 32 entries under the same try gate, then sends outside it.
++ * No consumer can hold this gate. Release/acquire publishes all slot bytes. */
++#include "events.h"
++#include <stdatomic.h>
++#include <stdlib.h>
++#include <string.h>
++#include <pthread.h>
++#include <sys/socket.h>
++#include <sys/un.h>
++#include <sys/random.h>
++#include <unistd.h>
++#include <time.h>
++#include <errno.h>
++#include <limits.h>
++#if ATOMIC_INT_LOCK_FREE != 2
++#error "Laboratory requires always-lock-free 32-bit atomics"
++#endif
++#define MAGIC 0x3532354dU
++#define CAPACITY 256U
++static m525_event ring[CAPACITY];
++static unsigned head, count;
++static uint32_t sequence;
++static uint64_t instance;
++static _Atomic uint32_t generation, lost, fault;
++static atomic_flag gate = ATOMIC_FLAG_INIT;
++static int enabled;
++static uint64_t now_ns(void) {
++    struct timespec ts;
++    if (clock_gettime(CLOCK_MONOTONIC, &ts)) return 0;
++    return (uint64_t)ts.tv_sec * 1000000000ULL + ts.tv_nsec;
++}
++/* Bounded CAS retries: excessive contention retires observation, never the CPU. */
++static void drop(uint32_t n) {
++    uint32_t old = atomic_load(&lost);
++    for (int i = 0; i < 4; i++) {
++        if (UINT32_MAX - old < n) { atomic_store(&fault, 1); return; }
++        if (atomic_compare_exchange_weak(&lost, &old, old + n)) return;
++    }
++    atomic_store(&fault, 1);
++}
++void m525_generation(void) {
++    if (!enabled) return;
++    uint32_t old = atomic_load(&generation);
++    /* Attachment transitions are serialized by SIMH's operator/CPU thread. */
++    if (old == UINT32_MAX) atomic_store(&fault, 1);
++    else atomic_store(&generation, old + 1);
++}
++void m525_complete(double ticks, uint32_t requested, uint32_t completed,
++                   uint16_t status, uint16_t command, int interrupt) {
++    if (!enabled || atomic_load(&fault)) return;
++    if (atomic_flag_test_and_set_explicit(&gate, memory_order_acquire)) { drop(1); return; }
++    if (sequence == UINT32_MAX) atomic_store(&fault, 1);
++    else {
++        sequence++;
++        if (count == CAPACITY) drop(1);
++        else {
++            m525_event event = {0};
++            event.magic = MAGIC; event.controller = 1; event.operation = 1;
++            event.flags = interrupt ? 1 : 0;
++            event.instance = instance; event.generation = atomic_load(&generation);
++            event.sequence = sequence; event.simulated_ticks = ticks;
++            event.monotonic_ns = now_ns(); event.requested = requested;
++            event.completed = completed; event.status = status; event.command = command;
++            event.lost = atomic_load(&lost);
++            ring[(head + count) % CAPACITY] = event;
++            count++;
++        }
++    }
++    atomic_flag_clear_explicit(&gate, memory_order_release);
++}
++static unsigned take(m525_event *out, unsigned max, uint32_t *seq) {
++    if (atomic_flag_test_and_set_explicit(&gate, memory_order_acquire)) return 0;
++    unsigned n = count < max ? count : max;
++    for (unsigned i=0; i<n; i++) out[i] = ring[(head+i)%CAPACITY];
++    head=(head+n)%CAPACITY; count-=n; *seq=sequence;
++    atomic_flag_clear_explicit(&gate, memory_order_release);
++    return n;
++}
++#ifndef M525_UNIT_TEST
++static void *drain(void *unused) {
++    (void)unused;
++    int fd = socket(AF_UNIX, SOCK_DGRAM | SOCK_NONBLOCK | SOCK_CLOEXEC, 0);
++    if (fd < 0) { atomic_store(&fault,1); return NULL; }
++    struct sockaddr_un destination = { .sun_family=AF_UNIX };
++    strcpy(destination.sun_path, "/tmp/m525-events.sock");
++    for (;;) {
++        m525_event packet[33] = {{0}};
++        uint32_t seq=0;
++        unsigned n=take(packet+1,32,&seq);
++        packet[0].magic=MAGIC; packet[0].controller=1;
++        packet[0].flags=atomic_load(&fault) ? 2 : 0;
++        packet[0].instance=instance; packet[0].generation=atomic_load(&generation);
++        packet[0].sequence=seq; packet[0].monotonic_ns=now_ns();
++        packet[0].lost=atomic_load(&lost);
++        ssize_t sent=sendto(fd,packet,(n+1)*64,MSG_DONTWAIT|MSG_NOSIGNAL,
++                           (struct sockaddr *)&destination,sizeof(destination));
++        if (sent != (ssize_t)((n+1)*64)) drop(n); /* Lost heartbeat alone is not an event loss. */
++        struct timespec delay={0,100000000};
++        nanosleep(&delay,NULL); /* Worker only; never a controller delay. */
++    }
++}
++__attribute__((constructor)) static void initialize(void) {
++    const char *option=getenv("PIDP11_M525_ENABLE");
++    if (!option || strcmp(option,"1")) return;
++    if (getrandom(&instance,sizeof(instance),0)!=(ssize_t)sizeof(instance) || !instance) return;
++    pthread_attr_t attr;
++    if (pthread_attr_init(&attr)) return;
++    pthread_attr_setdetachstate(&attr,PTHREAD_CREATE_DETACHED);
++    if (pthread_attr_setstacksize(&attr,128*1024)) { pthread_attr_destroy(&attr); return; }
++    pthread_t thread;
++    enabled=1; /* Initialization completes before SIMH starts any device. */
++    if (pthread_create(&thread,&attr,drain,NULL)) enabled=0;
++    pthread_attr_destroy(&attr);
++}
++#endif
+--- a/src/02.3_simh/4.x+realcons/src/events.h
++++ b/src/02.3_simh/4.x+realcons/src/events.h
+@@ -0,0 +1,24 @@
++/* M5.25 laboratory-only optional completion observations.
++ * MIT, copyright 2026 Craig Daters. Never part of the ordinary simulator build. */
++#ifndef M525_EVENTS_H
++#define M525_EVENTS_H
++#include <stdint.h>
++/* Native little-endian ARM64 lab wire format. No pointers, paths or guest bytes. */
++typedef struct {
++    uint32_t magic;
++    uint8_t controller, unit, operation, flags;
++    uint64_t instance;
++    uint32_t generation, sequence;
++    double simulated_ticks;
++    uint64_t monotonic_ns;
++    uint32_t requested, completed;
++    uint16_t status, command;
++    uint32_t lost;
++    uint64_t reserved;
++} m525_event;
++_Static_assert(sizeof(m525_event) == 64, "fixed event ABI");
++double m525_service_time(void); /* CPU-thread copy; no scheduler update. */
++void m525_generation(void);
++void m525_complete(double ticks, uint32_t requested, uint32_t completed,
++                   uint16_t status, uint16_t command, int interrupt);
++#endif
+--- a/src/02.3_simh/4.x+realcons/src/quickmake
++++ b/src/02.3_simh/4.x+realcons/src/quickmake
+@@ -20,7 +20,7 @@
+ 
+ # sources ------------------------------------------------------------------------------
+ 
+-SIM = scp.c sim_console.c sim_fio.c sim_timer.c sim_sock.c \
++SIM = events.c scp.c sim_console.c sim_fio.c sim_timer.c sim_sock.c \
+ 	sim_tmxr.c sim_ether.c sim_tape.c sim_disk.c sim_serial.c \
+ 	sim_video.c sim_imd.c
+ 
+--- a/src/02.3_simh/4.x+realcons/src/scp.c
++++ b/src/02.3_simh/4.x+realcons/src/scp.c
+@@ -10455,6 +10455,8 @@
+         time    =       global time
+ */
+ 
++double m525_service_time(void) { return sim_time; }
++
+ double sim_gtime (void)
+ {
+ if (AIO_MAIN_THREAD) {

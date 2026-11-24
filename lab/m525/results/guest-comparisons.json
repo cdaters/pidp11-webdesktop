@@ -1,0 +1,2977 @@
+[
+  {
+    "run": "qualified-control",
+    "mode": "control",
+    "binary_sha256": "56c373444d9bc3faf7bf1c3eb4087a43c49b882e42ede8a2cea986cc421d7b79",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.022350943996571004
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.020675692008808255
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.043784138979390264
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.0653001650061924
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04236355298780836
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.08293460501590744
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.08846536200144328
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04136246902635321
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021139819000381976
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022326944977976382
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04076121799880639
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040214508975623176
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021167442988371477
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02005044202087447
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04195859399624169
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04019092599628493
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020078984001884237
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04017121801734902
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04017292501521297
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020066650991793722
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040119924989994615
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040121425001416355
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02006164999329485
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04011867500958033
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04012005100958049
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020060692011611536
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040106550994096324
+      },
+      {
+        "command": "TYPE READA.TXT",
+        "seconds": 0.06015365899656899
+      }
+    ],
+    "states": [],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13136,
+      "VmRSS": 13136,
+      "Threads": 1,
+      "ticks": 121,
+      "fds": 7
+    },
+    "ending": {
+      "VmHWM": 13136,
+      "VmRSS": 13136,
+      "Threads": 1,
+      "ticks": 214,
+      "fds": 7
+    },
+    "elapsed": 0.9299169239820912,
+    "cpu_ticks": 93,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": true,
+    "sample_max_reader_rss_kib": 0,
+    "sample_max_reader_ticks": 0,
+    "sample_max_reader_fds": 0,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  },
+  {
+    "run": "qualified-disabled",
+    "mode": "disabled",
+    "binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.04118896901491098
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.021718402014812455
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.04229259499697946
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.04476230702130124
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04593326599569991
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.08373110499815084
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.0831677720125299
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.043313972011674196
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04099875999963842
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.042460469994693995
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04233405302511528
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04244205399299972
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0203472760040313
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.024216238991357386
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021609860996250063
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02103794299182482
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02131048499722965
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021209276979789138
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02021656700526364
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02220794398454018
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020996567996917292
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.048008602985646576
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02098131799721159
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021304817986674607
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022912404005182907
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02200581898796372
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02122052598861046
+      },
+      {
+        "command": "TYPE READA.TXT",
+        "seconds": 0.04253567900741473
+      }
+    ],
+    "states": [],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13332,
+      "VmRSS": 13332,
+      "Threads": 1,
+      "ticks": 120,
+      "fds": 7
+    },
+    "ending": {
+      "VmHWM": 13332,
+      "VmRSS": 13332,
+      "Threads": 1,
+      "ticks": 202,
+      "fds": 7
+    },
+    "elapsed": 0.8215017449983861,
+    "cpu_ticks": 82,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": true,
+    "sample_max_reader_rss_kib": 0,
+    "sample_max_reader_ticks": 0,
+    "sample_max_reader_fds": 0,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  },
+  {
+    "run": "qualified-enabled",
+    "mode": "enabled",
+    "binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.02227302797837183
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.020856610004557297
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.02111969399265945
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.040227924997452646
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04095075998338871
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.08506098200450651
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.06122011900879443
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04833793599391356
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020081358990864828
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02125081801204942
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020966651005437598
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04244859598111361
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04912839501048438
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021768985025119036
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021877027989830822
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021164192992728204
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02118840199545957
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02116606800700538
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021169693005504087
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022767236980143934
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021878319996176288
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02140881901141256
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02166040299925953
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020559150987537578
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021101443999214098
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023108444991521537
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021903777989791706
+      },
+      {
+        "command": "TYPE READA.TXT",
+        "seconds": 0.04017246700823307
+      }
+    ],
+    "states": [
+      {
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "acdc32333dd71c10",
+        "generation": 1,
+        "guest": "",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "acdc32333dd71c10",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "max_queue_at_drain": 9,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "acdc32333dd71c10",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 15,
+        "lost": 0,
+        "events": 15,
+        "bytes": 6144,
+        "filemarks": 3,
+        "activity": "recent verified read completion",
+        "last_event_to_reader_ms": 46.954601,
+        "max_event_to_reader_ms": 95.290371
+      },
+      {
+        "max_queue_at_drain": 30,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "acdc32333dd71c10",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 135,
+        "lost": 0,
+        "events": 135,
+        "bytes": 57344,
+        "filemarks": 23,
+        "activity": "recent verified read completion",
+        "last_event_to_reader_ms": 18.681148,
+        "max_event_to_reader_ms": 99.184917
+      }
+    ],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13168,
+      "VmRSS": 13168,
+      "Threads": 2,
+      "ticks": 132,
+      "fds": 8
+    },
+    "ending": {
+      "VmHWM": 13172,
+      "VmRSS": 13172,
+      "Threads": 2,
+      "ticks": 237,
+      "fds": 8
+    },
+    "elapsed": 1.0437329830019735,
+    "cpu_ticks": 105,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": true,
+    "sample_max_reader_rss_kib": 6320,
+    "sample_max_reader_ticks": 1,
+    "sample_max_reader_fds": 8,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  },
+  {
+    "run": "qualified-absent",
+    "mode": "absent",
+    "binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.020194942015223205
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.02007423300528899
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.020063817006302997
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.021850568999070674
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02394173899665475
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.040585384995210916
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.08375943900318816
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04489563999231905
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04277801199350506
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022175527992658317
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02176823597983457
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02230536099523306
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020327025005826727
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04071705200476572
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.046506226004567
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04388997200294398
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04251884497352876
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0421666789916344
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02011027600383386
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021652818977599964
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023279988003196195
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020387441996717826
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02028752598562278
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04462413999135606
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0401887180050835
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040171216998714954
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02009564999025315
+      },
+      {
+        "command": "TYPE READA.TXT",
+        "seconds": 0.04017800898873247
+      }
+    ],
+    "states": [],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13172,
+      "VmRSS": 13172,
+      "Threads": 2,
+      "ticks": 113,
+      "fds": 8
+    },
+    "ending": {
+      "VmHWM": 13176,
+      "VmRSS": 13176,
+      "Threads": 2,
+      "ticks": 197,
+      "fds": 8
+    },
+    "elapsed": 0.8343540529895108,
+    "cpu_ticks": 84,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": true,
+    "sample_max_reader_rss_kib": 0,
+    "sample_max_reader_ticks": 0,
+    "sample_max_reader_fds": 0,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  },
+  {
+    "run": "qualified-crash",
+    "mode": "crash",
+    "binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.0423714290081989
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.02006552499369718
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.04012784198857844
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.04452009798842482
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02184573601698503
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.06104432701249607
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.06549874899792485
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023985321982763708
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022479444975033402
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.043039553973358124
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020202733983751386
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040146550978533924
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02339790400583297
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02010415098629892
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02009898397955112
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04019059200072661
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040175301022827625
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023493321001296863
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.024975656997412443
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02278702799230814
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021177485992666334
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0422273040167056
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023344654007814825
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02423219699994661
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04664097499335185
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04587655799696222
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02125948600587435
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04062105101183988
+      },
+      {
+        "command": "TYPE READA.TXT",
+        "seconds": 0.050078395986929536
+      }
+    ],
+    "states": [
+      {
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "39914f760c16125f",
+        "generation": 1,
+        "guest": "",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "39914f760c16125f",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "max_queue_at_drain": 9,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "39914f760c16125f",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 15,
+        "lost": 0,
+        "events": 15,
+        "bytes": 6144,
+        "filemarks": 3,
+        "activity": "recent verified read completion",
+        "last_event_to_reader_ms": 83.064897,
+        "max_event_to_reader_ms": 89.218529
+      },
+      {
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "39914f760c16125f",
+        "generation": 1,
+        "guest": "",
+        "sequence": 135,
+        "lost": 108,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      }
+    ],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13316,
+      "VmRSS": 13316,
+      "Threads": 2,
+      "ticks": 131,
+      "fds": 8
+    },
+    "ending": {
+      "VmHWM": 13320,
+      "VmRSS": 13320,
+      "Threads": 2,
+      "ticks": 236,
+      "fds": 8
+    },
+    "elapsed": 1.0534724540193565,
+    "cpu_ticks": 105,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": true,
+    "sample_max_reader_rss_kib": 0,
+    "sample_max_reader_ticks": 0,
+    "sample_max_reader_fds": 0,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  },
+  {
+    "run": "qualified-slow",
+    "mode": "slow",
+    "binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.020573983987560496
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.05018235501484014
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.042483261990128085
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.06043228498310782
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04096221798681654
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.08339177200105041
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.08342485499451868
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.041919843992218375
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020155525009613484
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021821236005052924
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.042451470013475046
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04247605401906185
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02355157199781388
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020033901004353538
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022864653990836814
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.042076511977938935
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.045963141979882494
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02017177498782985
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04251451199525036
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04252767801517621
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04424876399571076
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021944235981209204
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.042493887012824416
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04472830699523911
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04454126500058919
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02318444600678049
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020073441992281005
+      },
+      {
+        "command": "TYPE READA.TXT",
+        "seconds": 0.043160303990589455
+      }
+    ],
+    "states": [
+      {
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "3a63f2d259560539",
+        "generation": 1,
+        "guest": "",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "3a63f2d259560539",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "max_queue_at_drain": 6,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "3a63f2d259560539",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 15,
+        "lost": 0,
+        "events": 15,
+        "bytes": 6144,
+        "filemarks": 3,
+        "activity": "recent verified read completion",
+        "last_event_to_reader_ms": 47.326185,
+        "max_event_to_reader_ms": 47.843685
+      },
+      {
+        "max_queue_at_drain": 6,
+        "pending_at_drain": 0,
+        "mode": "retired",
+        "reason": "source heartbeat expired",
+        "instance": "3a63f2d259560539",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 15,
+        "lost": 0,
+        "events": 15,
+        "bytes": 6144,
+        "filemarks": 3,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 47.326185,
+        "max_event_to_reader_ms": 47.843685
+      }
+    ],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13152,
+      "VmRSS": 13152,
+      "Threads": 2,
+      "ticks": 134,
+      "fds": 8
+    },
+    "ending": {
+      "VmHWM": 13156,
+      "VmRSS": 13156,
+      "Threads": 2,
+      "ticks": 283,
+      "fds": 8
+    },
+    "elapsed": 1.4885248779901303,
+    "cpu_ticks": 149,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": true,
+    "sample_max_reader_rss_kib": 6304,
+    "sample_max_reader_ticks": 0,
+    "sample_max_reader_fds": 8,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  },
+  {
+    "run": "reapproval-crash",
+    "mode": "crash",
+    "binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.04672526702051982
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.048979937011608854
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.04944618800072931
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.04480434799916111
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04178680301993154
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.06285391299752519
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.08084193497779779
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02276615399750881
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021729652013164014
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02174686102080159
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020146441995166242
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022394027997506782
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04208355300943367
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04380943000433035
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04431951398146339
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02091331800329499
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020512858987785876
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021188068989431486
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021186860016314313
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021199984999839216
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02618103302665986
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021511943981749937
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021120275981957093
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02483632299117744
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020196483004838228
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02349623799091205
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021587443974567577
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0208574429852888
+      },
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.022691694990498945
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021627069014357403
+      },
+      {
+        "command": "TYPE READA.TXT",
+        "seconds": 0.040396510012215
+      }
+    ],
+    "states": [
+      {
+        "event_age_ms": -1,
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "a2b71c4fd2f81792",
+        "generation": 1,
+        "guest": "",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "event_age_ms": -1,
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "a2b71c4fd2f81792",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "event_age_ms": 157.788532,
+        "max_queue_at_drain": 9,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "a2b71c4fd2f81792",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 15,
+        "lost": 0,
+        "events": 15,
+        "bytes": 6144,
+        "filemarks": 3,
+        "activity": "recent verified read completion",
+        "last_event_to_reader_ms": 36.340421,
+        "max_event_to_reader_ms": 78.223057
+      },
+      {
+        "event_age_ms": -1,
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "a2b71c4fd2f81792",
+        "generation": 1,
+        "guest": "",
+        "sequence": 135,
+        "lost": 114,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "event_age_ms": -1,
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "a2b71c4fd2f81792",
+        "generation": 1,
+        "guest": "",
+        "sequence": 141,
+        "lost": 114,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "event_age_ms": 160.949161,
+        "max_queue_at_drain": 6,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "a2b71c4fd2f81792",
+        "generation": 1,
+        "guest": "rt11-v0503-reverified",
+        "sequence": 147,
+        "lost": 114,
+        "events": 6,
+        "bytes": 2560,
+        "filemarks": 1,
+        "activity": "recent verified read completion",
+        "last_event_to_reader_ms": 28.962037,
+        "max_event_to_reader_ms": 29.153703
+      }
+    ],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13320,
+      "VmRSS": 13320,
+      "Threads": 2,
+      "ticks": 135,
+      "fds": 8
+    },
+    "ending": {
+      "VmHWM": 13324,
+      "VmRSS": 13324,
+      "Threads": 2,
+      "ticks": 278,
+      "fds": 8
+    },
+    "elapsed": 1.4294152200163808,
+    "cpu_ticks": 143,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": true,
+    "sample_max_reader_rss_kib": 0,
+    "sample_max_reader_ticks": 0,
+    "sample_max_reader_fds": 0,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  },
+  {
+    "run": "late-absent",
+    "mode": "absent",
+    "binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.021428026986541227
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.023944571992615238
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.020463108987314627
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.041841553000267595
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021593318990198895
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.06075482701999135
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.08687765200738795
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04291797001496889
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04605626600096002
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021282152010826394
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021195277018705383
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022487487003672868
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04970452099223621
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022295903007034212
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023811863007722422
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023783071985235438
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02286723698489368
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020164649991784245
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021549693978158757
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.042363137006759644
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0436357639846392
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040188176004448906
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02008056698832661
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04860576998908073
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04018129999167286
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04221813700860366
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020934109983500093
+      },
+      {
+        "command": "TYPE READA.TXT",
+        "seconds": 0.04690993399708532
+      }
+    ],
+    "states": [
+      {
+        "event_age_ms": -1,
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "345704ec0d946972",
+        "generation": 1,
+        "guest": "",
+        "sequence": 135,
+        "lost": 135,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "event_age_ms": -1,
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "345704ec0d946972",
+        "generation": 1,
+        "guest": "",
+        "sequence": 135,
+        "lost": 135,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      }
+    ],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13192,
+      "VmRSS": 13192,
+      "Threads": 2,
+      "ticks": 117,
+      "fds": 8
+    },
+    "ending": {
+      "VmHWM": 13196,
+      "VmRSS": 13196,
+      "Threads": 2,
+      "ticks": 215,
+      "fds": 8
+    },
+    "elapsed": 0.9766950249904767,
+    "cpu_ticks": 98,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": true,
+    "sample_max_reader_rss_kib": 0,
+    "sample_max_reader_ticks": 0,
+    "sample_max_reader_fds": 0,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  },
+  {
+    "run": "browser2",
+    "mode": "browser",
+    "binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+    "guest": "RT-11SJ (S) V05.03",
+    "commands": [
+      {
+        "command": "SHOW CONFIG",
+        "seconds": 0.04109963501105085
+      },
+      {
+        "command": "REMOVE CT",
+        "seconds": 0.04112717599491589
+      },
+      {
+        "command": "INSTALL MT",
+        "seconds": 0.042144761013332754
+      },
+      {
+        "command": "SHOW DEVICES",
+        "seconds": 0.046825849974993616
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02133236001827754
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECA.TXT SY:READA.TXT",
+        "seconds": 0.06385620500077493
+      },
+      {
+        "command": "COPY/IMAGE MT0:RECB.TXT SY:READB.TXT",
+        "seconds": 0.08046568397548981
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021215485001448542
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0213300270261243
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020274109003366902
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0226609030214604
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023022987006697804
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02012260799529031
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020934483996825293
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021461650991113856
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02217186099733226
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022487320005893707
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023882362991571426
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023245321004651487
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.046668850001879036
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020104941999306902
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020079317007912323
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0401504670153372
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020094524981686845
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020075401000212878
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.040153966983780265
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02007673299522139
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02289611301966943
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022277110983850434
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021130026987520978
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02283936200547032
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02145777700934559
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.046310975012602285
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0223629450192675
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022195778001332656
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023226946010254323
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04792535200249404
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02012898400425911
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021985651983413845
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.0214796100044623
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04302342899609357
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020402691996423528
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04837193599087186
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02160348600591533
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023400528996717185
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021341318992199376
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02278607100015506
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02027527499012649
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.024003072001505643
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02042240000446327
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04738997700042091
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021406902000308037
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04266917900531553
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.022694195999065414
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.023233738000271842
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04907452000770718
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.042255220003426075
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021907193993683904
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04043484301655553
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04104592598741874
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020722776011098176
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.020075691980309784
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.04014325901516713
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.024007864005398005
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02168477699160576
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.021901528001762927
+      },
+      {
+        "command": "DIR MT0:",
+        "seconds": 0.02133102700463496
+      }
+    ],
+    "states": [
+      {
+        "event_age_ms": -1,
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "unapproved",
+        "reason": "",
+        "instance": "edbcb9018c531b9b",
+        "generation": 1,
+        "guest": "",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "event_age_ms": -1,
+        "max_queue_at_drain": 0,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "edbcb9018c531b9b",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 0,
+        "lost": 0,
+        "events": 0,
+        "bytes": 0,
+        "filemarks": 0,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 0,
+        "max_event_to_reader_ms": 0
+      },
+      {
+        "event_age_ms": 161.412868,
+        "max_queue_at_drain": 9,
+        "pending_at_drain": 0,
+        "mode": "approved-lab",
+        "reason": "",
+        "instance": "edbcb9018c531b9b",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 15,
+        "lost": 0,
+        "events": 15,
+        "bytes": 6144,
+        "filemarks": 3,
+        "activity": "recent verified read completion",
+        "last_event_to_reader_ms": 58.727656,
+        "max_event_to_reader_ms": 98.601539
+      },
+      {
+        "event_age_ms": 1499.634519,
+        "max_queue_at_drain": 9,
+        "pending_at_drain": 0,
+        "mode": "retired",
+        "reason": "source or attachment changed",
+        "instance": "edbcb9018c531b9b",
+        "generation": 1,
+        "guest": "rt11-v0503-operator-attested",
+        "sequence": 375,
+        "lost": 0,
+        "events": 375,
+        "bytes": 159744,
+        "filemarks": 63,
+        "activity": "unknown",
+        "last_event_to_reader_ms": 98.402583,
+        "max_event_to_reader_ms": 105.63734
+      }
+    ],
+    "byte_verification": {
+      "guest_output_files": [
+        {
+          "source": "RECA.TXT",
+          "recovered": "READA.TXT",
+          "bytes": 512,
+          "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+          "exact_match": true
+        },
+        {
+          "source": "RECB.TXT",
+          "recovered": "READB.TXT",
+          "bytes": 1024,
+          "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+          "exact_match": true
+        }
+      ],
+      "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "tape_records": [
+        {
+          "offset": 0,
+          "next": 520,
+          "bytes": 512,
+          "label": "VOL1"
+        },
+        {
+          "offset": 520,
+          "next": 1040,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 1040,
+          "next": 1044,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1044,
+          "next": 1564,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 1564,
+          "next": 1568,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 1568,
+          "next": 2088,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 2088,
+          "next": 2092,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2092,
+          "next": 2612,
+          "bytes": 512,
+          "label": "HDR1"
+        },
+        {
+          "offset": 2612,
+          "next": 2616,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 2616,
+          "next": 3136,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3136,
+          "next": 3656,
+          "bytes": 512,
+          "label": "data"
+        },
+        {
+          "offset": 3656,
+          "next": 3660,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 3660,
+          "next": 4180,
+          "bytes": 512,
+          "label": "EOF1"
+        },
+        {
+          "offset": 4180,
+          "next": 4184,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4184,
+          "next": 4188,
+          "bytes": 0,
+          "label": "filemark"
+        },
+        {
+          "offset": 4188,
+          "next": 4192,
+          "bytes": 0,
+          "label": "filemark"
+        }
+      ]
+    },
+    "baseline": {
+      "VmHWM": 13300,
+      "VmRSS": 13300,
+      "Threads": 2,
+      "ticks": 141,
+      "fds": 8
+    },
+    "ending": {
+      "VmHWM": 13304,
+      "VmRSS": 13304,
+      "Threads": 2,
+      "ticks": 1523,
+      "fds": 8
+    },
+    "elapsed": 14.751817418000428,
+    "cpu_ticks": 1382,
+    "clock_hz": 100,
+    "guest_exit": 0,
+    "original_console_after_reader_stop": false,
+    "console_boundary": "Guest intentionally remained halted after independent tape replacement; no resume",
+    "sample_max_reader_rss_kib": 0,
+    "sample_max_reader_ticks": 0,
+    "sample_max_reader_fds": 0,
+    "facts": {
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000145\r\nMTC:\t060200\r\nMTBRC:\t000000\r\nMTCMA:\t000000\r\nUST[0]:\t000144\r\nPOS[0]:\t0\r\nsim> "
+    }
+  }
+]

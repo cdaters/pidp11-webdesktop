@@ -1,0 +1,461 @@
+[
+  {
+    "browser": "chromium",
+    "source": "genuine instrumented RT11; no intercepted responses",
+    "elapsed_ms": 3091.4642500000004,
+    "raw_samples": [
+      {
+        "sequence": 15,
+        "ageUpperMS": 759.5705720238418
+      },
+      {
+        "sequence": 21,
+        "ageUpperMS": 170.59446100000002
+      },
+      {
+        "sequence": 27,
+        "ageUpperMS": 156.687276
+      },
+      {
+        "sequence": 33,
+        "ageUpperMS": 121.94869198807908
+      },
+      {
+        "sequence": 39,
+        "ageUpperMS": 101.3199139761582
+      },
+      {
+        "sequence": 39,
+        "ageUpperMS": 206.67250400000012
+      },
+      {
+        "sequence": 45,
+        "ageUpperMS": 194.43094800596054
+      },
+      {
+        "sequence": 51,
+        "ageUpperMS": 168.91545800596055
+      },
+      {
+        "sequence": 57,
+        "ageUpperMS": 142.75834200596046
+      },
+      {
+        "sequence": 63,
+        "ageUpperMS": 118.5629780178815
+      },
+      {
+        "sequence": 69,
+        "ageUpperMS": 93.32673901192084
+      },
+      {
+        "sequence": 75,
+        "ageUpperMS": 68.0502490059605
+      },
+      {
+        "sequence": 75,
+        "ageUpperMS": 173.27383899999995
+      },
+      {
+        "sequence": 87,
+        "ageUpperMS": 14.311472988079004
+      },
+      {
+        "sequence": 87,
+        "ageUpperMS": 118.41685301192092
+      },
+      {
+        "sequence": 93,
+        "ageUpperMS": 85.54772899999989
+      },
+      {
+        "sequence": 99,
+        "ageUpperMS": 53.3213139999998
+      },
+      {
+        "sequence": 105,
+        "ageUpperMS": 40.17088097615806
+      },
+      {
+        "sequence": 105,
+        "ageUpperMS": 144.3033030119209
+      },
+      {
+        "sequence": 111,
+        "ageUpperMS": 114.77397400000018
+      },
+      {
+        "sequence": 117,
+        "ageUpperMS": 91.25044401788136
+      },
+      {
+        "sequence": 123,
+        "ageUpperMS": 76.75384498807898
+      },
+      {
+        "sequence": 129,
+        "ageUpperMS": 48.43201600596058
+      },
+      {
+        "sequence": 135,
+        "ageUpperMS": 22.20344100000011
+      },
+      {
+        "sequence": 135,
+        "ageUpperMS": 127.90199100596055
+      },
+      {
+        "sequence": 135,
+        "ageUpperMS": 231.69753797615795
+      },
+      {
+        "sequence": 135,
+        "ageUpperMS": 336.09792000596053
+      },
+      {
+        "sequence": 135,
+        "ageUpperMS": 438.7594680178813
+      },
+      {
+        "sequence": 135,
+        "ageUpperMS": 543.1647670000002
+      }
+    ],
+    "age_upper_bound_samples": [
+      14.311472988079004,
+      22.20344100000011,
+      40.17088097615806,
+      48.43201600596058,
+      53.3213139999998,
+      68.0502490059605,
+      76.75384498807898,
+      85.54772899999989,
+      91.25044401788136,
+      93.32673901192084,
+      101.3199139761582,
+      114.77397400000018,
+      118.5629780178815,
+      121.94869198807908,
+      142.75834200596046,
+      156.687276,
+      168.91545800596055,
+      170.59446100000002,
+      194.43094800596054
+    ],
+    "p95_upper_ms": 194.43094800596054,
+    "expired_to_unknown": true,
+    "cancellation_passed": true,
+    "attachment_retirement_passed": false,
+    "render_rate": 9.380668076624207,
+    "measurement_note": "Rendering count uses workload interval. Original request counter included later lifecycle checks and was excluded. Age upper bounds retain all eligible new-sequence samples, without the first run cutoff."
+  },
+  {
+    "browser": "firefox",
+    "source": "genuine instrumented RT11; no intercepted responses",
+    "elapsed_ms": 3181.707791,
+    "raw_samples": [
+      {
+        "sequence": 135,
+        "ageUpperMS": 2710.775753
+      },
+      {
+        "sequence": 141,
+        "ageUpperMS": 173.61038299999996
+      },
+      {
+        "sequence": 147,
+        "ageUpperMS": 152.29064700000004
+      },
+      {
+        "sequence": 153,
+        "ageUpperMS": 121.96652599999993
+      },
+      {
+        "sequence": 159,
+        "ageUpperMS": 106.93792400000007
+      },
+      {
+        "sequence": 165,
+        "ageUpperMS": 78.89984600000003
+      },
+      {
+        "sequence": 165,
+        "ageUpperMS": 181.045435
+      },
+      {
+        "sequence": 171,
+        "ageUpperMS": 138.8057960000001
+      },
+      {
+        "sequence": 177,
+        "ageUpperMS": 99.23811999999998
+      },
+      {
+        "sequence": 183,
+        "ageUpperMS": 72.05608699999993
+      },
+      {
+        "sequence": 189,
+        "ageUpperMS": 41.171468000000004
+      },
+      {
+        "sequence": 189,
+        "ageUpperMS": 144.0828879999999
+      },
+      {
+        "sequence": 195,
+        "ageUpperMS": 117.72497699999985
+      },
+      {
+        "sequence": 201,
+        "ageUpperMS": 68.414041
+      },
+      {
+        "sequence": 207,
+        "ageUpperMS": 52.16910199999984
+      },
+      {
+        "sequence": 213,
+        "ageUpperMS": 34.1203730000002
+      },
+      {
+        "sequence": 213,
+        "ageUpperMS": 137.6467950000001
+      },
+      {
+        "sequence": 213,
+        "ageUpperMS": 241.03717599999982
+      },
+      {
+        "sequence": 225,
+        "ageUpperMS": 79.44059500000003
+      },
+      {
+        "sequence": 225,
+        "ageUpperMS": 184.51210300000002
+      },
+      {
+        "sequence": 231,
+        "ageUpperMS": 153.38035600000012
+      },
+      {
+        "sequence": 237,
+        "ageUpperMS": 105.6262529999999
+      },
+      {
+        "sequence": 243,
+        "ageUpperMS": 92.87802899999997
+      },
+      {
+        "sequence": 249,
+        "ageUpperMS": 64.89603399999987
+      },
+      {
+        "sequence": 255,
+        "ageUpperMS": 36.68387299999995
+      },
+      {
+        "sequence": 255,
+        "ageUpperMS": 137.9275029999999
+      },
+      {
+        "sequence": 255,
+        "ageUpperMS": 242.39367600000014
+      },
+      {
+        "sequence": 255,
+        "ageUpperMS": 344.99109799999997
+      },
+      {
+        "sequence": 255,
+        "ageUpperMS": 449.7747709999999
+      },
+      {
+        "sequence": 255,
+        "ageUpperMS": 552.5502349999997
+      }
+    ],
+    "age_upper_bound_samples": [
+      34.1203730000002,
+      36.68387299999995,
+      41.171468000000004,
+      52.16910199999984,
+      64.89603399999987,
+      68.414041,
+      72.05608699999993,
+      78.89984600000003,
+      79.44059500000003,
+      92.87802899999997,
+      99.23811999999998,
+      105.6262529999999,
+      106.93792400000007,
+      117.72497699999985,
+      121.96652599999993,
+      138.8057960000001,
+      152.29064700000004,
+      153.38035600000012,
+      173.61038299999996
+    ],
+    "p95_upper_ms": 173.61038299999996,
+    "expired_to_unknown": true,
+    "cancellation_passed": true,
+    "attachment_retirement_passed": false,
+    "render_rate": 9.428898557202546,
+    "measurement_note": "Rendering count uses workload interval. Original request counter included later lifecycle checks and was excluded. Age upper bounds retain all eligible new-sequence samples, without the first run cutoff."
+  },
+  {
+    "browser": "webkit",
+    "source": "genuine instrumented RT11; no intercepted responses",
+    "elapsed_ms": 3258.6489170000004,
+    "raw_samples": [
+      {
+        "sequence": 261,
+        "ageUpperMS": 50.860727999999995
+      },
+      {
+        "sequence": 261,
+        "ageUpperMS": 173.12609099999997
+      },
+      {
+        "sequence": 267,
+        "ageUpperMS": 153.30256399999996
+      },
+      {
+        "sequence": 273,
+        "ageUpperMS": 129.02924299999995
+      },
+      {
+        "sequence": 279,
+        "ageUpperMS": 105.59892000000002
+      },
+      {
+        "sequence": 285,
+        "ageUpperMS": 64.58895200000006
+      },
+      {
+        "sequence": 285,
+        "ageUpperMS": 167.85858299999995
+      },
+      {
+        "sequence": 291,
+        "ageUpperMS": 145.37817799999993
+      },
+      {
+        "sequence": 297,
+        "ageUpperMS": 104.8237939999999
+      },
+      {
+        "sequence": 303,
+        "ageUpperMS": 81.05638900000008
+      },
+      {
+        "sequence": 303,
+        "ageUpperMS": 183.64273000000003
+      },
+      {
+        "sequence": 309,
+        "ageUpperMS": 145.08034500000008
+      },
+      {
+        "sequence": 315,
+        "ageUpperMS": 90.17615
+      },
+      {
+        "sequence": 321,
+        "ageUpperMS": 50.3489340000001
+      },
+      {
+        "sequence": 321,
+        "ageUpperMS": 156.84444200000007
+      },
+      {
+        "sequence": 327,
+        "ageUpperMS": 130.094826
+      },
+      {
+        "sequence": 333,
+        "ageUpperMS": 99.62878600000022
+      },
+      {
+        "sequence": 339,
+        "ageUpperMS": 65.81495300000006
+      },
+      {
+        "sequence": 345,
+        "ageUpperMS": 52.36535099999992
+      },
+      {
+        "sequence": 345,
+        "ageUpperMS": 156.422192
+      },
+      {
+        "sequence": 351,
+        "ageUpperMS": 137.8777540000001
+      },
+      {
+        "sequence": 357,
+        "ageUpperMS": 106.5726279999999
+      },
+      {
+        "sequence": 363,
+        "ageUpperMS": 76.68229699999983
+      },
+      {
+        "sequence": 369,
+        "ageUpperMS": 45.35042599999997
+      },
+      {
+        "sequence": 369,
+        "ageUpperMS": 151.47314499999993
+      },
+      {
+        "sequence": 375,
+        "ageUpperMS": 137.5434610000002
+      },
+      {
+        "sequence": 375,
+        "ageUpperMS": 242.46355099999982
+      },
+      {
+        "sequence": 375,
+        "ageUpperMS": 347.571684
+      },
+      {
+        "sequence": 375,
+        "ageUpperMS": 451.8936920000001
+      },
+      {
+        "sequence": 375,
+        "ageUpperMS": 556.059823
+      }
+    ],
+    "age_upper_bound_samples": [
+      45.35042599999997,
+      50.3489340000001,
+      50.860727999999995,
+      52.36535099999992,
+      64.58895200000006,
+      65.81495300000006,
+      76.68229699999983,
+      81.05638900000008,
+      90.17615,
+      99.62878600000022,
+      104.8237939999999,
+      105.59892000000002,
+      106.5726279999999,
+      129.02924299999995,
+      130.094826,
+      137.5434610000002,
+      137.8777540000001,
+      145.08034500000008,
+      145.37817799999993,
+      153.30256399999996
+    ],
+    "p95_upper_ms": 145.37817799999993,
+    "expired_to_unknown": true,
+    "cancellation_passed": false,
+    "attachment_retirement_passed": true,
+    "render_rate": 9.20626945833085,
+    "measurement_note": "Rendering count uses workload interval. Original request counter included later lifecycle checks and was excluded. Age upper bounds retain all eligible new-sequence samples, without the first run cutoff."
+  }
+]

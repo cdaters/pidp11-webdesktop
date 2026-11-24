@@ -1,0 +1,1 @@
+fixed ring=16384 bytes; saturation, contention, four producers, disabled and rollover passed; fault=1

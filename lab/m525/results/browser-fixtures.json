@@ -1,0 +1,20 @@
+[
+  {
+    "browser": "chromium",
+    "fixture": true,
+    "delayed_reply_after_stop_rejected": true,
+    "timeout_expires_activity": true
+  },
+  {
+    "browser": "firefox",
+    "fixture": true,
+    "delayed_reply_after_stop_rejected": true,
+    "timeout_expires_activity": true
+  },
+  {
+    "browser": "webkit",
+    "fixture": true,
+    "delayed_reply_after_stop_rejected": true,
+    "timeout_expires_activity": true
+  }
+]

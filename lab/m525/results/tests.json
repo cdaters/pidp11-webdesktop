@@ -1,0 +1,22 @@
+{
+  "go_vet_all": "passed",
+  "go_uncached_race_packages": 25,
+  "final_observer_race": "passed including connection bound/slot recovery",
+  "linux_arm64_vet_and_build": "passed",
+  "frontend_typecheck": "passed",
+  "frontend_units": 106,
+  "ordinary_frontend_build": "passed",
+  "genuine_browser_engines": [
+    "Chromium",
+    "Firefox",
+    "WebKit"
+  ],
+  "genuine_browser_campaigns": 2,
+  "browser_delayed_reply_fixtures": 3,
+  "original_C_interrupt_differential_modes": 3,
+  "ring_asan_ubsan": "passed; concurrent producers/consumer, full ring, rollover, try-gate contention",
+  "ordinary_full_browser_suite": "not rerun; ordinary UI unchanged; lab injection tested in three engines",
+  "c_thread_sanitizer": "not run",
+  "final_viewer_expiry_cancel_timeout_fixtures": "passed in Chromium, Firefox and WebKit after genuine browser campaign",
+  "patch_reproduction": "221 simulator-subtree files byte-identical, repeat application refused"
+}

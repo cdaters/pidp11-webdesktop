@@ -1,0 +1,482 @@
+{
+  "reader_sha256": "87bf3e60abc10bbdcbec85b95c80adaca36677438877e2044c5e81df7dc620fd",
+  "summary": {
+    "event_age_ms": 0,
+    "max_queue_at_drain": 18,
+    "pending_at_drain": 0,
+    "mode": "approved-lab",
+    "reason": "",
+    "instance": "c864d871fb736201",
+    "generation": 1,
+    "guest": "rt11-v0503-operator-attested",
+    "sequence": 135,
+    "lost": 0,
+    "events": 135,
+    "bytes": 57344,
+    "filemarks": 23,
+    "activity": "unknown",
+    "last_event_to_reader_ms": 49.617312,
+    "max_event_to_reader_ms": 105.997592
+  },
+  "guest_exit": 0,
+  "original_console_after_reader_stop": true,
+  "byte_verification": {
+    "guest_output_files": [
+      {
+        "source": "RECA.TXT",
+        "recovered": "READA.TXT",
+        "bytes": 512,
+        "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+        "exact_match": true
+      },
+      {
+        "source": "RECB.TXT",
+        "recovered": "READB.TXT",
+        "bytes": 1024,
+        "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+        "exact_match": true
+      }
+    ],
+    "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "tape_records": [
+      {
+        "offset": 0,
+        "next": 520,
+        "bytes": 512,
+        "label": "VOL1"
+      },
+      {
+        "offset": 520,
+        "next": 1040,
+        "bytes": 512,
+        "label": "HDR1"
+      },
+      {
+        "offset": 1040,
+        "next": 1044,
+        "bytes": 0,
+        "label": "filemark"
+      },
+      {
+        "offset": 1044,
+        "next": 1564,
+        "bytes": 512,
+        "label": "data"
+      },
+      {
+        "offset": 1564,
+        "next": 1568,
+        "bytes": 0,
+        "label": "filemark"
+      },
+      {
+        "offset": 1568,
+        "next": 2088,
+        "bytes": 512,
+        "label": "EOF1"
+      },
+      {
+        "offset": 2088,
+        "next": 2092,
+        "bytes": 0,
+        "label": "filemark"
+      },
+      {
+        "offset": 2092,
+        "next": 2612,
+        "bytes": 512,
+        "label": "HDR1"
+      },
+      {
+        "offset": 2612,
+        "next": 2616,
+        "bytes": 0,
+        "label": "filemark"
+      },
+      {
+        "offset": 2616,
+        "next": 3136,
+        "bytes": 512,
+        "label": "data"
+      },
+      {
+        "offset": 3136,
+        "next": 3656,
+        "bytes": 512,
+        "label": "data"
+      },
+      {
+        "offset": 3656,
+        "next": 3660,
+        "bytes": 0,
+        "label": "filemark"
+      },
+      {
+        "offset": 3660,
+        "next": 4180,
+        "bytes": 512,
+        "label": "EOF1"
+      },
+      {
+        "offset": 4180,
+        "next": 4184,
+        "bytes": 0,
+        "label": "filemark"
+      },
+      {
+        "offset": 4184,
+        "next": 4188,
+        "bytes": 0,
+        "label": "filemark"
+      },
+      {
+        "offset": 4188,
+        "next": 4192,
+        "bytes": 0,
+        "label": "filemark"
+      }
+    ]
+  },
+  "samples": [
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 184,
+        "fds": 8
+      },
+      "at": 217730.472317722,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 186,
+        "fds": 8
+      },
+      "at": 217730.49358079,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 190,
+        "fds": 8
+      },
+      "at": 217730.534827092,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 194,
+        "fds": 8
+      },
+      "at": 217730.578436063,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 196,
+        "fds": 8
+      },
+      "at": 217730.59993834,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 201,
+        "fds": 8
+      },
+      "at": 217730.649648319,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 206,
+        "fds": 8
+      },
+      "at": 217730.698958465,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 211,
+        "fds": 8
+      },
+      "at": 217730.748514235,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 216,
+        "fds": 8
+      },
+      "at": 217730.789554954,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 220,
+        "fds": 8
+      },
+      "at": 217730.833106633,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 224,
+        "fds": 8
+      },
+      "at": 217730.874668019,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 229,
+        "fds": 8
+      },
+      "at": 217730.915555612,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 231,
+        "fds": 8
+      },
+      "at": 217730.937423556,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 235,
+        "fds": 8
+      },
+      "at": 217730.978059899,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 239,
+        "fds": 8
+      },
+      "at": 217731.018672075,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 243,
+        "fds": 8
+      },
+      "at": 217731.06256063,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 247,
+        "fds": 8
+      },
+      "at": 217731.106900311,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 252,
+        "fds": 8
+      },
+      "at": 217731.152383535,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13124,
+        "VmRSS": 13124,
+        "Threads": 2,
+        "ticks": 254,
+        "fds": 8
+      },
+      "at": 217731.17269706,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    },
+    {
+      "simulator": {
+        "VmHWM": 13128,
+        "VmRSS": 13128,
+        "Threads": 2,
+        "ticks": 258,
+        "fds": 8
+      },
+      "at": 217731.213478653,
+      "reader": {
+        "VmHWM": 6644,
+        "VmRSS": 6644,
+        "Threads": 8,
+        "ticks": 0,
+        "fds": 8
+      }
+    }
+  ]
+}

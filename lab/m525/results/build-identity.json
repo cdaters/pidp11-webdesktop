@@ -1,0 +1,21 @@
+{
+  "source_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+  "base_image": "sha256:564662bf3489f350e39b39ec46751454568689b0d8dd0d24b4527971c2f3836c",
+  "toolchain": "gcc Debian 12.2.0-14+deb12u1, ARM64 Linux; original quickmake O2/C99 flags; NETWORK_OPT empty and DISPLAY_OPT=-DUSE_DISPLAY as established lab",
+  "control_source_file_count": 270,
+  "changed_source_files": [
+    "src/02.3_simh/4.x+realcons/src/PDP11/pdp11_tm.c",
+    "src/02.3_simh/4.x+realcons/src/events.c",
+    "src/02.3_simh/4.x+realcons/src/events.h",
+    "src/02.3_simh/4.x+realcons/src/quickmake",
+    "src/02.3_simh/4.x+realcons/src/scp.c"
+  ],
+  "control_source_matches_retained_original": true,
+  "control_binary_sha256": "56c373444d9bc3faf7bf1c3eb4087a43c49b882e42ede8a2cea986cc421d7b79",
+  "instrumented_binary_sha256": "9766a177fbba5c20e2c36bfdd320338606dba3bd9282336f0fde90065b9fb86e",
+  "first_candidate_rejected": "sim_gtime updates scheduler bookkeeping and takes AIO_LOCK; guest results not used as acceptance",
+  "first_candidate_binary_sha256": "0a5ef551bb2895cd882c1451c750007ca74067cfb1425944d4650640b3505a4b",
+  "reader_final_sha256": "87bf3e60abc10bbdcbec85b95c80adaca36677438877e2044c5e81df7dc620fd",
+  "browser_reader_sha256": "1fcdc320b385f2b850c416c88c818f4e9b6ed9c0eb2103995ad45e8d89102a49",
+  "reader_identity_scope": "Browser2 uses the retained pre-connection-limit reader; final-reader-enabled uses final reader. Earlier matrix reader hash was not captured separately; final state/connection checks are separately rerun."
+}

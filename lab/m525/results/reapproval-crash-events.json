@@ -1,0 +1,101 @@
+{
+  "summary": {
+    "event_age_ms": 0,
+    "max_queue_at_drain": 6,
+    "pending_at_drain": 0,
+    "mode": "approved-lab",
+    "reason": "",
+    "instance": "a2b71c4fd2f81792",
+    "generation": 1,
+    "guest": "rt11-v0503-reverified",
+    "sequence": 147,
+    "lost": 114,
+    "events": 6,
+    "bytes": 2560,
+    "filemarks": 1,
+    "activity": "unknown",
+    "last_event_to_reader_ms": 28.962037,
+    "max_event_to_reader_ms": 29.153703
+  },
+  "events": [
+    {
+      "instance": "a2b71c4fd2f81792",
+      "generation": 1,
+      "sequence": 142,
+      "simulated_ticks": 186290619,
+      "monotonic_ns": 217596205265252,
+      "requested": 512,
+      "completed": 512,
+      "status": 69,
+      "command": 24770,
+      "interrupt": true,
+      "lost": 114
+    },
+    {
+      "instance": "a2b71c4fd2f81792",
+      "generation": 1,
+      "sequence": 143,
+      "simulated_ticks": 186291569,
+      "monotonic_ns": 217596205278752,
+      "requested": 512,
+      "completed": 512,
+      "status": 69,
+      "command": 24770,
+      "interrupt": true,
+      "lost": 114
+    },
+    {
+      "instance": "a2b71c4fd2f81792",
+      "generation": 1,
+      "sequence": 144,
+      "simulated_ticks": 186294137,
+      "monotonic_ns": 217596205320044,
+      "requested": 512,
+      "completed": 512,
+      "status": 69,
+      "command": 24770,
+      "interrupt": true,
+      "lost": 114
+    },
+    {
+      "instance": "a2b71c4fd2f81792",
+      "generation": 1,
+      "sequence": 145,
+      "simulated_ticks": 186295028,
+      "monotonic_ns": 217596205333419,
+      "requested": 512,
+      "completed": 512,
+      "status": 69,
+      "command": 24770,
+      "interrupt": true,
+      "lost": 114
+    },
+    {
+      "instance": "a2b71c4fd2f81792",
+      "generation": 1,
+      "sequence": 146,
+      "simulated_ticks": 186300154,
+      "monotonic_ns": 217596205436585,
+      "requested": 512,
+      "completed": 512,
+      "status": 69,
+      "command": 24770,
+      "interrupt": true,
+      "lost": 114
+    },
+    {
+      "instance": "a2b71c4fd2f81792",
+      "generation": 1,
+      "sequence": 147,
+      "simulated_ticks": 186301310,
+      "monotonic_ns": 217596205457877,
+      "requested": 512,
+      "completed": 0,
+      "status": 16453,
+      "command": 57538,
+      "interrupt": true,
+      "lost": 114
+    }
+  ],
+  "history_omitted": 0
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "mode": "control",
+    "facts": {
+      "examine r0": "examine r0\r\nR0:\t000004\r\nsim> ",
+      "examine 3000-3016": "examine 3000-3016\r\n3000:\t000105\r\n3002:\t000302\r\n3004:\t040105\r\n3006:\t100302\r\n3010:\t040105\r\n3012:\t100302\r\n3014:\t000505\r\n3016:\t100302\r\nsim> ",
+      "examine 2000-2052": "examine 2000-2052\r\n2000:\t032515\r\n2002:\t031056\r\n2004:\t020065\r\n2006:\t046524\r\n2010:\t030461\r\n2012:\t047440\r\n2014:\t044522\r\n2016:\t044507\r\n2020:\t040516\r\n2022:\t026514\r\n2024:\t020103\r\n2026:\t047111\r\n2030:\t042524\r\n2032:\t051122\r\n2034:\t050125\r\n2036:\t020124\r\n2040:\t047503\r\n2042:\t050115\r\n2044:\t051101\r\n2046:\t051511\r\n2050:\t047117\r\n2052:\t005015\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000505\r\nMTC:\t100302\r\nMTBRC:\t177724\r\nMTCMA:\t002000\r\nUST[0]:\t000104\r\nPOS[0]:\t60\r\nsim> ",
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> "
+    },
+    "interrupts_serviced": 4,
+    "dma_bytes": 44,
+    "dma_sha256": "9187bed02f268644cd912df42b19978b3941064b555ef8eaf38736325c9f2622",
+    "input_unchanged": true,
+    "exit_code": 0
+  },
+  {
+    "mode": "disabled",
+    "facts": {
+      "examine r0": "examine r0\r\nR0:\t000004\r\nsim> ",
+      "examine 3000-3016": "examine 3000-3016\r\n3000:\t000105\r\n3002:\t000302\r\n3004:\t040105\r\n3006:\t100302\r\n3010:\t040105\r\n3012:\t100302\r\n3014:\t000505\r\n3016:\t100302\r\nsim> ",
+      "examine 2000-2052": "examine 2000-2052\r\n2000:\t032515\r\n2002:\t031056\r\n2004:\t020065\r\n2006:\t046524\r\n2010:\t030461\r\n2012:\t047440\r\n2014:\t044522\r\n2016:\t044507\r\n2020:\t040516\r\n2022:\t026514\r\n2024:\t020103\r\n2026:\t047111\r\n2030:\t042524\r\n2032:\t051122\r\n2034:\t050125\r\n2036:\t020124\r\n2040:\t047503\r\n2042:\t050115\r\n2044:\t051101\r\n2046:\t051511\r\n2050:\t047117\r\n2052:\t005015\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000505\r\nMTC:\t100302\r\nMTBRC:\t177724\r\nMTCMA:\t002000\r\nUST[0]:\t000104\r\nPOS[0]:\t60\r\nsim> ",
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> "
+    },
+    "interrupts_serviced": 4,
+    "dma_bytes": 44,
+    "dma_sha256": "9187bed02f268644cd912df42b19978b3941064b555ef8eaf38736325c9f2622",
+    "input_unchanged": true,
+    "exit_code": 0
+  },
+  {
+    "mode": "enabled",
+    "facts": {
+      "examine r0": "examine r0\r\nR0:\t000004\r\nsim> ",
+      "examine 3000-3016": "examine 3000-3016\r\n3000:\t000105\r\n3002:\t000302\r\n3004:\t040105\r\n3006:\t100302\r\n3010:\t040105\r\n3012:\t100302\r\n3014:\t000505\r\n3016:\t100302\r\nsim> ",
+      "examine 2000-2052": "examine 2000-2052\r\n2000:\t032515\r\n2002:\t031056\r\n2004:\t020065\r\n2006:\t046524\r\n2010:\t030461\r\n2012:\t047440\r\n2014:\t044522\r\n2016:\t044507\r\n2020:\t040516\r\n2022:\t026514\r\n2024:\t020103\r\n2026:\t047111\r\n2030:\t042524\r\n2032:\t051122\r\n2034:\t050125\r\n2036:\t020124\r\n2040:\t047503\r\n2042:\t050115\r\n2044:\t051101\r\n2046:\t051511\r\n2050:\t047117\r\n2052:\t005015\r\nsim> ",
+      "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t000505\r\nMTC:\t100302\r\nMTBRC:\t177724\r\nMTCMA:\t002000\r\nUST[0]:\t000104\r\nPOS[0]:\t60\r\nsim> ",
+      "show realcons": "show realcons\r\nREALCONS 11/70, host=\"localhost\", host panel=\"11/70\", interval = 20 msec, disconnected, boot image filename not set, nodebug, no server\r\nsim> "
+    },
+    "interrupts_serviced": 4,
+    "dma_bytes": 44,
+    "dma_sha256": "9187bed02f268644cd912df42b19978b3941064b555ef8eaf38736325c9f2622",
+    "input_unchanged": true,
+    "exit_code": 0
+  }
+]

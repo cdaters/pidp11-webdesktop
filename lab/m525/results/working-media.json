@@ -1,0 +1,38 @@
+[
+  {
+    "run": "qualified-control",
+    "working_disk_sha256": "1c11612c61e538316893bb70ad1dced66386f43d6352568ed3caa6f6e3d8b9c7",
+    "input_tape_sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "guest_exit": 0
+  },
+  {
+    "run": "qualified-disabled",
+    "working_disk_sha256": "1c11612c61e538316893bb70ad1dced66386f43d6352568ed3caa6f6e3d8b9c7",
+    "input_tape_sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "guest_exit": 0
+  },
+  {
+    "run": "qualified-enabled",
+    "working_disk_sha256": "1c11612c61e538316893bb70ad1dced66386f43d6352568ed3caa6f6e3d8b9c7",
+    "input_tape_sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "guest_exit": 0
+  },
+  {
+    "run": "qualified-absent",
+    "working_disk_sha256": "1c11612c61e538316893bb70ad1dced66386f43d6352568ed3caa6f6e3d8b9c7",
+    "input_tape_sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "guest_exit": 0
+  },
+  {
+    "run": "qualified-crash",
+    "working_disk_sha256": "1c11612c61e538316893bb70ad1dced66386f43d6352568ed3caa6f6e3d8b9c7",
+    "input_tape_sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "guest_exit": 0
+  },
+  {
+    "run": "qualified-slow",
+    "working_disk_sha256": "1c11612c61e538316893bb70ad1dced66386f43d6352568ed3caa6f6e3d8b9c7",
+    "input_tape_sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "guest_exit": 0
+  }
+]

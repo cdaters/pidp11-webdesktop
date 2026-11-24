@@ -1,0 +1,22 @@
+{
+  "summary": {
+    "event_age_ms": 0,
+    "max_queue_at_drain": 0,
+    "pending_at_drain": 0,
+    "mode": "unapproved",
+    "reason": "",
+    "instance": "345704ec0d946972",
+    "generation": 1,
+    "guest": "",
+    "sequence": 135,
+    "lost": 135,
+    "events": 0,
+    "bytes": 0,
+    "filemarks": 0,
+    "activity": "unknown",
+    "last_event_to_reader_ms": 0,
+    "max_event_to_reader_ms": 0
+  },
+  "events": [],
+  "history_omitted": 0
+}
