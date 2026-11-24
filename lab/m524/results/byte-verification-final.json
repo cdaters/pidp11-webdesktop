@@ -1,0 +1,117 @@
+{
+  "guest_output_files": [
+    {
+      "source": "RECA.TXT",
+      "recovered": "READA.TXT",
+      "bytes": 512,
+      "sha256": "aebba95d881ce65dbe403a39faa3a1ad53a7326d71ae53bf08eedeadbaeef160",
+      "exact_match": true
+    },
+    {
+      "source": "RECB.TXT",
+      "recovered": "READB.TXT",
+      "bytes": 1024,
+      "sha256": "7190fb13f6e934d33f6c8c7116f4de82cd1037c06ef3733d609db15bbb633782",
+      "exact_match": true
+    }
+  ],
+  "tape_sha256_unchanged": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+  "tape_records": [
+    {
+      "offset": 0,
+      "next": 520,
+      "bytes": 512,
+      "label": "VOL1"
+    },
+    {
+      "offset": 520,
+      "next": 1040,
+      "bytes": 512,
+      "label": "HDR1"
+    },
+    {
+      "offset": 1040,
+      "next": 1044,
+      "bytes": 0,
+      "label": "filemark"
+    },
+    {
+      "offset": 1044,
+      "next": 1564,
+      "bytes": 512,
+      "label": "data"
+    },
+    {
+      "offset": 1564,
+      "next": 1568,
+      "bytes": 0,
+      "label": "filemark"
+    },
+    {
+      "offset": 1568,
+      "next": 2088,
+      "bytes": 512,
+      "label": "EOF1"
+    },
+    {
+      "offset": 2088,
+      "next": 2092,
+      "bytes": 0,
+      "label": "filemark"
+    },
+    {
+      "offset": 2092,
+      "next": 2612,
+      "bytes": 512,
+      "label": "HDR1"
+    },
+    {
+      "offset": 2612,
+      "next": 2616,
+      "bytes": 0,
+      "label": "filemark"
+    },
+    {
+      "offset": 2616,
+      "next": 3136,
+      "bytes": 512,
+      "label": "data"
+    },
+    {
+      "offset": 3136,
+      "next": 3656,
+      "bytes": 512,
+      "label": "data"
+    },
+    {
+      "offset": 3656,
+      "next": 3660,
+      "bytes": 0,
+      "label": "filemark"
+    },
+    {
+      "offset": 3660,
+      "next": 4180,
+      "bytes": 512,
+      "label": "EOF1"
+    },
+    {
+      "offset": 4180,
+      "next": 4184,
+      "bytes": 0,
+      "label": "filemark"
+    },
+    {
+      "offset": 4184,
+      "next": 4188,
+      "bytes": 0,
+      "label": "filemark"
+    },
+    {
+      "offset": 4188,
+      "next": 4192,
+      "bytes": 0,
+      "label": "filemark"
+    }
+  ]
+}

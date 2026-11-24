@@ -1,0 +1,22 @@
+{
+  "captured_at": "2026-11-24T04:32:07.883681Z",
+  "facts": {
+    "show rl": "show rl\r\nRL\tRL11, address=17774400-17774411, vector=160, BR5, 4 units\r\n  RL0\t5242KW, attached to <disposable disk>, on line\r\n\twrite enabled, SIMH format, RL02\r\n  RL1\t2621KW, not attached, on line\r\n\twrite enabled, SIMH format, autosize\r\n  RL2\t2621KW, not attached, on line\r\n\twrite enabled, SIMH format, autosize\r\n  RL3\t2621KW, not attached, on line\r\n\twrite enabled, SIMH format, autosize\r\nsim> ",
+    "show rl0": "show rl0\r\nRL0\t5242KW, attached to <disposable disk>, on line\r\n\twrite enabled, SIMH format, RL02\r\nsim> ",
+    "show tm": "show tm\r\nTM\taddress=17772520-17772533, vector=224, BR5, 8 units\r\n  TM0\tattached to <authored readonly tape>, read only, write locked, SIMH format\r\n\tunlimited capacity\r\n  TM1\tnot attached, write enabled, SIMH format\r\n\tunlimited capacity\r\n  TM2\tnot attached, write enabled, SIMH format\r\n\tunlimited capacity\r\n  TM3\tnot attached, write enabled, SIMH format\r\n\tunlimited capacity\r\n  TM4\tnot attached, write enabled, SIMH format\r\n\tunlimited capacity\r\n  TM5\tnot attached, write enabled, SIMH format\r\n\tunlimited capacity\r\n  TM6\tnot attached, write enabled, SIMH format\r\n\tunlimited capacity\r\n  TM7\tnot attached, write enabled, SIMH format\r\n\tunlimited capacity\r\nsim> ",
+    "show tm0": "show tm0\r\nTM0\tattached to <authored readonly tape>, read only, write locked, SIMH format\r\n\tunlimited capacity\r\nsim> ",
+    "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]": "examine tm mts,mtc,mtbrc,mtcma,ust[0],pos[0]\r\nMTS:\t040105\r\nMTC:\t160200\r\nMTBRC:\t177000\r\nMTCMA:\t133672\r\nUST[0]:\t040104\r\nPOS[0]:\t4188\r\nsim> "
+  },
+  "images": {
+    "disk0.work": {
+      "sha256": "1c11612c61e538316893bb70ad1dced66386f43d6352568ed3caa6f6e3d8b9c7",
+      "size": 10478080,
+      "mtime_ns": 1795494307213044413
+    },
+    "tape/input.tap": {
+      "sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+      "size": 4192,
+      "mtime_ns": 1795494234389812782
+    }
+  }
+}

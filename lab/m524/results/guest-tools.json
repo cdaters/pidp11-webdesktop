@@ -1,0 +1,27 @@
+[
+  {
+    "name": "MT.SYS",
+    "size": 4608,
+    "sha256": "9ec6ca52b251c101453e36b6b23564a0c51eed244a97278db42f4e1374fabfdd"
+  },
+  {
+    "name": "MS.SYS",
+    "size": 5120,
+    "sha256": "25760f7de0403400183125501b41cf92aa780bf821d6265d036ca13dbfabb98c"
+  },
+  {
+    "name": "MM.SYS",
+    "size": 4608,
+    "sha256": "ce1712153e685655a2ba5012f6a03145ba08749c72d4f8d19f3d48f57160124b"
+  },
+  {
+    "name": "PIP.SAV",
+    "size": 15360,
+    "sha256": "b0e71bc5e4c49afa1f677cde99d5b37f0d5e86e8a28ae0c36db248fc202d5294"
+  },
+  {
+    "name": "DIR.SAV",
+    "size": 9728,
+    "sha256": "5346eb577cc29c7fa984812b1c60077fec627531a74e3aa9365cb60301762899"
+  }
+]

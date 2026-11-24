@@ -1,0 +1,15 @@
+{
+  "captured_at": "2026-11-24T04:32:10.581290Z",
+  "facts": {
+    "show rp": "show rp\r\nRP\tMassbus adapter 0 (RHA), 8 units\r\n  RP0\t87MW, attached to <disposable disk>, write enabled\r\n\tSIMH format, RP06\r\n  RP1\t33MW, not attached, write enabled\r\n\tSIMH format, autosize\r\n  RP2\t33MW, not attached, write enabled\r\n\tSIMH format, autosize\r\n  RP3\t33MW, not attached, write enabled\r\n\tSIMH format, autosize\r\n  RP4\t33MW, not attached, write enabled\r\n\tSIMH format, autosize\r\n  RP5\t33MW, not attached, write enabled\r\n\tSIMH format, autosize\r\n  RP6\t33MW, not attached, write enabled\r\n\tSIMH format, autosize\r\n  RP7\t33MW, not attached, write enabled\r\n\tSIMH format, autosize\r\nsim> ",
+    "show rp0": "show rp0\r\nRP0\t87MW, attached to <disposable disk>, write enabled\r\n\tSIMH format, RP06\r\nsim> ",
+    "examine rp cs1[0],ds[0],er1[0],da[0],dc[0]": "examine rp cs1[0],ds[0],er1[0],da[0],dc[0]\r\nCS1[0]:\t000000\tSC0 TRE0 MCPE0 DVA0 PSEL0 A170 A160 RDY0 IE0 FUNC=NOP GO0 \r\nDS[0]:\t010700\tATA0 ERR0 PIP0 MOL1 WRL0 LST0 PGM0 DPR1 RDY1 VV1 MBZ=0x0 OM0 \r\nER1[0]:\t000000\tDCK0 UNS0 OPI0 DTE0 WLE0 IAE0 AOE0 HCR0 HCE0 ECH0 WCF0 FER0 PAR0 RMR0 ILR0 ILF0 \r\nDA[0]:\t000403\tTA=0x1 SA=0x3 \r\nDC[0]:\t000000\tDC=0x0 \r\nsim> "
+  },
+  "images": {
+    "disk0.work": {
+      "sha256": "60f16779eaf3175b700e60b01339f19bd99ef18bd4a596c59b596c6d26b12e2e",
+      "size": 174423040,
+      "mtime_ns": 1795494729753584295
+    }
+  }
+}

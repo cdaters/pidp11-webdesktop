@@ -1,0 +1,17 @@
+{
+  "browser": {
+    "startTime": "2026-11-24T04:32:40.353Z",
+    "duration": 169681.97699999998,
+    "expected": 231,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "go_vet": "passed",
+  "go_uncached_race_packages": 24,
+  "typescript": "passed",
+  "frontend_tests": 106,
+  "transport_integration_tests": 1,
+  "selection_contract_tests": 9,
+  "standalone_bytes": 596156
+}

@@ -196,3 +196,54 @@ func BenchmarkVerifyMediaRL02(b *testing.B) {
 		}
 	}
 }
+
+func TestRP06IdentityAndGuestRetirement(t *testing.T) {
+	_, v := fixture(t)
+	v.ID, v.Device, v.Controller, v.Family = "rp-disk", "RP0", "RH70", "RP06"
+	v.Capacity, v.Size = 174423040, 174423040
+	v.Geometry = "815 cylinders; 19 heads; 22 sectors per track; 512-byte sectors"
+	v.Guest, v.GuestEvidence = "unix-v7-attested", "Original console ls / completed"
+	s, err := New([]Config{{"disk", "RL0", "RL11", 0}, {"tape", "TM0", "TM11", 0}, {v.ID, v.Device, v.Controller, 0}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	when, _ := time.Parse(time.RFC3339Nano, v.CapturedAt)
+	s.now = func() time.Time { return when }
+	if err := publish(s, v); err != nil {
+		t.Fatal(err)
+	}
+	old := s.List()[0]
+	for name, change := range map[string]func(*Snapshot){
+		"controller":  func(v *Snapshot) { v.Controller = "RH11" },
+		"unit":        func(v *Snapshot) { v.Unit = 1 },
+		"model":       func(v *Snapshot) { v.Family = "RP04" },
+		"capacity":    func(v *Snapshot) { v.Capacity-- },
+		"geometry":    func(v *Snapshot) { v.Geometry = "unavailable" },
+		"position":    func(v *Snapshot) { v.Position = 0 },
+		"media-bound": func(v *Snapshot) { v.Size = 256<<20 + 1 },
+	} {
+		t.Run(name, func(t *testing.T) {
+			bad := v
+			change(&bad)
+			if Validate(bad) == nil {
+				t.Fatal("unqualified RP identity accepted")
+			}
+		})
+	}
+	when = when.Add(time.Second)
+	v.Guest, v.Capture, v.CapturedAt = "replacement-guest", "capture-two", when.Format(time.RFC3339Nano)
+	if err := publish(s, v); err != nil {
+		t.Fatal(err)
+	}
+	if _, ok := s.Get(v.ID, old.Generation); ok {
+		t.Fatal("RP capture followed replacement guest")
+	}
+	current := s.List()[0]
+	a := s.Status()
+	if err := s.Revoke(Approval{Instance: a.Instance, Revision: a.Revision, Verified: true, ID: v.ID, Generation: current.Generation}); err != nil {
+		t.Fatal(err)
+	}
+	if s.List()[0].Freshness != "disconnected" {
+		t.Fatal("revocation ignored")
+	}
+}

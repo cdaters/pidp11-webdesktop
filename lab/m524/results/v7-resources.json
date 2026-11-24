@@ -1,0 +1,15 @@
+{
+  "scope": "100 authenticated loopback TLS snapshot inventories; one retained device; ARM64 lab, not Pi or live I/O",
+  "seconds": 5.457578175002709,
+  "requests": 100,
+  "max_response_bytes": 1175,
+  "max_rss_kib": 13792,
+  "max_hwm_kib": 13792,
+  "max_fds": 9,
+  "max_threads": 7,
+  "ticks": 3,
+  "clock_ticks_per_second": 100,
+  "one_core_cpu_percent": 0.5556075118569559,
+  "median_request_ms": 1.0474589944351465,
+  "max_request_ms": 4.004375980002806
+}

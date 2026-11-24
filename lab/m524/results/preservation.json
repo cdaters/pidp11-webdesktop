@@ -1,0 +1,21 @@
+{
+  "rt11": {
+    "original_unchanged": true,
+    "sha256": "543277ee81fb4c024d19242bf6d6a04c81a257c48fe4cece256a42de3fe8dd98",
+    "size": 10478080,
+    "mode": 33024,
+    "mtime_ns": 1795327069233304419,
+    "container_exit_code": 0,
+    "working_sha256": "1c11612c61e538316893bb70ad1dced66386f43d6352568ed3caa6f6e3d8b9c7"
+  },
+  "v7": {
+    "original_unchanged": true,
+    "sha256": "fc04dab1e7f2fbf3ea4b44603ed2c9d6ba15f4f86c702d4a27a1dac725966f39",
+    "size": 174423040,
+    "mode": 33024,
+    "mtime_ns": 1795028463811276596,
+    "container_exit_code": 0,
+    "working_sha256": "ee8221ad13ac4d0daf51670eec73a0f9d27874425550f71cf42754e9f50d9724"
+  },
+  "tape_unchanged": true
+}

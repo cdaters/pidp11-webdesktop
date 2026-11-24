@@ -1,0 +1,35 @@
+[
+  {
+    "browser": "chromium",
+    "device": "TM0",
+    "generation": "0a72ea4d6b5b8f00f87a67f3450ca4a6-1c7e9707a525c43f3ccf5f363a2ff57d",
+    "sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "freshness": "observed",
+    "source": "original captured SIMH evidence; no interception",
+    "all_captured_fields_equal": true,
+    "retained_is_not_connected": true,
+    "click_to_verified_dom_ms": 63.402375000000006
+  },
+  {
+    "browser": "firefox",
+    "device": "TM0",
+    "generation": "0a72ea4d6b5b8f00f87a67f3450ca4a6-1c7e9707a525c43f3ccf5f363a2ff57d",
+    "sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "freshness": "observed",
+    "source": "original captured SIMH evidence; no interception",
+    "all_captured_fields_equal": true,
+    "retained_is_not_connected": true,
+    "click_to_verified_dom_ms": 65.7065419999999
+  },
+  {
+    "browser": "webkit",
+    "device": "TM0",
+    "generation": "0a72ea4d6b5b8f00f87a67f3450ca4a6-1c7e9707a525c43f3ccf5f363a2ff57d",
+    "sha256": "8841da1560ce50d73165b659fb437c5de7d61fcd484993be2247ff05ffde09bb",
+    "freshness": "observed",
+    "source": "original captured SIMH evidence; no interception",
+    "all_captured_fields_equal": true,
+    "retained_is_not_connected": true,
+    "click_to_verified_dom_ms": 40.98191700000007
+  }
+]

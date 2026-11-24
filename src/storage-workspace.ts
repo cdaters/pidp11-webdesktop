@@ -27,6 +27,8 @@ export function validateStorage(value: unknown): StorageView {
     if (!choices.includes(String(row[key]))) throw Error("Invalid storage status");
   if (row.device === "RL0") {
     if (row.controller !== "RL11" || row.family !== "RL02" || row.format !== "SIMH disk" || row.capacity !== 10485760 || row.position !== -1 || row.position_meaning !== "unavailable" || row.filemark !== "unavailable" || row.end_of_medium !== "unavailable") throw Error("Wrong disk identity");
+  } else if (row.device === "RP0") {
+    if (row.controller !== "RH70" || row.family !== "RP06" || row.format !== "SIMH disk" || row.capacity !== 174423040 || row.geometry !== "815 cylinders; 19 heads; 22 sectors per track; 512-byte sectors" || row.position !== -1 || row.position_meaning !== "unavailable" || row.filemark !== "unavailable" || row.end_of_medium !== "unavailable") throw Error("Wrong RP06 identity");
   } else if (row.device === "TM0") {
     if (row.controller !== "TM11" || row.family !== "TU10" || row.format !== "SIMH tape" || Number(row.position) < 0 || Number(row.position) > Number(row.size) || row.geometry !== "unavailable" || row.position_meaning !== "SIMH logical image byte offset; not host file cursor or physical tape length") throw Error("Wrong tape identity");
   } else throw Error("Unsupported storage device");
@@ -62,6 +64,9 @@ export function mountStorageWorkspace(host: HTMLElement, tape: boolean, simulati
       if (!shown) return;
       const age = Date.now() - Date.parse(shown.captured_at);
       if (shown.freshness === "observed" && (age < 0 || age > 30000)) shown.freshness = "stale";
+      const ageText = age < 0 ? "Unknown; capture time is ahead of this clock" : `${Math.floor(age / 1000).toLocaleString()} seconds since capture; current state unknown`;
+      const ageField = facts.querySelector<HTMLElement>("[data-storage-age]");
+      if (ageField) ageField.textContent = ageText;
       status.textContent = mode === 2 ? "Retained snapshot · not connected · never live telemetry." : `${shown.freshness.toUpperCase()} capture · current device state unknown · no automatic updates.`;
     };
     const show = (record: StorageView) => {
@@ -71,6 +76,8 @@ export function mountStorageWorkspace(host: HTMLElement, tape: boolean, simulati
         Guest: `${record.guest} (operator-attested)`,
         Configuration: "Observed in original simulator at capture",
         Attachment: `${record.attachment} at capture · ${record.media}`,
+        Provenance: record.provenance,
+        Geometry: record.geometry,
         "Guest access": `${record.guest_access} · ${record.guest_evidence}`,
         "Media bytes": `${record.size.toLocaleString()} · ${record.format}`,
         "Configured capacity": record.capacity ? `${record.capacity.toLocaleString()} bytes` : "Unavailable; no transport length inferred",
@@ -80,8 +87,9 @@ export function mountStorageWorkspace(host: HTMLElement, tape: boolean, simulati
         "Tape position": tape ? `${record.position} · ${record.position_meaning}` : "Not applicable",
         "Filemark / end of medium": `${record.filemark} / ${record.end_of_medium} at capture`,
         Captured: new Date(record.captured_at).toLocaleString(),
+        "Snapshot age": "Unknown",
       };
-      for (const [key, value] of Object.entries(values)) { const dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = key; dd.textContent = value; facts.append(dt, dd); }
+      for (const [key, value] of Object.entries(values)) { const dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = key; dd.textContent = value; if (key === "Snapshot age") dd.dataset.storageAge = ""; facts.append(dt, dd); }
       details.textContent = `Source: ${record.source}\nProvenance: ${record.provenance}\nSHA-256 at capture: ${record.sha256}\nGeometry: ${record.geometry}\nRegisters: ${record.registers}\nSimulator: ${record.simulator}\nEquipment generation: ${record.generation}\nCapture: ${record.capture}\nCaptured UTC: ${record.captured_at}\nMedia may change after capture. Hash is not filesystem-mount evidence.`;
       freshness();
     };
@@ -93,7 +101,7 @@ export function mountStorageWorkspace(host: HTMLElement, tape: boolean, simulati
         try {
           const response = await fetch("/api/v1/storage", { signal: request.signal }); if (!response.ok) throw Error("Storage unavailable or sign-in required");
           const data: unknown = await response.json(); if (!Array.isArray(data) || data.length > 4) throw Error("Storage inventory exceeds bounds");
-          const next = data.map(validateStorage).filter(row => row.device === (tape ? "TM0" : "RL0"));
+          const next = data.map(validateStorage).filter(row => tape ? row.device === "TM0" : row.device === "RL0" || row.device === "RP0");
           if (disposed || pending !== request) return; rows = next;
           for (const row of rows) select.append(new Option(`${row.device} · ${row.media} · ${row.freshness}`, row.generation));
           status.textContent = rows.length ? "Select a capture; refreshing does not connect a device." : "No approved captures. Device state unavailable.";

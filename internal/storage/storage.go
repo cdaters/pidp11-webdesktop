@@ -101,7 +101,7 @@ func nonce() string {
 	return hex.EncodeToString(b[:])
 }
 func validConfig(c Config) bool {
-	return identifier.MatchString(c.ID) && c.Unit == 0 && ((c.Device == "RL0" && c.Controller == "RL11") || (c.Device == "TM0" && c.Controller == "TM11"))
+	return identifier.MatchString(c.ID) && c.Unit == 0 && ((c.Device == "RL0" && c.Controller == "RL11") || (c.Device == "TM0" && c.Controller == "TM11") || (c.Device == "RP0" && c.Controller == "RH70"))
 }
 func New(config []Config) (*Store, error) {
 	if len(config) > MaxDevices {
@@ -158,6 +158,13 @@ func Validate(s Snapshot) error {
 	if s.Device == "RL0" {
 		if s.Family != "RL02" || s.Format != "SIMH disk" || s.Capacity != 10485760 || s.Position != -1 || s.PositionMeaning != "unavailable" || s.Filemark != "unavailable" || s.EndOfMedium != "unavailable" {
 			return errors.New("invalid RL02 geometry/status")
+		}
+	}
+	// Only the original 11/70 RH70/RP06 configuration qualified in M5.24.
+	// RH11 adapters, other RP models and units need independent evidence.
+	if s.Device == "RP0" {
+		if s.Family != "RP06" || s.Format != "SIMH disk" || s.Capacity != 174423040 || s.Geometry != "815 cylinders; 19 heads; 22 sectors per track; 512-byte sectors" || s.Position != -1 || s.PositionMeaning != "unavailable" || s.Filemark != "unavailable" || s.EndOfMedium != "unavailable" {
+			return errors.New("invalid RP06 geometry/status")
 		}
 	}
 	if s.Device == "TM0" {

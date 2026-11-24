@@ -1,0 +1,72 @@
+[
+  {
+    "source": "AA-H376F-TC_RT-11_Installation_Guide_Aug91.pdf",
+    "url": "https://www.bitsavers.org/pdf/dec/pdp11/rt11/v5.6_Aug91/AA-H376F-TC_RT-11_Installation_Guide_Aug91.pdf",
+    "sha256": "cee634d94117a5e47e1b475885a94e2f5beeb689be70a73e8085b89300ecaf60"
+  },
+  {
+    "source": "AA-M239D-TC_RT-11_System_Utilities_Manual_Part_I_Aug91.pdf",
+    "url": "https://www.bitsavers.org/pdf/dec/pdp11/rt11/v5.6_Aug91/AA-M239D-TC_RT-11_System_Utilities_Manual_Part_I_Aug91.pdf",
+    "sha256": "286158093813ba5010ac99c248fd46c44d9379343d8bdba05983196366796427"
+  },
+  {
+    "source": "AA-PD6PA-TC_RT-11_Volume_and_File_Formats_Manual_Aug91.pdf",
+    "url": "https://www.bitsavers.org/pdf/dec/pdp11/rt11/v5.6_Aug91/AA-PD6PA-TC_RT-11_Volume_and_File_Formats_Manual_Aug91.pdf",
+    "sha256": "614f568793946c6f571572a8ef46da7af1b823a509c4fbf14f132813f5c877eb"
+  },
+  {
+    "source": "AA-PE7VA-TC_RT-11_Device_Handlers_Manual_Aug91.pdf",
+    "url": "https://www.bitsavers.org/pdf/dec/pdp11/rt11/v5.6_Aug91/AA-PE7VA-TC_RT-11_Device_Handlers_Manual_Aug91.pdf",
+    "sha256": "058536408452fdaddda7696bffa436ebde95bea3073f6b4238097a55a5627c12"
+  },
+  {
+    "source": "PDP11/pdp11_tm.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "cdcd0cdcaa2ab4d8d52ea2e4390f12b86caf4213807b27476bc3aaea724979fc"
+  },
+  {
+    "source": "PDP11/pdp11_rp.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "ddfcbb0335b06f1926edb763d0fa69c0a9b8bba27867e98da4b517c6879d0b54"
+  },
+  {
+    "source": "PDP11/pdp11_rh.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "1fa2ccfbdf1b9d8cea0f7138c0847760a1f2be065bd56fa8167a9df4e13501d3"
+  },
+  {
+    "source": "PDP11/pdp11_cpumod.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "f6e1cfd336df8b9167080342baabf11b7a078cef01ca7746e9a3ca38eb9c6d25"
+  },
+  {
+    "source": "PDP11/pdp11_cpumod.h",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "d4749c3ea3e39987ca9461850c9c88e3eeba9c46eafde2086a0c90e11015c8d0"
+  },
+  {
+    "source": "sim_disk.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "f9085f39481f31a5302fc6ef71944bc7ef6b39a00a33f8cc14c47b3f2647a295"
+  },
+  {
+    "source": "sim_tape.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "0e541a420e0a19a245ad923ea0e51b364d2bd561d3a71dfbe92ae8b9a0a20d8e"
+  },
+  {
+    "source": "scp.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "3549049ae5928b3b6bac2a337a4de3a2a69a630e19e817c1f3a9ac3220767609"
+  },
+  {
+    "source": "sim_frontpanel.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "0ab04601c2224091189e7a5cf74722059509eadc9bf98eef664b742fa44dfa55"
+  },
+  {
+    "source": "sim_console.c",
+    "revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+    "sha256": "71b54d589b52e45eb99a107a14ab20bc52aac71c4752a33497558e66a6d261a5"
+  }
+]
