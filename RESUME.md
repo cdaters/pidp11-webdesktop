@@ -6,6 +6,14 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **M5.24 active:** historical guest tape workflow and broader captured disk status.
+  Backup prerequisite completed: `M5.24-incremental-20261124T041941Z`, 123 files / seven directories,
+  42,097,705 logical bytes; archive 42,601,472 bytes, SHA-256
+  `a39b56eca99d76de8c66f11577c6bcb006010c6fb9fb245bf6c744616ebff73d`. Independently reread bytes and supported
+  metadata; no full restore. Private project-level recovery pointer: `Backups/WebDesktop-M5.24-incremental-20261124T041941Z/backup.json`.
+  Fresh evidence is reserved under `.research/m524/`; preserve earlier experiments.
+  No Pi access or interoperability changes authorized.
+
 - **Latest documentation/design checkpoint: M5.23.1.** The owner supplied Rolf
   Peters' agreement on five architectural directions: optional provider, mandatory
   selected-text receipts, Desktop-owned publication/consent, one slot and local
