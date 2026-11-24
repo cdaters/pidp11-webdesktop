@@ -1,5 +1,13 @@
 # Toward trustworthy storage activity
 
+**M5.25 follow-up:** the [completed experiment](../lab/M5.25.md) qualifies one
+disposable TM11 forward-read completion path against an unmodified control. It
+uses the fixed ring below with explicit drops, independent approval and bounded
+browser summaries. The standalone reader exceeds the incremental memory target;
+physical CPU, connected REALCONS and automatic guest identity remain open. No
+ordinary build was instrumented. The sections below preserve the M5.24 proposal;
+its targets are not retrospective claims of acceptance.
+
 M5.24 investigated the pinned original simulator; it did **not** add a live feed,
 patch SIMH or enable a monitor listener. The current browser consumes explicitly
 approved snapshots. See the [capture contract](storage-observation.md) and

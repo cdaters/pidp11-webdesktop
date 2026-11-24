@@ -1,8 +1,12 @@
 # Documentation
 
-Current storage work: [M5.24 report](lab/M5.24.md), [RT-11 tape workflow](technical/rt11-magnetic-tape.md), [future passive activity proposal](technical/storage-activity-proposal.md).
+Current engineering: [M5.25 passive activity feasibility](lab/M5.25.md),
+[isolated runbook/source](../lab/m525/README.md), [M5.24 guest tape report](lab/M5.24.md),
+[RT-11 tape workflow](technical/rt11-magnetic-tape.md) and
+[activity proposal and findings](technical/storage-activity-proposal.md).
+Next recommendation: serial communications, virtual modems and isolated networking.
 
-M5.23.1 documentation update: [Rolf feedback and change inventory](technical/M5.23.1-interoperability-review.md), [short review handoff](technical/M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](technical/selection-contract-0.2-proposal.md) and [planned conformance](technical/selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. M5.24 is the latest engineering milestone; that interoperability work remains unchanged.
+M5.23.1 documentation update: [Rolf feedback and change inventory](technical/M5.23.1-interoperability-review.md), [short review handoff](technical/M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](technical/selection-contract-0.2-proposal.md) and [planned conformance](technical/selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. M5.25 is the latest engineering milestone; that interoperability work remains unchanged.
 
 Current development: [M5.23 disk/tape findings](lab/M5.23.md),
 [original storage inventory](technical/storage-inventory.md),

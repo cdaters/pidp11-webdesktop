@@ -1,5 +1,12 @@
 # Capability and compatibility matrix
 
+[M5.25](lab/M5.25.md) qualifies **laboratory-only TM11 forward-read completion
+observation** in a disposable instrumented simulator: six RT-11 comparison modes,
+exact bytes/status, separate serviced-interrupt checks and three browser engines.
+Observer loss does not stop the tested guest. The separate reader exceeds the
+1 MiB incremental-memory target; Pi CPU, automatic guest identity and connected
+REALCONS timing remain unqualified. Ordinary builds retain snapshots.
+
 [M5.24](lab/M5.24.md) qualifies genuine RT-11 MT/PIP reads of two labeled tape
 files with byte-exact recovery, plus V7 RH70/RP06 filesystem and captured storage
 observation. RL02 and the earlier CPU/DMA tape evidence remain qualified. Existing
@@ -12,7 +19,7 @@ observer restart. Genuine RT-11 printer/punch output also passed exact three-eng
 history downloads. Utilities ran through the original console; safe state and guest
 identity remain operator-attested. Browser mounting remains disabled.
 
-Engineering through **M5.24**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Engineering through **M5.25**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
 
 [M5.20](lab/M5.20.md) qualifies RSX PIP printer output and a reader-to-punch copy,
 with exact browser exports. Existing equipment windows now separate simulation,
@@ -71,6 +78,7 @@ PiDP-11 owners and ordinary SIMH installations without GPIO or REALCONS.
 | Continuous-form local printer | Simulated spool / explicit snapshot | Sample jobs and imported text; separate from observed LP11 output |
 | RL02 disk observation | Genuine captured RT-11/RL11 subset | Verified configuration/attachment/hash, resident DL filesystem access, capacity/geometry and named registers. No live activity feed |
 | TM11/TU10 tape observation | Genuine RT-11 MT/PIP subset plus earlier CPU/device evidence | Two labeled files recovered exactly (512 + 1,024 bytes); normal filemark/logical-end search; read-only snapshots, no tape writing or live motion |
+| TM11 read-completion stream | Instrumented laboratory only; ordinary build excluded | [M5.25](lab/M5.25.md): exact RT-11 bytes/status, serviced IRQ differential, bounded delivery and retirement; separate reader memory target not met, Pi performance unmeasured |
 | RH70/RP06 disk observation | Genuine captured V7 subset | Original filesystem access, attachment/hash, exact geometry, named register status; unit zero only |
 | Storage snapshot lifecycle | Laboratory tested | Explicit local capture/publication, 30-second freshness, stale-generation rejection, retained data and empty observer restart; no automatic transition detection |
 | Browser disk, magnetic tape, paper-tape and OS management | Simulated | Genuine tape input was prepared/attached by the independent lab operator; browser controls cannot attach, replace, write media or boot an OS |

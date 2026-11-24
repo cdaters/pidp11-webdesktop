@@ -29,3 +29,11 @@ The user-supplied PDP-11 switch photograph and supplemental IMSAI shading screen
 Original source, documentation and application captures are published with their existing history. Generated-C fixtures retain the BlinkenBone MIT notice; the original SIMH/REALCONS source is fetched separately by the lab and is not relicensed by this repository. Historical guest disks, downloaded upstream packages and private lab records are not included. The root license does not assert ownership of historical names or marks.
 
 For a specific attribution, clarification or removal request, contact Craig Daters through [RetroRealm.org](https://retrorealm.org/). The owner will review it in good faith.
+
+## M5.25 laboratory experiment
+
+The optional TM11 completion patch applies only to disposable copies of the pinned
+original SIMH/REALCONS source. [Exact diff](lab/m525/experimental.patch) and
+[retained source notices](lab/m525/NOTICE) identify its scope. No upstream source
+was relicensed or installed binary replaced; the ordinary Go desktop does not link
+this C code. No new runtime dependency, guest disk or patched binary is published.

@@ -1,0 +1,61 @@
+{
+  "revision": "55c6629cabe2af79ea7b050f00394805d523f274",
+  "checks": [
+    {
+      "command": [
+        "npm",
+        "ci",
+        "--offline"
+      ],
+      "exit": 0,
+      "seconds": 0.715
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build:server"
+      ],
+      "exit": 0,
+      "seconds": 1.87
+    },
+    {
+      "command": [
+        "go",
+        "build",
+        "-o"
+      ],
+      "exit": 0,
+      "seconds": 0.657
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race"
+      ],
+      "exit": 0,
+      "seconds": 1.636
+    },
+    {
+      "command": [
+        "env",
+        "CGO_ENABLED=0",
+        "GOOS=linux"
+      ],
+      "exit": 0,
+      "seconds": 0.516
+    },
+    {
+      "command": [
+        "./node_modules/.bin/tsc",
+        "--ignoreConfig",
+        "lab/m525/viewer.ts"
+      ],
+      "exit": 0,
+      "seconds": 0.113
+    }
+  ],
+  "tracked_tree_clean": true,
+  "private_inputs_required": false
+}

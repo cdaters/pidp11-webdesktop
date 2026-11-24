@@ -17,7 +17,12 @@ The old computer still does the computing. SIMH runs the historical operating sy
 
 [**Source Alpha 2**](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.17-source-alpha.2) is available as a source-only experimental pre-release for local demonstrations and controlled historical-computing laboratories. Use its named tarball and checksum. It is not an approved installation for physical PiDP-11 hardware. [Publication verification](docs/releases/M5.18-publication.md). [Alpha 1](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1) remains unchanged.
 
-**Development main:** [M5.24](docs/lab/M5.24.md) adds genuine RT-11 MT/PIP tape-file
+**Development main:** [M5.25](docs/lab/M5.25.md) qualifies a separate, bounded TM11
+read-completion experiment against an unmodified simulator. Guest bytes/status and
+observer independence passed; memory/physical performance and production promotion
+remain unqualified. The ordinary build remains snapshot-only.
+
+[M5.24](docs/lab/M5.24.md) adds genuine RT-11 MT/PIP tape-file
 reads and V7 RH70/RP06 disk captures, alongside the earlier RL02 and CPU/device tests.
 The windows show provenance and capture age, distinguishing simulation, captured
 observation and retained data; no live

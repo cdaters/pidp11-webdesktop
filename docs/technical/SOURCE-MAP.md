@@ -1,5 +1,15 @@
 # Source map and subsystem boundaries
 
+## M5.25 isolated completion experiment
+
+[`lab/m525`](../../lab/m525/README.md) contains the opt-in C ring, guarded source
+patch/diff, separate Go reader and three-engine lab injection. Nothing is imported
+by the ordinary frontend or service. The C hook copies only final TM0 forward-read
+metadata; a worker owns outgoing nonblocking datagrams. The reader owns local
+approval, bounded history and HTTP lifetime; the viewer owns requests and expiry.
+The [report](../lab/M5.25.md) maps genuine guest, CPU/device, synthetic and browser
+evidence, including rejected candidates and unmet performance targets.
+
 ## M5.23 captured storage observations
 
 - `internal/storage` owns strict RL0/TM0 metadata, private approval revisions, immutable generations, expiry/revocation, bounded HTTP output and read-only media verification. It never opens a simulator interface.

@@ -65,6 +65,7 @@ framework, driver implementation, remote-control API or authority token.
 | Guest devices: live LP11/PC11 | Approved file follower; observation; producer identities, sequence/offset and renewal | Read/output completion and download; stale approval or missing bytes stops observation |
 | Original media observation schema | Offline fixture, separate from the captured storage contract | Descriptive validation only; busy/activity vocabulary is not genuine telemetry |
 | Captured RL02/RP06/TM11 storage | Independent local capture and read-only hash collector; bounded service/capture generations | Explicit view/retain, stale/current-unknown labels, no live I/O or media control |
+| M5.25 TM11 activity overlay | Disposable instrumented lab only, separate reader and explicit approval | Genuine read completions; unknown after expiry/gap; excluded from ordinary build |
 | Standalone 4010 window | Local vector fixture; simulation | Draw/erase/export fixture; genuine Tek is a separately selected guest terminal |
 | References / Companion | Local reference corpus or optional explanation provider; no equipment authority | Search, selection review and explanation; AI never receives machine control |
 
@@ -78,7 +79,7 @@ remote SIMH command channel. Browsers must not supply arbitrary host paths, moni
 commands or mount operations, share writable disks, start emulators or manipulate
 physical controls.
 
-## M5.24 equipment progress and next step
+## M5.25 equipment progress and next step
 
 [M5.20](../lab/M5.20.md) demonstrates actual RSX PIP printing, a separate RSX
 reader-to-punch utility copy and full-byte CPU/device transfer. The existing printer
@@ -96,10 +97,16 @@ explicit saved-data recovery, genuine slot reuse/restart tests, RT-11 browser ex
 and bounded active measurements. [M5.23](../lab/M5.23.md) adds captured RL02/TM11
 attachment/status, real RT-11 filesystem reads and CPU tape DMA/filemarks.
 [M5.24](../lab/M5.24.md) now qualifies RT-11 MT/PIP labeled-file reads and V7 RP06
-filesystem/captured status, with visible provenance and age. The next recommended
-step is the bounded [passive activity feasibility proposal](../technical/storage-activity-proposal.md),
-using a separate disposable build and explicit loss/generation semantics. It is not
-a current live feed. Further broad LP11/PC11 work needs a demonstrated blocker.
+filesystem/captured status, with visible provenance and age.
+[M5.25](../lab/M5.25.md) qualifies a separate optional TM11 completion experiment
+with genuine guest equivalence and failure checks. Its prototype is lab-only;
+ordinary storage remains captured data. The reader memory allowance is not met
+and Pi CPU/connected REALCONS remain unmeasured.
+
+The next recommended equipment step is **serial communications, virtual modems
+and isolated networking**: one genuine guest transfer, explicit endpoint ownership,
+disconnect tests and independent console access before browser operation. Further
+broad storage or LP11/PC11 work needs a demonstrated blocker.
 Reader selection currently means a read-only catalog and operator assistance. Do not
 expose attachment controls before safe state, authority, cancellation and actual
 attachment are independently verified. These subsets do not qualify production media

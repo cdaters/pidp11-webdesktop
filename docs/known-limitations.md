@@ -1,5 +1,15 @@
 # What is still experimental
 
+M5.25's [TM11 completion experiment](lab/M5.25.md) is confined to disposable
+laboratory builds. It covers TM0 READ FORWARD, not all controller operations or
+physical motion. The standalone reader reached 6,644 KiB RSS/HWM, exceeding the
+1 MiB incremental-process target; the 1% Pi CPU target remains unmeasured. Small
+lab summary-latency results do not establish physical or every-event latency.
+Guest changes without attachment changes still require independent retirement,
+and same-UID peer checks are not guest identity or a malicious-process boundary.
+Connected REALCONS and production transport remain unqualified. The ordinary UI
+stays snapshot-only; no production instrumentation is enabled.
+
 [M5.24 storage views](lab/M5.24.md) are captured metadata, never continuous device
 telemetry. An unreported guest/media transition can obsolete a snapshot immediately;
 the UI always says current state is unknown. Only RL0/RL11/RL02, RP0/RH70/RP06 and TM0/TM11/TU10

@@ -1,6 +1,6 @@
 # Where the project is going
 
-## Current product direction — M5.24
+## Current product direction — M5.25
 
 The [virtual computer room](docs/product/virtual-computer-room.md) is the enduring direction for both physical
 PiDP-11 owners and ordinary SIMH users without a panel. Everyday genuine terminals
@@ -25,12 +25,19 @@ Active ARM64 samples remain laboratory measurements.
 RT-11 disk access, genuine CPU tape reads/filemarks and detached observer restart.
 [M5.24](docs/lab/M5.24.md) now qualifies RT-11 MT/PIP labeled tape reads with exact
 bytes and V7 RH70/RP06 snapshots. Provenance, geometry and capture age are visible.
-Next recommended equipment milestone: **bounded passive storage activity feasibility**
-using one optional disposable instrumented build and an unmodified control build,
-as scoped in the [proposal](docs/technical/storage-activity-proposal.md). This is a
-recommendation requiring a new assignment, not implemented telemetry or physical
-approval. Preserve captured-only fallback and independent media operation. Further
-guest tape-writing/backup work needs its own disposable-media qualification.
+[M5.25](docs/lab/M5.25.md) completes that bounded TM11 activity feasibility experiment:
+exact guest bytes/status and independent operation passed, with a lab-only read
+completion pane. The standalone reader exceeds the incremental memory target;
+representative Pi CPU and connected REALCONS remain unmeasured. Ordinary builds
+still use snapshots. Further passive activity work is feasible, but production
+promotion is not approved.
+
+Next recommended equipment milestone: **serial communications, virtual modems and
+isolated networking**. Inventory original multiplexer/serial support and installed
+guest utilities, then qualify one genuine two-endpoint transfer with explicit
+ownership, disconnect handling and an independent console. No physical serial
+port, external network or new authority is implied. Preserve captured-only storage
+and independent media operation; do not schedule broad storage expansion by default.
 Reader selection remains a catalog/operator-assisted workflow until independent
 safe-state and actual-attachment checks support more. No new release or physical
 access is authorized.

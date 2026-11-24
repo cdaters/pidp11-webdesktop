@@ -6,13 +6,49 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **M5.25 active:** bounded TM11 completion-event feasibility in disposable source/build copies.
-  M5.24 evidence backup verified: `M5.25-incremental-20261124T064928Z`, 2,703 files / 339 directories / six symlinks,
-  373,080,685 logical bytes; archive 384,715,264 bytes, SHA-256
-  `c8d438a4c5714bd9ac0652fa903925e74aa3081920cd20a6cde56fb699de7973`. All file bytes and supported metadata independently reread; no full restore.
-  Private recovery pointer: `Backups/WebDesktop-M5.25-incremental-20261124T064928Z/backup.json`.
-  New work belongs in `.research/m525/`; original source/media, ordinary builds, physical Pi
-  and interoperability remain untouched. No running M5.24 processes found at start.
+- **Latest completed engineering milestone: M5.25.** Read the [report](docs/lab/M5.25.md)
+  and [isolated runbook](lab/m525/README.md). Engineering commit
+  `55c6629cabe2af79ea7b050f00394805d523f274`, active-stream crash test `0fc8132`; backup checkpoint `157c454`;
+  starting M5.24 main `3a22c3e`. Documentation follows in a separate commit.
+  Completion is not owner acceptance, a release or physical/production approval.
+- **Decision:** GO for further bounded TM11 laboratory development, NO-GO for
+  ordinary/physical deployment. All six genuine RT-11 modes recovered exact bytes
+  and identical whole working disks; separate control/disabled/enabled CPU tests
+  serviced four interrupts with identical DMA/status. Reader absence/crash did not
+  stop the guest. Only TM0 READ FORWARD is observed; other operations/controllers
+  are outside scope. Ordinary application builds remain snapshot-only.
+- **Bounds and limits:** fixed 16 KiB ring, drop-new/no waiting, explicit gap and
+  generation retirement; separate reader starts unapproved. Final reader RSS/HWM
+  6,644 KiB exceeds the 1 MiB incremental-process target. Pi 1% CPU target unmeasured;
+  small three-engine visible-age estimates p95 145–194 ms are lab summaries, not
+  every-event/physical acceptance. Guest changes without attachment changes need
+  independent retirement. Same-UID peer checking is not a malicious-process boundary.
+  REALCONS was disconnected, so connected timing/coexistence is unqualified.
+- **Validation:** vet/uncached Go race (25 packages), TypeScript/106 frontend tests,
+  build, C ASan/UBSan concurrent ring/pressure tests, genuine six-mode RT-11 and
+  three-mode interrupt comparisons, actual SIGKILL during a 200-read CPU stream,
+  crash/reapproval and late-reader checks, actual
+  halted tape replacement, three genuine browser engines and final three-engine
+  delayed-reply/cancellation/independent-expiry fixtures. Clean detached `55c6629`
+  built ordinary desktop and ARM64 reader without private inputs. The ordinary full
+  browser suite and C ThreadSanitizer were not rerun/run respectively. Report records
+  rejected first candidate, failed prompt detection and corrected measurement scopes.
+- **Cleanup/preservation:** all 26 owned M5.25 containers removed after evidence
+  capture; readers/relays/previews stopped; prior 22 containers/seven running states
+  preserved. Original source/media hashes and metadata unchanged. No Pi access.
+  Interoperability 0.1/0.2, accepted tags and public releases remain unchanged.
+  Recheck current processes before a new experiment; this is a historical record.
+- **Backup:** M5.24 evidence archive `M5.25-incremental-20261124T064928Z`, 2,703 files,
+  339 directories/six symlinks, 373,080,685 logical bytes; archive 384,715,264 bytes,
+  SHA-256 `c8d438a4c5714bd9ac0652fa903925e74aa3081920cd20a6cde56fb699de7973`.
+  All file bytes/supported metadata independently reread; no full restore.
+  Private project-level recovery pointer:
+  `Backups/WebDesktop-M5.25-incremental-20261124T064928Z/backup.json`.
+  It predates new M5.25 evidence, retained under `.research/m525/`; do not overwrite
+  failed attempts, working media, build copies or raw measurements.
+- **Next recommendation:** serial communications, virtual modems and isolated
+  networking, beginning with one genuine two-endpoint transfer and independent
+  console/lifecycle checks. This is a recommendation, not a new authorization.
 
 - **M5.24 completed:** genuine RT-11 MT/PIP tape reads and V7 RH70/RP06 captured status.
   Backup prerequisite completed: `M5.24-incremental-20261124T041941Z`, 123 files / seven directories,
@@ -38,7 +74,7 @@ request; historical approvals do not authorize new hardware, releases or message
   Documentation links, JSON examples, pinned code links and publication scope were
   checked; no runtime tests or genuine experiments were rerun for this prose-only work.
 
-- **Latest completed engineering milestone: M5.24.** Read the [report](docs/lab/M5.24.md),
+- **Prior completed engineering milestone: M5.24.** Read the [report](docs/lab/M5.24.md),
   [historical tape workflow](docs/technical/rt11-magnetic-tape.md),
   [capture contract](docs/technical/storage-observation.md),
   [future activity proposal](docs/technical/storage-activity-proposal.md) and
@@ -75,7 +111,7 @@ request; historical approvals do not authorize new hardware, releases or message
   mock and relay stopped; all 22 preexisting containers/seven running states retained.
   Original disks retain exact hash/size/mode/mtime and input tape hash is unchanged.
   M5.23.1 interoperability documents and 0.1 implementation were not changed.
-- **Next recommendation:** bounded optional storage-completion event feasibility in
+- **Prior M5.24 recommendation (now completed by M5.25):** bounded optional storage-completion event feasibility in
   a disposable build versus an unmodified control. It is a proposal, not an existing
   feed or implicit authorization. No physical Pi access, new release, browser media
   control, upstream work or production deployment is authorized.
@@ -95,7 +131,7 @@ request; historical approvals do not authorize new hardware, releases or message
 3. Read [current capabilities](docs/capabilities.md), [known limitations](docs/known-limitations.md),
    [roadmap](ROADMAP.md) and [documentation index](docs/README.md). Historical plans
    describe their time; later verified reports supersede pending-status wording.
-4. Read the current [M5.24 report](docs/lab/M5.24.md), then the [M5.23 report](docs/lab/M5.23.md), [M5.22 report](docs/lab/M5.22.md), [M5.21 report](docs/lab/M5.21.md) and [M5.20 report](docs/lab/M5.20.md) and [M5.19 workstation report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
+4. Read the current [M5.25 report](docs/lab/M5.25.md), then the [M5.24 report](docs/lab/M5.24.md), then the [M5.23 report](docs/lab/M5.23.md), [M5.22 report](docs/lab/M5.22.md), [M5.21 report](docs/lab/M5.21.md) and [M5.20 report](docs/lab/M5.20.md) and [M5.19 workstation report](docs/lab/M5.19.md), then the latest [publication record](docs/releases/M5.18-publication.md)
    and [M5.17 engineering report](docs/lab/M5.17.md). Follow relevant subsystem/lab
    runbooks instead of reconstructing commands from memory.
 5. Identify any owned running lab/preview before starting another. One outstanding
@@ -113,7 +149,7 @@ request; historical approvals do not authorize new hardware, releases or message
 Alpha 2 is public, source-only and experimental: 14,789,290 bytes / 1,026 members.
 Only its archive and SHA256SUMS were attached. Both releases and all accepted tags
 must remain unchanged. Do not republish them or tag current main as their source.
-No new release or binary publication is authorized for M5.24.
+No new release or binary publication is authorized for M5.25.
 
 ## Product and operating boundaries
 
@@ -133,7 +169,8 @@ not reconnect guests, restore authority, mount media or start emulators.
 
 ## Open limits to preserve
 
-- Disk/tape browser output is captured metadata, not live I/O. Guest OS and safe
+- Ordinary disk/tape browser output is captured metadata, not live I/O. The separate
+  M5.25 TM11 experiment is laboratory-only and does not qualify production activity. Guest OS and safe
   attachment remain operator-attested; unreported transitions can obsolete a capture
   immediately. Snapshot recovery never grants authority. TM11 has narrow RT-11 MT/PIP read
   qualification and separate CPU evidence, not a physical transport or general
