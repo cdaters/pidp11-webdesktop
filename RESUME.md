@@ -6,6 +6,17 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **M5.27 active:** genuine local modem/serial-integrity work and Ethernet inventory,
+  starting `6ec09cbd908e930dc2611820a4352914b1adbe4a`. Fresh private evidence in
+  `.research/m527/`. No Pi, external dialing, production network, deployment,
+  release, new tags or interoperability changes authorized.
+  M5.26 incremental backup verified: **M5.27-incremental-20261125T023333Z**, 77 files / five directories,
+  200,216,739 logical bytes; archive 200,533,504 bytes, SHA-256
+  `798e4edb9175dbb9a119aa209d0232ad42aa4fe69067ba399905ac122235d93a`.
+  All file hashes and supported metadata reread; no full restore. Private pointer:
+  `Backups/M5.27-incremental-20261125T023333Z/backup.json`. Prior 22 containers/seven running
+  preserved at startup. Recheck processes before continuing.
+
 - **Latest completed engineering milestone: M5.26.** Engineering commit
   `ba1e5819a8365e00688a6c3ea2f0222c88d0333f`; documentation follows separately.
   Read [report](docs/lab/M5.26.md), [session contract](docs/technical/serial-communications.md)
