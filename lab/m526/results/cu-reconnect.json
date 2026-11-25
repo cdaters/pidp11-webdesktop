@@ -1,0 +1,14 @@
+{
+  "kind": "genuine V7 cu DC11 ASCII7 transfer",
+  "peer_generation": 4,
+  "fresh_explicit_reconnect": true,
+  "guest_to_peer_bytes": 28,
+  "guest_to_peer_sha256": "aeb497ba879d82480bee7e48030c465ae431f274ce630151ea7446a4498aa436",
+  "peer_to_guest_bytes": 27,
+  "peer_to_guest_sha256": "bce42f7efeb2253eeb3ce1d104f404348756ac816351bc47ff1d77e8df5bba07",
+  "guest_console_rendered_bytes": 28,
+  "guest_console_rendered_sha256": "68efd8b2a1302d4defbba65fac970c6edb136e0587d0bdd3ba039a8ca066de3e",
+  "newline_rule": "Peer LF becomes CRLF on original console; outbound LF unchanged",
+  "peer_to_console_detection_upper_ms": 455.6892910040915,
+  "console_after_previous_disconnect": true
+}

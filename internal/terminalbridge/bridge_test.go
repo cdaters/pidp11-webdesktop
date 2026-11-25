@@ -273,6 +273,17 @@ func TestHTTPAuthorizationAndDisconnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	c2.Read(ctx)
+	if err := c2.Write(ctx, websocket.MessageText, []byte(`{"type":"status"}`)); err != nil {
+		t.Fatal(err)
+	}
+	_, observed, err := c2.Read(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var observation Frame
+	if json.Unmarshal(observed, &observation) != nil || observation.Owner || observation.Type != "state" {
+		t.Fatal("read-only status authority", string(observed))
+	}
 	c2.Write(ctx, websocket.MessageText, []byte(`{"type":"acquire"}`))
 	if _, _, err = c2.Read(ctx); err == nil {
 		t.Fatal("observer granted writer")

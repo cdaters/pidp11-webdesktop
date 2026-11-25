@@ -1,0 +1,59 @@
+[
+  {
+    "engine": "chromium",
+    "genuine_guest": true,
+    "guest_to_browser_hex": "4d3532362d56372d544f2d4348524f4d49554d2d384143320a",
+    "guest_to_browser_sha256": "a80b7d0f865c8fc2305d22e3ac98f3dc4f83d01ea4f04f69579e779e0d1e5b5b",
+    "browser_text": "M526-CHROMIUM-TO-V7-29E0",
+    "browser_return": "Explicit LF; CR alone remained buffered in this guest line discipline",
+    "guest_console_observed": true,
+    "visible_upper_ms": 931.0468339999998,
+    "last_transport_sample": {
+      "received": 77,
+      "written": 51,
+      "capped": false,
+      "pending": 0,
+      "sample_unix_ms": 1795570607358
+    },
+    "browser_disconnect_preserved_attachment": true,
+    "explicit_reconnect_readonly": true
+  },
+  {
+    "engine": "firefox",
+    "genuine_guest": true,
+    "guest_to_browser_hex": "4d3532362d56372d544f2d46495245464f582d384143320a",
+    "guest_to_browser_sha256": "cb2ae2c30f0762b1f527b711f49384cee7faa5aa559c7323cc7b929f51476c98",
+    "browser_text": "M526-FIREFOX-TO-V7-29E0",
+    "browser_return": "Explicit LF; CR alone remained buffered in this guest line discipline",
+    "guest_console_observed": true,
+    "visible_upper_ms": 467.1588750000001,
+    "last_transport_sample": {
+      "received": 125,
+      "written": 75,
+      "capped": false,
+      "pending": 0,
+      "sample_unix_ms": 1795570610634
+    },
+    "browser_disconnect_preserved_attachment": true,
+    "explicit_reconnect_readonly": true
+  },
+  {
+    "engine": "webkit",
+    "genuine_guest": true,
+    "guest_to_browser_hex": "4d3532362d56372d544f2d5745424b49542d384143320a",
+    "guest_to_browser_sha256": "95a9f7c0436faabd696979eea69558f883b82ed3092722f66fdd92d0b305c031",
+    "browser_text": "M526-WEBKIT-TO-V7-29E0",
+    "browser_return": "Explicit LF; CR alone remained buffered in this guest line discipline",
+    "guest_console_observed": true,
+    "visible_upper_ms": 953.3904999999995,
+    "last_transport_sample": {
+      "received": 171,
+      "written": 98,
+      "capped": false,
+      "pending": 0,
+      "sample_unix_ms": 1795570615907
+    },
+    "browser_disconnect_preserved_attachment": true,
+    "explicit_reconnect_readonly": true
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "fresh_service_starts_detached": true,
+  "restarted_service_new_instance": true,
+  "restarted_service_detached": true,
+  "independent_console_after_stop": true,
+  "safe_shutdown": "Three guest sync commands; independent SIGINT only after idle console; SIMH quit exit 0",
+  "genuine_peer_sigkill": "Lost carrier; explicit cu ~. returned console",
+  "guest_flow_control": "not qualified; observed canonical input and echo",
+  "modem_exchange": "AT produced OK; repeated ERROR feedback followed; stopped without qualification; bounded peer expired at 60 seconds"
+}

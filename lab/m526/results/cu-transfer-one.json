@@ -1,0 +1,21 @@
+{
+  "guest": "Research UNIX Seventh Edition",
+  "utility": "/bin/cu (original installed binary)",
+  "device": "DC11 DCI/DCO line 3 /dev/tty03",
+  "transport": "fixed loopback raw TCP inside network-none Linux",
+  "command": "cu 0 -l /dev/tty03 -a /dev/null -s 9600",
+  "acu_note": "Guest /dev/null substitutes only for absent automatic calling unit. No dialing, Hayes or external modem claim.",
+  "guest_to_peer_bytes": 24,
+  "peer_to_guest_bytes": 25,
+  "outgoing_sha256": "6ee9b9c27e6af11b6b0633465b8024183601f77013cb50a97c58e0523162e7fa",
+  "incoming_sha256": "f191d258c8c5de574d34a4426894e14a25aa9adf31339b5debb603a6cb7839a6",
+  "outgoing_hex": "4d3532362d56372d43552d544f2d504545522d373335410a",
+  "peer_sent_hex": "4d3532362d504545522d544f2d56372d43552d393143460d0a",
+  "guest_rendered_hex": "4d3532362d504545522d544f2d56372d43552d393143460d0d0a",
+  "transformation": "Console CR input became LF at peer. Peer CRLF rendered as CRCRLF on original console. Exact ASCII content after explicit newline transformation; not binary transparent.",
+  "guest_receipt": "cu printed distinct peer text through original guest console",
+  "peer_generation": 3,
+  "speed_correction": "The original cu source defaults unsupported 9600 to B300; no physical baud timing measured. Later commands requested 300 explicitly. Observed canonical/echo behavior means source intent is not proof that all ioctls succeeded.",
+  "guest_rendered_bytes": 26,
+  "guest_rendered_sha256": "bc3d6ffd727ac44c3e098c17cf9cee7c9f103a25adff44a21b9f438c8ecf2444"
+}

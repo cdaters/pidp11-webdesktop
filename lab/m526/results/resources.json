@@ -1,0 +1,25 @@
+{
+  "environment": "Mac-hosted OrbStack ARM64 Linux, original SIMH; not a physical Pi",
+  "service_idle_sample_seconds": 2.0037048329832032,
+  "service_cpu_ticks": 1,
+  "clock_ticks_per_second": 100,
+  "service_cpu_one_core_percent": 0.49907550430527053,
+  "sample": {
+    "VmHWM": "14664 kB",
+    "VmRSS": "14664 kB",
+    "Threads": "8"
+  },
+  "final": {
+    "VmHWM": "13664 kB",
+    "VmRSS": "12832 kB",
+    "Threads": "8"
+  },
+  "final_open_fds": 9,
+  "whole_lab_memory_max": 100663296,
+  "whole_lab_swap_max": 0,
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n",
+  "interfaces": [
+    "lo"
+  ],
+  "scope": "two-second CPU sample, not sustained throughput/stress or Pi performance"
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "path": "/bin/cu",
+    "mode": 33277,
+    "size": 7140,
+    "sha256": "6f9b1beaf5e9506b66c10e34f7944dd45a22be2e12d7ef146d69bb629f6d1ea4"
+  },
+  {
+    "path": "/bin/stty",
+    "mode": 33277,
+    "size": 4430,
+    "sha256": "05a289d6e945b16a78eb267a88af561c590d3cafd840fbe2f45ff266b3e0ee50"
+  },
+  {
+    "path": "/bin/cat",
+    "mode": 33277,
+    "size": 3748,
+    "sha256": "45397f3e647d599d07608a967fb9063b0d282dcef7f21a965d8352ff023d2975"
+  },
+  {
+    "path": "/bin/dd",
+    "mode": 33277,
+    "size": 6992,
+    "sha256": "0dc83d9dedc22a004dd839f594e0fe8775a49774b2717ba3c1285bb81ee65219"
+  },
+  {
+    "path": "/etc/ttys",
+    "mode": 33204,
+    "size": 266,
+    "sha256": "94952076bbd9f97800a4c7297a408fe144988ba601a90a9964ccd0bafbff2c81"
+  },
+  {
+    "path": "/etc/fstab",
+    "absent": true
+  }
+]

@@ -106,7 +106,7 @@ func (s *Server) stream(w http.ResponseWriter, r *http.Request) {
 			if d.Decode(&extra) != io.EOF {
 				return
 			}
-			if m.Type != "ack" && !s.Auth.Allowed(r, access.TerminalInput) {
+			if m.Type != "ack" && m.Type != "status" && !s.Auth.Allowed(r, access.TerminalInput) {
 				return
 			}
 			if m.Type == "propose" || m.Type == "approve" || m.Type == "cancel-proposal" {

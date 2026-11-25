@@ -138,7 +138,7 @@ func (m *Manager) List() []terminalbridge.Listing {
 	for id, l := range m.lines {
 		m.expireLocked(l, time.Now())
 		s := state(l)
-		rows = append(rows, terminalbridge.Listing{ID: id, Label: l.config.Label, Connected: s == "attached", State: s, Generation: m.generation(l), Kind: "real-guest-line", Columns: 80, Rows: 24})
+		rows = append(rows, terminalbridge.Listing{Serial: l.config.Serial, ID: id, Label: l.config.Label, Connected: s == "attached", State: s, Generation: m.generation(l), Kind: "real-guest-line", Columns: 80, Rows: 24})
 	}
 	return rows
 }

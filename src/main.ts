@@ -52,6 +52,7 @@ const apps = [
   ["panel", "Front panel", "PDP-11/70"],
   ["terminal", "Terminal", "Independent mock session"],
   ["guest", "Guest terminal", "Authenticated real guest line · laboratory"],
+  ["communications", "Communications", "Approved serial application line · no arbitrary network targets"],
   ["teletype", "Teletype", "ASR-33 paper presentation · approved guest line"],
   ["device-observer", "Guest devices", "Read-only completed emulated-device output"],
   ["companion", "AI Companion", "Optional offline guide fixture · no guest control"],
@@ -591,19 +592,20 @@ function renderApp(id: string, el: HTMLElement) {
     (b) => (b.onclick = () => manager.restore(b.dataset.focus!)),
   );
 }
-function openGuestTerminal(initialPersonality: "vt100" | "asr33" = "vt100") {
+function openGuestTerminal(initialPersonality: "vt100" | "asr33" = "vt100", communicationsOnly = false) {
   const slot = Array.from({length: 4}, (_, i) => i === 0 ? "guest" : `guest-${i + 1}`).find(id => !manager.store.windows.some(w => w.id === id));
   if (!slot) { notify("Four guest windows are already open."); return; }
   if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
   const el = body("Loading guest terminal…"); el.classList.add("guest-terminal-app");
   let dispose = () => {};
-  manager.open(slot, initialPersonality === "asr33" ? "Teletype · guest line" : "Real guest terminal", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
-  void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el, initialPersonality, status => manager.setStatus(slot, status))).then(cleanup => {
+  manager.open(slot, communicationsOnly ? "Serial communications" : initialPersonality === "asr33" ? "Teletype · guest line" : "Real guest terminal", el, { x: 80, y: 40, width: 1000, height: 690 }, () => dispose());
+  void import("./guest-terminal.ts").then(m => m.mountGuestTerminal(el, initialPersonality, status => manager.setStatus(slot, status), communicationsOnly)).then(cleanup => {
     if (el.isConnected) dispose = cleanup; else cleanup();
   }).catch(() => { el.textContent = "Guest terminal renderer unavailable"; });
 }
 function openApp(id: string) {
   if (id === "guest") return openGuestTerminal();
+  if (id === "communications") return openGuestTerminal("vt100", true);
   if (id === "teletype") return openGuestTerminal("asr33");
   if (id === "tek4010") {
     if (manager.store.windows.some(w => w.id === id)) { manager.restore(id); return; }

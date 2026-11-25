@@ -27,10 +27,11 @@ const Lease = 10 * time.Second
 // Config names an operator-selected raw serial endpoint, never a browser address.
 // DC11 setup and guest login configuration belong to the separate SIMH lab harness.
 type Config struct {
-	ID      string `json:"id"`
-	Label   string `json:"label"`
-	Address string `json:"address"`
-	Kind    string `json:"kind"`
+	Serial  SerialProfile `json:"serial,omitzero"`
+	ID      string        `json:"id"`
+	Label   string        `json:"label"`
+	Address string        `json:"address"`
+	Kind    string        `json:"kind"`
 }
 
 // Validate accepts one to four unique, literal-loopback raw guest endpoints.
@@ -40,6 +41,9 @@ func Validate(configs []Config) error {
 	}
 	ids, addresses := map[string]bool{}, map[string]bool{}
 	for _, c := range configs {
+		if err := c.Serial.Validate(); err != nil {
+			return err
+		}
 		host, port, e := net.SplitHostPort(c.Address)
 		ip := net.ParseIP(host)
 		number, portErr := strconv.Atoi(port)
@@ -55,15 +59,16 @@ func Validate(configs []Config) error {
 // Frame carries per-viewer ownership state or guest bytes (base64 in JSON).
 // Epoch fences keyboard authority; it is not a guest execution acknowledgement.
 type Frame struct {
-	Type       string `json:"type"`
-	Data       []byte `json:"data,omitempty"`
-	Connected  bool   `json:"connected"`
-	Owner      bool   `json:"owner"`
-	Busy       bool   `json:"busy"`
-	Epoch      uint64 `json:"epoch"`
-	Message    string `json:"message,omitempty"`
-	ProposalID string `json:"proposal_id,omitempty"`
-	Expires    int64  `json:"expires,omitempty"`
+	Serial     *SerialState `json:"serial,omitempty"`
+	Type       string       `json:"type"`
+	Data       []byte       `json:"data,omitempty"`
+	Connected  bool         `json:"connected"`
+	Owner      bool         `json:"owner"`
+	Busy       bool         `json:"busy"`
+	Epoch      uint64       `json:"epoch"`
+	Message    string       `json:"message,omitempty"`
+	ProposalID string       `json:"proposal_id,omitempty"`
+	Expires    int64        `json:"expires,omitempty"`
 }
 
 // Client is a subscription owned by one WebSocket handler. Endpoint.mu protects
@@ -83,16 +88,19 @@ type Client struct {
 // own lock (send, remove, state, broadcastState, expire) require mu to be held.
 // Config and the injectable Now clock must not change after concurrent use begins.
 type Endpoint struct {
-	Config       Config
-	mu           sync.Mutex
-	conn         net.Conn
-	used         bool // One guest attachment per endpoint lifetime, including after Close.
-	clients      map[*Client]bool
-	viewRevision uint64 // Changes on every membership transition, including eviction.
-	owner        *Client
-	epoch        uint64
-	until        time.Time
-	Now          func() time.Time
+	Config         Config
+	mu             sync.Mutex
+	conn           net.Conn
+	used           bool // One guest attachment per endpoint lifetime, including after Close.
+	clients        map[*Client]bool
+	viewRevision   uint64 // Changes on every membership transition, including eviction.
+	owner          *Client
+	epoch          uint64
+	until          time.Time
+	serialReceived uint64
+	serialWritten  uint64
+	serialCapped   bool
+	Now            func() time.Time
 }
 
 // NewEndpoint creates a detached line. Callers outside New must validate c first.
@@ -146,6 +154,7 @@ func (e *Endpoint) read(conn net.Conn) {
 				e.mu.Unlock()
 				return
 			}
+			addSerialCount(&e.serialReceived, n, &e.serialCapped)
 			// Output frames are immutable. Copy once before reusing the read buffer;
 			// viewers retain independent queue and credit limits.
 			var output []byte
@@ -187,7 +196,11 @@ func (e *Endpoint) remove(c *Client) {
 	}
 }
 func (e *Endpoint) state(c *Client, message string) Frame {
-	return Frame{Type: "state", Connected: e.conn != nil, Owner: e.owner == c, Busy: e.owner != nil, Epoch: e.epoch, Message: message}
+	frame := Frame{Type: "state", Connected: e.conn != nil, Owner: e.owner == c, Busy: e.owner != nil, Epoch: e.epoch, Message: message}
+	if e.Config.Serial.Present() {
+		frame.Serial = &SerialState{Received: e.serialReceived, Written: e.serialWritten, Capped: e.serialCapped, Pending: c.pending, SampleUnixMS: e.Now().UnixMilli()}
+	}
+	return frame
 }
 func (e *Endpoint) broadcastState(message string) {
 	for c := range e.clients {
@@ -272,6 +285,9 @@ func (e *Endpoint) operationLocked(c *Client, op string, epoch, seq uint64, data
 		return errors.New("disconnected")
 	}
 	switch op {
+	case "status":
+		// Read-only observation never extends keyboard authority.
+		e.send(c, e.state(c, ""))
 	case "acquire":
 		if e.conn == nil || (e.owner != nil && e.owner != c) {
 			e.send(c, e.state(c, "Keyboard unavailable"))
@@ -331,6 +347,7 @@ func (e *Endpoint) operationLocked(c *Client, op string, epoch, seq uint64, data
 		for len(rest) > 0 {
 			written, err := e.conn.Write(rest)
 			if written > 0 {
+				addSerialCount(&e.serialWritten, written, &e.serialCapped)
 				rest = rest[written:]
 			}
 			if err != nil || written == 0 {

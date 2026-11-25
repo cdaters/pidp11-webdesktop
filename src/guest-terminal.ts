@@ -1,3 +1,4 @@
+import { serialProfile, serialState, serialText, type SerialProfile, type SerialState } from "./serial-session.ts";
 import { renderEquipmentDescription } from "./equipment.ts";
 import { shareSelection } from "./terminal-sharing.ts";
 import { Tek4010 } from "./tek4010.ts";
@@ -16,13 +17,14 @@ export function safeGuestPaste(text: string): string {
 /** Mount one viewer of a configured guest line, initially without keyboard ownership.
  * The caller owns host and must invoke the returned cleanup when its window closes.
  * This view owns xterm, its socket and renewal timer; it never owns guest lifecycle. */
-export async function mountGuestTerminal(host: HTMLElement, initialPersonality: TerminalPersonality = "vt100", onStatus: (status: string) => void = () => {}) {
+export async function mountGuestTerminal(host: HTMLElement, initialPersonality: TerminalPersonality = "vt100", onStatus: (status: string) => void = () => {}, communicationsOnly = false) {
   const [{Terminal}] = await Promise.all([import("@xterm/xterm"),import("@xterm/xterm/css/xterm.css")]);
   if (!host.isConnected) return () => {};
   host.innerHTML = `<div class="guest-heading"><strong>Real guest terminal · dedicated guest line</strong><span class="source-tag">NOT CONNECTED</span></div>
     <form class="guest-login"><label>Terminal access token <input type="password" autocomplete="off" aria-label="Terminal access token"></label><button>Sign in</button></form>
     <div class="terminal-toolbar"><select aria-label="Guest endpoint" disabled></select><button data-refresh disabled>Refresh lines</button><button data-connect disabled>Connect</button><button data-disconnect disabled>Disconnect</button><button data-acquire disabled>Acquire keyboard</button><button data-release disabled>Release keyboard</button><button data-logout disabled>Sign out</button></div>
     <div class="terminal-toolbar"><label>Personality <select aria-label="Guest terminal personality"><option value="vt100">VT100 · tested subset</option><option value="vt52">VT52 · text subset</option><option value="vt220">VT220 · seven-bit subset</option><option value="asr33">ASR-33 · paper presentation</option><option value="tek4010">Tektronix 4010 · experimental</option></select></label><label>Text size <select aria-label="Guest terminal text size"><option value="11">Small</option><option value="13" selected>Normal</option><option value="16">Large</option><option value="20">Extra large</option></select></label></div>
+    <section data-serial-session hidden><h3>Serial communications session</h3><pre data-serial-facts></pre><p>Disconnect closes this viewer. The independent operator must revoke the actual bridge before changing the guest or peer.</p></section>
     <details class="equipment-description"><summary>Connection and equipment details</summary><dl></dl></details>
     <div class="guest-status" role="status">Sign in to list configured guest lines. No automatic keyboard takeover.</div>
     <div class="terminal-toolbar"><button data-save-output>Save display</button><button data-share-selection>Share selected text</button><label><input type="checkbox" data-uppercase> Uppercase keyboard (teletype)</label><span data-paper-status></span></div>
@@ -75,6 +77,17 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
   });
   workstation.bind(term);
   workstation.authority(false);
+  const serialProfiles = new Map<string, SerialProfile>();
+  let serialSample: SerialState | undefined;
+  let connectedSerial: SerialProfile | undefined;
+  let serialReceivedAt = 0;
+  const renderSerial = () => {
+    const profile = connectedSerial ?? serialProfiles.get(selector.value);
+    $("[data-serial-session]").hidden = !profile;
+    if (profile) $("[data-serial-facts]").textContent = serialText(
+      profile, serialSample, connected, owner, performance.now() - serialReceivedAt);
+  };
+  if (communicationsOnly) $(".guest-heading strong").textContent = "Serial communications · approved guest application line";
   const controls=()=>{
     const open=socket?.readyState===WebSocket.OPEN;
     $<HTMLButtonElement>("[data-connect]").disabled=!selector.options.length || !!socket || selector.selectedOptions[0]?.dataset.state !== "attached";
@@ -100,6 +113,7 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
       operations: owner && connected ? "Observe, copy/export, lease-gated keys and reviewed paste" : "Observe/copy/export when connected; acquire keyboard explicitly",
       limitations: "Partial terminal conformance; configured guest identity is operator-attested, not automatically authoritative",
     });
+    renderSerial();
     onStatus(`${selector.value || "No line"} · ${personality.value.toUpperCase()} · ${badge.textContent}`);
   };
   const send = (message: object) => {
@@ -163,16 +177,28 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
   const paste=(e:ClipboardEvent)=>{e.preventDefault();e.stopImmediatePropagation();const value=e.clipboardData?.getData('text/plain')??'';const box=$<HTMLInputElement>('.guest-paste input');try { box.value=safeGuestPaste(value); status.textContent='Paste captured for review; nothing sent'; } catch (error) { box.value=''; status.textContent=(error as Error).message; } $<HTMLDetailsElement>('.guest-paste').open=true;box.focus();};
   $(".guest-screen").addEventListener('paste',paste,true);
   $<HTMLButtonElement>('[data-paste]').onclick=()=>{try{input(safeGuestPaste($<HTMLInputElement>('.guest-paste input').value));$<HTMLInputElement>('.guest-paste input').value='';focus();}catch(e){status.textContent=String((e as Error).message);}};
+  let listRevision = 0;
   const list = async () => {
+    if (socket || disposed) return;
+    const revision = ++listRevision;
     const [session, endpoints] = await Promise.all([fetch('/api/v1/session'), fetch('/api/v1/terminals')]);
+    if (disposed || socket || revision !== listRevision) return;
     if (!session.ok || !endpoints.ok) throw Error('Guest terminal service unavailable or sign-in required');
     const s = await session.json();
-    const rows: {id: string; label: string; connected: boolean; state?: string; generation?: string}[] = await endpoints.json();
-    if (disposed) return;
+    const rows: {id: string; label: string; connected: boolean; state?: string; generation?: string; serial?: unknown}[] = await endpoints.json();
+    if (disposed || socket || revision !== listRevision) return;
     csrf = s.csrf;
     canInput = !!s.capabilities['terminal.input'];
     const selectedID = selector.value;
-    selector.replaceChildren(...rows.map(e => {
+    serialSample = undefined;
+    connectedSerial = undefined;
+    serialProfiles.clear();
+    const admitted = rows.filter(row => {
+      const profile = serialProfile(row.serial);
+      if (profile) serialProfiles.set(row.id, profile);
+      return !communicationsOnly || (profile !== undefined && !!row.generation);
+    });
+    selector.replaceChildren(...admitted.map(e => {
       const option = document.createElement('option');
       option.value = e.id;
       option.dataset.state = e.state ?? (e.connected ? 'attached' : 'unavailable');
@@ -182,15 +208,15 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     }));
     // Directory iteration order may change. Keep the intended line across a
     // refresh; a different first row must not silently replace the selection.
-    if (rows.some(row => row.id === selectedID)) selector.value = selectedID;
+    if (admitted.some(row => row.id === selectedID)) selector.value = selectedID;
     $<HTMLButtonElement>('[data-logout]').disabled = false;
     $<HTMLButtonElement>('[data-refresh]').disabled = false;
-    status.textContent = rows.some(e => e.connected)
+    status.textContent = admitted.some(e => e.connected)
       ? 'Select an attached guest line and connect read-only.'
       : 'No guest attached. A local operator must verify and approve a line, then use Refresh lines. The guest runs independently.';
     controls();
   };
-  selector.onchange = controls;
+  selector.onchange = () => { serialSample = undefined; connectedSerial = undefined; controls(); };
   $<HTMLButtonElement>('[data-refresh]').onclick = () => {
     if (socket) { status.textContent = 'Disconnect this view before refreshing terminal choices.'; return; }
     void list().catch(error => { status.textContent = (error as Error).message; });
@@ -205,6 +231,8 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     // consuming new output. Keyboard authority and input sequence also start fresh.
     const ws = new WebSocket(url);
     socket = ws;
+    // A delayed directory reply must not relabel this approved attachment.
+    listRevision++;
     seq = 0;
     owner = false;
     connected = false;
@@ -227,12 +255,14 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     term.write(profile.initial);
     configureKeys();
     handler = term.onData(input);
+    serialSample = undefined;
+    connectedSerial = serialProfiles.get(selector.value);
     status.textContent = 'Connecting · fresh display; no terminal history replay';
     controls();
     ws.onmessage=e=>{
       if(socket!==ws)return;
       try{const f=JSON.parse(e.data);
-        if(f.type==='state'){if(f.epoch!==proposalEpoch||!f.owner)clearProposal();owner=!!f.owner;connected=!!f.connected;epoch=f.epoch;status.textContent=f.message || (connected ? owner ? 'Connected · this window owns the guest keyboard' : f.busy ? 'Connected read-only · another viewer owns the keyboard' : 'Connected read-only · acquire keyboard explicitly' : 'Guest line unavailable · operator must reconnect it');controls();}
+        if(f.type==='state'){serialSample=serialState(f.serial);serialReceivedAt=performance.now();if(f.epoch!==proposalEpoch||!f.owner)clearProposal();owner=!!f.owner;connected=!!f.connected;epoch=f.epoch;status.textContent=f.message || (connected ? owner ? 'Connected · this window owns the guest keyboard' : f.busy ? 'Connected read-only · another viewer owns the keyboard' : 'Connected read-only · acquire keyboard explicitly' : 'Guest line unavailable · operator must reconnect it');controls();}
         else if(f.type==='output'){
           const raw=atob(f.data);if(queued+raw.length>65536)throw Error('Renderer backlog');queued+=raw.length;
           const bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
@@ -357,6 +387,12 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
     if (send({type: 'approve', epoch, seq: seq + 1, proposal_id: id})) seq++;
   };
   $<HTMLButtonElement>("[data-cancel-proposal]").onclick = cancelProposal;
+  const serialTimer = setInterval(() => {
+    if (serialProfiles.has(selector.value)) {
+      if (socket?.readyState === WebSocket.OPEN) send({ type: "status" });
+      renderSerial();
+    }
+  }, 1000);
   const heartbeat=setInterval(()=>{if(owner)send({type:'renew',epoch});},2000);
   const hide=()=>disconnect('Page closed · guest connection remains independent');window.addEventListener('pagehide',hide);
   // Session inspection is read-only. It never connects to a line or grants input.
@@ -364,6 +400,7 @@ export async function mountGuestTerminal(host: HTMLElement, initialPersonality: 
   return () => {
     disposed = true;
     clearInterval(heartbeat);
+    clearInterval(serialTimer);
     window.removeEventListener('pagehide', hide);
     disconnect();
     handler.dispose();

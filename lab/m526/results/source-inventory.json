@@ -1,0 +1,16 @@
+{
+  "upstream_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+  "simulator_sha256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+  "files": {
+    "PDP11/pdp11_dl.c": "7cea372f35f8931db800a47370a4c1370842ccc0cd9816bba6c077b4aa7cedad",
+    "PDP11/pdp11_dc.c": "8fb85bb3c5ba1c590a81b30bd1efb775588e9b67c3de50e35cacd0d03a86bedb",
+    "PDP11/pdp11_dz.c": "5219f52948cb3cd62343df2a59ec19f2511c3ce5fd25c4b4169251c80fdec576",
+    "PDP11/pdp11_vh.c": "aa6276b42b658e1718f4cc86c8f41f6a2ec48d862bb9017f02d0575e1a25318b",
+    "PDP11/pdp11_xq.c": "61508e5b6d2050bb487975e242755faecd3c2b84a172b33e700d6e32a21952df",
+    "PDP11/pdp11_xu.c": "099adc4ca33dbcf3cd3f506a39c8e61e93e8d5f905695bc81e54dd2362f2fa6f",
+    "PDP11/pdp11_defs.h": "e66efbd0a9a151671586edaadf59c0d64d9d40cee04b8259c1e6e892999663ba",
+    "sim_tmxr.c": "9f82699136bdf2135d20bca0ed58bba45cb9425df385172116d2ad769a1fa229",
+    "sim_tmxr.h": "93ff52299b9d9f326f4c15f22598d41d7160cbd4038876445e527a852c0fb6bd"
+  },
+  "runtime": "V4.0-0 REALCONS; no Ethernet; network support not available in simulator; REALCONS disconnected"
+}

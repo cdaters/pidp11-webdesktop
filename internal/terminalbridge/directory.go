@@ -9,14 +9,15 @@ type Directory interface {
 
 // Listing is public terminal metadata; it contains no network target or token.
 type Listing struct {
-	ID         string `json:"id"`
-	Label      string `json:"label"`
-	Connected  bool   `json:"connected"`
-	State      string `json:"state"`
-	Generation string `json:"generation,omitempty"`
-	Kind       string `json:"kind"`
-	Columns    int    `json:"columns"`
-	Rows       int    `json:"rows"`
+	Serial     SerialProfile `json:"serial,omitzero"`
+	ID         string        `json:"id"`
+	Label      string        `json:"label"`
+	Connected  bool          `json:"connected"`
+	State      string        `json:"state"`
+	Generation string        `json:"generation,omitempty"`
+	Kind       string        `json:"kind"`
+	Columns    int           `json:"columns"`
+	Rows       int           `json:"rows"`
 }
 
 // List reports the immutable pilot bridge through the common directory.
@@ -28,7 +29,7 @@ func (b *Bridge) List() []Listing {
 		if connected {
 			state = "attached"
 		}
-		rows = append(rows, Listing{ID: id, Label: e.Config.Label, Connected: connected, State: state, Kind: "real-guest-line", Columns: 80, Rows: 24})
+		rows = append(rows, Listing{Serial: e.Config.Serial, ID: id, Label: e.Config.Label, Connected: connected, State: state, Kind: "real-guest-line", Columns: 80, Rows: 24})
 	}
 	return rows
 }
