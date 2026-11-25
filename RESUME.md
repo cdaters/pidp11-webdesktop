@@ -6,9 +6,30 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **M5.29 complete: Source Alpha 3 qualified for owner review, not published.**
-  Exact candidate `a72357097a6483c9e9467933d59a00dd6a4d55f5`; proposed tag
-  `v0.5.29-source-alpha.3` does not exist. Private archive:
+
+- **M5.30 complete: Source Alpha 3 published and independently verified.**
+  [Public prerelease](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.29-source-alpha.3); release ID `457755118`, published `2026-11-25T07:01:14Z`.
+  Annotated tag `v0.5.29-source-alpha.3` targets exactly
+  `a72357097a6483c9e9467933d59a00dd6a4d55f5`, not current main.
+  Archive 16,337,022 bytes / 1,390 members; SHA-256
+  `0e3ed9ec9a7cb9fcd9ee587d65c744640859a787d4df95c0e822362dc087376d`.
+  Exactly the approved source archive and 112-byte `SHA256SUMS` were uploaded;
+  public downloads match byte-for-byte. It is a prerelease, not latest stable.
+- **M5.30 verification:** fresh offline extraction/build, 110 frontend tests,
+  27 Go race-tested packages, contract/integration/guide checks, 243 browser tests
+  without skips/flakes and static ARM64/detached memory-guard startup passed.
+  Read [publication record](docs/releases/M5.30-publication.md). Alpha 1/2 and prior
+  tags remain unchanged. Evidence `.research/m530/`; approved candidate stays
+  `.research/m529/candidate-a/`. Test servers stopped; no guest started.
+- **Current boundaries:** website deployment and physical integration still need
+  separate owner authorization. M5.30 did not access the website, DDEV, staged
+  pages or Pi. It did not announce the release or contact maintainers. Existing
+  technical/security/physical limits remain. The publication-report commit follows
+  the frozen candidate; never move its tag to include later documentation.
+
+- **M5.29 qualification retained; publication completed separately in M5.30.**
+  Exact candidate `a72357097a6483c9e9467933d59a00dd6a4d55f5`; tag
+  `v0.5.29-source-alpha.3` was created by the authorized M5.30 publication. Private archive:
   `.research/m529/candidate-a/pidp11-webdesktop-m5.29-source-alpha.3.tar.gz`,
   16,337,022 bytes / 1,390 members; SHA-256
   `0e3ed9ec9a7cb9fcd9ee587d65c744640859a787d4df95c0e822362dc087376d`.
@@ -22,11 +43,10 @@ request; historical approvals do not authorize new hardware, releases or message
   Static ARM64 build and network-none 96 MiB/zero-swap startup passed, zero guest
   dials; oversized/swap-enabled limits refused. Mac/lab checks are not Pi approval.
   Original application code, media, accepted tags and Alpha 1/2 records unchanged.
-- **Next decision:** separate owner approval for exact source publication and/or
-  website deployment. No release, tag, public asset or deployment was created.
-  Source-only recommendation GO; physical/production NO-GO. Existing blockers and
-  two historical screenshot revision gaps are explicit. Evidence `.research/m529/`;
-  private owner index `.research/m529/owner-review.html`. No Pi access authorized.
+- **M5.29 review outcome:** source-only publication subsequently authorized and
+  completed in M5.30 above. The website review remains local and undeployed;
+  physical/production NO-GO remains. Existing blockers and two historical screenshot
+  revision gaps are explicit. Qualification evidence `.research/m529/`.
 - **M5.28 backup verified:** `M5.29-incremental-20261125T062455Z`, 199 files,
   22 directories, 6,007,090,495 logical bytes; archive 6,007,927,296 bytes,
   SHA-256 `6ffe34b2768428e8d290d4911788a6931545aa552a9495e86110583e1c2d192b`.
