@@ -188,3 +188,15 @@ requires the publication epoch captured before source observation, preventing a
 request delayed across revocation from restoring consent. See the
 [identity contract](supervised-guest-identity.md) and
 [security packet](../security/M5.12-replicant-review.md).
+
+## M5.26 communications
+
+`internal/terminalbridge/serial.go` defines bounded operator metadata and socket
+accounting. Existing endpoint locks, generations and leases still own the data
+path. `src/serial-session.ts` validates and renders counts/freshness without owning
+a socket; `guest-terminal.ts` owns polling and ignores directory replies that
+arrive after attachment. Communications is a filtered terminal window, not another
+network client. `lab/m526/` contains the isolated original-guest peer, modem
+prototype and genuine three-engine harness; none is a production modem or guest
+network stack. See the [session contract](serial-communications.md) and
+[report](../lab/M5.26.md).

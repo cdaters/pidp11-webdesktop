@@ -1,0 +1,68 @@
+{
+  "source_revision": "ba1e5819a8365e00688a6c3ea2f0222c88d0333f",
+  "checks": {
+    "go_vet": "passed",
+    "uncached_full_race": "26 tested packages passed; final affected packages rerun after added coverage",
+    "typescript": "passed",
+    "frontend_unit_tests": 109,
+    "production_embed_build": "passed",
+    "python_synthetic_decoder_tests": 1,
+    "full_browser_first_run": {
+      "passed": 228,
+      "failed": 6,
+      "reason": "Embedded preview absent; connection refused"
+    },
+    "artifact_recheck": {
+      "passed": 9,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ]
+    },
+    "final_guest_communications_fixtures": {
+      "passed": 15,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ]
+    },
+    "genuine_browser_guest_runs": {
+      "passed": 3,
+      "intercepted_routes": false,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ]
+    },
+    "clean_checkout": "Offline npm ci, production/embed build, native desktop and Linux ARM64 service builds, affected Go tests; no private evidence inputs; tracked tree clean"
+  },
+  "toolchain": {
+    "go": "go version go1.26.0 darwin/arm64",
+    "node": "v26.9.0"
+  },
+  "actual_guest_trial_service": {
+    "sha256": "38053d41437e5f843c1a66414d4e6f61c136fcaa4db076d369237c157f37f0d0",
+    "bytes": 11520463,
+    "scope": "Genuine guest trial preceded final frontend delayed-directory and negative-age guards; those guards have separate unit/browser coverage"
+  },
+  "clean_arm64_service": {
+    "sha256": "aaa64475be7c04c6f3d58b25f664272316c5364c7062cfb52704613f58a98ef3",
+    "bytes": 11520391,
+    "published": false
+  },
+  "preservation": {
+    "original_v7_base_hash_and_size_mode_mtime": "unchanged",
+    "accepted_remote_tag_refs": "unchanged against initial inventory",
+    "prior_containers": 22,
+    "prior_running_containers": 7,
+    "prior_container_states": "unchanged",
+    "owned_lab_exit": 0,
+    "owned_lab_container": "removed",
+    "physical_pi_access": false,
+    "new_release": false,
+    "interoperability_changes": false
+  }
+}

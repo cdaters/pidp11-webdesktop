@@ -1,5 +1,14 @@
 # What is still experimental
 
+[M5.26 communications](lab/M5.26.md) is text-only V7/DC11 evidence. The observed
+`cu` state echoes serial input and buffers CR-only lines; explicit LF completes a
+line. Socket byte counts are not guest receipts or carrier signals. Modem testing
+produced OK followed by repeated ERROR feedback and is not qualified. Original
+SIMH reports no Ethernet backend; no guest TCP/IP or DECnet test passed or was
+claimed. Identity still needs independent operator approval. Physical baud,
+hardware/software flow control, sustained throughput and Pi performance remain
+unmeasured. A delayed directory refresh cannot relabel an active attachment.
+
 M5.25's [TM11 completion experiment](lab/M5.25.md) is confined to disposable
 laboratory builds. It covers TM0 READ FORWARD, not all controller operations or
 physical motion. The standalone reader reached 6,644 KiB RSS/HWM, exceeding the

@@ -6,20 +6,51 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **M5.26 active:** isolated genuine serial communications, virtual-modem feasibility
-  and networking inventory. Start `a7f6e56558abdd7d265eadbe935b6838f081af67`;
-  fresh evidence in `.research/m526/`. No Pi, public guest networking, production
-  deployment, release, M5.25 instrumentation promotion or interoperability changes.
-  Backup prerequisite completed: `M5.26-incremental-20261125T011230Z`,
-  1,998 files / 233 directories, 351,968,268 logical bytes;
-  archive 358,692,352 bytes, SHA-256
+- **Latest completed engineering milestone: M5.26.** Engineering commit
+  `ba1e5819a8365e00688a6c3ea2f0222c88d0333f`; documentation follows separately.
+  Read [report](docs/lab/M5.26.md), [session contract](docs/technical/serial-communications.md)
+  and [isolated runbook](lab/m526/README.md). This is an engineering result, not
+  owner acceptance, a release or physical/production approval.
+- **Result:** genuine original V7 `/bin/cu` on DC11 line 3 exchanged distinctive
+  ASCII text with an independent peer and Chromium/Firefox/WebKit. Communications
+  reuses terminal generations and keyboard leases, adds optional operator metadata
+  and socket counts, and labels stale/unknown state. Delayed directory replies
+  cannot relabel an active attachment. Browser disconnect preserved the guest;
+  actual bridge restart was detached under a new service instance.
+- **Limits:** guest echo and newline processing apply. Browser CR alone remained
+  buffered; explicit Workstation Line feed completed it. `/dev/null` substituted
+  for the absent calling unit. `cu -s 9600` falls back to B300 in inspected source;
+  later trials used 300, but actual ioctl/raw-mode success and physical timing are
+  unqualified. The genuine modem attempt returned OK then repeated ERROR feedback;
+  no successful Hayes session is claimed. Original SIMH has no Ethernet backend.
+  No guest TCP/IP/DECnet, flow-control or binary-transfer qualification is added.
+- **Verification:** full vet/uncached race, 109 frontend unit tests, builds,
+  bounded decoder/modem tests, actual peer disconnect/reconnect/SIGKILL, three
+  genuine browser engines and service stop/restart. Initial full fixture campaign:
+  228 passed, six embedded-preview connection failures; all nine artifact tests
+  passed after starting the missing preview. Final communications/guest suite:
+  15 passed across three engines. See the report for failed lab attempts and
+  measurement limits. Clean-checkout results are in the validation record.
+- **Resources/cleanup:** service RSS snapshots 12,832–14,664 KiB, a two-second lab
+  CPU sample about 0.50% of one core; not Pi or sustained-throughput measurements.
+  Service ran with enforced 96 MiB/zero swap (shared with the guest), no OOM events.
+  V7 synced three times and original SIMH exited 0. Owned peers, bridge, observer,
+  relay, previews and lab container stopped/removed; prior 22 containers/seven
+  running preserved. Original disk hash, size, mode and mtime unchanged. No Pi access,
+  public guest networking, releases, deployment or interoperability changes.
+- **Backup:** M5.25 evidence preserved before experimentation in
+  `M5.26-incremental-20261125T011230Z`, 1,998 files / 233 directories,
+  351,968,268 logical bytes; archive 358,692,352 bytes, SHA-256
   `c45df8ed270e71710c39fc5bde444d247c7ebbf75256b137423d804e3d3f749b`.
   Independent readback verified every file hash and supported metadata; no full restore.
-  Private pointer: `Backups/WebDesktop-M5.26-incremental-20261125T011230Z/backup.json`.
-  Prior 22 containers/seven running preserved at initial inspection; no M5.25 lab
-  process found running. Verify current state before continuing.
+  Private project-level pointer: `Backups/WebDesktop-M5.26-incremental-20261125T011230Z/backup.json`.
+  New private M5.26 evidence is under `.research/m526/`; preserve failures and working media.
+- **Next recommendation:** resolve actual V7 cu line-setting behavior on disposable
+  media, qualify received-file integrity and flow control, then the bounded local
+  modem. Separately inventory 2.11BSD kernel/tools for a no-route Ethernet lab.
+  This recommendation does not authorize physical access or external dialing.
 
-- **Latest completed engineering milestone: M5.25.** Read the [report](docs/lab/M5.25.md)
+- **M5.25 completed.** Read the [report](docs/lab/M5.25.md)
   and [isolated runbook](lab/m525/README.md). Engineering commit
   `55c6629cabe2af79ea7b050f00394805d523f274`, active-stream crash test `0fc8132`; backup checkpoint `157c454`;
   starting M5.24 main `3a22c3e`. Documentation follows in a separate commit.

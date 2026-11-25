@@ -1,5 +1,14 @@
 # A genuine PDP-11 computer room
 
+**M5.26 communications foundation:** the Communications window now presents
+approved serial application lines through the existing terminal bridge. Original
+V7 `cu` and DC11 exchanged distinct text with an independent local peer and all
+three browser engines. Socket counts, ownership and freshness are explicit;
+carrier and guest receipt are not inferred. Next: qualify line settings and a
+bounded local modem, then separately inventory a no-route Ethernet lab. The
+[report](../lab/M5.26.md) retains failed modem and CR-only attempts. M5.25 activity
+instrumentation remains laboratory-only; the browser still does not run the CPU.
+
 PiDP-11 Web Desktop is an optional browser computer room for genuine PDP-11
 computing environments. Terminals, printers, paper tape, storage, communications,
 graphics and reference tools should help people use an independently operated
@@ -103,10 +112,12 @@ with genuine guest equivalence and failure checks. Its prototype is lab-only;
 ordinary storage remains captured data. The reader memory allowance is not met
 and Pi CPU/connected REALCONS remain unmeasured.
 
-The next recommended equipment step is **serial communications, virtual modems
-and isolated networking**: one genuine guest transfer, explicit endpoint ownership,
-disconnect tests and independent console access before browser operation. Further
-broad storage or LP11/PC11 work needs a demonstrated blocker.
+[M5.26](../lab/M5.26.md) now provides that first genuine serial application path,
+explicit ownership, disconnect checks and independent console evidence. The next
+communications step is line-setting/file-integrity qualification and a bounded
+local modem; a private Ethernet lab needs a different identified build and actual
+guest driver/tool inventory. Further broad storage or LP11/PC11 work needs a
+demonstrated blocker.
 Reader selection currently means a read-only catalog and operator assistance. Do not
 expose attachment controls before safe state, authority, cancellation and actual
 attachment are independently verified. These subsets do not qualify production media

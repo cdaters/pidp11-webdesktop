@@ -1,6 +1,6 @@
 # Where the project is going
 
-## Current product direction — M5.25
+## Current product direction — M5.26
 
 The [virtual computer room](docs/product/virtual-computer-room.md) is the enduring direction for both physical
 PiDP-11 owners and ordinary SIMH users without a panel. Everyday genuine terminals
@@ -32,15 +32,16 @@ representative Pi CPU and connected REALCONS remain unmeasured. Ordinary builds
 still use snapshots. Further passive activity work is feasible, but production
 promotion is not approved.
 
-Next recommended equipment milestone: **serial communications, virtual modems and
-isolated networking**. Inventory original multiplexer/serial support and installed
-guest utilities, then qualify one genuine two-endpoint transfer with explicit
-ownership, disconnect handling and an independent console. No physical serial
-port, external network or new authority is implied. Preserve captured-only storage
-and independent media operation; do not schedule broad storage expansion by default.
-Reader selection remains a catalog/operator-assisted workflow until independent
-safe-state and actual-attachment checks support more. No new release or physical
-access is authorized.
+[M5.26](docs/lab/M5.26.md) establishes genuine V7/DC11 text communications,
+independent peers, actual three-engine browser exchanges and bounded transport
+accounting. A local modem attempt exposed echo feedback; the pinned simulator
+lacks an Ethernet backend. Neither modem nor networking is promoted as working.
+
+Next recommended communications milestone: verify actual V7 line settings,
+received-file integrity and flow control on disposable media; then qualify a
+bounded local modem. Separately inventory a 2.11BSD kernel/tools and a reproducible
+Ethernet-capable lab build for a private link with no production route. No public
+BBS, physical deployment or arbitrary browser dialing follows from this result.
 
 ## M5.17: Source Alpha 2 candidate and review intake
 

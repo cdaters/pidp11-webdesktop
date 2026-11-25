@@ -1,5 +1,12 @@
 # Capability and compatibility matrix
 
+[M5.26](lab/M5.26.md) qualifies a small **genuine V7 /bin/cu ↔ DC11 line 3
+ASCII text workflow**, with an independent peer and actual Chromium/Firefox/WebKit
+exchanges. Communications reuses approved terminal generations, keyboard leases
+and read-only socket counters. Echo/newline transformations apply; browser LF was
+required to complete input. The lab modem's guest exchange remains unqualified,
+and the pinned simulator has no Ethernet backend. No physical deployment is added.
+
 [M5.25](lab/M5.25.md) qualifies **laboratory-only TM11 forward-read completion
 observation** in a disposable instrumented simulator: six RT-11 comparison modes,
 exact bytes/status, separate serviced-interrupt checks and three browser engines.
