@@ -21,6 +21,7 @@ import (
 
 	"pidp11.local/webdesktop/internal/access"
 	"pidp11.local/webdesktop/internal/companion"
+	"pidp11.local/webdesktop/internal/localmodem"
 	"pidp11.local/webdesktop/internal/memoryguard"
 	"pidp11.local/webdesktop/internal/peripheral"
 	"pidp11.local/webdesktop/internal/storage"
@@ -85,6 +86,7 @@ func serve(ctx context.Context, path string) error {
 		devices.Register(mux, gate)
 		followers.Register(mux, gate)
 		storageViews.Register(mux, gate)
+		localmodem.RegisterObservation(mux, gate, config.ModemStatus, terminalservice.ReadPrivate)
 		chat.Register(mux, gate)
 	}}).Handler(web.Assets()), TLSConfig: &tls.Config{MinVersion: tls.VersionTLS13, Certificates: []tls.Certificate{cert}}, ReadHeaderTimeout: time.Second, ReadTimeout: 3 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}
 	defer server.Close()

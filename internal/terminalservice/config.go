@@ -26,6 +26,7 @@ import (
 // Config contains only operator-provisioned addresses and private file paths.
 // No attachment approvals or sessions are serialized here.
 type Config struct {
+	ModemStatus         string                    `json:"modem_status,omitempty"`
 	Storage             []storage.Config          `json:"storage_snapshots,omitempty"`
 	SupervisedEndpoints []string                  `json:"supervised_endpoints,omitempty"`
 	Followers           []peripheral.FollowConfig `json:"device_followers,omitempty"`
@@ -88,6 +89,9 @@ func Load(path string) (Config, *access.Gate, tls.Certificate, error) {
 	var extra any
 	if decoder.Decode(&extra) != io.EOF {
 		return c, nil, cert, errors.New("trailing configuration data")
+	}
+	if c.ModemStatus != "" && !filepath.IsAbs(c.ModemStatus) {
+		return c, nil, cert, errors.New("absolute modem observation path required")
 	}
 	if _, err = peripheral.New(c.Devices); err != nil {
 		return c, nil, cert, err

@@ -18,6 +18,7 @@ import (
 type line struct {
 	config       terminalbridge.Config
 	endpoint     *terminalbridge.Endpoint
+	actor        *terminalbridge.Client
 	revision     uint64
 	state        string
 	supervised   bool
@@ -33,11 +34,12 @@ type line struct {
 // at construction and must not change while the manager is in use. Lock order is
 // Manager.mu then Endpoint.mu; endpoints never call back into the manager.
 type Manager struct {
-	mu       sync.Mutex
-	instance string
-	lines    map[string]*line
-	closed   bool
-	dial     func(context.Context, string, string) (net.Conn, error)
+	mu           sync.Mutex
+	instance     string
+	lines        map[string]*line
+	closed       bool
+	reserveActor bool // Immutable; a local modem reserves bounded startup output.
+	dial         func(context.Context, string, string) (net.Conn, error)
 }
 
 // Approval fences one local operator action to the observed service and line.
@@ -98,6 +100,37 @@ func NewSupervised(configs []terminalbridge.Config, required []string) (*Manager
 	}
 	return m, nil
 }
+
+// NewSupervisedActor reserves one bounded subscription before socket reading
+// starts. This prevents a local protocol actor from losing a guest's first bytes
+// during independent socket verification. It grants no input authority; access is
+// withheld until verification, and the actor must still acquire an ordinary lease.
+// Ordinary browser managers do not retain startup output.
+func NewSupervisedActor(config terminalbridge.Config) (*Manager, error) {
+	m, err := NewSupervised([]terminalbridge.Config{config}, []string{config.ID})
+	if err != nil {
+		return nil, err
+	}
+	m.reserveActor = true
+	return m, nil
+}
+
+// ActorClient returns only the reserved subscription of the exact verified
+// generation. Its owner must unsubscribe and honor Done; retirement discards it.
+func (m *Manager) ActorClient(id, generation string) *terminalbridge.Client {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	l := m.lines[id]
+	if l == nil {
+		return nil
+	}
+	m.expireLocked(l, time.Now())
+	if m.closed || !m.reserveActor || generation != m.generation(l) || state(l) != "attached" {
+		return nil
+	}
+	return l.actor
+}
+
 func state(l *line) string {
 	if l.state == "attached" && !l.endpoint.Connected() {
 		return "unavailable"
@@ -209,7 +242,17 @@ func (m *Manager) Attach(ctx context.Context, a Approval) error {
 		return errors.New("approved guest line unavailable; no retry")
 	}
 	endpoint := terminalbridge.NewEndpoint(config)
+	if m.reserveActor {
+		l.actor, err = endpoint.Subscribe()
+		if err != nil {
+			conn.Close()
+			endpoint.Close()
+			l.state = "unavailable"
+			return err
+		}
+	}
 	if err = endpoint.Attach(conn); err != nil {
+		endpoint.Close()
 		conn.Close()
 		l.state = "unavailable"
 		return err

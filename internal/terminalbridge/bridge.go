@@ -83,6 +83,14 @@ type Client struct {
 	rateBytes int
 }
 
+// Frames exposes immutable received frames to an independently owned local actor.
+// Receiving frames grants no input authority; Operation and the existing lease
+// remain mandatory. Callers must not mutate frame data.
+func (c *Client) Frames() <-chan Frame { return c.out }
+
+// Done closes when the subscription is retired or evicted; Frames is not closed.
+func (c *Client) Done() <-chan struct{} { return c.done }
+
 // Endpoint owns one guest connection and up to eight viewers with one keyboard
 // owner. mu serializes membership, leases and guest writes. Helpers without their
 // own lock (send, remove, state, broadcastState, expire) require mu to be held.
@@ -264,6 +272,24 @@ func (e *Endpoint) Close() {
 	for c := range e.clients {
 		e.remove(c)
 	}
+}
+
+// Ownership observes an existing subscription after an explicit acquire. It
+// grants no authority and is primarily useful to local actors that must not
+// mistake an older queued state frame for the result of their acquisition.
+func (e *Endpoint) Ownership(c *Client) (owner bool, epoch uint64) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	e.expire()
+	return e.clients[c] && e.owner == c, e.epoch
+}
+
+// TransportCounts reports host-socket bytes, including a committed prefix of a
+// failed write. These totals do not prove receipt by the guest application.
+func (e *Endpoint) TransportCounts() (received, written uint64) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	return e.serialReceived, e.serialWritten
 }
 
 // Connected reports attachment, not guest login or CPU state.

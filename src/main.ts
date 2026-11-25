@@ -52,6 +52,7 @@ const apps = [
   ["panel", "Front panel", "PDP-11/70"],
   ["terminal", "Terminal", "Independent mock session"],
   ["guest", "Guest terminal", "Authenticated real guest line · laboratory"],
+  ["modem", "Local modem", "Read-only isolated modem state · no dialing authority"],
   ["communications", "Communications", "Approved serial application line · no arbitrary network targets"],
   ["teletype", "Teletype", "ASR-33 paper presentation · approved guest line"],
   ["device-observer", "Guest devices", "Read-only completed emulated-device output"],
@@ -604,6 +605,15 @@ function openGuestTerminal(initialPersonality: "vt100" | "asr33" = "vt100", comm
   }).catch(() => { el.textContent = "Guest terminal renderer unavailable"; });
 }
 function openApp(id: string) {
+  if (id === "modem") {
+    if (manager.store.windows.some(w => w.id === id)) { manager.restore(id); return; }
+    if (manager.store.windows.length >= 14) { notify("Close a window first."); return; }
+    const el = body("Loading modem observer…");
+    let dispose = () => {};
+    manager.open(id, "Local modem · read-only laboratory", el, { x: 160, y: 70, width: 800, height: 650 }, () => dispose());
+    void import("./modem.ts").then(m => { if (el.isConnected) dispose = m.mountModem(el); }).catch(() => { el.textContent = "Modem observer unavailable"; });
+    return;
+  }
   if (id === "guest") return openGuestTerminal();
   if (id === "communications") return openGuestTerminal("vt100", true);
   if (id === "teletype") return openGuestTerminal("asr33");
