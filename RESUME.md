@@ -6,11 +6,27 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **M5.29 active: Source Alpha 3 qualification.** Documentation and four local Grav
-  page proposals are being reconciled; no feature changes, release, tag, website
-  deployment, announcement or Pi access. Read [candidate scope](docs/releases/source-alpha-3-candidate.md).
-  Final exact artifact/tests belong in [M5.29](docs/lab/M5.29.md) after qualification;
-  never infer approval from this handoff. Evidence: `.research/m529/`.
+- **M5.29 complete: Source Alpha 3 qualified for owner review, not published.**
+  Exact candidate `a72357097a6483c9e9467933d59a00dd6a4d55f5`; proposed tag
+  `v0.5.29-source-alpha.3` does not exist. Private archive:
+  `.research/m529/candidate-a/pidp11-webdesktop-m5.29-source-alpha.3.tar.gz`,
+  16,337,022 bytes / 1,390 members; SHA-256
+  `0e3ed9ec9a7cb9fcd9ee587d65c744640859a787d4df95c0e822362dc087376d`.
+  Read [final report](docs/lab/M5.29.md), [candidate scope](docs/releases/source-alpha-3-candidate.md)
+  and [draft notes](docs/releases/M5.29-source-alpha-3.md). The final report follows
+  the frozen candidate in a documentation commit; never tag current main by default.
+- **Qualification:** independent export identical; safe extraction/manifest and
+  source/privacy checks passed; fresh offline builds, Go vet/27 race-tested
+  packages, 110 frontend tests, 1 transport/6 optional-app/9 contract tests,
+  48 guide tests and 243 browser tests (81 each engine) passed without skips/flakes.
+  Static ARM64 build and network-none 96 MiB/zero-swap startup passed, zero guest
+  dials; oversized/swap-enabled limits refused. Mac/lab checks are not Pi approval.
+  Original application code, media, accepted tags and Alpha 1/2 records unchanged.
+- **Next decision:** separate owner approval for exact source publication and/or
+  website deployment. No release, tag, public asset or deployment was created.
+  Source-only recommendation GO; physical/production NO-GO. Existing blockers and
+  two historical screenshot revision gaps are explicit. Evidence `.research/m529/`;
+  private owner index `.research/m529/owner-review.html`. No Pi access authorized.
 - **M5.28 backup verified:** `M5.29-incremental-20261125T062455Z`, 199 files,
   22 directories, 6,007,090,495 logical bytes; archive 6,007,927,296 bytes,
   SHA-256 `6ffe34b2768428e8d290d4911788a6931545aa552a9495e86110583e1c2d192b`.

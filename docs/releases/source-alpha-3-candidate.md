@@ -6,8 +6,13 @@ asset, website deployment or announcement is authorized by this preparation.
 [Source Alpha 2](M5.18-publication.md) remains the latest public source release.
 
 The proposed archive name is `pidp11-webdesktop-m5.29-source-alpha.3.tar.gz`.
-The final exact commit, member count, byte size, SHA-256 and extraction/build
-results belong to the [M5.29 report](../lab/M5.29.md), written after qualification.
+The completed [M5.29 report](../lab/M5.29.md) qualifies source commit
+`a72357097a6483c9e9467933d59a00dd6a4d55f5`: **16,337,022 bytes, 1,390 members**.
+SHA-256: `0e3ed9ec9a7cb9fcd9ee587d65c744640859a787d4df95c0e822362dc087376d`.
+The exact archive and `SHA256SUMS` remain private in `.research/m529/candidate-a/`.
+Independent export, safe extraction, offline build, tests and ARM64 startup checks
+passed. The recommendation is GO for owner consideration of source-only release,
+with separate approval still required.
 Do not substitute current main for that specific candidate revision.
 
 **Source Alpha 3 is intended for local demonstrations and controlled
