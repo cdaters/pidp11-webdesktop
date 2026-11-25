@@ -1,0 +1,235 @@
+{
+  "scope": "Mac-hosted isolated ARM64 laboratory; retained observations, not browser or physical deployment qualification",
+  "source_revision": "26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75",
+  "experimental_sha256": "515d0ef440bb9f66adacf77e1aa453486db61fdc4508609ac5ff86d279010d9c",
+  "original_sha256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+  "repeated_build_equal": true,
+  "captures": {
+    "capture-b": {
+      "mode": "retained-laboratory-capture",
+      "current_state": "unknown",
+      "sha256": "c1ba0e5cea049e194b589988a595ffd52496ec64baca0384d700b140b055d6a8",
+      "capture_bytes": 2829,
+      "frame_count": 34,
+      "frame_bytes": 2261,
+      "ether_types": {
+        "0806": 5,
+        "0800": 29
+      },
+      "malformed": {},
+      "arp_operations": {
+        "1": 3,
+        "2": 2
+      },
+      "icmp_pairs": [
+        {
+          "request_source": "172.30.28.2",
+          "identity_bytes": "1d000000",
+          "tap_request_to_reply_ms": 2.031
+        },
+        {
+          "request_source": "172.30.28.2",
+          "identity_bytes": "1d000100",
+          "tap_request_to_reply_ms": 0.13
+        },
+        {
+          "request_source": "172.30.28.2",
+          "identity_bytes": "1d000200",
+          "tap_request_to_reply_ms": 0.091
+        }
+      ],
+      "unmatched_echo_requests": 0,
+      "conflicting_tcp_segments": 0,
+      "limits": "Socket/TAP observations; no physical throughput, current guest identity or complete application receipt inferred."
+    },
+    "capture-c": {
+      "mode": "retained-laboratory-capture",
+      "current_state": "unknown",
+      "sha256": "e58799daa273447c53b74a376faf60fd3a625fd7565a955a700a73d0fb75668d",
+      "capture_bytes": 3338,
+      "frame_count": 44,
+      "frame_bytes": 2610,
+      "ether_types": {
+        "0800": 42,
+        "0806": 2
+      },
+      "malformed": {
+        "ICMP length/checksum": 1,
+        "IPv4 length": 1
+      },
+      "arp_operations": {
+        "1": 2
+      },
+      "icmp_pairs": [
+        {
+          "request_source": "172.30.28.1",
+          "identity_bytes": "52800001",
+          "tap_request_to_reply_ms": 27.159
+        },
+        {
+          "request_source": "172.30.28.1",
+          "identity_bytes": "52800001",
+          "tap_request_to_reply_ms": 34.495
+        }
+      ],
+      "unmatched_echo_requests": 0,
+      "conflicting_tcp_segments": 0,
+      "limits": "Socket/TAP observations; no physical throughput, current guest identity or complete application receipt inferred."
+    },
+    "capture-repeat": {
+      "mode": "retained-laboratory-capture",
+      "current_state": "unknown",
+      "sha256": "2a048614bbae4705d71eceb5f08d1adf0d07e35795d49e9a86532c6793ff9419",
+      "capture_bytes": 426,
+      "frame_count": 6,
+      "frame_bytes": 306,
+      "ether_types": {
+        "0806": 6
+      },
+      "malformed": {},
+      "arp_operations": {
+        "1": 3,
+        "2": 3
+      },
+      "icmp_pairs": [],
+      "unmatched_echo_requests": 0,
+      "conflicting_tcp_segments": 0,
+      "limits": "Socket/TAP observations; no physical throughput, current guest identity or complete application receipt inferred."
+    },
+    "capture-qualified": {
+      "mode": "retained-laboratory-capture",
+      "current_state": "unknown",
+      "sha256": "94ad63b3aafaaa41139c29f8f4990a73b5e6b3a8dcc01ae40681f846e242b994",
+      "capture_bytes": 1920,
+      "frame_count": 22,
+      "frame_bytes": 1544,
+      "ether_types": {
+        "0806": 4,
+        "0800": 18
+      },
+      "malformed": {},
+      "arp_operations": {
+        "1": 2,
+        "2": 2
+      },
+      "icmp_pairs": [
+        {
+          "request_source": "172.30.28.2",
+          "identity_bytes": "0c000000",
+          "tap_request_to_reply_ms": 0.014
+        },
+        {
+          "request_source": "172.30.28.2",
+          "identity_bytes": "0c000100",
+          "tap_request_to_reply_ms": 0.073
+        },
+        {
+          "request_source": "172.30.28.2",
+          "identity_bytes": "0c000200",
+          "tap_request_to_reply_ms": 0.202
+        }
+      ],
+      "unmatched_echo_requests": 0,
+      "conflicting_tcp_segments": 0,
+      "limits": "Socket/TAP observations; no physical throughput, current guest identity or complete application receipt inferred."
+    }
+  },
+  "peer_exchanges": {
+    "normal": {
+      "complete_request": true,
+      "raw_hex": "4d3532382d47554553542d524551554553542d324237310d0a",
+      "payload_hex": "4d3532382d47554553542d524551554553542d324237310d0a",
+      "sent_hex": "4d3532382d4c4f43414c2d504545522d52454144590d0a4d3532382d504545522d5245504c592d384334320d0a",
+      "elapsed_seconds": 0.8457478919881396,
+      "payload_sha256": "07d9c19314536f26856499ddae05a50e3f7a8eeb12882f0060f1bc9da025967b",
+      "payload_bytes": 25,
+      "sent_sha256": "15801d9eba830e512d426a8a99dccecd8c856b0c04ae443b79e3a3ef38f10a17",
+      "sent_bytes": 45
+    },
+    "slow": {
+      "complete_request": true,
+      "raw_hex": "4d3532382d47554553542d524551554553542d324237310d0a",
+      "payload_hex": "4d3532382d47554553542d524551554553542d324237310d0a",
+      "sent_hex": "4d3532382d4c4f43414c2d504545522d52454144590d0a4d3532382d504545522d5245504c592d384334320d0a",
+      "elapsed_seconds": 1.9689054929767735,
+      "payload_sha256": "07d9c19314536f26856499ddae05a50e3f7a8eeb12882f0060f1bc9da025967b",
+      "payload_bytes": 25,
+      "sent_sha256": "15801d9eba830e512d426a8a99dccecd8c856b0c04ae443b79e3a3ef38f10a17",
+      "sent_bytes": 45
+    },
+    "partial": {
+      "complete_request": true,
+      "raw_hex": "4d3532382d47554553542d524551554553542d324237310d0a",
+      "payload_hex": "4d3532382d47554553542d524551554553542d324237310d0a",
+      "sent_hex": "4d3532382d4c4f43414c2d504545522d52454144590d0a4d3532382d50454552",
+      "elapsed_seconds": 0.7949441160308197,
+      "payload_sha256": "07d9c19314536f26856499ddae05a50e3f7a8eeb12882f0060f1bc9da025967b",
+      "payload_bytes": 25,
+      "sent_sha256": "84b90f63586b676d67bd3d0152e96360d130cc12caaf39eb2a930bee24739013",
+      "sent_bytes": 32
+    },
+    "repeat": {
+      "complete_request": true,
+      "raw_hex": "4d3532382d47554553542d524551554553542d324237310d0a",
+      "payload_hex": "4d3532382d47554553542d524551554553542d324237310d0a",
+      "sent_hex": "4d3532382d4c4f43414c2d504545522d52454144590d0a4d3532382d504545522d5245504c592d384334320d0a",
+      "elapsed_seconds": 0.8534698440344073,
+      "payload_sha256": "07d9c19314536f26856499ddae05a50e3f7a8eeb12882f0060f1bc9da025967b",
+      "payload_bytes": 25,
+      "sent_sha256": "15801d9eba830e512d426a8a99dccecd8c856b0c04ae443b79e3a3ef38f10a17",
+      "sent_bytes": 45
+    }
+  },
+  "short_idle_samples": {
+    "pidp11-m528-bsd": {
+      "interval_seconds": 2.0692662090295926,
+      "cpu_percent_one_core": 0.483,
+      "rss_kib": 10396,
+      "peak_rss_kib": 12640,
+      "memory_max_bytes": 100663296,
+      "swap_max_bytes": 0,
+      "memory_events": [
+        "low 0",
+        "high 0",
+        "max 0",
+        "oom 0",
+        "oom_kill 0",
+        "oom_group_kill 0",
+        "sock_throttled 0"
+      ]
+    },
+    "pidp11-m528-capture-c": {
+      "interval_seconds": 2.052435040997807,
+      "cpu_percent_one_core": 0.974,
+      "rss_kib": 12176,
+      "peak_rss_kib": 15684,
+      "memory_max_bytes": 33554432,
+      "swap_max_bytes": 0,
+      "memory_events": [
+        "low 0",
+        "high 0",
+        "max 0",
+        "oom 0",
+        "oom_kill 0",
+        "oom_group_kill 0",
+        "sock_throttled 0"
+      ]
+    }
+  },
+  "preservation": {
+    "bsd_base": {
+      "sha256": "940608306ccf49b74780d3f6863476a4a5fea27651c9d1cc0a81b5c020dcbb1f",
+      "size": 1000089600,
+      "mode": 33024,
+      "mtime_ns": 1795297341999726128
+    },
+    "source_files_unchanged": 270,
+    "source_archive_unchanged": true,
+    "original_binary_unchanged": true,
+    "owned_containers_removed": 31,
+    "baseline_containers": 22,
+    "baseline_running": 7,
+    "tap_deleted": true,
+    "namespace_keeper_removed": true
+  }
+}
