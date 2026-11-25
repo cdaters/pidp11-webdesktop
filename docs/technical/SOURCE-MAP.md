@@ -1,5 +1,15 @@
 # Source map and subsystem boundaries
 
+## M5.28 isolated Ethernet laboratory
+
+- `lab/m528/build.sh`: two original-source TAP builds with byte comparison.
+- `lab/m528/isolation.py`, `setup-network.sh`: exclusive namespace gate/setup.
+- `lab/m528/guest.py`, `peer.py`: independently operated BSD and fixed TCP peer.
+- `lab/m528/capture.py`, `packets.py`, `observation.py`: bounded passive capture,
+  offline checksummed frame accounting and explicit retained identity selection.
+- [Runbook](../../lab/m528/README.md), [report](../lab/M5.28.md),
+  [observation contract](isolated-ethernet.md). No production application imports.
+
 ## M5.27 local modem
 
 - `internal/localmodem/`: bounded command/data personality, independently supervised

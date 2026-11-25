@@ -1,5 +1,15 @@
 # What is still experimental
 
+## M5.28 Ethernet limits
+
+Genuine BSD TCP/IP is qualified only in a disposable isolated DEUNA/TAP laboratory
+using a separate original-source build. No production observer, browser network
+control, automatic OS identity, full TCP stream reconstruction, DECnet, FTP or
+physical Pi performance is qualified. Capture requires separately scoped NET_RAW;
+its failure does not own the guest. Configuration order matters: manual DZ vector
+selection before XU enable leaves XU without its required vector. The corrected
+runbook gates vector 120 before boot. [Report and retained failures](lab/M5.28.md).
+
 ## M5.27 modem limitations
 
 The genuine qualification is short printable text through original V7 cu, with
@@ -17,8 +27,8 @@ See [M5.27](lab/M5.27.md). Ethernet is not enabled or tested by this milestone.
 echoed serial input and buffered CR-only lines; explicit LF completed a line. Socket byte counts are not guest receipts or carrier signals. Modem testing
 then produced OK followed by repeated ERROR feedback; M5.27 above diagnoses
 and corrects the line setup for its bounded qualification. Original
-SIMH reports no Ethernet backend; no guest TCP/IP or DECnet test passed or was
-claimed. Identity still needs independent operator approval. Physical baud,
+SIMH reports no Ethernet backend; M5.26 did not qualify guest TCP/IP or DECnet. M5.28 above later qualifies
+only isolated TCP/IP with a separate build. Identity still needs independent operator approval. Physical baud,
 hardware/software flow control, sustained throughput and Pi performance remain
 unmeasured. A delayed directory refresh cannot relabel an active attachment.
 

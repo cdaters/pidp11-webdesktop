@@ -10,7 +10,7 @@ included here. The ordinary Go/TypeScript application is unchanged.
 
 These are reconstructed replay instructions, not a promise that an arbitrary host
 has the retained image, source or guest. Use the existing
-[original-source laboratory](../README.md) and [BSD evidence](../m591/README.md).
+[original-source laboratory](../../docs/lab/M3.md) and [BSD evidence](../m591/README.md).
 Verify revision `26d20beda0c6b5a1d3a5cb3d7a4dd494e02bff75`, its retained source archive
 and the relevant 270 source hashes against your independent record. An extracted
 source tree is not a Git checkout: `git rev-parse` can accidentally report its

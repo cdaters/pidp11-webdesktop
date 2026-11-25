@@ -1,5 +1,14 @@
 # Capability and compatibility matrix
 
+## M5.28 isolated Ethernet evidence
+
+A separate original-source Ethernet-enabled SIMH now drives genuine 2.11BSD
+DEUNA/de0 ARP, ICMP and bounded TCP text to an independent isolated peer. Fresh-copy
+restart, fault and console-independence evidence is in [M5.28](lab/M5.28.md).
+The ordinary application is unchanged: networking observation is a retained lab
+summary, not a live browser feature. The accepted original binary is unchanged
+and still has no Ethernet backend. No DECnet, real LAN or physical qualification.
+
 ## M5.27 local modem evidence
 
 Original V7 cu/DC11 line 3 now completes bounded AT/CONNECT/text/hangup sessions
@@ -7,7 +16,7 @@ with an independent fixed local peer. Both directions have stopped-disk/peer
 checksum evidence. The Local modem window is authenticated, read-only observation
 of a separate optional process; it cannot dial or control a guest. See the
 [M5.27 report](lab/M5.27.md) and [contract](technical/local-modem.md).
-Ethernet remains preparation only, with actual retained 2.11BSD DEUNA/DELUA driver
+M5.27 established Ethernet preparation only, with actual retained 2.11BSD DEUNA/DELUA driver
 and networking-tool inventory. No binary transparency or physical modem claim.
 
 
@@ -37,7 +46,7 @@ observer restart. Genuine RT-11 printer/punch output also passed exact three-eng
 history downloads. Utilities ran through the original console; safe state and guest
 identity remain operator-attested. Browser mounting remains disabled.
 
-Engineering through **M5.25**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
+Engineering through **M5.28**, publication through **M5.18**; the M5.10 presentation and gallery are preserved. A guest is an operating system inside SIMH. A genuine device test executes PDP-11 instructions against original emulated-device registers. Neither result automatically qualifies the physical Pi or a production installation.
 
 [M5.20](lab/M5.20.md) qualifies RSX PIP printer output and a reader-to-punch copy,
 with exact browser exports. Existing equipment windows now separate simulation,

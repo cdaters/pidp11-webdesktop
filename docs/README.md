@@ -1,12 +1,12 @@
 # Documentation
 
-Current engineering: [M5.25 passive activity feasibility](lab/M5.25.md),
-[isolated runbook/source](../lab/m525/README.md), [M5.24 guest tape report](lab/M5.24.md),
-[RT-11 tape workflow](technical/rt11-magnetic-tape.md) and
-[activity proposal and findings](technical/storage-activity-proposal.md).
-Next recommendation: serial communications, virtual modems and isolated networking.
+Current engineering: [M5.28 genuine isolated Ethernet](lab/M5.28.md),
+[runbook](../lab/m528/README.md), [retained observation contract](technical/isolated-ethernet.md),
+[M5.27 local modem](lab/M5.27.md) and [M5.26 serial communications](lab/M5.26.md).
+Next recommendation: [M5.29 publication and Source Alpha 3 qualification](releases/M5.29-readiness-plan.md).
+No new release or physical deployment is approved.
 
-M5.23.1 documentation update: [Rolf feedback and change inventory](technical/M5.23.1-interoperability-review.md), [short review handoff](technical/M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](technical/selection-contract-0.2-proposal.md) and [planned conformance](technical/selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. M5.25 is the latest engineering milestone; that interoperability work remains unchanged.
+M5.23.1 documentation update: [Rolf feedback and change inventory](technical/M5.23.1-interoperability-review.md), [short review handoff](technical/M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](technical/selection-contract-0.2-proposal.md) and [planned conformance](technical/selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. The proposed interoperability work remains unchanged by M5.28.
 
 Current development: [M5.23 disk/tape findings](lab/M5.23.md),
 [original storage inventory](technical/storage-inventory.md),
@@ -67,4 +67,4 @@ Start with the browser demonstration; it needs no Pi, guest disk or AI model. Ge
 
 Historical reports describe their own tested revision. Use the current capability matrix for present scope; a later overview never turns an earlier experiment into physical acceptance.
 
-Latest engineering evidence: [M5.16 review readiness and fault qualification](lab/M5.16.md), [reproduction notes](../lab/m516/README.md), [external security review](security/M5.16-review.md), and [concise interoperability handoff](technical/M5.16-hacker-replicant-handoff.md). Earlier reports and presentation captures remain preserved.
+Earlier review evidence: [M5.16 review readiness and fault qualification](lab/M5.16.md), [reproduction notes](../lab/m516/README.md), [external security review](security/M5.16-review.md), and [concise interoperability handoff](technical/M5.16-hacker-replicant-handoff.md). Earlier reports and presentation captures remain preserved.

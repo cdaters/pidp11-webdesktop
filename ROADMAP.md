@@ -1,13 +1,16 @@
 # Where the project is going
 
-## M5.27 result and next step
+## M5.28 result and next step
 
-Genuine original V7 cu now completes bounded local modem sessions with independent
-file hashes, explicit hangup, crash/restart checks and a read-only equipment window.
-The next candidate milestone is repeatable file-completion handling and a separately
-built XU/2.11BSD Ethernet lab with no route, NAT or production interface. This is a
-recommendation, not authorization for networking or physical deployment.
-See [M5.27](docs/lab/M5.27.md).
+Genuine 2.11BSD TCP/IP now passes an isolated DEUNA/TAP experiment using a separate
+original-source build. The retained observer is optional and read-only; the
+ordinary application has no live network controls. Read [M5.28](docs/lab/M5.28.md).
+M5.27 modem and earlier genuine peripheral workflows remain preserved.
+
+Recommend [M5.29 publication and Source Alpha 3 qualification](docs/releases/M5.29-readiness-plan.md):
+reconcile current docs/screenshots, verify an exact source package and present it
+for owner review. This is not release authorization, physical deployment or a new
+network-control feature commitment.
 
 
 ## Current product direction — M5.26

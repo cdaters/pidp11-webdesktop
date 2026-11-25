@@ -6,11 +6,30 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **M5.28 active:** isolated original-source Ethernet build and disposable 2.11BSD
-  networking qualification, starting `9498805219959005df61b17cf1665848c9b8df6f`.
-  Work/evidence: `.research/m528/`. No Pi, Internet/LAN guest access, production
-  deployment, releases/tags, website changes or upstream contact. M5.29 readiness
-  inventory is also requested; distinguish lab/ordinary-build/proposed features.
+- **M5.28 engineering complete:** code checkpoint `b24799c4d75a318b4ec52ba9bd6f03e13d8ee1c2`.
+  [Report](docs/lab/M5.28.md), [runbook](lab/m528/README.md),
+  [retained observation](docs/technical/isolated-ethernet.md) and
+  [M5.29 publication-readiness plan](docs/releases/M5.29-readiness-plan.md).
+  Genuine BSD DEUNA/de0 ARP, 3/3 ICMP and distinctive bidirectional TCP text passed
+  twice, including a fresh guest and recreated TAP. Separate original-source
+  Ethernet build; accepted simulator/source/media unchanged. No Pi or external
+  guest network access. Ordinary application/M5.27 modem unchanged.
+- **Important replay findings:** enable XU before manually assigning DZ vector;
+  require XU vector 120 before boot. This original XU cannot SET VECTOR directly.
+  Monitor commands need prompt barriers. Refused Telnet remains at telnet>, and
+  peer shutdown requires actual exit before port reuse. Captures are retained,
+  current state unknown; IP/MAC/name reuse never authorizes a changed guest.
+- **M5.28 validation/cleanup:** full vet, uncached race, 110 frontend tests/build,
+  22 offline tests and clean-checkout offline install/build/vet passed. No UI
+  changes or new three-engine run. All booted guests synced/quit; 31 owned
+  containers and TAP removed. Prior 22 containers/seven running match baseline.
+  Immutable BSD hash/size/mode/nanosecond mtime, 270 source hashes, upstream archive
+  and accepted binary match. Evidence/failed attempts: `.research/m528/`.
+- **Next recommendation:** qualify Source Alpha 3 through focused documentation,
+  real captures and an exact reviewed source archive. This is not release,
+  website, physical deployment or guest-network authorization. Live RetroRealm
+  pages returned 403; repository handoff reviewed, current site copy unverified.
+  Alpha 1/2 and accepted tags remain unchanged; development push to main only.
 - **Backup prerequisite passed:** M5.27 evidence preserved in
   `M5.28-incremental-20261125T033149Z`: 113 files/nine directories,
   1,216,100,795 logical bytes, archive 1,216,571,392 bytes, SHA-256

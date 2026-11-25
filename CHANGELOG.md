@@ -1,5 +1,12 @@
 # Changelog
 
+## M5.28 isolated Ethernet — 2026-11-24 (development main)
+
+- Qualified genuine 2.11BSD DEUNA/TAP ARP, ICMP and bounded TCP text using a separate reproducible original-source build, independent peer and strictly isolated ARM64 Linux lab.
+- Added bounded retained capture summaries and explicit identity checks; preserved wrong-controller, vector-order, peer/link and restart failures with the corrected runbook. No ordinary browser networking controls.
+- Preserved originals, verified the M5.27 incremental backup, completed cleanup and regression/clean-checkout checks. [Engineering report](docs/lab/M5.28.md).
+- Prepared a non-destructive [M5.29 publication and Source Alpha 3 qualification plan](docs/releases/M5.29-readiness-plan.md). No release/tag, site edit, announcement or physical access.
+
 ## M5.23.1 interoperability design — 2026-11-23 (documentation only)
 
 - Recorded Rolf Peters’ five architectural directions as relayed by the owner; prepared a separate 0.2 selected-text proposal, credential/receipt boundary, source change inventory and future conformance plan.

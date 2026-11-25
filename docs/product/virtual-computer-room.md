@@ -1,12 +1,22 @@
 # A genuine PDP-11 computer room
 
+## M5.28: genuine isolated networking
+
+A genuine 2.11BSD guest now exchanges ARP/ICMP and distinctive TCP text through
+DEUNA to an independent private peer. Networking equipment begins as a retained,
+read-only capture summary with explicit identity and unknown current state; the
+ordinary desktop remains unchanged. [M5.28](../lab/M5.28.md) documents the separate
+simulator build, faults and independence. The next recommended increment is
+[M5.29 source-publication qualification](../releases/M5.29-readiness-plan.md), not
+physical deployment or an arbitrary browser networking service.
+
 ## M5.27: optional local modem
 
 The computer room can observe an independently operated, bounded text modem.
 Original V7 cu has genuine command/data/hangup and file-integrity evidence; the
 window shows actual modem snapshots without owning the guest connection. It offers
 no arbitrary dialing or simulated carrier-pin lights. Guest console operation
-continues when the modem or browser stops. Ethernet remains a future isolated lab.
+continues when the modem or browser stops. Ethernet was still a future isolated lab at M5.27; M5.28 above records the result.
 See the [report](../lab/M5.27.md) for evidence and limits.
 
 
