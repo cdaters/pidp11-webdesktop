@@ -6,18 +6,50 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
-- **M5.27 active:** genuine local modem/serial-integrity work and Ethernet inventory,
-  starting `6ec09cbd908e930dc2611820a4352914b1adbe4a`. Fresh private evidence in
-  `.research/m527/`. No Pi, external dialing, production network, deployment,
-  release, new tags or interoperability changes authorized.
-  M5.26 incremental backup verified: **M5.27-incremental-20261125T023333Z**, 77 files / five directories,
-  200,216,739 logical bytes; archive 200,533,504 bytes, SHA-256
+- **M5.27 engineering complete.** Code commit
+  `c156e5c` adds the independent bounded local modem, startup-output reservation,
+  lifecycle/fault tests and read-only equipment observation. Read
+  [report](docs/lab/M5.27.md), [contract](docs/technical/local-modem.md) and
+  [runbook](lab/m527/README.md). A clean detached checkout passed offline dependency installation,
+  frontend tests/embed build, Go vet and both executable builds. Documentation
+  follows in a separate commit; development publication is authorized to main. This is not owner acceptance, a release or physical approval.
+- **Genuine result:** original V7 cu/DC11 line 3 completed AT/CONNECT/text/hangup,
+  repeated exchange, peer loss and actual modem kill/restart. Independent peer and
+  stopped-disk extraction match 46-byte outgoing and 44-byte return files. Original
+  cu exactly matches an unchanged-source guest rebuild; reversed ioctl arguments
+  fail. Installed stty with output redirection establishes raw/no-echo without
+  patching historical binaries. Interrupted receive diversion includes NO CARRIER
+  in its partial file: no arbitrary binary/file-completion guarantee.
+- **UI and authority:** Local modem is read-only observation of a separate optional
+  process. It cannot dial, hang up, attach or control a guest. Explicit observation
+  stops on stale data/generation change. Real hangup remains guest/operator-owned.
+  The actor is fixed to one loopback V7/DC11 line and LOCAL peer, starts detached,
+  uses existing supervision/keyboard leases, caps buffers/transfers and never
+  silently reattaches. A same-process/same-socket guest change is still unknowable.
+- **Inventory:** actual disposable 2.11BSD inspection found DEUNA/DELUA and TCP/IP
+  symbols in /netnix, INET/NDE configuration and networking tools. Its startup adds
+  a default route; it was not executed. No Ethernet build or guest network enabled.
+- **Verification:** full vet/uncached race, 110 frontend unit tests, builds and
+  21 modem/communications/guest browser fixture tests across three engines passed.
+  Genuine modem tests used the independent console, not three guest-browser runs.
+  Failed diagnostic upload, startup race, compile attempts, bind retry and shared
+  browser-output collision are retained. Working ARM64 modem RSS 8,720 KiB/HWM
+  8,920 KiB; short idle CPU sample 0.483% one core; not Pi measurements.
+- **Cleanup:** V7 and BSD synced/exited; both owned guest containers removed after
+  stopped-state checks. Modem, supervisors and peers stopped. Original hashes,
+  sizes, modes and nanosecond mtimes match. Prior 22 containers/seven running match
+  baseline. Check current preview/process state rather than assuming cleanup.
+  Private evidence: `.research/m527/`; preserve working media and failures.
+- **Backup:** M5.26 incremental **M5.27-incremental-20261125T023333Z**, 77 files/five
+  directories, 200,216,739 logical bytes, archive 200,533,504 bytes, SHA-256
   `798e4edb9175dbb9a119aa209d0232ad42aa4fe69067ba399905ac122235d93a`.
-  All file hashes and supported metadata reread; no full restore. Private pointer:
-  `Backups/M5.27-incremental-20261125T023333Z/backup.json`. Prior 22 containers/seven running
-  preserved at startup. Recheck processes before continuing.
+  Every archived file hash/supported metadata reread; no full restore. Private
+  project-level pointer: `Backups/M5.27-incremental-20261125T023333Z/backup.json`.
+- **Next recommendation:** repeatable text-file completion and a separately built
+  XU/2.11BSD no-route Ethernet lab. No physical Pi, external dialing, production
+  networking, deployment, releases/tags or interoperability changes authorized.
 
-- **Latest completed engineering milestone: M5.26.** Engineering commit
+- **Previous completed milestone: M5.26.** Engineering commit
   `ba1e5819a8365e00688a6c3ea2f0222c88d0333f`; documentation follows separately.
   Read [report](docs/lab/M5.26.md), [session contract](docs/technical/serial-communications.md)
   and [isolated runbook](lab/m526/README.md). This is an engineering result, not

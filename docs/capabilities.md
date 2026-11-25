@@ -1,11 +1,22 @@
 # Capability and compatibility matrix
 
+## M5.27 local modem evidence
+
+Original V7 cu/DC11 line 3 now completes bounded AT/CONNECT/text/hangup sessions
+with an independent fixed local peer. Both directions have stopped-disk/peer
+checksum evidence. The Local modem window is authenticated, read-only observation
+of a separate optional process; it cannot dial or control a guest. See the
+[M5.27 report](lab/M5.27.md) and [contract](technical/local-modem.md).
+Ethernet remains preparation only, with actual retained 2.11BSD DEUNA/DELUA driver
+and networking-tool inventory. No binary transparency or physical modem claim.
+
+
 [M5.26](lab/M5.26.md) qualifies a small **genuine V7 /bin/cu ↔ DC11 line 3
 ASCII text workflow**, with an independent peer and actual Chromium/Firefox/WebKit
 exchanges. Communications reuses approved terminal generations, keyboard leases
 and read-only socket counters. Echo/newline transformations apply; browser LF was
-required to complete input. The lab modem's guest exchange remains unqualified,
-and the pinned simulator has no Ethernet backend. No physical deployment is added.
+required to complete input. The modem exchange was unqualified in M5.26; M5.27 above adds the bounded
+qualification. The pinned simulator still has no Ethernet backend. No physical deployment is added.
 
 [M5.25](lab/M5.25.md) qualifies **laboratory-only TM11 forward-read completion
 observation** in a disposable instrumented simulator: six RT-11 comparison modes,

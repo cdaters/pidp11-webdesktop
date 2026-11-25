@@ -1,5 +1,17 @@
 # Source map and subsystem boundaries
 
+## M5.27 local modem
+
+- `internal/localmodem/`: bounded command/data personality, independently supervised
+  actor and strict read-only observation; colocated parser/lifecycle/fault tests.
+- `cmd/local-modem/`: opt-in network-none executable, private status/control files,
+  enforced memory containment; never starts SIMH.
+- `src/modem.ts`: explicit generation-pinned read-only equipment observation.
+- `lab/m527/`: independent peer, diagnostic ioctl probe, bounded earlier-feedback
+  reproduction, replay runbook and sanitized measurements.
+- [Contract](local-modem.md), [engineering report](../lab/M5.27.md).
+
+
 ## M5.25 isolated completion experiment
 
 [`lab/m525`](../../lab/m525/README.md) contains the opt-in C ring, guarded source

@@ -1,9 +1,22 @@
 # What is still experimental
 
-[M5.26 communications](lab/M5.26.md) is text-only V7/DC11 evidence. The observed
-`cu` state echoes serial input and buffers CR-only lines; explicit LF completes a
-line. Socket byte counts are not guest receipts or carrier signals. Modem testing
-produced OK followed by repeated ERROR feedback and is not qualified. Original
+## M5.27 modem limitations
+
+The genuine qualification is short printable text through original V7 cu, with
+explicit installed-stty raw/no-echo setup. Cu's broken ioctl calls are unchanged.
+Return transfers normalize CRLF to LF; interrupted diversions can include NO CARRIER
+text in an incomplete file. No all-byte transfer, file acknowledgment, hardware
+flow control, modem-pin measurement or physical baud timing is qualified.
+The modem is network-none laboratory equipment with one fixed local peer, hard
+bounds and no automatic reattachment. The equipment window disconnects observation
+only. Guest changes inside the same process/socket remain operator-verified.
+See [M5.27](lab/M5.27.md). Ethernet is not enabled or tested by this milestone.
+
+
+[M5.26 communications](lab/M5.26.md) is text-only V7/DC11 evidence. The state observed then
+echoed serial input and buffered CR-only lines; explicit LF completed a line. Socket byte counts are not guest receipts or carrier signals. Modem testing
+then produced OK followed by repeated ERROR feedback; M5.27 above diagnoses
+and corrects the line setup for its bounded qualification. Original
 SIMH reports no Ethernet backend; no guest TCP/IP or DECnet test passed or was
 claimed. Identity still needs independent operator approval. Physical baud,
 hardware/software flow control, sustained throughput and Pi performance remain

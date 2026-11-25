@@ -1,11 +1,20 @@
 # A genuine PDP-11 computer room
 
+## M5.27: optional local modem
+
+The computer room can observe an independently operated, bounded text modem.
+Original V7 cu has genuine command/data/hangup and file-integrity evidence; the
+window shows actual modem snapshots without owning the guest connection. It offers
+no arbitrary dialing or simulated carrier-pin lights. Guest console operation
+continues when the modem or browser stops. Ethernet remains a future isolated lab.
+See the [report](../lab/M5.27.md) for evidence and limits.
+
+
 **M5.26 communications foundation:** the Communications window now presents
 approved serial application lines through the existing terminal bridge. Original
 V7 `cu` and DC11 exchanged distinct text with an independent local peer and all
 three browser engines. Socket counts, ownership and freshness are explicit;
-carrier and guest receipt are not inferred. Next: qualify line settings and a
-bounded local modem, then separately inventory a no-route Ethernet lab. The
+carrier and guest receipt are not inferred. M5.27 above completes the short-text modem qualification and networking inventory. The
 [report](../lab/M5.26.md) retains failed modem and CR-only attempts. M5.25 activity
 instrumentation remains laboratory-only; the browser still does not run the CPU.
 
@@ -113,10 +122,9 @@ ordinary storage remains captured data. The reader memory allowance is not met
 and Pi CPU/connected REALCONS remain unmeasured.
 
 [M5.26](../lab/M5.26.md) now provides that first genuine serial application path,
-explicit ownership, disconnect checks and independent console evidence. The next
-communications step is line-setting/file-integrity qualification and a bounded
-local modem; a private Ethernet lab needs a different identified build and actual
-guest driver/tool inventory. Further broad storage or LP11/PC11 work needs a
+explicit ownership, disconnect checks and independent console evidence. M5.27 adds line-setting/file-integrity qualification and a bounded local modem.
+A future private Ethernet lab needs a separate identified build; the retained
+guest driver/tool inventory is now recorded. Further broad storage or LP11/PC11 work needs a
 demonstrated blocker.
 Reader selection currently means a read-only catalog and operator assistance. Do not
 expose attachment controls before safe state, authority, cancellation and actual

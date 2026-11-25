@@ -1,5 +1,16 @@
 # Communications session contract
 
+## M5.27 qualified extension
+
+The M5.26 echo/raw-mode limitations below describe that milestone's observations.
+M5.27 diagnosed the matching cu source/binary and established a legitimate stty
+workaround, repeated text-file integrity and a separate bounded local modem.
+The [local modem contract](local-modem.md) adds an independent actor and read-only
+status window without changing ordinary terminal endpoint authority. Original cu,
+SIMH and media remain unmodified; broader binary/carrier/flow-control claims remain
+unqualified. See [M5.27](../lab/M5.27.md).
+
+
 M5.26 extends the existing [supervised guest attachment](supervised-guest-identity.md)
 and terminal ownership contracts. It creates no second dialing or authority path.
 The Communications window is a filtered view of ordinary approved terminal lines.

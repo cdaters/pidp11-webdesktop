@@ -1,5 +1,15 @@
 # Where the project is going
 
+## M5.27 result and next step
+
+Genuine original V7 cu now completes bounded local modem sessions with independent
+file hashes, explicit hangup, crash/restart checks and a read-only equipment window.
+The next candidate milestone is repeatable file-completion handling and a separately
+built XU/2.11BSD Ethernet lab with no route, NAT or production interface. This is a
+recommendation, not authorization for networking or physical deployment.
+See [M5.27](docs/lab/M5.27.md).
+
+
 ## Current product direction — M5.26
 
 The [virtual computer room](docs/product/virtual-computer-room.md) is the enduring direction for both physical
@@ -35,13 +45,12 @@ promotion is not approved.
 [M5.26](docs/lab/M5.26.md) establishes genuine V7/DC11 text communications,
 independent peers, actual three-engine browser exchanges and bounded transport
 accounting. A local modem attempt exposed echo feedback; the pinned simulator
-lacks an Ethernet backend. Neither modem nor networking is promoted as working.
+lacks an Ethernet backend. M5.27 above supersedes the modem blocker; networking remains preparation only.
 
-Next recommended communications milestone: verify actual V7 line settings,
-received-file integrity and flow control on disposable media; then qualify a
-bounded local modem. Separately inventory a 2.11BSD kernel/tools and a reproducible
-Ethernet-capable lab build for a private link with no production route. No public
-BBS, physical deployment or arbitrary browser dialing follows from this result.
+M5.27 completed line-setting, received-file integrity, bounded modem and BSD
+inventory work. The next recommendation at the top of this roadmap replaces the
+M5.26 next-step list; flow control and long transfers remain unqualified. No public
+BBS, physical deployment or arbitrary browser dialing follows from these results.
 
 ## M5.17: Source Alpha 2 candidate and review intake
 

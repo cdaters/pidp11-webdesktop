@@ -1,0 +1,39 @@
+{
+  "scope": "Original V7 cu / DC11 line 3; isolated ARM64 Linux; no physical Pi",
+  "original_simh_sha256": "f38167163e37dbb9578f33cc58f9740e3a6408829c4e357637b76835864c8237",
+  "cu_original_and_rebuild": {
+    "bytes": 7140,
+    "sha256": "6f9b1beaf5e9506b66c10e34f7944dd45a22be2e12d7ef146d69bb629f6d1ea4"
+  },
+  "guest_to_peer": {
+    "bytes": 46,
+    "sha256": "dea39e96dce8b13d6d4e832804b8f88bd0fc7019b9a1ad4629796eafb1f15180",
+    "hex": "4d3532372d47554553542d46494c452d412d313943440a4d3532372d47554553542d46494c452d422d363445320a"
+  },
+  "peer_to_guest": {
+    "bytes": 44,
+    "sha256": "18501d1f30fbb47c5e2bb0e4258119a6dc894c3e95fade34c9a981e2f2c4861f",
+    "hex": "4d3532372d504545522d46494c452d412d384233310a4d3532372d504545522d46494c452d422d323046370a"
+  },
+  "repeat_peer_to_guest": {
+    "bytes": 44,
+    "sha256": "18501d1f30fbb47c5e2bb0e4258119a6dc894c3e95fade34c9a981e2f2c4861f",
+    "hex": "4d3532372d504545522d46494c452d412d384233310a4d3532372d504545522d46494c452d422d323046370a"
+  },
+  "interrupted_receive": {
+    "bytes": 35,
+    "sha256": "1b59b7a574226d0be096491dab5e3ee744b58824dc52e6449e7c47426360fccb",
+    "hex": "4d3532372d494e434f4d504c4554452d5052454649580a0a4e4f20434152524945520a"
+  },
+  "return_wire_first_bytes": 63,
+  "return_wire_repeat_bytes": 64,
+  "rss_kib": 8720,
+  "high_water_rss_kib": 8920,
+  "sample_cpu_percent_one_core": 0.483,
+  "memory_max_bytes": 100663296,
+  "memory_swap_max_bytes": 0,
+  "oom_events": 0,
+  "console_observation_upper_ms": 1096.621,
+  "latency_limitation": "Includes operator IPC and polling; not device or physical baud latency",
+  "working_runtime_sha256": "4f840a2a40947bd8e6b73861671c6ac707afbc31a196db0d869bd91647d64f2b"
+}
