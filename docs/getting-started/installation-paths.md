@@ -42,8 +42,19 @@ A future **separately owner-approved** maintenance procedure should first verify
 
 M5.9 tested missing-controller refusal and restoration in a disposable systemd slice, **not** this Pi boot-file change or a fresh-card installation. See [M5.7.1](../lab/M5.7.1.md) and [M5.8 readiness](../lab/M5.8-readiness.md) for the existing gates. Hardware repair, memory readiness, guest identity and representative Pi resource measurements remain separate requirements.
 
-## Current development candidate
+## Current source qualification
 
-The [M5.10 alpha presentation](../releases/alpha-readiness.md) packages the Phase D runtime with current documentation. Optional live-device observation, offline references, exact facts/calculations and actual local-model conversations have laboratory evidence. The model remains experimental and unnecessary for terminal use. See the [capability matrix](../capabilities.md) for the distinctions.
+[Source Alpha 2](source-alpha-2.md) is the latest published source release.
+[M5.29](../releases/source-alpha-3-candidate.md) prepares an Alpha 3 candidate;
+no public Alpha 3 release or binary installer exists yet. Current main adds
+supervised printer/tape/history, storage snapshots, serial and local-modem work.
+Experimental TM11 instrumentation and Ethernet remain separate laboratory tools,
+not prerequisites or ordinary installation features.
 
-The [Phase D report](../lab/M5.9.3-D.md) records protected ARM64 lifecycle tests; M5.10 performs packaging and presentation checks, not a fresh physical deployment. Neither increment changes the hardware, guest-identity and enforced-memory gates above.
+The source-only demonstration needs Node and a local browser; it needs no guest
+media, simulator, GPIO or model. Ordinary SIMH users can prepare a dedicated guest
+line independently and review the [terminal bridge](../lab/M5.0.md) and
+[development instructions](../technical/development.md). Physical replica paths
+and the packaging preflight's original PiDP installation checks are not requirements
+for that source demonstration. A generic cross-platform SIMH installer is not
+qualified. The physical paths above remain separately gated candidate procedures.

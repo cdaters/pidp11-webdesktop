@@ -4,6 +4,11 @@ A browser can be a window into a very different kind of computer. This project b
 
 The [PiDP-11](https://github.com/obsolescence/pidp11) is a replica front panel. A Raspberry Pi inside runs **SIMH**, the program that emulates the PDP-11 processor and devices. A historical operating system running inside it is the **guest**. The optional Web Desktop connects to an approved guest terminal; it does not replace the emulator.
 
+[Source Alpha 2](source-alpha-2.md) is the latest published source archive. The
+[Alpha 3 candidate](../releases/source-alpha-3-candidate.md) is under review; current
+main includes later equipment work. Choose deliberately between a released archive
+and development source.
+
 ## Try the desktop without hardware
 
 Follow the short [local setup](../../README.md#try-the-local-desktop): install the project’s npm dependencies, run the development preview and open its loopback address. No Pi, disk image or model is needed. **Terminal** and the ordinary panel are simulations. **Guest terminal** requires a separately prepared service and guest.
@@ -16,7 +21,7 @@ Follow the short [local setup](../../README.md#try-the-local-desktop): install t
 
 - [Explore the desktop](explore.md): arrange windows, try mock equipment and find the reference desk.
 - [Understand terminals](terminals.md): prompts, personalities, connection and keyboard ownership.
-- [Choose an installation path](installation-paths.md): existing PiDP-11 owners or original software first on a fresh card.
+- [Choose an installation path](installation-paths.md): source demonstrations and ordinary SIMH development, with separately gated physical PiDP-11 procedures.
 - [Configure the optional companion](configured-companion.md): offline references first, a local model only if wanted.
 - [Troubleshoot a problem](questions.md) or check [current capabilities](../capabilities.md).
 - [Browse all documentation](../README.md) and [screenshots](../screenshots/README.md).

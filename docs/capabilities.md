@@ -1,5 +1,9 @@
 # Capability and compatibility matrix
 
+Current main is under [M5.29 source qualification](releases/source-alpha-3-candidate.md).
+Published Source Alpha 2 remains frozen at M5.17; later rows below are development
+results. Source qualification adds no physical or production acceptance.
+
 ## M5.28 isolated Ethernet evidence
 
 A separate original-source Ethernet-enabled SIMH now drives genuine 2.11BSD

@@ -1,11 +1,33 @@
 # Changelog
 
+## M5.29 source qualification — 2026-11-24 (development main)
+
+- Reconciled current README, installation boundaries, capabilities, indexes and release entry points; preserved historical release records.
+- Refreshed real screenshot/provenance inventory and prepared four focused RetroRealm page updates in an independent local staging copy. No production deployment.
+- Prepared Source Alpha 3 qualification and draft notes. The exact reviewed archive and test results are recorded in [M5.29](docs/lab/M5.29.md); no release or tag is created by this work.
+
 ## M5.28 isolated Ethernet — 2026-11-24 (development main)
 
 - Qualified genuine 2.11BSD DEUNA/TAP ARP, ICMP and bounded TCP text using a separate reproducible original-source build, independent peer and strictly isolated ARM64 Linux lab.
 - Added bounded retained capture summaries and explicit identity checks; preserved wrong-controller, vector-order, peer/link and restart failures with the corrected runbook. No ordinary browser networking controls.
 - Preserved originals, verified the M5.27 incremental backup, completed cleanup and regression/clean-checkout checks. [Engineering report](docs/lab/M5.28.md).
 - Prepared a non-destructive [M5.29 publication and Source Alpha 3 qualification plan](docs/releases/M5.29-readiness-plan.md). No release/tag, site edit, announcement or physical access.
+
+## M5.27 genuine local modem — 2026-11-24 (development main)
+
+- Qualified bounded original V7 cu command/data/hangup and independent text-file integrity through a local modem; added read-only equipment observation. [M5.27 evidence and limits](docs/lab/M5.27.md).
+
+## M5.26 serial communications — 2026-11-24 (development main)
+
+- Added Communications through existing explicit terminal ownership; genuine V7/DC11 printable text passed independent-peer and three-browser checks. [M5.26](docs/lab/M5.26.md).
+
+## M5.25 passive storage feasibility — 2026-11-24 (laboratory only)
+
+- Compared original and separately instrumented TM11 behavior. Tested results survived observer loss, but the reader missed its memory target. No ordinary-build promotion. [M5.25](docs/lab/M5.25.md).
+
+## M5.24 magnetic-tape guest workflows — 2026-11-23 (development main)
+
+- Qualified RT-11 MT/PIP tape reads and V7 RP06 captured observations with exact guest/output evidence and three-browser views. [M5.24](docs/lab/M5.24.md).
 
 ## M5.23.1 interoperability design — 2026-11-23 (documentation only)
 

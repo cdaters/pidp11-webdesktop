@@ -14,4 +14,6 @@ Thank you to:
 
 OpenAI Codex and ChatGPT assisted Craig with development, testing, research and documentation. They were tools in the work; the project direction, publication and maintenance belong to Craig and RetroRealm.
 
+The separately proposed [Hacker Replicant 0.2 selected-text contract](docs/technical/selection-contract-0.2-proposal.md) remains under review; it is not implemented upstream interoperability. The new isolated Ethernet build reuses original SIMH source without changing its notices.
+
 Historical names and logos identify the systems being explored. This project is not an official DEC product and does not claim endorsement by Oscar, Obsolescence Guaranteed or upstream contributors. Original project materials use [MIT](LICENSE); separately identified materials retain their own notices in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

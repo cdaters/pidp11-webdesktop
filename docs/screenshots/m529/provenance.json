@@ -1,0 +1,64 @@
+{
+  "status": "Real application captures and explicitly labeled retained evidence; no physical acceptance",
+  "retained_printer_spool": {
+    "bytes": 172,
+    "sha256": "7e4c5b19ee72837da7ebaf02818c7b0a478b9568a2b6685ebff416f1096944db",
+    "scope": "generated M5.22 RSX listing; imported read-only in current local demo"
+  },
+  "items": [
+    {
+      "file": "terminal-detached.png",
+      "sha256": "8f88f225e5e91cc0b18e39223bac57f3b3c99cb262b37c2b0a288a79c7809d11",
+      "width": 1600,
+      "height": 1100,
+      "application_revision": "b7b485f129d2b689c9f78a95df099f29024f198b",
+      "capture": "M5.29 local Chromium; no API interception; documentation-only working changes",
+      "caption": "Current disconnected guest terminal; no token or guest attached"
+    },
+    {
+      "file": "modem-detached.png",
+      "sha256": "b69ba823ce231a927ee3f14758053c03f61d42c1cc70f7d7d32c6da0c83f3167",
+      "width": 1600,
+      "height": 1100,
+      "application_revision": "b7b485f129d2b689c9f78a95df099f29024f198b",
+      "capture": "M5.29 local Chromium; no API interception; documentation-only working changes",
+      "caption": "Current read-only local modem interface before observation; no modem connected"
+    },
+    {
+      "file": "retained-printer.png",
+      "sha256": "2e55010868ef55724337c849ee10d9ada3643d6d64511608e2fc424f6d20a721",
+      "width": 1600,
+      "height": 1100,
+      "application_revision": "b7b485f129d2b689c9f78a95df099f29024f198b",
+      "capture": "M5.29 local Chromium; no API interception; documentation-only working changes",
+      "caption": "Current local import of unchanged retained M5.22 RSX LPDRV/PIP output; no live guest"
+    },
+    {
+      "file": "m526-serial.png",
+      "sha256": "179e0238aedc6305313719df878d3ac1797403fa48ccb3940e92ba18bdd9d99a",
+      "width": 1440,
+      "height": 1000,
+      "application_revision": null,
+      "capture": "Unchanged original genuine lab capture; exact capture-time working revision was not recorded; do not substitute later qualification commit",
+      "evidence_report": "docs/lab/M5.26.md",
+      "qualification_revision": "ba1e5819a8365e00688a6c3ea2f0222c88d0333f"
+    },
+    {
+      "file": "m522-paper-tape.png",
+      "sha256": "dc5923714d3157069f52876aa61240436d0e9eff3513f17dd735779cc1fe5504",
+      "width": 1600,
+      "height": 1100,
+      "application_revision": null,
+      "capture": "Unchanged original genuine lab capture; exact capture-time working revision was not recorded; do not substitute later qualification commit",
+      "evidence_report": "docs/lab/M5.22.md",
+      "qualification_revision": "b265d20c8e031d5d4c66025a71024cd8e39c7373"
+    },
+    {
+      "file": "ethernet-topology.svg",
+      "sha256": "c8aa2a3bd118a32affadef9420afcfad04a640363c1d5da1b01a56bfce948a94",
+      "kind": "authored explanatory vector diagram; not a screenshot",
+      "evidence_report": "docs/lab/M5.28.md",
+      "evidence_revision": "b7b485f129d2b689c9f78a95df099f29024f198b"
+    }
+  ]
+}

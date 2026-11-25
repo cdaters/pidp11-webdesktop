@@ -1,0 +1,117 @@
+--- before/workshop.md
++++ after/workshop.md
+@@ -61,9 +61,15 @@
+ 
+ The aim is to connect those interfaces to genuine emulated guests and devices wherever feasible. A blinking indicator or simulated disk is useful while I am building things, but I want the equipment to earn its place by doing something. Much of that room is still ahead of me; the [architecture page](/projects/pidp-11/architecture#equipment-interfaces) separates the working laboratory paths from the interfaces I still need to build.
+ 
+-That picture is getting rather more interesting. In the Mac laboratory, I can open genuine UNIX V7 terminals, use the full-screen `vi` editor in 2.11BSD and watch V7 draw a Tektronix plot. I can also observe LP11 printer and PC11 paper-tape activity from separate programs running on an emulated PDP-11. That last part is device testing, not proof that a UNIX printer driver is working.
++That picture is getting rather more interesting. The laboratory still has genuine UNIX V7 terminals, 2.11BSD editing and V7 Tektronix plotting. Since Source Alpha 2, RSX and RT-11 utilities have also produced verified printer and paper-tape output, with retained job records and exact downloads. Disk and magnetic-tape views now show separately captured facts from genuine guest workflows. The [engineering reports](https://github.com/cdaters/pidp11-webdesktop/blob/b7b485f129d2b689c9f78a95df099f29024f198b/docs/capabilities.md) identify the particular systems and tests; this is not a promise that every guest has every peripheral configured.
+ 
+-The ordinary browser front panel, disk and tape controls still use simulated state. The [gallery](/projects/pidp-11/gallery) shows which windows are connected to a guest, which are demonstrations and which belong to an earlier milestone.
++The ordinary browser front panel and local demonstrations still use simulated state. Separately selected printer, paper-tape and storage observations carry their own provenance; they do not let the browser mount media or operate the simulator. The [gallery](/projects/pidp-11/gallery) distinguishes genuine historical captures, retained output and disconnected current interface views.
++
++## More of the room is doing real work
++
++M5.26 and M5.27 added genuine V7 serial and bounded local-modem text exchanges with an independent peer. M5.28 then connected a genuine 2.11BSD guest through an emulated DEUNA Ethernet controller to a separate test peer. That network existed only inside an isolated laboratory: no Internet, real LAN or physical Pi was involved. Ethernet needed a separately built original-source simulator and currently produces retained evidence, not a live browser networking window.
++
++I am now preparing a **Source Alpha 3 candidate for review**. [Source Alpha 2](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.17-source-alpha.2) remains the latest public release, and its download has not changed. The newer development work is useful, but it does not make the physical installation ready. [Current source qualification](https://github.com/cdaters/pidp11-webdesktop/blob/main/docs/releases/source-alpha-3-candidate.md).
+ 
+ ## The physical machine comes first
+ 
+--- before/02.architecture/workshop.md
++++ after/02.architecture/workshop.md
+@@ -46,7 +46,7 @@
+   <section class="rr-architecture-lane">
+     <h3>Observed guest devices</h3>
+     <p><strong>Emulated LP11 / PC11 → approved local output → browser</strong></p>
+-    <p>Read-only laboratory observation. Device test programs supply the output; the browser does not attach media or operate the simulator.</p>
++    <p>Read-only supervised output and retained records. CPU tests and qualified guest utilities supply real bytes; the browser does not attach media or operate the simulator.</p>
+   </section>
+   <section class="rr-architecture-lane">
+     <h3>Optional historical companion</h3>
+@@ -85,9 +85,9 @@
+ 
+ **A genuine guest terminal** shows input and output from a historical operating system. UNIX V7 has been demonstrated in isolated development tests and controlled actual-Pi experiments. The laboratory also has genuine 2.11BSD full-screen editor checks, RSX-11M-PLUS text-terminal results and V7 Tektronix graphics. RT-11FB has demonstrated application-terminal input and output, not an independent browser command shell. Initial VT52/VT220 and teletype support does not imply complete terminal conformance. The [M5.17 qualification report](https://github.com/cdaters/pidp11-webdesktop/blob/7753caa7327e2dca60c44900e19d525c0ede9044/docs/lab/M5.17.md) records the tested subsets.
+ 
+-**The ordinary browser front panel, disk, tape and system controls** remain simulations. The demonstration printer is still available too. A simulated mounted disk does not mean a real guest disk has been changed, and a simulated lamp is not evidence of a physical signal.
++**The ordinary browser front panel and local demonstrations** remain simulations. Disk and magnetic-tape windows also show explicitly selected captured observations, with age and provenance; printer and paper-tape windows provide approved output and retained jobs. A simulated mounted disk does not mean a real guest disk changed, and no view grants browser authority to attach media.
+ 
+-**Guest devices** is a separate read-only view of approved LP11 and PC11 output. Completed exports and live observation have both been tested with real emulated CPU/device programs. The M5.10 equipment-room capture shows completed device observations, while the separate LP11 capture shows output arriving during the test. Both use separate producers for V7 and the device tests; it does not establish a working V7 printer driver or production peripheral supervision. [Observed-device boundaries](https://github.com/cdaters/pidp11-webdesktop/blob/05d23c6890ed22825f8815bcdb294cd3702852cb/docs/technical/observed-peripherals.md).
++**Guest devices, printer and paper tape** provide read-only approved output. Earlier CPU/device tests remain valid, and M5.20–M5.22 add genuine RSX PIP and RT-11 utility workflows, sequential jobs, supervised observation and checked exports. Those are specific guest subsets, not a universal driver claim. The old M5.10 picture still shows its original CPU-test evidence. [Current equipment boundaries](https://github.com/cdaters/pidp11-webdesktop/blob/b7b485f129d2b689c9f78a95df099f29024f198b/docs/technical/equipment-history.md).
+ 
+ **Remote panel control** is a separate experiment with unresolved safety questions. A delayed START-release message in an early test showed why losing browser control does not necessarily cancel a command already in flight. It remains outside the production feature set.
+ 
+@@ -98,9 +98,9 @@
+ A window is only the visible end of the job. I want the room to expose genuine machine and peripheral activity wherever it can, but each kind of equipment needs its own appropriate interface:
+ 
+ - **Terminals** use configured guest serial lines. The guest must supply the corresponding terminal service or application; its operator console is a separate connection.
+-- **Printers and paper tape** can be observed through actual emulated-device output and recorded reader/punch activity. LP11/PC11 observation is already laboratory-tested. It does not establish operating-system printer-driver integration or browser control of paper-tape input.
+-- **Disk drives, removable packs and magnetic tape** need guest-safe media handling: knowing when an operating system has finished using media, preserving it and deliberately approving any change. Those controls are still simulated. Unrestricted mounting is not a current feature.
+-- **Serial communications, virtual modems and networking** need suitable guest drivers, emulator configuration and deliberately bounded connections. A modem-shaped window would not supply those pieces; this remains future work.
++- **Printers and paper tape** have genuine RSX/RT-11 utility evidence and retained job history. Media attachment and guest commands remain independent local operations; no general browser input/mounting authority is added.
++- **Disk drives and magnetic tape** have genuine guest workflows and read-only captured geometry/provenance. They do not have ordinary-build live drive activity or browser mounting. The separate M5.25 TM11 activity hook is laboratory-only and missed its incremental-memory target.
++- **Serial communications and the local modem** have genuine bounded V7 text evidence. Communications reuses explicit terminal ownership; the modem window observes a separate optional fixed-peer process. **Ethernet** has isolated BSD TCP/IP evidence with a separate experimental simulator, not an ordinary browser networking service. No arbitrary dialing, binary-transfer guarantee, DECnet or real-LAN qualification is implied.
+ - **Graphics displays** depend on the device. Genuine V7 Tektronix plotting uses a terminal byte stream. VT11/VR14 would need a specialized emulated display-controller interface; the Tektronix renderer does not provide one.
+ - **Physical-panel observation** is separate from guest terminal access. The ordinary browser panel is simulated; observing real switches or lamps requires its own independently qualified path. Remote physical-panel control remains outside the accepted feature set.
+ 
+@@ -141,3 +141,13 @@
+ Start with the [published Source Alpha 2 release](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.17-source-alpha.2) and its [current quick start](https://github.com/cdaters/pidp11-webdesktop/blob/7753caa7327e2dca60c44900e19d525c0ede9044/docs/getting-started/source-alpha-2.md). This is experimental source software for local browser demonstrations and controlled laboratories, not an approved installer for physical PiDP-11 hardware. The [M5.18 publication record](https://github.com/cdaters/pidp11-webdesktop/blob/7753caa7327e2dca60c44900e19d525c0ede9044/docs/releases/M5.18-publication.md) identifies the exact released source; publication is not independent security certification or physical acceptance. The original ARM64 provisioning incidents and V7 plotting timeout remain unresolved.
+ 
+ The [existing-kit and fresh-Pi setup paths](https://github.com/cdaters/pidp11-webdesktop/blob/7753caa7327e2dca60c44900e19d525c0ede9044/docs/getting-started/installation-paths.md) explain the separate prerequisites; the [build log](/projects/pidp-11/build-log) follows my physical project. The [gallery](/projects/pidp-11/gallery) retains its dated M5.10 images and Phase D captures. Those pictures document their own milestones, rather than illustrating equipment I have not connected yet.
++
++## What the isolated Ethernet result means
++
++The diagram describes the actual M5.28 topology, not a new live networking window.
++
++![Isolated BSD DEUNA TAP peer topology with optional passive capture](/projects/pidp-11/m529-ethernet-topology.svg)
++
++The final fresh-copy run recorded 22 Ethernet frames, three matching ping replies and a distinctive 23-byte request / 21-byte response through the guest's installed Telnet client. Capture remained outside the data path. A changed guest, namespace or observation generation needs a fresh deliberate selection; an address is not guest identity. [Measurements and failed attempts](https://github.com/cdaters/pidp11-webdesktop/blob/b7b485f129d2b689c9f78a95df099f29024f198b/docs/lab/M5.28.md).
++
++Hacker Replicant remains Rolf Peters' independent project. The separately proposed 0.2 selected-text contract is under review; the earlier modified-application laboratory result does not establish upstream support. Optional AI explanations still cannot operate the machine.
+--- before/03.gallery/workshop.md
++++ after/03.gallery/workshop.md
+@@ -10,6 +10,18 @@
+ metadata:
+     description: 'Authentic PiDP-11 Web Desktop screenshots with milestone dates, simulation labels and provenance, plus a list of physical-build photos still to add.'
+ ---
++
++## Current interfaces and later laboratory evidence
++
++These additions distinguish a current interface capture from a historical guest test. Source Alpha 2 remains the latest published archive; the newer development views are being reviewed for a potential Source Alpha 3.
++
++<figure><a href="/projects/pidp-11/m529-retained-printer.png"><img src="/projects/pidp-11/m529-retained-printer.png" alt="Current printer viewer displaying an imported retained RSX listing, labeled no guest attached" width="1600" height="1100" loading="lazy"></a><figcaption>M5.29 current application, rendering the unchanged retained M5.22 RSX LPDRV/PIP listing through local import. This is a retained text snapshot in the simulation viewer, not a current guest connection. The original leading form feed leaves blank paper before the listing.</figcaption></figure>
++
++<figure><a href="/projects/pidp-11/m529-serial.png"><img src="/projects/pidp-11/m529-serial.png" alt="Historical genuine V7 serial text exchange in the Communications window" width="1440" height="1000" loading="lazy"></a><figcaption>Preserved M5.26 Chromium capture: genuine V7 cu/DC11 exchange with distinctive peer text. The background panel and mock terminal are simulations. This is historical evidence, not a currently running session.</figcaption></figure>
++
++<figure><a href="/projects/pidp-11/m529-modem.png"><img src="/projects/pidp-11/m529-modem.png" alt="Current Local modem observation window before observation begins" width="1600" height="1100" loading="lazy"></a><figcaption>M5.29 current application, disconnected read-only modem view. No guest, modem or fabricated carrier is connected in this capture. Genuine local-modem behavior is documented separately in M5.27.</figcaption></figure>
++
++Disk and magnetic-tape images in the [repository's current gallery](https://github.com/cdaters/pidp11-webdesktop/blob/main/docs/screenshots/m529/README.md) show actual M5.24 captures, with age and unknown current state. The [architecture page](/projects/pidp-11/architecture) uses a labeled topology and retained packet results for Ethernet; there is no live browser networking screenshot to show.
+ 
+ ## The equipment desk in the laboratory
+ 
+--- before/01.build-log/workshop.md
++++ after/01.build-log/workshop.md
+@@ -181,6 +181,14 @@
+ 
+ Next I want genuine printer output, paper-tape reader input and punch output driven by guest workflows, using disposable media and bytes we can verify. The [computer-room roadmap](https://github.com/cdaters/pidp11-webdesktop/blob/0451e51f0fe14e2df60bf06a07fb72be164d3caf/docs/product/virtual-computer-room.md) keeps the wider room in view. And the browser remains optional: physical switches, the original console, SSH, Screen, appropriate serial access and independently operated SIMH must remain usable without it.
+ 
++<h2 id="m520-m529" style="scroll-margin-top:6rem">November 24: Peripherals, communications and an isolated network</h2>
++
++The terminal work led into genuine RSX and RT-11 printer and paper-tape workflows, retained job history and captured disk/tape observations. V7 then completed serial and bounded local-modem text exchanges with an independent peer. In M5.28, 2.11BSD sent genuine ARP, ping and TCP traffic through a separately built original-source SIMH and DEUNA interface, entirely inside an isolated laboratory. No traffic was routed to the Internet or my real LAN, and none of this work accessed the physical Pi.
++
++These are specific tested paths, not universal peripheral support. Ordinary storage views remain snapshots; the separate passive TM11 activity experiment is not a production feature. Ethernet has retained packet evidence, not a live browser control panel. [M5.28 report](https://github.com/cdaters/pidp11-webdesktop/blob/b7b485f129d2b689c9f78a95df099f29024f198b/docs/lab/M5.28.md) and [current capability matrix](https://github.com/cdaters/pidp11-webdesktop/blob/main/docs/capabilities.md).
++
++M5.29 is catching the documentation and real screenshots up and qualifying an exact **Source Alpha 3 candidate for owner review**. It has not published another release. Source Alpha 2 remains the public download; hardware repair, memory protection, guest identity and independent review remain separate gates. The earlier dated entries below and above keep their original milestone context.
++
+ ## What I want the finished experience to feel like
+ 
+ The goal isn't to replace the traditional PiDP-11 experience. Quite the opposite.
+@@ -209,7 +217,7 @@
+ 
+ **Explore more operating systems.** UNIX V7, tested 2.11BSD applications and RSX-11M-PLUS now have laboratory browser-terminal results. RT-11 testing covers application input and output, not an independent browser command shell. RSTS/E and broader terminal support still need their own checks; booting a system through the original console does not establish a browser connection.
+ 
+-**Put the peripherals to work.** LP11/PC11 observation now works in the laboratory. Next comes dependable supervision and verified operating-system driver support. The ordinary disk, tape and system controls remain simulations; I still want to connect more equipment without putting guest media at risk.
++**Put the peripherals to work.** Build on the qualified RSX/RT-11 printer and paper-tape subsets, captured storage and V7 communications. Wider driver coverage, live storage activity and safe media handling still need their own evidence. The browser must remain optional and must not gain authority by displaying a device.
+ 
+ **Make the optional tutor more dependable.** Keep source-backed facts and exact calculations easy to reach, and get independent review of the generated explanations and their limited checks. Rolf Peters’ [Hacker Replicant](https://github.com/rolfpeters-droid/pidp11-hacker-replicant) remains a separate project. The modified read-only integration has now shared genuine V7 text in a supervised laboratory; reliable guest identity, production qualification and any upstream design agreement remain separate steps.
+ 

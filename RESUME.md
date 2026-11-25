@@ -6,6 +6,24 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **M5.29 active: Source Alpha 3 qualification.** Documentation and four local Grav
+  page proposals are being reconciled; no feature changes, release, tag, website
+  deployment, announcement or Pi access. Read [candidate scope](docs/releases/source-alpha-3-candidate.md).
+  Final exact artifact/tests belong in [M5.29](docs/lab/M5.29.md) after qualification;
+  never infer approval from this handoff. Evidence: `.research/m529/`.
+- **M5.28 backup verified:** `M5.29-incremental-20261125T062455Z`, 199 files,
+  22 directories, 6,007,090,495 logical bytes; archive 6,007,927,296 bytes,
+  SHA-256 `6ffe34b2768428e8d290d4911788a6931545aa552a9495e86110583e1c2d192b`.
+  Every file hash and supported metadata reread; 221 AppleDouble entries, no
+  special-file exclusions; originals stable, no full restore. Exact private
+  project-level pointer: `Backups/M5.29-incremental-20261125T062455Z/backup.json`.
+- **Local site review:** cloned the established PiDP editorial source into a
+  separate private staging directory. Original DDEV starter site and earlier
+  review remain untouched. Four pages at `http://127.0.0.1:8899/projects/pidp-11`;
+  current production was not queried. Baseline build log matches its recorded
+  M5.19 deployment hash. Stop only owned `pidp-m529-review` / `pidp-m529-proxy`
+  containers if needed; preserve the private stage and evidence.
+
 - **M5.28 engineering complete:** code checkpoint `b24799c4d75a318b4ec52ba9bd6f03e13d8ee1c2`.
   [Report](docs/lab/M5.28.md), [runbook](lab/m528/README.md),
   [retained observation](docs/technical/isolated-ethernet.md) and

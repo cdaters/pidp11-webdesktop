@@ -3,7 +3,7 @@
 Current engineering: [M5.28 genuine isolated Ethernet](lab/M5.28.md),
 [runbook](../lab/m528/README.md), [retained observation contract](technical/isolated-ethernet.md),
 [M5.27 local modem](lab/M5.27.md) and [M5.26 serial communications](lab/M5.26.md).
-Next recommendation: [M5.29 publication and Source Alpha 3 qualification](releases/M5.29-readiness-plan.md).
+Current publication preparation: [M5.29 Source Alpha 3 candidate](releases/source-alpha-3-candidate.md), following the [readiness inventory](releases/M5.29-readiness-plan.md).
 No new release or physical deployment is approved.
 
 M5.23.1 documentation update: [Rolf feedback and change inventory](technical/M5.23.1-interoperability-review.md), [short review handoff](technical/M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](technical/selection-contract-0.2-proposal.md) and [planned conformance](technical/selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. The proposed interoperability work remains unchanged by M5.28.

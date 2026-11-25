@@ -17,15 +17,22 @@ The old computer still does the computing. SIMH runs the historical operating sy
 
 [**Source Alpha 2**](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.17-source-alpha.2) is available as a source-only experimental pre-release for local demonstrations and controlled historical-computing laboratories. Use its named tarball and checksum. It is not an approved installation for physical PiDP-11 hardware. [Publication verification](docs/releases/M5.18-publication.md). [Alpha 1](https://github.com/cdaters/pidp11-webdesktop/releases/tag/v0.5.13-source-alpha.1) remains unchanged.
 
-**Development main:** [M5.26](docs/lab/M5.26.md) adds a genuine V7/DC11 serial
-text workflow, a Communications window and explicit socket accounting. Independent
-peer and three-browser tests passed; line processing applies. The modem experiment
-remains unqualified and the original build has no Ethernet backend.
+**Development main (newer than Alpha 2):** [M5.19–M5.28](docs/capabilities.md)
+add practical terminal controls, supervised RSX/RT-11 printer and paper-tape
+workflows, retained job history, captured storage observations and genuine V7
+serial/local-modem text. The ordinary application supplies the views; independently
+prepared guest equipment supplies real bytes. [M5.29 qualification](docs/releases/source-alpha-3-candidate.md)
+is preparing a source-only Alpha 3 candidate for owner review. It is not a release.
 
-[M5.25](docs/lab/M5.25.md) qualifies a separate, bounded TM11
-read-completion experiment against an unmodified simulator. Guest bytes/status and
-observer independence passed; memory/physical performance and production promotion
-remain unqualified. The ordinary build remains snapshot-only.
+[M5.28](docs/lab/M5.28.md) demonstrates genuine 2.11BSD TCP/IP only in an isolated
+DEUNA/TAP laboratory, using a separately built original-source simulator. Its
+retained packet summary is not a live browser networking feature. The accepted
+original simulator remains unchanged and has no Ethernet backend.
+
+[M5.25](docs/lab/M5.25.md) compares original SIMH with a separate instrumented TM11
+build. The bounded read-completion experiment preserved tested guest results,
+but exceeded its incremental-memory target; physical performance is unqualified.
+Ordinary builds retain captured storage observations.
 
 [M5.24](docs/lab/M5.24.md) adds genuine RT-11 MT/PIP tape-file
 reads and V7 RH70/RP06 disk captures, alongside the earlier RL02 and CPU/device tests.
@@ -39,7 +46,7 @@ For a new development session, start with [RESUME.md](RESUME.md).
 
 ![Actual Web Desktop with a UNIX V7 terminal, V7 Tektronix plot and completed LP11/PC11 device observations](docs/screenshots/m510/desktop.png)
 
-*Actual Chromium capture from a disposable Mac-hosted Linux lab. V7 supplies the terminal and plot; a separate diskless PDP-11 program supplies the printer and paper-tape bytes. This is not a physical Pi deployment or an operating-system printer-driver demonstration. [Full-size gallery and provenance](docs/screenshots/README.md).*
+*Actual Chromium capture from a disposable Mac-hosted Linux lab. V7 supplies the terminal and plot; a separate diskless PDP-11 program supplies the printer and paper-tape bytes. This is not a physical Pi deployment or an operating-system printer-driver demonstration. [Historical gallery and provenance](docs/screenshots/README.md). [Current views and later equipment evidence](docs/screenshots/m529/README.md).*
 
 ## A desk for historical computing
 
@@ -67,7 +74,7 @@ The Tektronix 4010 renderer receives genuine UNIX V7 `graph | plot -Ttek` output
 
 ![Genuine UNIX V7 vector plot in the browser](docs/screenshots/m510/v7-tek.png)
 
-The separate disk, magnetic-tape, paper-tape and system-management applications are **simulations**. They do not attach or rewrite real guest media. VT11/VR14 work remains research. [Graphics guide](docs/technical/graphics-foundations.md) · [Device observation](docs/technical/observed-peripherals.md).
+Disk and magnetic-tape windows separate **local simulation** from explicitly selected **captured observations**. Printer and paper-tape windows also offer approved output and retained job history. System-management demonstrations and the ordinary front panel remain simulated. None of these windows attaches or rewrites real guest media. VT11/VR14 work remains research. [Graphics guide](docs/technical/graphics-foundations.md) · [Device observation](docs/technical/observed-peripherals.md).
 
 ## An optional companion for learning
 
@@ -81,10 +88,12 @@ A separately configured local model can discuss deliberately shared text and sou
 
 [Rolf Peters’ Hacker Replicant](https://github.com/rolfpeters-droid/pidp11-hacker-replicant) inspired aspects of our independently developed companion. Its GNU Screen operator-console approach differs from our dedicated guest serial lines and explicit attachment/keyboard protections.
 
-The actual application completed laboratory conversations through our model gateway. The later supervised lab used an **explicitly modified**, pinned copy in a separately authenticated read-only mode with deliberately shared genuine V7 text and no console control. This is not a supported full integration, merger or endorsement. [Optional integration and attribution](integrations/hacker-replicant/README.md).
+The actual application completed laboratory conversations through our model gateway. The later supervised lab used an **explicitly modified**, pinned copy in a separately authenticated read-only mode with deliberately shared genuine V7 text and no console control. This is not a supported full integration, merger or endorsement. [Optional integration and attribution](integrations/hacker-replicant/README.md). The [separately proposed 0.2 contract](docs/technical/selection-contract-0.2-proposal.md) is not implemented or approved upstream support.
 
 ## Try the local desktop
 
+These commands select **development main**, not the immutable Alpha 2 archive.
+For that release, use its [versioned quick start](docs/getting-started/source-alpha-2.md).
 You need Git and Node.js **22.18 or newer** with npm. In a terminal on your development computer:
 
 ```sh

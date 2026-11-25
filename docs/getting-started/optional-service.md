@@ -1,8 +1,8 @@
 # Preparing the optional desktop service
 
-This is a **laboratory-tested installation candidate**, now extended by [M5.9 packaging and preflight](installation-paths.md), not an accepted physical Pi deployment. The owner has not authorized installing it on the physical machine. Original PiDP-11 operation remains the fallback. A later supervised deployment must first resolve the physical-selection discrepancy and review network access, certificate trust and guest-line ownership.
+This is a **laboratory-tested installation candidate**, not an accepted physical Pi deployment. The current public release is [source-only Alpha 2](source-alpha-2.md); [Alpha 3 qualification](../releases/source-alpha-3-candidate.md) is a separate source-review milestone. The following local binary-packaging instructions do not describe a hosted binary release. The owner has not authorized installing it on the physical machine. Original PiDP-11 operation remains the fallback. A later supervised deployment must first resolve the physical-selection discrepancy and review network access, certificate trust and guest-line ownership.
 
-The package contains a static Linux ARM64 executable with the desktop inside it. The target needs systemd and normal Linux administration tools, but no Node runtime, container, database or graphical desktop. It installs only under `/opt/pidp11-webdesktop`, `/etc/pidp11-webdesktop` and its own systemd/runtime locations. It does not change Oscar's installation or start an emulator.
+The locally built optional-service package contains a static Linux ARM64 executable with the desktop inside it. The target needs systemd and normal Linux administration tools, but no Node runtime, container, database or graphical desktop. It installs only under `/opt/pidp11-webdesktop`, `/etc/pidp11-webdesktop` and its own systemd/runtime locations. It does not change Oscar's installation or start an emulator.
 
 ## Build and inspect on the development Mac
 

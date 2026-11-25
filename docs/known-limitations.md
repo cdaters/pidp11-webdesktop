@@ -1,5 +1,9 @@
 # What is still experimental
 
+M5.29 qualifies a source-only candidate; it does not resolve physical deployment,
+automatic guest identity, independent security review, the original ARM64 exit-139
+incidents or V7 plotting timeout. See the [candidate boundaries](releases/source-alpha-3-candidate.md).
+
 ## M5.28 Ethernet limits
 
 Genuine BSD TCP/IP is qualified only in a disposable isolated DEUNA/TAP laboratory

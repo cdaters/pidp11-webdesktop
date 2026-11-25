@@ -1,0 +1,30 @@
+[
+  {
+    "source": "docs/screenshots/m529/retained-printer.png",
+    "stage_relative_path": "user/pages/06.projects/01.pidp-11/m529-retained-printer.png",
+    "sha256": "2e55010868ef55724337c849ee10d9ada3643d6d64511608e2fc424f6d20a721",
+    "bytes": 108123,
+    "provenance": "docs/screenshots/m529/provenance.json"
+  },
+  {
+    "source": "docs/screenshots/m529/m526-serial.png",
+    "stage_relative_path": "user/pages/06.projects/01.pidp-11/m529-serial.png",
+    "sha256": "179e0238aedc6305313719df878d3ac1797403fa48ccb3940e92ba18bdd9d99a",
+    "bytes": 128691,
+    "provenance": "docs/screenshots/m529/provenance.json"
+  },
+  {
+    "source": "docs/screenshots/m529/modem-detached.png",
+    "stage_relative_path": "user/pages/06.projects/01.pidp-11/m529-modem.png",
+    "sha256": "b69ba823ce231a927ee3f14758053c03f61d42c1cc70f7d7d32c6da0c83f3167",
+    "bytes": 145397,
+    "provenance": "docs/screenshots/m529/provenance.json"
+  },
+  {
+    "source": "docs/screenshots/m529/ethernet-topology.svg",
+    "stage_relative_path": "user/pages/06.projects/01.pidp-11/m529-ethernet-topology.svg",
+    "sha256": "c8aa2a3bd118a32affadef9420afcfad04a640363c1d5da1b01a56bfce948a94",
+    "bytes": 2282,
+    "provenance": "docs/screenshots/m529/provenance.json"
+  }
+]

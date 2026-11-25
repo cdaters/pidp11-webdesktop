@@ -1,8 +1,14 @@
 # Technical documentation
 
-Current storage work: [M5.24 report](../lab/M5.24.md), [RT-11 tape workflow](rt11-magnetic-tape.md), [future passive activity proposal](storage-activity-proposal.md).
+Current source qualification: [M5.29 / Source Alpha 3 candidate](../releases/source-alpha-3-candidate.md).
+Engineering through [M5.28 isolated Ethernet](../lab/M5.28.md),
+[M5.27 local modem](local-modem.md), [M5.26 serial communications](serial-communications.md)
+and [M5.22 equipment history](equipment-history.md). Networking and passive TM11
+activity remain separate laboratory experiments; see [capabilities](../capabilities.md).
 
-M5.23.1 documentation update: [Rolf feedback and change inventory](M5.23.1-interoperability-review.md), [short review handoff](M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](selection-contract-0.2-proposal.md) and [planned conformance](selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. M5.24 is the latest engineering milestone; that interoperability work remains unchanged.
+Earlier storage work: [M5.24 report](../lab/M5.24.md), [RT-11 tape workflow](rt11-magnetic-tape.md), [future passive activity proposal](storage-activity-proposal.md).
+
+M5.23.1 documentation update: [Rolf feedback and change inventory](M5.23.1-interoperability-review.md), [short review handoff](M5.23.1-hacker-replicant-handoff.md), [proposed 0.2 contract](selection-contract-0.2-proposal.md) and [planned conformance](selection-contract-0.2-conformance.md). Architectural direction is agreed; no new runtime or upstream compatibility is implemented. That proposed interoperability work remains separate and unchanged.
 
 The desktop uses TypeScript/HTML5/SVG and xterm.js; Go serves embedded assets and bounded streams. SIMH does the actual PDP-11 emulation. The normal executable remains a mock service. Genuine guest labs and the separate optional service use the established terminal bridge; the candidate service starts detached and requires explicit local approval. [Current capabilities](../capabilities.md) and [service procedure](../getting-started/optional-service.md).
 
@@ -10,7 +16,7 @@ Latest optional tutor milestone: [Phase D results and screenshots](../lab/M5.9.3
 
 Prior qualification: [M5.16 findings](../lab/M5.16.md), [reproduction](../../lab/m516/README.md), [security review entry point](../security/M5.16-review.md), and [concise Hacker Replicant handoff](M5.16-hacker-replicant-handoff.md). This work does not change the published M5.13 release or authorize Pi deployment.
 
-Latest qualification: [M5.17 candidate report](../lab/M5.17.md), [candidate decision](../releases/M5.17-candidate.md), [review intake](../security/review-intake/README.md) and [interoperability feedback matrix](M5.17-interoperability-feedback.md). No new release or physical deployment is authorized.
+Earlier qualification: [M5.17 candidate report](../lab/M5.17.md), [candidate decision](../releases/M5.17-candidate.md), [review intake](../security/review-intake/README.md) and [interoperability feedback matrix](M5.17-interoperability-feedback.md). No new release or physical deployment is authorized.
 
 ## Start here
 

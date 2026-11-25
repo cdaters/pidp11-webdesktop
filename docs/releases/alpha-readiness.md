@@ -1,3 +1,11 @@
+# Current source release and qualification
+
+[Source Alpha 2](M5.18-publication.md) is the latest published source-only pre-release.
+[M5.29 prepares Source Alpha 3](source-alpha-3-candidate.md) for owner review;
+publication, tags and physical deployment are not authorized by qualification.
+The versioned records below are retained historical decisions and binary-candidate
+procedures, not the current public download or a Pi installation recommendation.
+
 # Source-alpha decision for M5.13
 
 The current candidate is **source only**, for local demonstration and controlled

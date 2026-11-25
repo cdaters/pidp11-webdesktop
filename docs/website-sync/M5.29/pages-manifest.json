@@ -1,0 +1,34 @@
+{
+  "status": "local review only; no deployment",
+  "baseline": "retained editorial staging; build-log matches recorded M5.19 deployment; no current production query",
+  "files": [
+    {
+      "path": "workshop.md",
+      "before_sha256": "2bbc384446fb8cfcbf449a2d6abcc147d1952f06b6f0cc5750a47768ac7ffa7a",
+      "after_sha256": "c0a5933e738ecdcba4b25aad65139b453a723d45fdb0b1363e4cfdea0e253982",
+      "before_bytes": 12241,
+      "after_bytes": 13610
+    },
+    {
+      "path": "02.architecture/workshop.md",
+      "before_sha256": "bc44f074374c6025d9f1df78b230190c5483ece85adc9f92b8163af3054ca2a1",
+      "after_sha256": "02ba36e8c28a43a426854486449ef7ff76267022c6024b014079d82f8cf1931d",
+      "before_bytes": 19547,
+      "after_bytes": 20754
+    },
+    {
+      "path": "03.gallery/workshop.md",
+      "before_sha256": "2731e6a10b4990c1d1a79206908d523a5efadb7590f183bc7f72f899265ce5da",
+      "after_sha256": "25b8c5013808fab40935b593678e5ef73fdafdc0df2e40439ff3913bc4d321e6",
+      "before_bytes": 14903,
+      "after_bytes": 17048
+    },
+    {
+      "path": "01.build-log/workshop.md",
+      "before_sha256": "c3c8e5a5c3ad567db81b73f5bf8cc6ce1ed48b5eee045865c5c3dbad65635aa1",
+      "after_sha256": "0f4d191ae09c670a774c767235e3e7eaccd1c868c7eedef0a75b9023c69846ad",
+      "before_bytes": 28165,
+      "after_bytes": 29689
+    }
+  ]
+}

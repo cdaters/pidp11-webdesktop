@@ -1,5 +1,10 @@
 # Actual application gallery
 
+Start with the [M5.29 current views and retained evidence](m529/README.md) for
+current terminal/modem interfaces, genuine retained printer output, paper tape,
+serial communications, captured storage and the isolated Ethernet diagram.
+The M5.10, M5.11 and Phase D captures below remain historical records.
+
 These images show the real application. Eight fresh M5.10 Chromium captures use disposable V7/2.11BSD guests and original emulated devices on the Mac; four Phase D captures preserve the actual offline/model/app evidence. No image establishes a current physical Pi deployment.
 
 Open any image for full resolution. Captures retain their original dimensions; fresh PNGs received lossless compression only. [Machine-readable dimensions, hashes, captions and provenance](m510/provenance.json) · [M5.10 procedure and results](../lab/M5.10.md) · [Historical archive](ARCHIVE.md).

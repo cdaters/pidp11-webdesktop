@@ -1,5 +1,10 @@
 # Source map and subsystem boundaries
 
+Source publication: [Alpha 3 candidate](../releases/source-alpha-3-candidate.md),
+[screenshot provenance](../screenshots/m529/README.md),
+[local website review](../website-sync/M5.29/README.md). Export/verification use
+`packaging/source-alpha.py` and `packaging/verify-source-alpha.py`.
+
 ## M5.28 isolated Ethernet laboratory
 
 - `lab/m528/build.sh`: two original-source TAP builds with byte comparison.

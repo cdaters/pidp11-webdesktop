@@ -1,6 +1,6 @@
 # Development and tests
 
-Work on a local clone. The normal demonstration does not require a Pi. The normal application remains a mock desktop. M5.3 adds a separate terminal-only pilot command while retaining the proven M5.0 bridge and laboratory safeguards. Read the [coding standards](CODING-STANDARDS.md) and [source map](SOURCE-MAP.md) before changing a subsystem.
+Work on a local clone. The normal demonstration does not require a Pi. The default local preview uses simulated equipment. Genuine terminal, peripheral, storage and modem views require separately prepared and explicitly approved sources; they do not operate the guest lifecycle. The original M5.3 terminal-only pilot remains a separate historical path. Read the [coding standards](CODING-STANDARDS.md) and [source map](SOURCE-MAP.md) before changing a subsystem.
 
 ## Browser development
 
