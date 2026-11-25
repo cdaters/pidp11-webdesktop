@@ -6,6 +6,20 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **M5.28 active:** isolated original-source Ethernet build and disposable 2.11BSD
+  networking qualification, starting `9498805219959005df61b17cf1665848c9b8df6f`.
+  Work/evidence: `.research/m528/`. No Pi, Internet/LAN guest access, production
+  deployment, releases/tags, website changes or upstream contact. M5.29 readiness
+  inventory is also requested; distinguish lab/ordinary-build/proposed features.
+- **Backup prerequisite passed:** M5.27 evidence preserved in
+  `M5.28-incremental-20261125T033149Z`: 113 files/nine directories,
+  1,216,100,795 logical bytes, archive 1,216,571,392 bytes, SHA-256
+  `1b119b7f3759ab4ef1913a7eca0732f9087e2ac050a16df6f661707b80cc2087`.
+  Every file hash/supported metadata reread; only the stale modem control socket
+  excluded. No full restore. Private project-level recovery pointer:
+  `Backups/M5.28-incremental-20261125T033149Z/backup.json`.
+  Prior baseline: 22 containers/seven running; verify current state before work.
+
 - **M5.27 engineering complete.** Code commit
   `c156e5c` adds the independent bounded local modem, startup-output reservation,
   lifecycle/fault tests and read-only equipment observation. Read
