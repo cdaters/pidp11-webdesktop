@@ -6,6 +6,19 @@ request; historical approvals do not authorize new hardware, releases or message
 
 ## Current point
 
+- **M5.26 active:** isolated genuine serial communications, virtual-modem feasibility
+  and networking inventory. Start `a7f6e56558abdd7d265eadbe935b6838f081af67`;
+  fresh evidence in `.research/m526/`. No Pi, public guest networking, production
+  deployment, release, M5.25 instrumentation promotion or interoperability changes.
+  Backup prerequisite completed: `M5.26-incremental-20261125T011230Z`,
+  1,998 files / 233 directories, 351,968,268 logical bytes;
+  archive 358,692,352 bytes, SHA-256
+  `c45df8ed270e71710c39fc5bde444d247c7ebbf75256b137423d804e3d3f749b`.
+  Independent readback verified every file hash and supported metadata; no full restore.
+  Private pointer: `Backups/WebDesktop-M5.26-incremental-20261125T011230Z/backup.json`.
+  Prior 22 containers/seven running preserved at initial inspection; no M5.25 lab
+  process found running. Verify current state before continuing.
+
 - **Latest completed engineering milestone: M5.25.** Read the [report](docs/lab/M5.25.md)
   and [isolated runbook](lab/m525/README.md). Engineering commit
   `55c6629cabe2af79ea7b050f00394805d523f274`, active-stream crash test `0fc8132`; backup checkpoint `157c454`;
